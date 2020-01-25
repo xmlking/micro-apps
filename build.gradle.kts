@@ -131,6 +131,8 @@ spotlessChangelog {
     changelogFile("CHANGELOG.md")
     enforceCheck(true)
     branch("develop")
+    commitMessage("Published {{version}}")
+    tagPrefix("")
 }
 
 
