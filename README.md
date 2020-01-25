@@ -128,4 +128,4 @@ gradle dependencyUpdates -Drevision=release -DoutputFormatter=json,xml
 - https://android.jlelse.eu/sonarqube-code-coverage-for-kotlin-on-android-with-bitrise-71b2fee0b797
 
 ### Version
-Current 0.2.0
+Current 0.2.0 - pushing
