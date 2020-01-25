@@ -126,4 +126,6 @@ gradle dependencyUpdates -Drevision=release -DoutputFormatter=json,xml
 - https://github.com/banan1988/spring-demo/
 - https://github.com/detekt/sonar-kotlin
 - https://android.jlelse.eu/sonarqube-code-coverage-for-kotlin-on-android-with-bitrise-71b2fee0b797
-- 
+
+### Version
+Current 0.2.0 - pushing
