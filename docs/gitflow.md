@@ -1,6 +1,6 @@
 # Gitflow
 
-Our flow is based on [gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) workflow
+This project is based on [gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) workflow
 
 Here is the git-flow [cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)
 
@@ -25,7 +25,7 @@ Read  __gitflow-avh__ [wiki](https://github.com/petervanderdoes/gitflow-avh/wiki
 git flow init -d
 ```
 
-### Feature Branches
+### Features
 
 To list/start/finish/delete feature branches, use:
 
@@ -39,7 +39,7 @@ git flow feature delete <name>
 > For feature branches, the `<base>` arg must be `develop` branch. when omitted it defaults to the `develop` branch.
 
 
-To push/pull a feature branch to the remote repository, use:
+To push/pull/track a feature branch to the remote repository, use:
 
 ```bash
 git flow feature publish <name>
@@ -47,7 +47,7 @@ git flow feature pull origin <name>
 git flow feature track <name>
 ```
 
-### Release Branches
+### Make a release
 
 To list/start/finish/delete release branches, use:
 
@@ -62,6 +62,8 @@ git flow release finish <release>
 git flow release delete <release>
 ```
 
+> For release branches, the `<base>` arg must be `develop` branch. when omitted it defaults to the `develop` branch.
+
 To push/pull a release branch to the remote repository, use:
 
 ```bash
@@ -70,9 +72,7 @@ git flow feature pull origin RELEASE
 git flow release track RELEASE
 ```
 
-> For release branches, the `<base>` arg must be `develop` branch. when omitted it defaults to the `develop` branch.
-
-### Hotfix Branches
+### Hotfixs
 
 To list/start/finish/delete hotfix branches, use:
 
