@@ -111,15 +111,23 @@ gradle jib
 gradle jibDockerBuild
 ```
 
+### Dependencies
+
+```bash
+# Report dependencies
+gradle dependencyUpdates -Drevision=release -DoutputFormatter=json,xml
+# Update dependencies, `dependsOn dependencyUpdates`
+gradle useLatestVersions
+# This task will succeed if all available updates were successfully applied by useLatestVersions
+gradle useLatestVersions && gradle useLatestVersionsCheck
+```
+
 ### Gradle
 
 ```bash
 # upgrade gradlew
 VERSION=${1:-6.1}
 gradle wrapper --gradle-version "${VERSION}"
-# Report dependencies
-gradle dependencyUpdates -Drevision=release
-gradle dependencyUpdates -Drevision=release -DoutputFormatter=json,xml
 ```
 
 ### Reference
