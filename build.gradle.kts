@@ -5,7 +5,10 @@
  */
 
 import org.sonarqube.gradle.SonarQubeTask
-import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
+import de.gliderpilot.gradle.semanticrelease.GithubRepo
+import de.gliderpilot.gradle.semanticrelease.SemanticReleaseChangeLogService
+import org.ajoberstar.gradle.git.release.semver.ChangeScope
+//import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,11 +37,12 @@ plugins {
     // Versioning & Release with git tags
     // gradle currentVersion
     // gradle release
-    id("pl.allegro.tech.build.axion-release") version "1.10.3"
+//    id("pl.allegro.tech.build.axion-release") version "1.10.3"
+    id("de.gliderpilot.semantic-release") version "1.4.0"
 
     // Generate changelog
     // gradle changelogPush
-    id("com.diffplug.spotless-changelog") version "1.1.0"
+//    id("com.diffplug.spotless-changelog") version "1.1.0"
 
     // Build & Publish docker images
     // gradle jib
@@ -46,28 +50,66 @@ plugins {
 }
 
 
-scmVersion {
-    useHighestVersion = true
+//region CLI switches
+val ENABLE_PODMAN = "enable-podman"
+//region Properties
+val enablePodman by extra(
+        if (project.hasProperty(ENABLE_PODMAN))
+            "true" == project.property(ENABLE_PODMAN)
+        else true)
 
-    tag(closureOf<TagNameSerializationConfig> {
-        prefix = "" // 'v'
-        versionSeparator = ""
-    })
 
-    branchVersionIncrementer = mapOf(
-            "feature/.*" to "incrementMinor",
-            "hotfix/.*" to "incrementPatch",
-            "release/.*" to "incrementPrerelease",
-            "develop" to "incrementPatch",
-            "master" to "incrementMinor"
-    )
+
+
+
+release {
+    // versionStrategy  org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy.INSTANCE
 }
 
+
+val ghToken: String = if (project.hasProperty("smokeTests")) project.property("smokeTests").toString() else System.getenv("GH_TOKEN") ?: ""
+
+semanticRelease {
+    changeLog(closureOf<SemanticReleaseChangeLogService> {
+        repo(closureOf<GithubRepo> {
+            setGhToken(ghToken)
+        })
+
+//        changeScope = KotlinClosure1<org.ajoberstar.grgit.Commit, ChangeScope>({
+//            val version = extractVersion()
+//            when (version?.toUpperCase()) {
+//                "MAJOR" -> ChangeScope.MAJOR
+//                "MINOR" -> ChangeScope.MINOR
+//                "PATCH" -> ChangeScope.PATCH
+//                else -> null
+//            }
+//        })
+    })
+
+}
+
+//scmVersion {
+//    useHighestVersion = true
+//
+//    tag(closureOf<TagNameSerializationConfig> {
+//        prefix = "" // 'v'
+//        versionSeparator = ""
+//    })
+//
+//    branchVersionIncrementer = mapOf(
+//            "feature/.*" to "incrementMinor",
+//            "hotfix/.*" to "incrementPatch",
+//            "release/.*" to "incrementPrerelease",
+//            "develop" to "incrementPatch",
+//            "master" to "incrementMinor"
+//    )
+//}
+
 allprojects {
-    version = scmVersion.version
+//    version = scmVersion.version
 
     if (!project.hasProperty("release.quiet")) {
-        println("Version: $version,  Branch: ${scmVersion.scmPosition.branch}")
+//        println("Version: $version,  Branch: ${scmVersion.scmPosition.branch}")
     }
 }
 
@@ -121,19 +163,19 @@ publishing {
             // change URLs to point to your repos, e.g. http://my.org/repo
             val releasesRepoUrl = "$buildDir/repos/releases"
             val snapshotsRepoUrl = "$buildDir/repos/snapshots"
-            url = if (version.toString().endsWith("SNAPSHOT")) uri(snapshotsRepoUrl) else uri(releasesRepoUrl)
+            url = if (version.toString().endsWith("-SNAPSHOT")) uri(snapshotsRepoUrl) else uri(releasesRepoUrl)
         }
     }
 }
 
-spotlessChangelog {
-    // only necessary if you need to change the defaults below
-    changelogFile("CHANGELOG.md")
-    enforceCheck(true)
-    branch("develop")
-    commitMessage("Published {{version}}")
-    tagPrefix("")
-}
+//spotlessChangelog {
+//    // only necessary if you need to change the defaults below
+//    changelogFile("CHANGELOG.md")
+//    enforceCheck(true)
+//    branch("develop")
+//    commitMessage("Published {{version}}")
+//    tagPrefix("")
+//}
 
 
 
@@ -230,7 +272,8 @@ tasks {
             put("Build-By", System.getProperty("user.name"))
             put("Build-Date", sdf.format(Date()))
             put("Build-JDK", org.gradle.internal.jvm.Jvm.current())
-            put("Build-Revision", scmVersion.scmPosition.shortRevision)
+//            put("Build-Revision", scmVersion.scmPosition.shortRevision)
+            // put("Build-Revision",ve)
             put("Specification-Title", project.name)
             put("Specification-Version", project.version)
             put("Specification-Vendor", project.group)
@@ -241,3 +284,17 @@ tasks {
     }
 
 }
+
+
+fun org.ajoberstar.grgit.Commit.extractVersion(): String? {
+    val open = fullMessage.indexOf("[")
+    val close = fullMessage.indexOf("]")
+
+    if (open < 0 || close < 0) {
+        return null
+    }
+
+    return fullMessage.subSequence(open + 1, close).toString()
+}
+
+fun Project.isSnapshot() = version.toString().contains("SNAPSHOT")
