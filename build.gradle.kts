@@ -33,6 +33,8 @@ plugins {
     // Keep dependencies up to date
     // gradle dependencyUpdates -Drevision=release
     id("com.github.ben-manes.versions") version "0.27.0"
+    // gradle useLatestVersions
+    id("se.patrikerdes.use-latest-versions") version "0.2.13"
 
     // Versioning & Release with git tags
     // gradle currentVersion
@@ -63,7 +65,7 @@ val enablePodman by extra(
 
 
 release {
-    // versionStrategy  org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy.INSTANCE
+//    versionStrategy  org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy.INSTANCE
 }
 
 
