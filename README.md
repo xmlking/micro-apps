@@ -1,4 +1,4 @@
-# Java GitOps
+# JVM GitOps
 
 An experimental project for testing [Multi-branch Jenkins Pipeline](https://jenkins.io/doc/tutorials/build-a-multibranch-pipeline-project/)
 
