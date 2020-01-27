@@ -5,11 +5,7 @@
  */
 
 import org.sonarqube.gradle.SonarQubeTask
-import de.gliderpilot.gradle.semanticrelease.GithubRepo
-import de.gliderpilot.gradle.semanticrelease.SemanticReleaseChangeLogService
-import org.ajoberstar.gradle.git.release.semver.ChangeScope
-import org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy
-//import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
+import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,12 +36,11 @@ plugins {
     // Versioning & Release with git tags
     // gradle currentVersion
     // gradle release
-//    id("pl.allegro.tech.build.axion-release") version "1.10.3"
-    id("de.gliderpilot.semantic-release") version "1.4.0"
+    id("pl.allegro.tech.build.axion-release") version "1.10.3"
 
     // Generate changelog
     // gradle changelogPush
-//    id("com.diffplug.spotless-changelog") version "1.1.0"
+    id("com.diffplug.spotless-changelog") version "1.1.0"
 
     // Build & Publish docker images
     // gradle jib
@@ -62,76 +57,28 @@ val enablePodman by extra(
         else true)
 
 
+scmVersion {
+    useHighestVersion = true
 
-
-
-//release {
-////    versionStrategy  org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy.INSTANCE
-//}
-
-
-
-//release {
-//    // add a second strategy to create release candidates from 'rc/.*' branches
-//    versionStrategy( semanticRelease.releaseStrategy.copyWith(mapOf(
-//            // the type is important, without type you would again replace the default strategy
-//            "type" to "rc",
-////    "selector" to closureOf<de.gliderpilot.gradle.semanticrelease.SemanticReleaseStrategySelector>  { org.ajoberstar.gradle.git.release.semver.SemVerStrategyState state ->
-////    !state.repoDirty && state.currentBranch.name ==~ /rc\/.*/ && semanticRelease.semanticStrategy.canRelease(state) && project.gradle.startParameter.taskNames.find { it == 'release' } }
-//release    preReleaseStrategy to org.ajoberstar.gradle.git.release.semver.StrategyUtil.all({ it.copyWith(inferredPreRelease: 'rc') } as org.ajoberstar.gradle.git.release.semver.PartialSemVerStrategy, org.ajoberstar.gradle.git.release.opinion.Strategies.PreRelease.COUNT_INCREMENTED)
-//    ))
-//    )
-//}
-
-
-val ghToken: String = if (project.hasProperty("smokeTests")) project.property("smokeTests").toString() else System.getenv("GH_TOKEN") ?: ""
-
-semanticRelease {
-    repo(closureOf<GithubRepo> {
-        setGhToken(ghToken)
-//        releaseAsset(jar, "application/zip")
+    tag(closureOf<TagNameSerializationConfig> {
+        prefix = "" // 'v'
+        versionSeparator = ""
     })
 
-//    changeLog(closureOf<SemanticReleaseChangeLogService> {
-//        repo(closureOf<GithubRepo> {
-//            setGhToken(ghToken)
-//        })
-//
-//        changeScope = KotlinClosure1<org.ajoberstar.grgit.Commit, ChangeScope>({
-//            val version = extractVersion()
-//            when (version?.toUpperCase()) {
-//                "MAJOR" -> ChangeScope.MAJOR
-//                "MINOR" -> ChangeScope.MINOR
-//                "PATCH" -> ChangeScope.PATCH
-//                else -> null
-//            }
-//        })
-//    })
-
+    branchVersionIncrementer = mapOf(
+            "feature/.*" to "incrementMinor",
+            "hotfix/.*" to "incrementPatch",
+            "release/.*" to "incrementPrerelease",
+            "develop" to "incrementPatch",
+            "master" to "incrementMinor"
+    )
 }
 
-//scmVersion {
-//    useHighestVersion = true
-//
-//    tag(closureOf<TagNameSerializationConfig> {
-//        prefix = "" // 'v'
-//        versionSeparator = ""
-//    })
-//
-//    branchVersionIncrementer = mapOf(
-//            "feature/.*" to "incrementMinor",
-//            "hotfix/.*" to "incrementPatch",
-//            "release/.*" to "incrementPrerelease",
-//            "develop" to "incrementPatch",
-//            "master" to "incrementMinor"
-//    )
-//}
-
 allprojects {
-//    version = scmVersion.version
+    version = scmVersion.version
 
     if (!project.hasProperty("release.quiet")) {
-//        println("Version: $version,  Branch: ${scmVersion.scmPosition.branch}")
+        println("Version: $version,  Branch: ${scmVersion.scmPosition.branch}")
     }
 }
 
@@ -185,21 +132,19 @@ publishing {
             // change URLs to point to your repos, e.g. http://my.org/repo
             val releasesRepoUrl = "$buildDir/repos/releases"
             val snapshotsRepoUrl = "$buildDir/repos/snapshots"
-            url = if (version.toString().endsWith("-SNAPSHOT")) uri(snapshotsRepoUrl) else uri(releasesRepoUrl)
+            url = if (isSnapshot()) uri(snapshotsRepoUrl) else uri(releasesRepoUrl)
         }
     }
 }
 
-//spotlessChangelog {
-//    // only necessary if you need to change the defaults below
-//    changelogFile("CHANGELOG.md")
-//    enforceCheck(true)
-//    branch("develop")
-//    commitMessage("Published {{version}}")
-//    tagPrefix("")
-//}
-
-
+spotlessChangelog {
+    // only necessary if you need to change the defaults below
+    changelogFile("CHANGELOG.md")
+    enforceCheck(true)
+    branch("develop")
+    commitMessage("Published {{version}}")
+    tagPrefix("")
+}
 
 java {
     // Java 8 needed as Beam doesn't yet support 11
@@ -307,16 +252,4 @@ tasks {
 
 }
 
-
-fun org.ajoberstar.grgit.Commit.extractVersion(): String? {
-    val open = fullMessage.indexOf("[")
-    val close = fullMessage.indexOf("]")
-
-    if (open < 0 || close < 0) {
-        return null
-    }
-
-    return fullMessage.subSequence(open + 1, close).toString()
-}
-
-fun Project.isSnapshot() = version.toString().contains("SNAPSHOT")
+fun Project.isSnapshot() = version.toString().endsWith("-SNAPSHOT")

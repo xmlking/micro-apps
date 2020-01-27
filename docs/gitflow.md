@@ -47,6 +47,7 @@ git flow feature pull origin <name>
 git flow feature track <name>
 ```
 
+
 ### Make a release
 
 To list/start/finish/delete release branches, use:
@@ -60,6 +61,12 @@ git flow release
 git flow release start <release> [<base>]
 git flow release finish <release>
 git flow release delete <release>
+```
+
+```bash
+git flow release publish <release>
+git flow release pull origin <release>
+git flow release track <release>
 ```
 
 > For release branches, the `<base>` arg must be `develop` branch. when omitted it defaults to the `develop` branch.
