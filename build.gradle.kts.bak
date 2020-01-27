@@ -8,6 +8,7 @@ import org.sonarqube.gradle.SonarQubeTask
 import de.gliderpilot.gradle.semanticrelease.GithubRepo
 import de.gliderpilot.gradle.semanticrelease.SemanticReleaseChangeLogService
 import org.ajoberstar.gradle.git.release.semver.ChangeScope
+import org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy
 //import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,20 +65,38 @@ val enablePodman by extra(
 
 
 
-release {
-//    versionStrategy  org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy.INSTANCE
-}
+//release {
+////    versionStrategy  org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy.INSTANCE
+//}
 
+
+
+//release {
+//    // add a second strategy to create release candidates from 'rc/.*' branches
+//    versionStrategy( semanticRelease.releaseStrategy.copyWith(mapOf(
+//            // the type is important, without type you would again replace the default strategy
+//            "type" to "rc",
+////    "selector" to closureOf<de.gliderpilot.gradle.semanticrelease.SemanticReleaseStrategySelector>  { org.ajoberstar.gradle.git.release.semver.SemVerStrategyState state ->
+////    !state.repoDirty && state.currentBranch.name ==~ /rc\/.*/ && semanticRelease.semanticStrategy.canRelease(state) && project.gradle.startParameter.taskNames.find { it == 'release' } }
+//release    preReleaseStrategy to org.ajoberstar.gradle.git.release.semver.StrategyUtil.all({ it.copyWith(inferredPreRelease: 'rc') } as org.ajoberstar.gradle.git.release.semver.PartialSemVerStrategy, org.ajoberstar.gradle.git.release.opinion.Strategies.PreRelease.COUNT_INCREMENTED)
+//    ))
+//    )
+//}
 
 
 val ghToken: String = if (project.hasProperty("smokeTests")) project.property("smokeTests").toString() else System.getenv("GH_TOKEN") ?: ""
 
 semanticRelease {
-    changeLog(closureOf<SemanticReleaseChangeLogService> {
-        repo(closureOf<GithubRepo> {
-            setGhToken(ghToken)
-        })
+    repo(closureOf<GithubRepo> {
+        setGhToken(ghToken)
+//        releaseAsset(jar, "application/zip")
+    })
 
+//    changeLog(closureOf<SemanticReleaseChangeLogService> {
+//        repo(closureOf<GithubRepo> {
+//            setGhToken(ghToken)
+//        })
+//
 //        changeScope = KotlinClosure1<org.ajoberstar.grgit.Commit, ChangeScope>({
 //            val version = extractVersion()
 //            when (version?.toUpperCase()) {
@@ -87,7 +106,7 @@ semanticRelease {
 //                else -> null
 //            }
 //        })
-    })
+//    })
 
 }
 
