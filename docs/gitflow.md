@@ -6,13 +6,20 @@ Here is the git-flow [cheatsheet](http://danielkummer.github.io/git-flow-cheatsh
 
 ## Prerequisites
 
-1. [gitflow](https://github.com/petervanderdoes/gitflow-avh) extension
+1. [gitflow](https://github.com/petervanderdoes/gitflow-avh) git extension
 
-Check installation [instructions](https://github.com/petervanderdoes/gitflow-avh/wiki/Installation) for your platform.
+    Check installation [instructions](https://github.com/petervanderdoes/gitflow-avh/wiki/Installation) for your platform.
+    ```bash
+    brew install git-flow-avh
+    ```
 
-```bash
-brew install git-flow-avh
-```
+2. [git-chglog](https://github.com/git-chglog/git-chglog)
+
+    ```bash
+    # CHANGELOG generator
+    brew tap git-chglog/git-chglog
+    brew install git-chglog
+    ```
 
 ## Getting started
 

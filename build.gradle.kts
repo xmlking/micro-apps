@@ -38,10 +38,6 @@ plugins {
     // gradle release
     id("pl.allegro.tech.build.axion-release") version "1.10.3"
 
-    // Generate changelog
-    // gradle changelogPush
-    id("com.diffplug.spotless-changelog") version "1.1.0"
-
     // Build & Publish docker images
     // gradle jib
     id("com.google.cloud.tools.jib") version "1.8.0"
@@ -135,15 +131,6 @@ publishing {
             url = if (isSnapshot()) uri(snapshotsRepoUrl) else uri(releasesRepoUrl)
         }
     }
-}
-
-spotlessChangelog {
-    // only necessary if you need to change the defaults below
-    changelogFile("CHANGELOG.md")
-    enforceCheck(true)
-    branch("develop")
-    commitMessage("Published {{version}}")
-    tagPrefix("")
 }
 
 java {
