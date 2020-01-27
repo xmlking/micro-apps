@@ -69,8 +69,22 @@ We are using [Semantic Versioning 2.0.0](https://semver.org/) convention for ver
 
 ## Changelog
 
-Use [spotless](https://github.com/diffplug/spotless-changelog) gradle plugin to generate [keep-a-changelog](https://keepachangelog.com/en/1.0.0/)
- 
+Use [spotless](https://github.com/diffplug/spotless-changelog) gradle plugin to generate 
+
+## Changelog
+
+generate changelog using [git-chglog](https://github.com/git-chglog/git-chglog).
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+```bash
+# first time
+git-chglog --init
+# on release branch, generate CHANGELOG.md and commit before merging back to develop & master.
+git-chglog
+git-chglog -next-tag 2.0.0
+```
+
 ### Axion plugin
 
 We are using Gradle's [axion-release](https://axion-release-plugin.readthedocs.io/en/latest/) plugin for  release & version management.
