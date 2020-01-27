@@ -86,6 +86,12 @@ git flow feature pull origin RELEASE
 git flow release track RELEASE
 ```
 
+> Don't forget to push your tags with 
+>
+```bash
+git push origin --tags
+```
+
 ### Hotfixs
 
 To list/start/finish/delete hotfix branches, use:

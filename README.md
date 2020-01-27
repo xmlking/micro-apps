@@ -77,14 +77,14 @@ gradle release -Prelease.disableChecks -Prelease.pushTagsOnly -x test --profile
 
 ### Changelog
 
-> With every release, run `gradle changelogPush`
+> With every release, run `git-chglog`
 
 ```bash
-gradle changelogPrint
-gradle changelogCheck
-gradle changelogBump
-# changelogPush depends on changelogBump depends on changelogChecks
-gradle changelogPush
+# first time
+git-chglog --init
+# on release branch, generate CHANGELOG.md and commit before merging back to develop & master.
+git-chglog  -o CHANGELOG.md
+git-chglog  -o CHANGELOG.md -next-tag 2.0.0
 ```
 
 ### Publish

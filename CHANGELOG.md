@@ -9,7 +9,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Feat
 
+- **ci:** test4
+  
+  
+<a name="1.3.2"></a>
+
+## [1.3.2] - 2020-01-26
+
+### Feat
+
+- **ci:** test3
+  
+  
+<a name="1.3.1"></a>
+
+## [1.3.1] - 2020-01-26
+
+
+<a name="1.3.0"></a>
+
+## [1.3.0] - 2020-01-26
+
+### Feat
+
+- **ci:** test2
+  - **hi:** test
+  
+  ### Fix
+
+- **deps:** test
+  
+  
 <a name="1.2.0"></a>
 
 ## [1.2.0] - 2020-01-26
@@ -86,11 +118,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 0.1.0 - 2020-01-24
 
 
-[Unreleased]: https://github.com:xmlking/java-gitops.git/compare/1.2.0...HEAD
-[1.2.0]: https://github.com:xmlking/java-gitops.git/compare/1.1.0...1.2.0
-[1.1.0]: https://github.com:xmlking/java-gitops.git/compare/0.5.0...1.1.0
-[0.5.0]: https://github.com:xmlking/java-gitops.git/compare/0.4.0...0.5.0
-[0.4.0]: https://github.com:xmlking/java-gitops.git/compare/0.3.0...0.4.0
-[0.3.0]: https://github.com:xmlking/java-gitops.git/compare/0.2.0...0.3.0
-[0.2.0]: https://github.com:xmlking/java-gitops.git/compare/0.1.1...0.2.0
-[0.1.1]: https://github.com:xmlking/java-gitops.git/compare/0.1.0...0.1.1
+[Unreleased]: https://github.com/xmlking/java-gitops/compare/1.3.2...HEAD
+[1.3.2]: https://github.com/xmlking/java-gitops/compare/1.3.1...1.3.2
+[1.3.1]: https://github.com/xmlking/java-gitops/compare/1.3.0...1.3.1
+[1.3.0]: https://github.com/xmlking/java-gitops/compare/1.2.0...1.3.0
+[1.2.0]: https://github.com/xmlking/java-gitops/compare/1.1.0...1.2.0
+[1.1.0]: https://github.com/xmlking/java-gitops/compare/0.5.0...1.1.0
+[0.5.0]: https://github.com/xmlking/java-gitops/compare/0.4.0...0.5.0
+[0.4.0]: https://github.com/xmlking/java-gitops/compare/0.3.0...0.4.0
+[0.3.0]: https://github.com/xmlking/java-gitops/compare/0.2.0...0.3.0
+[0.2.0]: https://github.com/xmlking/java-gitops/compare/0.1.1...0.2.0
+[0.1.1]: https://github.com/xmlking/java-gitops/compare/0.1.0...0.1.1
