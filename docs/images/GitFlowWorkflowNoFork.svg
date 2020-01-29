@@ -1,0 +1,3746 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="4212.9922"
+   height="2979.9211"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="GitFlowWorkflowNoFork.png">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient11202">
+      <stop
+         style="stop-color:#fff6d5;stop-opacity:1;"
+         offset="0"
+         id="stop11204" />
+      <stop
+         style="stop-color:#fff6d5;stop-opacity:1;"
+         offset="1"
+         id="stop11206" />
+    </linearGradient>
+    <marker
+       inkscape:stockid="TriangleInM"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="TriangleInM"
+       style="overflow:visible">
+      <path
+         id="path6695"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(-0.4)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="TriangleOutM"
+       style="overflow:visible">
+      <path
+         id="path6704"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.4)" />
+    </marker>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 1489.9606 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="4212.9922 : 1489.9606 : 1"
+       inkscape:persp3d-origin="2106.4961 : 993.30705 : 1"
+       id="perspective7958" />
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mend"
+       style="overflow:visible;">
+      <path
+         id="path6585"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mstart"
+       style="overflow:visible">
+      <path
+         id="path6564"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.4) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path6567"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Sstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Sstart"
+       style="overflow:visible">
+      <path
+         id="path6588"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.3) translate(-2.3,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path6558"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <linearGradient
+       id="linearGradient4881">
+      <stop
+         style="stop-color:#ff7f2a;stop-opacity:1;"
+         offset="0"
+         id="stop4883" />
+      <stop
+         style="stop-color:#ff7f2a;stop-opacity:0;"
+         offset="1"
+         id="stop4885" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4871">
+      <stop
+         style="stop-color:#ff7f2a;stop-opacity:1;"
+         offset="0"
+         id="stop4873" />
+      <stop
+         style="stop-color:#ff7f2a;stop-opacity:0;"
+         offset="1"
+         id="stop4875" />
+    </linearGradient>
+    <filter
+       id="filter7581"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur7583"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix7585"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset7587"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge7589">
+        <feMergeNode
+           id="feMergeNode7591"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode7593"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter7595"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur7597"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix7599"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset7601"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge7603">
+        <feMergeNode
+           id="feMergeNode7605"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode7607"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter7595-4"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur7597-5"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix7599-5"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset7601-8"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge7603-4">
+        <feMergeNode
+           id="feMergeNode7605-2"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode7607-9"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-3"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6564-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mstart-5"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6564-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(0.4,0,0,0.4,4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleInM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleInM-0"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6695-6"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(-0.4,-0.4)" />
+    </marker>
+    <filter
+       id="filter10546"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10548"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10550"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10552"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10554">
+        <feMergeNode
+           id="feMergeNode10556"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10558"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10560"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10562"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10564"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10566"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10568">
+        <feMergeNode
+           id="feMergeNode10570"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10572"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10574"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10576"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10578"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10580"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10582">
+        <feMergeNode
+           id="feMergeNode10584"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10586"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10588"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10590"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10592"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10594"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10596">
+        <feMergeNode
+           id="feMergeNode10598"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10600"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10602"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10604"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10606"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10608"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10610">
+        <feMergeNode
+           id="feMergeNode10612"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10614"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10616"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10618"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10620"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10622"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10624">
+        <feMergeNode
+           id="feMergeNode10626"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10628"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10630"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10632"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10634"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10636"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10638">
+        <feMergeNode
+           id="feMergeNode10640"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10642"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10644"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10646"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10648"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10650"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10652">
+        <feMergeNode
+           id="feMergeNode10654"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10656"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter10560-7"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur10562-7"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10564-7"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10566-6"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10568-0">
+        <feMergeNode
+           id="feMergeNode10570-4"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10572-7"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10921"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10923"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10925"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10927"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10929">
+        <feMergeNode
+           id="feMergeNode10931"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10933"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter10935"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur10937"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10939"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10941"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10943">
+        <feMergeNode
+           id="feMergeNode10945"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10947"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <marker
+       inkscape:stockid="TriangleInM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleInM-2"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6695-3"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(-0.4,-0.4)" />
+    </marker>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient11202"
+       id="linearGradient11208"
+       x1="-401.41369"
+       y1="2250.025"
+       x2="41.413689"
+       y2="2250.025"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1,0,0,1.4296319,0,-1026.7864)" />
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter10588-4"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur10590-3"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10592-1"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10594-9"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10596-9">
+        <feMergeNode
+           id="feMergeNode10598-2"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10600-7"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter11276"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur11278"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11280"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11282"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11284">
+        <feMergeNode
+           id="feMergeNode11286"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11288"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter11290"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur11292"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11294"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11296"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11298">
+        <feMergeNode
+           id="feMergeNode11300"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11302"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter10574-0"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur10576-0"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10578-9"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10580-6"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10582-5">
+        <feMergeNode
+           id="feMergeNode10584-5"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10586-0"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter11349"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur11351"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11353"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11355"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11357">
+        <feMergeNode
+           id="feMergeNode11359"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11361"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter11369"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur11371"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11373"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11375"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11377">
+        <feMergeNode
+           id="feMergeNode11379"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11381"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter11369-8"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur11371-6"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11373-1"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11375-9"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11377-3">
+        <feMergeNode
+           id="feMergeNode11379-1"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11381-9"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter11435"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur11437"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11439"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11441"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11443"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode11445"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11447"
+           in="SourceGraphic" />
+      </feMerge>
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix11616" />
+      <feGaussianBlur
+         id="feGaussianBlur11618"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11620"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11622"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11624">
+        <feMergeNode
+           id="feMergeNode11626"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11628"
+           in="fbSourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter10616-9"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur10618-5"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10620-1"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10622-6"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10624-6">
+        <feMergeNode
+           id="feMergeNode10626-7"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10628-3"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutM-6"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6704-0"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.4,0.4)" />
+    </marker>
+    <filter
+       id="filter11630"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur11632"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11634"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11636"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11638">
+        <feMergeNode
+           id="feMergeNode11640"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11642"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter11677"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur11679"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11681"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11683"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11685">
+        <feMergeNode
+           id="feMergeNode11687"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11689"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutM-2"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6704-07"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.4,0.4)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutM-9"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6704-3"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.4,0.4)" />
+    </marker>
+    <filter
+       id="filter3853"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3855"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3857"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3859"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3861">
+        <feMergeNode
+           id="feMergeNode3863"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3865"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3867"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3869"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3871"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3873"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3875">
+        <feMergeNode
+           id="feMergeNode3877"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3879"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3881"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3883"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3885"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3887"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3889">
+        <feMergeNode
+           id="feMergeNode3891"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3893"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3895"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3897"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3899"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3901"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3903">
+        <feMergeNode
+           id="feMergeNode3905"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3907"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3909"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3911"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3913"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3915"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3917">
+        <feMergeNode
+           id="feMergeNode3919"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3921"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3923"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3925"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3927"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3929"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3931">
+        <feMergeNode
+           id="feMergeNode3933"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3935"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3937"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3939"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3941"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3943"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3945">
+        <feMergeNode
+           id="feMergeNode3947"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3949"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter3951"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur3953"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3955"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3957"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3959">
+        <feMergeNode
+           id="feMergeNode3961"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3963"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutM-3"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6704-5"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.4,0.4)" />
+    </marker>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter3853-0"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur3855-2"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3857-6"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3859-0"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3861-0">
+        <feMergeNode
+           id="feMergeNode3863-3"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3865-9"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4112"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4114"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4116"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4118"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4120">
+        <feMergeNode
+           id="feMergeNode4122"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4124"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4201"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4203"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4205"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4207"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4209">
+        <feMergeNode
+           id="feMergeNode4211"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4213"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4516"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4518"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4520"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4522"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4524">
+        <feMergeNode
+           id="feMergeNode4526"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4528"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4530"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4532"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4534"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4536"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4538">
+        <feMergeNode
+           id="feMergeNode4540"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4542"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4544"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4546"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4548"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4550"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4552">
+        <feMergeNode
+           id="feMergeNode4554"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4556"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4558"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4560"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4562"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4564"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4566">
+        <feMergeNode
+           id="feMergeNode4568"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4570"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4572"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4574"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4576"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4578"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4580">
+        <feMergeNode
+           id="feMergeNode4582"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4584"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4586"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4588"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4590"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4592"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4594">
+        <feMergeNode
+           id="feMergeNode4596"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4598"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter4600"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur4602"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix4604"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset4606"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge4608">
+        <feMergeNode
+           id="feMergeNode4610"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode4612"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter10921-1"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur10923-0"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10925-1"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10927-1"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10929-4">
+        <feMergeNode
+           id="feMergeNode10931-7"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10933-9"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter11369-8-6"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur11371-6-9"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix11373-1-6"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset11375-9-8"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge11377-3-5">
+        <feMergeNode
+           id="feMergeNode11379-1-7"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode11381-9-1"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutM-7"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6704-7"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.4,0.4)" />
+    </marker>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter10616-9-1"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur10618-5-9"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10620-1-1"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10622-6-1"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10624-6-9">
+        <feMergeNode
+           id="feMergeNode10626-7-4"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10628-3-9"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter10602-0"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur10604-6"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix10606-5"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset10608-7"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge10610-1">
+        <feMergeNode
+           id="feMergeNode10612-9"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode10614-0"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter6242"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur6244"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix6246"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset6248"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge6250">
+        <feMergeNode
+           id="feMergeNode6252"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode6254"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter3937-8"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-0.25"
+       y="-0.25">
+      <feGaussianBlur
+         id="feGaussianBlur3939-8"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix3941-3"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset3943-4"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge3945-4">
+        <feMergeNode
+           id="feMergeNode3947-8"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode3949-9"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter6310"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur6312"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix6314"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset6316"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge6318">
+        <feMergeNode
+           id="feMergeNode6320"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode6322"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter6348"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur6350"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix6352"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset6354"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge6356">
+        <feMergeNode
+           id="feMergeNode6358"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode6360"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="filter6362"
+       inkscape:label="Drop shadow"
+       width="1.5"
+       height="1.5"
+       x="-.25"
+       y="-.25">
+      <feGaussianBlur
+         id="feGaussianBlur6364"
+         in="SourceAlpha"
+         stdDeviation="2"
+         result="blur" />
+      <feColorMatrix
+         id="feColorMatrix6366"
+         result="bluralpha"
+         type="matrix"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0 " />
+      <feOffset
+         id="feOffset6368"
+         in="bluralpha"
+         dx="4"
+         dy="4"
+         result="offsetBlur" />
+      <feMerge
+         id="feMerge6370">
+        <feMergeNode
+           id="feMergeNode6372"
+           in="offsetBlur" />
+        <feMergeNode
+           id="feMergeNode6374"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="216.875"
+     inkscape:cy="727.65773"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     borderlayer="false"
+     showborder="false"
+     inkscape:showpageshadow="false"
+     inkscape:snap-global="true"
+     showguides="false"
+     inkscape:snap-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1032"
+     inkscape:window-x="1920"
+     inkscape:window-y="22"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4101"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer"
+     style="display:inline">
+    <rect
+       style="fill:#ececec;stroke:#fff6d5;stroke-width:8.17939568;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       id="rect10713"
+       width="1001.8578"
+       height="1021.7102"
+       x="-425.91028"
+       y="1944.0109"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:url(#linearGradient11208);fill-opacity:1;stroke:#000000;stroke-width:2.86339569;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect7956"
+       width="440"
+       height="399.99976"
+       x="-400"
+       y="1989.9211"
+       rx="0"
+       ry="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#fff6d5;stroke:#000000;stroke-width:2.55056119;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect7956-7"
+       width="449.97208"
+       height="398.71075"
+       x="100.01398"
+       y="1991.1964"
+       rx="0"
+       ry="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,1927.5591)"
+     style="display:inline">
+    <g
+       id="g6306"
+       transform="translate(-310.5,260)"
+       style="filter:url(#filter6348)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         transform="matrix(0,1,1,0,0,0)"
+         y="10.499998"
+         x="-47.637959"
+         height="20"
+         width="20"
+         id="rect9212-7-1"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8-2-5"
+         d="m 60,-37.637957 -30,0"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       transform="translate(-310.5,290)"
+       style="display:inline;filter:url(#filter6362)"
+       id="g6306-9"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         transform="matrix(0,1,1,0,0,0)"
+         y="10.499998"
+         x="-47.637959"
+         height="20"
+         width="20"
+         id="rect9212-7-1-2"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8-2-5-9"
+         d="m 60,-37.637957 -30,0"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g11365-0"
+       style="display:inline;filter:url(#filter11369-8)"
+       transform="translate(120,130)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="22.362041"
+         x="70"
+         height="20"
+         width="20"
+         id="rect9212-5-86-2-6"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8-7-82-8-0"
+         d="M 80,72.362043 80,42.362042"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g11365-0-6"
+       style="display:inline;filter:url(#filter11369-8-6)"
+       transform="translate(310,130)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="22.362041"
+         x="70"
+         height="20"
+         width="20"
+         id="rect9212-5-86-2-6-8"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8-7-82-8-0-5"
+         d="M 80,72.362043 80,42.362042"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <rect
+       style="fill:#ff7f2a;fill-opacity:1;stroke:#000000;stroke-width:1.46433377000000009;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter4112)"
+       id="rect4879-3-4"
+       width="280"
+       height="140"
+       x="150.00002"
+       y="202.36205"
+       ry="9.9999962"
+       rx="10.769227"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       style="display:inline;filter:url(#filter3867)"
+       id="g10514-5-8"
+       transform="matrix(0.9862385,0,0,0.99066535,577.79816,-2264.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-6"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-0"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-5"
+           sodipodi:role="line">2</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4.92950296;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#TriangleInM)"
+       d="m -360,402.36204 0,-270"
+       id="path6553-33"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.84605002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#TriangleInM)"
+       d="m 139.72477,272.54871 -150,0"
+       id="path6553"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-401.34766"
+       y="50.596416"
+       id="text9168"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan9170"
+         x="-401.34766"
+         y="50.596416">GitHub.com</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="389.13672"
+       y="52.022198"
+       id="text9168-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan9170-4"
+         x="389.13672"
+         y="52.022198">Your machine</tspan></text>
+    <g
+       id="g11670"
+       style="filter:url(#filter11677)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="translate(-400,260)"
+         id="g9265">
+        <rect
+           style="fill:#cccccc;stroke:#000000;stroke-width:4.24264050000000026;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;"
+           id="rect9212-8"
+           width="60"
+           height="29.999996"
+           x="10"
+           y="42.362041" />
+        <text
+           xml:space="preserve"
+           style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;"
+           x="20"
+           y="62.362041"
+           id="text9232"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan9234"
+             x="20"
+             y="62.362041"
+             style="font-size:12px;">master</tspan></text>
+      </g>
+      <path
+         transform="matrix(2.6666667,0,0,1,416.66667,10.000003)"
+         inkscape:connector-curvature="0"
+         id="path9316"
+         d="m -280,302.36204 30,0"
+         style="fill:none;stroke:#000000;stroke-width:1.83711731000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;" />
+    </g>
+    <g
+       id="g9382"
+       transform="translate(-20,2.03125e-6)"
+       style="filter:url(#filter10588)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="translate(-280,299.99998)"
+         id="g9260">
+        <rect
+           style="fill:#cccccc;stroke:#000000;stroke-width:4.58257532;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect9212-8-4"
+           width="70"
+           height="29.999996"
+           x="200"
+           y="72.362061" />
+        <text
+           xml:space="preserve"
+           style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+           x="210"
+           y="92.362061"
+           id="text9232-5"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan9234-3"
+             x="210"
+             y="92.362061"
+             style="font-size:12px">develop</tspan></text>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1"
+         d="m -50,372.36204 0,-30"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g9354"
+       transform="translate(-130,340)"
+       style="filter:url(#filter10560)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="32.362041"
+         x="-110"
+         height="20"
+         width="20"
+         id="rect9212"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8"
+         d="m -100,32.362043 0,-30.0000004"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       transform="translate(-100,340)"
+       id="g9354-5"
+       style="filter:url(#filter10546)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="32.362041"
+         x="-110"
+         height="20"
+         width="20"
+         id="rect9212-5"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8-7"
+         d="m -100,32.362043 0,-30.0000004"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-240"
+       y="412.36203"
+       id="text9417"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan9419"
+         x="-240"
+         y="412.36203">feature branches</tspan></text>
+    <g
+       id="g9382-3"
+       transform="translate(250.00002,2.3980624e-6)"
+       style="filter:url(#filter10602)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="translate(-280,299.99998)"
+         id="g9260-8">
+        <rect
+           style="fill:#cccccc;stroke:#000000;stroke-width:4.58257532;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect9212-8-4-9"
+           width="70"
+           height="29.999996"
+           x="200"
+           y="72.362061" />
+        <text
+           xml:space="preserve"
+           style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+           x="210"
+           y="92.362061"
+           id="text9232-5-0"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan9234-3-0"
+             x="210"
+             y="92.362061"
+             style="font-size:12px">develop</tspan></text>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-9"
+         d="m -50,372.36204 0,-30"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       transform="translate(420.00002,340)"
+       id="g9354-5-8"
+       style="filter:url(#filter11290)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="32.362041"
+         x="-110"
+         height="20"
+         width="20"
+         id="rect9212-5-8"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8-7-8"
+         d="m -100,32.362043 0,-30.0000004"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.46410346;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.46410346, 3.46410346;stroke-dashoffset:0"
+       d="m 320.00002,392.362 0,40.00004"
+       id="path9478"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#ff6600;stroke:#000000;stroke-width:3.37280273;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.37280267, 3.37280267;stroke-dashoffset:0;marker-start:none;marker-end:url(#TriangleOutM)"
+       d="m -130,430.67564 0,-26.21013"
+       id="path9480"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.00000003, 3.00000003;stroke-dashoffset:0"
+       d="m 321.50001,430.86204 -450.00001,0"
+       id="path9482"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       transform="translate(-30,340)"
+       id="g9354-5-3"
+       style="filter:url(#filter10574)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="32.362041"
+         x="-110"
+         height="20"
+         width="20"
+         id="rect9212-5-86"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8-7-82"
+         d="m -100,32.362043 0,-30.0000004"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g10514"
+       transform="matrix(0.9862385,0,0,0.99066535,247.52293,-2223.8498)"
+       style="filter:url(#filter3853)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512"
+           sodipodi:role="line">1</tspan></text>
+    </g>
+    <g
+       style="display:inline"
+       id="g10514-5"
+       transform="matrix(0.9862385,0,0,0.99066535,-202.20184,-1904.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4"
+           sodipodi:role="line">2</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="-349.0918"
+       y="581.05737"
+       id="text10703"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan10705"
+         x="-349.0918"
+         y="581.05737">Initialise the HubFlow tools</tspan><tspan
+         sodipodi:role="line"
+         x="-349.0918"
+         y="596.05737"
+         id="tspan10709"
+         style="font-weight:bold;-inkscape-font-specification:Courier New Bold" /><tspan
+         sodipodi:role="line"
+         x="-349.0918"
+         y="611.05737"
+         style="font-weight:bold;-inkscape-font-specification:Courier New Bold"
+         id="tspan3659">$ git hf init</tspan><tspan
+         sodipodi:role="line"
+         x="-349.0918"
+         y="626.05737"
+         id="tspan10711" /></text>
+    <g
+       style="display:inline"
+       id="g10514-5-7"
+       transform="matrix(0.9862385,0,0,0.99066535,-202.20184,-1814.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6"
+           sodipodi:role="line">3</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="-350.4043"
+       y="671.05737"
+       id="text10703-2"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan10705-8"
+         x="-350.4043"
+         y="671.05737">Create a feature branch</tspan><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="686.05737"
+         id="tspan10707-6" /><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="701.05737"
+         id="tspan10709-0"
+         style="font-weight:bold;-inkscape-font-specification:Courier New">$ git hf feature start ##feature-name##</tspan><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="716.05737"
+         style="font-weight:normal;-inkscape-font-specification:Courier New"
+         id="tspan10772" /><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="731.05737"
+         style="font-weight:normal;-inkscape-font-specification:Courier New"
+         id="tspan10774">- or checkout an existing feature branch</tspan><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="746.05737"
+         style="font-weight:normal;-inkscape-font-specification:Courier New"
+         id="tspan10776" /><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="761.05737"
+         style="font-weight:bold;-inkscape-font-specification:Courier New"
+         id="tspan10778">$ git hf feature checkout ##feature-name##</tspan><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="776.05737"
+         id="tspan10711-1" /></text>
+    <g
+       style="display:inline;filter:url(#filter4201)"
+       id="g10514-5-7-1-3"
+       transform="matrix(0.9862385,0,0,0.99066535,247.79816,-2064.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-0"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-0"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-1"
+           sodipodi:role="line">4</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.22711754;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#TriangleInM);marker-end:url(#TriangleOutM);display:inline"
+       d="m 160,382.54871 -180,0"
+       id="path6553-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       style="display:inline;filter:url(#filter3895)"
+       id="g10514-5-7-1-3-0"
+       transform="matrix(0.9862385,0,0,0.99066535,247.52293,-2113.8498)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-0-1"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-0-1"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-1-0"
+           sodipodi:role="line">5</tspan></text>
+    </g>
+    <g
+       id="g11269"
+       transform="translate(-150,40.000003)"
+       style="filter:url(#filter11276)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="translate(-280,29.99998)"
+         id="g9260-1">
+        <rect
+           style="fill:#cccccc;stroke:#000000;stroke-width:4.58257532;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect9212-8-4-8"
+           width="70"
+           height="29.999996"
+           x="200"
+           y="72.362061" />
+        <text
+           xml:space="preserve"
+           style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+           x="210"
+           y="92.362061"
+           id="text9232-5-1"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan9234-3-8"
+             x="210"
+             y="92.362061"
+             style="font-size:12px">develop</tspan></text>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-5"
+         d="m -50,162.36204 0,-30"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g11365"
+       style="filter:url(#filter11369)"
+       transform="translate(-140,130)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="22.362041"
+         x="70"
+         height="20"
+         width="20"
+         id="rect9212-5-86-2"
+         style="fill:#b3b3b3;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-8-7-82-8"
+         d="M 80,72.362043 80,42.362042"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g10666"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         id="g7700">
+        <rect
+           style="fill:#ff7f2a;fill-opacity:1;stroke:#000000;stroke-width:1.2507776;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter7581)"
+           id="rect4879"
+           width="240"
+           height="110.00002"
+           x="-250"
+           y="202.362"
+           ry="7.8571391"
+           rx="9.9999971"
+           transform="matrix(1,0,0,1.2727273,0,-55.189644)" />
+      </g>
+      <text
+         sodipodi:linespacing="125%"
+         id="text6472"
+         y="232.36201"
+         x="-230"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:24px;"
+           y="232.36201"
+           x="-230"
+           id="tspan6474"
+           sodipodi:role="line">upstream</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text6500"
+         y="282.362"
+         x="-230"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:18px;"
+           y="282.362"
+           x="-230"
+           id="tspan6502"
+           sodipodi:role="line">master repo</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text6525"
+         y="302.362"
+         x="-230"
+         style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           y="302.362"
+           x="-230"
+           id="tspan6527"
+           sodipodi:role="line">https://github.com/orgname/*</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="170.00002"
+       y="232.36205"
+       id="text6472-5-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6474-7-7"
+         x="170.00002"
+         y="232.36205"
+         style="font-size:24px">clone</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="170.00002"
+       y="282.36203"
+       id="text6500-3-1"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6502-5-7"
+         x="170.00002"
+         y="282.36203"
+         style="font-size:18px">your working copy</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="170.00002"
+       y="302.36203"
+       id="text6525-1-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6527-2-7"
+         x="170.00002"
+         y="302.36203">git clone https://github.com/orgname/*</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.59807634;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.5980763, 2.5980763;stroke-dashoffset:0;display:inline;filter:url(#filter10616-9)"
+       d="m -60,122.36204 0,30"
+       id="path9478-0"
+       inkscape:connector-curvature="0"
+       transform="matrix(1,0,0,1.3333332,0,-50.787334)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.00000001, 3.00000001;stroke-dashoffset:0;marker-start:url(#TriangleInM-2);marker-end:url(#TriangleOutM-9);display:inline"
+       d="m 180,162.36204 -220,0"
+       id="path9482-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.99999976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.00000001, 3.00000001;stroke-dashoffset:0;display:inline"
+       d="m -60.000002,112.36204 -139.999998,0"
+       id="path9482-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#ff6600;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.00000001, 3.00000001;stroke-dashoffset:0;marker-start:none;marker-end:url(#TriangleOutM);display:inline"
+       d="m -200,112.36204 0,20"
+       id="path9480-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       style="display:inline;filter:url(#filter3881)"
+       id="g10514-5-7-1-2"
+       transform="matrix(0.9862385,0,0,0.99066535,247.79816,-2334.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-3"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-5"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-0"
+           sodipodi:role="line">6</tspan></text>
+    </g>
+    <g
+       style="display:inline;filter:url(#filter3923)"
+       id="g10514-5-7-1-6"
+       transform="matrix(0.9862385,0,0,0.99066535,57.79816,-2384.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-4"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-6"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-19"
+           sodipodi:role="line">7</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="-340"
+       y="282.36203"
+       id="text9417-7"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan9419-7"
+         x="-340"
+         y="282.36203">release branches</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.99999976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.00000001, 3.00000001;stroke-dashoffset:0;display:inline"
+       d="m -230,152.36204 -60,0"
+       id="path9482-8-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#ff6600;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.00000003, 3.00000003;stroke-dashoffset:0;marker-start:none;marker-end:url(#TriangleOutM);display:inline"
+       d="m -290,152.36205 0,50"
+       id="path9480-3-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       style="display:inline;filter:url(#filter3937)"
+       id="g10514-5-7-1-9"
+       transform="matrix(0.9862385,0,0,0.99066535,-112.20184,-2344.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-06"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-4"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-15"
+           sodipodi:role="line">8</tspan></text>
+    </g>
+    <path
+       style="fill:#ff6600;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.00000003, 3.00000003;stroke-dashoffset:0;marker-start:none;marker-end:url(#TriangleOutM);display:inline"
+       d="m -299.99996,252.36204 -50,0"
+       id="path9480-3-4-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="340"
+       y="382.36203"
+       id="text9417-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan9419-8"
+         x="340"
+         y="382.36203">your feature branch</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="220"
+       y="162.36205"
+       id="text9417-3-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan9419-8-1"
+         x="220"
+         y="162.36205">your feature branch</tspan></text>
+    <g
+       style="display:inline"
+       id="g10514-5-7-1"
+       transform="matrix(0.9862385,0,0,0.99066535,-202.20184,-1674.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9"
+           sodipodi:role="line">4</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="-350.4043"
+       y="811.05737"
+       id="text10703-2-5"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="811.05737"
+         id="tspan5510">Push your feature branch back to GitHub as you make</tspan><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="826.05737"
+         id="tspan4371">progress on your changes</tspan><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="841.05737"
+         id="tspan10707-6-1" /><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="856.05737"
+         id="tspan10709-0-1"
+         style="font-weight:bold;-inkscape-font-specification:Courier New">$ git hf push</tspan><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="871.05737"
+         style="font-weight:bold;-inkscape-font-specification:Courier New"
+         id="tspan10778-8" /><tspan
+         sodipodi:role="line"
+         x="-350.4043"
+         y="886.05737"
+         id="tspan10711-1-4" /></text>
+    <g
+       style="display:inline;filter:url(#filter3951)"
+       id="g10514-5-7-8"
+       transform="matrix(0.9862385,0,0,0.99066535,457.52293,-2113.8498)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-64"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-3"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-0"
+           sodipodi:role="line">3</tspan></text>
+    </g>
+    <path
+       style="fill:#ff6600;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.00000003, 3.00000003;stroke-dashoffset:0;marker-start:none;marker-end:url(#TriangleOutM);display:inline"
+       d="m -300,222.36204 -50,0"
+       id="path9480-3-4-3-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       style="display:inline"
+       id="g10514-5-3"
+       transform="matrix(0.9862385,0,0,0.99066535,-202.20184,-1984.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-9"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-9"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-2"
+           sodipodi:role="line">1</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="-350"
+       y="502.36203"
+       id="text10703-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan10705-3"
+         x="-350"
+         y="502.36203">Clone the repo</tspan><tspan
+         sodipodi:role="line"
+         x="-350"
+         y="517.36206"
+         id="tspan10707-7" /><tspan
+         sodipodi:role="line"
+         x="-350"
+         y="532.36206"
+         id="tspan10709-9"
+         style="font-weight:bold;-inkscape-font-specification:Courier New Bold">$ git clone git@github.com:orgname/##repo##</tspan><tspan
+         sodipodi:role="line"
+         x="-350"
+         y="547.36206"
+         id="tspan10711-3" /></text>
+    <g
+       style="display:inline"
+       id="g10514-5-7-1-90"
+       transform="matrix(0.9862385,0,0,0.99066535,-202.20184,-1574.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-31"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-8"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-2"
+           sodipodi:role="line">5</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:12.54493809px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="-335.21906"
+       y="952.42981"
+       id="text10703-2-5-9"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0454115,0.95656112)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="-335.21906"
+         y="952.42981"
+         id="tspan12270-5">Keep up to date with completed features on</tspan><tspan
+         sodipodi:role="line"
+         x="-335.21906"
+         y="968.11096"
+         id="tspan4217">GitHub on a regular basis</tspan><tspan
+         sodipodi:role="line"
+         x="-335.21906"
+         y="983.79218"
+         id="tspan10707-6-1-6" /><tspan
+         sodipodi:role="line"
+         x="-335.21906"
+         y="999.47333"
+         id="tspan10709-0-1-1"
+         style="font-weight:bold;-inkscape-font-specification:Courier New">$ git hf update</tspan><tspan
+         sodipodi:role="line"
+         x="-335.21906"
+         y="1015.1545"
+         style="font-weight:bold;-inkscape-font-specification:Courier New"
+         id="tspan4225" /><tspan
+         sodipodi:role="line"
+         x="-335.21906"
+         y="1030.8357"
+         style="font-weight:bold;-inkscape-font-specification:Courier New"
+         id="tspan10778-8-5" /><tspan
+         sodipodi:role="line"
+         x="-335.21906"
+         y="1046.5168"
+         id="tspan10711-1-4-9" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11.9442873px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="100.06402"
+       y="498.73108"
+       id="text10703-2-5-1"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99535725,1.0046644)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="100.06402"
+         y="498.73108"
+         id="tspan4269">Push your changes back to GitHub when you are ready to share</tspan><tspan
+         sodipodi:role="line"
+         x="100.06402"
+         y="513.66144"
+         id="tspan6418">them with collaborators.</tspan><tspan
+         sodipodi:role="line"
+         x="100.06402"
+         y="528.5918"
+         id="tspan10707-6-1-8" /><tspan
+         sodipodi:role="line"
+         x="100.06402"
+         y="543.52216"
+         id="tspan10711-1-4-8"
+         style="font-weight:bold;-inkscape-font-specification:Courier New">$ git hf push</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12.00895882px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="99.52079"
+       y="571.4837"
+       id="text10703-2-5-1-3"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0007466,0.99925397)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="99.52079"
+         y="571.4837"
+         id="tspan4315">If you are collaborating with others, remember to fetch their</tspan><tspan
+         sodipodi:role="line"
+         x="99.52079"
+         y="586.49487"
+         id="tspan6422">changes back too!</tspan><tspan
+         sodipodi:role="line"
+         x="99.52079"
+         y="601.5061"
+         id="tspan10707-6-1-8-7" /><tspan
+         sodipodi:role="line"
+         x="99.52079"
+         y="616.51727"
+         id="tspan10711-1-4-8-8"
+         style="font-weight:bold;-inkscape-font-specification:Courier New">$ git hf pull</tspan></text>
+    <g
+       style="display:inline;"
+       id="g10514-5-7-1-90-3"
+       transform="matrix(0.9862385,0,0,0.99066535,247.79816,-1984.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-31-5"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549000000008;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-8-0"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold;"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-2-9"
+           sodipodi:role="line">6</tspan></text>
+    </g>
+    <g
+       style="display:inline"
+       id="g10514-5-7-1-90-3-4"
+       transform="matrix(0.9862385,0,0,0.99066535,247.79816,-1814.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-31-5-0"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-8-0-0"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-2-9-7"
+           sodipodi:role="line">7</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:11.9442873px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="100.46644"
+       y="669.24042"
+       id="text10703-2-5-1-6"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99535725,1.0046644)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="669.24042"
+         id="tspan6410">When your feature is ready for review, it's time to merge your</tspan><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="684.17078"
+         id="tspan6414">changes into origin/develop.  First, push your feature:</tspan><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="699.10114"
+         id="tspan10707-6-1-8-9" /><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="714.03149"
+         id="tspan10711-1-4-8-0"
+         style="font-weight:bold;-inkscape-font-specification:Courier New">$ git hf push</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11.9442873px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="100.46644"
+       y="737.61682"
+       id="text10703-2-5-1-6-2"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99535725,1.0046644)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="737.61682"
+         id="tspan4439">Use the GitHub website to issue a pull request to </tspan><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="752.54718"
+         id="tspan5516">origin/develop from origin/feature/##feature-name##.</tspan><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="767.47754"
+         id="tspan4441" /><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="782.4079"
+         style="font-weight:normal;-inkscape-font-specification:Courier New"
+         id="tspan4500">Ask a colleague to review your pull-request; don't accept it </tspan><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="797.33826"
+         style="font-weight:normal;-inkscape-font-specification:Courier New"
+         id="tspan6430">yourself unless you have to.  Once accepted, close your</tspan><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="812.26862"
+         style="font-weight:normal;-inkscape-font-specification:Courier New"
+         id="tspan6436">feature:</tspan><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="827.19897"
+         style="font-weight:normal;-inkscape-font-specification:Courier New"
+         id="tspan6438" /><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="842.12933"
+         style="font-weight:bold;-inkscape-font-specification:Courier New"
+         id="tspan6440">$ git hf feature finish [##feature-name##]</tspan><tspan
+         sodipodi:role="line"
+         x="100.46644"
+         y="857.05969"
+         style="font-weight:normal;-inkscape-font-specification:Courier New"
+         id="tspan6442" /></text>
+    <g
+       style="display:inline"
+       id="g10514-5-7-1-90-3-4-2"
+       transform="matrix(0.9862385,0,0,0.99066535,247.79816,-1574.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-31-5-0-5"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-8-0-0-0"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-2-9-7-2"
+           sodipodi:role="line">8</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.97279757px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -349.54416,551.86204 359.607324,0"
+       id="path5476"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9726513px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -350,641.86204 359.4992673,0"
+       id="path5478"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.97212058px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -349.54453,781.86204 359.1070427,0"
+       id="path5480"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.97265136px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -350,881.86204 359.4992673,0"
+       id="path5482"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.07282066px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100.54815,641.86204 448.86813,0"
+       id="path5484"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.07282126px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100.54755,882.86204 448.86873,0"
+       id="path5486"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="289.0918"
+       y="189.9597"
+       id="text9417-7-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan9419-7-4"
+         x="289.0918"
+         y="189.9597">release branches</tspan></text>
+    <path
+       style="fill:#ff6600;stroke:#000000;stroke-width:3.74590111;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.74590124, 3.74590124;stroke-dashoffset:0;marker-start:none;marker-end:url(#TriangleOutM);display:inline"
+       d="m -290,84.234993 0,33.566207"
+       id="path9480-3-48"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.84255576;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.84255566, 3.84255566;stroke-dashoffset:0;display:inline"
+       d="m 390,84.830394 0,65.623246"
+       id="path9478-0-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.67963791;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.67963793, 3.67963793;stroke-dashoffset:0;display:inline"
+       d="m 387.74338,82.362043 -676.98677,0"
+       id="path9482-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g5775"
+       transform="translate(-160,2.03125e-6)"
+       style="filter:url(#filter6242)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="translate(420,159.99998)"
+         id="g9260-8-5">
+        <rect
+           style="fill:#cccccc;stroke:#000000;stroke-width:4.58257532;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect9212-8-4-9-1"
+           width="70"
+           height="29.999996"
+           x="200"
+           y="72.362061" />
+        <text
+           xml:space="preserve"
+           style="font-size:10px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+           x="210"
+           y="92.362061"
+           id="text9232-5-0-6"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan9234-3-0-7"
+             x="210"
+             y="92.362061"
+             style="font-size:12px">develop</tspan></text>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path9316-1-9-7"
+         d="m 620,242.36204 -30,0"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.84255576;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.84255566, 3.84255566;stroke-dashoffset:0;display:inline"
+       d="m 500,162.36204 0,65.6232"
+       id="path9478-0-9-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.8524642;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2.85246424, 2.85246424;stroke-dashoffset:0;marker-end:url(#TriangleOutM-7);display:inline"
+       d="m 501.33439,162.36204 -91.33439,0"
+       id="path9482-9-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       style="display:inline;filter:url(#filter3937-8)"
+       id="g10514-5-7-1-9-6"
+       transform="matrix(0.9862385,0,0,0.99066535,627.79816,-2334.0365)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         d="m -160,2519.9211 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.0457 8.95431,-20 20,-20 11.04569,0 20,8.9543 20,20 z"
+         sodipodi:ry="20"
+         sodipodi:rx="20"
+         sodipodi:cy="2519.9211"
+         sodipodi:cx="-180"
+         id="path10508-5-8-6-06-1"
+         style="fill:#ffdd55;stroke:#000000;stroke-width:1.01168549;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text10510-0-8-0-4-6"
+         y="2527.9402"
+         x="-188.13721"
+         style="font-size:22px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="2527.9402"
+           x="-188.13721"
+           id="tspan10512-4-6-9-15-7"
+           sodipodi:role="line">8</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:11.9442873px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Courier New;-inkscape-font-specification:Courier New"
+       x="100.46642"
+       y="908.1272"
+       id="text10703-2-5-1-6-29"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99535725,1.0046644)"
+       inkscape:export-filename="/home/stuart/Devel/Datasift-GIT-Dev/datasift/gitflow/GitFlowWorkflowNoFork.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="100.46642"
+         y="908.1272"
+         id="tspan4403-4">When you have enough completed features, create a release branch,</tspan><tspan
+         sodipodi:role="line"
+         x="100.46642"
+         y="923.05756"
+         id="tspan6444">test and fix it, and then merge it into origin/master</tspan><tspan
+         sodipodi:role="line"
+         x="100.46642"
+         y="937.98792"
+         id="tspan10707-6-1-8-9-1" /><tspan
+         sodipodi:role="line"
+         x="100.46642"
+         y="952.91827"
+         id="tspan10711-1-4-8-0-2"
+         style="font-weight:bold;-inkscape-font-specification:Courier New">$ git hf release start ##release-version##</tspan><tspan
+         sodipodi:role="line"
+         x="100.46642"
+         y="967.84863"
+         style="font-weight:bold;-inkscape-font-specification:Courier New"
+         id="tspan6446">&lt;test + fix cycle&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="100.46642"
+         y="982.77899"
+         style="font-weight:bold;-inkscape-font-specification:Courier New"
+         id="tspan6448">$ git hf release finish ##release-version##</tspan><tspan
+         sodipodi:role="line"
+         x="100.46642"
+         y="997.70935"
+         style="font-weight:bold;-inkscape-font-specification:Courier New"
+         id="tspan6450" /></text>
+  </g>
+</svg>
