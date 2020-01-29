@@ -3,9 +3,7 @@ node("build-pod") {
         try {
             // stages for ALL branches.
             stage('Checkout repository') {
-                script {
-                    env.FAILED_STAGE_NAME = env.STAGE_NAME
-                }
+                env.FAILED_STAGE_NAME = env.STAGE_NAME
 
                 checkout([
                         $class                           : 'GitSCM',
@@ -21,33 +19,28 @@ node("build-pod") {
 
             }
 
-            stage('Checks & SonarQube analysis') {
-                script {
-                    env.FAILED_STAGE_NAME = env.STAGE_NAME
-                }
-
-                ex_gradle(command: "currentVersion", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
-                ex_gradle(command: "check", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
-                sonarQube_scan(serviceName: "play-jenkins", buildType: 'gradle')
-            }
-
-            stage("Quality Gate") {
-                script {
-                    env.FAILED_STAGE_NAME = env.STAGE_NAME
-                }
-
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-
             // stages for FEATURE, HOTFIX branches.
             // env.BRANCH_NAME.startsWith("feature/")
             if (env.BRANCH_NAME =~ /^feature\/.*$|^hotfix\/.*$/) {
-                stage('Build & Test for PRs') {
-                    script {
-                        env.FAILED_STAGE_NAME = env.STAGE_NAME
+
+                stage('Checks & SonarQube analysis') {
+                    env.FAILED_STAGE_NAME = env.STAGE_NAME
+
+                    ex_gradle(command: "currentVersion", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
+                    ex_gradle(command: "check", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
+                    sonarQube_scan(serviceName: "play-jenkins", buildType: 'gradle')
+                }
+
+                stage("Quality Gate") {
+                    env.FAILED_STAGE_NAME = env.STAGE_NAME
+
+                    timeout(time: 1, unit: 'HOURS') {
+                        waitForQualityGate abortPipeline: true
                     }
+                }
+
+                stage('Build & Test for PRs') {
+                env.FAILED_STAGE_NAME = env.STAGE_NAME
 
                     ex_gradle(command: "build --profile", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
                     // currentBuild.result = 'SUCCESS'
@@ -57,22 +50,19 @@ node("build-pod") {
             // stages for DEVELOP branch.
             if (env.BRANCH_NAME == "develop") {
                 stage('Publish for Develop') {
-                    script {
-                        env.FAILED_STAGE_NAME = env.STAGE_NAME
-                    }
+                env.FAILED_STAGE_NAME = env.STAGE_NAME
                     ex_gradle(command: "publish", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
                     // Our Nexus only allow SNAPSHOT
                     // ex_gradle(command: "publish -Prelease.forceSnapshot", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
                     sh "ls -la build/repos"
+                    // ex_gradle(command: "jibDockerBuild", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
                 }
             }
 
             // stages for MASTER branch.
             if (env.BRANCH_NAME == "master") {
                 stage('Deploy for Master') {
-                    script {
-                        env.FAILED_STAGE_NAME = env.STAGE_NAME
-                    }
+                env.FAILED_STAGE_NAME = env.STAGE_NAME
                     ex_gradle(command: "publish", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
                     ex_gradle(command: "jibDockerBuild", nexusCredentials: "nexusAuthToken", gradleConfigFile: "initGradleCatalog")
                 }
@@ -80,8 +70,8 @@ node("build-pod") {
 
             // stages for RELEASE branches.
             if (env.BRANCH_NAME =~ /^release\/.*$/) {
-                echo "Doing RELEASE stages..."
-                echo "deploying to GKE..."
+                echo "TODO: Generate Changelog"
+                echo "TODO: Generate proto code"
             }
 
             chatNotification('SUCCESS', "Successful !")
@@ -117,6 +107,6 @@ def chatNotification(String level, String msg) {
     } else if (level == 'ERROR') {
         color = '#ce2231'
     }
-    // TODO Send
-    echo "${color} -  ${message}"
+    echo "${color} - ${message}"
+    // googlechatnotification message: message, sameThreadNotification: true, url: 'https://chat.googleapis.com/XYZ'
 }
