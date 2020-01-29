@@ -134,6 +134,3 @@ gradle wrapper --gradle-version "${VERSION}"
 - https://github.com/banan1988/spring-demo/
 - https://github.com/detekt/sonar-kotlin
 - https://android.jlelse.eu/sonarqube-code-coverage-for-kotlin-on-android-with-bitrise-71b2fee0b797
-
-### Version
-Current 0.3.0 - pushing

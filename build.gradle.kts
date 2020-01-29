@@ -43,16 +43,6 @@ plugins {
     id("com.google.cloud.tools.jib") version "1.8.0"
 }
 
-
-//region CLI switches
-val ENABLE_PODMAN = "enable-podman"
-//region Properties
-val enablePodman by extra(
-        if (project.hasProperty(ENABLE_PODMAN))
-            "true" == project.property(ENABLE_PODMAN)
-        else true)
-
-
 scmVersion {
     useHighestVersion = true
 
@@ -141,7 +131,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClassName = "java.gitops.AppKt"
+    mainClassName = "jvm.gitops.AppKt"
 }
 
 jib {
@@ -226,8 +216,7 @@ tasks {
             put("Build-By", System.getProperty("user.name"))
             put("Build-Date", sdf.format(Date()))
             put("Build-JDK", org.gradle.internal.jvm.Jvm.current())
-//            put("Build-Revision", scmVersion.scmPosition.shortRevision)
-            // put("Build-Revision",ve)
+            put("Build-Revision", scmVersion.scmPosition.shortRevision)
             put("Specification-Title", project.name)
             put("Specification-Version", project.version)
             put("Specification-Vendor", project.group)
