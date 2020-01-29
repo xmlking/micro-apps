@@ -78,12 +78,12 @@ __Remember:__
 
     When you have enough completed features, create a release branch:
     ```bash
-    git pill --all
+    git pull --all
     git flow release start <version-number> [<base>]
    ```
 
     Once you’ve created the release branch,
-    - Create `Changelog`. preferable you automate this task in CI environment. 
+    - Create `Changelog`. Preferable automate this task in CI environment triggered on every push to __hotfix/*__ branch
     - Build the code in the release branch, deploy it into test environments, find bugs. 
     - Fix the bugs directly inside the release branch.
     - `deploy -> test -> fix -> redeploy -> retest` cycle continues until you’re happy that the release is good enough to release to customers.
@@ -95,7 +95,7 @@ __Remember:__
     When you’re ready to tag the release and merge it back into `master` and `develop` branches, do this:
     ```bash
     git flow release finish <version-number>
-    # Don't forget to push your tags with
+    # Don't forget to push your tags, run
     git push --all
     git push origin --tags
     ```
@@ -114,14 +114,14 @@ __Remember:__
     Use __hotfix__  when you want to make and release an urgent change to your latest released code, and you don’t want the changes currently in __develop__ to ship yet.
 
     ```bash
-    git pill --all
+    git pull --all
     git flow hotfix start <version-number> [<base>]
     # to create a hotfix off of an older tag
     git flow hotfix start 0.1.1 [0.1.0]
    ```
 
     Once you’ve created the __hotfix__ branch,
-    - Create `Changelog`. preferable you automate this task in CI environment. 
+    - Create `Changelog`. Preferable automate this task in CI environment triggered on every push to __hotfix/*__ branch
     - Build the code in the hotfix branch, deploy it into test environments, find bugs. 
     - Fix the bugs directly inside the hotfix branch.
     - `deploy -> test -> fix -> redeploy -> retest` cycle continues until you’re happy that the release is good enough to release to customers.

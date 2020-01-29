@@ -10,7 +10,7 @@ Main branches
 
 __master__ branch always represent stable, production ready code. last commit on `master` is always the `tag` commit. 
 
-We use __develop__ branch for automatic building _jars_ and _docker_ images then publish to __nexus__ and __GCR__ via Jenkins Continuous Integration(CI) process.<br/>
+We use __develop__ branch for automatic building _jars_ and _docker_ images then publish to __nexus__ and __GCR__ via Continuous Integration(CI) process.<br/>
 We use __master__ branch for automatic deployment to _integration_ __GKE__ cluster/namespace via Continuous Deployment(CD) process.
 
 Supporting branches 
@@ -22,8 +22,8 @@ Supporting branches are temporary. after merging, they get deleted.
 
 ### Restrictions
 
-Block commits directly to `master` branch except merges by __Release Manager__ role 
-Block commits directly to `develop` branch, and allow only _PR_ mergers. 
+Restrict commits directly to `master` branch except merges by __Release Manager__ role<br/>
+Restrict commits directly to `develop` branch, and allow only _PR_ mergers. 
 
 ### Do's and Don'ts
 
@@ -52,7 +52,7 @@ Following actions are triggered on __CI__ (jenkins, github actions)
     - __Automatic code review:__ CI run code quality checks(run unit tests, linting, code coverage,  code quality checks with __sonar__ )
     - CI continuously check code quality with each push and update build status on `BitBucket` or `GitHib` PR
     - When CI checks pass, Developer crete PR to merge `feature/*` branch to `develop` branch
-    - __Approves__ do code review and merge the PR. Finally delete `feature/*` branch
+    - __Approvers__ do code review and merge the PR. Finally delete `feature/*` branch
 - When PRs merged from `feature/*` branch to `develop` branch
     - CI run __build__ step (build jars,  build docker images with __next__ _SNAPSHOT_ version)
     - Here the __computed version__ looks like `0.2.1-SNAPSHOT`
