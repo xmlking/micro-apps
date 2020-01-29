@@ -40,6 +40,9 @@ Block commits directly to `develop` branch, and allow only _PR_ mergers.
 - __Hotfix:__ If you need to patch a release,
     - __Do__ make  a `hotfix/*` branch from `master` based on specific tag or head of the `master` branch
     - __Do__ merge code commits from `hotfix/*` branch to both `develop` and `master` branches via PR process.
+- Push feature branches back to origin repo so others can collaborate
+- Use the GitHub/BitBucket website to create pull requests from feature branches
+- __Don’t__ accept your own pull requests!
 
 ## CI/CD Automation
 
