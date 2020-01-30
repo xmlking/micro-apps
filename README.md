@@ -4,8 +4,6 @@ An experimental project for testing [Multi-branch Jenkins Pipeline](https://jenk
 
 Using [axion-release-plugin](https://axion-release-plugin.readthedocs.io/en/latest/) for Release & Version management 
 
-Using [spotless-changelog](https://github.com/diffplug/spotless-changelog) plugin for generating changelog
-
 Changelog format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -73,6 +71,9 @@ gradle release -Prelease.customUsername=sxc460 -Prelease.customPassword=
 gradle markNextVersion -Prelease.incrementer=incrementMinor -Prelease.dryRun
 # in CI enveroment 
 gradle release -Prelease.disableChecks -Prelease.pushTagsOnly -x test --profile
+# if you want to manually set version with Jenkins params
+gradle createRelease    -Prelease.disableChecks -Prelease.versionIncrementer=incrementMajor     -Prelease.dryRun
+gradle markNextVersion  -Prelease.disableChecks -Prelease.incrementer=incrementMajor            -Prelease.dryRun
 ```
 
 ### Changelog
@@ -105,10 +106,23 @@ gradle build publish -Prelease.forceVersion=3.0.0
 # Build an image tarball,
 # then you can load with `docker load --input build/jib-image.tar`
 gradle jibBuildTar
-# Build image
+# Build and publish docker image
 gradle jib
-# Build image useing your Docker daemon
+# Build image locally useing your Docker daemon (on publish)
 gradle jibDockerBuild
+```
+
+#### local testing
+
+pull a remote image and locally use it as base image
+
+```bash
+# pull base image first
+docker pull gcr.io/distroless/java:11
+# use local docker image as base, build image only (on publish)
+gradle jibDockerBuild -PbaseDockerImage=docker://gcr.io/distroless/java:11
+# you can run your local docker image
+docker run -it xmlking/jvm-gitops-jvm-gitops:0.2.0-SNAPSHOT
 ```
 
 ### Dependencies
@@ -134,6 +148,3 @@ gradle wrapper --gradle-version "${VERSION}"
 - https://github.com/banan1988/spring-demo/
 - https://github.com/detekt/sonar-kotlin
 - https://android.jlelse.eu/sonarqube-code-coverage-for-kotlin-on-android-with-bitrise-71b2fee0b797
-
-### Version
-Current 0.3.0 - pushing

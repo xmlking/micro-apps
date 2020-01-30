@@ -13,4 +13,4 @@
 //    }
 //}
 
-rootProject.name = "java-gitops"
+rootProject.name = "jvm-gitops"
