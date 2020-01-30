@@ -11,8 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Chore
 - **gitbook:** fix types
 - **gitbook:** adding gitbook config
+- **gradle:** jibDockerBuild from local image
+- **jenkins:** polish jenkins
+
+### Feat
+- **docs:** jenkins pipelines
 
 ### Fix
+- **docs:** manually set version with Jenkins params
 - **gradle:** fix gradle
 - **jenkins:** Jenkins
 
