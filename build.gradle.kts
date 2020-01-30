@@ -7,11 +7,13 @@
 import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.text.SimpleDateFormat
+import com.google.cloud.tools.jib.api.ImageFormat
 import java.util.*
 
 val jacocoVersion: String by project
 val jacocoQualityGate: String by project
 val gcloudProject: String by project
+val baseDockerImage: String by project
 
 plugins {
     id("idea")
@@ -22,7 +24,7 @@ plugins {
     // code coverage
     id("jacoco")
     // code quality
-    id("org.sonarqube") version "2.6.2"
+    id("org.sonarqube") version "2.8"
 
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.3.61"
@@ -36,11 +38,11 @@ plugins {
     // Versioning & Release with git tags
     // gradle currentVersion
     // gradle release
-    id("pl.allegro.tech.build.axion-release") version "1.10.3"
+    id("pl.allegro.tech.build.axion-release") version "1.11.0"
 
     // Build & Publish docker images
     // gradle jib
-    id("com.google.cloud.tools.jib") version "1.8.0"
+    id("com.google.cloud.tools.jib") version "2.0.0"
 }
 
 scmVersion {
@@ -142,9 +144,14 @@ application {
 
 jib {
     setAllowInsecureRegistries(true)
+    from {
+        if(project.hasProperty("baseDockerImage")) {
+            image = baseDockerImage
+        }
+    }
     to {
         image = "xmlking/${rootProject.name}-${project.name}:${project.version}"
-        // image = "gcr.io/${gcloudProject}/${rootProject.name}/${project.name}:${project.version}"
+        // image = "us.gcr.io/${gcloudProject}/${rootProject.name}/${project.name}:${project.version}"
 
         /**
         gcr: Google Container Registry (GCR)
@@ -157,12 +164,15 @@ jib {
         password = "*******"
         }
          */
+        tags = setOf("${project.version}")
     }
     container {
         jvmFlags = listOf("-Djava.security.egd=file:/dev/./urandom", "-Xms512m", "-server")
-        useCurrentTimestamp = true
+        creationTime = "USE_CURRENT_TIMESTAMP"
         mainClass = application.mainClassName
         ports = listOf("8080", "8443")
+        labels = mapOf("version" to "${project.version}",  "name" to project.name, "group" to "${project.group}")
+        format = ImageFormat.OCI
     }
 }
 

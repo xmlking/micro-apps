@@ -103,10 +103,23 @@ gradle build publish -Prelease.forceVersion=3.0.0
 # Build an image tarball,
 # then you can load with `docker load --input build/jib-image.tar`
 gradle jibBuildTar
-# Build image
+# Build and publish docker image
 gradle jib
-# Build image useing your Docker daemon
+# Build image locally useing your Docker daemon (on publish)
 gradle jibDockerBuild
+```
+
+#### local testing
+
+pull a remote image and locally use it as base image
+
+```bash
+# pull base image first
+docker pull gcr.io/distroless/java:11
+# use local docker image as base, build image only (on publish)
+gradle jibDockerBuild -PbaseDockerImage=docker://gcr.io/distroless/java:11
+# you can run your local docker image
+docker run -it xmlking/jvm-gitops-jvm-gitops:0.2.0-SNAPSHOT
 ```
 
 ### Dependencies
