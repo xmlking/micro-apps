@@ -18,13 +18,16 @@ pipeline {
     stages {
         stage('Preparing') {
             steps {
-                script {
-                    env.FAILED_STAGE_NAME = env.STAGE_NAME
-                    echo("IsRelease: ${params.RELEASE}, Releasing with increment: ${params.RELEASE_TYPE}")
-                }
                 echo "Running Preparing..."
                 // Default pipeline checkout behaviour does not fetch tags so we need to get them now
                 sh "git fetch --tags"
+                script {
+                    env.FAILED_STAGE_NAME = env.STAGE_NAME
+                    echo("IsRelease: ${params.RELEASE}, Releasing with increment: ${params.RELEASE_TYPE}")
+                    if (params.RELEASE) {
+                        sh "./gradlew createRelease -Prelease.versionIncrementer=increment${params.RELEASE_TYPE} -Prelease.disableChecks"
+                    }
+                }
                 sh './gradlew currentVersion'
             }
         }
