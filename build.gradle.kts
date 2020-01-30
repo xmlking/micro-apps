@@ -107,10 +107,16 @@ sonarqube {
     }
 }
 
+val sourcesJar = tasks.create<Jar>("sourcesJar") {
+    from(sourceSets.main.get().allSource)
+    archiveClassifier.set("sources")
+}
+
 publishing {
     publications {
         create<MavenPublication>("nexus") {
             from(components["java"])
+            artifact(sourcesJar)
         }
     }
     repositories {

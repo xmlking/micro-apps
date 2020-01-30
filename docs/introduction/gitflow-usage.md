@@ -80,6 +80,9 @@ __Remember:__
     ```bash
     git pull --all
     git flow release start <version-number> [<base>]
+    # optionally publish release
+    git flow release publish
+    # commit any release related changes and push for CI to trigger actions
    ```
 
     Once you’ve created the release branch,
