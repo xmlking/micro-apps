@@ -71,6 +71,9 @@ gradle release -Prelease.customUsername=sxc460 -Prelease.customPassword=
 gradle markNextVersion -Prelease.incrementer=incrementMinor -Prelease.dryRun
 # in CI enveroment 
 gradle release -Prelease.disableChecks -Prelease.pushTagsOnly -x test --profile
+# if you want to manually set version with Jenkins params
+gradle createRelease    -Prelease.disableChecks -Prelease.versionIncrementer=incrementMajor     -Prelease.dryRun
+gradle markNextVersion  -Prelease.disableChecks -Prelease.incrementer=incrementMajor            -Prelease.dryRun
 ```
 
 ### Changelog
