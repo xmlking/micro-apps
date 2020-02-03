@@ -7,7 +7,7 @@
 It has attracted a lot of attention because it is very well suited to collaboration and scaling the development team.
 
 
-![Gitflow](../images/GitFlowFull.png)
+![Gitflow](../images/gitflow-overview.webp)
 
 
 ## How It Works
