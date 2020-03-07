@@ -14,3 +14,8 @@
 //}
 
 rootProject.name = "jvm-gitops"
+include(
+    ":libs:core",
+    ":libs:shared",
+    ":apps:wordcount"
+)

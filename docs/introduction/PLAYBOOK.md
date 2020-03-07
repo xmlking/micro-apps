@@ -37,11 +37,26 @@ sdk install
 #sdkman self upgrade
 sdk selfupdate
 ```
+### IntelliJ IDEA 
+Be sure to enable delegate IDE build/run actions to Gradle so that Intellij does not use its internal build mechanism to compile source code. 
+
+```
+Settings -> Build, Execution, Deployment
+  -> Build Tools -> Gradle -> Runner
+  -> Delegate IDE build/run actions to gradle.
+```
+
+Point to local Gradle instead of gradle in wrapper
+```
+Settings -> Build, Execution, Deployment
+    -> Build Tools -> Gradle
+    -> Gradle -> set 'Use Gradle From' to 'Specified Loction' to local gradle for eg '/Users/{user-name}/.sdkman/candidates/gradle/6.0.1' 
+```
 
 ### Install Kubernetes (optional)
 follow instructions [here](https://gist.github.com/xmlking/62ab53753c0f0f5247d0e174b31dab21) to install kubernetes toolchain:
 1. Docker for Mac (edge version)
-2. Helm (optional)
+2. Kustomize (optional)
 3. kubectx (optional)
 
 #### Install Bazel (optional)
@@ -63,9 +78,9 @@ bazel clean --expunge
 
 
 #### Create Workspace
-TODO
 ```bash
- 
+mkdir micro-apps && cd micro-apps
+gradle init --type kotlin-application --dsl kotlin
 ```
  
 #### Generate Artifacts
