@@ -6,6 +6,7 @@
 
 import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
+//import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
 import java.text.SimpleDateFormat
 import com.google.cloud.tools.jib.api.ImageFormat
 import java.util.*
@@ -60,6 +61,14 @@ scmVersion {
             "develop" to "incrementPatch",
             "master" to "incrementMinor"
     )
+
+//    hooks(closureOf<HooksConfig> {
+//        pre("fileUpdate", mapOf(
+//                "file" to "README.md",
+//                "pattern" to "{v,p -> /('$'v)/}",
+//                "replacement" to """{v, p -> "'$'v"}]))"""))
+//        pre("commit")
+//    })
 }
 
 allprojects {

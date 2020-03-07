@@ -142,6 +142,8 @@ gradle useLatestVersions && gradle useLatestVersionsCheck
 # upgrade gradlew
 VERSION=${1:-6.1}
 gradle wrapper --gradle-version "${VERSION}"
+# Check Task Dependencies With a Dry Run with:  -m or --dry-run
+gradle publish -m
 ```
 
 ### Reference
