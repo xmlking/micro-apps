@@ -36,7 +36,10 @@ install the package from npm/brew
      touch foo
      git cz -a
     ```
-   
+1. [SonarLint]()
+
+    Install **SonarLint** Plugin for IntelliJ
+
 ### Usage
 
 #### Changelog

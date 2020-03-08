@@ -21,9 +21,9 @@ plugins {
     // code quality
     id("org.sonarqube") version "2.8"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.3.61"
+    id("org.jetbrains.kotlin.jvm") version "1.3.70"
     id("org.jetbrains.dokka") version "0.10.1"
-    // id("kotlinx-serialization") version "1.3.61" apply false
+    // id("kotlinx-serialization") version "1.3.70" apply false
     // Keep dependencies up to date
     // gradle dependencyUpdates -Drevision=release
     id("com.github.ben-manes.versions") version "0.28.0"
@@ -126,14 +126,12 @@ subprojects {
 
         // Logging
         implementation("com.google.flogger:flogger:$floggerVersion")
-        //runtimeOnly("com.google.flogger:flogger-system-backend:$floggerVersion")
-        runtimeOnly("com.google.flogger:flogger-slf4j-backend:$floggerVersion")
+        runtimeOnly("com.google.flogger:flogger-system-backend:$floggerVersion")
     }
 
     java {
-        // Java 8 needed as Beam doesn't yet support 11
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     jacoco {
@@ -285,7 +283,7 @@ tasks {
     }
 
     wrapper {
-        gradleVersion = "6.2.1"
+        gradleVersion = "6.2.2"
         distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-bin.zip"
     }
 

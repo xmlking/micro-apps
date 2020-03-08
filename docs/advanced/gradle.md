@@ -20,11 +20,13 @@
 gradle init --type kotlin-library --dsl kotlin
 ```
 
-    Options for all gradle commands: -D --system-prop, -P --project-prop
+    Options for all gradle commands: -D or --system-prop, -P or --project-prop, -m or --dry-run
+
+Check Task Dependencies With a Dry Run with dryRun: -m or --dry-run i.e., `gradle publish -m`
 
 ### Version
 
-> display computed version
+> display computed version 
 
 ```bash
 gradle cV
@@ -74,6 +76,9 @@ gradle release -Prelease.customUsername=sxc460 -Prelease.customPassword=
 gradle markNextVersion -Prelease.incrementer=incrementMinor -Prelease.dryRun
 # in CI enveroment 
 gradle release -Prelease.disableChecks -Prelease.pushTagsOnly -x test --profile
+# if you want to manually set version with Jenkins params
+gradle createRelease    -Prelease.disableChecks -Prelease.versionIncrementer=incrementMajor     -Prelease.dryRun
+gradle markNextVersion  -Prelease.disableChecks -Prelease.incrementer=incrementMajor            -Prelease.dryRun
 ```
 
 ### Changelog
@@ -106,10 +111,23 @@ gradle build publish -Prelease.forceVersion=3.0.0
 # Build an image tarball,
 # then you can load with `docker load --input build/jib-image.tar`
 gradle jibBuildTar
-# Build image
+# Build and publish docker image
 gradle jib
-# Build image useing your Docker daemon
+# Build image locally useing your Docker daemon (on publish)
 gradle jibDockerBuild
+```
+
+#### local testing
+
+pull a remote image and locally use it as base image
+
+```bash
+# pull base image first
+docker pull gcr.io/distroless/java:11
+# use local docker image as base, build image only (on publish)
+gradle jibDockerBuild -PbaseDockerImage=docker://gcr.io/distroless/java:11
+# you can run your local docker image
+docker run -it xmlking/jvm-gitops-jvm-gitops:0.2.0-SNAPSHOT
 ```
 
 ### Dependencies
@@ -124,8 +142,6 @@ gradle useLatestVersions && gradle useLatestVersionsCheck
 ```
 
 ### Gradle
-
-> miscellaneous Gradle commands
 
 ```bash
 # upgrade gradlew

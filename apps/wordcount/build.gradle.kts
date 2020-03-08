@@ -5,6 +5,7 @@ plugins {
 val kotlinVersion: String by project
 val beamVersion: String by project
 val csvVersion: String by project
+val floggerVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -16,9 +17,24 @@ dependencies {
     implementation("org.apache.beam:beam-runners-google-cloud-dataflow-java:$beamVersion")
     implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
     implementation("org.apache.commons:commons-csv:$csvVersion")
+
+    runtimeOnly("com.google.flogger:flogger-slf4j-backend:$floggerVersion")
+}
+
+java {
+    // Java 8 needed as Beam doesn't yet support 11
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 application {
     mainClassName = "micro.apps.pipeline.WordCountPipeline"
 //    applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
+}
+
+tasks {
+    shadowJar {
+        isZip64 = true
+        mergeServiceFiles()
+    }
 }

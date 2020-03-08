@@ -13,9 +13,11 @@
 //    }
 //}
 
-rootProject.name = "jvm-gitops"
+rootProject.name = "micro-apps"
 include(
+    ":apps:demo",
+    ":apps:wordcount",
     ":libs:core",
     ":libs:shared",
-    ":apps:wordcount"
+    ":libs:demo"
 )

@@ -22,10 +22,15 @@ out/
 .Trashes
 ehthumbs.db
 Thumbs.db
+.AppleDouble
+.LSOverride
 
-### DEMO ###
+### Docker ###
+.testcontainers-tmp-*
+
+### Project ###
 favicon.*
 *.mv.db
 *.trace.db
-src/main/jenkinsfile/ssh
+libs/demo/src/main/jenkinsfile/ssh
 TODO
