@@ -145,8 +145,19 @@ gradle useLatestVersions && gradle useLatestVersionsCheck
 
 ```bash
 # upgrade gradlew
-VERSION=${1:-6.1}
-gradle wrapper --gradle-version "${VERSION}"
+# upgrade project gradle version
+gradle wrapper --gradle-version 6.2.2 --distribution-type all
+# gradle daemon status 
+gradle --status
+gradle --stop
+# show dependencies
+gradle classifier:dependencies
+gradle classifier:dependencyInsight --dependency spring-messaging
+# refresh dependencies
+gradle build -x test --refresh-dependencies 
+
+# display version 
+gradle cV
 ```
 
 ### Reference
