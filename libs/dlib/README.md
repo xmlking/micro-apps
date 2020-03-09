@@ -4,13 +4,13 @@ Demo Lib module.
 
 ### Run
 ```bash
-gradle libs:demo:clean
+gradle libs:dlib:clean
 ```
 ### Test
 ```bash
-gradle libs:demo:test
+gradle libs:dlib:test
 ```
 ### Build
 ```bash
-gradle libs:demo:build
+gradle libs:dlib:build
 ```

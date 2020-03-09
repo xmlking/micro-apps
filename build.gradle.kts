@@ -1,5 +1,6 @@
 import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
+//import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
 import java.text.SimpleDateFormat
 import java.util.*
 import java.net.URL
@@ -35,7 +36,13 @@ plugins {
     // gradle release
     id("pl.allegro.tech.build.axion-release") version "1.11.0"
 
-    id("com.github.johnrengelman.shadow") version "5.2.0" apply false
+    // Make fat runnable jars
+    // gradle shadowJar
+    // gradle runShadow
+    // id("com.github.johnrengelman.shadow") version "5.2.0" apply false
+    // Build & Publish docker images
+    // gradle jib
+    // id("com.google.cloud.tools.jib") version "2.0.0" apply false
 }
 
 // rootProject config
@@ -55,6 +62,13 @@ scmVersion {
         "develop" to "incrementPatch",
         "master" to "incrementMinor"
     )
+    //hooks(closureOf<HooksConfig> {
+    //    pre("fileUpdate", mapOf(
+    //            "file" to "README.md",
+    //            "pattern" to "{v,p -> /('$'v)/}",
+    //            "replacement" to """{v, p -> "'$'v"}]))"""))
+    //    pre("commit")
+    //})
 }
 
 version = scmVersion.version
@@ -97,11 +111,14 @@ subprojects {
         plugin("org.sonarqube")
         plugin("maven-publish")
         plugin("org.jetbrains.dokka")
-    }
-    plugins.withId("application") {
-        project.apply { plugin("com.github.johnrengelman.shadow") }
+        //if (path.startsWith(":apps") && (name != "apps")) {
+        //    plugin("application")
+        //    plugin("com.github.johnrengelman.shadow")
+        //    plugin("com.google.cloud.tools.jib")
+        //}
     }
 
+    // do we need this?
     configurations {
         register("bom")
         implementation {

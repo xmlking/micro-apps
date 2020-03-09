@@ -14,12 +14,10 @@ gradle :apps:demo:test
 
 ### Build
 ```bash
-# display version 
-gradle :apps:demo:currentVersion 
 # clean
 gradle :apps:demo:clean
-# make jar
-gradle :apps:demo:jar
+# make fatJar
+gradle :apps:demo:build
 # docker build
 gradle :apps:demo:jibDockerBuild
 ```

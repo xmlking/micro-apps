@@ -1,28 +1,22 @@
 # WordCount
 
-wordcount pipeline demo. 
+WordCount pipeline demo. 
+
+### Run
+#### Local Run  
+```bash
+gradle :apps:wordcount:run --args="--runner=DirectRunner --inputFile=./src/test/resources/data/input.txt --output=./build/output.txt"
+```
 
 ### Test
 ```bash
-gradle :apps:samples:wordcount:test
+gradle :apps:wordcount:test
 ```
-
-### Run
-
-#### Local Run  
-```bash
-gradle :apps:samples:wordcount:run --args="--runner=DirectRunner --inputFile=./src/test/resources/data/input.txt --output=./build/output.txt"
-```
- 
 
 ### Build
 ```bash
-# display version
-gradle :versionDisplay
 # clean
-gradle :apps:samples:wordcount:clean
+gradle :apps:wordcount:clean
 # make fatJar
-gradle :apps:samples:wordcount:build
-# docker build
-gradle :apps:samples:wordcount:jibDockerBuild
+gradle :apps:wordcount:build
 ```

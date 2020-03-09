@@ -3,6 +3,7 @@
  */
 package micro.apps.demo
 
+import micro.apps.demo.App
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 

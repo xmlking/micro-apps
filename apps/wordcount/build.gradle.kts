@@ -23,18 +23,12 @@ dependencies {
 
 java {
     // Java 8 needed as Beam doesn't yet support 11
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    // FIXME
+    // sourceCompatibility = JavaVersion.VERSION_1_8
+    // targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 application {
     mainClassName = "micro.apps.pipeline.WordCountPipeline"
 //    applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
-}
-
-tasks {
-    shadowJar {
-        isZip64 = true
-        mergeServiceFiles()
-    }
 }

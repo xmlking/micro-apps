@@ -19,5 +19,5 @@ include(
     ":apps:wordcount",
     ":libs:core",
     ":libs:shared",
-    ":libs:demo"
+    ":libs:dlib"
 )
