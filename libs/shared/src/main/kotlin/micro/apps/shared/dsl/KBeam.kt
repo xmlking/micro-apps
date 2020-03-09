@@ -17,8 +17,8 @@ fun <A, B> ((A) -> B).toSerializableFunction(): SerializableFunction<A, B> = Ser
 object KPipeline {
     inline fun <reified R : PipelineOptions> from(args: Array<String>): Pair<Pipeline, R> {
         val options = PipelineOptionsFactory.fromArgs(*args)
-                .withValidation()
-                .`as`(R::class.java)
+            .withValidation()
+            .`as`(R::class.java)
         return Pipeline.create(options) to options
     }
 }
@@ -42,14 +42,14 @@ fun PCollection<String>.toText(name: String = "Write to Text", filename: String)
  * Read from File Collection.
  */
 fun Pipeline.fromFiles(
-        name: String = "Read from File Collection",
-        input: String): PCollection<KV<String, String>> {
+    name: String = "Read from File Collection",
+    input: String): PCollection<KV<String, String>> {
 
     return this.apply(name, FileIO.match().filepattern(input))
-            .apply("$name readMatches", FileIO.readMatches())
-            .apply("$name read files", MapElements.into(TypeDescriptors.kvs(TypeDescriptors.strings(), TypeDescriptors.strings())).via(SerializableFunction { file: FileIO.ReadableFile ->
-                KV.of(file.metadata.resourceId().toString(), file.readFullyAsUTF8String())
-            }))
+        .apply("$name readMatches", FileIO.readMatches())
+        .apply("$name read files", MapElements.into(TypeDescriptors.kvs(TypeDescriptors.strings(), TypeDescriptors.strings())).via(SerializableFunction { file: FileIO.ReadableFile ->
+            KV.of(file.metadata.resourceId().toString(), file.readFullyAsUTF8String())
+        }))
 }
 
 
@@ -57,11 +57,11 @@ fun Pipeline.fromFiles(
  * Run a function on each member of a PCollect
  */
 inline fun <I, reified O> PCollection<I>.map(
-        name: String = "map to ${O::class.simpleName}",
-        noinline transform: (I) -> O): PCollection<O> {
+    name: String = "map to ${O::class.simpleName}",
+    noinline transform: (I) -> O): PCollection<O> {
     val pc = this.apply(name,
-            MapElements.into(TypeDescriptor.of(O::class.java))
-                    .via(transform.toSerializableFunction()))
+        MapElements.into(TypeDescriptor.of(O::class.java))
+            .via(transform.toSerializableFunction()))
     return pc.setCoder(NullableCoder.of(pc.coder))
 }
 
@@ -70,10 +70,10 @@ inline fun <I, reified O> PCollection<I>.map(
  * Convert a nested PCollect into a single PCollect
  */
 inline fun <I, reified O> PCollection<I>.flatMap(
-        name: String = "flatMap to ${O::class.simpleName}",
-        noinline transform: (I) -> Iterable<O>): PCollection<O> {
+    name: String = "flatMap to ${O::class.simpleName}",
+    noinline transform: (I) -> Iterable<O>): PCollection<O> {
     val pc = this.apply(name, FlatMapElements.into(TypeDescriptor.of(O::class.java))
-            .via(transform.toSerializableFunction()))
+        .via(transform.toSerializableFunction()))
     return pc.setCoder(NullableCoder.of(pc.coder))
 }
 
@@ -81,17 +81,17 @@ inline fun <I, reified O> PCollection<I>.flatMap(
  * Filter items in a PCollect.
  */
 fun <I> PCollection<I>.filter(
-        name: String = "Filter items",
-        transform: (I) -> Boolean): PCollection<I> {
+    name: String = "Filter items",
+    transform: (I) -> Boolean): PCollection<I> {
     val pc = this.apply(name, Filter.by(transform.toSerializableFunction()))
     return pc.setCoder(NullableCoder.of(pc.coder))
 }
 
 
 fun <I> PCollection<I>.countPerElement(
-        name: String = "count per element"): PCollection<KV<I, Long>> {
+    name: String = "count per element"): PCollection<KV<I, Long>> {
     return this.apply(name, Count.perElement<I>())
-            .setTypeDescriptor(object : TypeDescriptor<KV<I, Long>>() {})
+        .setTypeDescriptor(object : TypeDescriptor<KV<I, Long>>() {})
 }
 
 /**
@@ -118,15 +118,15 @@ open class DoFnContext<I, O>(val context: DoFn<I, O>.ProcessContext) {
  * Generic parDo implementation.
  */
 inline fun <I, reified O> PCollection<I>.parDo(
-        name: String = "ParDo to ${O::class.simpleName}",
-        crossinline transform: DoFnContext<I, O>.() -> Unit): PCollection<O> {
+    name: String = "ParDo to ${O::class.simpleName}",
+    crossinline transform: DoFnContext<I, O>.() -> Unit): PCollection<O> {
     val pc = this.apply(name,
-            ParDo.of(object : DoFn<I, O>() {
-                @DoFn.ProcessElement
-                fun processElement(context: ProcessContext) {
-                    DoFnContext(context).apply(transform)
-                }
+        ParDo.of(object : DoFn<I, O>() {
+            @DoFn.ProcessElement
+            fun processElement(context: ProcessContext) {
+                DoFnContext(context).apply(transform)
             }
-            ))
+        }
+        ))
     return pc.setCoder(NullableCoder.of(pc.coder))
 }

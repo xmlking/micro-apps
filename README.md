@@ -33,6 +33,7 @@ docker-compose down -v
 # start local nexus
 docker-compose up nexus
 ```
+access **sonarqube** at http://localhost:9000/ (admin/admin)
 
 See [gradle commands](docs/advanced/gradle.md) for this project.
 

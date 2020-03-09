@@ -55,7 +55,7 @@ pipeline {
                         script {
                             env.FAILED_STAGE_NAME = env.STAGE_NAME
                         }
-                        sonarQube_scan(serviceName: "play-jenkins", buildType: 'gradle')
+                        sonarQube_scan(serviceName: "micro-apps", buildType: 'gradle')
                     }
                 }
                 stage('NexusIQ') {

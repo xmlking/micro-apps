@@ -22,10 +22,10 @@ import java.nio.charset.StandardCharsets
  * Write data to a PubSub topic.
  */
 fun PCollection<PubsubMessage>.toPubsub(
-        name: String = "Write to PubSub",
-        topic: String,
-        idAttribute: String?,
-        maxBatchSize: Int? = 10
+    name: String = "Write to PubSub",
+    topic: String,
+    idAttribute: String?,
+    maxBatchSize: Int? = 10
 ): PDone {
     return this.apply(name, PubsubIO.writeMessages().to(topic).apply {
         maxBatchSize?.let { withMaxBatchSize(maxBatchSize) }
@@ -37,18 +37,18 @@ fun PCollection<PubsubMessage>.toPubsub(
  * Write data to a BigQuery table.
  */
 fun PCollection<TableRow>.toBigquery(
-        name: String = "Write to BigQuery",
-        table: String,
-        dataset: String,
-        project: String
+    name: String = "Write to BigQuery",
+    table: String,
+    dataset: String,
+    project: String
 ): WriteResult {
     val tableRef = TableReference().setTableId(table).setDatasetId(dataset).setProjectId(project)
 
     return this.apply(name,
-            BigQueryIO.writeTableRows()
-                    .to(tableRef)
-                    .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_NEVER)
-                    .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND)
+        BigQueryIO.writeTableRows()
+            .to(tableRef)
+            .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_NEVER)
+            .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND)
     )
 }
 
@@ -56,38 +56,38 @@ fun PCollection<TableRow>.toBigquery(
  * Write data to a BigQuery table with Partitioning.
  */
 fun PCollection<TableRow>.toBigqueryTable(
-        name: String = "Write to BigQuery table",
-        table: String,
-        dataset: String,
-        project: String,
-        tableSchema: TableSchema,
-        timePartitioning: TimePartitioning = TimePartitioning()
+    name: String = "Write to BigQuery table",
+    table: String,
+    dataset: String,
+    project: String,
+    tableSchema: TableSchema,
+    timePartitioning: TimePartitioning = TimePartitioning()
 ): WriteResult {
     val tableRef = TableReference().setTableId(table).setDatasetId(dataset).setProjectId(project)
 
     return this.apply(name,
-            BigQueryIO.writeTableRows()
-                    .withExtendedErrorInfo()
-                    .withSchema(tableSchema)
-                    .to(tableRef)
-                    .withTimePartitioning(timePartitioning)
-                    .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
-                    .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND))
+        BigQueryIO.writeTableRows()
+            .withExtendedErrorInfo()
+            .withSchema(tableSchema)
+            .to(tableRef)
+            .withTimePartitioning(timePartitioning)
+            .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
+            .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND))
 }
 
 /**
  * Write data to a Spanner table.
  */
 fun PCollection<Mutation>.toSpanner(
-        name: String = "Write to Spanner",
-        instanceId: String,
-        databaseId: String,
-        batchSizeBytes: Long = (1024 * 10)
+    name: String = "Write to Spanner",
+    instanceId: String,
+    databaseId: String,
+    batchSizeBytes: Long = (1024 * 10)
 ) {
     this.apply(name, SpannerIO.write()
-            .withInstanceId(instanceId)
-            .withDatabaseId(databaseId)
-            .withBatchSizeBytes(batchSizeBytes)
+        .withInstanceId(instanceId)
+        .withDatabaseId(databaseId)
+        .withBatchSizeBytes(batchSizeBytes)
     )
 }
 

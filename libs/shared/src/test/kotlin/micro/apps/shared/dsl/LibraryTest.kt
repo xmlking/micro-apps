@@ -7,7 +7,8 @@ import kotlin.test.Test
 import kotlin.test.assertTrue
 
 class KBeamDSLTest {
-    @Test fun testKBeamDsl() {
+    @Test
+    fun testKBeamDsl() {
         assertTrue(true)
     }
 }

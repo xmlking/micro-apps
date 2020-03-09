@@ -2,6 +2,7 @@ package micro.apps.demo
 
 import com.google.common.flogger.FluentLogger
 import micro.apps.dlib.Library
+
 class App {
     val greeting: String
         get() {

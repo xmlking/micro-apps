@@ -20,4 +20,6 @@ gradle :apps:demo:clean
 gradle :apps:demo:build
 # docker build
 gradle :apps:demo:jibDockerBuild
+# run image
+docker run -it xmlking/micro-apps-demo:1.6.1-SNAPSHOT
 ```

@@ -23,17 +23,17 @@ class WordCountPipelineTest : Serializable {
     fun `Should process WordCount by GroupByKey`() {
 
         val results = pipeline
-                .apply(Create.of(
-                        "apache beam in kotlin",
-                        "this is kotlin",
-                        "awesome kotlin",
-                        ""))
-                .flatMap { it.split(Regex(TOKENIZER_PATTERN)).filter { it.isNotEmpty() }.toList() }
-                .countPerElement()
-                .map { "${it.key}: ${it.value}" }
+            .apply(Create.of(
+                "apache beam in kotlin",
+                "this is kotlin",
+                "awesome kotlin",
+                ""))
+            .flatMap { it.split(Regex(TOKENIZER_PATTERN)).filter { it.isNotEmpty() }.toList() }
+            .countPerElement()
+            .map { "${it.key}: ${it.value}" }
 
         PAssert.that(results).containsInAnyOrder(
-                "this: 1", "apache: 1", "beam: 1", "is: 1", "kotlin: 3", "awesome: 1", "in: 1")
+            "this: 1", "apache: 1", "beam: 1", "is: 1", "kotlin: 3", "awesome: 1", "in: 1")
 
         pipeline.run()
     }

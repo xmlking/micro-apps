@@ -17,9 +17,9 @@ sealed class Message : Serializable
 
 /** Event Message Class **/
 data class DataMessage(
-        val id: UUID,
-        val name: String,
-        val location: String = "CA",
-        val price: BigDecimal,
-        val timestamp: Instant = Instant.now()
+    val id: UUID,
+    val name: String,
+    val location: String = "CA",
+    val price: BigDecimal,
+    val timestamp: Instant = Instant.now()
 ) : Message(), Serializable

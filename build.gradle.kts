@@ -1,18 +1,18 @@
+//import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
+import com.google.cloud.tools.jib.api.ImageFormat
 import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
-//import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-import java.net.URL
-
-val jacocoVersion: String by project
-val jacocoQualityGate: String by project
-val gcloudProject: String by project
-val baseDockerImage: String by project
 
 val kotlinVersion: String by project
 val floggerVersion: String by project
 val hamcrestVersion: String by project
+val jacocoVersion: String by project
+val jacocoQualityGate: String by project
+val gcloudProject: String by project
+val baseDockerImage: String by project
 
 plugins {
     base
@@ -39,10 +39,10 @@ plugins {
     // Make fat runnable jars
     // gradle shadowJar
     // gradle runShadow
-    // id("com.github.johnrengelman.shadow") version "5.2.0" apply false
+    id("com.github.johnrengelman.shadow") version "5.2.0"
     // Build & Publish docker images
     // gradle jib
-    // id("com.google.cloud.tools.jib") version "2.0.0" apply false
+    id("com.google.cloud.tools.jib") version "2.0.0"
 }
 
 // rootProject config
@@ -111,11 +111,11 @@ subprojects {
         plugin("org.sonarqube")
         plugin("maven-publish")
         plugin("org.jetbrains.dokka")
-        //if (path.startsWith(":apps") && (name != "apps")) {
-        //    plugin("application")
-        //    plugin("com.github.johnrengelman.shadow")
-        //    plugin("com.google.cloud.tools.jib")
-        //}
+        if (path.startsWith(":apps") && (name != "apps")) {
+            plugin("application")
+            plugin("com.github.johnrengelman.shadow")
+            plugin("com.google.cloud.tools.jib")
+        }
     }
 
     // do we need this?
@@ -236,10 +236,51 @@ subprojects {
                 put("Implementation-Vendor", project.group)
             }
         }
+        plugins.withId("com.github.johnrengelman.shadow") {
+            shadowJar {
+                isZip64 = true
+                mergeServiceFiles()
+            }
+        }
 
         artifacts {
             archives(sourcesJar)
             archives(javadocJar)
+        }
+
+        plugins.withId("com.google.cloud.tools.jib") {
+            jib {
+                setAllowInsecureRegistries(true)
+                from {
+                    if (project.hasProperty("baseDockerImage")) {
+                        image = baseDockerImage
+                    }
+                }
+                to {
+                    image = "xmlking/${rootProject.name}-${project.name}:${project.version}"
+                    // image = "us.gcr.io/${gcloudProject}/${rootProject.name}/${project.name}:${project.version}"
+
+                    /**
+                    gcr: Google Container Registry (GCR)
+                    osxkeychain: Docker Hub
+                     */
+                    credHelper = "osxkeychain"
+                    /**
+                    auth {
+                    username = "*******"
+                    password = "*******"
+                    }
+                     */
+                    tags = setOf("${project.version}")
+                }
+                container {
+                    jvmFlags = listOf("-Djava.security.egd=file:/dev/./urandom", "-Xms512m", "-server")
+                    creationTime = "USE_CURRENT_TIMESTAMP"
+                    ports = listOf("8080", "8443")
+                    labels = mapOf("version" to "${project.version}", "name" to project.name, "group" to "${project.group}")
+                    format = ImageFormat.OCI
+                }
+            }
         }
     }
 

@@ -18,6 +18,6 @@ indent_size = 2
 [gradlew.bat]
 end_of_line = crlf
 
-[{package,bower}.json]
+[{package, bower}.json]
 indent_style = space
 indent_size = 2
