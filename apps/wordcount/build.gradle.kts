@@ -30,5 +30,6 @@ java {
 
 application {
     mainClassName = "micro.apps.pipeline.WordCountPipeline"
-//    applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
+    // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
+    applicationDefaultJvmArgs = listOf("-Dflogger.level=INFO")
 }
