@@ -1,6 +1,7 @@
 package micro.apps.pipeline
 
 import com.google.common.flogger.FluentLogger
+import micro.apps.core.util.LogDefinition.Companion.config
 import micro.apps.shared.dsl.*
 import org.apache.beam.sdk.options.*
 
@@ -23,8 +24,8 @@ interface WordCountOptions : PipelineOptions {
 const val TOKENIZER_PATTERN = "[^\\p{L}]+"
 
 object WordCountPipeline {
-
-    private val logger = FluentLogger.forEnclosingClass()
+    @JvmStatic
+    private val logger: FluentLogger = FluentLogger.forEnclosingClass().config()
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -34,16 +35,20 @@ object WordCountPipeline {
         val (pipe, options) = KPipeline.from<WordCountOptions>(args)
 
         logger.atInfo().log(
-            """Runner: ${options.runner.name}
-                |Job name: ${options.jobName}
+                """Runner: ${options.runner.name}
+                    |Job name: ${options.jobName}
                 """.trimMargin()
         )
 
         pipe.fromText(path = options.inputFile.get())
-            .flatMap { it.split(Regex(TOKENIZER_PATTERN)).filter { it.isNotEmpty() }.toList() }
-            .countPerElement()
-            .map { "${it.key}: ${it.value}" }
-            .toText(filename = options.output.get())
+                .flatMap { it.split(Regex(TOKENIZER_PATTERN)).filter { it.isNotEmpty() }.toList() }
+                .countPerElement()
+                .map { "${it.key}: ${it.value}" }
+                .parDo<String, String>(name = "just to demo logging") {
+                    logger.atFinest().log("THIS IS atFinest MESSAGE")
+                    output(element)
+                }
+                .toText(filename = options.output.get())
 
         pipe.run().waitUntilFinish()
     }
