@@ -31,9 +31,9 @@ __Remember:__
     git flow feature start <feature-name> [<base>]
     ```
     
-    If you are starting to work on an existing feature branch, do this:
+    If you are starting to work on an existing feature branch started by another developer, do this:
     ```bash
-    git flow feature pull origin <feature-name>
+    git flow feature track <feature-name>
     ```
     
     __Remember:__
