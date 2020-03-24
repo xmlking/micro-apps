@@ -1,4 +1,4 @@
-//import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
+// import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
 import com.google.cloud.tools.jib.api.ImageFormat
 import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
@@ -14,14 +14,17 @@ val jacocoVersion: String by project
 val jacocoQualityGate: String by project
 val gcloudProject: String by project
 val baseDockerImage: String by project
+val ktlintVersion: String by project
 
 plugins {
     base
     idea
     jacoco
     `maven-publish`
-    // code quality
+    // Code Quality
     id("org.sonarqube") version "2.8"
+    // Keep your code spotless
+    id("com.diffplug.gradle.spotless") version "3.28.0"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.3.70"
     id("org.jetbrains.dokka") version "0.10.1"
@@ -90,6 +93,16 @@ sonarqube {
     }
     tasks.sonarqube {
         dependsOn("jacocoTestReport")
+    }
+}
+
+spotless {
+    kotlin {
+        ktlint(ktlintVersion)
+    }
+    kotlinGradle {
+        target("*.gradle.kts")
+        ktlint(ktlintVersion)
     }
 }
 
@@ -162,6 +175,16 @@ subprojects {
             property("sonar.junit.reportPaths", "$buildDir/test-results/test")
             property("sonar.java.binaries", "$buildDir/classes/java, $buildDir/classes/kotlin")
             property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml")
+        }
+    }
+
+    spotless {
+        kotlin {
+            ktlint(ktlintVersion)
+        }
+        kotlinGradle {
+            target("*.gradle.kts")
+            ktlint(ktlintVersion)
         }
     }
 

@@ -3,7 +3,9 @@ package micro.apps.core.model
 import java.io.Serializable
 import java.math.BigDecimal
 import java.time.Instant
+/* ktlint-disable no-wildcard-imports */
 import java.util.*
+/* ktlint-enable no-wildcard-imports */
 
 // ----------------
 //  for Kotlin Gradle NoArg plugin

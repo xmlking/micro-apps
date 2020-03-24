@@ -15,5 +15,5 @@ private val logger = FluentLogger.forEnclosingClass()
 fun main(args: Array<String>) {
     // logger.atInfo().withCause(exception).log("Log message with: %s", argument);
 
-    logger.atInfo().log("greeting: %s, lib: %b", App().greeting, Library().someLibraryMethod());
+    logger.atInfo().log("greeting: %s, lib: %b", App().greeting, Library().someLibraryMethod())
 }

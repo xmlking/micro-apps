@@ -7,7 +7,6 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAdjusters
 
-
 /**
  * Format an Instant as an ISO8601 timestamp
  */
@@ -39,4 +38,3 @@ fun <T : Any> T?.whenNotNull(callback: (it: T) -> Unit) {
 fun <T : Any> T?.whenNull(callback: () -> Unit) {
     this ?: callback()
 }
-

@@ -1,10 +1,10 @@
-//pluginManagement {
+// pluginManagement {
 //    repositories {
 //        maven { url = uri("https://nexus/") }
 //        maven { url = uri("https://dl.bintray.com/gradle/gradle-plugins") }
 //        gradlePluginPortal()
 //    }
-//}
+// }
 
 rootProject.name = "micro-apps"
 include(
