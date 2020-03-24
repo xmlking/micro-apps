@@ -27,17 +27,17 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 > start app dependencies: postgres, redis
 ```bash
 # start local sonarqube
-docker-compose up -V postgres
+docker-compose up postgres # docker-compose up -V postgres
 # stop local postgres before restart again
-docker-compose down -v
+docker-compose down # docker-compose down -v
 ```
 
 > start optional CI/CD infra dependencies: sonarqube, nexus 
 ```bash
 # start local sonarqube
-docker-compose up -V sonarqube
+docker-compose up sonarqube # docker-compose up -V sonarqube
 # stop local sonarqube before restart again
-docker-compose down -v
+docker-compose down # docker-compose down -v
 # start local nexus
 docker-compose up nexus
 ```

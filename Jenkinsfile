@@ -5,7 +5,7 @@ pipeline {
     }
     parameters {
         booleanParam(name: 'RELEASE', defaultValue: false, description: 'Enable this value to generate a release on this build')
-        choice(name: 'RELEASE_TYPE', choices: 'Minor\nMajor\nPatch', description: 'Increment major, minor, or patch version for release')
+        choice(name: 'RELEASE_TYPE', choices: 'Patch\nMinor\nMajor', description: 'Increment major, minor, or patch version for release')
     }
     options {
         timeout(time: 1, unit: "HOURS")
@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Check') {
             steps {
                 script {
                     env.FAILED_STAGE_NAME = env.STAGE_NAME
