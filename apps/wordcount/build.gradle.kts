@@ -9,7 +9,7 @@ val floggerVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
-    implementation(project(":libs:shared"))
+    implementation(project(":libs:kbeam"))
 
     // Use Apache Beam
     implementation("org.apache.beam:beam-sdks-java-core:$beamVersion")

@@ -4,7 +4,8 @@ import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.net.URL
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.TimeZone
 
 val kotlinVersion: String by project
 val floggerVersion: String by project
@@ -62,13 +63,13 @@ scmVersion {
         "develop" to "incrementPatch",
         "master" to "incrementMinor"
     )
-    //hooks(closureOf<HooksConfig> {
-    //    pre("fileUpdate", mapOf(
-    //            "file" to "README.md",
-    //            "pattern" to "{v,p -> /('$'v)/}",
-    //            "replacement" to """{v, p -> "'$'v"}]))"""))
-    //    pre("commit")
-    //})
+    // hooks(closureOf<HooksConfig> {
+    //     pre("fileUpdate", mapOf(
+    //             "file" to "README.md",
+    //             "pattern" to "{v,p -> /('$'v)/}",
+    //             "replacement" to """{v, p -> "'$'v"}]))"""))
+    //     pre("commit")
+    // })
 }
 
 version = scmVersion.version
@@ -189,7 +190,10 @@ subprojects {
         }
 
         test {
-            testLogging.showExceptions = true
+            testLogging {
+                showExceptions = true
+                showStandardStreams = true
+            }
             finalizedBy("jacocoTestReport")
         }
 
@@ -203,7 +207,7 @@ subprojects {
                     noAndroidSdkLink = true
                     // any url you want, doesn't matter
                     url = URL("https://whatever")
-                    packageListUrl = URL("file:///${rootDir}/package-list")
+                    packageListUrl = URL("file:///$rootDir/package-list")
                 }
             }
         }
@@ -221,7 +225,7 @@ subprojects {
         }
         jar {
             val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-            sdf.timeZone = TimeZone.getTimeZone("UTC");
+            sdf.timeZone = TimeZone.getTimeZone("UTC")
 
             manifest.attributes.apply {
                 put("Build-By", System.getProperty("user.name"))
@@ -316,7 +320,6 @@ subprojects {
             }
         }
     }
-
 }
 
 // rootProject tasks
@@ -344,8 +347,4 @@ tasks {
         gradleVersion = "6.2.2"
         distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-bin.zip"
     }
-
 }
-
-
-

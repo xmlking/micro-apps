@@ -1,4 +1,4 @@
-package micro.apps.shared.dsl
+package micro.apps.kbeam
 
 import com.google.api.services.bigquery.model.TableReference
 import com.google.api.services.bigquery.model.TableRow
@@ -44,7 +44,8 @@ fun PCollection<TableRow>.toBigquery(
 ): WriteResult {
     val tableRef = TableReference().setTableId(table).setDatasetId(dataset).setProjectId(project)
 
-    return this.apply(name,
+    return this.apply(
+        name,
         BigQueryIO.writeTableRows()
             .to(tableRef)
             .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_NEVER)
@@ -65,14 +66,16 @@ fun PCollection<TableRow>.toBigqueryTable(
 ): WriteResult {
     val tableRef = TableReference().setTableId(table).setDatasetId(dataset).setProjectId(project)
 
-    return this.apply(name,
+    return this.apply(
+        name,
         BigQueryIO.writeTableRows()
             .withExtendedErrorInfo()
             .withSchema(tableSchema)
             .to(tableRef)
             .withTimePartitioning(timePartitioning)
             .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
-            .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND))
+            .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND)
+    )
 }
 
 /**
@@ -84,13 +87,13 @@ fun PCollection<Mutation>.toSpanner(
     databaseId: String,
     batchSizeBytes: Long = (1024 * 10)
 ) {
-    this.apply(name, SpannerIO.write()
-        .withInstanceId(instanceId)
-        .withDatabaseId(databaseId)
-        .withBatchSizeBytes(batchSizeBytes)
+    this.apply(
+        name, SpannerIO.write()
+            .withInstanceId(instanceId)
+            .withDatabaseId(databaseId)
+            .withBatchSizeBytes(batchSizeBytes)
     )
 }
-
 
 /**
  * Converts a JSON string to a [TableRow] object. If the data fails to convert, a RuntimeException will be thrown.
@@ -99,7 +102,6 @@ fun PCollection<Mutation>.toSpanner(
  * @return The parsed [TableRow] object.
  */
 fun convertJsonToTableRow(json: String): TableRow? {
-    // TODO: avoid converting to JSON => String => JSON again
     var row: TableRow? = null
     try {
         ByteArrayInputStream(json.toByteArray(StandardCharsets.UTF_8)).use { inputStream ->

@@ -1,4 +1,4 @@
-package micro.apps.shared.dsl
+package micro.apps.kbeam
 
 import org.apache.beam.sdk.Pipeline
 import org.apache.beam.sdk.coders.NullableCoder
@@ -6,8 +6,11 @@ import org.apache.beam.sdk.io.FileIO
 import org.apache.beam.sdk.io.TextIO
 import org.apache.beam.sdk.options.PipelineOptions
 import org.apache.beam.sdk.options.PipelineOptionsFactory
+import org.apache.beam.sdk.options.ValueProvider
+/* ktlint-disable no-wildcard-imports */
 import org.apache.beam.sdk.transforms.*
 import org.apache.beam.sdk.values.*
+/* ktlint-enable no-wildcard-imports */
 
 fun <A, B> ((A) -> B).toSerializableFunction(): SerializableFunction<A, B> = SerializableFunction { this(it) }
 
@@ -23,18 +26,17 @@ object KPipeline {
     }
 }
 
-
 /**
  * Read data from a text file.
  */
-fun Pipeline.fromText(name: String = "Read from Text", path: String): PCollection<String> {
+fun Pipeline.fromText(name: String = "Read from Text", path: ValueProvider<String>): PCollection<String> {
     return this.apply(name, TextIO.read().from(path))
 }
 
 /**
  * Write data to a text file.
  */
-fun PCollection<String>.toText(name: String = "Write to Text", filename: String): PDone {
+fun PCollection<String>.toText(name: String = "Write to Text", filename: ValueProvider<String>): PDone {
     return this.apply(name, TextIO.write().to(filename))
 }
 
@@ -43,37 +45,46 @@ fun PCollection<String>.toText(name: String = "Write to Text", filename: String)
  */
 fun Pipeline.fromFiles(
     name: String = "Read from File Collection",
-    input: String): PCollection<KV<String, String>> {
+    input: String
+): PCollection<KV<String, String>> {
 
     return this.apply(name, FileIO.match().filepattern(input))
         .apply("$name readMatches", FileIO.readMatches())
-        .apply("$name read files", MapElements.into(TypeDescriptors.kvs(TypeDescriptors.strings(), TypeDescriptors.strings())).via(SerializableFunction { file: FileIO.ReadableFile ->
-            KV.of(file.metadata.resourceId().toString(), file.readFullyAsUTF8String())
-        }))
+        .apply(
+            "$name read files",
+            MapElements.into(TypeDescriptors.kvs(TypeDescriptors.strings(), TypeDescriptors.strings()))
+                .via(SerializableFunction { file: FileIO.ReadableFile ->
+                    KV.of(file.metadata.resourceId().toString(), file.readFullyAsUTF8String())
+                })
+        )
 }
-
 
 /**
  * Run a function on each member of a PCollect
  */
 inline fun <I, reified O> PCollection<I>.map(
     name: String = "map to ${O::class.simpleName}",
-    noinline transform: (I) -> O): PCollection<O> {
-    val pc = this.apply(name,
+    noinline transform: (I) -> O
+): PCollection<O> {
+    val pc = this.apply(
+        name,
         MapElements.into(TypeDescriptor.of(O::class.java))
-            .via(transform.toSerializableFunction()))
+            .via(transform.toSerializableFunction())
+    )
     return pc.setCoder(NullableCoder.of(pc.coder))
 }
-
 
 /**
  * Convert a nested PCollect into a single PCollect
  */
 inline fun <I, reified O> PCollection<I>.flatMap(
     name: String = "flatMap to ${O::class.simpleName}",
-    noinline transform: (I) -> Iterable<O>): PCollection<O> {
-    val pc = this.apply(name, FlatMapElements.into(TypeDescriptor.of(O::class.java))
-        .via(transform.toSerializableFunction()))
+    noinline transform: (I) -> Iterable<O>
+): PCollection<O> {
+    val pc = this.apply(
+        name, FlatMapElements.into(TypeDescriptor.of(O::class.java))
+            .via(transform.toSerializableFunction())
+    )
     return pc.setCoder(NullableCoder.of(pc.coder))
 }
 
@@ -82,14 +93,15 @@ inline fun <I, reified O> PCollection<I>.flatMap(
  */
 fun <I> PCollection<I>.filter(
     name: String = "Filter items",
-    transform: (I) -> Boolean): PCollection<I> {
+    transform: (I) -> Boolean
+): PCollection<I> {
     val pc = this.apply(name, Filter.by(transform.toSerializableFunction()))
     return pc.setCoder(NullableCoder.of(pc.coder))
 }
 
-
 fun <I> PCollection<I>.countPerElement(
-    name: String = "count per element"): PCollection<KV<I, Long>> {
+    name: String = "count per element"
+): PCollection<KV<I, Long>> {
     return this.apply(name, Count.perElement<I>())
         .setTypeDescriptor(object : TypeDescriptor<KV<I, Long>>() {})
 }
@@ -119,7 +131,8 @@ open class DoFnContext<I, O>(val context: DoFn<I, O>.ProcessContext) {
  */
 inline fun <I, reified O> PCollection<I>.parDo(
     name: String = "ParDo to ${O::class.simpleName}",
-    crossinline transform: DoFnContext<I, O>.() -> Unit): PCollection<O> {
+    crossinline transform: DoFnContext<I, O>.() -> Unit
+): PCollection<O> {
     val pc = this.apply(name,
         ParDo.of(object : DoFn<I, O>() {
             @DoFn.ProcessElement

@@ -53,7 +53,22 @@ Settings -> Build, Execution, Deployment
     -> Gradle -> set 'Use Gradle From' to 'Specified Loction' to local gradle for eg '/Users/{user-name}/.sdkman/candidates/gradle/6.0.1' 
 ```
 
-Install **SonarLint** Plugin for IntelliJ
+Install IntelliJ Plugins
+
+1. SonarLint
+2. Detekt
+
+### Lint
+
+```bash
+# help
+ktlint --help
+# one time apply ktlint to intelliJ
+# it makes Intellij IDEA's built-in formatter produce 100% ktlint-compatible code.
+ ktlint applyToIDEAProject -y
+# lint
+ktlint
+```
 
 ### Install Kubernetes (optional)
 follow instructions [here](https://gist.github.com/xmlking/62ab53753c0f0f5247d0e174b31dab21) to install kubernetes toolchain:
