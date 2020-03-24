@@ -1,9 +1,9 @@
 package micro.apps.core.util
 
 import com.google.common.flogger.FluentLogger
-import micro.apps.core.util.LogDefinition.Companion.config
 import java.util.logging.Level
 import kotlin.test.Test
+import micro.apps.core.util.LogDefinition.Companion.config
 
 class LogTest {
     private var logger: FluentLogger = FluentLogger.forEnclosingClass().config(Level.ALL)

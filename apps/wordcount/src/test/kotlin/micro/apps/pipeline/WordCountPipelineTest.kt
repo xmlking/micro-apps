@@ -1,5 +1,7 @@
 package micro.apps.pipeline
 
+import java.io.Serializable
+import kotlin.test.Test
 import micro.apps.kbeam.countPerElement
 import micro.apps.kbeam.flatMap
 import micro.apps.kbeam.map
@@ -7,8 +9,6 @@ import org.apache.beam.sdk.testing.PAssert
 import org.apache.beam.sdk.testing.TestPipeline
 import org.apache.beam.sdk.transforms.Create
 import org.junit.Rule
-import java.io.Serializable
-import kotlin.test.Test
 
 const val TOKENIZER_PATTERN = "[^\\p{L}]+"
 

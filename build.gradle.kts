@@ -1,11 +1,11 @@
 // import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
 import com.google.cloud.tools.jib.api.ImageFormat
-import org.sonarqube.gradle.SonarQubeTask
-import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
+import org.sonarqube.gradle.SonarQubeTask
+import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 
 val kotlinVersion: String by project
 val floggerVersion: String by project
@@ -125,6 +125,7 @@ subprojects {
         plugin("org.sonarqube")
         plugin("maven-publish")
         plugin("org.jetbrains.dokka")
+        plugin("com.diffplug.gradle.spotless")
         if (path.startsWith(":apps") && (name != "apps")) {
             plugin("application")
             plugin("com.github.johnrengelman.shadow")
@@ -367,7 +368,7 @@ tasks {
     }
 
     wrapper {
-        gradleVersion = "6.2.2"
+        gradleVersion = "6.3"
         distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-bin.zip"
     }
 }

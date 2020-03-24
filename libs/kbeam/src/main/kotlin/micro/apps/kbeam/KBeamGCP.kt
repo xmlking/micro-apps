@@ -5,6 +5,9 @@ import com.google.api.services.bigquery.model.TableRow
 import com.google.api.services.bigquery.model.TableSchema
 import com.google.api.services.bigquery.model.TimePartitioning
 import com.google.cloud.spanner.Mutation
+import java.io.ByteArrayInputStream
+import java.io.IOException
+import java.nio.charset.StandardCharsets
 import org.apache.beam.sdk.coders.Coder
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO
 import org.apache.beam.sdk.io.gcp.bigquery.TableRowJsonCoder
@@ -14,9 +17,6 @@ import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
 import org.apache.beam.sdk.io.gcp.spanner.SpannerIO
 import org.apache.beam.sdk.values.PCollection
 import org.apache.beam.sdk.values.PDone
-import java.io.ByteArrayInputStream
-import java.io.IOException
-import java.nio.charset.StandardCharsets
 
 /**
  * Write data to a PubSub topic.
