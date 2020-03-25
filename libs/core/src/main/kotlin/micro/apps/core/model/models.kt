@@ -26,4 +26,4 @@ data class DataMessage(
     val timestamp: Instant = Instant.now()
 ) : Message(), Serializable
 
-data class Greeting(val message: String = "")
+data class Fruit(var name: String = "", var description: String = "")

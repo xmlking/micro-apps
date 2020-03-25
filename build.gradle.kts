@@ -126,7 +126,8 @@ subprojects {
         plugin("maven-publish")
         plugin("org.jetbrains.dokka")
         plugin("com.diffplug.gradle.spotless")
-        if (path.startsWith(":apps") && (name != "apps")) {
+        // exclude for root `apps` and `greeting-quarkus` projects
+        if (path.startsWith(":apps") && (name != "apps") && (name != "greeting-quarkus")) {
             plugin("application")
             plugin("com.github.johnrengelman.shadow")
             plugin("com.google.cloud.tools.jib")
@@ -190,6 +191,17 @@ subprojects {
     }
 
     tasks {
+        compileKotlin {
+            kotlinOptions {
+                javaParameters = true
+            }
+        }
+        compileTestKotlin {
+            kotlinOptions {
+                javaParameters = true
+            }
+        }
+
         jacocoTestReport {
             reports {
                 html.isEnabled = true

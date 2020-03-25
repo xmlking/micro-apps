@@ -5,8 +5,7 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class GreetingService {
 
-    fun greeting(name: String): String {
-        return "hello, $name"
+    fun greeting(name: String): Greeting {
+        return Greeting("hello, $name")
     }
-
 }

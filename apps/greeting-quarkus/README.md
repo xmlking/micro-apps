@@ -4,6 +4,21 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## Prerequisites
+
+1. A working container runtime (Docker, podman)
+1. JDK 11 installed with JAVA_HOME configured appropriately
+1. GraalVM version 20.0.0.r11 installed and configured appropriately
+    ```bash
+    sdk install java 20.0.0.r11-grl
+    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/20.0.0.r11-grl
+    ```
+1. Install the native-image tool using gu install:
+    ```bash
+    ${GRAALVM_HOME}/bin/gu install native-image
+    ```
+1. `brew install httpie`
+
 ## scaffolding projects
 
 ```bash
@@ -14,7 +29,7 @@ mvn io.quarkus:quarkus-maven-plugin:1.3.0.Final:create \
     -DprojectVersion=0.1.0 \
     -DclassName="micro.apps.greeting.GreetingResource" \
     -Dpath="/greeting" \
-    -Dextensions="kotlin,resteasy-jsonb,health" \
+    -Dextensions="kotlin,resteasy-jsonb" \
     -DbuildTool=gradle
 cd ..
 ```
@@ -49,7 +64,7 @@ You can create a native executable using: `gradle :apps:greeting-quarkus:buildNa
 
 Or, if you don't have GraalVM installed, you can run the native executable build in a container using: `gradle :apps:greeting-quarkus:buildNative --docker-build=true`.
 
-You can then execute your native executable with: `./build/greeting-quarkus-0.1.0-runner`
+You can then execute your native executable with: `./apps/greeting-quarkus/build/greeting-quarkus-1.6.1-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling#building-a-native-executable.
 
@@ -62,21 +77,32 @@ docker run -i --rm -p 8080:8080 quarkus/quarkus-project
 
 ## Testing
 
+Swagger UI:  http://localhost:8080/swagger-ui/
+
 ```bash
 http :8080/health
 http :8080/openapi
+http :8080/metrics
+http :8080/metrics/application
 http :8080/api/v1/greeting
 http :8080/api/v1/greeting/world
+
+http :8080/api/fruits
 ```
 
 ## Gradle 
 
 ```bash
+
 gradle :apps:greeting-quarkus:listExtensions
+gradle :apps:greeting-quarkus:addExtension --extensions="health,metrics,openapi"
 gradle :apps:greeting-quarkus:addExtension --extensions="hibernate-validator"
 gradle :apps:greeting-quarkus:addExtension --extensions="jdbc,agroal,non-exist-ent"
  
 gradle :apps:greeting-quarkus:quarkusDev -Dsuspend -Ddebug
+
+gradle :apps:greeting-quarkus:buildNative
+gradle :apps:greeting-quarkus:testNative
 ```
 
 ## Reference 

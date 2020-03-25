@@ -7,26 +7,31 @@ import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
+import org.eclipse.microprofile.metrics.MetricUnits
+import org.eclipse.microprofile.metrics.annotation.Counted
+import org.eclipse.microprofile.metrics.annotation.Gauge
+import org.eclipse.microprofile.metrics.annotation.Timed
 
-// http://0.0.0.0:8080/api/v1/greeting/sumo
+data class Greeting(val message: String = "")
 
 @Path("/v1/greeting")
 @Produces(MediaType.APPLICATION_JSON)
+@Counted(name = "performedChecks", description = "How many primality checks have been performed.")
 class GreetingResource {
 
     @Inject
     @field: Default
     lateinit var greetingService: GreetingService
 
-
     @GET
     @Path("")
-    fun hello() = "hello"
+    @Gauge(name = "hello", unit = MetricUnits.NONE, description = "How many anonymous")
+    fun hello() = Greeting("hello")
 
     @GET
     @Path("{name}")
-    fun greeting(@PathParam("name") name: String?): String {
-        return  if (null == name || name.isEmpty())   hello() else greetingService.greeting(name)
+    @Timed(name = "checksTimer", description = "A measure of how long it takes to perform the primality test.", unit = MetricUnits.MILLISECONDS)
+    fun greeting(@PathParam("name") name: String?): Greeting {
+        return if (null == name || name.isEmpty()) hello() else greetingService.greeting(name)
     }
-
 }
