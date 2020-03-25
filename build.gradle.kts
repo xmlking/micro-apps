@@ -217,6 +217,7 @@ subprojects {
             testLogging {
                 showExceptions = true
                 showStandardStreams = true
+                // events(PASSED, SKIPPED, FAILED)
             }
             finalizedBy("jacocoTestReport")
         }

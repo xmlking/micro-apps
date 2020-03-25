@@ -25,3 +25,5 @@ data class DataMessage(
     val price: BigDecimal,
     val timestamp: Instant = Instant.now()
 ) : Message(), Serializable
+
+data class Greeting(val message: String = "")

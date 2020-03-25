@@ -4,6 +4,12 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+### Eclipse ###
+.project
+.classpath
+.settings/
+bin/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -13,6 +19,14 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Vim ###
+*.swp
+*.swo
+
+### patch ###
+*.orig
+*.rej
 
 ### OS generated files ###
 .DS_Store
@@ -34,3 +48,4 @@ favicon.*
 *.trace.db
 libs/demo/src/main/jenkinsfile/ssh
 TODO
+
