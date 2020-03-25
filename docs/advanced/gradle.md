@@ -43,6 +43,33 @@ gradle jacocoTestReport
 gradle jacocoTestCoverageVerification
 gradle sonarqube
 gradle check
+gradle sonarqube
+```
+
+### Spotless tasks
+```bash
+# spotlessCheck - Checks that sourcecode satisfies formatting steps.
+gradle spotlessCheck
+# spotlessApply - Applies code formatting steps to sourcecode in-place.
+gradle spotlessApply
+```
+
+### Quarkus tasks
+```bash
+# addExtension - Adds Quarkus extensions specified by the user to the project.
+gradle :apps:greeting-quarkus:addExtension --extensions="health,metrics,openapi"
+gradle :apps:greeting-quarkus:addExtension --extensions="hibernate-validator"
+gradle :apps:greeting-quarkus:addExtension --extensions="jdbc,agroal,non-exist-ent"
+# buildNative - Building a native image
+gradle :apps:greeting-quarkus:buildNative
+gradle :apps:greeting-quarkus:testNative
+# generateConfig - Generates an example config file
+# listExtensions - Lists the available quarkus extensions
+gradle :apps:greeting-quarkus:listExtensions
+# quarkusBuild - Quarkus builds a runner jar based on the build jar
+# quarkusDev - Development mode: enables hot deployment with background compilation
+gradle :apps:greeting-quarkus:quarkusDev -Dsuspend -Ddebug
+# quarkusTestConfig - Sets the necessary system properties for the Quarkus tests to run.
 ```
 
 ### Build

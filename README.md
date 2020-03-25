@@ -49,12 +49,13 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 #### Apache Beam pipelines
 > Start [wordcount](./apps/wordcount/)
 
-#### Micronaut
-> Start [Greeting API](./apps/greeting-api/)
-
-> Start [Hello World Native API](./apps/hello-world-native/)
-
 #### Quarkus
+
+> Start [Greeting API](./apps/greeting-quarkus/)
+
+#### Micronaut
+
+> Start [Greeting API](./apps/greeting-micronaut/)
 
 ### Inspiration 
 * Creating a [Multi Module Project](https://spring.io/guides/gs/multi-module/)
