@@ -12,7 +12,7 @@ env:
   CI: true
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -37,7 +37,9 @@ jobs:
           gradle-version: 6.3
           arguments: check
       - name: comment
-        uses: example/action-that-comments-on-the-pr@v0
+        uses: unsplash/comment-on-pr@v1
         if: failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          comment: Build failed ${{ steps.check.outputs.build-scan-url }}
+          msg: Build failed ${{ steps.check.outputs.build-scan-url }}
