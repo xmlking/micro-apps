@@ -6,6 +6,12 @@ on:
 env:
   CI: true
 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 #jobs:
 #  BINTRAY_UPLOAD:
 #    name: Bintray Upload
