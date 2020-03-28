@@ -4,6 +4,7 @@ plugins {
 }
 
 val quarkusPlatformVersion: String by project
+val restAssuredVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -17,7 +18,7 @@ dependencies {
     implementation("io.quarkus:quarkus-smallrye-openapi")
 
     testImplementation("io.quarkus:quarkus-junit5")
-    testImplementation("io.rest-assured:rest-assured")
+    testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
 }
 
 quarkus {
