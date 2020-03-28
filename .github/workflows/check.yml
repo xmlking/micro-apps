@@ -37,7 +37,7 @@ jobs:
           gradle-version: 6.3
           arguments: check
       - name: comment
-        uses: unsplash/comment-on-pr@v1
+        uses: unsplash/comment-on-pr@master
         if: failure()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
