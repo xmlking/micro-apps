@@ -8,6 +8,10 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 1. A working container runtime (Docker, podman)
 1. JDK 11 installed with JAVA_HOME configured appropriately
+    ```bash
+    sdk install java 11.0.6.j9-adpt
+    export JAVA_HOME=$HOME/.sdkman/candidates/java/current
+    ```
 1. GraalVM version 20.0.0.r11 installed and configured appropriately
     ```bash
     sdk install java 20.0.0.r11-grl
@@ -18,6 +22,10 @@ If you want to learn more about Quarkus, please visit its website: https://quark
     ${GRAALVM_HOME}/bin/gu install native-image
     ```
 1. `brew install httpie`
+
+1. Adding an empty `META-INF/beans.xml` to `src/main/resources` of dependency project, sothat POJO classes will also be indexed by **Quarkus**
+
+    Ref: https://stackoverflow.com/questions/55513502/how-to-create-a-jandex-index-in-quarkus-for-classes-in-a-external-module
 
 ## scaffolding projects
 
@@ -88,6 +96,14 @@ http :8080/api/v1/greeting
 http :8080/api/v1/greeting/world
 
 http :8080/api/fruits
+```
+
+### Unit tests
+
+```bash
+gradle :apps:greeting-quarkus:check # Runs all checks
+gradle :apps:greeting-quarkus:test # Runs the unit tests.
+gradle :apps:greeting-quarkus:testNative # Runs native image tests
 ```
 
 ## Gradle 

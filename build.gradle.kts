@@ -25,7 +25,7 @@ plugins {
     // Code Quality
     id("org.sonarqube") version "2.8"
     // Keep your code spotless
-    id("com.diffplug.gradle.spotless") version "3.28.0"
+    id("com.diffplug.gradle.spotless") version "3.28.1"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.3.71"
     id("org.jetbrains.dokka") version "0.10.1"
@@ -197,12 +197,14 @@ subprojects {
             compileKotlin {
                 kotlinOptions {
                     javaParameters = true
+                    freeCompilerArgs = listOf("-Xjsr305=strict")
                 }
                 dependsOn("spotlessCheck")
             }
             compileTestKotlin {
                 kotlinOptions {
                     javaParameters = true
+                    freeCompilerArgs = listOf("-Xjsr305=strict")
                 }
             }
 
