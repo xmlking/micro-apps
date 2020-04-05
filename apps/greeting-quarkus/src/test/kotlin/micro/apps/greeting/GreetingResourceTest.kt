@@ -13,9 +13,6 @@ open class GreetingResourceTest {
 
     @Test
     fun testGreetingEndpoint() {
-        val response = given().`when`().get("/api/v1/greeting").asString()
-        println("Response: $response")
-
         given()
             .accept(ContentType.JSON)
             .contentType(ContentType.JSON)

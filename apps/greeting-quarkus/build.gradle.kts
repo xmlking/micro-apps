@@ -18,12 +18,11 @@ dependencies {
     implementation("io.quarkus:quarkus-smallrye-openapi")
 
     testImplementation("io.quarkus:quarkus-junit5")
-    testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
+    testImplementation("io.rest-assured:rest-assured")
 }
 
 quarkus {
     setOutputDirectory("$projectDir/build/classes/kotlin/main")
-    setSourceDir("$projectDir/src/main/kotlin")
 }
 
 allOpen {
