@@ -87,18 +87,23 @@ VERSION=1.6.1-SNAPSHOT
 
 IMANGE_NAME=${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}${DOCKER_CONTEXT_PATH}/${TARGET}:${VERSION}
 
+# build jar/native
+gradle :apps:greeting-quarkus:quarkusDev
+gradle :apps:greeting-quarkus:buildNative
+
 cd apps/greeting-quarkus/
 
-docker build -f src/main/docker/Dockerfile.native -t $IMANGE_NAME .
 docker build -f src/main/docker/Dockerfile.jvm -t $IMANGE_NAME .
+# or native
+docker build -f src/main/docker/Dockerfile.native -t $IMANGE_NAME .
 
 docker run -i --rm -p 8080:8080 $IMANGE_NAME
 
-# push
-docker push $IMANGE_NAME
-
 # check
 docker inspect  $IMANGE_NAME
+
+# push
+docker push $IMANGE_NAME
 
 # remove temp images after build
 docker image prune -f

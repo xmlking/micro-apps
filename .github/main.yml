@@ -1,0 +1,56 @@
+on: [push]
+
+jobs:
+  native_build:
+    runs-on: ubuntu-latest
+    name: Build native Quarkus app
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@master
+      - name: Build native executable
+        uses: maxday/quarkus-native-build-docker-action@1
+        with:
+          outputName: app-runner
+      - name: Upload native executable
+        uses: actions/upload-artifact@v1
+        with:
+          name: native-executable
+          path: app-runner
+
+  dockerize:
+    runs-on: ubuntu-latest
+    name: Embed the native executable in a Docker container
+    needs: native_build
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@master
+      - name: Download the binary
+        uses: actions/download-artifact@v1
+        with:
+          name: native-executable
+      - name: Dockerize
+        id: dockerize
+        uses: maxday/quarkus-dockerize-action@master
+        with:
+          tag: gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APP_NAME }}
+          executablePath: native-executable/app-runner
+      - name: Login to GCP
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          service_account_email: ${{ secrets.GCP_EMAIL }}
+          service_account_key: ${{ secrets.GCP_ACCOUNT_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT }}
+          export_default_credentials: true
+      - name: Push the Docker image to GCP
+        run: |
+          gcloud auth configure-docker --quiet
+          docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APP_NAME }}
+      - name: Deploy
+        run: |
+          gcloud components install beta --quiet
+          gcloud beta run deploy ${{ secrets.GCP_APP_NAME }} \
+          --image gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APP_NAME }} \
+          --platform managed \
+          --allow-unauthenticated --service-account ${{ secrets.GCP_EMAIL }} \
+          --region ${{ secrets.GCP_REGION }} \
+          --set-env-vars DISABLE_SIGNAL_HANDLERS=1
