@@ -79,11 +79,37 @@ If you want to learn more about building native executables, please consult http
 
 ## Docker 
 ```bash
-docker build -f src/main/docker/Dockerfile.native -t quarkus/quarkus-project .
-docker run -i --rm -p 8080:8080 quarkus/quarkus-project
+# DOCKER_REGISTRY=gcr.io
+DOCKER_REGISTRY=docker.pkg.github.com
+DOCKER_CONTEXT_PATH=xmlking/micro-apps
+TARGET=greeting-quarkus
+VERSION=1.6.1-SNAPSHOT
+
+IMANGE_NAME=${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}${DOCKER_CONTEXT_PATH}/${TARGET}:${VERSION}
+
+cd apps/greeting-quarkus/
+
+docker build -f src/main/docker/Dockerfile.native -t $IMANGE_NAME .
+docker build -f src/main/docker/Dockerfile.jvm -t $IMANGE_NAME .
+
+docker run -i --rm -p 8080:8080 $IMANGE_NAME
+
+# push
+docker push $IMANGE_NAME
+
+# check
+docker inspect  $IMANGE_NAME
+
+# remove temp images after build
+docker image prune -f
 ```
 
 ## Testing
+
+```bash
+gradle :apps:greeting-quarkus:quarkusDev
+open http://localhost:8080/swagger-ui/
+```
 
 Swagger UI:  http://localhost:8080/swagger-ui/
 
