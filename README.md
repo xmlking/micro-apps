@@ -13,9 +13,9 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 5. Build native binaries using [GraalVM](https://www.graalvm.org/)
 6. Cloud Native (Service Mesh, health checks, observability)
 
-### Build
-
-![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)
+[![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
+[![Version](https://img.shields.io/github/v/tag/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/tags)
+[![License](https://img.shields.io/github/license/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/blob/develop/LICENSE)
 
 ### Quality
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=alert_status)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
