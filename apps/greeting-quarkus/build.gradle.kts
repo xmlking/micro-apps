@@ -4,12 +4,13 @@ plugins {
 }
 
 val quarkusPlatformVersion: String by project
+val quarkusPlatformArtifactId: String by project
 val restAssuredVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
     // kotlin
-    implementation(enforcedPlatform("io.quarkus:quarkus-bom:$quarkusPlatformVersion"))
+    implementation(enforcedPlatform("io.quarkus:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-kotlin")
     // rest
     implementation("io.quarkus:quarkus-resteasy")
