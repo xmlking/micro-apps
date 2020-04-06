@@ -112,8 +112,8 @@ allprojects {
     repositories {
         jcenter()
         google()
-        // mavenLocal()
-        // mavenCentral()
+        mavenLocal()
+        mavenCentral()
     }
 }
 
