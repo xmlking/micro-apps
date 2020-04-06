@@ -31,13 +31,13 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ```bash
 cd apps
-mvn io.quarkus:quarkus-maven-plugin:1.3.0.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:1.3.1.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-quarkus \
     -DprojectVersion=0.1.0 \
     -DclassName="micro.apps.greeting.GreetingResource" \
     -Dpath="/greeting" \
-    -Dextensions="kotlin,resteasy-jsonb" \
+    -Dextensions="kotlin, resteasy-jsonb, kubernetes, jib" \
     -DbuildTool=gradle
 cd ..
 ```
@@ -93,7 +93,7 @@ Then build docker image
 ```bash
 cd apps/greeting-quarkus/
 
-# DOCKER_REGISTRY=gcr.io
+# DOCKER_REGISTRY=us.gcr.io
 DOCKER_REGISTRY=docker.pkg.github.com
 DOCKER_CONTEXT_PATH=xmlking/micro-apps
 TARGET=greeting-quarkus
@@ -154,7 +154,8 @@ gradle :apps:greeting-quarkus:listExtensions
 gradle :apps:greeting-quarkus:addExtension --extensions="health,metrics,openapi"
 gradle :apps:greeting-quarkus:addExtension --extensions="hibernate-validator"
 gradle :apps:greeting-quarkus:addExtension --extensions="jdbc,agroal,non-exist-ent"
- 
+gradle :apps:greeting-quarkus:addExtension --extensions="container-image-jib, kubernetes"
+
 gradle :apps:greeting-quarkus:quarkusDev -Dsuspend -Ddebug
 
 gradle :apps:greeting-quarkus:buildNative
@@ -165,3 +166,5 @@ gradle :apps:greeting-quarkus:testNative
 
 - [BUILDING QUARKUS APPS WITH GRADLE](https://quarkus.io/guides/gradle-tooling)
 - [Quarkus - Using Kotlin](https://github.com/quarkusio/quarkus/blob/master/docs/src/main/asciidoc/kotlin.adoc)
+- [Quarkus - kubernetes Extension](https://quarkus.io/guides/kubernetes)
+- [Quarkus - container image Extension](https://quarkus.io/guides/container-image)

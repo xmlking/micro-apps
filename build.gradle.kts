@@ -196,6 +196,7 @@ subprojects {
         tasks {
             compileKotlin {
                 kotlinOptions {
+                    jvmTarget = JavaVersion.VERSION_11.toString()
                     javaParameters = true
                     freeCompilerArgs = listOf("-Xjsr305=strict")
                 }
@@ -203,6 +204,7 @@ subprojects {
             }
             compileTestKotlin {
                 kotlinOptions {
+                    jvmTarget = JavaVersion.VERSION_11.toString()
                     javaParameters = true
                     freeCompilerArgs = listOf("-Xjsr305=strict")
                 }

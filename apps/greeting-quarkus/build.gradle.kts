@@ -8,15 +8,20 @@ val restAssuredVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
-
+    // kotlin
     implementation(enforcedPlatform("io.quarkus:quarkus-bom:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-kotlin")
+    // rest
     implementation("io.quarkus:quarkus-resteasy")
     implementation("io.quarkus:quarkus-resteasy-jsonb")
+    // tooling
     implementation("io.quarkus:quarkus-smallrye-health")
     implementation("io.quarkus:quarkus-smallrye-metrics")
     implementation("io.quarkus:quarkus-smallrye-openapi")
-
+    // deployment FIXME
+    // implementation("io.quarkus:quarkus-container-image-jib")
+    // implementation("io.quarkus:quarkus-kubernetes")
+    // testing
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 }
@@ -26,6 +31,7 @@ quarkus {
 }
 
 allOpen {
+    // NOTE: add all classes' annotations that need need hot-reload
     annotation("javax.ws.rs.Path")
     annotation("javax.enterprise.context.ApplicationScoped")
     annotation("io.quarkus.test.junit.QuarkusTest")

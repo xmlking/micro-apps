@@ -27,3 +27,5 @@ data class DataMessage(
 ) : Message(), Serializable
 
 data class Fruit(var name: String = "", var description: String = "")
+
+data class Greeting(val message: String = "")

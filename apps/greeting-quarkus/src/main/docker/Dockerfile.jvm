@@ -16,7 +16,7 @@
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1
 
-ARG JAVA_PACKAGE=java-1.8.0-openjdk-headless
+ARG JAVA_PACKAGE=java-11-openjdk-headless
 ARG RUN_JAVA_VERSION=1.3.5
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
@@ -38,7 +38,7 @@ RUN microdnf install openssl curl ca-certificates ${JAVA_PACKAGE} \
 # Configure the JAVA_OPTIONS, you can add -XshowSettings:vm to also display the heap size.
 ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 
-# not need to copy jar as we are building uber jar
+# not need to copy jars as we are building uber jar
 #COPY build/libs/* /deployments/lib/
 COPY build/*-runner.jar /deployments/app.jar
 
