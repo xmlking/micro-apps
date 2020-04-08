@@ -1,6 +1,6 @@
 plugins {
     kotlin("plugin.allopen") version "1.3.71"
-    id("io.quarkus") version "1.3.1.Final"
+    id("io.quarkus") version "1.3.2.Final"
 }
 
 val quarkusPlatformVersion: String by project
