@@ -1,0 +1,129 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch
+  labels:
+    name: elasticsearch
+    app: elasticsearch
+spec:
+  serviceName: "elasticsearch"
+  podManagementPolicy: "Parallel"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9114"
+        prometheus.io/path: "/metrics"
+      labels:
+        name: elasticsearch
+        app: elasticsearch
+    spec:
+      # hostNetwork: true
+      shareProcessNamespace: true
+      terminationGracePeriodSeconds: 60
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: "kubernetes.io/arch"
+                    operator: "In"
+                    values:
+                      - "amd64"
+              weight: 1
+      initContainers:
+        - name: volume-mount-fix
+          image: busybox
+          imagePullPolicy: Always
+          command: ["sh", "-c", "chmod -R 777 /usr/share/elasticsearch/data"]
+          volumeMounts:
+            - name: elasticsearch-storage
+              mountPath: /usr/share/elasticsearch/data
+      containers:
+        - image: saidsef/elasticsearch
+          imagePullPolicy: Always
+          name: elasticsearch
+          ports:
+            - protocol: TCP
+              containerPort: 9200
+              name: elasticsearch
+            - protocol: TCP
+              containerPort: 9300
+              name: cluster
+          livenessProbe:
+            exec:
+              command:
+                - pgrep
+                - java
+            initialDelaySeconds: 10
+            periodSeconds: 3
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              port: 9200
+              path: _cat/health
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          # lifecycle:
+          #   postStart:
+          #     exec:
+          #       command: [""]
+          resources:
+            requests:
+              memory: "1024Mi"
+              cpu: "250m"
+            limits:
+              memory: "2048Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: elasticsearch-storage
+              mountPath: /usr/share/elasticsearch/data
+        - image: justwatch/elasticsearch_exporter:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: prometheus
+          args:
+          - '--es.uri=http://localhost:9200'
+          - '--es.all'
+          - '--es.indices'
+          - '--es.snapshots'
+          ports:
+            - protocol: TCP
+              containerPort: 9114
+              name: prometheus
+          livenessProbe:
+            exec:
+              command:
+                - pgrep
+                - elasticsearch_exporter
+            initialDelaySeconds: 10
+            periodSeconds: 3
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              port: 9114
+              path: /health
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "50m"
+            limits:
+              memory: "512Mi"
+              cpu: "100m"
+      volumes:
+        - name: elasticsearch-storage
+          hostPath:
+            path: /mnt/es
+            type: DirectoryOrCreate
