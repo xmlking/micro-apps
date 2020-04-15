@@ -31,9 +31,9 @@ __Remember:__
     git flow feature start <feature-name> [<base>]
     ```
     
-    If you are starting to work on an existing feature branch, do this:
+    If you are starting to work on an existing feature branch started by another developer, do this:
     ```bash
-    git flow feature pull origin <feature-name>
+    git flow feature track <feature-name>
     ```
     
     __Remember:__
@@ -86,7 +86,7 @@ __Remember:__
    ```
 
     Once you’ve created the release branch,
-    - Create `Changelog`. Preferable automate this task in CI environment triggered on every push to __hotfix/*__ branch
+    - Create `Changelog`. Preferable automate this task in CI environment triggered on every push to __release/*__ branch
     - Build the code in the release branch, deploy it into test environments, find bugs. 
     - Fix the bugs directly inside the release branch.
     - `deploy -> test -> fix -> redeploy -> retest` cycle continues until you’re happy that the release is good enough to release to customers.

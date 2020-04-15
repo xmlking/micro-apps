@@ -1,0 +1,46 @@
+name: Check
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/*
+    pull_request:
+      branches:
+        - '*'
+env:
+  CI: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    name: Check code quality
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache gradle
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: check
+        uses: eskatos/gradle-command-action@v1
+        id: check
+        env:
+          CI: true
+        with:
+          gradle-version: 6.3
+          arguments: check
+      - name: comment
+        uses: unsplash/comment-on-pr@master
+        if: failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: Build failed ${{ steps.check.outputs.build-scan-url }}

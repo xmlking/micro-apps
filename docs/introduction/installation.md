@@ -28,9 +28,18 @@ install the package from npm/brew
 1. [Commitizen](http://commitizen.github.io/cz-cli/)
 
     ```bash
-    npm install -g commitizen
+     # install and configure `commitizen` git plugin
+     yarn global add commitizen cz-conventional-changelog
+     echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc; # will create .czrc
+     # then you can use commitizen as shown below
+     cd non-node-git-repo
+     touch foo
+     git cz -a
     ```
-   
+1. [SonarLint]()
+
+    Install **SonarLint** Plugin for IntelliJ
+
 ### Usage
 
 #### Changelog

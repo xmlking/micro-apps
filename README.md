@@ -1,150 +1,68 @@
-# JVM GitOps
+# Micro Apps
 
-An experimental project for testing [Multi-branch Jenkins Pipeline](https://jenkins.io/doc/tutorials/build-a-multibranch-pipeline-project/)
 
-Using [axion-release-plugin](https://axion-release-plugin.readthedocs.io/en/latest/) for Release & Version management 
+Modern microservices for Post-Kubernetes Era.
 
-Changelog format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+Monorepo(apps, libs) project to showcase workspace setup with multiple apps and shared libraries
 
-> first time generating a new library project
+### Features
+1. **Polyglot** - Support multiple languages (java, kotlin, groovy)
+2. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)
+3. Support multiple testing frameworks (spock, spek, kotlin-test and junit5) 
+4. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images with [Jib](https://github.com/GoogleContainerTools/jib)
+5. Build native binaries using [GraalVM](https://www.graalvm.org/)
+6. Cloud Native (Service Mesh, health checks, observability)
 
-```bash
-gradle init --type kotlin-library --dsl kotlin
-```
+[![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
+[![Version](https://img.shields.io/github/v/tag/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/tags)
+[![License](https://img.shields.io/github/license/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/blob/develop/LICENSE)
 
-## Gradle
-
-> miscellaneous Gradle commands
-
-> -D, --system-prop -P, --project-prop
-
-### Version
-
-> display computed version 
-
-```bash
-gradle cV
-gradle currentVersion
-# to get version # as plain text
-export VERSION=$(gradle cV -q -Prelease.quiet)
-echo $VERSION
-```
-
-### Verification
-```bash
-gradle test
-gradle jacocoTestReport
-gradle jacocoTestCoverageVerification
-gradle sonarqube
-gradle check
-```
-
-### Build
-
-> build jar
-
-```bash
-gradle build
-gradle build -x test
-# overriding version
-gradle build -Prelease.forceVersion=3.0.0
-```
+### Quality
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=alert_status)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=security_rating)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=bugs)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
 
 ### Run
+
+#### Docker
+> start app dependencies: postgres, redis
 ```bash
-gradle run
+# start local sonarqube
+docker-compose up postgres # docker-compose up -V postgres
+# stop local postgres before restart again
+docker-compose down # docker-compose down -v
 ```
 
-### Release
-
-> bump git Tag and Push
-
+> start optional CI/CD infra dependencies: sonarqube, nexus 
 ```bash
-# dryRun
-gradle release -Prelease.dryRun
-# disable all checks for current release
-gradle release -Prelease.disableChecks -Prelease.dryRun
-# real release
-gradle release -Prelease.customUsername=sxc460 -Prelease.customPassword=
-# bump Minor Version : 0.1.0 -> 0.2.0
-gradle markNextVersion -Prelease.incrementer=incrementMinor -Prelease.dryRun
-# in CI enveroment 
-gradle release -Prelease.disableChecks -Prelease.pushTagsOnly -x test --profile
-# if you want to manually set version with Jenkins params
-gradle createRelease    -Prelease.disableChecks -Prelease.versionIncrementer=incrementMajor     -Prelease.dryRun
-gradle markNextVersion  -Prelease.disableChecks -Prelease.incrementer=incrementMajor            -Prelease.dryRun
+# start local sonarqube
+docker-compose up sonarqube # docker-compose up -V sonarqube
+# stop local sonarqube before restart again
+docker-compose down # docker-compose down -v
+# start local nexus
+docker-compose up nexus
 ```
+access **sonarqube** at http://localhost:9000/ (admin/admin)
 
-### Changelog
+See [gradle commands](docs/advanced/gradle.md) for this project.
 
-> With every release, run `git-chglog`
 
-```bash
-# first time
-git-chglog --init
-# on release branch, generate CHANGELOG.md and commit before merging back to develop & master.
-git-chglog  -o CHANGELOG.md
-git-chglog  -o CHANGELOG.md -next-tag 2.0.0
-```
+#### Apache Beam pipelines
+> Start [wordcount](./apps/wordcount/)
 
-### Publish
+#### Quarkus
 
-> publish after release
+> Start [Greeting API](./apps/greeting-quarkus/)
 
-```bash
-gradle publish
-# skip tests in CI
-gradle publish -x test --profile
-gradle build publish -Prelease.forceSnapshot
-gradle build publish -Prelease.forceVersion=3.0.0
-```
+#### Micronaut
 
-### Docker
+> Start [Greeting API](./apps/greeting-micronaut/)
 
-```bash
-# Build an image tarball,
-# then you can load with `docker load --input build/jib-image.tar`
-gradle jibBuildTar
-# Build and publish docker image
-gradle jib
-# Build image locally useing your Docker daemon (on publish)
-gradle jibDockerBuild
-```
+### Inspiration 
+* Creating a [Multi Module Project](https://spring.io/guides/gs/multi-module/)
+* Microservices in a Post-Kubernetes Era [link](https://www.infoq.com/articles/microservices-post-kubernetes)
+* Why is a [workspace](https://nrwl.io/nx/why-a-workspace) (or monorepo) needed? 
 
-#### local testing
-
-pull a remote image and locally use it as base image
-
-```bash
-# pull base image first
-docker pull gcr.io/distroless/java:11
-# use local docker image as base, build image only (on publish)
-gradle jibDockerBuild -PbaseDockerImage=docker://gcr.io/distroless/java:11
-# you can run your local docker image
-docker run -it xmlking/jvm-gitops-jvm-gitops:0.2.0-SNAPSHOT
-```
-
-### Dependencies
-
-```bash
-# Report dependencies
-gradle dependencyUpdates -Drevision=release -DoutputFormatter=json,xml
-# Update dependencies, `dependsOn dependencyUpdates`
-gradle useLatestVersions
-# This task will succeed if all available updates were successfully applied by useLatestVersions
-gradle useLatestVersions && gradle useLatestVersionsCheck
-```
-
-### Gradle
-
-```bash
-# upgrade gradlew
-VERSION=${1:-6.1}
-gradle wrapper --gradle-version "${VERSION}"
-```
-
-### Reference
-- https://github.com/banan1988/spring-demo/
-- https://github.com/detekt/sonar-kotlin
-- https://android.jlelse.eu/sonarqube-code-coverage-for-kotlin-on-android-with-bitrise-71b2fee0b797

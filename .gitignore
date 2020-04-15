@@ -4,6 +4,12 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+### Eclipse ###
+.project
+.classpath
+.settings/
+bin/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -14,6 +20,14 @@ out/
 ### VS Code ###
 .vscode/
 
+### Vim ###
+*.swp
+*.swo
+
+### patch ###
+*.orig
+*.rej
+
 ### OS generated files ###
 .DS_Store
 .DS_Store?
@@ -22,10 +36,19 @@ out/
 .Trashes
 ehthumbs.db
 Thumbs.db
+.AppleDouble
+.LSOverride
 
-### DEMO ###
+### Docker ###
+.testcontainers-tmp-*
+
+### appclt ###
+.appctlconfig
+.deployment/
+
+### Project ###
 favicon.*
 *.mv.db
 *.trace.db
-src/main/jenkinsfile/ssh
+libs/demo/src/main/jenkinsfile/ssh
 TODO

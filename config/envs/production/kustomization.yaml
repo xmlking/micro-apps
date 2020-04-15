@@ -1,0 +1,74 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Please don't change the namespace field
+namespace: production
+namePrefix: prod-
+nameSuffix: -v1
+
+commonLabels:
+  environment: development
+  app.kubernetes.io/version: v1
+commonAnnotations:
+  note: Hello, I am production!
+
+resources:
+   - ../../base
+
+# enable mage-pull-policy and resource_limit as needed
+patches:
+  - path: patches/resource_limit.yaml
+    target:
+      kind: Deployment
+      labelSelector: app.kubernetes.io/component=microservice
+  - path: patches/image-pull-policy-if-not-present.yaml
+    target:
+      kind: Deployment
+      labelSelector: app.kubernetes.io/component=microservice
+
+configMapGenerator:
+  - name: env-vars
+#  - name: env-vars-common
+    behavior: merge
+    literals:
+      - APP_ENV=production
+      - LOG_LEVEL=info
+      - ELASTIC_LOG_LEVEL=error
+
+secretGenerator:
+  - name: postgres-secrets
+    behavior: replace
+    literals:
+      - DATABASE_PASSWORD=e2e-real-pass
+
+# labels for generated secrets at this level
+#generatorOptions:
+#  disableNameSuffixHash: true
+
+replicas:
+  - name: postgres
+    count: 1
+
+images:
+  - name: etcd
+    newTag: 3.3.15
+  - name: postgres
+    newTag: 11.5-alpine
+  - name: envoyproxy/envoy-alpine
+    newName: docker.io/envoyproxy/envoy-alpine
+    newTag: v1.14.1
+  - name: micro/micro
+    newName: docker.pkg.github.com/xmlking/micro-starter-kit/micro
+    newTag: v2.0.0
+  - name: xmlking/account-srv
+    newName: docker.pkg.github.com/xmlking/micro-starter-kit/account-srv
+    newTag: $(IMAGE_VERSION)
+  - name: xmlking/emailer-srv
+    newName: docker.pkg.github.com/xmlking/micro-starter-kit/emailer-srv
+    newTag: $(IMAGE_VERSION)
+  - name: xmlking/greeter-srv
+    newName: docker.pkg.github.com/xmlking/micro-starter-kit/greeter-srv
+    newTag: $(IMAGE_VERSION)
+  - name: xmlking/recorder-srv
+    newName: docker.pkg.github.com/xmlking/micro-starter-kit/recorder-srv
+    newTag: $(IMAGE_VERSION)

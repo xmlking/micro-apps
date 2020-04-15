@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+  jenkins:
+    image: jenkinsci/blueocean
+    container_name: jenkins
+    depends_on:
+      - nexus
+      - sonarqube
+    environment:
+      - DOCKER_HOST=tcp://localhost:2375
+      - JENKINS_UC=http://updates.jenkins.io
+      - JENKINS_UC_EXPERIMENTAL=http://updates.jenkins.io/experimental
+      - JENKINS_INCREMENTALS_REPO_MIRROR=http://repo.jenkins-ci.org/incrementals
+    user: root
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "50000:50000"
+    expose:
+      - "8080"
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-home:/home
+
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus
+    volumes:
+      - "nexus-data:/nexus-data"
+    ports:
+      - "8081:8081"
+    expose:
+      - "8081"
+
+  sonarqube:
+    image: sonarqube
+    container_name: sonarqube
+    depends_on:
+      - db
+    ports:
+      - "9000:9000"
+    environment:
+      - sonar.jdbc.url=jdbc:postgresql://db:5432/sonar
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=sonar
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+volumes:
+  nexus-data: {}
+  jenkins-data: {}
+  jenkins-home: {}
+  sonarqube_conf: {}
+  sonarqube_data: {}
+  sonarqube_extensions: {}
+  postgresql: {}
+  postgresql_data: {}

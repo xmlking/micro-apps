@@ -20,11 +20,13 @@
 gradle init --type kotlin-library --dsl kotlin
 ```
 
-    Options for all gradle commands: -D --system-prop, -P --project-prop
+    Options for all gradle commands: -D or --system-prop, -P or --project-prop, -m or --dry-run
+
+Check Task Dependencies With a Dry Run with dryRun: -m or --dry-run i.e., `gradle publish -m`
 
 ### Version
 
-> display computed version
+> display computed version 
 
 ```bash
 gradle cV
@@ -41,6 +43,33 @@ gradle jacocoTestReport
 gradle jacocoTestCoverageVerification
 gradle sonarqube
 gradle check
+gradle sonarqube
+```
+
+### Spotless tasks
+```bash
+# spotlessCheck - Checks that sourcecode satisfies formatting steps.
+gradle spotlessCheck
+# spotlessApply - Applies code formatting steps to sourcecode in-place.
+gradle spotlessApply
+```
+
+### Quarkus tasks
+```bash
+# addExtension - Adds Quarkus extensions specified by the user to the project.
+gradle :apps:greeting-quarkus:addExtension --extensions="health,metrics,openapi"
+gradle :apps:greeting-quarkus:addExtension --extensions="hibernate-validator"
+gradle :apps:greeting-quarkus:addExtension --extensions="jdbc,agroal,non-exist-ent"
+# buildNative - Building a native image
+gradle :apps:greeting-quarkus:buildNative
+gradle :apps:greeting-quarkus:testNative
+# generateConfig - Generates an example config file
+# listExtensions - Lists the available quarkus extensions
+gradle :apps:greeting-quarkus:listExtensions
+# quarkusBuild - Quarkus builds a runner jar based on the build jar
+# quarkusDev - Development mode: enables hot deployment with background compilation
+gradle :apps:greeting-quarkus:quarkusDev -Dsuspend -Ddebug
+# quarkusTestConfig - Sets the necessary system properties for the Quarkus tests to run.
 ```
 
 ### Build
@@ -74,6 +103,9 @@ gradle release -Prelease.customUsername=sxc460 -Prelease.customPassword=
 gradle markNextVersion -Prelease.incrementer=incrementMinor -Prelease.dryRun
 # in CI enveroment 
 gradle release -Prelease.disableChecks -Prelease.pushTagsOnly -x test --profile
+# if you want to manually set version with Jenkins params
+gradle createRelease    -Prelease.disableChecks -Prelease.versionIncrementer=incrementMajor     -Prelease.dryRun
+gradle markNextVersion  -Prelease.disableChecks -Prelease.incrementer=incrementMajor            -Prelease.dryRun
 ```
 
 ### Changelog
@@ -98,6 +130,7 @@ gradle publish
 gradle publish -x test --profile
 gradle build publish -Prelease.forceSnapshot
 gradle build publish -Prelease.forceVersion=3.0.0
+CI=true GITHUB_USER=xmlking GITHUB_TOKEN=<GITHUB_NPM_TOKEN> gradle publish
 ```
 
 ### Docker
@@ -106,10 +139,23 @@ gradle build publish -Prelease.forceVersion=3.0.0
 # Build an image tarball,
 # then you can load with `docker load --input build/jib-image.tar`
 gradle jibBuildTar
-# Build image
+# Build and publish docker image
 gradle jib
-# Build image useing your Docker daemon
+# Build image locally useing your Docker daemon (on publish)
 gradle jibDockerBuild
+```
+
+#### local testing
+
+pull a remote image and locally use it as base image
+
+```bash
+# pull base image first
+docker pull gcr.io/distroless/java:11
+# use local docker image as base, build image only (on publish)
+gradle jibDockerBuild -PbaseDockerImage=docker://gcr.io/distroless/java:11
+# you can run your local docker image
+docker run -it xmlking/micro-apps-demo:1.6.1-SNAPSHOT
 ```
 
 ### Dependencies
@@ -125,12 +171,21 @@ gradle useLatestVersions && gradle useLatestVersionsCheck
 
 ### Gradle
 
-> miscellaneous Gradle commands
-
 ```bash
 # upgrade gradlew
-VERSION=${1:-6.1}
-gradle wrapper --gradle-version "${VERSION}"
+# upgrade project gradle version
+gradle wrapper --gradle-version 6.2.2 --distribution-type all
+# gradle daemon status 
+gradle --status
+gradle --stop
+# show dependencies
+gradle classifier:dependencies
+gradle classifier:dependencyInsight --dependency spring-messaging
+# refresh dependencies
+gradle build -x test --refresh-dependencies 
+
+# display version 
+gradle cV
 ```
 
 ### Reference
