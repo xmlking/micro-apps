@@ -2,38 +2,34 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 # Please don't change the namespace field
-namespace: production
-namePrefix: prod-
+namespace: local
+namePrefix: dev-
 nameSuffix: -v1
 
 commonLabels:
-  environment: development
+  environment: local
   app.kubernetes.io/version: v1
 commonAnnotations:
-  note: Hello, I am production!
+  note: Hello, I am local!
 
 resources:
-   - ../../base
+  - ../../base
 
 # enable mage-pull-policy and resource_limit as needed
-patches:
-  - path: patches/resource_limit.yaml
-    target:
-      kind: Deployment
-      labelSelector: app.kubernetes.io/component=microservice
-  - path: patches/image-pull-policy-if-not-present.yaml
-    target:
-      kind: Deployment
-      labelSelector: app.kubernetes.io/component=microservice
+#patches:
+#  - path: patches/image-pull-policy-if-not-present.yaml
+#    target:
+#      kind: Deployment
+#      labelSelector: app.kubernetes.io/component=microservice
 
 configMapGenerator:
   - name: env-vars
 #  - name: env-vars-common
     behavior: merge
     literals:
-      - APP_ENV=production
-      - LOG_LEVEL=info
-      - ELASTIC_LOG_LEVEL=error
+      - APP_ENV=local
+      - LOG_LEVEL=debug
+      - ELASTIC_LOG_LEVEL=debug
 
 secretGenerator:
   - name: postgres-secrets

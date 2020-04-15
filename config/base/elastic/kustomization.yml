@@ -13,3 +13,8 @@ commonAnnotations:
 resources:
   - statefulset.yml
   - service.yml
+
+configMapGenerator:
+  - name: env-vars
+    literals:
+      - ELASTIC_LOG_LEVEL=info

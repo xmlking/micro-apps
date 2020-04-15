@@ -75,9 +75,9 @@ git push
 # Create the configuration for your enveronments. i.e., add/update `config/envs`, then test, push code.
 # dry run to see what you will create
 # kubectl apply -k config/envs/development  --dry-run=client -o yaml
-kustomize build config/envs/development --output ./dist/kubernetes/development
-kustomize build config/envs/production --output ./dist/kubernetes/production
-kustomize build config/envs/staging --output ./dist/kubernetes/staging
+kustomize build config/envs/development --output ./build/kubernetes/development
+kustomize build config/envs/production --output ./build/kubernetes/production
+kustomize build config/envs/staging --output ./build/kubernetes/staging
 # tag changes
 git tag v0.1.3
 git push origin  v0.1.3

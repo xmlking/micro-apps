@@ -42,13 +42,13 @@ Thumbs.db
 ### Docker ###
 .testcontainers-tmp-*
 
+### appclt ###
+.appctlconfig
+.deployment/
+
 ### Project ###
 favicon.*
 *.mv.db
 *.trace.db
 libs/demo/src/main/jenkinsfile/ssh
 TODO
-
-
-.appctlconfig
-.deployment/

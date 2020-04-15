@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - elastic
   - nifi
+  - postgres
 
 configurations:
   - kconfig.yaml
