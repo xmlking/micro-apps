@@ -1,0 +1,6 @@
+cluster_name: sumo
+project: micro-starter-kit
+compute:  # choose "region" or "zone"
+   zone: us-west2-a
+namespace: staging
+no_pr_approval_required: true
