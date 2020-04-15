@@ -13,36 +13,38 @@ commonAnnotations:
   note: Hello, I am staging!
 
 resources:
-  - ../../base
+  - ../../base/elastic
+  - ../../base/nifi
+  - ../../base/postgres
+  - ../../base/service
 
 # enable mage-pull-policy and resource_limit as needed
 patches:
   - path: patches/image-pull-policy-if-not-present.yaml
     target:
       kind: Deployment
-      labelSelector: app.kubernetes.io/component=infra
+      labelSelector: app.kubernetes.io/component=microservice
 
 configMapGenerator:
-  - name: env-vars
-#  - name: env-vars-common
+#  - name: env-vars
+  - name: env-vars-common
     behavior: merge
     literals:
       - APP_ENV=staging
-      - LOG_LEVEL=debug
-      - ELASTIC_LOG_LEVEL=info
+      - LOG_LEVEL=info
 
 secretGenerator:
-  - name: postgres-secrets
+  - name: secrets
     behavior: replace
     literals:
-      - DATABASE_PASSWORD=e2e-real-pass
+      - DATABASE_PASSWORD=stag-real-pass
 
 # labels for generated secrets at this level
 #generatorOptions:
 #  disableNameSuffixHash: true
 
 replicas:
-  - name: postgres
+  - name: service
     count: 1
 
 images:
@@ -68,3 +70,6 @@ images:
   - name: xmlking/recorder-srv
     newName: docker.pkg.github.com/xmlking/micro-starter-kit/recorder-srv
     newTag: $(IMAGE_VERSION)
+  - name: xmlking/greeting-quarkus
+    newName: docker.pkg.github.com/xmlking/micro-apps/greeting-quarkus
+    newTag: 1.6.1-SNAPSHOT

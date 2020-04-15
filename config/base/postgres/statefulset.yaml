@@ -32,8 +32,8 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secrets
-                  key: postgres-password
+                  name: secrets
+                  key: DATABASE_PASSWORD
           livenessProbe:
             exec:
               command: ["pg_isready", "-U", "$(POSTGRES_USER)"]

@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  app.kubernetes.io/part-of: micro-apps
+  app.kubernetes.io/managed-by: kustomize
+commonAnnotations:
+  org: acmeCorporation
+
+resources:
+  - greeting
+
+configurations:
+  - kconfig.yaml
+
+configMapGenerator:
+#  - name: env-vars
+#    behavior: merge
+  - name: env-vars-common
+    literals:
+      - APP_ENV=development
+      - MICRO_LOG_LEVEL=debug
+
+secretGenerator:
+  - name: secrets
+    literals:
+      - DATABASE_PASSWORD=fake
+  # - name: app-tls
+  #   files:
+  #     - secret/tls.cert
+  #     - secret/tls.key

@@ -10,6 +10,8 @@ commonLabels:
 commonAnnotations:
   org: acmeCorporation
 
+namePrefix: elastic-
+
 resources:
   - statefulset.yml
   - service.yml

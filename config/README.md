@@ -56,7 +56,7 @@ gcloud components install appctl
 # Initialize existing repository
 # make sure the `git remote -v` show `git@github.com:xmlking/micro-apps.git`
 cd ..
-appctl init yeti --app-config-repo=github.com/xmlking/micro-apps
+appctl init micro-apps --app-config-repo=github.com/xmlking/micro-apps
 cd micro-apps
 # Create the configuration for your Kubernetes workload. i.e., add/update `config/base`, then test:
 # kubectl apply -k config/base/ --dry-run=client -o yaml
@@ -75,6 +75,7 @@ git push
 # Create the configuration for your enveronments. i.e., add/update `config/envs`, then test, push code.
 # dry run to see what you will create
 # kubectl apply -k config/envs/development  --dry-run=client -o yaml
+mkdir -p {./build/kubernetes/development,./build/kubernetes/production,./build/kubernetes/staging}
 kustomize build config/envs/development --output ./build/kubernetes/development
 kustomize build config/envs/production --output ./build/kubernetes/production
 kustomize build config/envs/staging --output ./build/kubernetes/staging

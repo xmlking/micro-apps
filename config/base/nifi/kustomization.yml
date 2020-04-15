@@ -10,8 +10,15 @@ commonLabels:
 commonAnnotations:
   org: acmeCorporation
 
+namePrefix: nifi-
+
 resources:
 - statefulset.yml
 - secret.yml
 - service.yml
 - ingress.yml
+
+configMapGenerator:
+  - name: env-vars
+    literals:
+      - NIFI_LOG_LEVEL=info
