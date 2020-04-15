@@ -8,6 +8,87 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v1.6.1"></a>
+## [v1.6.1] - 2020-04-15
+### Appctl
+- added scaffolding structure for the new environment: production.
+- added scaffolding structure for the new environment: staging.
+- added scaffolding structure for the new environment: development.
+- Initialized app repository, scaffolding the app configuration in kustomize format under config directory config
+
+### Build
+- **deps:** upgraded to 1.3.2.Final
+- **gradle:** adding excludedProjects for empty projects `apps` `libs`
+- **gradle:** fix kotlin version
+- **quarkus:** adding an empty `META-INF/beans.xml` to `src/main/resources` of dependency project
+
+### Chore
+- **deploy:** bootstraping config
+- **deploy:** adding Elasticsearch deployment via kustomization
+- **deploy:** adding nifi k8s deployment via kustomization
+- **deps:** update dependency com.diffplug.gradle.spotless:com.diffplug.gradle.spotless.gradle.plugin to v3.28.1
+- **deps:** update dependency io.quarkus:io.quarkus.gradle.plugin to v1.3.2.final
+- **deps:** add renovate.json
+- **deps:** update dependency io.quarkus:io.quarkus.gradle.plugin to v1.3.1.final
+- **deps:** update dependency io.quarkus:quarkus-universe-bom to v1.3.2.final
+- **deps:** update dependency com.google.flogger:flogger-system-backend to v0.5.1
+- **deps:** update dependency com.google.flogger:flogger-slf4j-backend to v0.5.1
+- **deps:** update dependency com.google.flogger:flogger to v0.5.1
+- **deps:** updated gradle
+- **quarkus:** adding kubernetes, jib extensions
+- **readme:** adding version badge
+
+### Ci
+- **actions:** adding github action for build docker and deploy to GKE
+- **jenkins:** polish Jenkinsfile
+
+### Docs
+- **commitizen:** add commitizen setup docs
+- **docker:** updated docker build step
+- **docker:** adding Docker build instructions
+- **gitbook:** updated playbook
+- **gitflow:** fix typo
+- **gradle:** updated gradle docs for sonarqube spotless and Quarkus
+
+### Feat
+- **deploy:** now using google appctl and Kustomize
+- **infra:** adding health,metrics,openapi
+- **ktlint:** adding ktlint gradle plugin
+- **quarkus:** adding quarkus example
+
+### Fix
+- **actions:** fix check action comment step
+- **actions:** fix check action comment step
+- **actions:** fix github actions
+- **docs:** add image
+- **docs:** updated docs for `git flow feature track`
+- **docs:** add image
+- **readme:** adding github badge
+
+### Improvement
+- **readme:** adding sonarcloud badges
+- **structure:** project structure
+
+### Refactor
+- **gradle:** reduce duplicate code
+- **gradle:** polish gradle
+- **gradle:** polish gradle
+- **gradle:** refactore gradle tasks
+- **shared:** renamed shared module to kbeam
+
+### Style
+- **ktlint:** fix ktlint issues
+
+### Test
+- **bom:** ability to switch quarkus-universe-bom <=> quarkus-bom (local quarkus build)
+- **flogger:** adding unit tests for flogger
+- **quarkus:** test with local built Quarkus from master
+- **quarkus:** fix: with quarkusPlatformVersion=1.3.1.Final, tests fails
+
+
+<a name="v1.6.0"></a>
+## [v1.6.0] - 2020-01-30
 ### Chore
 - **gitbook:** fix types
 - **gitbook:** adding gitbook config
@@ -18,6 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **docs:** jenkins pipelines
 
 ### Fix
+- **docs:** changelog
 - **docs:** manually set version with Jenkins params
 - **gradle:** fix gradle
 - **jenkins:** Jenkins
@@ -111,7 +193,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-24
 
-[Unreleased]: https://github.com/xmlking/jvm-gitops/compare/1.5.0...HEAD
+[Unreleased]: https://github.com/xmlking/jvm-gitops/compare/v1.6.1...HEAD
+[v1.6.1]: https://github.com/xmlking/jvm-gitops/compare/v1.6.0...v1.6.1
+[v1.6.0]: https://github.com/xmlking/jvm-gitops/compare/1.5.0...v1.6.0
 [1.5.0]: https://github.com/xmlking/jvm-gitops/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/xmlking/jvm-gitops/compare/1.3.2...1.4.0
 [1.3.2]: https://github.com/xmlking/jvm-gitops/compare/1.3.1...1.3.2
