@@ -20,7 +20,7 @@ patches:
   - path: patches/image-pull-policy-if-not-present.yaml
     target:
       kind: Deployment
-      labelSelector: app.kubernetes.io/component=microservice
+      labelSelector: app.kubernetes.io/component=infra
 
 configMapGenerator:
   - name: env-vars
