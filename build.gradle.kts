@@ -56,7 +56,7 @@ scmVersion {
     useHighestVersion = true
 
     tag(closureOf<TagNameSerializationConfig> {
-        prefix = "" // 'v'
+        prefix = "v" // golang and appctl need SemVer tags with `v` prefix
         versionSeparator = ""
     })
 

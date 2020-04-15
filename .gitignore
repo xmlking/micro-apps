@@ -49,3 +49,6 @@ favicon.*
 libs/demo/src/main/jenkinsfile/ssh
 TODO
 
+
+.appctlconfig
+.deployment/
