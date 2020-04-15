@@ -14,7 +14,7 @@ My goal is to show how to run Apache NiFi Cluster in Kubernetes
 This will deploy Apache NiFi in a Cluster mode with extenal Apache Zookeeper managing ellections:
 
 ```shell
-kubectl apply -k deployments/
+kubectl apply -k config/base/nifi
 ```
 
 This will create:
