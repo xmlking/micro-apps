@@ -15,13 +15,6 @@ commonAnnotations:
 resources:
   - ../../base
 
-# enable mage-pull-policy and resource_limit as needed
-#patches:
-#  - path: patches/image-pull-policy-if-not-present.yaml
-#    target:
-#      kind: Deployment
-#      labelSelector: app.kubernetes.io/component=microservice
-
 configMapGenerator:
 #  - name: env-vars
   - name: env-vars-common
@@ -35,10 +28,6 @@ secretGenerator:
     behavior: replace
     literals:
       - DATABASE_PASSWORD=local-real-pass
-
-# labels for generated secrets at this level
-#generatorOptions:
-#  disableNameSuffixHash: true
 
 replicas:
   - name: service

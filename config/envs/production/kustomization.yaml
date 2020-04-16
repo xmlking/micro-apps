@@ -40,10 +40,6 @@ secretGenerator:
     literals:
       - DATABASE_PASSWORD=prod-real-pass
 
-# labels for generated secrets at this level
-#generatorOptions:
-#  disableNameSuffixHash: true
-
 replicas:
   - name: service
     count: 1
