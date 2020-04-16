@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="v1.6.3"></a>
+## [v1.6.3] - 2020-04-15
+### Improvement
+- **deploy:** polish Kustomization
+- **deploy:** polish Kustomization
+
+
+<a name="v1.6.2"></a>
+## [v1.6.2] - 2020-04-15
+### Chore
+- **deploy:** test Kustomization patches
+
+
 <a name="v1.6.1"></a>
 ## [v1.6.1] - 2020-04-15
 ### Appctl
@@ -44,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **jenkins:** polish Jenkinsfile
 
 ### Docs
+- **changelog:** updating change log
 - **commitizen:** add commitizen setup docs
 - **docker:** updated docker build step
 - **docker:** adding Docker build instructions
@@ -193,7 +207,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-24
 
-[Unreleased]: https://github.com/xmlking/jvm-gitops/compare/v1.6.1...HEAD
+[Unreleased]: https://github.com/xmlking/jvm-gitops/compare/v1.6.3...HEAD
+[v1.6.3]: https://github.com/xmlking/jvm-gitops/compare/v1.6.2...v1.6.3
+[v1.6.2]: https://github.com/xmlking/jvm-gitops/compare/v1.6.1...v1.6.2
 [v1.6.1]: https://github.com/xmlking/jvm-gitops/compare/v1.6.0...v1.6.1
 [v1.6.0]: https://github.com/xmlking/jvm-gitops/compare/1.5.0...v1.6.0
 [1.5.0]: https://github.com/xmlking/jvm-gitops/compare/1.4.0...1.5.0
