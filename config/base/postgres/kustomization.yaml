@@ -5,10 +5,10 @@ commonLabels:
   app.kubernetes.io/name: postgres
   app.kubernetes.io/instance: postgres-abcxzy
   app.kubernetes.io/component: database
-  app.kubernetes.io/part-of: micro-apps
-  app.kubernetes.io/managed-by: kustomize
-commonAnnotations:
-  org: acmeCorporation
+#  app.kubernetes.io/part-of: micro-apps
+#  app.kubernetes.io/managed-by: kustomize
+#commonAnnotations:
+#  org: acmeCorporation
 
 resources:
   - statefulset.yaml

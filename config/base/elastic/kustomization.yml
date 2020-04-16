@@ -5,10 +5,10 @@ commonLabels:
   app.kubernetes.io/name: elastic
   app.kubernetes.io/instance: elastic-abcxzy
   app.kubernetes.io/component: infra
-  app.kubernetes.io/part-of: micro-apps
-  app.kubernetes.io/managed-by: kustomize
-commonAnnotations:
-  org: acmeCorporation
+#  app.kubernetes.io/part-of: micro-apps
+#  app.kubernetes.io/managed-by: kustomize
+#commonAnnotations:
+#  org: acmeCorporation
 
 namePrefix: elastic-
 

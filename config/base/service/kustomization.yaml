@@ -10,9 +10,6 @@ commonAnnotations:
 resources:
   - greeting
 
-configurations:
-  - kconfig.yaml
-
 configMapGenerator:
 #  - name: env-vars
 #    behavior: merge
@@ -21,11 +18,8 @@ configMapGenerator:
       - APP_ENV=development
       - MICRO_LOG_LEVEL=debug
 
-secretGenerator:
-  - name: secrets
-    literals:
-      - DATABASE_PASSWORD=fake
-  # - name: app-tls
-  #   files:
-  #     - secret/tls.cert
-  #     - secret/tls.key
+#secretGenerator:
+#   - name: app-tls
+#     files:
+#       - secret/tls.cert
+#       - secret/tls.key

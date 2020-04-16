@@ -2,25 +2,16 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch
-  labels:
-    name: elasticsearch
-    app: elasticsearch
 spec:
   serviceName: "elasticsearch"
   podManagementPolicy: "Parallel"
   replicas: 1
-  selector:
-    matchLabels:
-      app: elasticsearch
   template:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9114"
         prometheus.io/path: "/metrics"
-      labels:
-        name: elasticsearch
-        app: elasticsearch
     spec:
       # hostNetwork: true
       shareProcessNamespace: true

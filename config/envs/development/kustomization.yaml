@@ -13,10 +13,7 @@ commonAnnotations:
   note: Hello, I am development!
 
 resources:
-  - ../../base/elastic
-  - ../../base/nifi
-  - ../../base/postgres
-  - ../../base/service
+  - ../../base
 
 # enable mage-pull-policy and resource_limit as needed
 #patches:
