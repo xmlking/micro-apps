@@ -3,19 +3,10 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: nifi
-  labels:
-    name: nifi
-    app: nifi
 spec:
   serviceName: nifi
   replicas: 2
-  selector:
-    matchLabels:
-      app: nifi
   template:
-    metadata:
-      labels:
-        app: nifi
     spec:
       nodeSelector:
         beta.kubernetes.io/os: linux
@@ -26,7 +17,6 @@ spec:
             - topologyKey: "kubernetes.io/hostname"
               labelSelector:
                 matchLabels:
-                  app: nifi
       restartPolicy: Always
       containers:
       - name: nifi
@@ -72,19 +62,10 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zookeeper
-  labels:
-    name: zookeeper
-    app: zookeeper
 spec:
   serviceName: zookeeper
   replicas: 1
-  selector:
-    matchLabels:
-      app: zookeeper
   template:
-    metadata:
-      labels:
-        app: zookeeper
     spec:
       nodeSelector:
         kubernetes.io/os: linux
@@ -95,7 +76,6 @@ spec:
             - topologyKey: "kubernetes.io/hostname"
               labelSelector:
                 matchLabels:
-                  app: zookeeper
       restartPolicy: Always
       containers:
       - name: zookeeper

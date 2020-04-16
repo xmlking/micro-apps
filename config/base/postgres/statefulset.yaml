@@ -2,18 +2,10 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
-  labels:
-    app: postgres
 spec:
   replicas: 1
   serviceName: postgres-internal
-  selector:
-    matchLabels:
-      app: postgres
   template:
-    metadata:
-      labels:
-        app: postgres
     spec:
       terminationGracePeriodSeconds: 10
       containers:
@@ -32,8 +24,8 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secrets
-                  key: postgres-password
+                  name: secrets
+                  key: DATABASE_PASSWORD
           livenessProbe:
             exec:
               command: ["pg_isready", "-U", "$(POSTGRES_USER)"]
@@ -50,8 +42,6 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: postgres-storage
-        labels:
-          app: postgres
       spec:
         accessModes: ["ReadWriteOnce"]
         # storageClassName: <custom storage class>

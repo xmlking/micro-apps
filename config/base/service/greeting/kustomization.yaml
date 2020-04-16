@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  app.kubernetes.io/name: greeting-service
+  app.kubernetes.io/instance: greeting-service-abcxzy
+  app.kubernetes.io/component: microservice
+
+namePrefix: greeting-
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+configMapGenerator:
+  - name: env-vars
+    literals:
+      - MICRO_SERVER_NAME=micro.service.greeting
+      # - MICRO_SERVER_ADVERTISE="$(GREETING_SERVICE_ENDPOINT):8080"
+      - DATABASE_HOST=$(DATABASE_ENDPOINT)
+
+vars:
+  - name: GREETING_SERVICE_ENDPOINT
+    objref:
+      kind: Service
+      name: service
+      apiVersion: v1
+    fieldref:
+      fieldpath: metadata.name

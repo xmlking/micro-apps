@@ -23,26 +23,25 @@ resources:
 #      labelSelector: app.kubernetes.io/component=microservice
 
 configMapGenerator:
-  - name: env-vars
-#  - name: env-vars-common
+#  - name: env-vars
+  - name: env-vars-common
     behavior: merge
     literals:
       - APP_ENV=local
       - LOG_LEVEL=debug
-      - ELASTIC_LOG_LEVEL=debug
 
 secretGenerator:
-  - name: postgres-secrets
+  - name: secrets
     behavior: replace
     literals:
-      - DATABASE_PASSWORD=e2e-real-pass
+      - DATABASE_PASSWORD=local-real-pass
 
 # labels for generated secrets at this level
 #generatorOptions:
 #  disableNameSuffixHash: true
 
 replicas:
-  - name: postgres
+  - name: service
     count: 1
 
 images:
@@ -68,3 +67,6 @@ images:
   - name: xmlking/recorder-srv
     newName: docker.pkg.github.com/xmlking/micro-starter-kit/recorder-srv
     newTag: $(IMAGE_VERSION)
+  - name: xmlking/greeting-quarkus
+    newName: docker.pkg.github.com/xmlking/micro-apps/greeting-quarkus
+    newTag: 1.6.1-SNAPSHOT

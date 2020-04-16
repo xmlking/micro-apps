@@ -5,13 +5,20 @@ commonLabels:
   app.kubernetes.io/name: nifi
   app.kubernetes.io/instance: nifi-abcxzy
   app.kubernetes.io/component: infra
-  app.kubernetes.io/part-of: micro-apps
-  app.kubernetes.io/managed-by: kustomize
-commonAnnotations:
-  org: acmeCorporation
+#  app.kubernetes.io/part-of: micro-apps
+#  app.kubernetes.io/managed-by: kustomize
+#commonAnnotations:
+#  org: acmeCorporation
+
+namePrefix: nifi-
 
 resources:
 - statefulset.yml
 - secret.yml
 - service.yml
 - ingress.yml
+
+configMapGenerator:
+  - name: env-vars
+    literals:
+      - NIFI_LOG_LEVEL=info

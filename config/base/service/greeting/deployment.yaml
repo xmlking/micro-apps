@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service
+spec:
+  template:
+    spec:
+      containers:
+        - name: service
+          image: xmlking/greeting-quarkus:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: env-vars
+            - configMapRef:
+                name: env-vars-common
+            - secretRef:
+                name: secrets
