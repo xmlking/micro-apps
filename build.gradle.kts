@@ -1,5 +1,5 @@
 // import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
-import com.google.cloud.tools.jib.api.ImageFormat
+import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -49,7 +49,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.2.0"
     // Build & Publish docker images
     // gradle jib
-    id("com.google.cloud.tools.jib") version "2.1.0"
+    id("com.google.cloud.tools.jib") version "2.2.0"
 }
 
 // rootProject config
@@ -88,11 +88,9 @@ if (!project.hasProperty("release.quiet")) {
 
 sonarqube {
     properties {
-        if (!isCI) {
-            property("sonar.host.url", "http://localhost:9000")
-        }
         property("sonar.java.codeCoveragePlugin", "jacoco")
         property("sonar.dynamicAnalysis", "reuseReports")
+        property("sonar.exclusions", "**/*Generated.java")
     }
     tasks.sonarqube {
         dependsOn("jacocoTestReport")

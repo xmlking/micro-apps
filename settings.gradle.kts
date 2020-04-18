@@ -18,5 +18,6 @@ include(
     ":apps:greeting-quarkus",
     ":libs:core",
     ":libs:kbeam",
-    ":libs:dlib"
+    ":libs:dlib",
+    ":libs:proto"
 )
