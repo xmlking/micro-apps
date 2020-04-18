@@ -5,6 +5,7 @@ plugins {
 val kotlinVersion: String by project
 val beamVersion: String by project
 val csvVersion: String by project
+val hamcrestVersion: String by project
 val floggerVersion: String by project
 
 dependencies {
@@ -19,6 +20,7 @@ dependencies {
     implementation("org.apache.commons:commons-csv:$csvVersion")
 
     runtimeOnly("com.google.flogger:flogger-slf4j-backend:$floggerVersion")
+    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
 }
 
 java {

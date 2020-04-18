@@ -9,12 +9,14 @@ import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 
 val kotlinVersion: String by project
 val floggerVersion: String by project
-val hamcrestVersion: String by project
 val jacocoVersion: String by project
 val jacocoQualityGate: String by project
 val gcloudProject: String by project
 val baseDockerImage: String by project
 val ktlintVersion: String by project
+val mockkVersion: String by project
+val arrowVersion: String by project
+
 val excludedProjects = setOf("apps", "libs")
 
 plugins {
@@ -156,9 +158,15 @@ subprojects {
             // Use the Kotlin test library.
             testImplementation(kotlin("test"))
 
+            // Arrow
+            implementation("io.arrow-kt:arrow-core:$arrowVersion")
+            implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
+            implementation("io.arrow-kt:arrow-fx:$arrowVersion")
+
             // Use the Kotlin JUnit integration.
             testImplementation(kotlin("test-junit"))
-            testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+            // Use Mockk mocking library
+            testImplementation("io.mockk:mockk:$mockkVersion")
 
             // Logging
             implementation("com.google.flogger:flogger:$floggerVersion")
