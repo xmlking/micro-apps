@@ -23,7 +23,7 @@ var person = with(Person.newBuilder()) {
 class AccountServer(val port: Int) {
     val server: Server = ServerBuilder
         .forPort(port)
-        .addService(EchoService())
+        .addService(AccountService())
         .build()
 
     fun start() {
@@ -31,9 +31,9 @@ class AccountServer(val port: Int) {
         logger.atInfo().log("Server started, listening on: %s", port)
         Runtime.getRuntime().addShutdownHook(
             Thread {
-                println("*** shutting down gRPC server since JVM is shutting down")
+                logger.atInfo().log("*** shutting down gRPC server since JVM is shutting down")
                 this@AccountServer.stop()
-                println("*** server shut down")
+                logger.atInfo().log("*** server shut down")
             }
         )
     }
@@ -69,7 +69,7 @@ private val logger = FluentLogger.forEnclosingClass()
 fun main() {
     // logger.atInfo().withCause(exception).log("Log message with: %s", argument);
 
-    val port = System.getenv("PORT")?.toInt() ?: 50051
+    val port = System.getenv("PORT")?.toInt() ?: 8080
     val server = AccountServer(port)
     server.start()
     server.blockUntilShutdown()

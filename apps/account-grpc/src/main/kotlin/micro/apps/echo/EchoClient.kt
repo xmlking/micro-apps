@@ -41,7 +41,7 @@ class EchoClient(private val channel: ManagedChannel) : Closeable {
  * greets "world" otherwise.
  */
 fun main(args: Array<String>) = runBlocking {
-    val port = 50051
+    val port = 8080
 
     val client = EchoClient(
         ManagedChannelBuilder.forAddress("localhost", port)

@@ -53,7 +53,7 @@ class EchoServer(val port: Int) {
 }
 
 fun main() {
-    val port = System.getenv("PORT")?.toInt() ?: 50051
+    val port = System.getenv("PORT")?.toInt() ?: 8080
     val server = EchoServer(port)
     server.start()
     server.blockUntilShutdown()
