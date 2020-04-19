@@ -38,9 +38,8 @@ jib {
         // since we have many main classes, it cannot be Inferred. lets help
         mainClass = application.mainClassName
     }
-//    extraDirectories {
-//        setPaths("src/main/custom-extra-dir,/home/user/jib-extras")
-//        permissions = mapOf("/work" to "775", "/distr" to "775")
-//    }
+    // extraDirectories {
+    //     setPaths("src/main/custom-extra-dir,/home/user/jib-extras")
+    //     permissions = mapOf("/work" to "775", "/distr" to "775")
+    // }
 }
-
