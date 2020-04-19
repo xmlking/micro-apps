@@ -46,7 +46,7 @@ class AccountServer(val port: Int) {
         server.awaitTermination()
     }
 
-    private class EchoService : AccountServiceGrpcKt.AccountServiceCoroutineImplBase() {
+    private class AccountService : AccountServiceGrpcKt.AccountServiceCoroutineImplBase() {
 
         override suspend fun get(request: GetRequest): GetResponse = GetResponse
             .newBuilder()
