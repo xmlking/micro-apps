@@ -8,6 +8,7 @@ option java_package = "micro.apps.proto.echo.v1";
 
 service EchoService {
   rpc Echo(EchoRequest) returns (EchoResponse);
+  rpc EchoStream(EchoStreamRequest) returns (stream EchoStreamResponse) {}
 }
 
 message EchoRequest {
@@ -16,4 +17,12 @@ message EchoRequest {
 
 message EchoResponse {
   string message = 1;
+}
+
+message EchoStreamRequest {
+    string message = 1;
+}
+
+message EchoStreamResponse {
+    string message = 1;
 }

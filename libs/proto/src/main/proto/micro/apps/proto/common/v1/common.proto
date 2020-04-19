@@ -9,34 +9,36 @@ import "google/protobuf/wrappers.proto";
 import "validate/validate.proto";
 
 enum Currency {
-  CURRENCY_USD_UNSPECIFIED = 0;
-  CURRENCY_INR = 1;
+    CURRENCY_USD_UNSPECIFIED = 0;
+    CURRENCY_INR = 1;
 }
 
-message Account {
-  string id = 1;
-  string name = 2;
-  string description = 3;
+message Person {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string phone = 4;
+    string email = 5;
 }
 
 message Product {
-  string id = 1;
-  string slug = 2;
-  string name = 3;
-  string description = 4;
-  Currency currency = 5;
-  int32 price = 6;
+    string id = 1;
+    string slug = 2;
+    string name = 3;
+    string description = 4;
+    Currency currency = 5;
+    int32 price = 6;
 }
 
 message Order {
-  string id = 1;
-  google.protobuf.StringValue subject = 2 [
-    (validate.rules).string = {
-      min_len: 5
-    }
-  ];
-  string body = 3;
-  int32 total_price = 4;
-  Currency currency = 5;
-  string channel = 6;
+    string id = 1;
+    google.protobuf.StringValue subject = 2 [
+        (validate.rules).string = {
+            min_len: 5
+        }
+    ];
+    string body = 3;
+    int32 total_price = 4;
+    Currency currency = 5;
+    string channel = 6;
 }

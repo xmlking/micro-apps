@@ -2,10 +2,33 @@
 
 Generated code from ProtoBuf files.
 
+### Prerequisites
+```bash
+# buf: proto tool https://buf.build/docs/tour-1
+brew tap bufbuild/buf
+brew install buf
+```
+
+### Buf
+```bash
+# To list all files Buf is configured to use:
+buf ls-files
+# lint
+buf check lint
+buf check breaking --against-input '.git#branch=master'
+```
+
 ### Test
 ```bash
 gradle libs:proto:test
+
+# To use Buf-produced FileDescriptorSets with grpcurl on the fly:
+grpcurl -protoset <(buf image build -o -) ...
+
+# To use Buf-produced FileDescriptorSets with ghz on the fly:
+ghz --protoset <(buf image build -o -) ...
 ```
+
 ### Build
 ```bash
 gradle libs:proto:generateProto

@@ -16,6 +16,7 @@ include(
     ":apps:demo",
     ":apps:wordcount",
     ":apps:greeting-quarkus",
+    ":apps:account-grpc",
     ":libs:core",
     ":libs:kbeam",
     ":libs:dlib",
