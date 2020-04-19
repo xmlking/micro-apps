@@ -1,0 +1,25 @@
+build:
+  roots:
+    - libs/proto/src/main/proto
+    - libs/proto/src/main/third_party_proto
+
+lint:
+  use:
+    - DEFAULT
+    - FILE_LOWER_SNAKE_CASE
+  except:
+    # - PACKAGE_AFFINITY
+  ignore:
+    - protoc-gen-gorm
+    - validate
+  ignore_only:
+    RPC_RESPONSE_STANDARD_NAME:
+      - micro/apps/proto/account/v1/account.proto
+  rpc_allow_google_protobuf_empty_responses: true
+
+breaking:
+  use:
+    - WIRE_JSON
+  ignore:
+    - protoc-gen-gorm
+    - validate

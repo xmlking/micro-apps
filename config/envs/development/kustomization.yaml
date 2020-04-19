@@ -16,11 +16,11 @@ resources:
   - ../../base
 
 # enable mage-pull-policy and resource_limit as needed
-#patches:
-#  - path: patches/image-pull-policy-if-not-present.yaml
-#    target:
-#      kind: Deployment
-#      labelSelector: app.kubernetes.io/component=microservice
+patches:
+  - path: patches/image-pull-policy-if-not-present.yaml
+    target:
+      kind: Deployment
+      labelSelector: app.kubernetes.io/component=microservice
 
 configMapGenerator:
 #  - name: env-vars
@@ -28,17 +28,13 @@ configMapGenerator:
     behavior: merge
     literals:
       - APP_ENV=development
-      - MICRO_LOG_LEVEL=debug
+      - LOG_LEVEL=debug
 
 secretGenerator:
   - name: secrets
     behavior: replace
     literals:
       - DATABASE_PASSWORD=dev-real-pass
-
-# labels for generated secrets at this level
-#generatorOptions:
-#  disableNameSuffixHash: true
 
 replicas:
   - name: service

@@ -57,7 +57,7 @@ Following actions are triggered on __CI__ (jenkins, github actions)
     - CI run __build__ step (build jars,  build docker images with __next__ _SNAPSHOT_ version)
     - Here the __computed version__ looks like `0.2.1-SNAPSHOT`
     - CI run __publish__ step (publish jars to Nexus, publish docker images to GCR)
-    - CI run __deploy__ step (deploy new images to _integration_ __GKE__ cluster via __helm__ i.e., `helm upgrade bigfoot/core --version=$VERSION -f config.yaml`)
+    - CI run __deploy__ step (deploy new images to _integration_ __GKE__ cluster via __helm__ i.e., `helm upgrade micro/core --version=$VERSION -f config.yaml`)
     - CI run __e2e test__ step (run ???  ), targeting _qa_ __GKE__ cluster/namespace 
 - When code commits pushed to `release/*` branch
     - Above `feature/*` steps will also apply to `release/*` and `hotfix/*` branches
@@ -66,7 +66,7 @@ Following actions are triggered on __CI__ (jenkins, github actions)
     - CI run __build__ step (build jars,  build docker images with stable __version__ from _Latest/Highest_ git tag on `master` branch)
     - Here the __computed version__ looks like: `0.2.0`
     - CI run __publish__ step (publish jars to Nexus, publish docker images to GCR)
-    - CI run __deploy__ step (deploy new images to _integration_ __GKE__ cluster via __helm__ i.e., `helm upgrade bigfoot/core --version=$VERSION -f config.yaml`)
+    - CI run __deploy__ step (deploy new images to _integration_ __GKE__ cluster via __helm__ i.e., `helm upgrade micro/core --version=$VERSION -f config.yaml`)
     - CI run __e2e test__ step (run ???  ), targeting _integration_ __GKE__ cluster/namespace 
 
 

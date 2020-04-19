@@ -9,43 +9,44 @@ import org.junit.jupiter.api.Test
 
 @QuarkusTest
 class FruitResourceTest {
+
     @Test
     fun testList() {
         RestAssured
             .given()
             .`when`()
-                .get("/api/fruits")
+            .get("/api/fruits")
             .then()
-                .statusCode(200)
-                .body("$.size()", CoreMatchers.`is`(2),
-                    "name", Matchers.containsInAnyOrder("Apple", "Pineapple"),
-                    "description", Matchers.containsInAnyOrder("Winter fruit", "Tropical fruit"))
+            .statusCode(200)
+            .body("$.size()", CoreMatchers.`is`(2),
+                "name", Matchers.containsInAnyOrder("Apple", "Pineapple"),
+                "description", Matchers.containsInAnyOrder("Winter fruit", "Tropical fruit"))
     }
 
     @Test
     fun testAdd() {
         RestAssured
             .given()
-                .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
-                .contentType(MediaType.APPLICATION_JSON)
+            .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
+            .contentType(MediaType.APPLICATION_JSON)
             .`when`()
-                .post("/api/fruits")
+            .post("/api/fruits")
             .then()
-                .statusCode(200)
-                .body("$.size()", CoreMatchers.`is`(3),
-                    "name", Matchers.containsInAnyOrder("Apple", "Pineapple", "Pear"),
-                    "description", Matchers.containsInAnyOrder("Winter fruit", "Tropical fruit", "Winter fruit"))
+            .statusCode(200)
+            .body("$.size()", CoreMatchers.`is`(3),
+                "name", Matchers.containsInAnyOrder("Apple", "Pineapple", "Pear"),
+                "description", Matchers.containsInAnyOrder("Winter fruit", "Tropical fruit", "Winter fruit"))
 
         RestAssured
             .given()
-                .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
-                .contentType(MediaType.APPLICATION_JSON)
+            .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
+            .contentType(MediaType.APPLICATION_JSON)
             .`when`()
-                .delete("/api/fruits")
+            .delete("/api/fruits")
             .then()
-                .statusCode(200)
-                .body("$.size()", CoreMatchers.`is`(2),
-                    "name", Matchers.containsInAnyOrder("Apple", "Pineapple"),
-                    "description", Matchers.containsInAnyOrder("Winter fruit", "Tropical fruit"))
+            .statusCode(200)
+            .body("$.size()", CoreMatchers.`is`(2),
+                "name", Matchers.containsInAnyOrder("Apple", "Pineapple"),
+                "description", Matchers.containsInAnyOrder("Winter fruit", "Tropical fruit"))
     }
 }

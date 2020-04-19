@@ -1,5 +1,5 @@
 // import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
-import com.google.cloud.tools.jib.api.ImageFormat
+import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -9,12 +9,14 @@ import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 
 val kotlinVersion: String by project
 val floggerVersion: String by project
-val hamcrestVersion: String by project
 val jacocoVersion: String by project
 val jacocoQualityGate: String by project
 val gcloudProject: String by project
 val baseDockerImage: String by project
 val ktlintVersion: String by project
+val mockkVersion: String by project
+val arrowVersion: String by project
+
 val excludedProjects = setOf("apps", "libs")
 
 plugins {
@@ -27,7 +29,7 @@ plugins {
     // Keep your code spotless
     id("com.diffplug.gradle.spotless") version "3.28.1"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.3.71"
+    id("org.jetbrains.kotlin.jvm") version "1.3.72"
     id("org.jetbrains.dokka") version "0.10.1"
     // id("kotlinx-serialization") version "1.3.71" apply false
     // Keep dependencies up to date
@@ -47,7 +49,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.2.0"
     // Build & Publish docker images
     // gradle jib
-    id("com.google.cloud.tools.jib") version "2.1.0"
+    id("com.google.cloud.tools.jib") version "2.2.0"
 }
 
 // rootProject config
@@ -86,11 +88,9 @@ if (!project.hasProperty("release.quiet")) {
 
 sonarqube {
     properties {
-        if (!isCI) {
-            property("sonar.host.url", "http://localhost:9000")
-        }
         property("sonar.java.codeCoveragePlugin", "jacoco")
         property("sonar.dynamicAnalysis", "reuseReports")
+        property("sonar.exclusions", "**/*Generated.java")
     }
     tasks.sonarqube {
         dependsOn("jacocoTestReport")
@@ -156,9 +156,15 @@ subprojects {
             // Use the Kotlin test library.
             testImplementation(kotlin("test"))
 
+            // Arrow
+            implementation("io.arrow-kt:arrow-core:$arrowVersion")
+            implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
+            implementation("io.arrow-kt:arrow-fx:$arrowVersion")
+
             // Use the Kotlin JUnit integration.
             testImplementation(kotlin("test-junit"))
-            testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+            // Use Mockk mocking library
+            testImplementation("io.mockk:mockk:$mockkVersion")
 
             // Logging
             implementation("com.google.flogger:flogger:$floggerVersion")

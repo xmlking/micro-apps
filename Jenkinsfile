@@ -1,7 +1,7 @@
 pipeline {
 
     agent {
-        label 'build-pod'
+        label 'gradle:6.3-jdk11'
     }
     parameters {
         booleanParam(name: 'RELEASE', defaultValue: false, description: 'Enable this value to generate a release on this build')
@@ -55,7 +55,9 @@ pipeline {
                         script {
                             env.FAILED_STAGE_NAME = env.STAGE_NAME
                         }
-                        sonarQube_scan(serviceName: "micro-apps", buildType: 'gradle')
+                        withSonarQubeEnv('sonarQube') {
+                            sh './gradlew sonarqube -x test'
+                        }
                     }
                 }
                 stage('NexusIQ') {
@@ -66,6 +68,11 @@ pipeline {
                 stage('Fortify') {
                     steps {
                         echo "TODO - Fortify is not implemented"
+                    }
+                }
+                stage('owasp') {
+                    steps {
+                        echo "TODO - owasp is not implemented"
                     }
                 }
             }
@@ -168,27 +175,27 @@ pipeline {
         }
         always {
             echo "Archive JARs:"
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
 
-            echo "Publish Gradle Test Report:"
+            echo "Publish Demo Test Report:"
             publishHTML([
                     allowMissing         : false,
                     alwaysLinkToLastBuild: false,
                     keepAll              : true,
-                    reportDir            : 'build/reports/tests/test',
+                    reportDir            : 'apps/demo/build/reports/tests/test',
                     reportFiles          : 'index.html',
                     reportName           : 'Gradle Test Report',
                     reportTitles         : ''
             ])
 
-            echo "Publish Gradle Profile Reports:"
+            echo "Publish Demo Coverage Reports:"
             publishHTML([
                     allowMissing         : false,
                     alwaysLinkToLastBuild: false,
                     keepAll              : true,
-                    reportDir            : 'build/reports/profile',
+                    reportDir            : 'apps/demo/build/reports/jacoco/test/html',
                     reportFiles          : 'profile-*.html',
-                    reportName           : 'Gradle Profile Reports',
+                    reportName           : 'Gradle Coverage Report',
                     reportTitles         : ''
             ])
         }
