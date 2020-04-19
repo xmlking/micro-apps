@@ -9,8 +9,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="v1.6.4"></a>
+## [v1.6.4] - 2020-04-18
+### Build
+- **deps:** updated deps
+
+### Chore
+- **deps:** update dependency org.apache.beam:beam-sdks-java-io-google-cloud-platform to v2.20.0
+- **deps:** update dependency org.apache.beam:beam-sdks-java-core to v2.20.0
+- **deps:** update dependency org.apache.beam:beam-runners-google-cloud-dataflow-java to v2.20.0
+- **deps:** update dependency org.apache.beam:beam-runners-direct-java to v2.20.0
+- **deps:** update dependency org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin to v1.3.72
+
+### Feat
+- **account-grpc:** adding new kotlin-grpc example
+- **proto:** adding proto module
+
+### Improvement
+- **deploy:** removed unused code from yaml
+- **mock:** adding mockk
+
+### Style
+- **lint:** ktlint fix
+
+
 <a name="v1.6.3"></a>
 ## [v1.6.3] - 2020-04-15
+### Docs
+- **clog:** updating change log
+
 ### Improvement
 - **deploy:** polish Kustomization
 - **deploy:** polish Kustomization
@@ -207,7 +234,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-24
 
-[Unreleased]: https://github.com/xmlking/jvm-gitops/compare/v1.6.3...HEAD
+[Unreleased]: https://github.com/xmlking/jvm-gitops/compare/v1.6.4...HEAD
+[v1.6.4]: https://github.com/xmlking/jvm-gitops/compare/v1.6.3...v1.6.4
 [v1.6.3]: https://github.com/xmlking/jvm-gitops/compare/v1.6.2...v1.6.3
 [v1.6.2]: https://github.com/xmlking/jvm-gitops/compare/v1.6.1...v1.6.2
 [v1.6.1]: https://github.com/xmlking/jvm-gitops/compare/v1.6.0...v1.6.1
