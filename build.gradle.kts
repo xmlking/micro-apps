@@ -15,7 +15,6 @@ val gcloudProject: String by project
 val baseDockerImage: String by project
 val ktlintVersion: String by project
 val mockkVersion: String by project
-val arrowVersion: String by project
 
 val excludedProjects = setOf("apps", "libs")
 
@@ -155,11 +154,6 @@ subprojects {
 
             // Use the Kotlin test library.
             testImplementation(kotlin("test"))
-
-            // Arrow
-            implementation("io.arrow-kt:arrow-core:$arrowVersion")
-            implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
-            implementation("io.arrow-kt:arrow-fx:$arrowVersion")
 
             // Use the Kotlin JUnit integration.
             testImplementation(kotlin("test-junit"))

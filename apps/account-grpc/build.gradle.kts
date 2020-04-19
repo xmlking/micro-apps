@@ -3,6 +3,7 @@ val guavaVersion: String by project
 val grpcVersion: String by project
 val grpcKotlinVersion: String by project
 val protobufVersion: String by project
+val arrowVersion: String by project
 
 dependencies {
     implementation(project(":libs:proto"))
@@ -19,6 +20,11 @@ dependencies {
 
     // Google
     implementation("com.google.guava:guava:$guavaVersion")
+
+    // Arrow, TODO: planing to use n the future
+    // implementation("io.arrow-kt:arrow-core:$arrowVersion")
+    // implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
+    // implementation("io.arrow-kt:arrow-fx:$arrowVersion")
 }
 
 application {
