@@ -14,7 +14,8 @@ pluginManagement {
 rootProject.name = "micro-apps"
 include(
     ":apps:demo",
-    ":apps:wordcount",
+    ":apps:wordcount-pipeline",
+    ":apps:streaming-pipeline",
     ":apps:greeting-quarkus",
     ":apps:account-grpc",
     ":libs:core",

@@ -6,6 +6,7 @@
   - [Hot it Works](introduction/gitflow.md)
   - [Installation](introduction/installation.md)
   - [Usage](introduction/gitflow-usage.md)
+  - [Project Layout](introduction/project-layout.md)
 - Concepts
   - [Introduction](concepts/intro.md)
   - [Release](concepts/release.md)
