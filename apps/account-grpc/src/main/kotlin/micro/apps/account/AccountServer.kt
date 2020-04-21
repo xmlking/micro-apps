@@ -20,6 +20,8 @@ var person = with(Person.newBuilder()) {
     return@with build()
 }
 
+private val logger = FluentLogger.forEnclosingClass()
+
 class AccountServer(val port: Int) {
     val server: Server = ServerBuilder
         .forPort(port)
@@ -63,8 +65,6 @@ class AccountServer(val port: Int) {
         }
     }
 }
-
-private val logger = FluentLogger.forEnclosingClass()
 
 fun main() {
     // logger.atInfo().withCause(exception).log("Log message with: %s", argument);
