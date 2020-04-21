@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: beam-schedule
+spec:
+  schedule: "*/1 * * * *"
+  # Do not start a new pipeline if the previous one has not completed
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: beam-pipeline
+              image: xmlking/beam-scheduling-kubernetes
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure

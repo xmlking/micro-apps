@@ -67,3 +67,11 @@ gradle :apps:wordcount-pipeline:clean
 # make fatJar
 gradle :apps:wordcount-pipeline:build
 ```
+
+### Kubernetes
+
+Scheduled Apache Beam jobs using Kubernetes Cronjobs
+
+```bash
+kubectl apply -f config/base/beam/cronjob.yml
+```

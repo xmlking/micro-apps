@@ -67,3 +67,7 @@ gradle :apps:streaming-pipeline:clean
 # make fatJar
 gradle :apps:streaming-pipeline:build
 ```
+
+### TODO
+
+- https://beam.apache.org/documentation/sdks/java/euphoria/
