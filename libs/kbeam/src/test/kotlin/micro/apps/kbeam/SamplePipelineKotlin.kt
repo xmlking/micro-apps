@@ -45,10 +45,6 @@ class DSLPipelineTest : Serializable {
         val countryCodes = pipeline.readTextFile { filePattern = StaticValueProvider.of("src/test/resources/data/country_codes.jsonl") }
             .apply("Parse", ParseJsons.of(CountryCodeEntry::class.java))
             .setCoder(SerializableCoder.of(CountryCodeEntry::class.java))
-            .parDo<CountryCodeEntry, CountryCodeEntry>(name = "just to demo logging") {
-                println(element)
-                output(element)
-            }
             .map("Convert to KV") { KV.of(it.code, it.name) }.toMap()
 
         val test = pipeline.readTextFile(name = "Read Lines") { filePattern = StaticValueProvider.of("src/test/resources/data/test.csv") }

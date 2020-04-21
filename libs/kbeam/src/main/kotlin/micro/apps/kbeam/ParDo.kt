@@ -98,8 +98,8 @@ open class DoFnContextWrapper<I, O>(override val context: DoFn<I, O>.ProcessCont
  * @param name The name of the processing step
  * @param sideInputs The *optional* sideInputs
  */
-inline fun <I, O> PCollection<I>.parDo(
-    name: String = "ParDo",
+inline fun <I, reified O> PCollection<I>.parDo(
+    name: String = "ParDo to ${O::class.simpleName}",
     sideInputs: List<PCollectionView<*>> = emptyList(),
     crossinline function: DoFnContext<I, O>.() -> Unit
 ):
@@ -117,7 +117,7 @@ inline fun <I, O> PCollection<I>.parDo(
  *
  * The executed lambda has access to an implicit process context as *this* if needed
  */
-inline fun <I> PCollection<I>.filter(name: String = "filter", crossinline function: (I) -> Boolean): PCollection<I> {
+inline fun <reified I> PCollection<I>.filter(name: String = "filter", crossinline function: (I) -> Boolean): PCollection<I> {
     return this.parDo(name) {
         if (function(element)) {
             output(element)
