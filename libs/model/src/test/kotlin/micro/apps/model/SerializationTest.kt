@@ -1,5 +1,7 @@
 package micro.apps.model
 
+// import com.charleskorn.kaml.Yaml
+// import com.charleskorn.kaml.YamlConfiguration
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
 import kotlin.test.Test
@@ -28,6 +30,10 @@ class SerializationTest {
 
 //    val JSON by lazy {
 //        Json(JsonConfiguration.Stable.copy(isLenient = true, prettyPrint = true))
+//    }
+
+//    val YAML by lazy {
+//        Yaml(configuration = YamlConfiguration(strictMode = false))
 //    }
 
     private val veg = Pizza("veg", listOf(Ingredient("peppers", 0.1, 0.3), Ingredient("onion", 1.0, 0.4)), true, 265)
@@ -71,10 +77,24 @@ class SerializationTest {
     }
 
     @Test
-    fun testAvroSerialization() {
+    fun testAvroSerialization_WriteData() {
+        val serializer = Pizza.serializer()
+        val schema = Avro.default.schema(serializer)
+        val output = Avro.default.openOutputStream(serializer) {
+            format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
+            this.schema = schema
+        }.to("./src/test/resources/data/pizzas.avro")
+        output.write(listOf(veg, hawaiian))
+        output.close()
+    }
+
+    @Test
+    fun testAvroSerialization_ReadData() {
+        val serializer = Pizza.serializer()
+        val schema = Avro.default.schema(serializer)
         val input = Avro.default.openInputStream {
-            format = AvroFormat.BinaryFormat
-            writerSchema = Avro.default.schema(Pizza.serializer())
+            format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
+            writerSchema = schema
         }.from("./src/test/resources/data/pizzas.avro")
 
         input.iterator().forEach { println(it) }
