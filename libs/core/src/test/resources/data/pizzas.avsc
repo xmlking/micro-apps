@@ -1,0 +1,34 @@
+{
+    "type" : "record",
+    "name" : "Pizza",
+    "namespace" : "micro.apps.core.model",
+    "fields" : [ {
+        "name" : "name",
+        "type" : "string"
+    }, {
+        "name" : "ingredients",
+        "type" : {
+            "type" : "array",
+            "items" : {
+                "type" : "record",
+                "name" : "Ingredient",
+                "fields" : [ {
+                    "name" : "name",
+                    "type" : "string"
+                }, {
+                    "name" : "sugar",
+                    "type" : "double"
+                }, {
+                    "name" : "fat",
+                    "type" : "double"
+                } ]
+            }
+        }
+    }, {
+        "name" : "vegetarian",
+        "type" : "boolean"
+    }, {
+        "name" : "kcals",
+        "type" : "int"
+    } ]
+}

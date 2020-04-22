@@ -10,7 +10,7 @@ val pgvVersion: String by project
 plugins {
     // For best results, install idea plugin along with `com.google.protobuf` plugin for IntelliJ.
     idea
-    id("com.google.protobuf") version "0.8.12"
+    id("com.google.protobuf")
 }
 
 dependencies {

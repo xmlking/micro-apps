@@ -1,11 +1,9 @@
 package micro.apps.core.model
 
-import java.io.Serializable
+import java.io.Serializable as JavaSerializable
 import java.math.BigDecimal
 import java.time.Instant
-/* ktlint-disable no-wildcard-imports */
-import java.util.*
-/* ktlint-enable no-wildcard-imports */
+import java.util.UUID
 
 // ----------------
 //  for Kotlin Gradle NoArg plugin
@@ -15,7 +13,7 @@ annotation class NoArg
 @NoArg
 class Test(val id: Int)
 
-sealed class Message : Serializable
+sealed class Message : JavaSerializable
 
 /** Event Message Class **/
 data class DataMessage(
@@ -24,7 +22,7 @@ data class DataMessage(
     val location: String = "CA",
     val price: BigDecimal,
     val timestamp: Instant = Instant.now()
-) : Message(), Serializable
+) : Message(), JavaSerializable
 
 data class Fruit(var name: String = "", var description: String = "")
 

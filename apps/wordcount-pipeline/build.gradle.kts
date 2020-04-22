@@ -1,7 +1,3 @@
-plugins {
-//    id("kotlinx-serialization")
-}
-
 val kotlinVersion: String by project
 val beamVersion: String by project
 val csvVersion: String by project

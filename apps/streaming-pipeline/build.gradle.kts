@@ -1,5 +1,5 @@
 plugins {
-    kotlin("plugin.serialization") version "1.3.72"
+    kotlin("plugin.serialization")
 }
 
 val kotlinVersion: String by project
@@ -18,7 +18,6 @@ dependencies {
     implementation("org.apache.beam:beam-runners-direct-java:$beamVersion")
     implementation("org.apache.beam:beam-runners-google-cloud-dataflow-java:$beamVersion")
     implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
-    implementation("org.apache.commons:commons-csv:$csvVersion")
     implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion")
     implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
 
