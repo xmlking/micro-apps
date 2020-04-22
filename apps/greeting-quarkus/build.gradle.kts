@@ -9,6 +9,7 @@ val restAssuredVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
+    implementation(project(":libs:model"))
     // kotlin
     implementation(enforcedPlatform("io.quarkus:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-kotlin")

@@ -10,7 +10,7 @@ import javax.ws.rs.Path
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 import kotlin.collections.LinkedHashMap
-import micro.apps.core.model.Fruit
+import micro.apps.model.Fruit
 
 @Path("/fruits")
 @Produces(MediaType.APPLICATION_JSON)

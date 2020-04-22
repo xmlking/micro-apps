@@ -8,9 +8,11 @@ val csvVersion: String by project
 val hamcrestVersion: String by project
 val floggerVersion: String by project
 val kotlinSerializationVersion: String by project
+val avro4kVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
+    implementation(project(":libs:model"))
     implementation(project(":libs:kbeam"))
 
     // Use Apache Beam
@@ -18,14 +20,16 @@ dependencies {
     implementation("org.apache.beam:beam-runners-direct-java:$beamVersion")
     implementation("org.apache.beam:beam-runners-google-cloud-dataflow-java:$beamVersion")
     implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
-    implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion")
-    implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
+
+    // Use Kotlin Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinSerializationVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinSerializationVersion") // protobuf serialization
+    implementation("com.sksamuel.avro4k:avro4k-core:$avro4kVersion") // avro serialization
+    // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion") // kryo serialization
+    // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
 
     runtimeOnly("com.google.flogger:flogger-slf4j-backend:$floggerVersion")
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
-
-    // Use Kotlin Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinSerializationVersion") // JVM dependency
 }
 
 java {

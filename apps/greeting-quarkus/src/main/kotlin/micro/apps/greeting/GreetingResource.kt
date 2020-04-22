@@ -7,7 +7,7 @@ import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
-import micro.apps.core.model.Greeting
+import micro.apps.model.Greeting
 import org.eclipse.microprofile.metrics.MetricUnits
 import org.eclipse.microprofile.metrics.annotation.Counted
 import org.eclipse.microprofile.metrics.annotation.Gauge

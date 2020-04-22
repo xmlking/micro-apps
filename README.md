@@ -7,11 +7,12 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 
 ### Features
 1. **Polyglot** - Support multiple languages (java, kotlin, groovy)
-2. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)
-3. Support multiple testing frameworks (spock, spek, kotlin-test and junit5) 
-4. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images with [Jib](https://github.com/GoogleContainerTools/jib)
-5. Build native binaries using [GraalVM](https://www.graalvm.org/)
-6. Cloud Native (Service Mesh, health checks, observability)
+1. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)
+1. Support multiple testing frameworks (spock, spek, kotlin-test and junit5) 
+1. Support multiple serialization methods (JSON, Avro, ProtoBuf)
+1. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images with [Jib](https://github.com/GoogleContainerTools/jib)
+1. Build native binaries using [GraalVM](https://www.graalvm.org/)
+1. Cloud Native (Service Mesh, health checks, observability)
 
 [![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
 [![Version](https://img.shields.io/github/v/tag/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/tags)
@@ -51,7 +52,10 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 
 
 #### Apache Beam pipelines
-> Start [wordcount](./apps/wordcount/)
+
+> Start [wordcount Pipeline](./apps/wordcount-pipeline/)
+>
+> Start [streaming Pipeline](./apps/streaming-pipeline/)
 
 #### Quarkus
 

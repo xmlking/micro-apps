@@ -13,13 +13,13 @@ pluginManagement {
 
 rootProject.name = "micro-apps"
 include(
-    ":apps:demo",
-    ":apps:wordcount-pipeline",
-    ":apps:streaming-pipeline",
-    ":apps:greeting-quarkus",
     ":apps:account-grpc",
+    ":apps:greeting-quarkus",
+    ":apps:streaming-pipeline",
+    ":apps:wordcount-pipeline",
+
     ":libs:core",
     ":libs:kbeam",
-    ":libs:dlib",
+    ":libs:model",
     ":libs:proto"
 )

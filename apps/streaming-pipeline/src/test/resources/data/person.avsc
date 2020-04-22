@@ -1,0 +1,29 @@
+{
+  "type" : "record",
+  "name" : "Person",
+  "namespace" : "micro.apps.model",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "pii" : "yes"
+  }, {
+    "name" : "firstName",
+    "type" : "string"
+  }, {
+    "name" : "lastName",
+    "type" : "string"
+  }, {
+    "name" : "phone",
+    "type" : "string",
+    "pii" : "yes"
+  }, {
+    "name" : "email",
+    "type" : "string",
+    "encrypted" : "yes"
+  }, {
+    "name" : "age",
+    "type" : "int",
+    "pii" : "yes"
+  } ],
+  "mode" : "private"
+}
