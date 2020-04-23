@@ -2,57 +2,91 @@
 
 Streaming pipeline demo. 
 
+### Prerequisites
+
+1. Google PubSub
+    ```bash
+    gcloud components install pubsub-emulator
+    ```
+2. 
+    ```bash
+
+    ```
+   
 ### Run
+
+#### Start Google PubSub Emulator 
+
+```bash
+export PROJECT_ID=my-project-id
+export PIPELINE_NAME=streaming
+
+gcloud beta emulators pubsub start --project=${PROJECT_ID} --host-port=localhost:8085
+
+# export PUBSUB_EMULATOR_HOST before using emulator pubsub
+export PUBSUB_EMULATOR_HOST=http://localhost:8085
+
+# Create Topic every time you restart pubsub emulator 
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
+
+# List Topics
+curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics
+```
 
 #### Local Run  
 ```bash
-gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --inputFile=./src/test/resources/data/input.txt --output=./build/output.txt"
+gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
 
 java -jar -Dflogger.level=INFO \
-./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
+./apps/wordcount/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
 --runner=DirectRunner \
---inputFile=./apps/wordcount/src/test/resources/data/input.txt \
---output=./apps/wordcount/build/output.txt
+--pubsubRootUrl=${PUBSUB_EMULATOR_HOST} \
+--inputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input \
+--outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
 ```
 
 #### Cloud Run  
 ```bash
 PROJECT_ID=<my-project-id>
-GCS_BUCKET=<my-project-gcs-bucket>
+PIPELINE_NAME=streaming
 export GOOGLE_APPLICATION_CREDENTIALS=<full-path-to-your-json>
 
-gradle -Dflogger.level=ALL  :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation=gs://$GCS_BUCKET/dataflow/wordcount/temp/ --stagingLocation=gs://$GCS_BUCKET/dataflow/wordcount/staging/ --inputFile=gs://$GCS_BUCKET/dataflow/wordcount/input/shakespeare.txt --output=gs://$GCS_BUCKET/dataflow/wordcount/output/output.txt"
+gradle -Dflogger.level=ALL  :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation==gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ --inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt --output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt"
 
 # Or with fatJar
 java -jar ./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
 --runner=DataflowRunner \
---project=$PROJECT_ID \
---gcpTempLocation=gs://$GCS_BUCKET/dataflow/wordcount/temp/ \
---stagingLocation=gs://$GCS_BUCKET/dataflow/wordcount/staging/ \
---inputFile=gs://$GCS_BUCKET/dataflow/wordcount/input/shakespeare.txt \
---output=gs://$GCS_BUCKET/dataflow/wordcount/output/output.txt
+--windowDuration=2m \
+--numShards=1 \
+--project=${PROJECT_ID} \
+--inputTopic=projects/${PROJECT_ID}/topics/windowed-files \
+--gcpTempLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ \
+--stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ \
+--inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt \
+--output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
 ```
 
 #### Creating Template
 ```bash
-gradle :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation=gs://$GCS_BUCKET/dataflow/wordcount/temp/ --stagingLocation=gs://$GCS_BUCKET/dataflow/wordcount/staging/ --templateLocation=gs://$GCS_BUCKET/dataflow/wordcount/template/wordcount"
+gradle :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/staging/ --templateLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME}"
 ```
 
 > Creating as template from VM
 ```bash
 java -jar /mnt/data/pipelines/templates/wordcount-0.1.6-SNAPSHOT-all.jar --runner=DataFlowRunner \
     --project=$PROJECT_ID \
-    --gcpTempLocation=gs://$GCS_BUCKET/dataflow/wordcount/temp/ 
-    --stagingLocation=gs://$GCS_BUCKET/dataflow/wordcount/staging/
-    --templateLocation=gs://$GCS_BUCKET/dataflow/wordcount/template/wordcount
+    --gcpTempLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ \
+    --stagingLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/staging/ \
+    --templateLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME}
 ```
 
 #### Running template
 > Create Job
 ```bash
 gcloud dataflow jobs run wordcount \
-    --gcs-location gs://$GCS_BUCKET/dataflow/wordcount/template/wordcount \
-    --parameters inputFile=gs://$GCS_BUCKET/dataflow/wordcount/input/shakespeare.txt,outputFile=gs://$GCS_BUCKET/dataflow/wordcount/output/output.txt
+    --gcs-location gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME} \
+    --parameters inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt,gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
 ```
 
 ### Test

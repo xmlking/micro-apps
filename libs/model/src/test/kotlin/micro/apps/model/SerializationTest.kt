@@ -13,6 +13,8 @@ import kotlinx.serialization.protobuf.ProtoBuf
 import kotlinx.serialization.protobuf.ProtoId
 import kotlinx.serialization.protobuf.ProtoNumberType
 import kotlinx.serialization.protobuf.ProtoType
+import org.apache.avro.Schema
+import org.apache.avro.generic.GenericRecord
 
 @Serializable
 data class Ingredient(val name: String, val sugar: Double, val fat: Double)
@@ -92,12 +94,32 @@ class SerializationTest {
     fun testAvroSerialization_ReadData() {
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
-        val input = Avro.default.openInputStream {
+        val input = Avro.default.openInputStream(serializer) {
             format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
             writerSchema = schema
         }.from("./src/test/resources/data/pizzas.avro")
 
         input.iterator().forEach { println(it) }
         input.close()
+    }
+
+    @Test
+    fun testAvroSerialization_ReadDataAsGenericRecord() {
+        val serializer = Pizza.serializer()
+        val schema = Avro.default.schema(serializer)
+        val input = Avro.default.openInputStream {
+            format = AvroFormat.DataFormat
+            readerSchema = schema
+        }.from(javaClass.getResourceAsStream("/data/pizzas.avro"))
+
+        input.iterator().forEach { println(it as GenericRecord) }
+        input.close()
+    }
+
+    @Test
+    fun testGeneratedSchema() {
+        val expectedSchema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/pizzas.avsc"))
+        val generatedSchema = Avro.default.schema(Pizza.serializer())
+        assertEquals(expectedSchema.toString(true), generatedSchema.toString(true))
     }
 }

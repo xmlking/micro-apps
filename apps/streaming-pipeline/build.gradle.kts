@@ -40,7 +40,7 @@ java {
 }
 
 application {
-    mainClassName = "micro.apps.pipeline.WordCountPipeline"
+    mainClassName = "micro.apps.pipeline.StreamingPipeline"
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
-    applicationDefaultJvmArgs = listOf("-Dflogger.level=INFO")
+    applicationDefaultJvmArgs = listOf("-Dflogger.level=CONFIG")
 }

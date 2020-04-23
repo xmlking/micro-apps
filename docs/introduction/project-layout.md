@@ -9,20 +9,20 @@ we will be using **monorepo** style project layout, utilizing **gradle** multi-p
 ```
 micro-apps/
 ├── apps
-│   ├── demo
+│   ├── account-grpc
 │   │   ├── README.md
 │   │   ├── build.gradle.kts
 │   │   └── src
-│   ├── account-grpc
 │   ├── greeting-quarkus
-│   └── wordcount
+│   ├── streaming-quarkus
+│   └── wordcount-pipeline
 ├── libs
 │   ├── core
 │   │   ├── README.md
 │   │   ├── build.gradle.kts
 │   │   └── src
-│   ├── dlib
 │   ├── kbeam
+│   ├── model
 │   └── proto
 ├── config     <-- deployment configuration ie., k8s yaml
 │   ├── base
