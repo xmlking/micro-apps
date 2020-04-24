@@ -6,9 +6,9 @@ pluginManagement {
 //        maven { url = uri("https://nexus/") }
 //        maven { url = uri("https://dl.bintray.com/gradle/gradle-plugins") }
     }
-//    plugins {
-//        id ("io.quarkus:$quarkusPluginVersion")
-//    }
+    plugins {
+        id("io.quarkus") version "1.4.0.Final"
+    }
 }
 
 rootProject.name = "micro-apps"

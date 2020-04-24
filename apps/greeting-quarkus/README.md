@@ -31,7 +31,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ```bash
 cd apps
-mvn io.quarkus:quarkus-maven-plugin:1.3.2.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:1.4.0.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-quarkus \
     -DprojectVersion=0.1.0 \

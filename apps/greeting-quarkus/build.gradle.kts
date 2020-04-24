@@ -2,7 +2,7 @@ plugins {
     kotlin("plugin.allopen")
     id("io.quarkus")
 }
-
+val quarkusPlatformGroupId: String by project
 val quarkusPlatformVersion: String by project
 val quarkusPlatformArtifactId: String by project
 val restAssuredVersion: String by project
@@ -11,7 +11,7 @@ dependencies {
     implementation(project(":libs:core"))
     implementation(project(":libs:model"))
     // kotlin
-    implementation(enforcedPlatform("io.quarkus:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
+    implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-kotlin")
     // rest
     implementation("io.quarkus:quarkus-resteasy")
@@ -53,7 +53,7 @@ tasks {
     }
 
     buildNative {
-        isEnableHttpUrlHandler = true
+        // isEnableHttpUrlHandler = true
         // isEnableHttpsUrlHandler = true
         // dockerBuild = "true"
     }
