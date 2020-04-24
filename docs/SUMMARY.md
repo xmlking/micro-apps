@@ -21,7 +21,7 @@
 - Dev Ops
   - [Keycloak](devops/keycloak.md)
 - Recipes
-  - [Recipe 1](recipes/recipe1.md)
+  - [Steaming Pipeline](recipes/streaming.md)
   - [Recipe 2](recipes/recipe2.md)
 - [Change Log](../CHANGELOG.md)
 - [FAQ](faq/faq.md)

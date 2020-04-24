@@ -1,14 +1,16 @@
+# Streaming Dataflow
+
+```kotlin
 package micro.apps.pipeline
 
 /* ktlint-disable no-wildcard-imports */
 import com.google.common.flogger.FluentLogger
 import com.google.common.flogger.MetadataKey.single
+import com.sksamuel.avro4k.Avro
 import micro.apps.core.LogDefinition.Companion.config
-import micro.apps.kbeam.PipeBuilder
+import micro.apps.kbeam.*
 import micro.apps.kbeam.coder.AvroToPubsubMessage
-import micro.apps.kbeam.parDo
-import micro.apps.kbeam.split
-import micro.apps.kbeam.toList
+import micro.apps.model.Person
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import org.apache.beam.runners.dataflow.util.TimeUtil
@@ -90,7 +92,7 @@ object StreamingPipeline {
                 .discardingFiredPanes()
                 .withAllowedLateness(Duration.standardSeconds(300)))
 
-            // decrypting and enrich record
+            // iterating GenericRecord
             .parDo<GenericRecord, GenericRecord>(
                 "decrypt and enrich record",
                 sideInputs = listOf(keys)) {
@@ -107,22 +109,37 @@ object StreamingPipeline {
                 element
             }
 
-        // split records
+            // GenericRecord to Entity
+            .map {
+                Avro.default.fromRecord(Person.serializer(), it)
+            }
+
+            // decrypt fields
+            .parDo<Person, Person>(
+                "decrypt and enrich record",
+                sideInputs = listOf(keys)) {
+                // TODO: may a copy, modify and emit
+                output(element.copy(email = "decrypted email"))
+            }
+
         val (old, young) = input.split {
             println(it)
-            true // it.age >= 20
+            it.age >= 20
         }
 
-        old.parDo<GenericRecord, Void> {
+        old.parDo<Person, Void> {
             println("Old: $element")
         }
 
-        young.parDo<GenericRecord, Void> {
+        young.parDo<Person, Void> {
             println("Young: $element")
         }
 
         input
-            // convert GenericRecord to PubsubMessage
+            // Entity to GenericRecord
+            .map {
+                Avro.default.toRecord(Person.serializer(), it)
+            }
             .apply(MapElements.via(AvroToPubsubMessage()))
             // write back to PubSub
             .apply("Write PubSub Events", PubsubIO.writeMessages().to(options.outputTopic))
@@ -130,3 +147,4 @@ object StreamingPipeline {
         pipe.run()
     }
 }
+```

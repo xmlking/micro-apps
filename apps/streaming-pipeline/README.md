@@ -26,19 +26,19 @@ export PROJECT_ID=my-project-id
 export PIPELINE_NAME=streaming
 export PUBSUB_EMULATOR_HOST=http://localhost:8085
 
-# Create Topic every time you restart pubsub emulator 
+# Create Topic every time you restart pubsub emulator
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
 
-# Create subscription
+# Create subscription (optional)
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-subscription \
 -d '{
   "topic": "projects/my-project-id/topics/streaming-input"
 }'
 
-# List Topics
+# List Topics (optional)
 curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics
-# List subscriptions
+# List Subscriptions (optional)
 curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions
 ```
 
