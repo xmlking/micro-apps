@@ -22,6 +22,8 @@ export PIPELINE_NAME=streaming
 gcloud beta emulators pubsub start --project=${PROJECT_ID} --host-port=localhost:8085
 
 # export PUBSUB_EMULATOR_HOST before using emulator pubsub
+export PROJECT_ID=my-project-id
+export PIPELINE_NAME=streaming
 export PUBSUB_EMULATOR_HOST=http://localhost:8085
 
 # Create Topic every time you restart pubsub emulator 
@@ -29,10 +31,10 @@ curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
 
 # Create subscription
-curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/{sub}
-{
-  "topic": "projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input"
-}
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-subscription \
+-d '{
+  "topic": "projects/my-project-id/topics/streaming-input"
+}'
 
 # List Topics
 curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics

@@ -6,7 +6,9 @@ import com.google.common.flogger.MetadataKey
 import micro.apps.core.LogDefinition.Companion.config
 import micro.apps.kbeam.PipeBuilder
 import micro.apps.kbeam.coder.AvroToPubsubMessage
-import micro.apps.kbeam.map
+import micro.apps.kbeam.parDo
+import micro.apps.kbeam.split
+import micro.apps.kbeam.toList
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import org.apache.beam.runners.dataflow.util.TimeUtil
@@ -14,6 +16,7 @@ import org.apache.beam.sdk.extensions.gcp.options.GcpOptions
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubOptions
 import org.apache.beam.sdk.options.*
+import org.apache.beam.sdk.transforms.Create
 import org.apache.beam.sdk.transforms.MapElements
 import org.apache.beam.sdk.transforms.windowing.AfterWatermark
 import org.apache.beam.sdk.transforms.windowing.FixedWindows
@@ -45,8 +48,9 @@ interface MyStreamingOptions : ApplicationNameOptions, PipelineOptions, Streamin
     var windowDuration: String
 }
 
-const val TOKENIZER_PATTERN = "[^\\p{L}]+"
-// TODO 1. side load 2. split by tag success/failure
+/**
+ * showcase side-input and split
+ */
 object StreamingPipeline {
     @JvmStatic
     private val logger: FluentLogger = FluentLogger.forEnclosingClass().config()
@@ -68,13 +72,17 @@ object StreamingPipeline {
 
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
-        logger.atInfo().with(MetadataKey.single("text", Schema::class.java), schema).log()
+        // create dummy `keys` to use as `side input` for decryption
+        val keys = pipe.apply(Create.of(listOf("aaa", "bbb"))).toList()
 
-        println(options.windowDuration)
-        println(TimeUtil.fromCloudDuration(options.windowDuration))
-        pipe
+        logger.atInfo()
+            .with(MetadataKey.single("schema", Schema::class.java), schema)
+            .with(MetadataKey.single("windowDuration", String::class.java), options.windowDuration)
+            .with(MetadataKey.single("pubsubRootUrl", String::class.java), options.pubsubRootUrl)
+            .log()
+
+        val input = pipe
             .apply("Read new Data from PubSub", PubsubIO.readAvroGenericRecords(schema).fromTopic(options.inputTopic))
-
             // Batch events into 5 minute windows
             .apply("Batch Events, windowDuration: ${options.windowDuration}", Window.into<GenericRecord>(
                 // FixedWindows.of(Duration.standardMinutes(5)))
@@ -82,14 +90,40 @@ object StreamingPipeline {
                 .triggering(AfterWatermark.pastEndOfWindow())
                 .discardingFiredPanes()
                 .withAllowedLateness(Duration.standardSeconds(300)))
-
-            .map("print for debug") {
-                println(it)
-                it
+            // just for show
+            .parDo<GenericRecord, GenericRecord>(
+                "decrypt and enrich record",
+                sideInputs = listOf(keys)) {
+                println(element)
+                println(timestamp)
+                println(element.schema)
+                println("key used to decrypt encrypted field: ${sideInputs[keys][0]}")
+                for (field in schema.fields /*element.schema.fields*/) {
+                    val fieldKey: String = field.name()
+                    println("$fieldKey : ${element.get(fieldKey)}, is encrypted? ${field.getProp("encrypted")}")
+                }
+                // TODO: may a copy, modify and retun
+                // output(element.copy(email = "decrypted email"))
+                element
             }
-            .apply(MapElements.via(AvroToPubsubMessage()))
 
+        val (old, young) = input.split {
+            println(it)
+            true // it.age >= 20
+        }
+
+        old.parDo<GenericRecord, Void> {
+            println("Old: $element")
+        }
+
+        young.parDo<GenericRecord, Void> {
+            println("Young: $element")
+        }
+
+        input.apply(MapElements.via(AvroToPubsubMessage()))
+            // write back to PubSub
             .apply("Write PubSub Events", PubsubIO.writeMessages().to(options.outputTopic))
+
         pipe.run()
     }
 }
