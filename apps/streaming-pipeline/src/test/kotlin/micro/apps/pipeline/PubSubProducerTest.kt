@@ -26,7 +26,7 @@ class PubSubProducerTest : Serializable {
     @JvmField
     val pipeline = TestPipeline.create()
 
-    @Test // @Ignore
+    @Test @Ignore // TODO: remove @Ignore to use it
     fun generateTestData() {
         val options = TestPipeline.testingPipelineOptions()
         options.`as`(PubsubOptions::class.java).pubsubRootUrl = "http://localhost:8085"
