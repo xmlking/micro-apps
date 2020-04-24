@@ -2,18 +2,16 @@
 
 Streaming pipeline demo. 
 
-### Prerequisites
+## Prerequisites
 
 1. Google PubSub
     ```bash
     gcloud components install pubsub-emulator
     ```
-2. 
-    ```bash
-
-    ```
    
-### Run
+## Run
+
+### Local Run  
 
 #### Start Google PubSub Emulator 
 
@@ -30,23 +28,38 @@ export PUBSUB_EMULATOR_HOST=http://localhost:8085
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
 
+# Create subscription
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/{sub}
+{
+  "topic": "projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input"
+}
+
 # List Topics
 curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics
+# List subscriptions
+curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions
 ```
 
-#### Local Run  
+#### Run Job
+
 ```bash
-gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
+gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --windowDuration=100s  --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
 
 java -jar -Dflogger.level=INFO \
 ./apps/wordcount/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
 --runner=DirectRunner \
+--windowDuration=300s \
 --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} \
 --inputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input \
 --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
 ```
 
-#### Cloud Run  
+> publish sample data into `PubSub` Emulator for testing
+```bash
+gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.PubSubProducerTest.generateTestData"
+```
+
+### Cloud Run  
 ```bash
 PROJECT_ID=<my-project-id>
 PIPELINE_NAME=streaming
@@ -67,7 +80,7 @@ java -jar ./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
 --output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
 ```
 
-#### Creating Template
+### Creating Template
 ```bash
 gradle :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/staging/ --templateLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME}"
 ```
@@ -81,7 +94,7 @@ java -jar /mnt/data/pipelines/templates/wordcount-0.1.6-SNAPSHOT-all.jar --runne
     --templateLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME}
 ```
 
-#### Running template
+### Running template
 > Create Job
 ```bash
 gcloud dataflow jobs run wordcount \
@@ -89,12 +102,12 @@ gcloud dataflow jobs run wordcount \
     --parameters inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt,gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
 ```
 
-### Test
+## Test
 ```bash
 gradle :apps:streaming-pipeline:test
 ```
 
-### Build
+## Build
 ```bash
 # clean
 gradle :apps:streaming-pipeline:clean
@@ -102,6 +115,6 @@ gradle :apps:streaming-pipeline:clean
 gradle :apps:streaming-pipeline:build
 ```
 
-### TODO
+## TODO
 
 - https://beam.apache.org/documentation/sdks/java/euphoria/

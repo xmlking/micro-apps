@@ -2,6 +2,7 @@ package micro.apps.pipeline
 
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
+import kotlin.test.Ignore
 import kotlin.test.Test
 import micro.apps.model.Person
 
@@ -9,7 +10,7 @@ class SerializationTest {
     val person1 = Person(firstName = "sumo1", lastName = "demo1", email = "sumo1@demo.com", phone = "0000000000", age = 99)
     val person2 = Person(firstName = "sumo2", lastName = "demo1", email = "sumo2@demo.com", phone = "1111111111", age = 99, valid = true)
 
-    @Test
+    @Test @Ignore
     fun testAvroSerialization_WriteData() {
         val serializer = Person.serializer()
         val schema = Avro.default.schema(serializer)
@@ -21,7 +22,7 @@ class SerializationTest {
         output.close()
     }
 
-    @Test
+    @Test @Ignore
     fun testAvroSerialization_ReadData() {
         val serializer = Person.serializer()
         val schema = Avro.default.schema(serializer)

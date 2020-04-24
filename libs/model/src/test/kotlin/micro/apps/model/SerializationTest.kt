@@ -98,8 +98,8 @@ class SerializationTest {
             format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
             writerSchema = schema
         }.from("./src/test/resources/data/pizzas.avro")
-
-        input.iterator().forEach { println(it) }
+        println(input.nextOrThrow()) // get first only
+        input.iterator().forEach { println(it) } // get all
         input.close()
     }
 
@@ -107,11 +107,10 @@ class SerializationTest {
     fun testAvroSerialization_ReadDataAsGenericRecord() {
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
-        val input = Avro.default.openInputStream {
+        val input = Avro.default.openInputStream() {
             format = AvroFormat.DataFormat
             readerSchema = schema
         }.from(javaClass.getResourceAsStream("/data/pizzas.avro"))
-
         input.iterator().forEach { println(it as GenericRecord) }
         input.close()
     }
