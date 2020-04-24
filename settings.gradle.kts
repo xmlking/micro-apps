@@ -7,7 +7,7 @@ pluginManagement {
 //        maven { url = uri("https://dl.bintray.com/gradle/gradle-plugins") }
     }
     plugins {
-        id("io.quarkus") version "1.4.0.Final"
+        id("io.quarkus") version "1.4.1.Final"
     }
 }
 
