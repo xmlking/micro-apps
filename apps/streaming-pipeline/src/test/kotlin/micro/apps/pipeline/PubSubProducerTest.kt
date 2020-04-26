@@ -35,10 +35,9 @@ class PubSubProducerTest : Serializable {
         val schema = Avro.default.schema(serializer)
 
         // sample data
-        val records: List<GenericRecord> = listOf(
-            Avro.default.toRecord(serializer, Person(firstName = "sumo1", lastName = "demo1", email = "sumo1@demo.com", phone = "0000000000", age = 99)),
-            Avro.default.toRecord(serializer, Person(firstName = "sumo2", lastName = "demo1", email = "sumo2@demo.com", phone = "1111111111", age = 99, valid = true))
-        )
+        val records: List<GenericRecord> = persons.map {
+            Avro.default.toRecord(serializer, it)
+        }
 
         val attributes = ImmutableMap.builder<String, String>()
             .put("timestamp", "")
@@ -48,7 +47,7 @@ class PubSubProducerTest : Serializable {
 
         pipeline.apply(Create.of(records).withCoder(AvroCoder.of(schema)))
             .apply(MapElements.via(AvroToPubsubMessage(attributes)))
-            .apply("Write Message to PubSub", PubsubIO.writeMessages().to("projects/my-project-id/topics/streaming-input"))
+            .apply("Write Message to PubSub", PubsubIO.writeMessages().to("projects/my-project-id/topics/classifier-input"))
 
         pipeline.run(options)
     }
@@ -62,7 +61,7 @@ class PubSubProducerTest : Serializable {
 
         pipeline.apply(AvroIO.readGenericRecords(schema).from("./src/test/resources/data/person.avro"))
             .apply(MapElements.via(AvroToPubsubMessage()))
-            .apply("Write Message to PubSub", PubsubIO.writeMessages().to("projects/my-project-id/topics/streaming-input"))
+            .apply("Write Message to PubSub", PubsubIO.writeMessages().to("projects/my-project-id/topics/classifier-input"))
 
         pipeline.run(options)
     }

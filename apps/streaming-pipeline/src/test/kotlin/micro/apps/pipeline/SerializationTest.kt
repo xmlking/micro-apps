@@ -4,21 +4,35 @@ import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
 import kotlin.test.Ignore
 import kotlin.test.Test
+import micro.apps.model.Address
+import micro.apps.model.Gender
+import micro.apps.model.Name
 import micro.apps.model.Person
 
-class SerializationTest {
-    val person1 = Person(firstName = "sumo1", lastName = "demo1", email = "sumo1@demo.com", phone = "0000000000", age = 99)
-    val person2 = Person(firstName = "sumo2", lastName = "demo1", email = "sumo2@demo.com", phone = "1111111111", age = 99, valid = true)
+val persons = listOf(
+    Person(
+        name = Name(first = "sumo1", last = "demo1"),
+        address = Address(suite = "1234", street = "Wood Road", city = "Riverside", state = "California", code = "92505", country = "CA"),
+        gender = Gender.MALE, age = 99,
+        email = "sumo1@demo.com", phone = "0000000000"),
+    Person(
+        name = Name(first = "sumo2", last = "demo2"),
+        address = Address(suite = "4321", street = "Wood Road", city = "Riverside", state = "California", code = "92505", country = "CA"),
+        gender = Gender.FEMALE, age = 99,
+        email = "sumo2@demo.com", phone = "1111111111")
+)
 
+class SerializationTest {
     @Test @Ignore
     fun testAvroSerialization_WriteData() {
         val serializer = Person.serializer()
         val schema = Avro.default.schema(serializer)
+        println(schema)
         val output = Avro.default.openOutputStream(serializer) {
             format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
             this.schema = schema
         }.to("./src/test/resources/data/person.avro")
-        output.write(listOf(person1, person2))
+        output.write(persons)
         output.close()
     }
 

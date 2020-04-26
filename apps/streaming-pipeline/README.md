@@ -17,24 +17,26 @@ Streaming pipeline demo.
 
 ```bash
 export PROJECT_ID=my-project-id
-export PIPELINE_NAME=streaming
+export PIPELINE_NAME=classifier
 
 gcloud beta emulators pubsub start --project=${PROJECT_ID} --host-port=localhost:8085
 
 # export PUBSUB_EMULATOR_HOST before using emulator pubsub
 export PROJECT_ID=my-project-id
-export PIPELINE_NAME=streaming
+export PIPELINE_NAME=classifier
 export PUBSUB_EMULATOR_HOST=http://localhost:8085
 
 # Create Topic every time you restart pubsub emulator
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
 
-# Create subscription (optional)
-curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-subscription \
+# Create subscription
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input \
+-H "Content-Type: application/json" \
 -d '{
-  "topic": "projects/my-project-id/topics/streaming-input"
-}'
+"topic": "'"projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input"'"
+}' 
+
 
 # List Topics (optional)
 curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics
@@ -45,14 +47,16 @@ curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions
 #### Run Job
 
 ```bash
-gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --windowDuration=100s  --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
+gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project==${PROJECT_ID} --windowDuration=100s  --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
 
+# or via jar
 java -jar -Dflogger.level=INFO \
 ./apps/wordcount/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
 --runner=DirectRunner \
+--project==${PROJECT_ID} \
 --windowDuration=300s \
 --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} \
---inputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input \
+--inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input \
 --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
 ```
 

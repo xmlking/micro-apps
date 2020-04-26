@@ -40,7 +40,7 @@ java {
 }
 
 application {
-    mainClassName = "micro.apps.pipeline.StreamingPipeline"
+    mainClassName = "micro.apps.pipeline.ClassifierPipeline"
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
     applicationDefaultJvmArgs = listOf("-Dflogger.level=CONFIG")
 }
