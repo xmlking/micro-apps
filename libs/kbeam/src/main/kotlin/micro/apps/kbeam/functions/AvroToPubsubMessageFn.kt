@@ -27,3 +27,8 @@ class AvroToPubsubMessageFn(val attributes: Map<String, String> = ImmutableMap.o
         }
     }
 }
+class PubsubMessageToSpecificFn<T>() : SimpleFunction<PubsubMessage, T>() {
+    override fun apply(input: PubsubMessage): T {
+        TODO()
+    }
+}
