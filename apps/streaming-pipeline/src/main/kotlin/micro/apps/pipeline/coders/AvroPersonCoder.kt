@@ -5,13 +5,8 @@ import com.sksamuel.avro4k.io.AvroFormat
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
-import micro.apps.model.Address
-import micro.apps.model.Gender
-import micro.apps.model.Name
 import micro.apps.model.Person
 import org.apache.beam.sdk.coders.CustomCoder
-import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
-import org.apache.beam.sdk.transforms.SimpleFunction
 
 /*
 interface KSerializable<T> {
@@ -57,16 +52,5 @@ class AvroPersonCoder : CustomCoder<Person>() {
             format = AvroFormat.BinaryFormat
             writerSchema = personSchema
         }.from(inStream).nextOrThrow()
-    }
-}
-
-class PubsubMessageToPersonFn() : SimpleFunction<PubsubMessage, Person>() {
-    override fun apply(input: PubsubMessage): Person {
-
-        return Person(
-            name = Name(first = "sumo1", last = "demo1"),
-            address = Address(suite = "1234", street = "Wood Road", city = "Riverside", state = "California", code = "92505", country = "CA"),
-            gender = Gender.MALE, age = 99,
-            email = "sumo1@demo.com", phone = "0000000000")
     }
 }

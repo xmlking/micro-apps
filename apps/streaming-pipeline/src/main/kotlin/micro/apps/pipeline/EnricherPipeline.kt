@@ -79,6 +79,8 @@ object EnricherPipeline {
             }
 
         input
+            // convert GenericRecord to PubsubMessage
+            // .apply(MapElements.via(PersonToPubsubMessageFn()))
             // write back to PubSub
             .apply("Write PubSub Events", PubsubIO.writeMessages().to(options.outputTopic))
 
