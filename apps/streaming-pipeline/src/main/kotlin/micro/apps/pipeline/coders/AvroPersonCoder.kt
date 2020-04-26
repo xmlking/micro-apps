@@ -41,11 +41,13 @@ class Avro4Coder<T> : CustomCoder<T>() where T : KSerializable<T> {
 
 class AvroPersonCoder : CustomCoder<Person>() {
     private val serializer = Person.serializer()
+    private val personSchema = Avro.default.schema(Person.serializer())
 
     @Throws(IOException::class)
     override fun encode(value: Person, outStream: OutputStream) {
         Avro.default.openOutputStream(serializer) {
             format = AvroFormat.BinaryFormat
+            this.schema = personSchema
         }.to(outStream).write(value).close()
     }
 
@@ -53,7 +55,7 @@ class AvroPersonCoder : CustomCoder<Person>() {
     override fun decode(inStream: InputStream): Person {
         return Avro.default.openInputStream(serializer) {
             format = AvroFormat.BinaryFormat
-            writerSchema = Avro.default.schema(Person.serializer())
+            writerSchema = personSchema
         }.from(inStream).nextOrThrow()
     }
 }
