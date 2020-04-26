@@ -27,7 +27,7 @@ gcloud beta emulators pubsub start --project=${PROJECT_ID} --host-port=localhost
 > publish sample data into `PubSub` Emulator for testing
 
 ```bash
-# @Ignore is uncommented in `PubSubProducerTest.kt`
+# make sure @Ignore is uncommented in `PubSubProducerTest.kt`
 gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.PubSubProducerTest.generateTestData"
 ```
 
@@ -108,7 +108,7 @@ gradle :apps:streaming-pipeline:clean
 gradle :apps:streaming-pipeline:build
 ```
 
-## Setting PubSub topics
+### Setting PubSub topics
 
 > you can generate topics and subscription for Emulator via REST API
 
