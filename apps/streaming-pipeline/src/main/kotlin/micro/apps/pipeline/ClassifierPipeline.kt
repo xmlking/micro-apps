@@ -5,7 +5,7 @@ import com.google.common.flogger.FluentLogger
 import com.google.common.flogger.MetadataKey.single
 import micro.apps.core.LogDefinition.Companion.config
 import micro.apps.kbeam.PipeBuilder
-import micro.apps.kbeam.coder.AvroToPubsubMessage
+import micro.apps.kbeam.functions.AvroToPubsubMessageFn
 import micro.apps.kbeam.parDo
 import micro.apps.kbeam.split
 import micro.apps.kbeam.toList
@@ -97,7 +97,7 @@ object ClassifierPipeline {
 
         input
             // convert GenericRecord to PubsubMessage
-            .apply(MapElements.via(AvroToPubsubMessage()))
+            .apply(MapElements.via(AvroToPubsubMessageFn()))
             // write back to PubSub
             .apply("Write PubSub Events", PubsubIO.writeMessages().to(options.outputTopic))
 

@@ -4,7 +4,7 @@ Streaming pipeline demo.
 
 ## Prerequisites
 
-1. Google PubSub
+1. Google PubSub [Emulator](https://cloud.google.com/pubsub/docs/emulator) 
     ```bash
     gcloud components install pubsub-emulator
     ```
@@ -20,33 +20,24 @@ export PROJECT_ID=my-project-id
 export PIPELINE_NAME=classifier
 
 gcloud beta emulators pubsub start --project=${PROJECT_ID} --host-port=localhost:8085
-
-# export PUBSUB_EMULATOR_HOST before using emulator pubsub
-export PROJECT_ID=my-project-id
-export PIPELINE_NAME=classifier
-export PUBSUB_EMULATOR_HOST=http://localhost:8085
-
-# Create Topic every time you restart pubsub emulator
-curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input
-curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
-
-# Create subscription
-curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input \
--H "Content-Type: application/json" \
--d '{
-"topic": "'"projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input"'"
-}' 
-
-
-# List Topics (optional)
-curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics
-# List Subscriptions (optional)
-curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions
 ```
 
 #### Run Job
 
+> publish sample data into `PubSub` Emulator for testing
+
 ```bash
+# @Ignore is uncommented in `PubSubProducerTest.kt`
+gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.PubSubProducerTest.generateTestData"
+```
+
+> run subscription job
+
+```bash
+export PROJECT_ID=my-project-id
+export PIPELINE_NAME=classifier
+export PUBSUB_EMULATOR_HOST=http://localhost:8085
+
 gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project==${PROJECT_ID} --windowDuration=100s  --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
 
 # or via jar
@@ -60,10 +51,6 @@ java -jar -Dflogger.level=INFO \
 --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
 ```
 
-> publish sample data into `PubSub` Emulator for testing
-```bash
-gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.PubSubProducerTest.generateTestData"
-```
 
 ### Cloud Run  
 ```bash
@@ -121,6 +108,35 @@ gradle :apps:streaming-pipeline:clean
 gradle :apps:streaming-pipeline:build
 ```
 
+## Setting PubSub topics
+
+> you can generate topics and subscription for Emulator via REST API
+
+```bash
+export PROJECT_ID=my-project-id
+export PIPELINE_NAME=classifier
+export PUBSUB_EMULATOR_HOST=http://localhost:8085
+
+# Create Topics and Subscriptions every time you restart pubsub emulator 
+# if you run `generateTestData` test, it will also generate below topics.
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
+
+# Create subscription
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input \
+-H "Content-Type: application/json" \
+-d '{
+"topic": "'"projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input"'"
+}' 
+
+# List Topics (optional)
+curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics
+# List Subscriptions (optional)
+curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions
+``` 
+
 ## TODO
 
 - https://beam.apache.org/documentation/sdks/java/euphoria/
+- [Batched RPC](https://beam.apache.org/blog/2017/08/28/timely-processing.html)
+- E2E tests with PutSub <https://github.com/stevenextwave/beam/blob/master/src/test/java/org/apache/beam/examples/test/EndToEndTest.java>

@@ -30,6 +30,7 @@ dependencies {
 
     runtimeOnly("com.google.flogger:flogger-slf4j-backend:$floggerVersion")
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+    testImplementation("com.google.cloud:google-cloud-pubsub:1.105.0")
 }
 
 java {

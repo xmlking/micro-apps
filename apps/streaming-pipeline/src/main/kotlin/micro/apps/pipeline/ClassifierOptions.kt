@@ -1,12 +1,13 @@
 package micro.apps.pipeline
 
 /* ktlint-disable no-wildcard-imports */
+import org.apache.beam.runners.direct.DirectOptions
 import org.apache.beam.sdk.extensions.gcp.options.GcpOptions
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubOptions
 import org.apache.beam.sdk.options.*
 /* ktlint-enable no-wildcard-imports */
 
-interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, StreamingOptions, PubsubOptions, GcpOptions {
+interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, StreamingOptions, PubsubOptions, GcpOptions, DirectOptions {
 
     @get:Description("""The Cloud Pub/Sub subscription to read from.
         The name should be in the format of projects/<project-id>/subscriptions/<subscriptions-name>.""")
