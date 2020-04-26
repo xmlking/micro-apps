@@ -1,4 +1,4 @@
-package micro.apps.kbeam.coder
+package micro.apps.kbeam.functions
 
 import com.google.common.collect.ImmutableMap
 import java.io.ByteArrayOutputStream
@@ -11,7 +11,7 @@ import org.apache.avro.io.EncoderFactory
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
 import org.apache.beam.sdk.transforms.SimpleFunction
 
-class AvroToPubsubMessage(val attributes: Map<String, String> = ImmutableMap.of()) : SimpleFunction<IndexedRecord, PubsubMessage>() {
+class AvroToPubsubMessageFn(val attributes: Map<String, String> = ImmutableMap.of()) : SimpleFunction<IndexedRecord, PubsubMessage>() {
     override fun apply(input: IndexedRecord): PubsubMessage {
         return try {
             val datumWriter: DatumWriter<IndexedRecord> = GenericDatumWriter(input.getSchema())
