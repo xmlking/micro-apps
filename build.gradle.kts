@@ -237,6 +237,7 @@ subprojects {
             }
 
             test {
+                maxParallelForks = Runtime.getRuntime().availableProcessors()
                 testLogging {
                     showExceptions = true
                     showStandardStreams = true
