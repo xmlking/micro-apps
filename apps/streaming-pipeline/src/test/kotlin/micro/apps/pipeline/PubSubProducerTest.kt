@@ -62,7 +62,7 @@ class PubSubProducerTest : Serializable {
         println("cleaning...")
     }
 
-    @Test // @Ignore // TODO: remove @Ignore to use it
+    @Test @Ignore // TODO: remove @Ignore to use it
     fun generateTestData() {
         val serializer = Person.serializer()
         val schema = Avro.default.schema(serializer)
