@@ -5,7 +5,9 @@ import com.google.api.core.ApiFutures
 import com.google.api.gax.core.CredentialsProvider
 import com.google.api.gax.core.NoCredentialsProvider
 import com.google.api.gax.grpc.GrpcTransportChannel
+import com.google.api.gax.rpc.ApiException
 import com.google.api.gax.rpc.FixedTransportChannelProvider
+import com.google.api.gax.rpc.StatusCode.Code.NOT_FOUND
 import com.google.api.gax.rpc.TransportChannelProvider
 import com.google.cloud.pubsub.v1.Publisher
 import com.google.cloud.pubsub.v1.SubscriptionAdminClient
@@ -60,8 +62,19 @@ class Helper(var host: String, var projectId: String) {
 
     fun getTopic(topicName: String): Topic? {
         val projectTopicName = TopicName.of(projectId, topicName)
-        return topicAdminClient.getTopic(projectTopicName)
+        var topic: Topic? = null
+        try {
+            topic = topicAdminClient.getTopic(projectTopicName)
+        } catch (e: ApiException) {
+            if (e.statusCode.code == NOT_FOUND) {
+                println("topic already created")
+            }
+        } catch (e: Exception) {
+            println(e.message)
+        }
+        return topic
     }
+    
     fun hasTopic(topicName: String): Boolean {
         return null != getTopic(topicName)
     }
