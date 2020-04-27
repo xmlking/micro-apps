@@ -74,7 +74,7 @@ class Helper(var host: String, var projectId: String) {
         }
         return topic
     }
-    
+
     fun hasTopic(topicName: String): Boolean {
         return null != getTopic(topicName)
     }
