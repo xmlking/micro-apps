@@ -53,8 +53,6 @@ class PubSubProducerTest : Serializable {
         if (!helper.hasTopic(inputTopicName)) {
             helper.createTopic(inputTopicName)
             helper.createSubscription(inputTopicName, subscriptionName)
-        } else {
-            println("topic is there")
         }
     }
 
