@@ -28,7 +28,7 @@ gcloud beta emulators pubsub start --project=${PROJECT_ID} --host-port=localhost
 
 ```bash
 # make sure @Ignore is uncommented in `PubSubProducerTest.kt`
-gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.PubSubProducerTest.generateTestData"
+gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.KeyingPipelineTest.generateTestData"
 ```
 
 > run subscription job
@@ -38,11 +38,12 @@ export PROJECT_ID=my-project-id
 export PIPELINE_NAME=classifier
 export PUBSUB_EMULATOR_HOST=http://localhost:8085
 
-gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project==${PROJECT_ID} --windowDuration=100s  --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
+gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project=${PROJECT_ID} --jobName=${PIPELINE_NAME} --pubsubRootUrl=${PUBSUB_EMULATOR_HOST}"
+gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project=${PROJECT_ID} --jobName=${PIPELINE_NAME} --windowDuration=100s  --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
 
 # or via jar
 java -jar -Dflogger.level=INFO \
-./apps/wordcount/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
+./apps/streaming/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
 --runner=DirectRunner \
 --project==${PROJECT_ID} \
 --windowDuration=300s \
@@ -61,7 +62,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=<full-path-to-your-json>
 gradle -Dflogger.level=ALL  :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation==gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ --inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt --output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt"
 
 # Or with fatJar
-java -jar ./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
+java -jar ./apps/streaming/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
 --runner=DataflowRunner \
 --windowDuration=2m \
 --numShards=1 \
