@@ -5,6 +5,7 @@ import org.apache.beam.runners.direct.DirectOptions
 import org.apache.beam.sdk.extensions.gcp.options.GcpOptions
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubOptions
 import org.apache.beam.sdk.options.*
+
 /* ktlint-enable no-wildcard-imports */
 
 interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, StreamingOptions, PubsubOptions, GcpOptions, DirectOptions {
@@ -17,13 +18,13 @@ interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, Streaming
 
     @get:Description("""The Cloud Pub/Sub topic to read from.
         The name should be in the format of projects/<project-id>/topics/<topic-name>.""")
-    @get:Default.String("projects/my-project-id/topics/classifier-input")
+    @get:Default.InstanceFactory(PubsubTopicFactoryInput::class)
     @get:Validation.Required
     var inputTopic: ValueProvider<String>
 
     @get:Description("""The Cloud Pub/Sub topic to publish to.
         The name should be in the format of projects/<project-id>/topics/<topic-name>.""")
-    @get:Default.InstanceFactory(PubsubTopicFactory::class)
+    @get:Default.InstanceFactory(PubsubTopicFactoryOutput::class)
     @get:Validation.Required
     var outputTopic: ValueProvider<String>
 
@@ -42,17 +43,27 @@ interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, Streaming
                 projects/
                 ${(options as GcpOptions).project}
                 /subscriptions/
-                ${options.jobName}
+                ${options.jobName}-input
             """.trimIndent()
     }
 
     /** Returns a default Pub/Sub topic based on the project and the job names.  */
-    class PubsubTopicFactory : DefaultValueFactory<String> {
+    class PubsubTopicFactoryInput : DefaultValueFactory<String> {
         override fun create(options: PipelineOptions) = """
                 projects/"
                     ${(options as GcpOptions).project}
                     /topics/
-                    ${options.jobName}
+                    ${options.jobName}-input
+            """.trimIndent()
+    }
+
+    /** Returns a default Pub/Sub topic based on the project and the job names.  */
+    class PubsubTopicFactoryOutput : DefaultValueFactory<String> {
+        override fun create(options: PipelineOptions) = """
+                projects/"
+                    ${(options as GcpOptions).project}
+                    /topics/
+                    ${options.jobName}-output
             """.trimIndent()
     }
 }
