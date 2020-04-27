@@ -39,31 +39,16 @@ interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, Streaming
 
     /** Returns a default Pub/Sub subscription based on the project and the job names.  */
     class PubsubSubscriptionFactory : DefaultValueFactory<String> {
-        override fun create(options: PipelineOptions) = """
-                projects/
-                ${(options as GcpOptions).project}
-                /subscriptions/
-                ${options.jobName}-input
-            """.trimIndent()
+        override fun create(options: PipelineOptions) = """projects/${(options as GcpOptions).project}/subscriptions/${options.jobName}-input""".trimIndent()
     }
 
     /** Returns a default Pub/Sub topic based on the project and the job names.  */
     class PubsubTopicFactoryInput : DefaultValueFactory<String> {
-        override fun create(options: PipelineOptions) = """
-                projects/"
-                    ${(options as GcpOptions).project}
-                    /topics/
-                    ${options.jobName}-input
-            """.trimIndent()
+        override fun create(options: PipelineOptions) = """projects/${(options as GcpOptions).project}/topics/${options.jobName}-input""".trimIndent()
     }
 
     /** Returns a default Pub/Sub topic based on the project and the job names.  */
     class PubsubTopicFactoryOutput : DefaultValueFactory<String> {
-        override fun create(options: PipelineOptions) = """
-                projects/"
-                    ${(options as GcpOptions).project}
-                    /topics/
-                    ${options.jobName}-output
-            """.trimIndent()
+        override fun create(options: PipelineOptions) = """projects/${(options as GcpOptions).project}/topics/${options.jobName}-output""".trimIndent()
     }
 }
