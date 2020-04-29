@@ -237,7 +237,7 @@ subprojects {
             }
 
             test {
-                maxParallelForks = Runtime.getRuntime().availableProcessors()
+                // maxParallelForks = Runtime.getRuntime().availableProcessors() // FIXME: port conflict for quarkus
                 testLogging {
                     showExceptions = true
                     showStandardStreams = true
