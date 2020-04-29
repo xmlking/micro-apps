@@ -9,6 +9,7 @@ val hamcrestVersion: String by project
 val floggerVersion: String by project
 val kotlinSerializationVersion: String by project
 val avro4kVersion: String by project
+val konfigVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -27,6 +28,9 @@ dependencies {
     implementation("com.sksamuel.avro4k:avro4k-core:$avro4kVersion") // Avro serialization
     // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion") // kryo serialization
     // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
+
+    // Kotlin Config
+    implementation("com.uchuhimo:konf:$konfigVersion")
 
     runtimeOnly("com.google.flogger:flogger-slf4j-backend:$floggerVersion")
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")

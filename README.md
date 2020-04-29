@@ -13,6 +13,7 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 1. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images with [Jib](https://github.com/GoogleContainerTools/jib)
 1. Build native binaries using [GraalVM](https://www.graalvm.org/)
 1. Cloud Native (Service Mesh, health checks, observability)
+1. A type-safe cascading configuration with [konf](https://github.com/uchuhimo/konf)
 
 [![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
 [![Version](https://img.shields.io/github/v/tag/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/tags)
