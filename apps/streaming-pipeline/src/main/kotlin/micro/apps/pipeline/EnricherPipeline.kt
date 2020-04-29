@@ -36,24 +36,18 @@ object EnricherPipeline {
 
         val (pipe, options) = PipeBuilder.from<ClassifierOptions>(args)
         options.isStreaming = true
-        // set `pubsubRootUrl` via CLI args for development
-        // options.pubsubRootUrl = "http://localhost:8085"
 
         logger.atInfo()
             .with(single("Runner", String::class.java), options.runner.name)
             .with(single("JobName", String::class.java), options.jobName)
+            .with(single("windowDuration", String::class.java), options.windowDuration)
+            .with(single("pubsubRootUrl", String::class.java), options.pubsubRootUrl)
             .log("Started job with:")
 
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
-        // create dummy `keys` to use as `side input` for decryption
+        // load dummy `keys` to use as `side input` for decryption
         val keys = pipe.apply(Create.of(listOf("aaa", "bbb"))).toList()
-
-        logger.atInfo()
-            .with(single("schema", Schema::class.java), schema)
-            .with(single("windowDuration", String::class.java), options.windowDuration)
-            .with(single("pubsubRootUrl", String::class.java), options.pubsubRootUrl)
-            .log()
 
         val input = pipe
             .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))
@@ -63,6 +57,8 @@ object EnricherPipeline {
                 .triggering(AfterWatermark.pastEndOfWindow())
                 .discardingFiredPanes()
                 .withAllowedLateness(Duration.standardSeconds(300)))
+
+            // .apply("convert PubSub to GenericRecord", MapElements.via(PubsubToAvro(schema))).setCoder(AvroCoder.of(schema))
 
             // decrypting and enrich record
             .parDo<PubsubMessage, PubsubMessage>(
@@ -80,7 +76,7 @@ object EnricherPipeline {
 
         input
             // convert GenericRecord to PubsubMessage
-            // .apply(MapElements.via(PersonToPubsubMessageFn()))
+            // .apply(MapElements.via(PersonToPubsub()))
             // write back to PubSub
             .apply("Write PubSub Events", PubsubIO.writeMessages().to(options.outputTopic))
 

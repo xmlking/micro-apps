@@ -7,7 +7,7 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Ignore
 import kotlin.test.Test
-import micro.apps.kbeam.functions.AvroToPubsubMessageFn
+import micro.apps.kbeam.functions.AvroToPubsub
 import micro.apps.model.Person
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
@@ -79,7 +79,7 @@ class PubSubProducerTest : Serializable {
             .build() // Collections.emptyMap()
 
         pipeline.apply(Create.of(records).withCoder(AvroCoder.of(schema)))
-            .apply(MapElements.via(AvroToPubsubMessageFn(attributes)))
+            .apply(MapElements.via(AvroToPubsub(attributes)))
             .apply("Write Message to PubSub", PubsubIO.writeMessages().to(testOptions.inputTopic))
 
         pipeline.run(testOptions)
@@ -90,7 +90,7 @@ class PubSubProducerTest : Serializable {
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
         pipeline.apply(AvroIO.readGenericRecords(schema).from("./src/test/resources/data/person.avro"))
-            .apply(MapElements.via(AvroToPubsubMessageFn()))
+            .apply(MapElements.via(AvroToPubsub()))
             .apply("Write Message to PubSub", PubsubIO.writeMessages().to(testOptions.inputTopic))
 
         pipeline.run(testOptions)

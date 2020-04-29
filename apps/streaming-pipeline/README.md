@@ -28,7 +28,7 @@ gcloud beta emulators pubsub start --project=${PROJECT_ID} --host-port=localhost
 
 ```bash
 # make sure @Ignore is uncommented in `PubSubProducerTest.kt`
-gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.KeyingPipelineTest.generateTestData"
+gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.PubSubProducerTest.generateTestData"
 ```
 
 > run subscription job
