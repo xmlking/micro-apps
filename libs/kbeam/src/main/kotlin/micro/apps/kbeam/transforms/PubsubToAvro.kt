@@ -1,4 +1,4 @@
-package micro.apps.kbeam.functions
+package micro.apps.kbeam.transforms
 
 /* ktlint-disable no-wildcard-imports */
 import com.google.common.collect.ImmutableMap

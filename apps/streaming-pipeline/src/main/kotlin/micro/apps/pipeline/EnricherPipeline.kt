@@ -57,8 +57,14 @@ object EnricherPipeline {
                 .triggering(AfterWatermark.pastEndOfWindow())
                 .discardingFiredPanes()
                 .withAllowedLateness(Duration.standardSeconds(300)))
+            /*
+            .apply("convert PubSub to Person", MapElements.via(PubsubToPerson())).setCoder(AvroPersonCoder())
 
-            // .apply("convert PubSub to GenericRecord", MapElements.via(PubsubToAvro(schema))).setCoder(AvroCoder.of(schema))
+            .parDo<Person, Person>("decrypt and enrich record") {
+                println(element)
+                element
+            }
+            */
 
             // decrypting and enrich record
             .parDo<PubsubMessage, PubsubMessage>(

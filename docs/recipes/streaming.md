@@ -9,7 +9,7 @@ import com.google.common.flogger.MetadataKey.single
 import com.sksamuel.avro4k.Avro
 import micro.apps.core.LogDefinition.Companion.config
 import micro.apps.kbeam.*
-import micro.apps.kbeam.coder.AvroToPubsubMessage
+import micro.apps.kbeam.coders.AvroToPubsub
 import micro.apps.model.Person
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord

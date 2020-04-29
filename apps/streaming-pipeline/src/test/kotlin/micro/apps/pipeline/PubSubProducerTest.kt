@@ -7,7 +7,7 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Ignore
 import kotlin.test.Test
-import micro.apps.kbeam.functions.AvroToPubsub
+import micro.apps.kbeam.transforms.AvroToPubsub
 import micro.apps.model.Person
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord

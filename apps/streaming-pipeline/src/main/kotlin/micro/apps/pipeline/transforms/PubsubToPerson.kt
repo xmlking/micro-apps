@@ -1,4 +1,4 @@
-package micro.apps.pipeline.functions
+package micro.apps.pipeline.transforms
 
 import com.google.common.collect.ImmutableMap
 import com.sksamuel.avro4k.Avro

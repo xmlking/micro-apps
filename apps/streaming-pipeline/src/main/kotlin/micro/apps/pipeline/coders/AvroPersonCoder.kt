@@ -8,34 +8,10 @@ import java.io.OutputStream
 import micro.apps.model.Person
 import org.apache.beam.sdk.coders.CustomCoder
 
-/*
-interface KSerializable<T> {
-    fun serializer(): KSerializer<T>
-}
-
-class Avro4Coder<T> : CustomCoder<T>() where T : KSerializable<T> {
-    @Throws(IOException::class)
-    override fun encode(value: T, outStream: OutputStream) {
-       @Suppress("UNCHECKED_CAST")
-       // val  serializer = value::class.serializer() as KSerializer<Any>
-       val  serializer = value.serializer()
-        Avro.default.openOutputStream(serializer) {
-            format = AvroFormat.DataFormat
-        }.to(outStream).write(value).close()
-    }
-
-    @Throws(IOException::class)
-    override fun decode(inStream: InputStream): T {
-        val  serializer = value.serializer() // value::class.java.serializer()
-        Avro.default.openInputStream(deserializer) {
-            format = AvroFormat.DataFormat
-        }.from(inStream).nextOrThrow()
-    }
-}
-*/
-
 class AvroPersonCoder : CustomCoder<Person>() {
+    @Transient
     private val serializer = Person.serializer()
+    @Transient
     private val personSchema = Avro.default.schema(Person.serializer())
 
     @Throws(IOException::class)

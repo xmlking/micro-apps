@@ -1,4 +1,4 @@
-package micro.apps.kbeam.coder
+package micro.apps.kbeam.coders
 
 // import org.apache.beam.sdk.extensions.kryo.KryoCoderProvider
 

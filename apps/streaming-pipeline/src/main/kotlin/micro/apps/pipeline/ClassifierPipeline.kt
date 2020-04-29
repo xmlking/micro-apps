@@ -5,11 +5,11 @@ import com.google.common.flogger.FluentLogger
 import com.google.common.flogger.MetadataKey.single
 import micro.apps.core.LogDefinition.Companion.config
 import micro.apps.kbeam.PipeBuilder
-import micro.apps.kbeam.functions.AvroToPubsub
-import micro.apps.kbeam.functions.PubsubToAvro
 import micro.apps.kbeam.parDo
 import micro.apps.kbeam.split
 import micro.apps.kbeam.toList
+import micro.apps.kbeam.transforms.AvroToPubsub
+import micro.apps.kbeam.transforms.PubsubToAvro
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import org.apache.beam.runners.dataflow.util.TimeUtil
