@@ -10,9 +10,7 @@ import micro.apps.kbeam.PipeBuilder
 import micro.apps.kbeam.parDo
 import micro.apps.kbeam.toList
 import micro.apps.model.Person
-import micro.apps.pipeline.config.EndpointConfig
-import micro.apps.pipeline.config.TlsConfig
-import micro.apps.pipeline.config.config
+import micro.apps.pipeline.config.*
 import org.apache.avro.Schema
 import org.apache.beam.runners.dataflow.util.TimeUtil
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO
@@ -39,7 +37,7 @@ object EnricherPipeline {
 
         val (pipe, options) = PipeBuilder.from<ClassifierOptions>(args)
         options.isStreaming = true
-        
+
         println(config[TLS.caCert])
         println(config<String>("endpoints.account"))
         println("server.host" in config)
