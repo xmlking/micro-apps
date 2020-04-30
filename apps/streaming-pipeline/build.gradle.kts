@@ -6,7 +6,6 @@ val kotlinVersion: String by project
 val beamVersion: String by project
 val csvVersion: String by project
 val hamcrestVersion: String by project
-val floggerVersion: String by project
 val kotlinSerializationVersion: String by project
 val avro4kVersion: String by project
 val konfigVersion: String by project
@@ -32,7 +31,6 @@ dependencies {
     // Kotlin Config
     implementation("com.uchuhimo:konf:$konfigVersion")
 
-    runtimeOnly("com.google.flogger:flogger-slf4j-backend:$floggerVersion")
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testImplementation("com.google.cloud:google-cloud-pubsub:1.105.0")
 }

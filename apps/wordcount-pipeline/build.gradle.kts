@@ -16,7 +16,6 @@ dependencies {
     // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion")
     // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
 
-    runtimeOnly("com.google.flogger:flogger-slf4j-backend:$floggerVersion")
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
 }
 

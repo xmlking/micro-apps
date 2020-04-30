@@ -15,6 +15,8 @@ val gcloudProject: String by project
 val baseDockerImage: String by project
 val ktlintVersion: String by project
 val mockkVersion: String by project
+val slf4jVersion: String by project
+val kotlinLoggingVersion: String by project
 
 val excludedProjects = setOf("apps", "libs")
 
@@ -164,8 +166,10 @@ subprojects {
             testImplementation("io.mockk:mockk:$mockkVersion")
 
             // Logging
-            implementation("com.google.flogger:flogger:$floggerVersion")
+            implementation("com.google.flogger:flogger:$floggerVersion") // TODO remove
             runtimeOnly("com.google.flogger:flogger-system-backend:$floggerVersion")
+            implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
+            runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
         }
 
         java {
