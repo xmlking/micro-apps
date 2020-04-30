@@ -9,16 +9,17 @@ import com.uchuhimo.konf.source.yaml
 
 val config by lazy {
     Config {
-        addSpec(TlsConfig)
-        addSpec(EndpointConfig)
+        addSpec(TLS)
+        addSpec(Endpoints)
+        addSpec(Cloud)
     }
         .from.yaml.resource("config.yaml")
-        .from.yaml.resource("config.dev.yaml", true)
+        .from.yaml.resource("config.prod.yaml", true)
         .from.env()
         .from.systemProperties()
 }
 
-object TlsConfig : ConfigSpec("certs") {
+object TLS : ConfigSpec("certs") {
     val serverKey by optional("certs/server-key.pem")
     val serverCert by optional("certs/server-cert.pem")
 
@@ -32,13 +33,13 @@ object TlsConfig : ConfigSpec("certs") {
     val upstreamCaCert by optional("certs/upstream-ca-cert.pem")
 }
 
-object EndpointConfig : ConfigSpec("endpoints") {
+object Endpoints : ConfigSpec("endpoints") {
     val account by optional("http://localhost:8080")
-    val echo by optional("http://localhost:8081", description = "endpoints of echo")
+    val echo by required<String>(description = "endpoints of echo")
 }
 
-object CloudConfig : ConfigSpec() {
-    object DataflowConfig : ConfigSpec() {
-        val user by optional("admin")
+object Cloud : ConfigSpec() {
+    object Dataflow : ConfigSpec() {
+        val windowDuration by optional("300s")
     }
 }
