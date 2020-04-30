@@ -2,7 +2,6 @@ val kotlinVersion: String by project
 val beamVersion: String by project
 val csvVersion: String by project
 val hamcrestVersion: String by project
-val floggerVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -29,5 +28,4 @@ java {
 application {
     mainClassName = "micro.apps.pipeline.WordCountPipeline"
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
-    applicationDefaultJvmArgs = listOf("-Dflogger.level=INFO")
 }

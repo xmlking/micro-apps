@@ -42,8 +42,7 @@ gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project=${PR
 gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project=${PROJECT_ID} --jobName=${PIPELINE_NAME} --windowDuration=100s  --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
 
 # or via jar
-java -jar -Dflogger.level=INFO \
-./apps/streaming/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
+java -jar ./apps/streaming/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
 --runner=DirectRunner \
 --project==${PROJECT_ID} \
 --windowDuration=300s \
@@ -59,7 +58,7 @@ PROJECT_ID=<my-project-id>
 PIPELINE_NAME=streaming
 export GOOGLE_APPLICATION_CREDENTIALS=<full-path-to-your-json>
 
-gradle -Dflogger.level=ALL  :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation==gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ --inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt --output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt"
+gradle :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation==gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ --inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt --output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt"
 
 # Or with fatJar
 java -jar ./apps/streaming/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \

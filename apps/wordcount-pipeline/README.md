@@ -8,8 +8,7 @@ WordCount pipeline demo.
 ```bash
 gradle :apps:wordcount-pipeline:run --args="--runner=DirectRunner --inputFile=./src/test/resources/data/input.txt --output=./build/output.txt"
 
-java -jar -Dflogger.level=INFO \
-./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
+java -jar ./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
 --runner=DirectRunner \
 --inputFile=./apps/wordcount/src/test/resources/data/input.txt \
 --output=./apps/wordcount/build/output.txt
@@ -21,7 +20,7 @@ PROJECT_ID=<my-project-id>
 PIPELINE_FOLDER=wordcount
 export GOOGLE_APPLICATION_CREDENTIALS=<full-path-to-your-json>
 
-gradle -Dflogger.level=ALL  :apps:wordcount-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation==gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ --inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt --output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt"
+gradle :apps:wordcount-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation==gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ --inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt --output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt"
 
 # Or with fatJar
 java -jar ./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \

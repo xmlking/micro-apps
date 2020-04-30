@@ -1,9 +1,8 @@
 package micro.apps.pipeline.transforms
 
-import com.google.common.flogger.FluentLogger
 import java.util.regex.Pattern
-import micro.apps.core.LogDefinition.Companion.config
 import micro.apps.model.Person
+import mu.KotlinLogging
 import org.apache.beam.sdk.metrics.Metrics
 import org.apache.beam.sdk.transforms.DoFn
 // import org.apache.beam.vendor.grpc.v1p26p0.io.grpc.ManagedChannel;
@@ -15,11 +14,9 @@ import org.apache.beam.sdk.transforms.DoFn
 // https://github.com/alexander-dev-hub/apache-beam/blob/master/runners/google-cloud-dataflow-java/worker/src/test/java/org/apache/beam/runners/dataflow/worker/StreamingDataflowWorkerTest.java
 // https://github.com/xsm110/Beam15.0/blob/master/sdks/java/harness/src/test/java/org/apache/beam/fn/harness/FnApiDoFnRunnerTest.java
 // https://github.com/alexander-dev-hub/apache-beam/blob/master/runners/google-cloud-dataflow-java/worker/src/test/java/org/apache/beam/runners/dataflow/worker/fn/data/BeamFnDataGrpcServiceTest.java
+
+private val logger = KotlinLogging.logger {}
 public class EnrichFn(pattern: String) : DoFn<Person, Person>() {
-    companion object {
-        @JvmStatic
-        private val logger: FluentLogger = FluentLogger.forEnclosingClass().config()
-    }
 
     private val filter: Pattern = Pattern.compile(pattern)
 
@@ -37,7 +34,7 @@ public class EnrichFn(pattern: String) : DoFn<Person, Person>() {
             c.output(inPerson.copy(email = "decrypted email"))
             enrichedPersons.inc()
         } catch (e: Exception) {
-            logger.atInfo().withCause(e).log("error  message...")
+            logger.error(e) { "error  message..." }
             failedPersons.inc()
         }
     }

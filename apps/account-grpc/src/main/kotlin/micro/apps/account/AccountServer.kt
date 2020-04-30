@@ -1,6 +1,5 @@
 package micro.apps.account
 
-import com.google.common.flogger.FluentLogger
 import io.grpc.Server
 import io.grpc.ServerBuilder
 import kotlinx.coroutines.delay
@@ -12,6 +11,7 @@ import micro.apps.proto.account.v1.GetResponse
 import micro.apps.proto.account.v1.SearchRequest
 import micro.apps.proto.account.v1.SearchResponse
 import micro.apps.proto.common.v1.Person
+import mu.KotlinLogging
 
 var person = with(Person.newBuilder()) {
     firstName = "sumo"
@@ -20,8 +20,7 @@ var person = with(Person.newBuilder()) {
     return@with build()
 }
 
-private val logger = FluentLogger.forEnclosingClass()
-
+private val logger = KotlinLogging.logger {}
 class AccountServer(val port: Int) {
     val server: Server = ServerBuilder
         .forPort(port)
@@ -30,7 +29,7 @@ class AccountServer(val port: Int) {
 
     fun start() {
         server.start()
-        logger.atInfo().log("Server started, listening on: %s", port)
+        logger.info { "Server started, listening on: $port" }
         Runtime.getRuntime().addShutdownHook(
             Thread {
                 logger.atInfo().log("*** shutting down gRPC server since JVM is shutting down")
