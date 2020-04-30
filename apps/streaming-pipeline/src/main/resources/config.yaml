@@ -1,8 +1,11 @@
 certs:
-  serverKey: certs/server-key.pem
-  serverCert: certs/server-cert.pem
-  clientKey: certs/client-key.pem
-  clientCert: certs/client-cert.pem
-  caCert: certs/ca-cert.pem
+    serverKey: certs/server-key.pem
+    serverCert: certs/server-cert.pem
+    clientKey: certs/client-key.pem
+    clientCert: certs/client-cert.pem
+    caCert: certs/ca-cert.pem
 endpoints:
-  account: http://localhost:8088
+    account: http://localhost:8088
+cloud:
+    dataflow:
+        windowDuration: 400s
