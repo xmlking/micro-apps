@@ -33,19 +33,17 @@ object ClassifierPipeline {
     @JvmStatic
     fun main(args: Array<String>) {
 
-        logger.info("My Args: $args")
+        logger.info { "My Args: ${args.contentToString()}" }
 
         val (pipe, options) = PipeBuilder.from<ClassifierOptions>(args)
         options.isStreaming = true
 
-        logger.info {
-            """"Started job with:
-                |Runner: ${options.runner.name}
-                |Job name: ${options.jobName}
-                |"windowDuration": ${options.windowDuration}
-                |"pubsubRootUrl": ${options.pubsubRootUrl}
-                |""".trimMargin()
-        }
+        logger.underlyingLogger.atInfo()
+            .addKeyValue("runner", options.runner.name)
+            .addKeyValue("jobName", options.jobName)
+            .addKeyValue("pubsubRootUrl", options.pubsubRootUrl)
+            .addKeyValue("windowDuration", options.windowDuration)
+            .log("Started job with:")
 
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 

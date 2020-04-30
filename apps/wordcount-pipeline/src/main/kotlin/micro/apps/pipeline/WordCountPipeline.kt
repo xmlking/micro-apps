@@ -30,15 +30,14 @@ object WordCountPipeline {
     @JvmStatic
     fun main(args: Array<String>) {
 
-        logger.info("My Args: $args")
+        logger.info { "My Args: ${args.contentToString()}" }
 
         val (pipe, options) = PipeBuilder.from<WordCountOptions>(args)
 
-        logger.info {
-            """Runner: ${options.runner.name}
-                |Job name: ${options.jobName}
-                |""".trimMargin()
-        }
+        logger.underlyingLogger.atInfo()
+            .addKeyValue("runner", options.runner.name)
+            .addKeyValue("jobName", options.jobName)
+            .log("Started job with:")
 
         pipe.readTextFile { filePattern = options.inputFile }
             .flatMap { it.split(Regex(TOKENIZER_PATTERN)).filter { it.isNotEmpty() }.toList() }

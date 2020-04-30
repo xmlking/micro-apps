@@ -8,7 +8,6 @@ import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 
 val kotlinVersion: String by project
-val floggerVersion: String by project
 val jacocoVersion: String by project
 val jacocoQualityGate: String by project
 val gcloudProject: String by project
@@ -165,9 +164,8 @@ subprojects {
             // Use Mockk mocking library
             testImplementation("io.mockk:mockk:$mockkVersion")
 
-            // Logging
-            implementation("com.google.flogger:flogger:$floggerVersion") // TODO remove
-            runtimeOnly("com.google.flogger:flogger-system-backend:$floggerVersion")
+            // Logging slf4jVersion=2.0.0-alpha1
+            implementation("org.slf4j:slf4j-api:$slf4jVersion")
             implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
             runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
         }
