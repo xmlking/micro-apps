@@ -35,7 +35,7 @@ interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, Streaming
                 Nm (for minutes, example: 12m),
                 Nh (for hours, example: 2h).")""")
     @get:Default.String("300s")
-    var windowDuration: String
+    var windowDuration: String?
 
     /** Returns a default Pub/Sub subscription based on the project and the job names.  */
     class PubsubSubscriptionFactory : DefaultValueFactory<String> {
