@@ -1,15 +1,13 @@
 package micro.apps.pipeline
 
 /* ktlint-disable no-wildcard-imports */
-import com.google.common.flogger.FluentLogger
-import com.google.common.flogger.MetadataKey.single
-import micro.apps.core.LogDefinition.Companion.config
 import micro.apps.kbeam.PipeBuilder
 import micro.apps.kbeam.parDo
 import micro.apps.kbeam.split
 import micro.apps.kbeam.toList
 import micro.apps.kbeam.transforms.AvroToPubsub
 import micro.apps.kbeam.transforms.PubsubToAvro
+import mu.KotlinLogging
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import org.apache.beam.runners.dataflow.util.TimeUtil
@@ -28,35 +26,31 @@ import org.joda.time.Duration
 /**
  * showcase side-input and split
  */
+private val logger = KotlinLogging.logger {}
+
 object ClassifierPipeline {
-    @JvmStatic
-    private val logger: FluentLogger = FluentLogger.forEnclosingClass().config()
 
     @JvmStatic
     fun main(args: Array<String>) {
 
-        logger.atConfig().log("My Args: %s", args)
+        logger.info("My Args: $args")
 
         val (pipe, options) = PipeBuilder.from<ClassifierOptions>(args)
         options.isStreaming = true
-        // set `pubsubRootUrl` via CLI args for development
-        // options.pubsubRootUrl = "http://localhost:8085"
 
-        logger.atInfo()
-            .with(single("Runner", String::class.java), options.runner.name)
-            .with(single("JobName", String::class.java), options.jobName)
-            .log("Started job with:")
+        logger.info {
+            """"Started job with:
+                |Runner: ${options.runner.name}
+                |Job name: ${options.jobName}
+                |"windowDuration": ${options.windowDuration}
+                |"pubsubRootUrl": ${options.pubsubRootUrl}
+                |""".trimMargin()
+        }
 
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
         // create dummy `keys` to use as `side input` for decryption
         val keys = pipe.apply(Create.of(listOf("aaa", "bbb"))).toList()
-
-        logger.atInfo()
-            .with(single("schema", Schema::class.java), schema)
-            .with(single("windowDuration", String::class.java), options.windowDuration)
-            .with(single("pubsubRootUrl", String::class.java), options.pubsubRootUrl)
-            .log()
 
         val input = pipe
             .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))

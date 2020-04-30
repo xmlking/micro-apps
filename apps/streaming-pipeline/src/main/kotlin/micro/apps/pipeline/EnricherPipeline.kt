@@ -1,16 +1,16 @@
 package micro.apps.pipeline
 
 /* ktlint-disable no-wildcard-imports */
-import com.google.common.flogger.FluentLogger
-import com.google.common.flogger.MetadataKey.single
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
-import micro.apps.core.LogDefinition.Companion.config
 import micro.apps.kbeam.PipeBuilder
 import micro.apps.kbeam.parDo
 import micro.apps.kbeam.toList
 import micro.apps.model.Person
-import micro.apps.pipeline.config.*
+import micro.apps.pipeline.config.Cloud
+import micro.apps.pipeline.config.TLS
+import micro.apps.pipeline.config.config
+import mu.KotlinLogging
 import org.apache.avro.Schema
 import org.apache.beam.runners.dataflow.util.TimeUtil
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO
@@ -26,14 +26,14 @@ import org.joda.time.Duration
 /**
  * showcase side-input and split
  */
+private val logger = KotlinLogging.logger {}
+
 object EnricherPipeline {
-    @JvmStatic
-    private val logger: FluentLogger = FluentLogger.forEnclosingClass().config()
 
     @JvmStatic
     fun main(args: Array<String>) {
 
-        logger.atConfig().log("My Args: %s", args)
+        logger.info("My Args: $args")
 
         val (pipe, options) = PipeBuilder.from<ClassifierOptions>(args)
         options.isStreaming = true
@@ -45,12 +45,14 @@ object EnricherPipeline {
         println(config[Cloud.Dataflow.windowDuration])
         options.windowDuration = options.windowDuration ?: config[Cloud.Dataflow.windowDuration]
 
-        logger.atInfo()
-            .with(single("Runner", String::class.java), options.runner.name)
-            .with(single("JobName", String::class.java), options.jobName)
-            .with(single("windowDuration", String::class.java), options.windowDuration)
-            .with(single("pubsubRootUrl", String::class.java), options.pubsubRootUrl)
-            .log("Started job with:")
+        logger.info {
+            """"Started job with:
+                |Runner: ${options.runner.name}
+                |Job name: ${options.jobName}
+                |"windowDuration": ${options.windowDuration}
+                |"pubsubRootUrl": ${options.pubsubRootUrl}
+                |""".trimMargin()
+        }
 
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
@@ -66,13 +68,13 @@ object EnricherPipeline {
                 .discardingFiredPanes()
                 .withAllowedLateness(Duration.standardSeconds(300)))
             /*
-            .apply("convert PubSub to Person", MapElements.via(PubsubToPerson())).setCoder(AvroPersonCoder())
+        .apply("convert PubSub to Person", MapElements.via(PubsubToPerson())).setCoder(AvroPersonCoder())
 
-            .parDo<Person, Person>("decrypt and enrich record") {
-                println(element)
-                element
-            }
-            */
+        .parDo<Person, Person>("decrypt and enrich record") {
+            println(element)
+            element
+        }
+        */
 
             // decrypting and enrich record
             .parDo<PubsubMessage, PubsubMessage>(
