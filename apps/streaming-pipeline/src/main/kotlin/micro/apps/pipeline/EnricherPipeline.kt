@@ -39,10 +39,13 @@ object EnricherPipeline {
 
         val (pipe, options) = PipeBuilder.from<ClassifierOptions>(args)
         options.isStreaming = true
-
-        println(config[TlsConfig.caCert])
+        
+        println(config[TLS.caCert])
         println(config<String>("endpoints.account"))
-        println(EndpointConfig.echo in config)
+        println("server.host" in config)
+        println(config.containsRequired())
+        println(config[Cloud.Dataflow.windowDuration])
+        options.windowDuration = options.windowDuration ?: config[Cloud.Dataflow.windowDuration]
 
         logger.atInfo()
             .with(single("Runner", String::class.java), options.runner.name)
