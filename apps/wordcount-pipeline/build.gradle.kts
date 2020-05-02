@@ -15,6 +15,10 @@ dependencies {
     // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion")
     // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
 
+    // Use the Kotlin test library.
+    testImplementation(kotlin("test"))
+    // Use the Kotlin JUnit integration.
+    testImplementation(kotlin("test-junit"))
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
 }
 

@@ -8,12 +8,13 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 ### Features
 1. **Polyglot** - Support multiple languages (java, kotlin, groovy)
 1. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)
-1. Support multiple testing frameworks (spock, spek, kotlin-test and junit5) 
 1. Support multiple serialization methods (JSON, Avro, ProtoBuf)
+1. A type-safe cascading configuration with [konf](https://github.com/uchuhimo/konf)
+1. Integrated with best testing frameworks ([kotest](https://github.com/kotest/kotest/blob/master/doc/reference.md), [MockK](https://mockk.io/)) 
 1. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images with [Jib](https://github.com/GoogleContainerTools/jib)
 1. Build native binaries using [GraalVM](https://www.graalvm.org/)
 1. Cloud Native (Service Mesh, health checks, observability)
-1. A type-safe cascading configuration with [konf](https://github.com/uchuhimo/konf)
+
 
 [![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
 [![Version](https://img.shields.io/github/v/tag/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/tags)
@@ -75,4 +76,4 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 * Creating a [Multi Module Project](https://spring.io/guides/gs/multi-module/)
 * Microservices in a Post-Kubernetes Era [link](https://www.infoq.com/articles/microservices-post-kubernetes)
 * Why is a [workspace](https://nrwl.io/nx/why-a-workspace) (or monorepo) needed? 
-
+* Gradle Setup [arara](https://github.com/cereda/arara)

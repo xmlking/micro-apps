@@ -1,11 +1,15 @@
+/* ktlint-disable no-wildcard-imports */
 // import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
+/* ktlint-disable no-wildcard-imports */
 
 val kotlinVersion: String by project
 val jacocoVersion: String by project
@@ -16,6 +20,7 @@ val ktlintVersion: String by project
 val mockkVersion: String by project
 val slf4jVersion: String by project
 val kotlinLoggingVersion: String by project
+val kotestVersion: String by project
 
 val excludedProjects = setOf("apps", "libs")
 
@@ -38,6 +43,9 @@ plugins {
     // Keep dependencies up to date
     // gradle dependencyUpdates -Drevision=release
     id("com.github.ben-manes.versions") version "0.28.0"
+    // keep your changelog spotless
+    // gradle changelogPrint // gradle changelogBump
+    id("com.diffplug.spotless-changelog") version "1.1.0"
     // gradle useLatestVersions
     id("se.patrikerdes.use-latest-versions") version "0.2.13"
 
@@ -89,16 +97,19 @@ if (!project.hasProperty("release.quiet")) {
     println("Version: $version,  Branch: ${scmVersion.scmPosition.branch}, isCI: $isCI")
 }
 
-sonarqube {
-    properties {
-        property("sonar.java.codeCoveragePlugin", "jacoco")
-        property("sonar.dynamicAnalysis", "reuseReports")
-        property("sonar.exclusions", "**/*Generated.java")
-    }
-    tasks.sonarqube {
-        dependsOn("jacocoTestReport")
-    }
+spotlessChangelog {
+    changelogFile("CHANGELOG.md")
+    // enforceCheck true
+    setAppendDashSnapshotUnless_dashPrelease(true)
+    ifFoundBumpBreaking("**BREAKING**")
+    ifFoundBumpAdded("### Added", "### Feat")
+    tagPrefix("v")
+    commitMessage("Release v{{version}}")
+    remote("origin")
+    branch("release")
 }
+
+println("SpotlessChangelog versionNext: ${spotlessChangelog.versionNext} versionLast: ${spotlessChangelog.versionLast}")
 
 spotless {
     kotlin {
@@ -107,6 +118,17 @@ spotless {
     kotlinGradle {
         target("*.gradle.kts")
         ktlint(ktlintVersion)
+    }
+}
+
+sonarqube {
+    properties {
+        property("sonar.java.codeCoveragePlugin", "jacoco")
+        property("sonar.dynamicAnalysis", "reuseReports")
+        property("sonar.exclusions", "**/*Generated.java")
+    }
+    tasks.sonarqube {
+        dependsOn("jacocoTestReport")
     }
 }
 
@@ -156,15 +178,13 @@ subprojects {
             implementation(kotlin("stdlib-jdk8"))
             implementation(kotlin("reflect"))
 
-            // Use the Kotlin test library.
-            testImplementation(kotlin("test"))
+            // Use kotest for testing
+            testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion") // for kotest framework
+            testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion") // for kotest core jvm assertions
+            testImplementation("io.kotest:kotest-property-jvm:$kotestVersion") // for kotest property test
+            testImplementation("io.mockk:mockk:$mockkVersion") // Use Mockk mocking library
 
-            // Use the Kotlin JUnit integration.
-            testImplementation(kotlin("test-junit"))
-            // Use Mockk mocking library
-            testImplementation("io.mockk:mockk:$mockkVersion")
-
-            // Logging slf4jVersion=2.0.0-alpha1
+            // Logging with slf4jVersion=2.0.0-alpha1
             implementation("org.slf4j:slf4j-api:$slf4jVersion")
             implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
             runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
@@ -189,6 +209,11 @@ subprojects {
         }
 
         spotless {
+            java {
+                removeUnusedImports()
+                trimTrailingWhitespace()
+                endWithNewline()
+            }
             kotlin {
                 ktlint(ktlintVersion)
             }
@@ -225,6 +250,11 @@ subprojects {
             jacocoTestCoverageVerification {
                 violationRules {
                     rule { limit { minimum = jacocoQualityGate.toBigDecimal() } }
+                    rule {
+                        enabled = false
+                        element = "CLASS"
+                        includes = listOf("micro.apps.proto.*")
+                    }
                 }
             }
 
@@ -239,11 +269,16 @@ subprojects {
             }
 
             test {
+                // useJUnitPlatform()
+                filter {
+                    isFailOnNoMatchingTests = false
+                }
                 // maxParallelForks = Runtime.getRuntime().availableProcessors() // FIXME: port conflict for quarkus
                 testLogging {
+                    exceptionFormat = FULL
                     showExceptions = true
                     showStandardStreams = true
-                    // events(PASSED, SKIPPED, FAILED)
+                    events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
                 }
                 finalizedBy("jacocoTestReport")
             }

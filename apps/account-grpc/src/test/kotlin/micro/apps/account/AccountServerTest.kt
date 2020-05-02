@@ -1,18 +1,18 @@
 package micro.apps.account
 
-import kotlin.test.Test
-import kotlin.test.assertNotNull
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.shouldBe
 import micro.apps.proto.common.v1.Person
 
-class AccountServerTest {
-    @Test
-    fun testAppHasAGreeting() {
+class AccountServerTest : FunSpec({
+
+    test("proto generated class can be used") {
         val person = with(Person.newBuilder()) {
             firstName = "sumo"
             lastName = "demo"
             phone = "000-000-0000"
             return@with build()
         }
-        assertNotNull(person.firstName, "sumo")
+        person.firstName shouldBe "sumo"
     }
-}
+})

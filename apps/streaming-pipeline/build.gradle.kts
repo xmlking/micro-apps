@@ -29,8 +29,13 @@ dependencies {
     // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
 
     // Kotlin Config
-    implementation("com.uchuhimo:konf:$konfigVersion")
+    implementation("com.uchuhimo:konf-core:$konfigVersion")
+    implementation("com.uchuhimo:konf-yaml:$konfigVersion")
 
+    // Use the Kotlin test library.
+    testImplementation(kotlin("test"))
+    // Use the Kotlin JUnit integration.
+    testImplementation(kotlin("test-junit"))
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testImplementation("com.google.cloud:google-cloud-pubsub:1.105.0")
 }
@@ -47,4 +52,11 @@ application {
     // mainClassName = "micro.apps.pipeline.EnricherPipeline"
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
     applicationDefaultJvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
+}
+
+// gradle test -DKotest.tags.include=Beam -DKotest.tags.exclude=E2E
+tasks {
+    test {
+        systemProperty("Kotest.tags.exclude", System.getProperty("E2E"))
+    }
 }

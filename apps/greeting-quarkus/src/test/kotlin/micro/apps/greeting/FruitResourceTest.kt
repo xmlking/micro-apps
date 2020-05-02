@@ -1,17 +1,23 @@
 package micro.apps.greeting
 
+import io.kotest.core.spec.style.FunSpec
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured
 import javax.ws.rs.core.MediaType
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
-import org.junit.jupiter.api.Test
 
 @QuarkusTest
-class FruitResourceTest {
+class FruitResourceTest : FunSpec({
 
-    @Test
-    fun testList() {
+    beforeTest {
+        println("Starting test ${it.name}!")
+    }
+    afterTest {
+        println("Finished test ${it.a.name}!")
+    }
+
+    test("get fruits call should work") {
         RestAssured
             .given()
             .`when`()
@@ -23,8 +29,7 @@ class FruitResourceTest {
                 "description", Matchers.containsInAnyOrder("Winter fruit", "Tropical fruit"))
     }
 
-    @Test
-    fun testAdd() {
+    test("add fruits call should work") {
         RestAssured
             .given()
             .body("{\"name\": \"Pear\", \"description\": \"Winter fruit\"}")
@@ -49,4 +54,4 @@ class FruitResourceTest {
                 "name", Matchers.containsInAnyOrder("Apple", "Pineapple"),
                 "description", Matchers.containsInAnyOrder("Winter fruit", "Tropical fruit"))
     }
-}
+})

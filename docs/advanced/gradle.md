@@ -120,6 +120,20 @@ git-chglog  -o CHANGELOG.md
 git-chglog  -o CHANGELOG.md -next-tag 2.0.0
 ```
 
+```bash
+# prints the last published version and calculated next version
+gradle changelogPrint
+# throws an error if the changelog is not formatted according to your rules
+gradle changelogCheck
+
+## Update the changelog, commit, push
+
+# updates the changelog on disk with the next version and the current UTC date
+gradle changelogBump -Prelease=true
+# commits the changelog, tags, and pushes
+gradle changelogPush
+```
+
 ### Publish
 
 > publish after release
