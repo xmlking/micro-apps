@@ -49,9 +49,8 @@ object EnricherPipeline {
         logger.underlyingLogger.atInfo()
             .addKeyValue("runner", options.runner.name)
             .addKeyValue("jobName", options.jobName)
-            .addKeyValue("pubsubRootUrl", options.pubsubRootUrl)
-            .addKeyValue("windowDuration", options.windowDuration)
             .log("Started job with:")
+        logger.info { options }
 
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
@@ -93,7 +92,7 @@ object EnricherPipeline {
             // convert GenericRecord to PubsubMessage
             // .apply(MapElements.via(PersonToPubsub()))
             // write back to PubSub
-            .apply("Write PubSub Events", PubsubIO.writeMessages().to(options.outputTopic))
+            .apply("Write PubSub Events", PubsubIO.writeMessages().to(options.outputSuccessPath))
 
         pipe.run()
     }

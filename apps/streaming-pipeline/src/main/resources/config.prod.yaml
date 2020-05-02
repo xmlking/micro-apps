@@ -9,10 +9,10 @@ account:
     endpoint: 127.0.0.1:8080
     authority: my.domain.com
     maxRetry: 3
-    deadline: 2s
+    deadline: 3s
 endpoints:
     account: 127.0.0.2:8080
     echo: 127.0.0.3:8080
 cloud:
     dataflow:
-        windowDuration: 500s
+        windowDuration: 300s

@@ -1,5 +1,7 @@
 package micro.apps.pipeline
 
+import com.google.api.gax.rpc.ApiException
+import com.google.api.gax.rpc.StatusCode.Code.ALREADY_EXISTS
 import com.google.common.collect.ImmutableMap
 import com.sksamuel.avro4k.Avro
 import java.io.Serializable
@@ -27,9 +29,11 @@ class PubSubProducerTest : Serializable {
 
     private val host = "localhost:8085"
     private val projectId = "my-project-id"
-    private val inputTopicName = "classifier-input"
-    private val outputTopicName = "classifier-output"
-    private val subscriptionName = "classifier-input"
+    private val jobName = "classifier"
+    private val inputTopicName = "$jobName-input"
+    private val inputSubscriptionName = "$jobName-input"
+    private val outputSuccessTopicName = "$jobName-output-success"
+    private val outputFailureTopicName = "$jobName-output-failure"
     private val helper = Helper(host, projectId)
     private lateinit var testOptions: ClassifierOptions
 
@@ -42,17 +46,20 @@ class PubSubProducerTest : Serializable {
     @Throws(Exception::class)
     fun setup() {
         PipelineOptionsFactory.register(ClassifierOptions::class.java)
-        val args = arrayOf(
-            "--windowDuration=310s",
-            "--inputTopic=projects/$projectId/topics/$inputTopicName",
-            "--inputSubscription=projects/$projectId/subscriptions/$subscriptionName",
-            "--outputTopic=projects/$projectId/topics/$outputTopicName")
+        val args = arrayOf("--project=$projectId", "--jobName=$jobName")
         testOptions = PipelineOptionsFactory.fromArgs(*args).withValidation().`as`(ClassifierOptions::class.java)
         testOptions.pubsubRootUrl = "http://localhost:8085"
         testOptions.credentialFactoryClass = NoopCredentialFactory::class.java
-        if (!helper.hasTopic(inputTopicName)) {
+        println(testOptions)
+        try {
             helper.createTopic(inputTopicName)
-            helper.createSubscription(inputTopicName, subscriptionName)
+            helper.createSubscription(inputTopicName, inputSubscriptionName)
+            helper.createTopic(outputSuccessTopicName)
+            helper.createTopic(outputFailureTopicName)
+        } catch (e: ApiException) {
+            if (e.statusCode.code == ALREADY_EXISTS) {
+                println("topic already exists")
+            }
         }
     }
 
@@ -60,6 +67,11 @@ class PubSubProducerTest : Serializable {
     @Throws(Exception::class)
     fun after() {
         println("cleaning...")
+    }
+
+    @Test @Ignore
+    fun tummyTest() {
+        println("tummyTest...")
     }
 
     @Test @Ignore // TODO: remove @Ignore to use it

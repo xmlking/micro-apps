@@ -55,6 +55,7 @@ class Helper(var host: String, var projectId: String) {
         subscriptionAdminClient.deleteSubscription(projectSubscriptionName)
     }
 
+    @Throws(ApiException::class)
     fun createTopic(topicName: String): Topic {
         val projectTopicName = TopicName.of(projectId, topicName)
         return topicAdminClient.createTopic(projectTopicName)
@@ -67,14 +68,13 @@ class Helper(var host: String, var projectId: String) {
             topic = topicAdminClient.getTopic(projectTopicName)
         } catch (e: ApiException) {
             if (e.statusCode.code == NOT_FOUND) {
-                println("topic already created")
+                println("topic not found")
             }
         } catch (e: Exception) {
             println(e.message)
         }
         return topic
     }
-
     fun hasTopic(topicName: String): Boolean {
         return null != getTopic(topicName)
     }

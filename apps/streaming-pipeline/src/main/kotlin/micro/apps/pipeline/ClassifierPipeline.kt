@@ -41,9 +41,8 @@ object ClassifierPipeline {
         logger.underlyingLogger.atInfo()
             .addKeyValue("runner", options.runner.name)
             .addKeyValue("jobName", options.jobName)
-            .addKeyValue("pubsubRootUrl", options.pubsubRootUrl)
-            .addKeyValue("windowDuration", options.windowDuration)
             .log("Started job with:")
+        logger.info { options }
 
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
@@ -91,7 +90,7 @@ object ClassifierPipeline {
 
         input
             .apply("convert GenericRecord to PubsubMessage", MapElements.via(AvroToPubsub()))
-            .apply("write back to PubSub", PubsubIO.writeMessages().to(options.outputTopic))
+            .apply("write back to PubSub", PubsubIO.writeMessages().to(options.outputSuccessTopic))
 
         pipe.run()
     }

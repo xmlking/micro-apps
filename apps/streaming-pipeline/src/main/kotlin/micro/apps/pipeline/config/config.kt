@@ -10,6 +10,7 @@ import com.uchuhimo.konf.source.yaml
 val config by lazy {
     Config {
         addSpec(TLS)
+        addSpec(Account)
         addSpec(Endpoints)
         addSpec(Cloud)
     }
@@ -25,6 +26,7 @@ object TLS : ConfigSpec("certs") {
 
     val clientKey by optional("certs/client-key.pem")
     val clientCert by optional("certs/client-cert.pem")
+    val clientPasscode by optional("fake_one")
 
     val caCert: OptionalItem<String> by optional("certs/ca-cert.pem")
 
@@ -33,9 +35,17 @@ object TLS : ConfigSpec("certs") {
     val upstreamCaCert by optional("certs/upstream-ca-cert.pem")
 }
 
+object Account : ConfigSpec("account") {
+    val endpoint by optional("http://localhost:8080")
+    val authority by required<String>()
+    val maxRetry by optional<Int>(3)
+    val flowControlWindow by optional<Int>(65 * 1024)
+    val deadline by optional("1s") // in the format of ['-']sssss[.nnnn]'s'
+}
+
 object Endpoints : ConfigSpec("endpoints") {
-    val account by optional("http://localhost:8080")
-    val echo by required<String>(description = "endpoints of echo")
+    val account by optional("http://localhost:8080", description = "endpoint of account service")
+    val echo by required<String>(description = "endpoint of echo service")
 }
 
 object Cloud : ConfigSpec() {
