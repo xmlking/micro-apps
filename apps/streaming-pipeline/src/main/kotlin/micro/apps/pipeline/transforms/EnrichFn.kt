@@ -9,12 +9,6 @@ import org.apache.beam.sdk.transforms.DoFn
 // import org.apache.beam.vendor.grpc.v1p26p0.io.grpc.ManagedChannelBuilder;
 // java.util.concurrent.ExecutorService;
 
-// https://github.com/bradkyle/AxiomJava/blob/master/src/main/java/com/axiom/pipeline/core/EnrichmentDoFn.java
-// https://github.com/NorwinYu/UoN-Final-Year-Project-Public-Database/blob/master/Download-Java-Files/Normal/RemoteExecutionTest.java
-// https://github.com/alexander-dev-hub/apache-beam/blob/master/runners/google-cloud-dataflow-java/worker/src/test/java/org/apache/beam/runners/dataflow/worker/StreamingDataflowWorkerTest.java
-// https://github.com/xsm110/Beam15.0/blob/master/sdks/java/harness/src/test/java/org/apache/beam/fn/harness/FnApiDoFnRunnerTest.java
-// https://github.com/alexander-dev-hub/apache-beam/blob/master/runners/google-cloud-dataflow-java/worker/src/test/java/org/apache/beam/runners/dataflow/worker/fn/data/BeamFnDataGrpcServiceTest.java
-
 private val logger = KotlinLogging.logger {}
 public class EnrichFn(pattern: String) : DoFn<Person, Person>() {
 

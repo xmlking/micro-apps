@@ -1,0 +1,15 @@
+certs:
+    serverKey: certs/server-key.pem
+    serverCert: certs/server-cert.pem
+    clientKey: certs/client-key.pem
+    clientCert: certs/client-cert.pem
+    clientPasscode: fake_pass
+    caCert: certs/ca-cert.pem
+account:
+    endpoint: 127.0.0.1:8080
+    authority: my.domain.com
+    maxRetry: 3
+    deadline: 2s
+endpoints:
+    account: 127.0.0.2:8080
+    echo: 127.0.0.3:8080

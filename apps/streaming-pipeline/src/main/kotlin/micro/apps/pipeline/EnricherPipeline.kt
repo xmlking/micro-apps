@@ -28,7 +28,6 @@ import org.joda.time.Duration
  */
 private val logger = KotlinLogging.logger {}
 
-// KotlinLoggingConfiguration.LOG_LEVEL = KotlinLoggingLevel.DEBUG
 object EnricherPipeline {
 
     @JvmStatic

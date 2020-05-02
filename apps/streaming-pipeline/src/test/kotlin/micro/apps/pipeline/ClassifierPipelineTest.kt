@@ -1,5 +1,7 @@
 package micro.apps.pipeline
 
+import com.google.api.gax.rpc.ApiException
+import com.google.api.gax.rpc.StatusCode.Code.ALREADY_EXISTS
 import com.google.protobuf.ByteString
 import com.google.pubsub.v1.PubsubMessage
 import com.sksamuel.avro4k.Avro
@@ -25,9 +27,11 @@ class ClassifierPipelineTest : Serializable {
 
     private val host = "localhost:8085"
     private val projectId = "my-project-id"
-    private val inputTopicName = "classifier-input"
-    private val outputTopicName = "classifier-output"
-    private val subscriptionName = "classifier-input"
+    private val jobName = "classifier"
+    private val inputTopicName = "$jobName-input"
+    private val inputSubscriptionName = "$jobName-input"
+    private val outputSuccessTopicName = "$jobName-output-success"
+    private val outputFailureTopicName = "$jobName-output-failure"
     private val helper = Helper(host, projectId)
     private lateinit var testOptions: ClassifierOptions
 
@@ -40,17 +44,22 @@ class ClassifierPipelineTest : Serializable {
     @Throws(Exception::class)
     fun setup() {
         PipelineOptionsFactory.register(ClassifierOptions::class.java)
-        val args = arrayOf(
-            "--windowDuration=310s",
-            "--inputTopic=projects/$projectId/topics/$inputTopicName",
-            "--inputSubscription=projects/$projectId/subscriptions/$subscriptionName",
-            "--outputTopic=projects/$projectId/topics/$outputTopicName")
+        val args = arrayOf("--project=$projectId", "--jobName=$jobName", "--windowDuration=310s")
         testOptions = PipelineOptionsFactory.fromArgs(*args).withValidation().`as`(ClassifierOptions::class.java)
         testOptions.pubsubRootUrl = "http://localhost:8085"
         testOptions.credentialFactoryClass = NoopCredentialFactory::class.java
         testOptions.isBlockOnRun = false
-        helper.createTopic(inputTopicName)
-        helper.createSubscription(inputTopicName, subscriptionName)
+        println(testOptions)
+        try {
+            helper.createTopic(inputTopicName)
+            helper.createSubscription(inputTopicName, inputSubscriptionName)
+            helper.createTopic(outputSuccessTopicName)
+            helper.createTopic(outputFailureTopicName)
+        } catch (e: ApiException) {
+            if (e.statusCode.code == ALREADY_EXISTS) {
+                println("topic already exists")
+            }
+        }
         // seed data
         persons.forEach {
             val data = Avro.default.dump(Person.serializer(), it)
@@ -62,10 +71,12 @@ class ClassifierPipelineTest : Serializable {
     }
 
     @AfterTest
-    @Throws(Exception::class)
+    @Throws(ApiException::class)
     fun after() {
-        helper.deleteSubscription(subscriptionName)
+        helper.deleteSubscription(inputSubscriptionName)
         helper.deleteTopic(inputTopicName)
+        helper.deleteTopic(outputSuccessTopicName)
+        helper.deleteTopic(outputFailureTopicName)
     }
 
     @Test @Ignore
