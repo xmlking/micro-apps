@@ -80,6 +80,11 @@ interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, Streaming
     @get:Default.String("300s")
     var windowDuration: String
 
+    @get:Description("Set Streaming Mode. Defaults to TRUE")
+    @get:Default.Boolean(true)
+    @get:Validation.Required
+    var stream: Boolean
+
     @get:Description("Inquiry Service gRPC End Point. Format host:port")
     @get:Default.String("localhost:443")
     @get:Validation.Required
