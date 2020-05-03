@@ -47,7 +47,7 @@ object ClassifierPipeline {
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
         // create dummy `keys` to use as `side input` for decryption
-        val keys = pipe.apply(Create.of(listOf("aaa", "bbb"))).toList()
+        val keysView = pipe.apply(Create.of(listOf("aaa", "bbb"))).toList()
 
         val input = pipe
             .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))
@@ -60,11 +60,11 @@ object ClassifierPipeline {
 
             .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema))).setCoder(AvroCoder.of(schema))
 
-            .parDo<GenericRecord, GenericRecord>("decrypt and enrich record", sideInputs = listOf(keys)) {
+            .parDo<GenericRecord, GenericRecord>("decrypt and enrich record", sideInputs = listOf(keysView)) {
                 println(element)
                 println(timestamp)
                 println(element.schema)
-                println("key used to decrypt encrypted field: ${sideInputs[keys][0]}")
+                println("key used to decrypt encrypted field: ${sideInputs[keysView][0]}")
                 for (field in element.schema.fields) {
                     val fieldKey: String = field.name()
                     println("$fieldKey : ${element.get(fieldKey)}, is encrypted? ${field.getProp("encrypted")}")

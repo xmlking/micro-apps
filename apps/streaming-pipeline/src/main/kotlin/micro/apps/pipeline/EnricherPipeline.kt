@@ -1,24 +1,25 @@
 package micro.apps.pipeline
 
 /* ktlint-disable no-wildcard-imports */
-import com.sksamuel.avro4k.Avro
-import com.sksamuel.avro4k.io.AvroFormat
+
 import micro.apps.kbeam.PipeBuilder
-import micro.apps.kbeam.parDo
 import micro.apps.kbeam.toList
-import micro.apps.model.Person
-import micro.apps.pipeline.config.Cloud
-import micro.apps.pipeline.config.TLS
-import micro.apps.pipeline.config.config
+import micro.apps.kbeam.transforms.AvroToPubsub
+import micro.apps.kbeam.transforms.PubsubToAvro
+import micro.apps.pipeline.transforms.EnrichFn
 import mu.KotlinLogging
 import org.apache.avro.Schema
 import org.apache.beam.runners.dataflow.util.TimeUtil
+import org.apache.beam.sdk.coders.AvroCoder
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
 import org.apache.beam.sdk.transforms.Create
+import org.apache.beam.sdk.transforms.MapElements
+import org.apache.beam.sdk.transforms.ParDo
 import org.apache.beam.sdk.transforms.windowing.AfterWatermark
 import org.apache.beam.sdk.transforms.windowing.FixedWindows
 import org.apache.beam.sdk.transforms.windowing.Window
+import org.apache.beam.sdk.values.TupleTagList
 import org.joda.time.Duration
 
 /* ktlint-enable no-wildcard-imports */
@@ -38,13 +39,6 @@ object EnricherPipeline {
         val (pipe, options) = PipeBuilder.from<ClassifierOptions>(args)
         options.isStreaming = true
 
-        println(config[TLS.caCert])
-        println(config<String>("endpoints.account"))
-        println("server.host" in config)
-        println(config.containsRequired())
-        println(config[Cloud.Dataflow.windowDuration])
-        options.windowDuration = options.windowDuration ?: config[Cloud.Dataflow.windowDuration]
-
         logger.underlyingLogger.atInfo()
             .addKeyValue("runner", options.runner.name)
             .addKeyValue("jobName", options.jobName)
@@ -54,7 +48,7 @@ object EnricherPipeline {
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
         // create dummy `keys` to use as `side input` for decryption
-        val keys = pipe.apply(Create.of(listOf("aaa", "bbb"))).toList()
+        val keysView = pipe.apply(Create.of(listOf("aaa", "bbb"))).toList()
 
         val input = pipe
             .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))
@@ -64,34 +58,21 @@ object EnricherPipeline {
                 .triggering(AfterWatermark.pastEndOfWindow())
                 .discardingFiredPanes()
                 .withAllowedLateness(Duration.standardSeconds(300)))
-            /*
-        .apply("convert PubSub to Person", MapElements.via(PubsubToPerson())).setCoder(AvroPersonCoder())
 
-        .parDo<Person, Person>("decrypt and enrich record") {
-            println(element)
-            element
-        }
-        */
+            .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema))).setCoder(AvroCoder.of(schema))
 
-            // decrypting and enrich record
-            .parDo<PubsubMessage, PubsubMessage>(
-                "decrypt and enrich record",
-                sideInputs = listOf(keys)) {
-                // val per = Avro.default.load(Person.serializer(), element.payload)
-                val person = Avro.default.openInputStream(Person.serializer()) {
-                    format = AvroFormat.BinaryFormat
-                    writerSchema = Avro.default.schema(Person.serializer())
-                }.from(element.payload).nextOrThrow()
+            val output = input.apply("decrypt and enrich record", ParDo.of(EnrichFn(keysView))
+                .withSideInputs(keysView)
+                .withOutputTags(successTag, TupleTagList.of(errorTag))
+            )
 
-                println(person)
-                element
-            }
+        output.get(successTag)
+            .apply("convert GenericRecord to PubsubMessage", MapElements.via(AvroToPubsub()))
+            .apply("write success events to SuccessTopic", PubsubIO.writeMessages().to(options.outputSuccessTopic))
 
-        input
-            // convert GenericRecord to PubsubMessage
-            // .apply(MapElements.via(PersonToPubsub()))
-            // write back to PubSub
-            .apply("Write PubSub Events", PubsubIO.writeMessages().to(options.outputSuccessPath))
+        output.get(errorTag)
+            .apply("convert GenericRecord to PubsubMessage", MapElements.via(AvroToPubsub()))
+            .apply("write error events to FailureTopic", PubsubIO.writeMessages().to(options.outputFailureTopic))
 
         pipe.run()
     }
