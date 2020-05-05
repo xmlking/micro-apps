@@ -29,11 +29,11 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## scaffolding projects
 
-> your can use  https://code.quarkus.io/ **WebApp**  to generate project
+> your can also use [code.quarkus.io](https://code.quarkus.io/?g=micro.apps&a=greeting-quarkus&v=1.0.0-SNAPSHOT&b=GRADLE&c=micro.apps.ExampleResource&s=ARC.dZK.tqK.OxX.Ll4.qZz&cn=code.quarkus.io) webApp to generate a new project
 
 ```bash
 cd apps
-mvn io.quarkus:quarkus-maven-plugin:1.4.1.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:1.4.2.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-quarkus \
     -DprojectVersion=0.1.0 \
@@ -81,7 +81,15 @@ If you want to learn more about building native executables, please consult http
 
 ## Docker 
 
-First build the binaries
+`quarkusBuild` command also creates docker image if `quarkus-container-image-jib` plugin is enabled.
+> Check with `docker images`
+
+`quarkusBuild` command also creates kubernetes YAML if `quarkus-kubernetes` plugin is enabled.
+> Check `apps/greeting-quarkus/build/kubernetes/kubernetes.yml`
+
+You can run image with `docker run -i --rm -p 8080:8080 xmlking/greeting-quarkus:1.6.5-SNAPSHOT`
+
+### Manual Docker Build
 
 ```bash
 # build jar/native first
