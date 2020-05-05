@@ -8,13 +8,82 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Build
+- **deploy:** adding: Scheduled Apache Beam jobs using Kubernetes Cronjobs
+- **deps:** updated quarkus to 1.4.2.Final, now k8s and jib docker builds works
+- **deps:** updated quarkus to 1.4.2.Final
+- **deps:** updating deps for quarkus
+- **deps:** quarkus --> 1.4.0.Final
+- **gradle:** change spotlessChangelog plugin to remove V prefix from tag
 
-<a name="v1.6.4"></a>
+### Chore
+- **build:** adding spotless-changelog gradle plugin, making Junit5 as default
+- **deps:** update dependency io.mockk:mockk to v1.10.0
+- **deps:** update dependency io.grpc:grpc-testing to v1.29.0
+- **deps:** update dependency io.quarkus:io.quarkus.gradle.plugin to v1.4.0.final
+- **deps:** update dependency io.quarkus:quarkus-bom to v1.4.1.final
+- **deps:** update dependency io.quarkus:quarkus-bom to v1.4.1.final
+- **logging:** remove flogger
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding test helper to create topics
+- **streaming:** adding test helper to create topics
+- **streaming:** updated person schema
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** adding EnricherPipeline
+- **streaming:** fix tests
+- **streaming:** using tags to split output
+
+### Ci
+- **streaming:** improve test helper
+- **streaming:** updated logging backend
+- **streaming:** adding build time config
+
+### Docs
+- **readme:** updated grpc link
+
+### Feat
+- **micro:** refactor
+- **streaming:** adding side-input and split usage
+- **streaming:** adding  PubSubProducer test data generator
+
+### Fix
+- **deps:** remove Arrow deps
+
+### Improvement
+- **account-grpc:** set port to 8080 , fix docker builds
+- **account-grpc:** set port to 8080 , fix docker builds
+- **account-grpc:** set port to 8080 , fix docker builds
+- **account-grpc:** adding account-grpc client for testing streaming API
+- **core:** adding more tests for avro serialization
+- **core:** using kotlinx-serialization for json,avro,protobuf
+- **gradle:** polich gradle files
+- **kbeam:** adding default name for ParDo
+- **kbeam:** refactor API
+- **streaming:** adding google pubsub emulator
+- **streaming:** adding streaming pipeline docs under docs/recipes
+- **streaming:** updated docs to query messages from pubsub emulator
+- **workspace:** removed demo/dlib, split core into core + model projects
+
+### Style
+- **grpc:** rename class
+
+
+<a name="1.6.4"></a>
 ## [v1.6.4] - 2020-04-18
 ### Build
 - **deps:** updated deps
 
 ### Chore
+- **clog:** updating changelog
 - **deps:** update dependency org.apache.beam:beam-sdks-java-io-google-cloud-platform to v2.20.0
 - **deps:** update dependency org.apache.beam:beam-sdks-java-core to v2.20.0
 - **deps:** update dependency org.apache.beam:beam-runners-google-cloud-dataflow-java to v2.20.0
@@ -33,7 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **lint:** ktlint fix
 
 
-<a name="v1.6.3"></a>
+<a name="1.6.3"></a>
 ## [v1.6.3] - 2020-04-15
 ### Docs
 - **clog:** updating change log
@@ -43,13 +112,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **deploy:** polish Kustomization
 
 
-<a name="v1.6.2"></a>
+<a name="1.6.2"></a>
 ## [v1.6.2] - 2020-04-15
 ### Chore
 - **deploy:** test Kustomization patches
 
 
-<a name="v1.6.1"></a>
+<a name="1.6.1"></a>
 ## [v1.6.1] - 2020-04-15
 ### Appctl
 - added scaffolding structure for the new environment: production.
@@ -128,7 +197,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **quarkus:** fix: with quarkusPlatformVersion=1.3.1.Final, tests fails
 
 
-<a name="v1.6.0"></a>
+<a name="1.6.0"></a>
 ## [v1.6.0] - 2020-01-30
 ### Chore
 - **gitbook:** fix types
@@ -234,21 +303,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-24
 
-[Unreleased]: https://github.com/xmlking/jvm-gitops/compare/v1.6.4...HEAD
-[v1.6.4]: https://github.com/xmlking/jvm-gitops/compare/v1.6.3...v1.6.4
-[v1.6.3]: https://github.com/xmlking/jvm-gitops/compare/v1.6.2...v1.6.3
-[v1.6.2]: https://github.com/xmlking/jvm-gitops/compare/v1.6.1...v1.6.2
-[v1.6.1]: https://github.com/xmlking/jvm-gitops/compare/v1.6.0...v1.6.1
-[v1.6.0]: https://github.com/xmlking/jvm-gitops/compare/1.5.0...v1.6.0
-[1.5.0]: https://github.com/xmlking/jvm-gitops/compare/1.4.0...1.5.0
-[1.4.0]: https://github.com/xmlking/jvm-gitops/compare/1.3.2...1.4.0
-[1.3.2]: https://github.com/xmlking/jvm-gitops/compare/1.3.1...1.3.2
-[1.3.1]: https://github.com/xmlking/jvm-gitops/compare/1.3.0...1.3.1
-[1.3.0]: https://github.com/xmlking/jvm-gitops/compare/1.2.0...1.3.0
-[1.2.0]: https://github.com/xmlking/jvm-gitops/compare/1.1.0...1.2.0
-[1.1.0]: https://github.com/xmlking/jvm-gitops/compare/0.5.0...1.1.0
-[0.5.0]: https://github.com/xmlking/jvm-gitops/compare/0.4.0...0.5.0
-[0.4.0]: https://github.com/xmlking/jvm-gitops/compare/0.3.0...0.4.0
-[0.3.0]: https://github.com/xmlking/jvm-gitops/compare/0.2.0...0.3.0
-[0.2.0]: https://github.com/xmlking/jvm-gitops/compare/0.1.1...0.2.0
-[0.1.1]: https://github.com/xmlking/jvm-gitops/compare/0.1.0...0.1.1
+[Unreleased]: https://github.com/xmlking/micro-apps/compare/v1.6.4...HEAD
+[v1.6.4]: https://github.com/xmlking/micro-apps/compare/v1.6.3...v1.6.4
+[v1.6.3]: https://github.com/xmlking/micro-apps/compare/v1.6.2...v1.6.3
+[v1.6.2]: https://github.com/xmlking/micro-apps/compare/v1.6.1...v1.6.2
+[v1.6.1]: https://github.com/xmlking/micro-apps/compare/v1.6.0...v1.6.1
+[v1.6.0]: https://github.com/xmlking/micro-apps/compare/1.5.0...v1.6.0
+[1.5.0]: https://github.com/xmlking/micro-apps/compare/1.4.0...1.5.0
+[1.4.0]: https://github.com/xmlking/micro-apps/compare/1.3.2...1.4.0
+[1.3.2]: https://github.com/xmlking/micro-apps/compare/1.3.1...1.3.2
+[1.3.1]: https://github.com/xmlking/micro-apps/compare/1.3.0...1.3.1
+[1.3.0]: https://github.com/xmlking/micro-apps/compare/1.2.0...1.3.0
+[1.2.0]: https://github.com/xmlking/micro-apps/compare/1.1.0...1.2.0
+[1.1.0]: https://github.com/xmlking/micro-apps/compare/0.5.0...1.1.0
+[0.5.0]: https://github.com/xmlking/micro-apps/compare/0.4.0...0.5.0
+[0.4.0]: https://github.com/xmlking/micro-apps/compare/0.3.0...0.4.0
+[0.3.0]: https://github.com/xmlking/micro-apps/compare/0.2.0...0.3.0
+[0.2.0]: https://github.com/xmlking/micro-apps/compare/0.1.1...0.2.0
+[0.1.1]: https://github.com/xmlking/micro-apps/compare/0.1.0...0.1.1
