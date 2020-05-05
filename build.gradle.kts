@@ -1,15 +1,17 @@
-/* ktlint-disable no-wildcard-imports */
 // import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
-import com.diffplug.spotless.changelog.NextVersionFunction.Semver
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import java.net.URL
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.TimeZone
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
-import org.gradle.api.tasks.testing.logging.TestLogEvent.*
+import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
+import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 import org.sonarqube.gradle.SonarQubeTask
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
-/* ktlint-disable no-wildcard-imports */
 
 val kotlinVersion: String by project
 val jacocoVersion: String by project
@@ -23,15 +25,6 @@ val kotlinLoggingVersion: String by project
 val kotestVersion: String by project
 
 val excludedProjects = setOf("apps", "libs")
-
-class SemverRemoveV : Semver() {
-    override fun nextVersion(unreleasedChanges: String, lastVersion: String): String {
-        return if (lastVersion.startsWith("v"))
-            super.nextVersion(unreleasedChanges, lastVersion.removePrefix("v"))
-        else
-            super.nextVersion(unreleasedChanges, lastVersion)
-    }
-}
 
 plugins {
     base
@@ -113,7 +106,6 @@ spotlessChangelog {
     ifFoundBumpBreaking("**BREAKING**")
     ifFoundBumpAdded("### Added", "### Feat")
     tagPrefix("v")
-    versionSchema(SemverRemoveV::class.java)
     commitMessage("Release v{{version}}")
     remote("origin")
     branch("release")

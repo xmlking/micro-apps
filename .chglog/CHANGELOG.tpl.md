@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 {{ range .Versions }}
 <a name="{{ replace .Tag.Name "v" "" 1 }}"></a>
-## {{ if .Tag.Previous }}[{{ .Tag.Name }}]{{ else }}{{ .Tag.Name }}{{ end }} - {{ datetime "2006-01-02" .Tag.Date }}
+## {{ if .Tag.Previous }}[{{ replace .Tag.Name "v" "" 1 }}]{{ else }}{{ .Tag.Name }}{{ end }} - {{ datetime "2006-01-02" .Tag.Date }}
 {{ range .CommitGroups -}}
 ### {{ .Title }}
 {{ range .Commits -}}

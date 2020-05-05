@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Build
+- **clog:** fix changelog template to remove 'v' from tag name
 - **deploy:** adding: Scheduled Apache Beam jobs using Kubernetes Cronjobs
 - **deps:** updated quarkus to 1.4.2.Final, now k8s and jib docker builds works
 - **deps:** updated quarkus to 1.4.2.Final
@@ -78,7 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 <a name="1.6.4"></a>
-## [v1.6.4] - 2020-04-18
+## [1.6.4] - 2020-04-18
 ### Build
 - **deps:** updated deps
 
@@ -103,7 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 <a name="1.6.3"></a>
-## [v1.6.3] - 2020-04-15
+## [1.6.3] - 2020-04-15
 ### Docs
 - **clog:** updating change log
 
@@ -113,13 +114,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 <a name="1.6.2"></a>
-## [v1.6.2] - 2020-04-15
+## [1.6.2] - 2020-04-15
 ### Chore
 - **deploy:** test Kustomization patches
 
 
 <a name="1.6.1"></a>
-## [v1.6.1] - 2020-04-15
+## [1.6.1] - 2020-04-15
 ### Appctl
 - added scaffolding structure for the new environment: production.
 - added scaffolding structure for the new environment: staging.
@@ -198,7 +199,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 <a name="1.6.0"></a>
-## [v1.6.0] - 2020-01-30
+## [1.6.0] - 2020-01-30
 ### Chore
 - **gitbook:** fix types
 - **gitbook:** adding gitbook config
