@@ -108,32 +108,67 @@ gradle :apps:streaming-pipeline:clean
 gradle :apps:streaming-pipeline:build
 ```
 
-### Setting PubSub topics
+### Using PubSub Emulator
 
 > you can generate topics and subscription for Emulator via REST API
+
+#### Setup Env
 
 ```bash
 export PROJECT_ID=my-project-id
 export PIPELINE_NAME=classifier
 export PUBSUB_EMULATOR_HOST=http://localhost:8085
+```
 
+#### Create 
+
+```bash
 # Create Topics and Subscriptions every time you restart pubsub emulator 
 # if you run `generateTestData` test, it will also generate below topics.
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input
-curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output-success
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output-failure
 
-# Create subscription
+# Create a subscription to input topic
 curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input \
 -H "Content-Type: application/json" \
 -d '{
 "topic": "'"projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input"'"
 }' 
 
+# Create a subscription to output success topic
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-output-success \
+-H "Content-Type: application/json" \
+-d '{
+"topic": "'"projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output-success"'"
+}' 
+
+# Create a subscription to output failure topic
+curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-output-failure \
+-H "Content-Type: application/json" \
+-d '{
+"topic": "'"projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output-failure"'"
+}' 
+```
+
+#### Verify 
+
+```bash
 # List Topics (optional)
 curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics
 # List Subscriptions (optional)
 curl -X GET ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions
+ 
+# publishing a message to input topic
+curl -d '{"messages": [{"data": "c3Vwc3VwCg=="}]}' -H "Content-Type: application/json" -X POST ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-input:publish
+ 
+# Read messages from success topic
+curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: application/json" -X POST ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-output-success:pull
+
+# Read messages from error topic
+curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: application/json" -X POST ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-output-failure:pull
 ``` 
+
 
 ## TODO
 

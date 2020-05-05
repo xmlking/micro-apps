@@ -29,7 +29,6 @@ class ClassifierPipelineTest : Serializable {
     private val projectId = "my-project-id"
     private val jobName = "classifier"
     private val inputTopicName = "$jobName-input"
-    private val inputSubscriptionName = "$jobName-input"
     private val outputSuccessTopicName = "$jobName-output-success"
     private val outputFailureTopicName = "$jobName-output-failure"
     private val helper = Helper(host, projectId)
@@ -52,9 +51,12 @@ class ClassifierPipelineTest : Serializable {
         println(testOptions)
         try {
             helper.createTopic(inputTopicName)
-            helper.createSubscription(inputTopicName, inputSubscriptionName)
+            // using subscription name same as topic name
+            helper.createSubscription(inputTopicName, inputTopicName)
             helper.createTopic(outputSuccessTopicName)
+            helper.createSubscription(outputSuccessTopicName, outputSuccessTopicName)
             helper.createTopic(outputFailureTopicName)
+            helper.createSubscription(outputFailureTopicName, outputFailureTopicName)
         } catch (e: ApiException) {
             if (e.statusCode.code == ALREADY_EXISTS) {
                 println("topic already exists")
@@ -73,7 +75,10 @@ class ClassifierPipelineTest : Serializable {
     @AfterTest
     @Throws(ApiException::class)
     fun after() {
-        helper.deleteSubscription(inputSubscriptionName)
+        helper.deleteSubscription(inputTopicName)
+        helper.deleteSubscription(outputSuccessTopicName)
+        helper.deleteSubscription(outputFailureTopicName)
+
         helper.deleteTopic(inputTopicName)
         helper.deleteTopic(outputSuccessTopicName)
         helper.deleteTopic(outputFailureTopicName)
