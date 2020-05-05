@@ -36,3 +36,5 @@ gradle :apps:account-grpc:jib \
 
 ## Reference 
 - [Announcing Open Source gRPC Kotlin Deck](https://www.cncf.io/wp-content/uploads/2020/04/Announcing-Open-Source-gRPC-Kotlin.pdf)
+- [A collection of useful/essential gRPC Java Examples](https://github.com/saturnism/grpc-by-example-java)
+- [Lessons Learned Implementing Microservices in Kubernetes](https://saturnism.me/talk/kubernetes-microservices-lessons-learned/)
