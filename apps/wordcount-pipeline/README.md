@@ -8,7 +8,8 @@ WordCount pipeline demo.
 ```bash
 gradle :apps:wordcount-pipeline:run --args="--runner=DirectRunner --inputFile=./src/test/resources/data/input.txt --output=./build/output.txt"
 
-java -jar ./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
+java -jar \
+./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
 --runner=DirectRunner \
 --inputFile=./apps/wordcount/src/test/resources/data/input.txt \
 --output=./apps/wordcount/build/output.txt
@@ -30,9 +31,9 @@ java -jar ./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
 --project=${PROJECT_ID} \
 --inputTopic=projects/${PROJECT_ID}/topics/windowed-files \
 --gcpTempLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ \
---stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ \
---inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt \
---output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
+--stagingLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/staging/ \
+--inputFile=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt \
+--output=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
 ```
 
 #### Creating Template

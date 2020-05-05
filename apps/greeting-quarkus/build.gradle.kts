@@ -21,11 +21,11 @@ dependencies {
     implementation("io.quarkus:quarkus-smallrye-metrics")
     implementation("io.quarkus:quarkus-smallrye-openapi")
     // deployment FIXME
-    // implementation("io.quarkus:quarkus-container-image-jib")
-    // implementation("io.quarkus:quarkus-kubernetes")
+    implementation("io.quarkus:quarkus-container-image-jib")
+    implementation("io.quarkus:quarkus-kubernetes")
     // testing
     testImplementation("io.quarkus:quarkus-junit5")
-    testImplementation("io.rest-assured:rest-assured")
+    testImplementation("io.rest-assured:kotlin-extensions")
 }
 
 quarkus {
@@ -42,6 +42,7 @@ allOpen {
 tasks {
     test {
         useJUnitPlatform()
+        systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
     }
 
     quarkusDev {

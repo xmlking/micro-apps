@@ -29,6 +29,8 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## scaffolding projects
 
+> your can use  https://code.quarkus.io/ **WebApp**  to generate project
+
 ```bash
 cd apps
 mvn io.quarkus:quarkus-maven-plugin:1.4.1.Final:create \

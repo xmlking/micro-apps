@@ -36,19 +36,21 @@ gradle :apps:streaming-pipeline:test --tests "micro.apps.pipeline.PubSubProducer
 ```bash
 export PROJECT_ID=my-project-id
 export PIPELINE_NAME=classifier
+GCS_BUCKET=classifier-bucket
 export PUBSUB_EMULATOR_HOST=http://localhost:8085
 
-gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project=${PROJECT_ID} --jobName=${PIPELINE_NAME} --pubsubRootUrl=${PUBSUB_EMULATOR_HOST}"
-gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner --project=${PROJECT_ID} --jobName=${PIPELINE_NAME} --windowDuration=100s  --pubsubRootUrl=${PUBSUB_EMULATOR_HOST} --inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input --outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output"
+gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner \
+--project=${PROJECT_ID} \
+--jobName=${PIPELINE_NAME} \
+--gcsBucket=${GCS_BUCKET} \
+--pubsubRootUrl=${PUBSUB_EMULATOR_HOST}
 
-# or via jar
-java -jar ./apps/streaming/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
---runner=DirectRunner \
---project==${PROJECT_ID} \
---windowDuration=300s \
---pubsubRootUrl=${PUBSUB_EMULATOR_HOST} \
---inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input \
---outputTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output
+# or via jar [gradle :apps:streaming-pipeline:build -x test]
+java -jar ./apps/streaming-pipeline/build/libs/streaming-pipeline-0.1.2-SNAPSHOT-all.jar --runner=DirectRunner \
+--project=${PROJECT_ID} \
+--jobName=${PIPELINE_NAME} \
+--gcsBucket=${GCS_BUCKET} \
+--pubsubRootUrl=${PUBSUB_EMULATOR_HOST}
 ```
 
 
@@ -56,21 +58,29 @@ java -jar ./apps/streaming/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
 ```bash
 PROJECT_ID=<my-project-id>
 PIPELINE_NAME=streaming
+GCS_BUCKET=<my-gcs-bucket>
 export GOOGLE_APPLICATION_CREDENTIALS=<full-path-to-your-json>
 
-gradle :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation==gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ --inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt --output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt"
+gradle :apps:streaming-pipeline:run --args="--runner=DataflowRunner \
+--project=${PROJECT_ID} \
+--jobName=${PIPELINE_NAME} \
+--gcsBucket=${GCS_BUCKET} \
+--inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input \
+--outputSuccessTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output-success" \
+--outputFailureTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output-failure" \
+--gcpTempLocation=gs://${PROJECT_ID}/dataflow/${PIPELINE_NAME}/temp/ \
+--stagingLocation=gs://${PROJECT_ID}/dataflow/${PIPELINE_NAME}/staging"
 
 # Or with fatJar
-java -jar ./apps/streaming/build/libs/streaming-0.1.6-SNAPSHOT-all.jar  \
---runner=DataflowRunner \
---windowDuration=2m \
---numShards=1 \
+java -jar ./apps/streaming-pipeline/build/libs/streaming-pipeline-0.1.2-SNAPSHOT-all.jar --runner=DataflowRunner \
 --project=${PROJECT_ID} \
---inputTopic=projects/${PROJECT_ID}/topics/windowed-files \
---gcpTempLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ \
---stagingLocation=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/staging/ \
---inputFile=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt \
---output=gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
+--jobName=${PIPELINE_NAME} \
+--gcsBucket=${GCS_BUCKET} \
+--inputSubscription=projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-input \
+--outputSuccessTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output-success" \
+--outputFailureTopic=projects/${PROJECT_ID}/topics/${PIPELINE_NAME}-output-failure" \
+--gcpTempLocation=gs://${PROJECT_ID}/dataflow/${PIPELINE_NAME}/temp/ \
+--stagingLocation=gs://${PROJECT_ID}/dataflow/${PIPELINE_NAME}/staging/ \
 ```
 
 ### Creating Template
@@ -80,7 +90,7 @@ gradle :apps:streaming-pipeline:run --args="--runner=DataflowRunner --project=$P
 
 > Creating as template from VM
 ```bash
-java -jar /mnt/data/pipelines/templates/wordcount-0.1.6-SNAPSHOT-all.jar --runner=DataFlowRunner \
+java -jar ./apps/streaming-pipeline/build/libs/streaming-pipeline-0.1.6-SNAPSHOT-all.jar --runner=DataFlowRunner \
     --project=$PROJECT_ID \
     --gcpTempLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ \
     --stagingLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/staging/ \
@@ -105,7 +115,7 @@ gradle :apps:streaming-pipeline:test
 # clean
 gradle :apps:streaming-pipeline:clean
 # make fatJar
-gradle :apps:streaming-pipeline:build
+gradle :apps:streaming-pipeline:build -x test
 ```
 
 ### Using PubSub Emulator
@@ -169,9 +179,10 @@ curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: applicat
 curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: application/json" -X POST ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PIPELINE_NAME}-output-failure:pull
 ``` 
 
-
 ## TODO
 
 - https://beam.apache.org/documentation/sdks/java/euphoria/
 - [Batched RPC](https://beam.apache.org/blog/2017/08/28/timely-processing.html)
 - E2E tests with PutSub <https://github.com/stevenextwave/beam/blob/master/src/test/java/org/apache/beam/examples/test/EndToEndTest.java>
+
+- Async https://github.com/danielhultqvist/async-scio-future/blob/master/src/main/scala/example/FutureAsyncDoFn.scala
