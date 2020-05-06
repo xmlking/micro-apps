@@ -9,6 +9,9 @@ val hamcrestVersion: String by project
 val kotlinSerializationVersion: String by project
 val avro4kVersion: String by project
 val konfigVersion: String by project
+val guavaVersion: String by project
+val grpcKotlinVersion: String by project
+val kotlinCoroutinesVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -31,6 +34,12 @@ dependencies {
     // Kotlin Config
     implementation("com.uchuhimo:konf-core:$konfigVersion")
     implementation("com.uchuhimo:konf-yaml:$konfigVersion")
+
+    // gRPC deps: for calling API
+    implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinCoroutinesVersion")
+    api("com.google.guava:guava:$guavaVersion") // Force `-jre` version instead of `-android`
 
     // Use the Kotlin test library.
     testImplementation(kotlin("test"))

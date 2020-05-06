@@ -8,7 +8,7 @@ val arrowVersion: String by project
 dependencies {
     implementation(project(":libs:proto"))
 
-    // Grpc
+    // gRPC
     implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
     implementation("io.grpc:grpc-protobuf:$grpcVersion")
     implementation("io.grpc:grpc-stub:$grpcVersion")
