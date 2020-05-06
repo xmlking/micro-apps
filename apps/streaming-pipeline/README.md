@@ -45,6 +45,18 @@ gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner \
 --gcsBucket=${GCS_BUCKET} \
 --pubsubRootUrl=${PUBSUB_EMULATOR_HOST}
 
+# run non-stream mode 
+gradle :apps:streaming-pipeline:run --args="--runner=DirectRunner \
+--project=${PROJECT_ID} \
+--jobName=${PIPELINE_NAME} \
+--gcsBucket=${GCS_BUCKET} \
+--pubsubRootUrl=${PUBSUB_EMULATOR_HOST} \
+--stream=false \
+--gcpTempLocation=./build/temp \
+--inputPath=./src/main/resources/data/*.avro \
+--outputSuccessPath=./build/output/success \
+--outputFailurePath=./build/output/failure"
+
 # or via jar [gradle :apps:streaming-pipeline:build -x test]
 java -jar ./apps/streaming-pipeline/build/libs/streaming-pipeline-0.1.2-SNAPSHOT-all.jar --runner=DirectRunner \
 --project=${PROJECT_ID} \

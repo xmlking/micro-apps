@@ -111,7 +111,7 @@ spotlessChangelog {
     branch("release")
 }
 
-println("SpotlessChangelog version Next: ${spotlessChangelog.versionNext}  Last: ${spotlessChangelog.versionLast}")
+println("SpotlessChangelog Version Next: ${spotlessChangelog.versionNext}  Last: ${spotlessChangelog.versionLast}")
 
 spotless {
     kotlin {

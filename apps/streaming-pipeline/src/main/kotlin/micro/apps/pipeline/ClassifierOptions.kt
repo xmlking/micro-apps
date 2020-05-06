@@ -49,14 +49,14 @@ interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, Streaming
     @get:Validation.Required
     var inputPath: ValueProvider<String>
 
-    @get:Description("""GCS output path to write SUCCESS events.
-        |Format is: gs://<project-id>/dataflow/<jobName>/output_success""")
+    @get:Description("""GCS outputPrefix to write SUCCESS events.
+        |Format is: gs://<project-id>/dataflow/<jobName>/output/success""")
     @get:Default.InstanceFactory(GcsOutputSuccessPathFactory::class)
     @get:Validation.Required
     var outputSuccessPath: ValueProvider<String>
 
-    @get:Description("""GCS output path to write FAILURE events.
-        |Format is: gs://<project-id>/dataflow/<jobName>/output_failure""")
+    @get:Description("""GCS outputPrefix to write FAILURE events.
+        |Format is: gs://<project-id>/dataflow/<jobName>/output/failure""")
     @get:Default.InstanceFactory(GcsOutputFailurePathFactory::class)
     @get:Validation.Required
     var outputFailurePath: ValueProvider<String>
@@ -128,10 +128,10 @@ interface ClassifierOptions : ApplicationNameOptions, PipelineOptions, Streaming
         override fun create(options: PipelineOptions) = """gs://${(options as ClassifierOptions).gcsBucket}/dataflow/${options.jobName}/input/*.avro""".trimIndent()
     }
     class GcsOutputSuccessPathFactory : DefaultValueFactory<String> {
-        override fun create(options: PipelineOptions) = """gs://${(options as ClassifierOptions).gcsBucket}/dataflow/${options.jobName}/output_success""".trimIndent()
+        override fun create(options: PipelineOptions) = """gs://${(options as ClassifierOptions).gcsBucket}/dataflow/${options.jobName}/output/success""".trimIndent()
     }
     class GcsOutputFailurePathFactory : DefaultValueFactory<String> {
-        override fun create(options: PipelineOptions) = """gs://${(options as ClassifierOptions).gcsBucket}/dataflow/${options.jobName}/output_failure""".trimIndent()
+        override fun create(options: PipelineOptions) = """gs://${(options as ClassifierOptions).gcsBucket}/dataflow/${options.jobName}/output/failure""".trimIndent()
     }
     class GcsKeystorePathFactory : DefaultValueFactory<String> {
         override fun create(options: PipelineOptions) = """projects/${(options as GcpOptions).project}/locations/${options.jobName}/keyRings/${options.jobName}/cryptoKeys""".trimIndent()
