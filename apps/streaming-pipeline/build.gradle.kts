@@ -46,7 +46,7 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation(kotlin("test-junit"))
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
-    testImplementation("com.google.cloud:google-cloud-pubsub:1.105.0")
+    testImplementation("com.google.cloud:google-cloud-pubsub:1.105.1")
 }
 
 java {
