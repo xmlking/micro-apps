@@ -34,7 +34,7 @@ plugins {
     // Code Quality
     id("org.sonarqube") version "2.8"
     // Keep your code spotless
-    id("com.diffplug.gradle.spotless") version "3.29.0"
+    id("com.diffplug.gradle.spotless") version "3.30.0"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.serialization") version "1.3.72" apply false
@@ -434,7 +434,7 @@ tasks {
     }
 
     wrapper {
-        gradleVersion = "6.4"
+        gradleVersion = "6.4.1"
         distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-bin.zip"
     }
 }
