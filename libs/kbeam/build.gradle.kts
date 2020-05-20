@@ -7,6 +7,10 @@ dependencies {
     implementation("org.apache.beam:beam-runners-direct-java:$beamVersion")
     implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
 
+    // Use the Kotlin test library.
+    testImplementation(kotlin("test"))
+    // Use the Kotlin JUnit integration.
+    testImplementation(kotlin("test-junit"))
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testImplementation("org.apache.beam:beam-sdks-java-extensions-json-jackson:$beamVersion")
 }

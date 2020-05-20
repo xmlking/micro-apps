@@ -1,1 +1,5 @@
-
+tasks {
+    test {
+        useJUnitPlatform()
+    }
+}

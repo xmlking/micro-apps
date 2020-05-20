@@ -271,7 +271,7 @@ subprojects {
             }
 
             test {
-                // useJUnitPlatform()
+                // useJUnitPlatform() // TODO: once, all projects compatible with JUnit5 we will make it default
                 filter {
                     isFailOnNoMatchingTests = false
                 }

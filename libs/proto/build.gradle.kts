@@ -27,8 +27,8 @@ dependencies {
 
     // proto validate generator
     implementation("io.envoyproxy.protoc-gen-validate:pgv-java-stub:$pgvVersion")
-    // grpc testing
-    testImplementation("io.grpc:grpc-testing:$grpcVersion")
+    // grpc testing TODO: https://github.com/grpc/grpc-java/issues/5331
+    // testImplementation("io.grpc:grpc-testing:$grpcVersion")
 }
 
 sourceSets {
@@ -71,5 +71,11 @@ protobuf {
             }
             it.generateDescriptorSet = true
         }
+    }
+}
+
+tasks {
+    test {
+        useJUnitPlatform()
     }
 }

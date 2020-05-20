@@ -4,8 +4,8 @@ package micro.apps.model
 // import com.charleskorn.kaml.YamlConfiguration
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.shouldBe
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.Json
@@ -28,7 +28,8 @@ data class ProtobufData(
     @ProtoId(2) val b: Double = 42.88
 )
 
-class SerializationTest {
+@kotlinx.serialization.UnstableDefault
+class SerializationTest : FunSpec({
 
 //    val JSON by lazy {
 //        Json(JsonConfiguration.Stable.copy(isLenient = true, prettyPrint = true))
@@ -38,48 +39,45 @@ class SerializationTest {
 //        Yaml(configuration = YamlConfiguration(strictMode = false))
 //    }
 
-    private val veg = Pizza("veg", listOf(Ingredient("peppers", 0.1, 0.3), Ingredient("onion", 1.0, 0.4)), true, 265)
-    private val hawaiian = Pizza("hawaiian", listOf(Ingredient("ham", 1.5, 5.6), Ingredient("pineapple", 5.2, 0.2)), false, 391)
+    val veg = Pizza("veg", listOf(Ingredient("peppers", 0.1, 0.3), Ingredient("onion", 1.0, 0.4)), true, 265)
+    val hawaiian = Pizza("hawaiian", listOf(Ingredient("ham", 1.5, 5.6), Ingredient("pineapple", 5.2, 0.2)), false, 391)
 
-    private val vegString = """{"name":"veg","ingredients":[{"name":"peppers","sugar":0.1,"fat":0.3},{"name":"onion","sugar":1.0,"fat":0.4}],"vegetarian":true,"kcals":265}"""
-    private val hawaiianString = """{"name":"hawaiian","ingredients":[{"name":"ham","sugar":1.5,"fat":5.6},{"name":"pineapple","sugar":5.2,"fat":0.2}],"vegetarian":false,"kcals":391}"""
+    val vegString =
+        """{"name":"veg","ingredients":[{"name":"peppers","sugar":0.1,"fat":0.3},{"name":"onion","sugar":1.0,"fat":0.4}],"vegetarian":true,"kcals":265}"""
+    val hawaiianString =
+        """{"name":"hawaiian","ingredients":[{"name":"ham","sugar":1.5,"fat":5.6},{"name":"pineapple","sugar":5.2,"fat":0.2}],"vegetarian":false,"kcals":391}"""
 
-    private val pizzaString = """[{"name":"veg","ingredients":[{"name":"peppers","sugar":0.1,"fat":0.3},{"name":"onion","sugar":1.0,"fat":0.4}],"vegetarian":true,"kcals":265},{"name":"hawaiian","ingredients":[{"name":"ham","sugar":1.5,"fat":5.6},{"name":"pineapple","sugar":5.2,"fat":0.2}],"vegetarian":false,"kcals":391}]"""
+    val pizzaString =
+        """[{"name":"veg","ingredients":[{"name":"peppers","sugar":0.1,"fat":0.3},{"name":"onion","sugar":1.0,"fat":0.4}],"vegetarian":true,"kcals":265},{"name":"hawaiian","ingredients":[{"name":"ham","sugar":1.5,"fat":5.6},{"name":"pineapple","sugar":5.2,"fat":0.2}],"vegetarian":false,"kcals":391}]"""
 
-    @kotlinx.serialization.UnstableDefault
-    @Test
-    fun testJsonSerialization() {
+    test("testJsonSerialization") {
         val str = Json.stringify<Pizza>(Pizza.serializer(), veg)
-        assertEquals(vegString, str)
+        vegString shouldBe str
 
         // parsing data back
         val obj = Json.parse<Pizza>(Pizza.serializer(), str)
-        assertEquals(veg, obj)
+        veg shouldBe obj
     }
 
-    @kotlinx.serialization.UnstableDefault
-    @Test
-    fun testJsonListSerialization() {
+    test("testJsonListSerialization") {
         val str = Json.stringify<List<Pizza>>(Pizza.serializer().list, listOf(veg, hawaiian))
-        assertEquals(pizzaString, str)
+        pizzaString shouldBe str
         println(str)
     }
 
-    @Test
-    fun testProtobufSerialization() {
+    test("testProtobufSerialization") {
         // testing non-proto class
         val pizzaBytes = ProtoBuf.dump(Pizza.serializer(), hawaiian)
         val pizza = ProtoBuf.load<Pizza>(Pizza.serializer(), pizzaBytes) // parsing data back
-        assertEquals(hawaiian, pizza)
+        hawaiian shouldBe pizza
         // testing ProtoId annotated class
         val originalData = ProtobufData(a = 5)
         val dump = ProtoBuf.dump<ProtobufData>(ProtobufData.serializer(), originalData)
         val data = ProtoBuf.load<ProtobufData>(ProtobufData.serializer(), dump) // parsing data back
-        assertEquals(originalData, data)
+        originalData shouldBe data
     }
 
-    @Test
-    fun testAvroSerialization_WriteData() {
+    test("testAvroSerialization_WriteData") {
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
         val output = Avro.default.openOutputStream(serializer) {
@@ -90,8 +88,7 @@ class SerializationTest {
         output.close()
     }
 
-    @Test
-    fun testAvroSerialization_ReadData() {
+    test("testAvroSerialization_ReadData") {
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
         val input = Avro.default.openInputStream(serializer) {
@@ -103,8 +100,7 @@ class SerializationTest {
         input.close()
     }
 
-    @Test
-    fun testAvroSerialization_ReadDataAsGenericRecord() {
+    test("testAvroSerialization_ReadDataAsGenericRecord") {
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
         val input = Avro.default.openInputStream() {
@@ -115,10 +111,9 @@ class SerializationTest {
         input.close()
     }
 
-    @Test
-    fun testGeneratedSchema() {
+    test("testGeneratedSchema") {
         val expectedSchema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/pizzas.avsc"))
         val generatedSchema = Avro.default.schema(Pizza.serializer())
-        assertEquals(expectedSchema.toString(true), generatedSchema.toString(true))
+        expectedSchema.toString(true) shouldBe generatedSchema.toString(true)
     }
-}
+})
