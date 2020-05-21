@@ -40,7 +40,7 @@ plugins {
     kotlin("plugin.serialization") version "1.3.72" apply false
     kotlin("plugin.allopen") version "1.3.72" apply false
     id("org.jetbrains.dokka") version "0.10.1"
-    id("com.google.protobuf") version "0.8.12" apply false
+    id("com.google.protobuf") version "3.12.1" apply false
     id("io.quarkus") version "1.4.2.Final" apply false
     // Keep dependencies up to date
     // gradle dependencyUpdates -Drevision=release
