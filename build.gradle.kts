@@ -62,7 +62,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.2.0"
     // Build & Publish docker images
     // gradle jib
-    id("com.google.cloud.tools.jib") version "2.2.0"
+    id("com.google.cloud.tools.jib") version "2.3.0"
 }
 
 // rootProject config
