@@ -4,6 +4,7 @@ val grpcVersion: String by project
 val grpcKotlinVersion: String by project
 val protobufVersion: String by project
 val arrowVersion: String by project
+val sentinelVersion: String by project
 
 dependencies {
     implementation(project(":libs:proto"))
@@ -23,10 +24,17 @@ dependencies {
     // Google
     implementation("com.google.guava:guava:$guavaVersion")
 
+    // Resilience frameworks
+    implementation("com.alibaba.csp:sentinel-grpc-adapter:$sentinelVersion")
+    // implementation("com.netflix.concurrency-limits:concurrency-limits-grpc:$netflixConcurrencyVersion")
+
     // Arrow, TODO: planing to use n the future
     // implementation("io.arrow-kt:arrow-core:$arrowVersion")
     // implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
     // implementation("io.arrow-kt:arrow-fx:$arrowVersion")
+
+    // Test
+    // testImplementation("io.kotest:kotest-extensions-koin:{version}")
 }
 
 application {
