@@ -34,7 +34,7 @@ plugins {
     // Code Quality
     id("org.sonarqube") version "2.8"
     // Keep your code spotless
-    id("com.diffplug.gradle.spotless") version "4.0.0"
+    id("com.diffplug.gradle.spotless") version "4.0.1"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.serialization") version "1.3.72" apply false
@@ -62,7 +62,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.2.0"
     // Build & Publish docker images
     // gradle jib
-    id("com.google.cloud.tools.jib") version "2.2.0"
+    id("com.google.cloud.tools.jib") version "2.3.0"
 }
 
 // rootProject config
