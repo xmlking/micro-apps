@@ -44,6 +44,7 @@ pipeline {
                 always {
                     jacoco classPattern: "**/build/classes", execPattern: "**/build/jacoco/*.exec", sourcePattern: "**/src/main/kotlin"
                     junit allowEmptyResults: true, testResults: '**/build/test-results/**/*.xml'
+                    publishCoverage adapters: [jacocoAdapter(mergeToOneReport: true, path: '**/build/reports/jacoco/test/jacocoTestReport.xml')]
                 }
             }
         }
