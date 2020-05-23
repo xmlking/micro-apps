@@ -1,5 +1,1 @@
-tasks {
-    test {
-        useJUnitPlatform()
-    }
-}
+// Test

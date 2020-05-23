@@ -41,7 +41,6 @@ allOpen {
 
 tasks {
     test {
-        useJUnitPlatform()
         systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
     }
 

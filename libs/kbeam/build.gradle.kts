@@ -1,4 +1,5 @@
 val beamVersion: String by project
+val junitVersion: String by project
 val hamcrestVersion: String by project
 
 dependencies {
@@ -12,5 +13,8 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation(kotlin("test-junit"))
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
+        because("allows JUnit 4 tests run along with JUnit 5")
+    }
     testImplementation("org.apache.beam:beam-sdks-java-extensions-json-jackson:$beamVersion")
 }

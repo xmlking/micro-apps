@@ -53,9 +53,3 @@ jib {
     //     permissions = mapOf("/work" to "775", "/distr" to "775")
     // }
 }
-
-tasks {
-    test {
-        useJUnitPlatform()
-    }
-}

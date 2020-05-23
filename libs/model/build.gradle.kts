@@ -13,9 +13,3 @@ dependencies {
     implementation("com.sksamuel.avro4k:avro4k-core:$avro4kVersion") // Avro serialization
     // implementation("com.charleskorn.kaml:kaml:$kamlVersion") // YAML serialization
 }
-
-tasks {
-    test {
-        useJUnitPlatform()
-    }
-}

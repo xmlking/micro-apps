@@ -73,9 +73,3 @@ protobuf {
         }
     }
 }
-
-tasks {
-    test {
-        useJUnitPlatform()
-    }
-}

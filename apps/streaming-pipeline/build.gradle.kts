@@ -5,6 +5,7 @@ plugins {
 val kotlinVersion: String by project
 val beamVersion: String by project
 val csvVersion: String by project
+val junitVersion: String by project
 val hamcrestVersion: String by project
 val kotlinSerializationVersion: String by project
 val avro4kVersion: String by project
@@ -47,20 +48,9 @@ dependencies {
     testImplementation(kotlin("test-junit"))
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testImplementation("com.google.cloud:google-cloud-pubsub:1.105.1")
-}
-
-java {
-    // Java 8 needed as Beam doesn't yet support 11
-    // FIXME
-    // sourceCompatibility = JavaVersion.VERSION_1_8
-    // targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-application {
-    // mainClassName = "micro.apps.pipeline.ClassifierPipeline"
-    mainClassName = "micro.apps.pipeline.EnricherPipeline"
-    // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
-    applicationDefaultJvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
+        because("allows JUnit 4 tests run along with JUnit 5")
+    }
 }
 
 // gradle test -DKotest.tags.include=Beam -DKotest.tags.exclude=E2E
@@ -68,4 +58,11 @@ tasks {
     test {
         systemProperty("Kotest.tags.exclude", System.getProperty("E2E"))
     }
+}
+
+application {
+    // mainClassName = "micro.apps.pipeline.ClassifierPipeline"
+    mainClassName = "micro.apps.pipeline.EnricherPipeline"
+    // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
+    applicationDefaultJvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
 }

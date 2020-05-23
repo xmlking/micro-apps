@@ -24,9 +24,11 @@
     
     Reference : [gRPC Authentication](https://grpc.io/docs/guides/auth/)
 
-- How to implement gRPC client/server-side resilience? 
+### flow-control middleware 
 
-    I found following two liberties that could be used as gRPC intercepts
+- How to implement gRPC client/server side resilience?
+
+    Found following two liberties that could be used as gRPC intercepts
     1. [concurrency-limits-grpc](https://github.com/Netflix/concurrency-limits)
     2. [Sentinel](https://sentinelguard.io/en-us/)
-        2.1 [Sentinel-gRPC](https://sentinelguard.io/en-us/docs/open-source-framework-integrations.html)
+        1. [Sentinel-gRPC](https://sentinelguard.io/en-us/docs/open-source-framework-integrations.html)
