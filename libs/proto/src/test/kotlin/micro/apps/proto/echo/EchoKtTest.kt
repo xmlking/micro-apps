@@ -6,7 +6,7 @@ import micro.apps.proto.echo.v1.EchoRequest
 
 class EchoKtTest : FunSpec({
 
-    test("Test create EchoRequest") {
+    test("EchoRequest proto generated class should be buildable") {
         val account = with(EchoRequest.newBuilder()) {
             message = "sumo"
             return@with build()

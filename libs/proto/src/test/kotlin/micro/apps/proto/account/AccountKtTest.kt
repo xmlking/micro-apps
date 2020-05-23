@@ -6,7 +6,7 @@ import micro.apps.proto.common.v1.Person
 
 class AccountKtTest : FunSpec({
 
-    test("Test create Person") {
+    test("Person proto generated class should be buildable") {
         val person = with(Person.newBuilder()) {
             firstName = "sumo"
             lastName = "demo"
