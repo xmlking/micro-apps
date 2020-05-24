@@ -57,6 +57,7 @@ Install IntelliJ Plugins
 
 1. SonarLint
 2. Detekt
+3. [kotest](https://plugins.jetbrains.com/plugin/14080-kotest)
 
 ### Lint
 
