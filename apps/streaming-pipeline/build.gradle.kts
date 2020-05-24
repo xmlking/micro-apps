@@ -13,6 +13,7 @@ val konfigVersion: String by project
 val guavaVersion: String by project
 val grpcKotlinVersion: String by project
 val kotlinCoroutinesVersion: String by project
+val slf4jVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -65,4 +66,8 @@ application {
     mainClassName = "micro.apps.pipeline.EnricherPipeline"
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
     applicationDefaultJvmArgs = listOf("-Djava.util.logging.config.file=src/main/resources/logging.properties", "-Dmicro.apps.level=FINE")
+}
+
+loggingCapabilities {
+    selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }

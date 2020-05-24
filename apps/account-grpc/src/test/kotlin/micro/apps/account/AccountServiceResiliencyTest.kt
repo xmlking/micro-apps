@@ -15,6 +15,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.TestCaseConfig
 import io.kotest.matchers.shouldBe
+import kotlin.system.measureTimeMillis
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
 import kotlinx.coroutines.async
@@ -109,21 +110,24 @@ class AccountServiceResiliencyTest : FunSpec({
     }
 
     test("flow-control should slowdown busted requests").config(enabled = true, tags = setOf(Slow, E2E)) {
-        configureBlockingFlowRule(2)
+        configureBlockingFlowRule(3)
         val accountStub: AccountServiceGrpcKt.AccountServiceCoroutineStub =
             AccountServiceGrpcKt.AccountServiceCoroutineStub(channel)
 
         lateinit var results: List<GetResponse>
         shouldNotThrowAny {
-            results = (1..10).map {
-                async {
-                    logger.debug { "firing request #$it" }
-                    val request = GetRequest.newBuilder().setId(StringValue.of("sumo$it")).build()
-                    val res = accountStub.get(request)
-                    logger.debug { "Received: ${res.account.firstName}" }
-                    res
-                }
-            }.awaitAll()
+            val elapsed = measureTimeMillis {
+                results = (1..10).map {
+                    async {
+                        logger.debug { "firing request #$it" }
+                        val request = GetRequest.newBuilder().setId(StringValue.of("sumo$it")).build()
+                        val res = accountStub.get(request)
+                        logger.debug { "Received: ${res.account.firstName}" }
+                        res
+                    }
+                }.awaitAll()
+            }
+            logger.info { "elapsed time $elapsed" }
         }
         results.size shouldBe 10
     }

@@ -1,5 +1,6 @@
 package micro.apps.account
 
+import com.google.protobuf.StringValue
 import io.grpc.Server
 import io.grpc.ServerBuilder
 import kotlinx.coroutines.delay
@@ -55,8 +56,10 @@ class AccountServer(val port: Int) {
             .build()
 
         override fun search(request: SearchRequest): Flow<SearchResponse> = flow {
-            // logger.atInfo().log("firstName: %s, lastName: %s", person.firstName, person.lastName)
-            // logger.atInfo().log("filter: %s", request.filter)
+            // logger.atInfo().log("firstName: {}, lastName: {}", person.firstName, person.lastName)
+            // logger.atDebug().addKeyValue("firstName", person.firstName).addKeyValue("lastName", person.lastName).log("Responding with Person:")
+            val filter = request.filter.unpack<StringValue>(StringValue::class.java).value
+            logger.atDebug().log("filter type: {}", filter)
             while (true) {
                 delay(1000)
                 emit(SearchResponse.newBuilder().setAccount(person).build())

@@ -13,3 +13,9 @@
   touch foo
   git cz -a
   ```
+  
+- How to configure SLF4J with different logger implementations?
+
+  - [How to configure SLF4J with different logger implementations](http://saltnlight5.blogspot.com/2013/08/how-to-configure-slf4j-with-different.html)
+  - [Addressing the complexity of the Java logging ecosystem with capabilitiesblog](https://blog.gradle.org/addressing-logging-complexity-capabilities)
+  - [logging-capabilities gradle plugin](https://github.com/ljacomet/logging-capabilities)

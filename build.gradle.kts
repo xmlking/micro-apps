@@ -63,6 +63,8 @@ plugins {
     // Build & Publish docker images
     // gradle jib
     id("com.google.cloud.tools.jib") version "2.3.0"
+    // detect slf4j conflicts and configure desired backend
+    id("dev.jacomet.logging-capabilities") version "0.9.0"
 }
 
 // rootProject config
@@ -158,6 +160,7 @@ subprojects {
             plugin("maven-publish")
             plugin("org.jetbrains.dokka")
             plugin("com.diffplug.gradle.spotless")
+            plugin("dev.jacomet.logging-capabilities")
             // exclude for root `apps` and `greeting-quarkus` projects
             if (path.startsWith(":apps") && (name != "greeting-quarkus")) {
                 plugin("application")
@@ -196,6 +199,13 @@ subprojects {
             implementation("org.slf4j:slf4j-api:$slf4jVersion")
             implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
             runtimeOnly("org.slf4j:slf4j-jdk14:$slf4jVersion")
+            runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
+        }
+
+        // enforce `slf4j-simple` for all sub-projects.
+        // Dataflow projects can overwrite it with `slf4j-jdk14` in project specific build.gradle.kts file
+        loggingCapabilities {
+            selectSlf4JBinding("org.slf4j:slf4j-simple:$slf4jVersion")
         }
 
         java {

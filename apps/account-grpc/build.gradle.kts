@@ -43,6 +43,7 @@ dependencies {
 application {
     mainClassName = "micro.apps.account.AccountServerKt"
     //    applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
+    applicationDefaultJvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
 }
 
 jib {

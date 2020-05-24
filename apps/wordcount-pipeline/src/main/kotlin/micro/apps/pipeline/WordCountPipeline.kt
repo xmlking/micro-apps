@@ -44,7 +44,7 @@ object WordCountPipeline {
             .countPerElement()
             .map { "${it.key}: ${it.value}" }
             .parDo<String, String>(name = "just to demo logging") {
-                logger.debug { "THIS IS atFinest MESSAGE" }
+                logger.debug { "THIS IS FINE MESSAGE" }
                 output(element)
             }
             .writeText { path = options.output }
