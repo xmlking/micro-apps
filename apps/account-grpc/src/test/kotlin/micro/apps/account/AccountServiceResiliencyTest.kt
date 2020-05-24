@@ -13,10 +13,19 @@ import io.grpc.StatusException
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.core.test.TestCaseConfig
 import io.kotest.matchers.shouldBe
+import kotlin.time.ExperimentalTime
+import kotlin.time.minutes
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import micro.apps.proto.account.v1.AccountServiceGrpcKt
 import micro.apps.proto.account.v1.GetRequest
+import micro.apps.proto.account.v1.GetResponse
+import micro.apps.test.E2E
+import micro.apps.test.Slow
+import micro.apps.test.gRPC
+import mu.KotlinLogging
 
 const val resourceName = "micro.apps.proto.account.v1.AccountService/Get"
 
@@ -42,7 +51,12 @@ fun configureBlockingFlowRule(count: Int) {
     FlowRuleManager.loadRules(listOf(rule))
 }
 
+private val logger = KotlinLogging.logger {}
+
+@ExperimentalTime
 class AccountServiceResiliencyTest : FunSpec({
+    // defaultTestConfig
+    TestCaseConfig(timeout = 3.minutes, tags = setOf(gRPC))
 
     val port = 8080
     lateinit var server: AccountServer
@@ -72,7 +86,7 @@ class AccountServiceResiliencyTest : FunSpec({
         ClusterBuilderSlot.getClusterNodeMap().clear()
     }
 
-    test("rate-limit should block second request") {
+    test("rate-limit should block second request").config(enabled = true, tags = setOf(E2E)) {
         configureFlowRule(2)
 
         val client = AccountClient(channel)
@@ -94,22 +108,23 @@ class AccountServiceResiliencyTest : FunSpec({
         clusterNode.blockRequest() shouldBe 1
     }
 
-    test("rate-limit should slowdown busted requests") {
+    test("flow-control should slowdown busted requests").config(enabled = true, tags = setOf(Slow, E2E)) {
         configureBlockingFlowRule(2)
         val accountStub: AccountServiceGrpcKt.AccountServiceCoroutineStub =
             AccountServiceGrpcKt.AccountServiceCoroutineStub(channel)
 
-        val request = GetRequest.newBuilder().setId(StringValue.of("sumo")).build()
-        val response = accountStub.get(request)
-        response.account.firstName shouldBe "sumo"
-
+        lateinit var results: List<GetResponse>
         shouldNotThrowAny {
-            repeat(10) {
-                val res = async {
-                    accountStub.get(request)
+            results = (1..10).map {
+                async {
+                    logger.debug { "firing request #$it" }
+                    val request = GetRequest.newBuilder().setId(StringValue.of("sumo$it")).build()
+                    val res = accountStub.get(request)
+                    logger.debug { "Received: ${res.account.firstName}" }
+                    res
                 }
-                println(res.await().account.firstName)
-            }
+            }.awaitAll()
         }
+        results.size shouldBe 10
     }
 })

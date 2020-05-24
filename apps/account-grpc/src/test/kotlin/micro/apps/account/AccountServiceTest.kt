@@ -12,6 +12,9 @@ import kotlinx.coroutines.withTimeoutOrNull
 import micro.apps.proto.account.v1.AccountServiceGrpcKt
 import micro.apps.proto.account.v1.SearchRequest
 import micro.apps.proto.account.v1.SearchResponse
+import micro.apps.proto.common.fixtures.mockPerson
+import micro.apps.test.E2E
+import micro.apps.test.Slow
 
 class AccountServiceTest : FunSpec({
     val port = 8080
@@ -35,7 +38,7 @@ class AccountServiceTest : FunSpec({
         channel.shutdownNow()
     }
 
-    test("should be able to call AccountService/Get method") {
+    test("should be able to call AccountService/Get method").config(tags = setOf(E2E)) {
         val aClient = AccountClient(channel)
 
         shouldNotThrowAny {
@@ -45,7 +48,7 @@ class AccountServiceTest : FunSpec({
         aClient.close()
     }
 
-    test("should be able to call AccountService/Search method") {
+    test("should be able to call AccountService/Search method").config(tags = setOf(Slow, E2E)) {
         val accountStub: AccountServiceGrpcKt.AccountServiceCoroutineStub =
             AccountServiceGrpcKt.AccountServiceCoroutineStub(channel)
 
@@ -64,5 +67,9 @@ class AccountServiceTest : FunSpec({
         }
 
         searchResponse.account.firstName shouldBe "sumo"
+    }
+
+    test("test mockPerson helper") {
+        println(mockPerson(1))
     }
 })

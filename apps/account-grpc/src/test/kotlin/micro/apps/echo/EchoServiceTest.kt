@@ -8,6 +8,7 @@ import io.kotest.matchers.shouldBe
 import micro.apps.proto.echo.v1.EchoRequest
 import micro.apps.proto.echo.v1.EchoResponse
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
+import micro.apps.test.E2E
 
 class EchoServiceTest : FunSpec({
     val port = 8080
@@ -31,7 +32,7 @@ class EchoServiceTest : FunSpec({
         channel.shutdownNow()
     }
 
-    test("should be able to call EchoService/Search method") {
+    test("should be able to call EchoService/Search method").config(tags = setOf(E2E)) {
         val echoStub: EchoServiceGrpcKt.EchoServiceCoroutineStub = EchoServiceGrpcKt.EchoServiceCoroutineStub(channel)
 
         lateinit var response: EchoResponse

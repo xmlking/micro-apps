@@ -18,5 +18,6 @@ include(
     ":libs:core",
     ":libs:kbeam",
     ":libs:model",
-    ":libs:proto"
+    ":libs:proto",
+    ":libs:test"
 )

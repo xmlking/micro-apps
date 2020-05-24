@@ -153,6 +153,8 @@ subprojects {
             plugin("org.jetbrains.kotlin.jvm")
             plugin("jacoco")
             plugin("org.sonarqube")
+            // TODO replace "maven-publish" with  id("com.jfrog.artifactory") version "4.10.0"
+            // Adds "build information" when uploading to Artifactory
             plugin("maven-publish")
             plugin("org.jetbrains.dokka")
             plugin("com.diffplug.gradle.spotless")
@@ -161,6 +163,9 @@ subprojects {
                 plugin("application")
                 plugin("com.github.johnrengelman.shadow")
                 plugin("com.google.cloud.tools.jib")
+            }
+            if (path.startsWith(":libs")) {
+                plugin("java-library")
             }
         }
 
@@ -195,6 +200,8 @@ subprojects {
         java {
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
+            withSourcesJar()
+            withJavadocJar()
         }
 
         jacoco {
@@ -300,17 +307,6 @@ subprojects {
                 }
             }
 
-            val sourcesJar by creating(Jar::class) {
-                dependsOn(JavaPlugin.CLASSES_TASK_NAME)
-                archiveClassifier.set("sources")
-                from(sourceSets.main.get().allSource)
-            }
-            val javadocJar by creating(Jar::class) {
-                dependsOn(JavaPlugin.JAVADOC_TASK_NAME)
-                group = JavaBasePlugin.DOCUMENTATION_GROUP
-                archiveClassifier.set("javadoc")
-                from(javadoc)
-            }
             jar {
                 val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
                 sdf.timeZone = TimeZone.getTimeZone("UTC")
@@ -333,11 +329,6 @@ subprojects {
                     isZip64 = true
                     mergeServiceFiles()
                 }
-            }
-
-            artifacts {
-                archives(sourcesJar)
-                archives(javadocJar)
             }
 
             plugins.withId("com.google.cloud.tools.jib") {
@@ -380,9 +371,7 @@ subprojects {
         publishing {
             publications {
                 create<MavenPublication>("micro-apps") {
-                    from(components["kotlin"])
-                    artifact(tasks["sourcesJar"])
-                    artifact(tasks["javadocJar"])
+                    from(components["java"])
                     plugins.withId("com.github.johnrengelman.shadow") {
                         artifact(tasks["shadowJar"])
                     }

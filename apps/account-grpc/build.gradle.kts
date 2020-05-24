@@ -35,6 +35,9 @@ dependencies {
 
     // Test
     // testImplementation("io.kotest:kotest-extensions-koin:{version}")
+    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(project(":libs:model")))
+    testImplementation(testFixtures(project(":libs:proto")))
 }
 
 application {

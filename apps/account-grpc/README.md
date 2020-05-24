@@ -10,6 +10,8 @@ gradle :apps:account-grpc:run
 ### Test
 ```bash
 gradle :apps:account-grpc:test
+gradle :apps:account-grpc:test -Dkotest.tags.exclude=Slow
+gradle :apps:account-grpc:test -Dkotest.tags.include=E2E
 ```
 
 ### Build

@@ -53,10 +53,10 @@ dependencies {
     }
 }
 
-// gradle test -DKotest.tags.include=Beam -DKotest.tags.exclude=E2E
+// gradle test -Dkotest.tags.include=Beam -Dkotest.tags.exclude=E2E
 tasks {
     test {
-        systemProperty("Kotest.tags.exclude", System.getProperty("E2E"))
+        systemProperty("kotest.tags.exclude", System.getProperty("E2E"))
     }
 }
 

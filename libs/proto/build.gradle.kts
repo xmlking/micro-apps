@@ -11,6 +11,7 @@ plugins {
     // For best results, install idea plugin along with `com.google.protobuf` plugin for IntelliJ.
     idea
     id("com.google.protobuf")
+    `java-test-fixtures`
 }
 
 dependencies {
@@ -27,8 +28,12 @@ dependencies {
 
     // proto validate generator
     implementation("io.envoyproxy.protoc-gen-validate:pgv-java-stub:$pgvVersion")
+
+    // Testing
     // grpc testing TODO: https://github.com/grpc/grpc-java/issues/5331
     // testImplementation("io.grpc:grpc-testing:$grpcVersion")
+    testFixturesImplementation(kotlin("stdlib-jdk8"))
+    testFixturesImplementation("com.google.protobuf:protobuf-java:$protobufVersion")
 }
 
 sourceSets {
