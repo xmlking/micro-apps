@@ -187,6 +187,7 @@ subprojects {
 
             // Use kotest for testing
             testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion") // for kotest framework
+            testImplementation("io.kotest:kotest-runner-console-jvm:$kotestVersion") // for kotest framework
             testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion") // for kotest core jvm assertions
             testImplementation("io.kotest:kotest-property-jvm:$kotestVersion") // for kotest property test
             testImplementation("io.mockk:mockk:$mockkVersion") // Use Mockk mocking library
@@ -194,7 +195,7 @@ subprojects {
             // Logging with slf4jVersion=2.0.0-alpha1
             implementation("org.slf4j:slf4j-api:$slf4jVersion")
             implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
-            runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
+            runtimeOnly("org.slf4j:slf4j-jdk14:$slf4jVersion")
         }
 
         java {

@@ -3,6 +3,7 @@ val beamVersion: String by project
 val csvVersion: String by project
 val junitVersion: String by project
 val hamcrestVersion: String by project
+val guavaVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -15,6 +16,7 @@ dependencies {
     implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
     // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion")
     // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
+    api("com.google.guava:guava:$guavaVersion") // Force `-jre` version instead of `-android`
 
     // Use the Kotlin test library.
     testImplementation(kotlin("test"))
@@ -29,4 +31,5 @@ dependencies {
 application {
     mainClassName = "micro.apps.pipeline.WordCountPipeline"
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
+    applicationDefaultJvmArgs = listOf("-Djava.util.logging.config.file=src/main/resources/logging.properties", "-Dmicro.apps.level=FINE")
 }
