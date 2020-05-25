@@ -48,7 +48,7 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation(kotlin("test-junit"))
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
-    testImplementation("com.google.cloud:google-cloud-pubsub:1.105.1")
+    testImplementation("com.google.cloud:google-cloud-pubsub:1.106.0")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }
