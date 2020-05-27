@@ -7,7 +7,7 @@ namePrefix: prod-
 nameSuffix: -v1
 
 commonLabels:
-  environment: development
+  environment: production
   app.kubernetes.io/version: v1
 commonAnnotations:
   note: Hello, I am production!
