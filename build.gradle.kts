@@ -49,7 +49,7 @@ plugins {
     // gradle changelogPrint // gradle changelogBump
     id("com.diffplug.spotless-changelog") version "1.1.0"
     // gradle useLatestVersions
-    id("se.patrikerdes.use-latest-versions") version "0.2.13"
+    id("se.patrikerdes.use-latest-versions") version "0.2.14"
 
     // Versioning & Release with git tags
     // gradle currentVersion
