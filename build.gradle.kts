@@ -32,7 +32,7 @@ plugins {
     jacoco
     `maven-publish`
     // Code Quality
-    id("org.sonarqube") version "2.8"
+    id("org.sonarqube") version "3.0"
     // Keep your code spotless
     id("com.diffplug.gradle.spotless") version "4.0.1"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
@@ -49,7 +49,7 @@ plugins {
     // gradle changelogPrint // gradle changelogBump
     id("com.diffplug.spotless-changelog") version "1.1.0"
     // gradle useLatestVersions
-    id("se.patrikerdes.use-latest-versions") version "0.2.13"
+    id("se.patrikerdes.use-latest-versions") version "0.2.14"
 
     // Versioning & Release with git tags
     // gradle currentVersion

@@ -46,7 +46,7 @@ interface DoFnContext<I, O> {
     val sideInputs: SideInputs<I>
     val timestamp: Instant
     val pane: PaneInfo
-    fun updateWatermark(watermark: Instant)
+//    fun updateWatermark(watermark: Instant)
 
     fun output(item: O)
     fun outputTimeStamped(item: O, timestamp: Instant)
@@ -70,9 +70,9 @@ open class DoFnContextWrapper<I, O>(override val context: DoFn<I, O>.ProcessCont
     override val pane: PaneInfo
         get() = context.pane()
 
-    override fun updateWatermark(watermark: Instant) {
-        context.updateWatermark(watermark)
-    }
+//    override fun updateWatermark(watermark: Instant) {
+//        context.updateWatermark(watermark)
+//    }
 
     override fun output(item: O) {
         context.output(item)
