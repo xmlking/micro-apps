@@ -54,7 +54,7 @@ plugins {
     // Versioning & Release with git tags
     // gradle currentVersion
     // gradle release
-    id("pl.allegro.tech.build.axion-release") version "1.11.0"
+    id("pl.allegro.tech.build.axion-release") version "1.12.0"
 
     // Make fat runnable jars
     // gradle shadowJar
