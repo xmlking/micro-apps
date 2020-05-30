@@ -132,7 +132,12 @@ sonarqube {
         property("sonar.exclusions", "**/*Generated.java")
     }
     tasks.sonarqube {
-        dependsOn("jacocoTestReport")
+        // gotcha: jacoco reports need to be generated before `sonarqube` task
+        // dependsOn("jacocoTestReport")
+        subprojects.filter { it.name !in excludedProjects }.forEach {
+
+            dependsOn(":${it.path}:check")
+        }
     }
 }
 
@@ -161,7 +166,10 @@ subprojects {
             plugin("maven-publish")
             plugin("org.jetbrains.dokka")
             plugin("com.diffplug.gradle.spotless")
-            plugin("dev.jacomet.logging-capabilities")
+            // plugin("dev.jacomet.logging-capabilities")
+            if (name != "greeting-quarkus") {
+                plugin("dev.jacomet.logging-capabilities")
+            }
             // exclude for root `apps` and `greeting-quarkus` projects
             if (path.startsWith(":apps") && (name != "greeting-quarkus")) {
                 plugin("application")
@@ -284,11 +292,6 @@ subprojects {
             check {
                 dependsOn("jacocoTestCoverageVerification")
                 dependsOn("jacocoTestReport")
-            }
-
-            withType<SonarQubeTask> {
-                group = "Verification"
-                dependsOn("check")
             }
 
             test {

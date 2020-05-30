@@ -19,14 +19,13 @@ dependencies {
     // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
     api("com.google.guava:guava:$guavaVersion") // Force `-jre` version instead of `-android`
 
-    // Use the Kotlin test library.
+    // Test with JUnit4 & JUnit5
     testImplementation(kotlin("test"))
-    // Use the Kotlin JUnit integration.
     testImplementation(kotlin("test-junit"))
-    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }
+    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
 }
 
 application {

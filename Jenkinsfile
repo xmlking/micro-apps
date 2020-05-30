@@ -57,7 +57,7 @@ pipeline {
                             env.FAILED_STAGE_NAME = env.STAGE_NAME
                         }
                         withSonarQubeEnv('sonarQube') {
-                            sh './gradlew sonarqube -x test'
+                            sh './gradlew sonarqube'
                         }
                     }
                 }

@@ -53,16 +53,14 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinCoroutinesVersion")
     api("com.google.guava:guava:$guavaVersion") // Force `-jre` version instead of `-android`
 
-    // Test
-    // Use the Kotlin test library.
+    // Test with JUnit4 & JUnit5
     testImplementation(kotlin("test"))
-    // Use the Kotlin JUnit integration.
     testImplementation(kotlin("test-junit"))
-    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
-    testImplementation("com.google.cloud:google-cloud-pubsub:1.106.0")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }
+    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+    testImplementation("com.google.cloud:google-cloud-pubsub:1.106.0")
     testImplementation(testFixtures(project(":libs:test")))
     testImplementation(testFixtures(project(":libs:model")))
     testImplementation(testFixtures(project(":libs:proto")))

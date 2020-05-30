@@ -41,9 +41,9 @@ echo $VERSION
 gradle test
 gradle jacocoTestReport
 gradle jacocoTestCoverageVerification
+# gotcha: jacoco reports need to be generated before any of the sonar task
 gradle check
 gradle sonarqube
-gradle sonarqube -x test
 ```
 
 ### Spotless tasks
@@ -206,3 +206,4 @@ gradle cV
 - https://github.com/banan1988/spring-demo/
 - https://github.com/detekt/sonar-kotlin
 - https://android.jlelse.eu/sonarqube-code-coverage-for-kotlin-on-android-with-bitrise-71b2fee0b797
+- [Reporting code coverage with JaCoCo Sample](https://docs.gradle.org/6.4.1/samples/sample_jvm_multi_project_with_code_coverage.html)
