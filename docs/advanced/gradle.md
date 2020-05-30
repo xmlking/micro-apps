@@ -41,9 +41,9 @@ echo $VERSION
 gradle test
 gradle jacocoTestReport
 gradle jacocoTestCoverageVerification
-gradle sonarqube
 gradle check
 gradle sonarqube
+gradle sonarqube -x test
 ```
 
 ### Spotless tasks
