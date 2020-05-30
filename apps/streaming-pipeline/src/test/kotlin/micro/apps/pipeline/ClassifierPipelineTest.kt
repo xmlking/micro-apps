@@ -13,6 +13,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import micro.apps.kbeam.map
 import micro.apps.model.Person
+import micro.apps.model.fixtures.mockPersonList
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import org.apache.beam.sdk.extensions.gcp.auth.NoopCredentialFactory
@@ -33,6 +34,8 @@ class ClassifierPipelineTest : Serializable {
     private val outputFailureTopicName = "$jobName-output-failure"
     private val helper = Helper(host, projectId)
     private lateinit var testOptions: ClassifierOptions
+
+    private val persons = mockPersonList()
 
     @Rule
     @Transient
@@ -84,6 +87,7 @@ class ClassifierPipelineTest : Serializable {
         helper.deleteTopic(outputFailureTopicName)
     }
 
+    // NOTE:Google PubSub Emulator must be running for this test to be passed.
     @Test @Ignore
     fun runE2ETest() {
         assertEquals("310s", testOptions.windowDuration)

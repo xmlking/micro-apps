@@ -64,3 +64,17 @@ fun mockName(
         title = title
     )
 }
+fun mockPersonList() = listOf(
+    Person(
+        name = Name(first = "sumo1", last = "demo1"),
+        address = Address(suite = "1234", street = "Wood Road", city = "Riverside", state = "California", code = "92505", country = "CA"),
+        gender = Gender.MALE, age = 99,
+        email = "sumo1@demo.com", phone = "0000000000"
+    ),
+    Person(
+        name = Name(first = "sumo2", last = "demo2"),
+        address = Address(suite = "4321", street = "Wood Road", city = "Riverside", state = "California", code = "92505", country = "CA"),
+        gender = Gender.FEMALE, age = 99,
+        email = "sumo2@demo.com", phone = "1111111111"
+    )
+)

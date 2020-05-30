@@ -53,6 +53,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinCoroutinesVersion")
     api("com.google.guava:guava:$guavaVersion") // Force `-jre` version instead of `-android`
 
+    // Test
     // Use the Kotlin test library.
     testImplementation(kotlin("test"))
     // Use the Kotlin JUnit integration.
@@ -62,6 +63,9 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }
+    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(project(":libs:model")))
+    testImplementation(testFixtures(project(":libs:proto")))
 }
 
 // gradle test -Dkotest.tags.include=Beam -Dkotest.tags.exclude=E2E

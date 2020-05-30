@@ -11,6 +11,7 @@ import kotlin.test.Ignore
 import kotlin.test.Test
 import micro.apps.kbeam.transforms.AvroToPubsub
 import micro.apps.model.Person
+import micro.apps.model.fixtures.mockPersonList
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import org.apache.beam.sdk.coders.AvroCoder
@@ -35,6 +36,8 @@ class PubSubProducerTest : Serializable {
     private val outputFailureTopicName = "$jobName-output-failure"
     private val helper = Helper(host, projectId)
     private lateinit var testOptions: ClassifierOptions
+
+    private val persons = mockPersonList()
 
     @Rule
     @Transient
