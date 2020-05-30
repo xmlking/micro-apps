@@ -14,6 +14,16 @@ val guavaVersion: String by project
 val grpcKotlinVersion: String by project
 val kotlinCoroutinesVersion: String by project
 val slf4jVersion: String by project
+val grpcVersion: String by project
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "io.grpc" && requested.name != "grpc-kotlin-stub") {
+            useVersion(grpcVersion)
+            because("fix grpc version to latest")
+        }
+    }
+}
 
 dependencies {
     implementation(project(":libs:core"))

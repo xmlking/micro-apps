@@ -5,7 +5,10 @@ package micro.apps.model
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.core.test.TestCaseConfig
 import io.kotest.matchers.shouldBe
+import kotlin.time.ExperimentalTime
+import kotlin.time.minutes
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.Json
@@ -28,8 +31,10 @@ data class ProtobufData(
     @ProtoId(2) val b: Double = 42.88
 )
 
+@ExperimentalTime
 @kotlinx.serialization.UnstableDefault
 class SerializationTest : FunSpec({
+    TestCaseConfig(timeout = 3.minutes, enabled = true)
 
 //    val JSON by lazy {
 //        Json(JsonConfiguration.Stable.copy(isLenient = true, prettyPrint = true))
@@ -77,13 +82,13 @@ class SerializationTest : FunSpec({
         originalData shouldBe data
     }
 
-    test("testAvroSerialization_WriteData") {
+    test("testAvroSerialization_WriteData").config(enabled = false) {
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
         val output = Avro.default.openOutputStream(serializer) {
             format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
             this.schema = schema
-        }.to("./src/test/resources/data/pizzas.avro")
+        }.to("./libs/model/src/test/resources/data/pizzas.avro")
         output.write(listOf(veg, hawaiian))
         output.close()
     }
@@ -94,7 +99,7 @@ class SerializationTest : FunSpec({
         val input = Avro.default.openInputStream(serializer) {
             format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
             writerSchema = schema
-        }.from("./src/test/resources/data/pizzas.avro")
+        }.from(javaClass.getResourceAsStream("/data/pizzas.avro"))
         println(input.nextOrThrow()) // get first only
         input.iterator().forEach { println(it) } // get all
         input.close()

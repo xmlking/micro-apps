@@ -44,7 +44,9 @@ docker-compose down # docker-compose down -v
 # start local sonarqube
 docker-compose up sonarqube # docker-compose up -V sonarqube
 # stop local sonarqube before restart again
-docker-compose down # docker-compose down -v
+docker-compose down
+# (optional) this remove volumes - needed when you upgrade image versions 
+docker-compose down -v
 # start local nexus
 docker-compose up nexus
 ```
