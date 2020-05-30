@@ -1,10 +1,9 @@
 pluginManagement {
     repositories {
+        // maven { url = uri("https://mycompany.nexus/") }
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
-//        maven { url = uri("https://nexus/") }
-//        maven { url = uri("https://dl.bintray.com/gradle/gradle-plugins") }
     }
 }
 
