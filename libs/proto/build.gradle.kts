@@ -14,6 +14,14 @@ plugins {
     `java-test-fixtures`
 }
 
+// Workaround the Gradle bug resolving multi-platform dependencies.
+// FIXME: https://github.com/google/protobuf-gradle-plugin/issues/391
+configurations.all {
+    if (name.contains("kapt") || name.contains("proto", ignoreCase = true)) {
+        attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class.java, Usage.JAVA_RUNTIME))
+    }
+}
+
 dependencies {
     // Grpc
     implementation("io.grpc:grpc-netty-shaded:$grpcVersion")

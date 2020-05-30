@@ -6,6 +6,7 @@ val quarkusPlatformGroupId: String by project
 val quarkusPlatformVersion: String by project
 val quarkusPlatformArtifactId: String by project
 val restAssuredVersion: String by project
+val slf4jVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
