@@ -205,8 +205,10 @@ subprojects {
 
         // enforce `slf4j-simple` for all sub-projects.
         // Dataflow projects can overwrite it with `slf4j-jdk14` in project specific build.gradle.kts file
-        loggingCapabilities {
-            selectSlf4JBinding("org.slf4j:slf4j-simple:$slf4jVersion")
+        plugins.withId("dev.jacomet.logging-capabilities") {
+            loggingCapabilities {
+                selectSlf4JBinding("org.slf4j:slf4j-simple:$slf4jVersion")
+            }
         }
 
         java {
