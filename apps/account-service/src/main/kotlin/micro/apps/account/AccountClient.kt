@@ -10,6 +10,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.account.v1.AccountServiceGrpcKt.AccountServiceCoroutineStub
+import micro.apps.μservice.channelForTarget
 
 class AccountClient(private val channel: ManagedChannel) : Closeable {
     private val stub: AccountServiceCoroutineStub = AccountServiceCoroutineStub(channel)

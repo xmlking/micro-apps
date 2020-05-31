@@ -3,7 +3,7 @@ package micro.apps.account
 import io.grpc.Server
 import io.grpc.ServerBuilder
 import io.grpc.ServerInterceptors
-import micro.apps.proto.interceptors.UnknownStatusInterceptor
+import micro.apps.μservice.interceptors.UnknownStatusInterceptor
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}

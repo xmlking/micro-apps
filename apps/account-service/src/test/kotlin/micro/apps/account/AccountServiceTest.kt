@@ -14,6 +14,7 @@ import micro.apps.proto.account.v1.SearchResponse
 import micro.apps.proto.common.fixtures.mockPerson
 import micro.apps.test.E2E
 import micro.apps.test.Slow
+import micro.apps.μservice.channelForTarget
 
 class AccountServiceTest : FunSpec({
     val port = 8080

@@ -6,10 +6,11 @@ val protobufVersion: String by project
 val arrowVersion: String by project
 val sentinelVersion: String by project
 
-dependencies {
-    implementation(project(":libs:proto"))
-    implementation(project(":libs:μservice"))
+plugins {
+    `java-test-fixtures`
+}
 
+dependencies {
     // gRPC
     implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
     implementation("io.grpc:grpc-protobuf:$grpcVersion")
@@ -29,32 +30,8 @@ dependencies {
     implementation("com.alibaba.csp:sentinel-grpc-adapter:$sentinelVersion")
     // implementation("com.netflix.concurrency-limits:concurrency-limits-grpc:$netflixConcurrencyVersion")
 
-    // Arrow, TODO: planing to use n the future
-    // implementation("io.arrow-kt:arrow-core:$arrowVersion")
-    // implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
-    // implementation("io.arrow-kt:arrow-fx:$arrowVersion")
-
     // Test
-    // testImplementation("io.kotest:kotest-extensions-koin:{version}")
     testImplementation(testFixtures(project(":libs:test")))
-    testImplementation(testFixtures(project(":libs:model")))
-    testImplementation(testFixtures(project(":libs:proto")))
-}
-
-application {
-    mainClassName = "micro.apps.account.AccountServerKt"
-    //    applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
-    applicationDefaultJvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
-}
-
-jib {
-    containerizingMode = "packaged"
-    container {
-        // since we have many main classes, it cannot be Inferred. lets help
-        mainClass = application.mainClassName
-    }
-    // extraDirectories {
-    //     setPaths("src/main/custom-extra-dir,/home/user/jib-extras")
-    //     permissions = mapOf("/work" to "775", "/distr" to "775")
-    // }
+    // testFixturesImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
+    // testFixturesImplementation(kotlin("stdlib-jdk8"))
 }

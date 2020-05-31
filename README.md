@@ -14,6 +14,7 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 1. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images with [Jib](https://github.com/GoogleContainerTools/jib)
 1. Build native binaries using [GraalVM](https://www.graalvm.org/)
 1. Cloud Native (Service Mesh, health checks, observability)
+1. Deployment automation with [kustomize](https://kustomize.io/) and Event-driven Autoscaling with [KEDA](https://keda.sh/)
 
 
 [![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
@@ -59,7 +60,7 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 
 > Start [wordcount Pipeline](./apps/wordcount-pipeline/)
 >
-> Start [streaming Pipeline](./apps/streaming-pipeline/)
+> Start [streaming Pipeline](./apps/ingestion-pipeline/)
 
 #### Quarkus
 

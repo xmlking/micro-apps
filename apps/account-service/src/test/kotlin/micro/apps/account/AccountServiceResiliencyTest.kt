@@ -24,6 +24,7 @@ import micro.apps.proto.account.v1.GetResponse
 import micro.apps.test.E2E
 import micro.apps.test.Slow
 import micro.apps.test.gRPC
+import micro.apps.μservice.sentinelChannelForTarget
 import mu.KotlinLogging
 
 const val resourceName = "micro.apps.proto.account.v1.AccountService/Get"

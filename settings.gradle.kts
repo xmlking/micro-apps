@@ -11,12 +11,15 @@ rootProject.name = "micro-apps"
 include(
     ":apps:account-service",
     ":apps:greeting-service",
-    ":apps:streaming-pipeline",
+    ":apps:classifier-pipeline",
+    ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",
 
     ":libs:core",
     ":libs:kbeam",
     ":libs:model",
     ":libs:proto",
-    ":libs:test"
+    ":libs:test",
+    ":libs:μservice",
+    ":libs:pipeline"
 )

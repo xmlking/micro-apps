@@ -1,0 +1,104 @@
+{
+  "type": "record",
+  "name": "Person",
+  "namespace": "micro.apps.model",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "pii": "yes"
+    },
+    {
+      "name": "name",
+      "type": {
+        "type": "record",
+        "name": "Name",
+        "fields": [
+          {
+            "name": "first",
+            "type": "string"
+          },
+          {
+            "name": "last",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          }
+        ],
+        "pii": "yes"
+      }
+    },
+    {
+      "name": "address",
+      "type": {
+        "type": "record",
+        "name": "Address",
+        "fields": [
+          {
+            "name": "suite",
+            "type": "string"
+          },
+          {
+            "name": "street",
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "type": "string"
+          }
+        ],
+        "pii": "yes"
+      }
+    },
+    {
+      "name": "gender",
+      "type": {
+        "type": "enum",
+        "name": "Gender",
+        "symbols": [
+          "UNKNOWN",
+          "MALE",
+          "FEMALE"
+        ]
+      },
+      "pii": "yes"
+    },
+    {
+      "name": "age",
+      "type": "int",
+      "pii": "yes"
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "encrypted": "yes"
+    },
+    {
+      "name": "phone",
+      "type": {
+        "type": "fixed",
+        "name": "phone",
+        "size": 10
+      },
+      "encrypted": "yes"
+    },
+    {
+      "name": "avatar",
+      "type": "string"
+    }
+  ]
+}
