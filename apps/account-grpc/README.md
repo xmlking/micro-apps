@@ -2,19 +2,19 @@
 
 Account gRPC service. 
 
-### Run
+### 🚀 Run
 ```bash
 gradle :apps:account-grpc:run
 ```
 
-### Test
+### 🔭 Test
 ```bash
 gradle :apps:account-grpc:test
 gradle :apps:account-grpc:test -Dkotest.tags.exclude=Slow
 gradle :apps:account-grpc:test -Dkotest.tags.include=E2E
 ```
 
-### Build
+### 📦 Build
 ```bash
 # clean
 gradle :apps:account-grpc:clean
@@ -36,7 +36,8 @@ gradle :apps:account-grpc:jib \
     -Djib.to.auth.password=$PASSWORD
 ```
 
-## Reference 
+## 🔗 Credits
 - [Announcing Open Source gRPC Kotlin Deck](https://www.cncf.io/wp-content/uploads/2020/04/Announcing-Open-Source-gRPC-Kotlin.pdf)
 - [A collection of useful/essential gRPC Java Examples](https://github.com/saturnism/grpc-by-example-java)
 - [Lessons Learned Implementing Microservices in Kubernetes](https://saturnism.me/talk/kubernetes-microservices-lessons-learned/)
+- [Death Star demo App by Marharyta](https://github.com/leveretka/grpc-death-star)

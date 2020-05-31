@@ -1,0 +1,44 @@
+name: release-build
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+          settings-path: ${{ github.workspace }} # location for the settings.xml file
+      - name: Build JVM JAR
+        run: gradle :apps:greeting-quarkus:quarkusBuild --uber-jar
+#        run: gradle :apps:greeting-quarkus:quarkusBuild --uber-jar -Pversion="${{ github.event.release.tag_name }}"
+      - name: Upload JVM JAR
+        id: upload-jar
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./apps/greeting-quarkus/build/greeting-quarkus-${{ github.event.release.tag_name }}-runner.jar
+          asset_name: greeting-quarkus-${{ github.event.release.tag_name }}.jar
+          asset_content_type: application/octet-stream
+      - name: Build Native
+        run: gradle :apps:greeting-quarkus:quarkusBuild -Dquarkus.package.type=native -Dquarkus.native.container-build=true -Pversion="${{ github.event.release.tag_name }}"
+      - name: Upload Native Image (Linux)
+        id: upload-native-image-linux
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./apps/greeting-quarkus/build/greeting-quarkus-${{ github.event.release.tag_name }}-runner
+          asset_name: greeting-quarkus-${{ github.event.release.tag_name }}-linux
+          asset_content_type: application/octet-stream

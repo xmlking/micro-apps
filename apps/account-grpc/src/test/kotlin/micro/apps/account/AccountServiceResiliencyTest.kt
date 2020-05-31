@@ -1,14 +1,12 @@
 package micro.apps.account
 
 import com.alibaba.csp.sentinel.EntryType
-import com.alibaba.csp.sentinel.adapter.grpc.SentinelGrpcClientInterceptor
 import com.alibaba.csp.sentinel.slots.block.RuleConstant
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager
 import com.alibaba.csp.sentinel.slots.clusterbuilder.ClusterBuilderSlot
 import com.google.protobuf.StringValue
 import io.grpc.ManagedChannel
-import io.grpc.ManagedChannelBuilder
 import io.grpc.StatusException
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
@@ -73,11 +71,7 @@ class AccountServiceResiliencyTest : FunSpec({
     }
 
     beforeTest {
-        channel =
-            ManagedChannelBuilder.forAddress("localhost", port)
-                .usePlaintext()
-                .intercept(SentinelGrpcClientInterceptor())
-                .build()
+        channel = sentinelChannelForTarget("localhost:$port")
     }
 
     afterTest {

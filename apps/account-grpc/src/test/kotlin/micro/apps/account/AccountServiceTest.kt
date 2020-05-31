@@ -3,7 +3,6 @@ package micro.apps.account
 import com.google.protobuf.Any
 import com.google.protobuf.StringValue
 import io.grpc.ManagedChannel
-import io.grpc.ManagedChannelBuilder
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -31,7 +30,7 @@ class AccountServiceTest : FunSpec({
     }
 
     beforeTest {
-        channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build()
+        channel = channelForTarget("localhost:$port")
     }
 
     afterTest {

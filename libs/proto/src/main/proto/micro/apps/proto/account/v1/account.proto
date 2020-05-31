@@ -16,6 +16,7 @@ import "micro/apps/proto/common/v1/common.proto";
 service AccountService {
     rpc Get(GetRequest) returns (GetResponse);
     rpc List(ListRequest) returns (ListResponse);
+    rpc Count(google.protobuf.Empty) returns (google.protobuf.UInt32Value);
     rpc Search(SearchRequest) returns (stream SearchResponse);
     rpc Create(CreateRequest) returns (google.protobuf.Empty);
     rpc Update(UpdateRequest) returns (google.protobuf.Empty);
