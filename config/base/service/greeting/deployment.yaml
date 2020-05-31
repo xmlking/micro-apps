@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: service
-          image: xmlking/greeting-quarkus:latest
+          image: xmlking/greeting-service:latest
           imagePullPolicy: Always
           ports:
             - name: http

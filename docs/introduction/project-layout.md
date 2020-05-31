@@ -9,11 +9,11 @@ we will be using **monorepo** style project layout, utilizing **gradle** multi-p
 ```
 micro-apps/
 ├── apps
-│   ├── account-grpc
+│   ├── account-service
 │   │   ├── README.md
 │   │   ├── build.gradle.kts
 │   │   └── src
-│   ├── greeting-quarkus
+│   ├── greeting-service
 │   ├── streaming-quarkus
 │   └── wordcount-pipeline
 ├── libs

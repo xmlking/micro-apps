@@ -9,8 +9,8 @@ pluginManagement {
 
 rootProject.name = "micro-apps"
 include(
-    ":apps:account-grpc",
-    ":apps:greeting-quarkus",
+    ":apps:account-service",
+    ":apps:greeting-service",
     ":apps:streaming-pipeline",
     ":apps:wordcount-pipeline",
 

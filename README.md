@@ -63,11 +63,11 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 
 #### Quarkus
 
-> Start [Greeting API](./apps/greeting-quarkus/)
+> Start [Greeting API](./apps/greeting-service/)
 
 #### Kotlin-gRPC
 
-> Start [Kotlin-gRPC API](./apps/account-grpc/)
+> Start [Kotlin-gRPC API](./apps/account-service/)
 
 
 #### Micronaut

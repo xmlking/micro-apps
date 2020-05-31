@@ -4,33 +4,33 @@ Account gRPC service.
 
 ### 🚀 Run
 ```bash
-gradle :apps:account-grpc:run
+gradle :apps:account-service:run
 ```
 
 ### 🔭 Test
 ```bash
-gradle :apps:account-grpc:test
-gradle :apps:account-grpc:test -Dkotest.tags.exclude=Slow
-gradle :apps:account-grpc:test -Dkotest.tags.include=E2E
+gradle :apps:account-service:test
+gradle :apps:account-service:test -Dkotest.tags.exclude=Slow
+gradle :apps:account-service:test -Dkotest.tags.include=E2E
 ```
 
 ### 📦 Build
 ```bash
 # clean
-gradle :apps:account-grpc:clean
+gradle :apps:account-service:clean
 # make fatJar
-gradle :apps:account-grpc:build
+gradle :apps:account-service:build
 # docker build
-gradle :apps:account-grpc:jibDockerBuild
+gradle :apps:account-service:jibDockerBuild
 # prune dangling images.
 docker image prune -f
 # run image
-docker run -it xmlking/micro-apps-account-grpc:1.6.5-SNAPSHOT
+docker run -it xmlking/micro-apps-account-service:1.6.5-SNAPSHOT
 ```
 
 ```bash
 # custom build
-gradle :apps:account-grpc:jib \
+gradle :apps:account-service:jib \
     -Djib.to.image=myregistry/myimage:latest \
     -Djib.to.auth.username=$USERNAME \
     -Djib.to.auth.password=$PASSWORD

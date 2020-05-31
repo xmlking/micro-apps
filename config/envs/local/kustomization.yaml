@@ -56,6 +56,6 @@ images:
   - name: xmlking/recorder-srv
     newName: docker.pkg.github.com/xmlking/micro-starter-kit/recorder-srv
     newTag: $(IMAGE_VERSION)
-  - name: xmlking/greeting-quarkus
-    newName: docker.pkg.github.com/xmlking/micro-apps/greeting-quarkus
+  - name: xmlking/greeting-service
+    newName: docker.pkg.github.com/xmlking/micro-apps/greeting-service
     newTag: 1.6.1-SNAPSHOT

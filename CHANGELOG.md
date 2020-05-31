@@ -60,10 +60,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **deps:** remove Arrow deps
 
 ### Improvement
-- **account-grpc:** set port to 8080 , fix docker builds
-- **account-grpc:** set port to 8080 , fix docker builds
-- **account-grpc:** set port to 8080 , fix docker builds
-- **account-grpc:** adding account-grpc client for testing streaming API
+- **account-service:** set port to 8080 , fix docker builds
+- **account-service:** set port to 8080 , fix docker builds
+- **account-service:** set port to 8080 , fix docker builds
+- **account-service:** adding account-service client for testing streaming API
 - **core:** adding more tests for avro serialization
 - **core:** using kotlinx-serialization for json,avro,protobuf
 - **gradle:** polich gradle files
@@ -92,7 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **deps:** update dependency org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin to v1.3.72
 
 ### Feat
-- **account-grpc:** adding new kotlin-grpc example
+- **account-service:** adding new kotlin-grpc example
 - **proto:** adding proto module
 
 ### Improvement

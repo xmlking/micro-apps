@@ -1,4 +1,4 @@
-# greeting-quarkus
+# greeting-service
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -29,13 +29,13 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## scaffolding projects
 
-> your can also use [code.quarkus.io](https://code.quarkus.io/?g=micro.apps&a=greeting-quarkus&v=1.0.0-SNAPSHOT&b=GRADLE&c=micro.apps.ExampleResource&s=ARC.dZK.tqK.OxX.Ll4.qZz&cn=code.quarkus.io) webApp to generate a new project
+> your can also use [code.quarkus.io](https://code.quarkus.io/?g=micro.apps&a=greeting-service&v=1.0.0-SNAPSHOT&b=GRADLE&c=micro.apps.ExampleResource&s=ARC.dZK.tqK.OxX.Ll4.qZz&cn=code.quarkus.io) webApp to generate a new project
 
 ```bash
 cd apps
 mvn io.quarkus:quarkus-maven-plugin:1.5.0.Final:create \
     -DprojectGroupId=micro.apps \
-    -DprojectArtifactId=greeting-quarkus \
+    -DprojectArtifactId=greeting-service \
     -DprojectVersion=0.1.0 \
     -DclassName="micro.apps.greeting.GreetingResource" \
     -Dpath="/greeting" \
@@ -48,33 +48,33 @@ cd ..
 
 You can run your application in dev mode that enables live coding using:
 ```
-gradle :apps:greeting-quarkus:quarkusDev
+gradle :apps:greeting-service:quarkusDev
 # You can also run a Quarkus application in debug mode with a suspended JVM using:
-gradle :apps:greeting-quarkus:quarkusDev -Dsuspend -Ddebug
+gradle :apps:greeting-service:quarkusDev -Dsuspend -Ddebug
 # Then, attach your debugger to localhost:5005.
 ```
 > In development mode, Quarkus starts by default with debug mode enabled, listening to port 5005 without suspending the JVM.
 
 ## Packaging and running the application
 
-The application can be packaged using `gradle :apps:greeting-quarkus:quarkusBuild`.
-It produces the `greeting-quarkus-0.1.0-runner.jar` file in the `build` directory.
+The application can be packaged using `gradle :apps:greeting-service:quarkusBuild`.
+It produces the `greeting-service-0.1.0-runner.jar` file in the `build` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/lib` directory.
 
-The application is now runnable using `java -jar build/greeting-quarkus-0.1.0-runner.jar`.
+The application is now runnable using `java -jar build/greeting-service-0.1.0-runner.jar`.
 
 If you want to build an _über-jar_, just add the `--uber-jar` option to the command line:
 ```
-gradle :apps:greeting-quarkus:quarkusBuild --uber-jar
+gradle :apps:greeting-service:quarkusBuild --uber-jar
 ```
 
 ## Creating a native executable
 
-You can create a native executable using: `gradle :apps:greeting-quarkus:buildNative`.
+You can create a native executable using: `gradle :apps:greeting-service:buildNative`.
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: `gradle :apps:greeting-quarkus:buildNative --docker-build=true`.
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using: `gradle :apps:greeting-service:buildNative --docker-build=true`.
 
-You can then execute your native executable with: `./apps/greeting-quarkus/build/greeting-quarkus-1.6.1-SNAPSHOT-runner`
+You can then execute your native executable with: `./apps/greeting-service/build/greeting-service-1.6.1-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling#building-a-native-executable.
 
@@ -85,28 +85,28 @@ If you want to learn more about building native executables, please consult http
 > Check with `docker images`
 
 `quarkusBuild` command also creates kubernetes YAML if `quarkus-kubernetes` plugin is enabled.
-> Check `apps/greeting-quarkus/build/kubernetes/kubernetes.yml`
+> Check `apps/greeting-service/build/kubernetes/kubernetes.yml`
 
-You can run image with `docker run -i --rm -p 8080:8080 xmlking/greeting-quarkus:1.6.5-SNAPSHOT`
+You can run image with `docker run -i --rm -p 8080:8080 xmlking/greeting-service:1.6.5-SNAPSHOT`
 
 ### Manual Docker Build
 
 ```bash
 # build jar/native first
-gradle :apps:greeting-quarkus:quarkusDev
+gradle :apps:greeting-service:quarkusDev
 # or native
-gradle :apps:greeting-quarkus:buildNative --docker-build=true
+gradle :apps:greeting-service:buildNative --docker-build=true
 ```
 
 Then build docker image
 
 ```bash
-cd apps/greeting-quarkus/
+cd apps/greeting-service/
 
 # DOCKER_REGISTRY=us.gcr.io
 DOCKER_REGISTRY=docker.pkg.github.com
 DOCKER_CONTEXT_PATH=xmlking/micro-apps
-TARGET=greeting-quarkus
+TARGET=greeting-service
 VERSION=1.6.1-SNAPSHOT
 
 IMANGE_NAME=${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}${DOCKER_CONTEXT_PATH}/${TARGET}:${VERSION}
@@ -131,7 +131,7 @@ docker image prune -f
 ## Testing
 
 ```bash
-gradle :apps:greeting-quarkus:quarkusDev
+gradle :apps:greeting-service:quarkusDev
 open http://localhost:8080/swagger-ui/
 ```
 
@@ -151,25 +151,25 @@ http :8080/api/fruits
 ### Unit tests
 
 ```bash
-gradle :apps:greeting-quarkus:check # Runs all checks
-gradle :apps:greeting-quarkus:test # Runs the unit tests.
-gradle :apps:greeting-quarkus:testNative # Runs native image tests
+gradle :apps:greeting-service:check # Runs all checks
+gradle :apps:greeting-service:test # Runs the unit tests.
+gradle :apps:greeting-service:testNative # Runs native image tests
 ```
 
 ## Gradle 
 
 ```bash
 
-gradle :apps:greeting-quarkus:listExtensions
-gradle :apps:greeting-quarkus:addExtension --extensions="health,metrics,openapi"
-gradle :apps:greeting-quarkus:addExtension --extensions="hibernate-validator"
-gradle :apps:greeting-quarkus:addExtension --extensions="jdbc,agroal,non-exist-ent"
-gradle :apps:greeting-quarkus:addExtension --extensions="container-image-jib, kubernetes"
+gradle :apps:greeting-service:listExtensions
+gradle :apps:greeting-service:addExtension --extensions="health,metrics,openapi"
+gradle :apps:greeting-service:addExtension --extensions="hibernate-validator"
+gradle :apps:greeting-service:addExtension --extensions="jdbc,agroal,non-exist-ent"
+gradle :apps:greeting-service:addExtension --extensions="container-image-jib, kubernetes"
 
-gradle :apps:greeting-quarkus:quarkusDev -Dsuspend -Ddebug
+gradle :apps:greeting-service:quarkusDev -Dsuspend -Ddebug
 
-gradle :apps:greeting-quarkus:buildNative
-gradle :apps:greeting-quarkus:testNative
+gradle :apps:greeting-service:buildNative
+gradle :apps:greeting-service:testNative
 ```
 
 ## Reference 

@@ -166,11 +166,11 @@ subprojects {
             plugin("org.jetbrains.dokka")
             plugin("com.diffplug.gradle.spotless")
             // plugin("dev.jacomet.logging-capabilities")
-            if (name != "greeting-quarkus") {
+            if (name != "greeting-service") {
                 plugin("dev.jacomet.logging-capabilities")
             }
-            // exclude for root `apps` and `greeting-quarkus` projects
-            if (path.startsWith(":apps") && (name != "greeting-quarkus")) {
+            // exclude for root `apps` and `greeting-service` projects
+            if (path.startsWith(":apps") && (name != "greeting-service")) {
                 plugin("application")
                 plugin("com.github.johnrengelman.shadow")
                 plugin("com.google.cloud.tools.jib")
