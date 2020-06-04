@@ -33,7 +33,7 @@ plugins {
     // Code Quality
     id("org.sonarqube") version "3.0"
     // Keep your code spotless
-    id("com.diffplug.gradle.spotless") version "4.1.0"
+    id("com.diffplug.gradle.spotless") version "4.2.1"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.serialization") version "1.3.72" apply false
