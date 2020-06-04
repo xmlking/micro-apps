@@ -33,14 +33,13 @@ plugins {
     // Code Quality
     id("org.sonarqube") version "3.0"
     // Keep your code spotless
-    id("com.diffplug.gradle.spotless") version "4.0.1"
+    id("com.diffplug.gradle.spotless") version "4.1.0"
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.serialization") version "1.3.72" apply false
     kotlin("plugin.allopen") version "1.3.72" apply false
     id("org.jetbrains.dokka") version "0.10.1"
     id("com.google.protobuf") version "0.8.12" apply false
-    id("io.quarkus") version "1.4.2.Final" apply false
     // Keep dependencies up to date
     // gradle dependencyUpdates -Drevision=release
     id("com.github.ben-manes.versions") version "0.28.0"
@@ -439,7 +438,7 @@ tasks {
     }
 
     wrapper {
-        gradleVersion = "6.4.1"
+        gradleVersion = "6.5"
         distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-bin.zip"
     }
 }

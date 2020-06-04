@@ -5,6 +5,10 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        val quarkusPluginVersion: String by settings
+        id("io.quarkus") version quarkusPluginVersion
+    }
 }
 
 rootProject.name = "micro-apps"

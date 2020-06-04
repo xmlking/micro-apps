@@ -28,5 +28,5 @@ fun <K, V> PCollection<KV<K, V>>.toMap(): PCollectionView<Map<K, V>> {
 }
 
 fun <I> PCollection<I>.asSingleton(): PCollectionView<I> {
-    return this.apply(View.asSingleton())
+    return this.apply("As Singleton", View.asSingleton())
 }
