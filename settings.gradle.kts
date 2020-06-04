@@ -6,8 +6,35 @@ pluginManagement {
         gradlePluginPortal()
     }
     plugins {
+        val sonarPluginVersion: String by settings
+        val spotlessPluginVersion: String by settings
+        val spotlessClogPluginVersion: String by settings
+        val dokkaPluginVersion: String by settings
+        val checkLatestPluginVersion: String by settings
+        val useLatestPluginVersion: String by settings
+        val axionPluginVersion: String by settings
+        val shadowPluginVersion: String by settings
+        val jibPluginVersion: String by settings
+        val loggerPluginVersion: String by settings
         val quarkusPluginVersion: String by settings
-        id("io.quarkus") version quarkusPluginVersion
+        val kotlinVersion: String by settings
+        val protobufPluginVersion: String by settings
+
+        id("org.sonarqube") version sonarPluginVersion
+        id("com.diffplug.gradle.spotless") version spotlessPluginVersion
+        kotlin("jvm") version kotlinVersion
+        kotlin("plugin.serialization") version kotlinVersion apply false
+        kotlin("plugin.allopen") version kotlinVersion apply false
+        id("org.jetbrains.dokka") version dokkaPluginVersion
+        id("com.github.ben-manes.versions") version checkLatestPluginVersion
+        id("com.diffplug.spotless-changelog") version spotlessClogPluginVersion
+        id("se.patrikerdes.use-latest-versions") version useLatestPluginVersion
+        id("pl.allegro.tech.build.axion-release") version axionPluginVersion
+        id("com.github.johnrengelman.shadow") version shadowPluginVersion
+        id("com.google.cloud.tools.jib") version jibPluginVersion
+        id("dev.jacomet.logging-capabilities") version loggerPluginVersion
+        id("com.google.protobuf") version protobufPluginVersion apply false
+        id("io.quarkus") version quarkusPluginVersion apply false
     }
 }
 

@@ -31,38 +31,33 @@ plugins {
     jacoco
     `maven-publish`
     // Code Quality
-    id("org.sonarqube") version "3.0"
+    id("org.sonarqube")
     // Keep your code spotless
-    id("com.diffplug.gradle.spotless") version "4.1.0"
+    id("com.diffplug.gradle.spotless")
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    kotlin("jvm") version "1.3.72"
-    kotlin("plugin.serialization") version "1.3.72" apply false
-    kotlin("plugin.allopen") version "1.3.72" apply false
-    id("org.jetbrains.dokka") version "0.10.1"
-    id("com.google.protobuf") version "0.8.12" apply false
+    kotlin("jvm")
+    id("org.jetbrains.dokka")
     // Keep dependencies up to date
     // gradle dependencyUpdates -Drevision=release
-    id("com.github.ben-manes.versions") version "0.28.0"
+    id("com.github.ben-manes.versions")
     // keep your changelog spotless
     // gradle changelogPrint // gradle changelogBump
-    id("com.diffplug.spotless-changelog") version "1.1.0"
+    id("com.diffplug.spotless-changelog")
     // gradle useLatestVersions
-    id("se.patrikerdes.use-latest-versions") version "0.2.14"
-
+    id("se.patrikerdes.use-latest-versions")
     // Versioning & Release with git tags
     // gradle currentVersion
     // gradle release
-    id("pl.allegro.tech.build.axion-release") version "1.12.0"
-
+    id("pl.allegro.tech.build.axion-release")
     // Make fat runnable jars
     // gradle shadowJar
     // gradle runShadow
-    id("com.github.johnrengelman.shadow") version "5.2.0"
+    id("com.github.johnrengelman.shadow")
     // Build & Publish docker images
     // gradle jib
-    id("com.google.cloud.tools.jib") version "2.3.0"
+    id("com.google.cloud.tools.jib")
     // detect slf4j conflicts and configure desired backend
-    id("dev.jacomet.logging-capabilities") version "0.9.0"
+    id("dev.jacomet.logging-capabilities")
 }
 
 // rootProject config

@@ -29,9 +29,9 @@ import mu.KotlinLogging
 
 const val resourceName = "micro.apps.proto.account.v1.AccountService/Get"
 
-fun configureFlowRule(count: Int) {
+fun configureFlowRule(qps: Int) {
     val rule = FlowRule()
-        .setCount(count.toDouble())
+        .setCount(qps.toDouble())
         .setGrade(RuleConstant.FLOW_GRADE_QPS)
         .setResource(resourceName)
         .setLimitApp("default")
@@ -39,9 +39,9 @@ fun configureFlowRule(count: Int) {
     FlowRuleManager.loadRules(listOf(rule))
 }
 
-fun configureBlockingFlowRule(count: Int) {
+fun configureBlockingFlowRule(qps: Int) {
     val rule = FlowRule()
-        .setCount(count.toDouble())
+        .setCount(qps.toDouble())
         .setGrade(RuleConstant.FLOW_GRADE_QPS)
         .setResource(resourceName)
         .setLimitApp("default")
