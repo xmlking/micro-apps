@@ -36,3 +36,4 @@ jobs:
           gradle-version: 6.3
           arguments: publish
 
+# TODO https://github.com/marketplace/actions/publish-docker

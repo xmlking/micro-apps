@@ -27,6 +27,13 @@ import micro.apps.test.gRPC
 import micro.apps.μservice.sentinelChannelForTarget
 import mu.KotlinLogging
 
+/**
+ * Showcase backpressure handling techniques:
+ * - Dropping the messages.
+ * - Sensible buffering strategies (time vs count).
+ * - Blocking the execution and processing the current set of events.
+ * - Throttling and debouncing strategies.
+ */
 const val resourceName = "micro.apps.proto.account.v1.AccountService/Get"
 
 fun configureFlowRule(qps: Int) {

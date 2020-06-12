@@ -2,6 +2,13 @@
 
 Account gRPC service. 
 
+Showcase backpressure handling techniques:
+- Dropping the messages.
+- Sensible buffering strategies (time vs count).
+- Blocking the execution and processing the current set of events.
+- Throttling and debouncing strategies.
+
+
 ### 🚀 Run
 ```bash
 gradle :apps:account-service:run

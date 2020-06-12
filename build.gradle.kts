@@ -12,6 +12,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 
+val gradleToolVersion: String by project
 val kotlinVersion: String by project
 val jacocoVersion: String by project
 val jacocoQualityGate: String by project
@@ -433,7 +434,6 @@ tasks {
     }
 
     wrapper {
-        gradleVersion = "6.5"
-        distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-bin.zip"
+        distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleToolVersion-bin.zip"
     }
 }

@@ -197,6 +197,8 @@ gradle classifier:dependencies
 gradle classifier:dependencyInsight --dependency spring-messaging
 # refresh dependencies
 gradle build -x test --refresh-dependencies 
+# viewing and debugging dependencies
+gradle -q :apps:greeting-service:dependencyInsight  --dependency org.ow2.asm:asm --configuration testCompileClasspath
 
 # display version 
 gradle cV
