@@ -3,9 +3,9 @@
 
 ## Install PubSub Emulator
 Google PubSub [Emulator](https://cloud.google.com/pubsub/docs/emulator) 
-    ```bash
-    gcloud components install pubsub-emulator
-    ```
+```bash
+gcloud components install pubsub-emulator
+```
     
 ## Start PubSub Emulator
 
