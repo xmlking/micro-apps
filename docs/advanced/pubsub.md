@@ -1,6 +1,22 @@
 # Using Google PubSub Emulator
  
-> you can generate topics and subscription for Emulator via REST API
+
+## Install PubSub Emulator
+Google PubSub [Emulator](https://cloud.google.com/pubsub/docs/emulator) 
+```bash
+gcloud components install pubsub-emulator
+```
+    
+## Start PubSub Emulator
+
+```
+export PROJECT_ID=my-project-id
+export PIPELINE_NAME=ingestion
+
+gcloud beta emulators pubsub start --project=${PROJECT_ID} --host-port=localhost:8085
+```
+
+You can generate topics and subscription for Emulator via REST API
 
 ## Setup Env
 
