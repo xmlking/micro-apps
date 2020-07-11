@@ -196,5 +196,6 @@ curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: applicat
 - https://beam.apache.org/documentation/sdks/java/euphoria/
 - [Batched RPC](https://beam.apache.org/blog/2017/08/28/timely-processing.html)
 - E2E tests with PutSub <https://github.com/stevenextwave/beam/blob/master/src/test/java/org/apache/beam/examples/test/EndToEndTest.java>
-
+- [A Distributed Tracing Adventure in Apache Beam](http://rion.io/2020/07/04/a-distributed-tracing-adventure-in-apache-beam/)
+- [Avoiding Kotlin Minefields in Apache Beam](http://rion.io/2020/06/17/avoiding-kotlin-minefields-in-apache-beam/)
 - Async https://github.com/danielhultqvist/async-scio-future/blob/master/src/main/scala/example/FutureAsyncDoFn.scala
