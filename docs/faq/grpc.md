@@ -24,6 +24,10 @@
     
     Reference : [gRPC Authentication](https://grpc.io/docs/guides/auth/)
 
+- Awesome gRPC videos
+
+{% youtube src="https://www.youtube.com/watch?v=j1CzQNydMLI" %}{% endyoutube %}
+
 ### flow-control middleware 
 
 - How to implement gRPC client/server side resilience?

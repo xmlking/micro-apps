@@ -5,6 +5,23 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+
+    // FIXME: remove after: https://github.com/diffplug/spotless/issues/643
+    buildscript {
+        repositories {
+            mavenLocal()
+            mavenCentral()
+        }
+        dependencies {
+            classpath("org.eclipse.jgit:org.eclipse.jgit:5.7.0.202003110725-r")
+        }
+        configurations.classpath {
+            resolutionStrategy {
+                force("org.eclipse.jgit:org.eclipse.jgit:5.7.0.202003110725-r")
+            }
+        }
+    }
+
     plugins {
         val sonarPluginVersion: String by settings
         val spotlessPluginVersion: String by settings
