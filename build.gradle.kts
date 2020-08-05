@@ -34,7 +34,7 @@ plugins {
     // Code Quality
     id("org.sonarqube")
     // Keep your code spotless
-    id("com.diffplug.gradle.spotless")
+    id("com.diffplug.spotless")
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     kotlin("jvm")
     id("org.jetbrains.dokka")
@@ -159,7 +159,7 @@ subprojects {
             // Adds "build information" when uploading to Artifactory
             plugin("maven-publish")
             plugin("org.jetbrains.dokka")
-            plugin("com.diffplug.gradle.spotless")
+            plugin("com.diffplug.spotless")
             // plugin("dev.jacomet.logging-capabilities")
             if (name != "greeting-service") {
                 plugin("dev.jacomet.logging-capabilities")

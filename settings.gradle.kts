@@ -38,7 +38,7 @@ pluginManagement {
         val protobufPluginVersion: String by settings
 
         id("org.sonarqube") version sonarPluginVersion
-        id("com.diffplug.gradle.spotless") version spotlessPluginVersion
+        id("com.diffplug.spotless") version spotlessPluginVersion
         kotlin("jvm") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion apply false
         kotlin("plugin.allopen") version kotlinVersion apply false
