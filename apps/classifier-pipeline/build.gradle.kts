@@ -39,7 +39,7 @@ dependencies {
     implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
 
     // Use Kotlin Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinSerializationVersion") // JSON serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlinSerializationVersion") // JSON serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinSerializationVersion") // ProtoBuf serialization
     implementation("com.sksamuel.avro4k:avro4k-core:$avro4kVersion") // Avro serialization
     // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion") // kryo serialization

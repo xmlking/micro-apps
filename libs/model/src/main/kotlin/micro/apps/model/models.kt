@@ -9,7 +9,7 @@ import java.util.UUID
 import kotlinx.serialization.SerialInfo
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import kotlinx.serialization.protobuf.ProtoNumberType
+import kotlinx.serialization.protobuf.ProtoIntegerType
 import kotlinx.serialization.protobuf.ProtoType
 
 // ----------------
@@ -76,7 +76,7 @@ data class Person(
     @ProtoId(2) val name: Name,
     @ProtoId(3) val address: Address,
     @ProtoId(4) @AvroProp("pii", "yes") val gender: Gender,
-    @ProtoId(5) @AvroProp("pii", "yes") @ProtoType(ProtoNumberType.SIGNED) val age: Int,
+    @ProtoId(5) @AvroProp("pii", "yes") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
     @ProtoId(6) @AvroProp("encrypted", "yes") val email: String,
     @ProtoId(7) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String,
     @ProtoId(8) val avatar: String = "http://www.gravatar.com/avatar", // Optional

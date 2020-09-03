@@ -8,7 +8,6 @@ import micro.apps.model.Person
 import micro.apps.model.fixtures.mockPersonList
 
 @ExperimentalTime
-@kotlinx.serialization.UnstableDefault
 class SerializationTest : FunSpec({
 
     val persons = mockPersonList()
