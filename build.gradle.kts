@@ -37,6 +37,7 @@ plugins {
     id("com.diffplug.spotless")
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     kotlin("jvm")
+    // gradle dokkaHtmlMultimodule
     id("org.jetbrains.dokka")
     // Keep dependencies up to date
     // gradle dependencyUpdates -Drevision=release
@@ -303,17 +304,23 @@ subprojects {
                 finalizedBy("jacocoTestReport")
             }
 
-            // KDoc
-            dokka {
-                //  we need to do this, due to corp proxy
-                configuration {
-                    externalDocumentationLink {
-                        noJdkLink = true
-                        noStdlibLink = true
-                        noAndroidSdkLink = true
-                        // any url you want, doesn't matter
-                        url = URL("https://whatever")
-                        packageListUrl = URL("file:///$rootDir/package-list")
+            dokkaHtml {
+                dokkaSourceSets {
+                    /* configure main source set */
+                    // named("main") {}
+
+                    /* configure all source sets */
+                    configureEach {
+                        includes.from("README.md")
+                        /* we need to do this, due to corp proxy  */
+                        externalDocumentationLink {
+                            noJdkLink.set(true)
+                            noStdlibLink.set(true)
+                            noAndroidSdkLink.set(true)
+                            // any url you want, doesn't matter
+                            url.set(URL("https://whatever"))
+                            packageListUrl.set(URL("file:///$rootDir/package-list"))
+                        }
                     }
                 }
             }
@@ -431,6 +438,11 @@ tasks {
         checkForGradleUpdate = true
         revision = "release"
         gradleReleaseChannel = "current"
+    }
+
+    dokkaHtmlMultiModule {
+        // outputDirectory.set(buildDir.resolve("dokka"))
+        documentationFileName.set("README.md")
     }
 
     wrapper {

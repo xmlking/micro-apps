@@ -88,6 +88,16 @@ gradle build -Prelease.forceVersion=3.0.0
 gradle run
 ```
 
+### Docs
+
+> https://github.com/Kotlin/dokka/blob/master/docs/src/doc/docs/user_guide/gradle/usage.md
+
+```bash
+gradle dokkaHtmlMultimodule -Dorg.gradle.jvmargs="-Xmx4096m -XX:MaxMetaspaceSize=512m"
+gradle dokkaHtmlMultimodule
+gradle dokkaHtml
+```
+
 ### Release
 
 > bump git Tag and Push
