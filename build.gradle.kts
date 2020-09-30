@@ -442,7 +442,7 @@ tasks {
 
     dokkaHtmlMultiModule {
         // outputDirectory.set(buildDir.resolve("dokka"))
-        documentationFileName.set("README.md")
+        // documentationFileName.set("README.md")
     }
 
     wrapper {
