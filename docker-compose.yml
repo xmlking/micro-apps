@@ -1,4 +1,4 @@
-version: "3"
+version: "3.3"
 
 services:
   jenkins:
@@ -57,6 +57,29 @@ services:
     volumes:
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
+
+
+  pub-sub-emulator:
+    image: google/cloud-sdk:306.0.0
+    command: ["gcloud", "beta", "emulators", "pubsub", "start", "--host-port=0.0.0.0:8085", "--project=df-key-kls-npe-8d1f"]
+    ports:
+      - "8085:8085"
+
+  nifi:
+    image: apache/nifi:1.11.4
+    container_name: nifi
+    ports:
+      - 8080:8080
+#    environment:
+#      - NIFI_WEB_HTTP_PORT=8080
+#    links:
+#      - pub-sub-emulator
+#    volumes:
+#      - ./data:/opt/datafiles
+#      - ./config/nifi:/opt/nifi/nifi-current/conf
+#      - nifi:/opt/nifi/nifi-current/extensions
+
+
 volumes:
   nexus-data: {}
   jenkins-data: {}
@@ -66,3 +89,4 @@ volumes:
   sonarqube_extensions: {}
   postgresql: {}
   postgresql_data: {}
+  nifi: {}
