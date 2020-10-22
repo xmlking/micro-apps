@@ -66,7 +66,7 @@ services:
       - "8085:8085"
 
   nifi:
-    image: apache/nifi:1.11.4
+    image: apache/nifi:1.12.1
     container_name: nifi
     ports:
       - 8080:8080
