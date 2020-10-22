@@ -65,4 +65,4 @@ images:
     newTag: $(IMAGE_VERSION)
   - name: xmlking/greeting-service
     newName: docker.pkg.github.com/xmlking/micro-apps/greeting-service
-    newTag: 1.6.1-SNAPSHOT
+    newTag: 1.6.5-SNAPSHOT

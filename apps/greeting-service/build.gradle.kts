@@ -61,10 +61,6 @@ tasks {
         setSourceDir("$projectDir/src/main/kotlin")
     }
 
-    quarkusBuild {
-        isUberJar = true
-    }
-
     buildNative {
         // isEnableHttpUrlHandler = true
         // isEnableHttpsUrlHandler = true

@@ -67,7 +67,7 @@ class ClassifierPipelineTest : Serializable {
         }
         // seed data
         persons.forEach {
-            val data = Avro.default.dump(Person.serializer(), it)
+            val data = Avro.default.encodeToByteArray(Person.serializer(), it)
             val pubsubMessage = PubsubMessage.newBuilder()
                 .setData(ByteString.copyFrom(data))
                 .putAttributes("timestamp", Instant.now().millis.toString()).build()

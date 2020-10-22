@@ -9,12 +9,12 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 1. A working container runtime (Docker, podman)
 1. JDK 11 installed with JAVA_HOME configured appropriately
     ```bash
-    sdk install java 11.0.6.j9-adpt
+    sdk install java 11.0.8.hs-adpt
     export JAVA_HOME=$HOME/.sdkman/candidates/java/current
     ```
 1. GraalVM version 20.0.0.r11 installed and configured appropriately
     ```bash
-    sdk install java 20.0.0.r11-grl
+    sdk install java 20.2.0.r11-grl
     export GRAALVM_HOME=$HOME/.sdkman/candidates/java/20.0.0.r11-grl
     ```
 1. Install the native-image tool using gu install:
@@ -29,11 +29,11 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## scaffolding projects
 
-> your can also use [code.quarkus.io](https://code.quarkus.io/?g=micro.apps&a=greeting-service&v=1.0.0-SNAPSHOT&b=GRADLE&c=micro.apps.ExampleResource&s=ARC.dZK.tqK.OxX.Ll4.qZz&cn=code.quarkus.io) webApp to generate a new project
+> your can also use [code.quarkus.io](https://code.quarkus.io/?g=micro.apps&a=greeting-service&v=1.0.0-SNAPSHOT&b=GRADLE_KOTLIN_DSL&s=ARC.dZK.tqK.qZz.Ll4.OxX&cn=code.quarkus.io) webApp to generate a new project
 
 ```bash
 cd apps
-mvn io.quarkus:quarkus-maven-plugin:1.5.2.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:1.9.0.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-service \
     -DprojectVersion=0.1.0 \
@@ -57,27 +57,35 @@ gradle :apps:greeting-service:quarkusDev -Dsuspend -Ddebug
 
 ## Packaging and running the application
 
-The application can be packaged using `gradle :apps:greeting-service:quarkusBuild`.
-It produces the `greeting-service-0.1.0-runner.jar` file in the `build` directory.
+The application can be packaged using
+```shell script
+gradle :apps:greeting-service:quarkusBuild
+```
+It produces the `greeting-service-0.1.0-SNAPSHOT-runner.jar` file in the `/build` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/lib` directory.
 
-The application is now runnable using `java -jar build/greeting-service-0.1.0-runner.jar`.
-
-If you want to build an _über-jar_, just add the `--uber-jar` option to the command line:
-```
+If you want to build an _über-jar_, execute the following command:
+```shell script
 gradle :apps:greeting-service:quarkusBuild --uber-jar
 ```
 
+The application is now runnable using `java -jar build/greeting-service-0.1.0-SNAPSHOT-runner.jar`.
+
 ## Creating a native executable
 
-You can create a native executable using: `gradle :apps:greeting-service:buildNative`.
+You can create a native executable using: 
+```shell script
+# ignore error: The native binary produced by the build is not a Linux binary
+gradle :apps:greeting-service:build -Dquarkus.package.type=native
+```
+You can then execute your native executable with: `./apps/greeting-service/build/greeting-service-1.6.5-SNAPSHOT-runner`
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: `gradle :apps:greeting-service:buildNative --docker-build=true`.
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+```shell script
+gradle :apps:greeting-service:build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
+```
 
-You can then execute your native executable with: `./apps/greeting-service/build/greeting-service-1.6.1-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling#building-a-native-executable.
-
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling.
 
 ## Docker 
 
@@ -107,7 +115,7 @@ cd apps/greeting-service/
 DOCKER_REGISTRY=docker.pkg.github.com
 DOCKER_CONTEXT_PATH=xmlking/micro-apps
 TARGET=greeting-service
-VERSION=1.6.1-SNAPSHOT
+VERSION=1.6.5-SNAPSHOT
 
 IMANGE_NAME=${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}${DOCKER_CONTEXT_PATH}/${TARGET}:${VERSION}
 
@@ -173,7 +181,7 @@ gradle :apps:greeting-service:testNative
 ```
 
 ## Reference 
-
+- [Quarkus - Command Mode](https://quarkus.io/guides/command-mode-reference)
 - [BUILDING QUARKUS APPS WITH GRADLE](https://quarkus.io/guides/gradle-tooling)
 - [Quarkus - Using Kotlin](https://github.com/quarkusio/quarkus/blob/master/docs/src/main/asciidoc/kotlin.adoc)
 - [Quarkus - kubernetes Extension](https://quarkus.io/guides/kubernetes)

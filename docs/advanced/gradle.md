@@ -179,7 +179,7 @@ docker pull gcr.io/distroless/java:11
 # use local docker image as base, build image only (on publish)
 gradle jibDockerBuild -PbaseDockerImage=docker://gcr.io/distroless/java:11
 # you can run your local docker image
-docker run -it xmlking/micro-apps-demo:1.6.1-SNAPSHOT
+docker run -it xmlking/micro-apps-demo:1.6.5-SNAPSHOT
 ```
 
 ### Dependencies
@@ -198,7 +198,7 @@ gradle useLatestVersions && gradle useLatestVersionsCheck
 ```bash
 # upgrade gradlew
 # upgrade project gradle version
-gradle wrapper --gradle-version 6.2.2 --distribution-type all
+gradle wrapper --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop

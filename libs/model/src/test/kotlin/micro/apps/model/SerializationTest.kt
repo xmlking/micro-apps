@@ -10,11 +10,10 @@ import io.kotest.matchers.shouldBe
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
-import kotlinx.serialization.protobuf.ProtoId
-import kotlinx.serialization.protobuf.ProtoNumberType
+import kotlinx.serialization.protobuf.ProtoIntegerType
 import kotlinx.serialization.protobuf.ProtoType
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
@@ -27,12 +26,11 @@ data class Pizza(val name: String, val ingredients: List<Ingredient>, val vegeta
 
 @Serializable
 data class ProtobufData(
-    @ProtoId(1) @ProtoType(ProtoNumberType.SIGNED) val a: Int,
+    @ProtoId(1) @ProtoType(ProtoIntegerType.SIGNED) val a: Int,
     @ProtoId(2) val b: Double = 42.88
 )
 
 @ExperimentalTime
-@kotlinx.serialization.UnstableDefault
 class SerializationTest : FunSpec({
     TestCaseConfig(timeout = 3.minutes, enabled = true)
 
@@ -56,29 +54,29 @@ class SerializationTest : FunSpec({
         """[{"name":"veg","ingredients":[{"name":"peppers","sugar":0.1,"fat":0.3},{"name":"onion","sugar":1.0,"fat":0.4}],"vegetarian":true,"kcals":265},{"name":"hawaiian","ingredients":[{"name":"ham","sugar":1.5,"fat":5.6},{"name":"pineapple","sugar":5.2,"fat":0.2}],"vegetarian":false,"kcals":391}]"""
 
     test("testJsonSerialization") {
-        val str = Json.stringify<Pizza>(Pizza.serializer(), veg)
+        val str = Json.encodeToString<Pizza>(Pizza.serializer(), veg)
         vegString shouldBe str
 
         // parsing data back
-        val obj = Json.parse<Pizza>(Pizza.serializer(), str)
+        val obj = Json.decodeFromString<Pizza>(Pizza.serializer(), str)
         veg shouldBe obj
     }
 
     test("testJsonListSerialization") {
-        val str = Json.stringify<List<Pizza>>(Pizza.serializer().list, listOf(veg, hawaiian))
+        val str = Json.encodeToString<List<Pizza>>(ListSerializer(Pizza.serializer()), listOf(veg, hawaiian))
         pizzaString shouldBe str
         println(str)
     }
 
     test("testProtobufSerialization") {
         // testing non-proto class
-        val pizzaBytes = ProtoBuf.dump(Pizza.serializer(), hawaiian)
-        val pizza = ProtoBuf.load<Pizza>(Pizza.serializer(), pizzaBytes) // parsing data back
+        val pizzaBytes = ProtoBuf.encodeToByteArray(Pizza.serializer(), hawaiian)
+        val pizza = ProtoBuf.decodeFromByteArray<Pizza>(Pizza.serializer(), pizzaBytes) // parsing data back
         hawaiian shouldBe pizza
         // testing ProtoId annotated class
         val originalData = ProtobufData(a = 5)
-        val dump = ProtoBuf.dump<ProtobufData>(ProtobufData.serializer(), originalData)
-        val data = ProtoBuf.load<ProtobufData>(ProtobufData.serializer(), dump) // parsing data back
+        val dump = ProtoBuf.encodeToByteArray<ProtobufData>(ProtobufData.serializer(), originalData)
+        val data = ProtoBuf.decodeFromByteArray<ProtobufData>(ProtobufData.serializer(), dump) // parsing data back
         originalData shouldBe data
     }
 

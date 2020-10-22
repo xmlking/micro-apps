@@ -19,10 +19,10 @@ class FruitResourceTest : FunSpec({
     TestCaseConfig(timeout = 3.minutes)
 
     beforeTest {
-        println("Starting test ${it.name}!")
+        println("Starting test ${it.displayName}!")
     }
     afterTest {
-        println("Finished test ${it.a.name}!")
+        println("Finished test ${it.a.displayName}!")
     }
 
     test("get fruits call should work").config(enabled = false) {
