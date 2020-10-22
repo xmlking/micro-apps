@@ -12,10 +12,10 @@ If you want to learn more about Quarkus, please visit its website: https://quark
     sdk install java 11.0.8.hs-adpt
     export JAVA_HOME=$HOME/.sdkman/candidates/java/current
     ```
-1. GraalVM version 20.0.0.r11 installed and configured appropriately
+1. GraalVM version 20.2.0.r11 installed and configured appropriately
     ```bash
     sdk install java 20.2.0.r11-grl
-    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/20.0.0.r11-grl
+    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/20.2.0.r11-grl
     ```
 1. Install the native-image tool using gu install:
     ```bash
