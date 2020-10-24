@@ -58,6 +58,33 @@ services:
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
 
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER: postgres
+      - POSTGRES_PASSWORD: postgres
+      - POSTGRES_DB: postgres
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+      - "./scripts/add-keycloak-db.sh:/docker-entrypoint-initdb.d/add-keycloak-db.sh"
+
+  keycloak:
+    image: jboss/keycloak:11.0.2
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: "/tmp/karate-quarkus-demo-realm.json"
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+    ports:
+      - 8180:8080
+    volumes:
+      - "./scripts/karate-quarkus-demo-realm.json:/tmp/karate-quarkus-demo-realm.json"
+    depends_on:
+      - postgres
 
   pub-sub-emulator:
     image: google/cloud-sdk:306.0.0

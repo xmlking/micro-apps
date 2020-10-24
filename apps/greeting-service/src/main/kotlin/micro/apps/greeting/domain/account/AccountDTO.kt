@@ -1,3 +1,5 @@
 package micro.apps.greeting.domain.account
 
-data class AccountDTO(val name: String)
+import java.time.LocalDate
+
+data class AccountDTO(var firstName: String?, var lastName: String? = null, var phone: String?, var birthdate: LocalDate? = null)

@@ -1,23 +1,19 @@
 package micro.apps.greeting.domain.account
 
-import javax.enterprise.context.ApplicationScoped
 import micro.apps.greeting.util.IMapper
+import org.mapstruct.InheritInverseConfiguration
+import org.mapstruct.Mapper
+import org.mapstruct.Mapping
+import org.mapstruct.Mappings
 
-// import org.mapstruct.Mapper;
-//
-// @Mapper(componentModel = "cdi", uses = {})
-@ApplicationScoped
-class AccountMapper : IMapper<AccountDTO, Account> {
-    override fun toDto(entity: Account): AccountDTO {
-        return AccountDTO(
-            name = entity.name
-        )
-    }
+@Mapper(componentModel = "cdi")
+interface AccountMapper : IMapper<AccountDTO, Account> {
+    @Mappings(
+        Mapping(source = "phoneNumber", target = "phone"),
+        Mapping(source = "firstName", target = "firstName")
+    )
+    override fun toDTO(entity: Account): AccountDTO
 
-    override fun toEntity(dto: AccountDTO): Account {
-        // TODO("Not yet implemented")
-        return Account(
-            name = dto.name
-        )
-    }
+    @InheritInverseConfiguration
+    override fun toEntity(dto: AccountDTO): Account
 }

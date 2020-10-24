@@ -40,7 +40,7 @@ class AccountResource(private val accountService: AccountService) {
         } else if (result is Success<AccountDTO>) {
             return result.right
         }
-        return AccountDTO("no")
+        return AccountDTO(firstName = "no", phone = "no")
     }
 
     @GET

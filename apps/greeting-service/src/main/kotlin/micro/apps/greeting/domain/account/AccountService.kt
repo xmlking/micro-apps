@@ -5,7 +5,7 @@ import javax.inject.Inject
 import micro.apps.greeting.util.AbstractService
 import micro.apps.greeting.util.Result
 import micro.apps.greeting.util.Success
-import micro.apps.greeting.util.toDto
+import micro.apps.greeting.util.toDTOs
 
 @ApplicationScoped
 class AccountService : AbstractService<AccountDTO, Account>() {
@@ -14,11 +14,11 @@ class AccountService : AbstractService<AccountDTO, Account>() {
     override lateinit var mapper: AccountMapper
 
     override fun findById(id: String): Result<AccountDTO> {
-        return Success(mapper.toDto(Account(id)))
+        return Success(mapper.toDTO(Account(firstName = "firstName-$id", phoneNumber = "lastName-$id")))
     }
 
     override fun findAll(index: Int, size: Int): List<AccountDTO> {
-        return mapper.toDto(listOf<Account>(Account("1")))
+        return mapper.toDTOs(listOf<Account>(Account(firstName = "firstName-$index", phoneNumber = "lastName-$index")))
     }
 
     override fun save(dto: AccountDTO): Result<AccountDTO> {

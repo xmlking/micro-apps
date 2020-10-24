@@ -188,3 +188,5 @@ gradle :apps:greeting-service:testNative
 - [Quarkus - Using Kotlin](https://github.com/quarkusio/quarkus/blob/master/docs/src/main/asciidoc/kotlin.adoc)
 - [Quarkus - kubernetes Extension](https://quarkus.io/guides/kubernetes)
 - [Quarkus - container image Extension](https://quarkus.io/guides/container-image)
+- [Quarkus - Java - Todos Example](https://github.com/ineat/karate-quarkus-demo)
+- [MapStruct + Quarkus](https://github.com/mapstruct/mapstruct-examples/tree/master/mapstruct-quarkus)

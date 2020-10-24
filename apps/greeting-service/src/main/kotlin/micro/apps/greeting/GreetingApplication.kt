@@ -11,6 +11,9 @@ import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType
 import org.eclipse.microprofile.openapi.annotations.info.Contact
 import org.eclipse.microprofile.openapi.annotations.info.Info
+import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow
+import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows
+import org.eclipse.microprofile.openapi.annotations.security.OAuthScope
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme
 import org.eclipse.microprofile.openapi.annotations.servers.Server
@@ -43,6 +46,27 @@ fun main(vararg args: String) {
                 type = SecuritySchemeType.HTTP,
                 scheme = "bearer",
                 bearerFormat = "JWT"
+            ),
+            SecurityScheme(
+                securitySchemeName = "openId",
+                type = SecuritySchemeType.OPENIDCONNECT,
+                openIdConnectUrl = "https://accounts.google.com/.well-known/openid-configuration"
+            ),
+            SecurityScheme(
+                securitySchemeName = "oauth2",
+                type = SecuritySchemeType.OAUTH2,
+                description = "Authentication needed for this operation",
+                flows = OAuthFlows(
+                    implicit = OAuthFlow(
+                        authorizationUrl = "https://accounts.google.com/o/oauth2/v2/auth",
+                        tokenUrl = "https://oauth2.googleapis.com/token",
+                        scopes = [
+                            OAuthScope(name = "openid"),
+                            OAuthScope(name = "email"),
+                            OAuthScope(name = "profile")
+                        ]
+                    )
+                )
             )
         ]
     ),

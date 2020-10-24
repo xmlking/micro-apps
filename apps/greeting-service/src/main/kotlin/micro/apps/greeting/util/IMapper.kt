@@ -2,12 +2,12 @@ package micro.apps.greeting.util
 
 interface IMapper<D, E> {
     fun toEntity(dto: D): E
-    fun toDto(entity: E): D
-//    fun toEntity(dtoList: List<D>?): List<E>?
-//    fun toDto(entityList: List<E>?): List<D>?
+    fun toDTO(entity: E): D
+//    fun toEntities(dtoList: List<D>?): List<E>?
+//    fun toDTOs(entityList: List<E>?): List<D>?
 }
 
-fun <D, E> IMapper<D, E>.toEntity(dtoList: List<D>): List<E> {
+fun <D, E> IMapper<D, E>.toEntities(dtoList: List<D>): List<E> {
     val result = mutableListOf<E>()
     for (dto in dtoList) {
         result.add(toEntity(dto))
@@ -15,10 +15,10 @@ fun <D, E> IMapper<D, E>.toEntity(dtoList: List<D>): List<E> {
     return result
 }
 
-fun <D, E> IMapper<D, E>.toDto(entityList: List<E>): List<D> {
+fun <D, E> IMapper<D, E>.toDTOs(entityList: List<E>): List<D> {
     val result = mutableListOf<D>()
     for (entity in entityList) {
-        result.add(toDto(entity))
+        result.add(toDTO(entity))
     }
     return result
 }

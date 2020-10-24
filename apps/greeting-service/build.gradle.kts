@@ -1,5 +1,6 @@
 plugins {
     kotlin("plugin.allopen")
+    kotlin("kapt")
     id("io.quarkus")
 }
 val quarkusPlatformGroupId: String by project
@@ -10,6 +11,7 @@ val slf4jVersion: String by project
 val grpcVersion: String by project
 val grpcKotlinVersion: String by project
 val kotlinCoroutinesVersion: String by project
+val mapstructVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -24,6 +26,9 @@ dependencies {
     // rest
     implementation("io.quarkus:quarkus-resteasy")
     implementation("io.quarkus:quarkus-resteasy-jsonb")
+    // mapper
+    implementation("org.mapstruct:mapstruct:$mapstructVersion")
+    kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
     // security
     implementation("io.quarkus:quarkus-oidc")
     // grpc
