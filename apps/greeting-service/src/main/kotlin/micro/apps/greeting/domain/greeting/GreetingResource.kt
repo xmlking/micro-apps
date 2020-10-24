@@ -1,4 +1,4 @@
-package micro.apps.greeting
+package micro.apps.greeting.domain.greeting
 
 import javax.enterprise.inject.Default
 import javax.inject.Inject
@@ -28,7 +28,11 @@ class GreetingResource {
 
     @GET
     @Path("{name}")
-    @Timed(name = "checksTimer", description = "A measure of how long it takes to perform the primality test.", unit = MetricUnits.MILLISECONDS)
+    @Timed(
+        name = "checksTimer",
+        description = "A measure of how long it takes to perform the primality test.",
+        unit = MetricUnits.MILLISECONDS
+    )
     fun greeting(@PathParam("name") name: String?): Greeting {
         return if (null == name || name.isEmpty()) hello() else greetingService.greeting(name)
     }

@@ -19,10 +19,13 @@ dependencies {
     // quarkus
     implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-kotlin")
+    implementation("io.quarkus:quarkus-arc")
     // implementation("io.quarkus:quarkus-logging-json")
     // rest
     implementation("io.quarkus:quarkus-resteasy")
     implementation("io.quarkus:quarkus-resteasy-jsonb")
+    // security
+    implementation("io.quarkus:quarkus-oidc")
     // grpc
     implementation("io.quarkus:quarkus-grpc")
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")

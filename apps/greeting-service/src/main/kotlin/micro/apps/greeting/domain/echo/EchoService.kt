@@ -1,16 +1,17 @@
-package micro.apps.greeting
+package micro.apps.greeting.domain.echo
 
-// import io.grpc.stub.StreamObserver
 import javax.inject.Singleton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import micro.apps.proto.echo.v1.EchoRequest
 import micro.apps.proto.echo.v1.EchoResponse
-// import micro.apps.proto.echo.v1.EchoServiceGrpc
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
 import micro.apps.proto.echo.v1.EchoStreamRequest
 import micro.apps.proto.echo.v1.EchoStreamResponse
+
+// import io.grpc.stub.StreamObserver
+// import micro.apps.proto.echo.v1.EchoServiceGrpc
 
 // @Singleton
 // class EchoService0 : EchoServiceGrpc.EchoServiceImplBase() {
@@ -24,8 +25,7 @@ import micro.apps.proto.echo.v1.EchoStreamResponse
 
 @Singleton
 class EchoService : EchoServiceGrpcKt.EchoServiceCoroutineImplBase() {
-    override suspend fun echo(request: EchoRequest): EchoResponse = EchoResponse
-        .newBuilder()
+    override suspend fun echo(request: EchoRequest): EchoResponse = EchoResponse.newBuilder()
         .setMessage("Hello ${request.message}")
         .build()
 

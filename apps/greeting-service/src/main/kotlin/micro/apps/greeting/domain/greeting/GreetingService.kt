@@ -1,4 +1,4 @@
-package micro.apps.greeting
+package micro.apps.greeting.domain.greeting
 
 import javax.enterprise.context.ApplicationScoped
 import micro.apps.model.Greeting

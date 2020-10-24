@@ -29,8 +29,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## scaffolding projects
 
-> your can also use [code.quarkus.io](https://code.quarkus.io/?g=micro.apps&a=greeting-service&v=1.0.0-SNAPSHOT&b=GRADLE_KOTLIN_DSL&s=ARC.dZK.tqK.qZz.Ll4.OxX&cn=code.quarkus.io) webApp to generate a new project
-
+> your can also use [code.quarkus.io](https://code.quarkus.io/?g=micro.apps&a=greeting-service&v=1.0.0-SNAPSHOT&b=GRADLE_KOTLIN_DSL&s=ARC.dZK.tqK.qZz.Ll4.OxX.fgL&cn=code.quarkus.io) webApp to generate a new project
 ```bash
 cd apps
 mvn io.quarkus:quarkus-maven-plugin:1.9.0.Final:create \
@@ -39,7 +38,7 @@ mvn io.quarkus:quarkus-maven-plugin:1.9.0.Final:create \
     -DprojectVersion=0.1.0 \
     -DclassName="micro.apps.greeting.GreetingResource" \
     -Dpath="/greeting" \
-    -Dextensions="kotlin, resteasy-jsonb, kubernetes, jib, grpc" \
+    -Dextensions="kotlin, resteasy-jsonb, oidc, kubernetes, jib, grpc" \
     -DbuildTool=gradle
 cd ..
 ```
@@ -154,6 +153,9 @@ http :8080/api/v1/greeting
 http :8080/api/v1/greeting/world
 
 http :8080/api/fruits
+
+http :8080/api/v1/account/id/abc123
+http :8080/api/v1/account/user-info 'Authorization:Bearer GOOGLE.TOKEN'
 ```
 
 ### Unit tests

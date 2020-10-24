@@ -1,4 +1,4 @@
-package micro.apps.greeting
+package micro.apps.greeting.domain.fruit
 
 import java.util.Collections
 import java.util.function.Predicate
@@ -11,12 +11,18 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 import kotlin.collections.LinkedHashMap
 import micro.apps.model.Fruit
+import org.eclipse.microprofile.openapi.annotations.tags.Tag
+import org.eclipse.microprofile.openapi.annotations.tags.Tags
 
 @Path("/fruits")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tags(
+    Tag(name = "FruitResource", description = "Fruit API")
+)
 class FruitResource {
-    private val fruits: MutableSet<Fruit> = Collections.newSetFromMap(Collections.synchronizedMap(LinkedHashMap<Fruit, Boolean>()))
+    private val fruits: MutableSet<Fruit> =
+        Collections.newSetFromMap(Collections.synchronizedMap(LinkedHashMap<Fruit, Boolean>()))
 
     init {
         fruits.add(Fruit("Apple", "Winter fruit"))
