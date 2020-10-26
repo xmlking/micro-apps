@@ -15,6 +15,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 import micro.apps.greeting.util.Failure
 import micro.apps.greeting.util.Success
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.eclipse.microprofile.openapi.annotations.tags.Tag
 import org.eclipse.microprofile.openapi.annotations.tags.Tags
 
@@ -46,6 +47,8 @@ class AccountResource(private val accountService: AccountService) {
     @GET
     @Path("/user-info")
     @Produces(MediaType.TEXT_PLAIN)
+    @SecurityRequirement(name = "oauth2", scopes = ["openid", "email", "profile"])
+    // @SecurityRequirement(name = "bearerAuth", scopes = [])
     @Authenticated
     fun printUsername(): String? {
         return if (isDevoteamEmployee()) {
