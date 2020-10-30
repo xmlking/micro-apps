@@ -1,7 +1,7 @@
 /* ktlint-disable no-wildcard-imports */
 import com.google.protobuf.gradle.*
 
-val kotlinCoroutinesVersion: String by project
+val coroutinesVersion: String by project
 val grpcVersion: String by project
 val grpcKotlinVersion: String by project
 val protobufVersion: String by project
@@ -28,7 +28,7 @@ dependencies {
     implementation("io.grpc:grpc-protobuf:$grpcVersion")
     implementation("io.grpc:grpc-stub:$grpcVersion")
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
     // Protobuf
     implementation("com.google.protobuf:protobuf-java:$protobufVersion")
     implementation("com.google.protobuf:protobuf-java-util:$protobufVersion")

@@ -7,12 +7,12 @@ val beamVersion: String by project
 val csvVersion: String by project
 val junitVersion: String by project
 val hamcrestVersion: String by project
-val kotlinSerializationVersion: String by project
+val serializationVersion: String by project
 val avro4kVersion: String by project
 val konfigVersion: String by project
 val guavaVersion: String by project
 val grpcKotlinVersion: String by project
-val kotlinCoroutinesVersion: String by project
+val coroutinesVersion: String by project
 val slf4jVersion: String by project
 val grpcVersion: String by project
 val googlePubsubVersion: String by project
@@ -39,8 +39,8 @@ dependencies {
     implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
 
     // Use Kotlin Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinSerializationVersion") // JSON serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinSerializationVersion") // ProtoBuf serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion") // JSON serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$serializationVersion") // ProtoBuf serialization
     implementation("com.sksamuel.avro4k:avro4k-core:$avro4kVersion") // Avro serialization
     // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion") // kryo serialization
     // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")

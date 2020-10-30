@@ -10,7 +10,7 @@ val restAssuredVersion: String by project
 val slf4jVersion: String by project
 val grpcVersion: String by project
 val grpcKotlinVersion: String by project
-val kotlinCoroutinesVersion: String by project
+val coroutinesVersion: String by project
 val mapstructVersion: String by project
 
 dependencies {
@@ -34,8 +34,8 @@ dependencies {
     // grpc
     implementation("io.quarkus:quarkus-grpc")
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinCoroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
     // tooling
     implementation("io.quarkus:quarkus-smallrye-health")
     implementation("io.quarkus:quarkus-smallrye-metrics")
