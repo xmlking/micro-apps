@@ -22,6 +22,7 @@ dependencies {
     implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-arc")
+    implementation("io.quarkus:quarkus-config-yaml")
     // implementation("io.quarkus:quarkus-logging-json")
     // rest
     implementation("io.quarkus:quarkus-resteasy")

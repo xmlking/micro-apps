@@ -38,7 +38,7 @@ mvn io.quarkus:quarkus-maven-plugin:1.9.0.Final:create \
     -DprojectVersion=0.1.0 \
     -DclassName="micro.apps.greeting.GreetingResource" \
     -Dpath="/greeting" \
-    -Dextensions="kotlin, resteasy-jsonb, oidc, kubernetes, jib, grpc" \
+    -Dextensions="kotlin, config-yaml, resteasy-jsonb, oidc, kubernetes, jib, grpc" \
     -DbuildTool=gradle
 cd ..
 ```
