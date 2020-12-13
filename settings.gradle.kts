@@ -13,7 +13,7 @@ pluginManagement {
             mavenCentral()
         }
         dependencies {
-            classpath("org.eclipse.jgit:org.eclipse.jgit:5.7.0.202003110725-r")
+            classpath("org.eclipse.jgit:org.eclipse.jgit:5.10.0.202012080955-r")
         }
         configurations.classpath {
             resolutionStrategy {
