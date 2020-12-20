@@ -21,9 +21,9 @@ open class WriteConfig(
     var suffix: String = ".txt",
     var numShards: Int = 0
 ) {
-    operator fun <DT, UT> invoke(io: FileIO.Write<DT, UT>): FileIO.Write<DT, UT>? {
+    operator fun <DT, UT> invoke(io: FileIO.Write<DT, UT>): FileIO.Write<DT, UT> {
         return io
-            .to(path)
+            .to(path.toString())
             .withCompression(compression)
             .withNumShards(numShards)
             .withSuffix(suffix)
@@ -37,7 +37,7 @@ open class TextWriteConfig(
 ) : WriteConfig() {
     operator fun invoke(io: TextIO.Write): TextIO.Write {
         return io
-            .to(path)
+            .to(path.toString())
             .withCompression(compression)
             .withNumShards(numShards)
             .withSuffix(suffix)
@@ -48,7 +48,7 @@ open class TextWriteConfig(
 }
 
 class TextReadConfig(
-    var filePattern: ValueProvider<String>? = null,
+    var filePattern: ValueProvider<String> = ValueProvider.StaticValueProvider.of("build/input"),
     var compression: Compression = Compression.UNCOMPRESSED,
 //    var delimiter: ByteArray = "\r\n".toByteArray(Charsets.US_ASCII),
     var delimiter: ByteArray = "\n".toByteArray(Charsets.US_ASCII),
@@ -104,8 +104,9 @@ fun PCollection<String>.writeText(name: String? = "Write to Text", configFunctio
  * Read files from a PCollection of file names
  */
 fun PCollection<String>.readAllTextFiles(name: String? = null): PCollection<String> {
-    return this.apply(name ?: "Read from File Collection", TextIO.readAll()
-        .withCompression(Compression.AUTO))
+    return this.apply(name ?: "Read from File Collection", FileIO.matchAll())
+        .apply(FileIO.readMatches().withCompression(Compression.AUTO))
+        .apply(TextIO.readFiles())
 }
 
 /**

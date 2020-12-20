@@ -8,7 +8,7 @@ WordCount pipeline demo.
 ```bash
 gradle :apps:wordcount-pipeline:run --args="--runner=DirectRunner \
 --inputFile=./src/test/resources/data/input.txt \
---output=./build/output.txt"
+--output=./build/output"
 ```
 
 #### Cloud Run  

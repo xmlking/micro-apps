@@ -53,7 +53,7 @@ object IngestionPipeline {
             input = pipe
                 .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))
                 .apply("Batch records with windowDuration: ${options.windowDuration}", Window.into<PubsubMessage>(
-                    FixedWindows.of(TimeUtil.fromCloudDuration(options.windowDuration)))
+                    FixedWindows.of(TimeUtil.fromCloudDuration(options.windowDuration)!!))
                     .triggering(AfterWatermark.pastEndOfWindow())
                     .discardingFiredPanes()
                     .withAllowedLateness(Duration.standardSeconds(300)))

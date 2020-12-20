@@ -1,6 +1,6 @@
 plugins {
-    kotlin("plugin.allopen")
     kotlin("kapt")
+    kotlin("plugin.allopen")
     id("io.quarkus")
 }
 val quarkusPlatformGroupId: String by project

@@ -33,6 +33,7 @@ pluginManagement {
         val shadowPluginVersion: String by settings
         val jibPluginVersion: String by settings
         val loggerPluginVersion: String by settings
+        val quarkusPluginId: String by settings
         val quarkusPluginVersion: String by settings
         val kotlinVersion: String by settings
         val protobufPluginVersion: String by settings
@@ -42,6 +43,7 @@ pluginManagement {
         kotlin("jvm") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion apply false
         kotlin("plugin.allopen") version kotlinVersion apply false
+        kotlin("kapt") version kotlinVersion apply false
         id("org.jetbrains.dokka") version dokkaPluginVersion
         id("com.github.ben-manes.versions") version checkLatestPluginVersion
         id("com.diffplug.spotless-changelog") version spotlessClogPluginVersion
@@ -51,7 +53,7 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version jibPluginVersion
         id("dev.jacomet.logging-capabilities") version loggerPluginVersion
         id("com.google.protobuf") version protobufPluginVersion apply false
-        id("io.quarkus") version quarkusPluginVersion apply false
+        id(quarkusPluginId) version quarkusPluginVersion apply false
     }
 }
 

@@ -44,6 +44,10 @@ quarkus:
 #  http.auth.permission.authenticated.paths: /admin/user-info,/admin/health,/admin/reboot-services
 #  http.auth.permission.authenticated.policy: authenticated
 
+## swagger ##
+  swagger-ui:
+    oauth2-redirect-url: "/swagger-ui/oauth2-redirect.html"
+
 ## native ##
 #  native:
 #    container-build: true

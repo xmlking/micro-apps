@@ -6,6 +6,7 @@ import java.io.Serializable as JavaSerializable
 import java.math.BigDecimal
 import java.time.Instant
 import java.util.UUID
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialInfo
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -15,6 +16,7 @@ import kotlinx.serialization.protobuf.ProtoType
 // ----------------
 //  User-defined serial annotation for ProtoBuf
 // ----------------
+@ExperimentalSerializationApi
 @SerialInfo
 @Target(AnnotationTarget.PROPERTY)
 annotation class ProtoId(val id: Int)
@@ -51,6 +53,7 @@ enum class Gender {
     fun isFemale(): Boolean = this == FEMALE
 }
 
+@ExperimentalSerializationApi
 @Serializable
 @AvroProp("pii", "yes")
 data class Name(
@@ -59,6 +62,7 @@ data class Name(
     @ProtoId(3) val title: String = ""
 )
 
+@ExperimentalSerializationApi
 @Serializable
 @AvroProp("pii", "yes")
 data class Address(
@@ -71,6 +75,7 @@ data class Address(
 )
 
 @Serializable
+@kotlinx.serialization.ExperimentalSerializationApi
 data class Person(
     @ProtoId(1) @AvroProp("pii", "yes") val id: String = "",
     @ProtoId(2) val name: Name,

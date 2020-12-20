@@ -9,6 +9,7 @@ import io.kotest.core.test.TestCaseConfig
 import io.kotest.matchers.shouldBe
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
@@ -25,11 +26,13 @@ data class Ingredient(val name: String, val sugar: Double, val fat: Double)
 data class Pizza(val name: String, val ingredients: List<Ingredient>, val vegetarian: Boolean, val kcals: Int)
 
 @Serializable
+@kotlinx.serialization.ExperimentalSerializationApi
 data class ProtobufData(
     @ProtoId(1) @ProtoType(ProtoIntegerType.SIGNED) val a: Int,
     @ProtoId(2) val b: Double = 42.88
 )
 
+@ExperimentalSerializationApi
 @ExperimentalTime
 class SerializationTest : FunSpec({
     TestCaseConfig(timeout = 3.minutes, enabled = true)
