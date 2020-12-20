@@ -2,7 +2,7 @@ quarkus:
 #  ssl:
 #    native: true
 
-  ## logging ##
+## logging ##
   log:
     console:
       enable: true
@@ -33,7 +33,8 @@ quarkus:
     auth-server-url: https://accounts.google.com
     application-type: service
     client-id: 399994557022-f5p50d6oc04g49rjhu4r0o20ljujlt0f.apps.googleusercontent.com
-    credentials.secret:
+    credentials:
+      secret:
 #    connection-delay: 25S
     token:
       issuer: https://accounts.google.com
@@ -41,12 +42,13 @@ quarkus:
       scopes: email,profile,openid
       user-info-required: true
 
+#  https://edwin.baculsoft.com/2020/08/securing-quarkus-metric-api/
 #  http.auth.permission.authenticated.paths: /admin/user-info,/admin/health,/admin/reboot-services
 #  http.auth.permission.authenticated.policy: authenticated
 
 ## swagger ##
   swagger-ui:
-    oauth2-redirect-url: "/swagger-ui/oauth2-redirect.html"
+    oauth2-redirect-url: "http://localhost:8080/q/swagger-ui/oauth2-redirect.html"
 
 ## native ##
 #  native:
@@ -67,7 +69,6 @@ quarkus:
 
 ## kubernetes ##
   kubernetes:
-    deploy: true
     part-of: micro-apps
     name: greeting-service
 #    version: 1.6.5

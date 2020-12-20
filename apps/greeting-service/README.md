@@ -139,16 +139,21 @@ docker image prune -f
 
 ```bash
 gradle :apps:greeting-service:quarkusDev
-open http://localhost:8080/swagger-ui/
+open http://localhost:8080/q/swagger-ui/
 ```
 
-Swagger UI:  http://localhost:8080/swagger-ui/
+Swagger UI: http://localhost:8080/q/swagger-ui/
+Health UI: http://localhost:8080/q/health-ui
 
 ```bash
-http :8080/health
-http :8080/openapi
-http :8080/metrics
-http :8080/metrics/application
+http :8080/q/health
+http :8080/q/health/live
+http :8080/q/health/ready
+
+http :8080/q/openapi
+http :8080/q/metrics
+http :8080/q/metrics/application
+
 http :8080/api/v1/greeting
 http :8080/api/v1/greeting/world
 
