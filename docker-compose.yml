@@ -70,7 +70,7 @@ services:
       - "./scripts/add-keycloak-db.sh:/docker-entrypoint-initdb.d/add-keycloak-db.sh"
 
   keycloak:
-    image: jboss/keycloak:11.0.2
+    image: jboss/keycloak:11.0.3
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
