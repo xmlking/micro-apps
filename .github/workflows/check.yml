@@ -35,7 +35,7 @@ jobs:
         env:
           CI: true
         with:
-          gradle-version: 6.3
+          gradle-version: 6.8
           arguments: check
       - name: comment
         uses: unsplash/comment-on-pr@master

@@ -4,11 +4,13 @@ import com.google.common.collect.ImmutableMap
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
 import java.io.ByteArrayOutputStream
+import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Person
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
 import org.apache.beam.sdk.transforms.SimpleFunction
 
 class PubsubToPerson : SimpleFunction<PubsubMessage, Person>() {
+    @ExperimentalSerializationApi
     override fun apply(input: PubsubMessage): Person {
         return Avro.default.openInputStream(Person.serializer()) {
             format = AvroFormat.BinaryFormat

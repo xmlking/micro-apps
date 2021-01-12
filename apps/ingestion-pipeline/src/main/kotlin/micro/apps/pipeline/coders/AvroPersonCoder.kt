@@ -5,9 +5,11 @@ import com.sksamuel.avro4k.io.AvroFormat
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
+import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Person
 import org.apache.beam.sdk.coders.CustomCoder
 
+@ExperimentalSerializationApi
 class AvroPersonCoder : CustomCoder<Person>() {
     @Transient
     private val serializer = Person.serializer()
