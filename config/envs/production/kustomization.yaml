@@ -48,7 +48,7 @@ images:
   - name: etcd
     newTag: 3.3.15
   - name: postgres
-    newTag: 11.9-alpine
+    newTag: 11.10-alpine
   - name: envoyproxy/envoy-alpine
     newName: docker.io/envoyproxy/envoy-alpine
     newTag: v1.16.0
