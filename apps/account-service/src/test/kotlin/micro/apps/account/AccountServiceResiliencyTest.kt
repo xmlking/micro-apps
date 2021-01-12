@@ -79,7 +79,7 @@ class AccountServiceResiliencyTest : FunSpec({
     }
 
     beforeTest {
-        channel = sentinelChannelForTarget("localhost:$port")
+        channel = sentinelChannelForTarget("dns:///localhost:$port")
     }
 
     afterTest {

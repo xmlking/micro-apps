@@ -31,7 +31,7 @@ class AccountServiceTest : FunSpec({
     }
 
     beforeTest {
-        channel = channelForTarget("localhost:$port")
+        channel = channelForTarget("dns:///localhost:$port")
     }
 
     afterTest {

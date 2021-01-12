@@ -39,7 +39,7 @@ class AccountClient(private val channel: ManagedChannel) : Closeable {
  * greets "world" otherwise.
  */
 fun main(args: Array<String>) = runBlocking {
-    val accountTarget: String = System.getenv("ACCOUNT_SERVICE_TARGET") ?: "localhost:8080"
+    val accountTarget: String = System.getenv("ACCOUNT_SERVICE_TARGET") ?: "dns:///localhost:8080"
 
     val client = AccountClient(channelForTarget(accountTarget))
 
