@@ -9,13 +9,13 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 1. A working container runtime (Docker, podman)
 1. JDK 11 installed with JAVA_HOME configured appropriately
     ```bash
-    sdk install java 11.0.8.hs-adpt
+    sdk install java 11.0.9.hs-adpt
     export JAVA_HOME=$HOME/.sdkman/candidates/java/current
     ```
-1. GraalVM version 20.3.0.r11-grl installed and configured appropriately
+1. GraalVM version 21.0.0.r11-grl installed and configured appropriately
     ```bash
-    sdk install java  20.3.0.r11-grl
-    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/20.3.0.r11-grl
+    sdk install java  21.0.0.r11-grl
+    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/21.0.0.r11-grl
     ```
 1. Install the native-image tool using gu install:
     ```bash
@@ -32,7 +32,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 > your can also use [code.quarkus.io](https://code.quarkus.io/?g=micro.apps&a=greeting-service&v=1.0.0-SNAPSHOT&b=GRADLE_KOTLIN_DSL&s=ARC.dZK.tqK.qZz.Ll4.OxX.fgL&cn=code.quarkus.io) webApp to generate a new project
 ```bash
 cd apps
-mvn io.quarkus:quarkus-maven-plugin:1.9.0.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:1.11.0.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-service \
     -DprojectVersion=0.1.0 \

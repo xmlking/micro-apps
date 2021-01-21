@@ -7,7 +7,7 @@ quarkus:
     console:
       enable: true
       format: "%d{HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n"
-      level: DEBUG
+      min-level: DEBUG
       color: true
 
 ## Security ##
@@ -91,23 +91,23 @@ greeting:
     log:
       category:
         "io.grpc":
-          level: INFO
+          min-level: INFO
         "io.quarkus.oidc":
-          level: DEBUG
+          min-level: DEBUG
         "io.quarkus.security":
-          level: TRACE
+          min-level: TRACE
         "io.quarkus.smallrye":
-          level: TRACE
+          min-level: TRACE
         "io.smallrye.jwt":
-          level: TRACE
+          min-level: TRACE
         "io.vertx":
-          level: TRACE
+          min-level: TRACE
         "io.undertow.request.security":
-          level: TRACE
+          min-level: TRACE
         "org.keycloak":
-          level: TRACE
+          min-level: TRACE
         "io.quarkus.mongodb.panache.runtime":
-          level: DEBUG
+          min-level: DEBUG
 
 ---
 "%test":
