@@ -9,6 +9,7 @@ import micro.apps.model.Person
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
 import org.apache.beam.sdk.transforms.SimpleFunction
 
+@ExperimentalSerializationApi
 class PubsubToPerson : SimpleFunction<PubsubMessage, Person>() {
     @ExperimentalSerializationApi
     override fun apply(input: PubsubMessage): Person {
@@ -19,6 +20,7 @@ class PubsubToPerson : SimpleFunction<PubsubMessage, Person>() {
     }
 }
 
+@ExperimentalSerializationApi
 class PersonToPubsub(private val attributes: Map<String, String> = ImmutableMap.of()) : SimpleFunction<Person, PubsubMessage>() {
     private val serializer = Person.serializer()
     private val personSchema = Avro.default.schema(Person.serializer())

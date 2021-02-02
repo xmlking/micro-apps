@@ -1,5 +1,6 @@
 package micro.apps.pipeline
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.kbeam.PipeBuilder
 import micro.apps.kbeam.toList
 import micro.apps.kbeam.transforms.AvroToPubsub
@@ -26,6 +27,7 @@ import org.joda.time.Duration
 
 private val logger = KotlinLogging.logger {}
 
+@ExperimentalSerializationApi
 object IngestionPipeline {
 
     @JvmStatic

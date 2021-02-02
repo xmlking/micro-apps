@@ -9,6 +9,7 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Ignore
 import kotlin.test.Test
+import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.kbeam.transforms.AvroToPubsub
 import micro.apps.model.Person
 import micro.apps.model.fixtures.mockPersonList
@@ -24,6 +25,7 @@ import org.joda.time.Instant
 import org.junit.Rule
 
 // use Avro.default.fromRecord(serializer, rec) , Avro.default.toRecord Avro.default.toRecord(serializer, obj) to convert GenericRecord <==> Data Class
+@ExperimentalSerializationApi
 class PubSubProducerTest : Serializable {
 
     private val host = "localhost:8085"

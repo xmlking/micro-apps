@@ -1,6 +1,7 @@
 package micro.apps.pipeline.transforms
 
 import com.sksamuel.avro4k.Avro
+import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Person
 import micro.apps.pipeline.IngestionOptions
 import micro.apps.pipeline.config.Cloud
@@ -14,6 +15,7 @@ import org.apache.beam.sdk.transforms.DoFn
 import org.apache.beam.sdk.values.PCollectionView
 
 private val logger = KotlinLogging.logger {}
+@ExperimentalSerializationApi
 class EnrichFn(private val keysView: PCollectionView<List<String>>) : DoFn<GenericRecord, GenericRecord>() {
 
     private val enrichedPersons = Metrics.counter(EnrichFn::class.java, "enrichedPersons")
