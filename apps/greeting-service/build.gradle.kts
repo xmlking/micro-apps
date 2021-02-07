@@ -1,5 +1,5 @@
 plugins {
-    kotlin("kapt")
+//    kotlin("kapt")
     kotlin("plugin.allopen")
     id("io.quarkus")
 }
@@ -28,8 +28,9 @@ dependencies {
     implementation("io.quarkus:quarkus-resteasy")
     implementation("io.quarkus:quarkus-resteasy-jsonb")
     // mapper
+    // FIXME: https://github.com/quarkusio/quarkus/issues/14012
     implementation("org.mapstruct:mapstruct:$mapstructVersion")
-    kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
+//    kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
     // security
     implementation("io.quarkus:quarkus-oidc")
     // grpc

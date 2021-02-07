@@ -8,7 +8,7 @@ All `model` serializable to `JSON`, `Avro` and `ProtoBuf`
 
 ### Run
 ```bash
-gradle libs:model:clean
+gradle libs:model:clean -Prelease.forceVersion=3.0.0
 ```
 ### Test
 ```bash
@@ -18,3 +18,4 @@ gradle libs:model:test
 ```bash
 gradle libs:model:build
 ```
+ 

@@ -7,19 +7,11 @@ import java.math.BigDecimal
 import java.time.Instant
 import java.util.UUID
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.SerialInfo
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import kotlinx.serialization.protobuf.ProtoIntegerType
+import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoType
-
-// ----------------
-//  User-defined serial annotation for ProtoBuf
-// ----------------
-@ExperimentalSerializationApi
-@SerialInfo
-@Target(AnnotationTarget.PROPERTY)
-annotation class ProtoId(val id: Int)
 
 // ----------------
 //  for Kotlin Gradle NoArg plugin
@@ -57,33 +49,33 @@ enum class Gender {
 @Serializable
 @AvroProp("pii", "yes")
 data class Name(
-    @ProtoId(1) val first: String,
-    @ProtoId(2) val last: String,
-    @ProtoId(3) val title: String = ""
+    @ProtoNumber(1) val first: String,
+    @ProtoNumber(2) val last: String,
+    @ProtoNumber(3) val title: String = ""
 )
 
 @ExperimentalSerializationApi
 @Serializable
 @AvroProp("pii", "yes")
 data class Address(
-    @ProtoId(1) val suite: String,
-    @ProtoId(2) val street: String,
-    @ProtoId(3) val city: String,
-    @ProtoId(4) val state: String,
-    @ProtoId(5) val code: String,
-    @ProtoId(6) val country: String
+    @ProtoNumber(1) val suite: String,
+    @ProtoNumber(2) val street: String,
+    @ProtoNumber(3) val city: String,
+    @ProtoNumber(4) val state: String,
+    @ProtoNumber(5) val code: String,
+    @ProtoNumber(6) val country: String
 )
 
 @Serializable
 @kotlinx.serialization.ExperimentalSerializationApi
 data class Person(
-    @ProtoId(1) @AvroProp("pii", "yes") val id: String = "",
-    @ProtoId(2) val name: Name,
-    @ProtoId(3) val address: Address,
-    @ProtoId(4) @AvroProp("pii", "yes") val gender: Gender,
-    @ProtoId(5) @AvroProp("pii", "yes") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
-    @ProtoId(6) @AvroProp("encrypted", "yes") val email: String,
-    @ProtoId(7) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String,
-    @ProtoId(8) val avatar: String = "http://www.gravatar.com/avatar", // Optional
+    @ProtoNumber(1) @AvroProp("pii", "yes") val id: String = "",
+    @ProtoNumber(2) val name: Name,
+    @ProtoNumber(3) val address: Address,
+    @ProtoNumber(4) @AvroProp("pii", "yes") val gender: Gender,
+    @ProtoNumber(5) @AvroProp("pii", "yes") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
+    @ProtoNumber(6) @AvroProp("encrypted", "yes") val email: String,
+    @ProtoNumber(7) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String,
+    @ProtoNumber(8) val avatar: String = "http://www.gravatar.com/avatar", // Optional
     @Transient val valid: Boolean = false // not serialized: explicitly transient
 )

@@ -15,6 +15,7 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 import kotlinx.serialization.protobuf.ProtoIntegerType
+import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoType
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
@@ -28,8 +29,8 @@ data class Pizza(val name: String, val ingredients: List<Ingredient>, val vegeta
 @Serializable
 @kotlinx.serialization.ExperimentalSerializationApi
 data class ProtobufData(
-    @ProtoId(1) @ProtoType(ProtoIntegerType.SIGNED) val a: Int,
-    @ProtoId(2) val b: Double = 42.88
+    @ProtoNumber(1) @ProtoType(ProtoIntegerType.SIGNED) val a: Int,
+    @ProtoNumber(2) val b: Double = 42.88
 )
 
 @ExperimentalSerializationApi
@@ -76,7 +77,7 @@ class SerializationTest : FunSpec({
         val pizzaBytes = ProtoBuf.encodeToByteArray(Pizza.serializer(), hawaiian)
         val pizza = ProtoBuf.decodeFromByteArray<Pizza>(Pizza.serializer(), pizzaBytes) // parsing data back
         hawaiian shouldBe pizza
-        // testing ProtoId annotated class
+        // testing ProtoNumber annotated class
         val originalData = ProtobufData(a = 5)
         val dump = ProtoBuf.encodeToByteArray<ProtobufData>(ProtobufData.serializer(), originalData)
         val data = ProtoBuf.decodeFromByteArray<ProtobufData>(ProtobufData.serializer(), dump) // parsing data back
