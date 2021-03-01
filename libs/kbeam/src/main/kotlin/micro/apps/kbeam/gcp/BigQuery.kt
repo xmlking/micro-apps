@@ -4,14 +4,14 @@ import com.google.api.services.bigquery.model.TableReference
 import com.google.api.services.bigquery.model.TableRow
 import com.google.api.services.bigquery.model.TableSchema
 import com.google.api.services.bigquery.model.TimePartitioning
-import java.io.ByteArrayInputStream
-import java.io.IOException
-import java.nio.charset.StandardCharsets
 import org.apache.beam.sdk.coders.Coder
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO
 import org.apache.beam.sdk.io.gcp.bigquery.TableRowJsonCoder
 import org.apache.beam.sdk.io.gcp.bigquery.WriteResult
 import org.apache.beam.sdk.values.PCollection
+import java.io.ByteArrayInputStream
+import java.io.IOException
+import java.nio.charset.StandardCharsets
 
 /**
  * Write data to a BigQuery table.

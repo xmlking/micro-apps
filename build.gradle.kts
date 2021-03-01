@@ -1,9 +1,5 @@
 // import pl.allegro.tech.build.axion.release.domain.hooks.HooksConfig
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
-import java.net.URL
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.TimeZone
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
@@ -11,6 +7,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
+import java.net.URL
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.TimeZone
 
 val gradleToolVersion: String by project
 val kotlinVersion: String by project
@@ -67,10 +67,12 @@ plugins {
 scmVersion {
     useHighestVersion = true
 
-    tag(closureOf<TagNameSerializationConfig> {
-        prefix = "v" // golang and appctl need SemVer tags with `v` prefix
-        versionSeparator = ""
-    })
+    tag(
+        closureOf<TagNameSerializationConfig> {
+            prefix = "v" // golang and appctl need SemVer tags with `v` prefix
+            versionSeparator = ""
+        }
+    )
 
     branchVersionIncrementer = mapOf(
         "feature/.*" to "incrementMinor",
@@ -362,15 +364,15 @@ subprojects {
                         // image = "us.gcr.io/${gcloudProject}/${rootProject.name}/${project.name}:${project.version}"
 
                         /**
-                        gcr: Google Container Registry (GCR)
-                        osxkeychain: Docker Hub
+                         gcr: Google Container Registry (GCR)
+                         osxkeychain: Docker Hub
                          */
                         credHelper = "osxkeychain"
                         /**
-                        auth {
-                        username = "*******"
-                        password = "*******"
-                        }
+                         auth {
+                         username = "*******"
+                         password = "*******"
+                         }
                          */
                         tags = setOf("${project.version}")
                     }

@@ -2,16 +2,16 @@ package micro.apps.model
 
 import com.sksamuel.avro4k.AvroFixed
 import com.sksamuel.avro4k.AvroProp
-import java.io.Serializable as JavaSerializable
-import java.math.BigDecimal
-import java.time.Instant
-import java.util.UUID
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import kotlinx.serialization.protobuf.ProtoIntegerType
 import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoType
+import java.math.BigDecimal
+import java.time.Instant
+import java.util.UUID
+import java.io.Serializable as JavaSerializable
 
 // ----------------
 //  for Kotlin Gradle NoArg plugin

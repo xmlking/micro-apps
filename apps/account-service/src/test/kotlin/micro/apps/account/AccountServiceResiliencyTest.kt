@@ -13,9 +13,6 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.TestCaseConfig
 import io.kotest.matchers.shouldBe
-import kotlin.system.measureTimeMillis
-import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import micro.apps.proto.account.v1.AccountServiceGrpcKt
@@ -26,6 +23,9 @@ import micro.apps.test.Slow
 import micro.apps.test.gRPC
 import micro.apps.μservice.sentinelChannelForTarget
 import mu.KotlinLogging
+import kotlin.system.measureTimeMillis
+import kotlin.time.ExperimentalTime
+import kotlin.time.minutes
 
 /**
  * Showcase backpressure handling techniques:

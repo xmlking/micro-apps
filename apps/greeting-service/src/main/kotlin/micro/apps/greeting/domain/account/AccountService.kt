@@ -1,11 +1,11 @@
 package micro.apps.greeting.domain.account
 
-import javax.enterprise.context.ApplicationScoped
-import javax.inject.Inject
 import micro.apps.greeting.util.AbstractService
 import micro.apps.greeting.util.Result
 import micro.apps.greeting.util.Success
 import micro.apps.greeting.util.toDTOs
+import javax.enterprise.context.ApplicationScoped
+import javax.inject.Inject
 
 @ApplicationScoped
 class AccountService : AbstractService<AccountDTO, Account>() {

@@ -1,7 +1,5 @@
 package micro.apps.kbeam
 
-import java.io.Serializable
-import kotlin.test.Test
 import micro.apps.kbeam.io.readTextFile
 import org.apache.beam.sdk.coders.SerializableCoder
 import org.apache.beam.sdk.extensions.jackson.ParseJsons
@@ -12,6 +10,8 @@ import org.apache.beam.sdk.options.ValueProvider.StaticValueProvider
 import org.apache.beam.sdk.testing.TestPipeline
 import org.apache.beam.sdk.values.KV
 import org.junit.Rule
+import java.io.Serializable
+import kotlin.test.Test
 
 interface KMyOptions : PipelineOptions {
     @Description("Custom Option")
@@ -54,7 +54,8 @@ class DSLPipelineTest : Serializable {
                 KEntry(words[0], words[1], words[2].toDouble())
             }.parDo<KEntry, KEntry>(
                 name = "Join with countries",
-                sideInputs = listOf(countryCodes)) {
+                sideInputs = listOf(countryCodes)
+            ) {
                 val countryName = sideInputs[countryCodes][element.countryCode] ?: "unknown"
                 output(element.copy(countryName = countryName))
             }

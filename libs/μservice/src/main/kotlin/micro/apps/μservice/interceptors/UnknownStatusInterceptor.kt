@@ -17,7 +17,8 @@ class UnknownStatusInterceptor : ServerInterceptor {
             override fun close(st: Status, trailers: Metadata) {
                 var status = st
                 if (status.code == Status.Code.UNKNOWN && status.description == null &&
-                    status.cause != null) {
+                    status.cause != null
+                ) {
                     val t = status.cause
                     status = Status.INTERNAL.withDescription(t!!.message)
                         .augmentDescription(t.stackTrace.joinToString("\n"))

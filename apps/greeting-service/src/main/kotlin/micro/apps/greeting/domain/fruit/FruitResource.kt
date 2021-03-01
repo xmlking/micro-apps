@@ -1,5 +1,8 @@
 package micro.apps.greeting.domain.fruit
 
+import micro.apps.model.Fruit
+import org.eclipse.microprofile.openapi.annotations.tags.Tag
+import org.eclipse.microprofile.openapi.annotations.tags.Tags
 import java.util.Collections
 import java.util.function.Predicate
 import javax.ws.rs.Consumes
@@ -10,9 +13,6 @@ import javax.ws.rs.Path
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 import kotlin.collections.LinkedHashMap
-import micro.apps.model.Fruit
-import org.eclipse.microprofile.openapi.annotations.tags.Tag
-import org.eclipse.microprofile.openapi.annotations.tags.Tags
 
 @Path("/fruits")
 @Produces(MediaType.APPLICATION_JSON)

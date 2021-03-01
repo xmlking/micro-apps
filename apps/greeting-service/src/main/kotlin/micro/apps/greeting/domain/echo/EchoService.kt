@@ -1,6 +1,5 @@
 package micro.apps.greeting.domain.echo
 
-import javax.inject.Singleton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -9,6 +8,7 @@ import micro.apps.proto.echo.v1.EchoResponse
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
 import micro.apps.proto.echo.v1.EchoStreamRequest
 import micro.apps.proto.echo.v1.EchoStreamResponse
+import javax.inject.Singleton
 
 // import io.grpc.stub.StreamObserver
 // import micro.apps.proto.echo.v1.EchoServiceGrpc

@@ -104,13 +104,16 @@ inline fun <I, reified O> PCollection<I>.parDo(
     crossinline function: DoFnContext<I, O>.() -> Unit
 ):
     PCollection<O> {
-    return this.apply(name, ParDo.of(object : DoFn<I, O>() {
-        @ProcessElement
-        fun processElement(processContext: ProcessContext) {
-            DoFnContextWrapper(processContext).apply(function)
-        }
-    }).withSideInputs(sideInputs))
-}
+        return this.apply(
+            name,
+            ParDo.of(object : DoFn<I, O>() {
+                @ProcessElement
+                fun processElement(processContext: ProcessContext) {
+                    DoFnContextWrapper(processContext).apply(function)
+                }
+            }).withSideInputs(sideInputs)
+        )
+    }
 
 /**
  * Filter the input PCollection by a condition
@@ -177,12 +180,15 @@ inline fun <I, reified O1, reified O2> PCollection<I>.parDo2(
     val output1Tag = object : TupleTag<O1>() {}
     val output2Tag = object : TupleTag<O2>() {}
     val tagList = TupleTagList.of(listOf(output2Tag))
-    val pCollectionTuple = this.apply(name, ParDo.of(object : DoFn<I, O1>() {
-        @ProcessElement
-        fun processElement(context: ProcessContext) {
-            DoFnContextWrapper2Outputs(context, output2Tag).apply(function)
-        }
-    }).withSideInputs(sideInputs).withOutputTags(output1Tag, tagList))
+    val pCollectionTuple = this.apply(
+        name,
+        ParDo.of(object : DoFn<I, O1>() {
+            @ProcessElement
+            fun processElement(context: ProcessContext) {
+                DoFnContextWrapper2Outputs(context, output2Tag).apply(function)
+            }
+        }).withSideInputs(sideInputs).withOutputTags(output1Tag, tagList)
+    )
     return DoFn2Outputs(pCollectionTuple[output1Tag], pCollectionTuple[output2Tag])
 }
 
@@ -224,8 +230,9 @@ inline fun <I, reified O> PCollection<I>.flatMap0(
     noinline transform: (I) -> Iterable<O>
 ): PCollection<O> {
     val pc = this.apply(
-        name, FlatMapElements.into(TypeDescriptor.of(O::class.java))
-        .via(transform.toSerializableFunction())
+        name,
+        FlatMapElements.into(TypeDescriptor.of(O::class.java))
+            .via(transform.toSerializableFunction())
     )
     return pc.setCoder(NullableCoder.of(pc.coder))
 }

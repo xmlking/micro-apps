@@ -54,22 +54,32 @@ object IngestionPipeline {
             logger.info { "Reading from PubSub" }
             input = pipe
                 .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))
-                .apply("Batch records with windowDuration: ${options.windowDuration}", Window.into<PubsubMessage>(
-                    FixedWindows.of(TimeUtil.fromCloudDuration(options.windowDuration)!!))
-                    .triggering(AfterWatermark.pastEndOfWindow())
-                    .discardingFiredPanes()
-                    .withAllowedLateness(Duration.standardSeconds(300)))
+                .apply(
+                    "Batch records with windowDuration: ${options.windowDuration}",
+                    Window.into<PubsubMessage>(
+                        FixedWindows.of(TimeUtil.fromCloudDuration(options.windowDuration)!!)
+                    )
+                        .triggering(AfterWatermark.pastEndOfWindow())
+                        .discardingFiredPanes()
+                        .withAllowedLateness(Duration.standardSeconds(300))
+                )
                 .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema))).setCoder(AvroCoder.of(schema))
         } else {
             logger.info { "Reading from GCS" }
-            input = pipe.apply("Read New Data from GCS", AvroIO.readGenericRecords(schema).from(options.inputPath)
-                .withEmptyMatchTreatment(EmptyMatchTreatment.ALLOW)
-                .withHintMatchesManyFiles())
+            input = pipe.apply(
+                "Read New Data from GCS",
+                AvroIO.readGenericRecords(schema).from(options.inputPath)
+                    .withEmptyMatchTreatment(EmptyMatchTreatment.ALLOW)
+                    .withHintMatchesManyFiles()
+            )
         }
 
-        val output = input.apply("decrypt and enrich record", ParDo.of(EnrichFn(keysView))
-            .withSideInputs(keysView)
-            .withOutputTags(successTag, TupleTagList.of(errorTag)))
+        val output = input.apply(
+            "decrypt and enrich record",
+            ParDo.of(EnrichFn(keysView))
+                .withSideInputs(keysView)
+                .withOutputTags(successTag, TupleTagList.of(errorTag))
+        )
 
         if (options.isStreaming) {
             logger.info { "Writing to PubSub" }

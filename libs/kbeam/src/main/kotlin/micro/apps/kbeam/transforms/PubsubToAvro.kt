@@ -2,7 +2,6 @@ package micro.apps.kbeam.transforms
 
 /* ktlint-disable no-wildcard-imports */
 import com.google.common.collect.ImmutableMap
-import java.io.ByteArrayOutputStream
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericDatumReader
 import org.apache.avro.generic.GenericDatumWriter
@@ -11,6 +10,7 @@ import org.apache.avro.generic.IndexedRecord
 import org.apache.avro.io.*
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
 import org.apache.beam.sdk.transforms.SimpleFunction
+import java.io.ByteArrayOutputStream
 
 /* ktlint-enable no-wildcard-imports */
 

@@ -5,12 +5,6 @@ import com.google.api.gax.rpc.StatusCode.Code.ALREADY_EXISTS
 import com.google.protobuf.ByteString
 import com.google.pubsub.v1.PubsubMessage
 import com.sksamuel.avro4k.Avro
-import java.io.Serializable
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Ignore
-import kotlin.test.Test
-import kotlin.test.assertEquals
 import micro.apps.kbeam.map
 import micro.apps.model.Person
 import micro.apps.model.fixtures.mockPersonList
@@ -23,6 +17,12 @@ import org.apache.beam.sdk.testing.PAssert
 import org.apache.beam.sdk.testing.TestPipeline
 import org.joda.time.Instant
 import org.junit.Rule
+import java.io.Serializable
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Ignore
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class ClassifierPipelineTest : Serializable {
 
@@ -98,7 +98,8 @@ class ClassifierPipelineTest : Serializable {
             Avro.default.toRecord(serializer, it)
         }
 
-        val read = pipeline.apply("Read data from PubSub",
+        val read = pipeline.apply(
+            "Read data from PubSub",
             PubsubIO.readAvroGenericRecords(schema).fromSubscription(testOptions.inputSubscription)
         ).map {
             println(it)

@@ -1,7 +1,7 @@
 package micro.apps.greeting.domain.greeting
 
-import javax.enterprise.context.ApplicationScoped
 import micro.apps.model.Greeting
+import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class GreetingService {

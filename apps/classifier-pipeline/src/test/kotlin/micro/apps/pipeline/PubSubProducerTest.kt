@@ -4,11 +4,6 @@ import com.google.api.gax.rpc.ApiException
 import com.google.api.gax.rpc.StatusCode.Code.ALREADY_EXISTS
 import com.google.common.collect.ImmutableMap
 import com.sksamuel.avro4k.Avro
-import java.io.Serializable
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Ignore
-import kotlin.test.Test
 import micro.apps.kbeam.transforms.AvroToPubsub
 import micro.apps.model.Person
 import micro.apps.model.fixtures.mockPersonList
@@ -24,6 +19,11 @@ import org.apache.beam.sdk.transforms.Create
 import org.apache.beam.sdk.transforms.MapElements
 import org.joda.time.Instant
 import org.junit.Rule
+import java.io.Serializable
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 // use Avro.default.fromRecord(serializer, rec) , Avro.default.toRecord Avro.default.toRecord(serializer, obj) to convert GenericRecord <==> Data Class
 class PubSubProducerTest : Serializable {

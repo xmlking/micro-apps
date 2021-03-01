@@ -1,7 +1,5 @@
 package micro.apps.kbeam
 
-import java.io.Serializable
-import kotlin.test.Test
 import micro.apps.kbeam.io.writeText
 import org.apache.beam.sdk.io.Compression
 import org.apache.beam.sdk.options.ValueProvider.StaticValueProvider
@@ -9,6 +7,8 @@ import org.apache.beam.sdk.testing.TestPipeline
 import org.apache.beam.sdk.transforms.Create
 import org.apache.beam.sdk.values.KV
 import org.junit.Rule
+import java.io.Serializable
+import kotlin.test.Test
 
 class KBeamDSLTest : Serializable {
 

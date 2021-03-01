@@ -2,12 +2,12 @@ package micro.apps.pipeline.coders
 
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
 import kotlinx.serialization.KSerializer
 import org.apache.beam.sdk.coders.CoderException
 import org.apache.beam.sdk.coders.CustomCoder
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 
 interface KSerializable<T> {
     fun serializer(): KSerializer<T>

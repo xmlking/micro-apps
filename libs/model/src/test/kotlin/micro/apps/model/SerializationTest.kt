@@ -7,8 +7,6 @@ import com.sksamuel.avro4k.io.AvroFormat
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.TestCaseConfig
 import io.kotest.matchers.shouldBe
-import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
@@ -19,6 +17,8 @@ import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoType
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
+import kotlin.time.ExperimentalTime
+import kotlin.time.minutes
 
 @Serializable
 data class Ingredient(val name: String, val sugar: Double, val fat: Double)

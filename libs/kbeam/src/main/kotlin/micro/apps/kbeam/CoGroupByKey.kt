@@ -14,13 +14,13 @@ inline fun <reified KeyType, reified LeftType, reified RightType, reified Output
     crossinline function: (key: KeyType, left: Iterable<LeftType>, right: Iterable<RightType>) -> List<OutputType>
 ):
     PCollection<OutputType> {
-    val leftTag = object : TupleTag<LeftType>() {}
-    val rightTag = object : TupleTag<RightType>() {}
-    val keyedPCollectionTuple = KeyedPCollectionTuple.of(leftTag, left).and(rightTag, right)
-    return keyedPCollectionTuple.apply(CoGroupByKey.create()).parDo {
-        val k = element.key
-        if (k != null) {
-            function(k, element.value.getAll(leftTag), element.value.getAll(rightTag)).forEach { output(it) }
+        val leftTag = object : TupleTag<LeftType>() {}
+        val rightTag = object : TupleTag<RightType>() {}
+        val keyedPCollectionTuple = KeyedPCollectionTuple.of(leftTag, left).and(rightTag, right)
+        return keyedPCollectionTuple.apply(CoGroupByKey.create()).parDo {
+            val k = element.key
+            if (k != null) {
+                function(k, element.value.getAll(leftTag), element.value.getAll(rightTag)).forEach { output(it) }
+            }
         }
     }
-}

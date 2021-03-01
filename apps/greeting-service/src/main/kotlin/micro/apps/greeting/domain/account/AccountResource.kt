@@ -3,6 +3,11 @@ package micro.apps.greeting.domain.account
 import io.quarkus.oidc.UserInfo
 import io.quarkus.security.Authenticated
 import io.quarkus.security.identity.SecurityIdentity
+import micro.apps.greeting.util.Failure
+import micro.apps.greeting.util.Success
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
+import org.eclipse.microprofile.openapi.annotations.tags.Tag
+import org.eclipse.microprofile.openapi.annotations.tags.Tags
 import java.lang.Exception
 import javax.enterprise.inject.Default
 import javax.inject.Inject
@@ -13,11 +18,6 @@ import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
-import micro.apps.greeting.util.Failure
-import micro.apps.greeting.util.Success
-import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
-import org.eclipse.microprofile.openapi.annotations.tags.Tag
-import org.eclipse.microprofile.openapi.annotations.tags.Tags
 
 @Path("/v1/account")
 @Produces(MediaType.APPLICATION_JSON)

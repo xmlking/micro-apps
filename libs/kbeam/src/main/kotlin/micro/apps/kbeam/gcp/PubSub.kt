@@ -14,8 +14,11 @@ fun PCollection<PubsubMessage>.toPubSub(
     idAttribute: String?,
     maxBatchSize: Int? = 10
 ): PDone {
-    return this.apply(name, PubsubIO.writeMessages().to(topic).apply {
-        maxBatchSize?.let { withMaxBatchSize(maxBatchSize) }
-        idAttribute?.let { withIdAttribute(idAttribute) }
-    })
+    return this.apply(
+        name,
+        PubsubIO.writeMessages().to(topic).apply {
+            maxBatchSize?.let { withMaxBatchSize(maxBatchSize) }
+            idAttribute?.let { withIdAttribute(idAttribute) }
+        }
+    )
 }

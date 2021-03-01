@@ -14,9 +14,10 @@ fun PCollection<Mutation>.toSpanner(
     batchSizeBytes: Long = (1024 * 10)
 ) {
     this.apply(
-        name, SpannerIO.write()
-        .withInstanceId(instanceId)
-        .withDatabaseId(databaseId)
-        .withBatchSizeBytes(batchSizeBytes)
+        name,
+        SpannerIO.write()
+            .withInstanceId(instanceId)
+            .withDatabaseId(databaseId)
+            .withBatchSizeBytes(batchSizeBytes)
     )
 }

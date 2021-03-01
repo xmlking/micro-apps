@@ -35,14 +35,18 @@ class PubsubHelper(var host: String, var projectId: String) {
 
     @Throws(IOException::class)
     private fun createTopicAdmin(): TopicAdminClient {
-        return TopicAdminClient.create(TopicAdminSettings.newBuilder().setTransportChannelProvider(transportChannelProvider)
-            .setCredentialsProvider(credentialsProvider).build())
+        return TopicAdminClient.create(
+            TopicAdminSettings.newBuilder().setTransportChannelProvider(transportChannelProvider)
+                .setCredentialsProvider(credentialsProvider).build()
+        )
     }
 
     @Throws(IOException::class)
     private fun createSubscriberAdmin(): SubscriptionAdminClient {
-        return SubscriptionAdminClient.create(SubscriptionAdminSettings.newBuilder().setTransportChannelProvider(transportChannelProvider)
-            .setCredentialsProvider(credentialsProvider).build())
+        return SubscriptionAdminClient.create(
+            SubscriptionAdminSettings.newBuilder().setTransportChannelProvider(transportChannelProvider)
+                .setCredentialsProvider(credentialsProvider).build()
+        )
     }
 
     fun deleteTopic(topicName: String) {
@@ -92,15 +96,19 @@ class PubsubHelper(var host: String, var projectId: String) {
         try {
             publisher = Publisher.newBuilder(projectTopicName).setChannelProvider(transportChannelProvider).setCredentialsProvider(credentialsProvider).build()
             val future = publisher.publish(message)
-            ApiFutures.addCallback(future, object : ApiFutureCallback<String?> {
-                override fun onFailure(throwable: Throwable) {
-                    throwable.printStackTrace()
-                }
+            ApiFutures.addCallback(
+                future,
+                object : ApiFutureCallback<String?> {
+                    override fun onFailure(throwable: Throwable) {
+                        throwable.printStackTrace()
+                    }
 
-                override fun onSuccess(s: String?) {
-                    // log.info("Sending Id =" + s);
-                }
-            }, MoreExecutors.directExecutor())
+                    override fun onSuccess(s: String?) {
+                        // log.info("Sending Id =" + s);
+                    }
+                },
+                MoreExecutors.directExecutor()
+            )
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {

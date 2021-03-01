@@ -3,11 +3,11 @@ package micro.apps.pipeline.transforms
 import com.google.common.collect.ImmutableMap
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
-import java.io.ByteArrayOutputStream
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Person
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
 import org.apache.beam.sdk.transforms.SimpleFunction
+import java.io.ByteArrayOutputStream
 
 @ExperimentalSerializationApi
 class PubsubToPerson : SimpleFunction<PubsubMessage, Person>() {

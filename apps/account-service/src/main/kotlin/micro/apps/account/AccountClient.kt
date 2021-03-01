@@ -3,14 +3,14 @@ package micro.apps.account
 import com.google.protobuf.Any
 import com.google.protobuf.StringValue
 import io.grpc.ManagedChannel
-import java.io.Closeable
-import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.account.v1.AccountServiceGrpcKt.AccountServiceCoroutineStub
 import micro.apps.μservice.channelForTarget
+import java.io.Closeable
+import java.util.concurrent.TimeUnit
 
 class AccountClient(private val channel: ManagedChannel) : Closeable {
     private val stub: AccountServiceCoroutineStub = AccountServiceCoroutineStub(channel)

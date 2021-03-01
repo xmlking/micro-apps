@@ -1,5 +1,10 @@
 package micro.apps.greeting.domain.greeting
 
+import micro.apps.model.Greeting
+import org.eclipse.microprofile.metrics.MetricUnits
+import org.eclipse.microprofile.metrics.annotation.Counted
+import org.eclipse.microprofile.metrics.annotation.Gauge
+import org.eclipse.microprofile.metrics.annotation.Timed
 import javax.enterprise.inject.Default
 import javax.inject.Inject
 import javax.ws.rs.GET
@@ -7,11 +12,6 @@ import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
-import micro.apps.model.Greeting
-import org.eclipse.microprofile.metrics.MetricUnits
-import org.eclipse.microprofile.metrics.annotation.Counted
-import org.eclipse.microprofile.metrics.annotation.Gauge
-import org.eclipse.microprofile.metrics.annotation.Timed
 
 @Path("/v1/greeting")
 @Produces(MediaType.APPLICATION_JSON)

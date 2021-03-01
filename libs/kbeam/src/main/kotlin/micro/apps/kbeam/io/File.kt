@@ -81,12 +81,16 @@ fun Pipeline.readTextFile(name: String? = "Read from Text", configurator: TextRe
     configurator(readConfig)
     if (readConfig.watchForNewFiles) {
         // Streaming case
-        return this.apply(name ?: "Read from ${readConfig.filePattern}",
-            readConfig(TextIO.read()))
+        return this.apply(
+            name ?: "Read from ${readConfig.filePattern}",
+            readConfig(TextIO.read())
+        )
     } else {
         // Batch case
-        return this.apply(name ?: "Read from ${readConfig.filePattern}",
-            readConfig(TextIO.read()))
+        return this.apply(
+            name ?: "Read from ${readConfig.filePattern}",
+            readConfig(TextIO.read())
+        )
     }
 }
 
@@ -122,8 +126,10 @@ fun Pipeline.fromFiles(
         .apply(
             "$name read files",
             MapElements.into(TypeDescriptors.kvs(TypeDescriptors.strings(), TypeDescriptors.strings()))
-                .via(SerializableFunction { file: FileIO.ReadableFile ->
-                    KV.of(file.metadata.resourceId().toString(), file.readFullyAsUTF8String())
-                })
+                .via(
+                    SerializableFunction { file: FileIO.ReadableFile ->
+                        KV.of(file.metadata.resourceId().toString(), file.readFullyAsUTF8String())
+                    }
+                )
         )
 }

@@ -3,9 +3,6 @@ package micro.apps.greeting
 import io.quarkus.runtime.Quarkus
 import io.quarkus.runtime.QuarkusApplication
 import io.quarkus.runtime.annotations.QuarkusMain
-import javax.enterprise.context.ApplicationScoped
-import javax.ws.rs.ApplicationPath
-import javax.ws.rs.core.Application
 import org.eclipse.microprofile.openapi.annotations.Components
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType
@@ -18,6 +15,9 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme
 import org.eclipse.microprofile.openapi.annotations.servers.Server
 import org.eclipse.microprofile.openapi.annotations.tags.Tag
+import javax.enterprise.context.ApplicationScoped
+import javax.ws.rs.ApplicationPath
+import javax.ws.rs.core.Application
 
 fun main(vararg args: String) {
     println("ARGS: ${args.size}")

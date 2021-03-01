@@ -41,11 +41,15 @@ object ClassifierPipeline {
         val input = pipe
             .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))
             // Batch events into 5 minute windows
-            .apply("Batch Events, windowDuration: ${options.windowDuration}", Window.into<PubsubMessage>(
-                FixedWindows.of(TimeUtil.fromCloudDuration(options.windowDuration)!!))
-                .triggering(AfterWatermark.pastEndOfWindow())
-                .discardingFiredPanes()
-                .withAllowedLateness(Duration.standardSeconds(300)))
+            .apply(
+                "Batch Events, windowDuration: ${options.windowDuration}",
+                Window.into<PubsubMessage>(
+                    FixedWindows.of(TimeUtil.fromCloudDuration(options.windowDuration)!!)
+                )
+                    .triggering(AfterWatermark.pastEndOfWindow())
+                    .discardingFiredPanes()
+                    .withAllowedLateness(Duration.standardSeconds(300))
+            )
 
             .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema))).setCoder(AvroCoder.of(schema))
 

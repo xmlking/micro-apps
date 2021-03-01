@@ -5,9 +5,9 @@ import io.kotest.core.test.TestCaseConfig
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
+import org.hamcrest.CoreMatchers.equalTo
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
-import org.hamcrest.CoreMatchers.equalTo
 
 // FIXME https://github.com/kotest/kotest/issues/1401
 @ExperimentalTime

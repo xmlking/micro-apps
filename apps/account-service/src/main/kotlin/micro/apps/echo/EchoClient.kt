@@ -2,8 +2,6 @@ package micro.apps.echo
 
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
-import java.io.Closeable
-import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.async
@@ -13,6 +11,8 @@ import kotlinx.coroutines.runBlocking
 import micro.apps.proto.echo.v1.EchoRequest
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt.EchoServiceCoroutineStub
 import micro.apps.proto.echo.v1.EchoStreamRequest
+import java.io.Closeable
+import java.util.concurrent.TimeUnit
 
 class EchoClient(private val channel: ManagedChannel) : Closeable {
     private val stub: EchoServiceCoroutineStub = EchoServiceCoroutineStub(channel)
@@ -47,7 +47,8 @@ fun main(args: Array<String>) = runBlocking {
         ManagedChannelBuilder.forAddress("dns:///localhost", port)
             .usePlaintext()
             .executor(Dispatchers.Default.asExecutor())
-            .build())
+            .build()
+    )
 
     val user = args.singleOrNull() ?: "world"
     client.echo(user)

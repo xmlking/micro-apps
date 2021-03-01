@@ -3,9 +3,9 @@ package micro.apps.pipeline
 import com.sksamuel.avro4k.Avro
 import com.sksamuel.avro4k.io.AvroFormat
 import io.kotest.core.spec.style.FunSpec
-import kotlin.time.ExperimentalTime
 import micro.apps.model.Person
 import micro.apps.model.fixtures.mockPersonList
+import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
 class SerializationTest : FunSpec({
