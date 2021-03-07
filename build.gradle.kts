@@ -146,6 +146,7 @@ allprojects {
         mavenLocal()
         mavenCentral()
         maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") } // TODO: remove
+        maven { url = uri("https://repo.spring.io/milestone") }
     }
 }
 
@@ -380,7 +381,11 @@ subprojects {
                         jvmFlags = listOf("-Djava.security.egd=file:/dev/./urandom", "-Xms512m", "-server")
                         creationTime = "USE_CURRENT_TIMESTAMP"
                         ports = listOf("8080", "8443")
-                        labels = mapOf("version" to "${project.version}", "name" to project.name, "group" to "${project.group}")
+                        labels = mapOf(
+                            "version" to "${project.version}",
+                            "name" to project.name,
+                            "group" to "${project.group}"
+                        )
                         format = ImageFormat.OCI
                     }
                 }

@@ -70,10 +70,16 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 
 > Start [Kotlin-gRPC API](./apps/account-service/)
 
+#### Spring-RSocket
+> Start [Spring Chat APP](./apps/chat-app/)
 
 #### Micronaut
 
 > Start [Greeting API](./apps/greeting-micronaut/)
+
+### TODO
+
+* [Building Reactive Pipelines with Kotlin & Spring](https://github.com/mkheck/building-reactive-pipelines-with-kotlin)
 
 ### Inspiration 
 * Creating a [Multi Module Project](https://spring.io/guides/gs/multi-module/)

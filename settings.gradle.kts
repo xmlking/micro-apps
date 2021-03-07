@@ -37,6 +37,8 @@ pluginManagement {
         val quarkusPluginVersion: String by settings
         val kotlinVersion: String by settings
         val protobufPluginVersion: String by settings
+        val springVersion: String by settings
+        val springDependencyManagementVersion: String by settings
 
         id("org.sonarqube") version sonarPluginVersion
         id("com.diffplug.spotless") version spotlessPluginVersion
@@ -54,13 +56,17 @@ pluginManagement {
         id("dev.jacomet.logging-capabilities") version loggerPluginVersion
         id("com.google.protobuf") version protobufPluginVersion apply false
         id(quarkusPluginId) version quarkusPluginVersion apply false
+        id("org.springframework.boot") version springVersion apply false
+        id("io.spring.dependency-management") version springDependencyManagementVersion apply false
+        kotlin("plugin.spring") version kotlinVersion apply false
     }
 }
 
 rootProject.name = "micro-apps"
 include(
+    ":apps:chat-app",
     ":apps:account-service",
-    ":apps:greeting-service",
+//    ":apps:greeting-service",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",
