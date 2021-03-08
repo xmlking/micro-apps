@@ -1,0 +1,222 @@
+[
+    [
+        {
+            "id": "d13ba7c4-6c7d-4661-ad6d-858a1731e8fd",
+            "name": "Driving",
+            "value": 53
+        },
+        {
+            "id": "d2552177-1445-4f02-91a2-8865bb050610",
+            "name": "Fitness",
+            "value": 19
+        },
+        {
+            "id": "90443d40-abbe-4040-83dc-5e08ec452e3f",
+            "name": "Activity",
+            "value": 26
+        },
+        {
+            "id": "9ca4847c-2e77-43a1-9478-fa37d6b950d3",
+            "name": "Financial",
+            "value": 16
+        }
+    ],
+    [
+        {
+            "id": "81fbd922-094c-4e9f-8362-cbfcceb4b9df",
+            "name": "Driving",
+            "value": 57
+        },
+        {
+            "id": "c90bcccd-f900-4c5b-84eb-f5d30bb28298",
+            "name": "Fitness",
+            "value": 25
+        },
+        {
+            "id": "271c7683-abbf-4e14-a857-e7c3c8ff4ab0",
+            "name": "Activity",
+            "value": 0
+        },
+        {
+            "id": "db1683e7-c358-4e4a-b200-42a9296160d8",
+            "name": "Financial",
+            "value": 61
+        }
+    ],
+    [
+        {
+            "id": "07b1ddf0-af06-41e5-858d-0c188fed230b",
+            "name": "Driving",
+            "value": 48
+        },
+        {
+            "id": "acf3bf4f-cc22-4a12-b0b7-1eabd275af83",
+            "name": "Fitness",
+            "value": 73
+        },
+        {
+            "id": "56405c21-04a4-4c22-b2bb-7e6466019ded",
+            "name": "Activity",
+            "value": 62
+        },
+        {
+            "id": "3a4009e6-5513-4fe5-b391-9c8d34a67079",
+            "name": "Financial",
+            "value": 54
+        }
+    ],
+    [
+        {
+            "id": "6a3d949c-d4a5-4ad4-aac4-2847c0140a85",
+            "name": "Driving",
+            "value": 42
+        },
+        {
+            "id": "51ac6824-e05c-492a-bd25-145bc67d9122",
+            "name": "Fitness",
+            "value": 95
+        },
+        {
+            "id": "d5f3f78c-9104-48c7-9aa9-52a3eef0a896",
+            "name": "Activity",
+            "value": 57
+        },
+        {
+            "id": "bde2d353-c513-4e60-9fe5-39a9636d282f",
+            "name": "Financial",
+            "value": 44
+        }
+    ],
+    [
+        {
+            "id": "10a85beb-8063-4efa-9b45-74aaf5dbbf4a",
+            "name": "Driving",
+            "value": 15
+        },
+        {
+            "id": "9c12ba10-d231-4715-bda3-1f219caf46c0",
+            "name": "Fitness",
+            "value": 94
+        },
+        {
+            "id": "64abc30b-21bd-4beb-860d-a5aba69798c8",
+            "name": "Activity",
+            "value": 63
+        },
+        {
+            "id": "8472e4a2-c26a-4041-be37-e2c2af167862",
+            "name": "Financial",
+            "value": 22
+        }
+    ],
+    [
+        {
+            "id": "6cc43771-2b11-4b59-9aca-bcfa4d73e8f8",
+            "name": "Driving",
+            "value": 43
+        },
+        {
+            "id": "089a1dec-a96c-4572-86bb-2a22d5c7bbbb",
+            "name": "Fitness",
+            "value": 89
+        },
+        {
+            "id": "c75beb58-f7a5-4d36-bba8-d343339879dc",
+            "name": "Activity",
+            "value": 47
+        },
+        {
+            "id": "a125ca4f-5616-4ed4-92f8-2ae7ca646e38",
+            "name": "Financial",
+            "value": 12
+        }
+    ],
+    [
+        {
+            "id": "4f931428-8197-4738-b639-6a31e3278486",
+            "name": "Driving",
+            "value": 55
+        },
+        {
+            "id": "fb36ff5b-6727-46d2-a730-7b815353f690",
+            "name": "Fitness",
+            "value": 13
+        },
+        {
+            "id": "83ddc3bb-93c6-40e5-9a10-fc16d4068408",
+            "name": "Activity",
+            "value": 20
+        },
+        {
+            "id": "fbabdbec-8717-427c-b768-39eb0ef464d1",
+            "name": "Financial",
+            "value": 51
+        }
+    ],
+    [
+        {
+            "id": "da594a0b-cfd8-42dc-8997-d94041d8824a",
+            "name": "Driving",
+            "value": 27
+        },
+        {
+            "id": "c61df030-f193-4dbb-8c67-ca1980ad3521",
+            "name": "Fitness",
+            "value": 3
+        },
+        {
+            "id": "2e175db3-fd69-4004-95df-6f99fa91f210",
+            "name": "Activity",
+            "value": 47
+        },
+        {
+            "id": "a3124670-16eb-451d-ab89-e7dcb7979816",
+            "name": "Financial",
+            "value": 92
+        }
+    ],
+    [
+        {
+            "id": "f136f83c-f07a-4190-9c17-4ad38972c27e",
+            "name": "Driving",
+            "value": 31
+        },
+        {
+            "id": "2707ef06-d394-41e9-baca-9fbc899d3f20",
+            "name": "Fitness",
+            "value": 37
+        },
+        {
+            "id": "ac5e2b50-e710-4471-8400-54f8412ab4c1",
+            "name": "Activity",
+            "value": 15
+        },
+        {
+            "id": "c9a24e83-1c49-4a46-b12d-20f8a4788a16",
+            "name": "Financial",
+            "value": 5
+        }
+    ],
+    [
+        {
+            "id": "6aa6dcc1-d0cd-45a7-8b5c-d3c6cf1e5fa6",
+            "name": "Driving",
+            "value": 2
+        },
+        {
+            "id": "63d116aa-3091-4e0a-b492-57dd6918df9c",
+            "name": "Fitness",
+            "value": 68
+        },
+        {
+            "id": "019a3c99-d7c6-458e-9dc8-aacc4cb40f06",
+            "name": "Activity",
+            "value": 53
+        },
+        {
+            "id": "c586d351-cea5-49d4-8842-365728d7a218",
+            "name": "Financial",
+            "value": 24
+        }
+    ]
+]

@@ -70,6 +70,7 @@ include(
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",
+    ":apps:person-graphql",
 
     ":libs:core",
     ":libs:kbeam",

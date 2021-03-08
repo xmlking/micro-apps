@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/greeting-service .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/person-graphql .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/greeting-service
+# docker run -i --rm -p 8080:8080 quarkus/person-graphql
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.3
