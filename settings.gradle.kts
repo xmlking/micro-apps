@@ -66,7 +66,7 @@ rootProject.name = "micro-apps"
 include(
     ":apps:chat-app",
     ":apps:account-service",
-//    ":apps:greeting-service",
+    ":apps:greeting-service",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",

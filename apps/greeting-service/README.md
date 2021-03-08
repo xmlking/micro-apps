@@ -9,7 +9,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 1. A working container runtime (Docker, podman)
 1. JDK 11 installed with JAVA_HOME configured appropriately
     ```bash
-    sdk install java 11.0.9.hs-adpt
+    sdk install java 11.0.10.hs-adpt
     export JAVA_HOME=$HOME/.sdkman/candidates/java/current
     ```
 1. GraalVM version 21.0.0.r11-grl installed and configured appropriately
