@@ -77,10 +77,6 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 
 > Start [Greeting API](./apps/greeting-micronaut/)
 
-### TODO
-
-* [Building Reactive Pipelines with Kotlin & Spring](https://github.com/mkheck/building-reactive-pipelines-with-kotlin)
-
 ### Inspiration 
 * Creating a [Multi Module Project](https://spring.io/guides/gs/multi-module/)
 * Microservices in a Post-Kubernetes Era [link](https://www.infoq.com/articles/microservices-post-kubernetes)

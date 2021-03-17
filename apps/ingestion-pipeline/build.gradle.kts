@@ -77,7 +77,7 @@ tasks {
 }
 
 application {
-    mainClassName = "micro.apps.pipeline.IngestionPipeline"
+    mainClass.set("micro.apps.pipeline.IngestionPipeline")
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
     applicationDefaultJvmArgs = listOf("-Djava.util.logging.config.file=src/main/resources/logging.properties", "-Dmicro.apps.level=FINE")
 }

@@ -5,6 +5,9 @@ plugins {
 }
 
 val slf4jVersion: String by project
+val turbineVersion: String by project
+val markdownVersion: String by project
+val javafakerVersion: String by project
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -15,7 +18,7 @@ dependencies {
     implementation("io.r2dbc:r2dbc-h2")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("com.github.javafaker:javafaker:$javafakerVersion")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -24,11 +27,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("app.cash.turbine:turbine:0.4.0")
+    testImplementation("app.cash.turbine:turbine:$turbineVersion")
 
     runtimeOnly("com.h2database:h2")
 
-    implementation("org.jetbrains:markdown:0.1.45")
+    implementation("org.jetbrains:markdown:$markdownVersion")
 }
 
 loggingCapabilities {

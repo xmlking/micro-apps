@@ -29,7 +29,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "micro.apps.pipeline.WordCountPipeline"
+    mainClass.set("micro.apps.pipeline.WordCountPipeline")
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
     applicationDefaultJvmArgs = listOf("-Djava.util.logging.config.file=src/main/resources/logging.properties", "-Dmicro.apps.level=FINE")
 }
