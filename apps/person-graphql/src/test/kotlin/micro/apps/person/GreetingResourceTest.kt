@@ -30,36 +30,12 @@ class GreetingResourceTest {
             .then()
             .statusCode(200)
             .body("data.hello", equalTo("hello"))
-            // .body("data.allStudents.size", greaterThanOrEqualTo(3))
             .and()
             .body(containsString("hello"))
     }
 
     @Test
     fun testGetProductsEndpoint() {
-
-        val query = """
-            {
-                products
-            }
-        """.trimIndent()
-
-        given()
-            .contentType("application/json")
-            .accept("application/json")
-            .body(GraphQlQuery(query = query))
-            .`when`().post("/graphql")
-            .then()
-            .statusCode(200)
-            .body(`is`("{\"data\":{\"products\":[\"test\",\"test1\",\"test2\"]}}"))
-            .body("data.products[0]", equalTo("test"))
-            .body("data.products.size", greaterThanOrEqualTo(3))
-            .and()
-            .body(containsString("test"))
-    }
-
-    @Test
-    fun testGetPersonEndpoint() {
 
         val query = """
             {
