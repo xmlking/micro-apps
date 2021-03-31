@@ -17,6 +17,7 @@ dependencies {
     implementation("io.quarkus:quarkus-hibernate-validator")
 
     testImplementation("io.quarkus:quarkus-junit5")
+    // testImplementation("io.quarkus:quarkus-jacoco")
     testImplementation("io.rest-assured:rest-assured")
 }
 
