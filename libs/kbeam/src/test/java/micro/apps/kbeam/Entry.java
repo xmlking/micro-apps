@@ -1,6 +1,5 @@
 package micro.apps.kbeam;
 
-
 import org.apache.beam.sdk.coders.AvroCoder;
 import org.apache.beam.sdk.coders.DefaultCoder;
 

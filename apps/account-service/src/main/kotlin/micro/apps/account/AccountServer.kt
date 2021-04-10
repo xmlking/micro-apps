@@ -7,6 +7,7 @@ import micro.apps.μservice.interceptors.UnknownStatusInterceptor
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
+
 class AccountServer(private val port: Int) {
     val server: Server = ServerBuilder
         .forPort(port)

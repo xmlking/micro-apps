@@ -199,6 +199,7 @@ gradle useLatestVersions && gradle useLatestVersionsCheck
 # upgrade gradlew
 # upgrade project gradle version
 gradle wrapper --distribution-type all
+# gradle wrapper --gradle-version=7.0
 # gradle daemon status 
 gradle --status
 gradle --stop
