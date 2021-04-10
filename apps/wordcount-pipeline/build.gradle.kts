@@ -17,7 +17,7 @@ dependencies {
     implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
     // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion")
     // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
-    api("com.google.guava:guava:$guavaVersion") // Force `-jre` version instead of `-android`
+    api(libs.guava) // Force `-jre` version instead of `-android`
 
     // Test with JUnit4 & JUnit5
     testImplementation(kotlin("test"))

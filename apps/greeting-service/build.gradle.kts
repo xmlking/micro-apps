@@ -14,6 +14,10 @@ val coroutinesVersion: String by project
 val mapstructVersion: String by project
 
 dependencies {
+    // TODO
+    // implementation(projects.libs.core)
+    // implementation(projects.libs.model)
+    // implementation(projects.libs.proto)
     implementation(project(":libs:core"))
     implementation(project(":libs:model"))
     implementation(project(":libs:proto"))

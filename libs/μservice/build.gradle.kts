@@ -24,7 +24,7 @@ dependencies {
     implementation("com.google.protobuf:protobuf-java-util:$protobufVersion")
 
     // Google
-    implementation("com.google.guava:guava:$guavaVersion")
+    implementation(libs.guava)
 
     // Resilience frameworks
     implementation("com.alibaba.csp:sentinel-grpc-adapter:$sentinelVersion")

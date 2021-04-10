@@ -53,7 +53,7 @@ dependencies {
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
-    api("com.google.guava:guava:$guavaVersion") // Force `-jre` version instead of `-android`
+    api(libs.guava) // Force `-jre` version instead of `-android`
 
     // Test with JUnit4 & JUnit5
     testImplementation(kotlin("test"))

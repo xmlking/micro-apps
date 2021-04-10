@@ -22,6 +22,9 @@ pluginManagement {
         }
     }
 
+    enableFeaturePreview("VERSION_CATALOGS")
+    // enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS") // TODO
+
     plugins {
         val sonarPluginVersion: String by settings
         val spotlessPluginVersion: String by settings

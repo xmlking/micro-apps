@@ -10,7 +10,6 @@ val hamcrestVersion: String by project
 val serializationVersion: String by project
 val avro4kVersion: String by project
 val konfigVersion: String by project
-val guavaVersion: String by project
 val grpcKotlinVersion: String by project
 val coroutinesVersion: String by project
 val slf4jVersion: String by project
