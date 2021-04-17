@@ -51,7 +51,7 @@ jib {
     containerizingMode = "packaged"
     container {
         // since we have many main classes, it cannot be Inferred. lets help
-        mainClass = application.mainClassName
+        mainClass = application.mainClass.get()
     }
     // extraDirectories {
     //     setPaths("src/main/custom-extra-dir,/home/user/jib-extras")

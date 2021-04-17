@@ -2,7 +2,7 @@
 
 # kotlin
 kotlin = "1.4.32"
-#kotlin = "1.5.0-M1"
+#kotlin = "1.5.0-RC"
 spek = "2.0.8"
 kotest = "4.4.3"
 junit = "5.7.1"
@@ -21,12 +21,12 @@ javafaker = "1.0.2"
 # gradle
 gradleTool = "7.0"
 sonarPlugin = "3.1.1"
-spotlessPlugin = "5.12.0"
+spotlessPlugin = "5.12.1"
 spotlessClogPlugin = "2.1.2"
 dokkaPlugin = "1.4.30"
 checkLatestPlugin = "0.38.0"
-useLatestPlugin = "0.2.15"
-axionPlugin = "1.13.1"
+useLatestPlugin = "0.2.16"
+axionPlugin = "1.13.2"
 shadowPlugin = "6.1.0"
 jibPlugin = "3.0.0"
 loggerPlugin = "0.9.0"
@@ -44,8 +44,8 @@ slf4j = "2.0.0-alpha1"
 # slf4j = "1.7.30"
 # quarkus
 quarkusPluginId = "io.quarkus"
-quarkusPlugin = "1.13.1.Final"
-quarkusPlatform = "1.13.1.Final"
+quarkusPlugin = "1.13.2.Final"
+quarkusPlatform = "1.13.2.Final"
 quarkusPlatformGroupId = "io.quarkus"
 quarkusPlatformArtifactId = "quarkus-universe-bom"
 # to use locally built Quarkus, use `quarkus-bom` and `999-SNAPSHOT`
@@ -68,10 +68,10 @@ yaml = "2.10.3"
 # avro version
 avro = "1.9.2"
 # spring
-spring = "2.4.4"
+spring = "2.4.5"
 springDependencyManagement = "1.0.11.RELEASE"
 # google
-googlePubsub = "1.112.0"
+googlePubsub = "1.112.1"
 
 [libraries]
 guava = { module="com.google.guava:guava", version.ref="guava" }

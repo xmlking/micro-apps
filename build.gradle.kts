@@ -197,7 +197,7 @@ subprojects {
 
             // Use kotest for testing
             testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion") // for kotest framework
-//            testImplementation("io.kotest:kotest-runner-console-jvm:$kotestVersion") // for kotest framework
+            // testImplementation("io.kotest:kotest-runner-console-jvm:$kotestVersion") // for kotest framework
             testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion") // for kotest core jvm assertions
             testImplementation("io.kotest:kotest-property-jvm:$kotestVersion") // for kotest property test
             testImplementation("io.mockk:mockk:$mockkVersion") // Use Mockk mocking library
@@ -218,8 +218,9 @@ subprojects {
         }
 
         java {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(11))
+            }
             withSourcesJar()
             withJavadocJar()
         }
@@ -256,8 +257,11 @@ subprojects {
             compileKotlin {
                 kotlinOptions {
                     jvmTarget = JavaVersion.VERSION_11.toString()
+                    // languageVersion = "1.6"
+                    // apiVersion = "1.6"
                     javaParameters = true
                     freeCompilerArgs = listOf(
+                        // "-Xjvm-enable-preview",
                         "-Xjsr305=strict",
                         "-Xopt-in=kotlin.RequiresOptIn",
                         "-Xopt-in=kotlin.OptIn"
@@ -268,8 +272,11 @@ subprojects {
             compileTestKotlin {
                 kotlinOptions {
                     jvmTarget = JavaVersion.VERSION_11.toString()
+                    // languageVersion = "1.6"
+                    // apiVersion = "1.6"
                     javaParameters = true
                     freeCompilerArgs = listOf(
+                        // "-Xjvm-enable-preview",
                         "-Xjsr305=strict",
                         "-Xopt-in=kotlin.RequiresOptIn",
                         "-Xopt-in=kotlin.OptIn"

@@ -6,7 +6,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 
-    // FIXME: remove after: https://github.com/diffplug/spotless/issues/643
+    // FIXME: remove after: https://github.com/diffplug/spotless/issues/587
     buildscript {
         repositories {
             mavenLocal()
@@ -69,7 +69,7 @@ rootProject.name = "micro-apps"
 include(
     ":apps:chat-app",
     ":apps:account-service",
-    ":apps:greeting-service",
+//    ":apps:greeting-service",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",

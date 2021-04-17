@@ -37,7 +37,7 @@ class EchoServer(val port: Int) {
         server.awaitTermination()
     }
 
-    private class EchoService : EchoServiceGrpcKt.EchoServiceCoroutineImplBase() {
+    class EchoService : EchoServiceGrpcKt.EchoServiceCoroutineImplBase() {
         override suspend fun echo(request: EchoRequest): EchoResponse = EchoResponse
             .newBuilder()
             .setMessage("Hello ${request.message}")

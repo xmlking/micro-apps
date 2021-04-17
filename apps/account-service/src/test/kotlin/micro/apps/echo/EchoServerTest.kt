@@ -1,9 +1,7 @@
 package micro.apps.echo
 
 import io.grpc.ManagedChannel
-import io.grpc.Server
-import io.grpc.inprocess.InProcessChannelBuilder
-import io.grpc.inprocess.InProcessServerBuilder
+import io.grpc.ManagedChannelBuilder
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -12,24 +10,22 @@ import micro.apps.proto.echo.v1.EchoResponse
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
 import micro.apps.test.E2E
 
-class EchoServiceTest : FunSpec({
+class EchoServerTest : FunSpec({
     val port = 8080
-    lateinit var uniqueName: String
-    lateinit var server: Server
+    lateinit var server: EchoServer
     lateinit var channel: ManagedChannel
 
     beforeSpec {
-        uniqueName = InProcessServerBuilder.generateName()
-        server = InProcessServerBuilder.forName(uniqueName).directExecutor().addService(EchoServer.EchoService()).build()
+        server = EchoServer(port)
         server.start()
     }
 
     afterSpec {
-        server.shutdown()
+        server.server.shutdown()
     }
 
     beforeTest {
-        channel = InProcessChannelBuilder.forName(uniqueName).directExecutor().build()
+        channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build()
     }
 
     afterTest {
