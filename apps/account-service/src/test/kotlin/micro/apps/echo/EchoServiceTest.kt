@@ -13,7 +13,6 @@ import micro.apps.proto.echo.v1.EchoServiceGrpcKt
 import micro.apps.test.E2E
 
 class EchoServiceTest : FunSpec({
-    val port = 8080
     lateinit var uniqueName: String
     lateinit var server: Server
     lateinit var channel: ManagedChannel
