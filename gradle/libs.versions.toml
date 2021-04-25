@@ -30,7 +30,7 @@ axionPlugin = "1.13.2"
 shadowPlugin = "6.1.0"
 jibPlugin = "3.0.0"
 loggerPlugin = "0.9.0"
-protobufPlugin = "0.8.15"
+protobufPlugin = "0.8.16"
 # test matchers
 hamcrest = "1.3"
 restAssured = "4.3.1"
