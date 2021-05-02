@@ -5,6 +5,8 @@ Modern microservices for Post-Kubernetes Era.
 
 Monorepo(apps, libs) project to showcase workspace setup with multiple apps and shared libraries
 
+<span style="color:purple"> aaa <mark>bbb</mark> ccc</span>
+
 ### Features
 1. **Polyglot** - Support multiple languages (java, kotlin, groovy)
 1. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)

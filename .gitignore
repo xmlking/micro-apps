@@ -10,7 +10,6 @@ bin/
 *.iml
 *.iws
 out/
-local.properties
 
 # NetBeans
 nb-configuration.xml

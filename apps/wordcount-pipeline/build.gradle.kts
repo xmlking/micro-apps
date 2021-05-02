@@ -3,7 +3,6 @@ val beamVersion: String by project
 val csvVersion: String by project
 val junitVersion: String by project
 val hamcrestVersion: String by project
-val guavaVersion: String by project
 val slf4jVersion: String by project
 
 dependencies {

@@ -154,7 +154,9 @@ gradle publish
 gradle publish -x test --profile
 gradle build publish -Prelease.forceSnapshot
 gradle build publish -Prelease.forceVersion=3.0.0
-CI=true GITHUB_USER=xmlking GITHUB_TOKEN=<GITHUB_NPM_TOKEN> gradle publish
+# set `CI=true` to publish from laptop
+CI=true gradle publish -Prelease.forceSnapshot
+CI=true GITHUB_USER=xmlking GITHUB_TOKEN=<GITHUB_PACKAGES_TOKEN> gradle publish
 ```
 
 ### Docker

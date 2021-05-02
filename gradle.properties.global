@@ -1,0 +1,51 @@
+## This file must *NOT* be checked into Version Control Systems,
+# as it contains information specific to your local configuration.
+# TODO: copy gradle.properties.global to ~/.gradle/gradle.properties
+# override url/username/token etc
+#
+# Location of the SDK. This is only used by Gradle.
+# For customization when using a Version Control System, please read the
+# header note.
+#Mon Jul 13 20:06:46 PDT 2020
+sdk.dir=/Users/schintha/Library/Android/sdk
+
+############################################################
+# nexus settings
+############################################################
+nexus.url=<nexusUrl>
+nexus.username=<username>
+nexus.password=<token>
+
+############################################################
+# sonarqube settings
+############################################################
+systemProp.sonar.host.url=<sonarqubeUrl>
+systemProp.sonar.login=<token>
+
+############################################################
+# http proxy settings
+# Uncomment blow lines if you face gradle download errors.
+# after downloading dependencies, your can comment them before pushing code to git.
+# alternatively you can keep following proxy settings in ~/.gradle/gradle.properties
+# to avoid accidental leaking your password.
+############################################################
+#systemProp.http.proxyHost=localhost
+#systemProp.http.proxyPort=3128
+#systemProp.http.nonProxyHosts=localhost|127.0.0.1
+#systemProp.https.proxyHost=localhost
+#systemProp.https.proxyPort=3128
+#systemProp.https.nonProxyHosts=localhost|127.0.0.1
+#systemProp.http.proxyUser=
+#systemProp.http.proxyPassword=
+
+### experimenting further proxy SSL fix options ###
+#systemProp.jsse.enableSNIExtension=false
+#systemProp.javax.net.ssl.trustStore=gradle/builder/cacerts
+#systemProp.javax.net.ssl.trustStorePassword=changeit
+
+############################################################
+# gradle settings
+############################################################
+# gradle logs
+#org.gradle.logging.level=INFO
+#org.gradle.jvmargs=-Xmx4096m -XX:MaxMetaspaceSize=512m

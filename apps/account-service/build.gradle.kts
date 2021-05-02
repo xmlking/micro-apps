@@ -1,5 +1,4 @@
 val coroutinesVersion: String by project
-val guavaVersion: String by project
 val grpcVersion: String by project
 val grpcKotlinVersion: String by project
 val protobufVersion: String by project
