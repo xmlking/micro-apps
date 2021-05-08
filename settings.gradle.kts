@@ -23,6 +23,7 @@ pluginManagement {
     }
 
     enableFeaturePreview("VERSION_CATALOGS")
+    // enableFeaturePreview("GRADLE_METADATA")
     // enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS") // TODO
 
     plugins {
@@ -67,13 +68,14 @@ pluginManagement {
 
 rootProject.name = "micro-apps"
 include(
-    ":apps:chat-app",
+
     ":apps:account-service",
+    ":apps:chat-app",
     ":apps:greeting-service",
+    ":apps:person-graphql",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",
-    ":apps:person-graphql",
 
     ":libs:core",
     ":libs:kbeam",

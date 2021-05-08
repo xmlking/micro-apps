@@ -9,17 +9,15 @@ dependencies {
     implementation(project(":libs:proto"))
     implementation(project(":libs:μservice"))
 
-    // gRPC
-    implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
+    // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
+    runtimeOnly("io.grpc:grpc-netty:$grpcVersion")
     implementation("io.grpc:grpc-protobuf:$grpcVersion")
-    implementation("io.grpc:grpc-stub:$grpcVersion")
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
 
-    // Protobuf
+    // Protobuf - If you want to use features like protobuf JsonFormat, `protobuf-java-util` instead of `protobuf-java`
     implementation("com.google.protobuf:protobuf-java:$protobufVersion")
-    implementation("com.google.protobuf:protobuf-java-util:$protobufVersion")
 
     // Google
     implementation(libs.guava)
@@ -34,10 +32,12 @@ dependencies {
     // implementation("io.arrow-kt:arrow-fx:$arrowVersion")
 
     // Test
-    // testImplementation("io.kotest:kotest-extensions-koin:{version}")
+    // testImplementation("io.kotest.extensions:kotest-extensions-koin:{version}")
     testImplementation(testFixtures(project(":libs:test")))
     testImplementation(testFixtures(project(":libs:model")))
     testImplementation(testFixtures(project(":libs:proto")))
+    // grpc testing TODO: https://github.com/grpc/grpc-java/issues/5331
+    testImplementation("io.grpc:grpc-testing:$grpcVersion")
 }
 
 application {

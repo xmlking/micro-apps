@@ -126,8 +126,8 @@ gradle markNextVersion  -Prelease.disableChecks -Prelease.incrementer=incrementM
 # first time
 git-chglog --init
 # on release branch, generate CHANGELOG.md and commit before merging back to develop & master.
-git-chglog  -o CHANGELOG.md
-git-chglog  -o CHANGELOG.md -next-tag 2.0.0
+git-chglog -c .github/chglog/config.yml -o CHANGELOG.md
+git-chglog -c .github/chglog/config.yml -o CHANGELOG.md --next-tag 2.0.0
 ```
 
 ```bash

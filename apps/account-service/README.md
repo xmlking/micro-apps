@@ -48,3 +48,4 @@ gradle :apps:account-service:jib \
 - [A collection of useful/essential gRPC Java Examples](https://github.com/saturnism/grpc-by-example-java)
 - [Lessons Learned Implementing Microservices in Kubernetes](https://saturnism.me/talk/kubernetes-microservices-lessons-learned/)
 - [Death Star demo App by Marharyta](https://github.com/leveretka/grpc-death-star)
+- [kotlin-samples](https://github.com/GoogleCloudPlatform/kotlin-samples/tree/master/run)

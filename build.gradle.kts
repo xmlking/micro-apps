@@ -141,7 +141,6 @@ sonarqube {
 // all projects config
 allprojects {
     repositories {
-        jcenter()
         google()
         mavenLocal()
         mavenCentral()
@@ -425,7 +424,7 @@ subprojects {
                         val snapshotsRepoUrl = "https://maven.pkg.github.com/xmlking/micro-apps"
                         url = if (isSnapshot) uri(snapshotsRepoUrl) else uri(releasesRepoUrl)
                         credentials {
-                            username = findProperty("nexus.username")  as String? ?: System.getenv("GITHUB_USER")
+                            username = findProperty("nexus.username") as String? ?: System.getenv("GITHUB_USER")
                             password = findProperty("nexus.password") as String? ?: System.getenv("GITHUB_TOKEN")
                         }
                     }

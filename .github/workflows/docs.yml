@@ -1,0 +1,32 @@
+# https://github.com/kotest/kotest/tree/master/.github/workflows
+name: docs
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'documentation/**'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      -  uses: actions/checkout@v2
+      -  uses: actions/setup-node@v1
+         with:
+           node-version: '12.x'
+      -  name: Release to GitHub Pages
+         env:
+           USE_SSH: true
+           GIT_USER: git
+         run: |
+           git config user.name github-actions
+           git config user.email github-actions@github.com
+           npm --prefix documentation ci
+           npm --prefix documentation run build
+           mv documentation/build docs
+           echo "kashmora.com" > docs/CNAME
+           echo "kashmora.com" > CNAME
+           git add docs -f
+           git commit -m "Updated docs"
+           git push origin master:gh-pages --force

@@ -99,8 +99,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 # first time
 git-chglog --init
 # on release
-git-chglog -o CHANGELOG.md
-git-chglog -o CHANGELOG.md -next-tag 2.0.0
+git-chglog -c .github/chglog/config.yml -o CHANGELOG.md --next-tag 2.0.0
 ```
 
 #### Tools

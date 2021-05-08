@@ -23,16 +23,13 @@ configurations.all {
 }
 
 dependencies {
-    // Grpc
-    implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
+    // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
     implementation("io.grpc:grpc-protobuf:$grpcVersion")
-    implementation("io.grpc:grpc-stub:$grpcVersion")
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-    // Protobuf
+
+    // Protobuf - If you want to use features like protobuf JsonFormat, `protobuf-java-util` instead of `protobuf-java`
     implementation("com.google.protobuf:protobuf-java:$protobufVersion")
-    implementation("com.google.protobuf:protobuf-java-util:$protobufVersion")
-    compileOnly("javax.annotation:javax.annotation-api:1.3.2")
 
     // proto validate generator
     implementation("io.envoyproxy.protoc-gen-validate:pgv-java-stub:$pgvVersion")

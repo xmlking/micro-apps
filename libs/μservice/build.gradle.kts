@@ -10,17 +10,15 @@ plugins {
 }
 
 dependencies {
-    // gRPC
-    implementation("io.grpc:grpc-netty-shaded:$grpcVersion")
+    // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
+    runtimeOnly("io.grpc:grpc-netty:$grpcVersion")
     implementation("io.grpc:grpc-protobuf:$grpcVersion")
-    implementation("io.grpc:grpc-stub:$grpcVersion")
     implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
 
-    // Protobuf
+    // Protobuf - If you want to use features like protobuf JsonFormat, `protobuf-java-util` instead of `protobuf-java`
     implementation("com.google.protobuf:protobuf-java:$protobufVersion")
-    implementation("com.google.protobuf:protobuf-java-util:$protobufVersion")
 
     // Google
     implementation(libs.guava)
