@@ -16,6 +16,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.springframework.boot:spring-boot-starter-rsocket")
     implementation("io.r2dbc:r2dbc-h2")
+    // FIXME https://docs.uptrace.dev/guide/java.html#introduction
+    implementation("org.yaml:snakeyaml:1.28")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.github.javafaker:javafaker:$javafakerVersion")
