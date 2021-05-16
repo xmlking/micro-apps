@@ -108,8 +108,8 @@ services:
 
 
   envoy:
-    image: docker.io/envoyproxy/envoy-alpine:v1.16.2
-    command: /usr/local/bin/envoy -c etc/envoy/envoy.yaml -l debug --service-cluster front --service-node front
+    image: docker.io/envoyproxy/envoy-alpine:v1.18.3
+    command: /usr/local/bin/envoy -c etc/envoy/bootstrap.yaml -l debug --service-cluster front --service-node front
     volumes:
       - './config/certs:/etc/certs:ro'
       - './config/base/envoy/config:/etc/envoy:ro'

@@ -1,6 +1,6 @@
 version_info: '0'
 resources:
-  - '@type': type.googleapis.com/envoy.api.v2.Listener
+  - "@type": type.googleapis.com/envoy.config.listener.v3.Listener
     name: listener_http
     address:
       socket_address: { address: 0.0.0.0, port_value: 9090 }
@@ -8,8 +8,7 @@ resources:
       - filters:
           - name: envoy.filters.network.http_connection_manager
             typed_config:
-              '@type': type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
-              codec_type: AUTO
+              "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
               stat_prefix: ingress_http
               rds:
                 route_config_name: route_config_0
@@ -22,7 +21,7 @@ resources:
                 #   # config: {}
                 # - name: envoy.filters.http.jwt_authn
                 #   # config: {}
-  - '@type': type.googleapis.com/envoy.api.v2.Listener
+  - "@type": type.googleapis.com/envoy.config.listener.v3.Listener
     name: listener_https
     address:
       socket_address: { address: 0.0.0.0, port_value: 9443 }
@@ -30,10 +29,10 @@ resources:
       - transport_socket:
           name: envoy.transport_sockets.tls
           typed_config:
-            '@type': type.googleapis.com/envoy.api.v2.auth.DownstreamTlsContext
+            "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
             require_client_certificate: true # uncomment if you want client to provide cert
             common_tls_context:
-              alpn_protocols: ['h2', 'http/1.1']
+              alpn_protocols: [ 'h2', 'http/1.1' ]
               tls_certificates:
                 - certificate_chain: { filename: '/etc/certs/proxy-cert.pem' }
                   private_key: { filename: '/etc/certs/proxy-key.pem' }
@@ -42,8 +41,7 @@ resources:
         filters:
           - name: envoy.filters.network.http_connection_manager
             typed_config:
-              '@type': type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
-              codec_type: AUTO
+              '@type': type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
               stat_prefix: ingress_http
               rds:
                 route_config_name: route_config_0

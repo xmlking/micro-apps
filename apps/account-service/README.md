@@ -17,7 +17,7 @@ Showcase backpressure handling techniques:
 # server
 gradle :apps:account-service:run
 # proxy
-docker-compose up envoy
+docker compose up envoy
 # client -> proxy -> server
 gradle :apps:account-service:runClient
 # client -> server
@@ -32,6 +32,15 @@ gradle :apps:account-service:runClient
 gradle :apps:account-service:test
 gradle :apps:account-service:test -Dkotest.tags.exclude=Slow
 gradle :apps:account-service:test -Dkotest.tags.include=E2E
+```
+
+```bash
+# test API via envoy with TLS, and client cert
+grpcurl -cacert=config/certs/ca-cert.pem \
+-cert=config/certs/client-cert.pem \
+-key=config/certs/client-key.pem \
+-protoset <(buf build -o -) \
+-d '{ "id": { "value": "sumo" } }' localhost:9444 micro.apps.proto.account.v1.AccountService/Get
 ```
 
 ### 📦 Build

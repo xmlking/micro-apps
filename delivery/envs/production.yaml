@@ -1,5 +1,5 @@
 cluster_name: sumo
-project: micro-starter-kit
+project: micro-apps
 compute:  # choose "region" or "zone"
    zone: us-west2-a
 namespace: production
