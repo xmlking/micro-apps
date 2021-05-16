@@ -14,8 +14,8 @@ brew install buf
 # To list all files Buf is configured to use:
 buf ls-files
 # lint
-buf check lint
-buf check breaking --against-input '.git#branch=master'
+buf lint
+buf breaking --against-input '.git#branch=master'
 ```
 
 ### Test

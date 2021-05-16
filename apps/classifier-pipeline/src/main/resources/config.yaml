@@ -3,7 +3,6 @@ certs:
     serverCert: certs/server-cert.pem
     clientKey: certs/client-key.pem
     clientCert: certs/client-cert.pem
-    clientPasscode: fake_pass
     caCert: certs/ca-cert.pem
 account:
     endpoint: 127.0.0.1:8080

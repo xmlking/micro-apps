@@ -1,13 +1,15 @@
 certs:
-    serverKey: certs/server-key.pem
-    serverCert: certs/server-cert.pem
-    clientKey: certs/client-key.pem
-    clientCert: certs/client-cert.pem
-    clientPasscode: fake_pass
-    caCert: certs/ca-cert.pem
+    caCert: config/certs/upstream-ca-cert.pem
+    clientKey: config/certs/client-key.pem
+    clientCert: config/certs/client-cert.pem
+    proxyKey: config/certs/proxy-key.pem
+    proxyCert: config/certs/proxy-cert.pem
+    upstreamKey: config/certs/upstream-localhost-key.pem
+    upstreamCert: config/certs/upstream-localhost-cert.pem
+    upstreamCaCert: config/certs/upstream-ca-cert.pem
 account:
-    endpoint: 127.0.0.1:8080
-    authority: my.domain.com
+    endpoint: 0.0.0.0:5000
+    authority: localhost
     maxRetry: 3
     deadline: 2s
 endpoints:

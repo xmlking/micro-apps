@@ -1,13 +1,16 @@
 package micro.apps.account
 
 import com.alibaba.csp.sentinel.EntryType
+import com.alibaba.csp.sentinel.adapter.grpc.SentinelGrpcClientInterceptor
 import com.alibaba.csp.sentinel.slots.block.RuleConstant
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager
 import com.alibaba.csp.sentinel.slots.clusterbuilder.ClusterBuilderSlot
 import com.google.protobuf.StringValue
+import io.grpc.Grpc
 import io.grpc.ManagedChannel
 import io.grpc.StatusException
+import io.grpc.TlsChannelCredentials
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
@@ -15,14 +18,19 @@ import io.kotest.core.test.TestCaseConfig
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import micro.apps.account.config.Account
+import micro.apps.account.config.TLS
+import micro.apps.account.config.config
 import micro.apps.proto.account.v1.AccountServiceGrpcKt
 import micro.apps.proto.account.v1.GetRequest
 import micro.apps.proto.account.v1.GetResponse
 import micro.apps.test.E2E
 import micro.apps.test.Slow
 import micro.apps.test.gRPC
-import micro.apps.μservice.sentinelChannelForTarget
 import mu.KotlinLogging
+import org.bouncycastle.jce.provider.BouncyCastleProvider
+import java.io.File
+import java.security.Security
 import kotlin.system.measureTimeMillis
 import kotlin.time.ExperimentalTime
 import kotlin.time.minutes
@@ -62,10 +70,13 @@ private val logger = KotlinLogging.logger {}
 
 @ExperimentalTime
 class AccountServiceResiliencyTest : FunSpec({
+    // Add BCP to avoid `algid parse error, not a sequence` eror
+    Security.addProvider(BouncyCastleProvider())
+
     // defaultTestConfig
     TestCaseConfig(timeout = 3.minutes, tags = setOf(gRPC))
 
-    val port = 8080
+    val port = 5000
     lateinit var server: AccountServer
     lateinit var channel: ManagedChannel
 
@@ -79,7 +90,13 @@ class AccountServiceResiliencyTest : FunSpec({
     }
 
     beforeTest {
-        channel = sentinelChannelForTarget("dns:///localhost:$port")
+        val creds = TlsChannelCredentials.newBuilder()
+            .keyManager(File(config[TLS.clientCert]), File(config[TLS.clientKey]))
+            .trustManager(File(config[TLS.caCert])).build()
+        channel = Grpc.newChannelBuilder(config[Account.endpoint], creds)
+            .intercept(SentinelGrpcClientInterceptor())
+            .overrideAuthority(config[Account.authority])
+            .build()
     }
 
     afterTest {

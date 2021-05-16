@@ -10,8 +10,21 @@ Showcase backpressure handling techniques:
 
 
 ### 🚀 Run
+
+ 
+
 ```bash
+# server
 gradle :apps:account-service:run
+# proxy
+docker-compose up envoy
+# client -> proxy -> server
+gradle :apps:account-service:runClient
+# client -> server
+CERTS_CACERT=config/certs/upstream-ca-cert.pem \
+ACCOUNT_ENDPOINT=dns:///localhost:5000 \
+ACCOUNT_AUTHORITY=localhost \
+gradle :apps:account-service:runClient
 ```
 
 ### 🔭 Test
@@ -49,3 +62,5 @@ gradle :apps:account-service:jib \
 - [Lessons Learned Implementing Microservices in Kubernetes](https://saturnism.me/talk/kubernetes-microservices-lessons-learned/)
 - [Death Star demo App by Marharyta](https://github.com/leveretka/grpc-death-star)
 - [kotlin-samples](https://github.com/GoogleCloudPlatform/kotlin-samples/tree/master/run)
+- [gRPC Server Reflection Tutorial](https://github.com/grpc/grpc-java/blob/master/documentation/server-reflection-tutorial.md)
+- [traffic-director-grpc-examples](https://github.com/GoogleCloudPlatform/traffic-director-grpc-examples)

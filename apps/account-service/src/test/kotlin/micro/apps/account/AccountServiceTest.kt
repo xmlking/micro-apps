@@ -2,22 +2,32 @@ package micro.apps.account
 
 import com.google.protobuf.Any
 import com.google.protobuf.StringValue
+import io.grpc.Grpc
 import io.grpc.ManagedChannel
+import io.grpc.TlsChannelCredentials
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withTimeoutOrNull
+import micro.apps.account.config.Account
+import micro.apps.account.config.TLS
+import micro.apps.account.config.config
 import micro.apps.proto.account.v1.AccountServiceGrpcKt
 import micro.apps.proto.account.v1.SearchRequest
 import micro.apps.proto.account.v1.SearchResponse
 import micro.apps.proto.common.fixtures.mockPerson
 import micro.apps.test.E2E
 import micro.apps.test.Slow
-import micro.apps.μservice.channelForTarget
+import org.bouncycastle.jce.provider.BouncyCastleProvider
+import java.io.File
+import java.security.Security
 
 class AccountServiceTest : FunSpec({
-    val port = 8080
+    // Add BCP to avoid `algid parse error, not a sequence` eror
+    Security.addProvider(BouncyCastleProvider())
+
+    val port = 5000
     lateinit var server: AccountServer
     lateinit var channel: ManagedChannel
 
@@ -31,7 +41,10 @@ class AccountServiceTest : FunSpec({
     }
 
     beforeTest {
-        channel = channelForTarget("dns:///localhost:$port")
+        val creds = TlsChannelCredentials.newBuilder()
+            .keyManager(File(config[TLS.clientCert]), File(config[TLS.clientKey]))
+            .trustManager(File(config[TLS.caCert])).build()
+        channel = Grpc.newChannelBuilder(config[Account.endpoint], creds).overrideAuthority(config[Account.authority]).build()
     }
 
     afterTest {

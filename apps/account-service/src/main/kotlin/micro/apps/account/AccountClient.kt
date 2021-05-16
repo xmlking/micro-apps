@@ -2,15 +2,25 @@ package micro.apps.account
 
 import com.google.protobuf.Any
 import com.google.protobuf.StringValue
+import io.grpc.Grpc
 import io.grpc.ManagedChannel
+import io.grpc.TlsChannelCredentials
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
+import micro.apps.account.config.Account
+import micro.apps.account.config.TLS
+import micro.apps.account.config.config
 import micro.apps.proto.account.v1.AccountServiceGrpcKt.AccountServiceCoroutineStub
-import micro.apps.μservice.channelForTarget
+import mu.KotlinLogging
+import org.bouncycastle.jce.provider.BouncyCastleProvider
 import java.io.Closeable
+import java.io.File
+import java.security.Security
 import java.util.concurrent.TimeUnit
+
+private val logger = KotlinLogging.logger {}
 
 class AccountClient(private val channel: ManagedChannel) : Closeable {
     private val stub: AccountServiceCoroutineStub = AccountServiceCoroutineStub(channel)
@@ -39,9 +49,19 @@ class AccountClient(private val channel: ManagedChannel) : Closeable {
  * greets "world" otherwise.
  */
 fun main(args: Array<String>) = runBlocking {
-    val accountTarget: String = System.getenv("ACCOUNT_SERVICE_TARGET") ?: "dns:///localhost:8080"
+    // Add BCP to avoid `algid parse error, not a sequence` eror
+    Security.addProvider(BouncyCastleProvider())
 
-    val client = AccountClient(channelForTarget(accountTarget))
+    val creds = TlsChannelCredentials.newBuilder()
+        .keyManager(File(config[TLS.clientCert]), File(config[TLS.clientKey]))
+        .trustManager(File(config[TLS.caCert])).build()
+
+    val channel = Grpc.newChannelBuilder(config[Account.endpoint], creds)
+        .overrideAuthority(config[Account.authority])
+        // .executor(Dispatchers.Default.asExecutor())
+        .build()
+
+    val client = AccountClient(channel)
 
     val user = args.singleOrNull() ?: "world"
     client.get(user)
