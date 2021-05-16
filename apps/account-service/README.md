@@ -35,12 +35,17 @@ gradle :apps:account-service:test -Dkotest.tags.include=E2E
 ```
 
 ```bash
+# test API directly with TLS
+grpcurl -insecure \
+-protoset <(buf build -o -) \
+-d '{ "id":  "sumo" }' 0.0.0.0:5000 micro.apps.proto.account.v1.AccountService/Get
+
 # test API via envoy with TLS, and client cert
 grpcurl -cacert=config/certs/ca-cert.pem \
 -cert=config/certs/client-cert.pem \
 -key=config/certs/client-key.pem \
 -protoset <(buf build -o -) \
--d '{ "id": { "value": "sumo" } }' localhost:9444 micro.apps.proto.account.v1.AccountService/Get
+-d '{ "id":  "sumo" }' localhost:9444 micro.apps.proto.account.v1.AccountService/Get
 ```
 
 ### 📦 Build
