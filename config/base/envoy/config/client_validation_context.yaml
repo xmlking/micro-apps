@@ -1,0 +1,6 @@
+resources:
+  - "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.Secret
+    name: client_validation_context
+    validation_context:
+      trusted_ca:
+        filename: '/etc/certs/ca-cert.pem'

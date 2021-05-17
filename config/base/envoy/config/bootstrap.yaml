@@ -12,3 +12,10 @@ dynamic_resources:
     path: '/etc/envoy/listeners.yaml'
   cds_config:
     path: '/etc/envoy/clusters.yaml'
+
+layered_runtime:
+  layers:
+    - name: static_layer_0
+      static_layer:
+        overload:
+          global_downstream_max_connections: 50000

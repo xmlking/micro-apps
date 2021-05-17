@@ -33,16 +33,24 @@ resources:
             require_client_certificate: true # uncomment if you want client to provide cert
             common_tls_context:
               alpn_protocols: [ 'h2', 'http/1.1' ]
-              tls_certificates:
-                - certificate_chain: { filename: '/etc/certs/proxy-cert.pem' }
-                  private_key: { filename: '/etc/certs/proxy-key.pem' }
-              validation_context:
-                trusted_ca: { filename: '/etc/certs/ca-cert.pem' }
+              tls_certificate_sds_secret_configs:
+                name: proxy_cert
+                sds_config:
+                  path: '/etc/envoy/proxy_cert.yaml'
+              validation_context_sds_secret_config:
+                name: client_validation_context
+                sds_config:
+                  path: '/etc/envoy/client_validation_context.yaml'
         filters:
           - name: envoy.filters.network.http_connection_manager
             typed_config:
               '@type': type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
               stat_prefix: ingress_http
+              forward_client_cert_details: SANITIZE_SET
+              set_current_client_cert_details:
+                subject: true
+                # cert: true
+                # dns: true
               rds:
                 route_config_name: route_config_0
                 config_source: { path: '/etc/envoy/routes.yaml' }

@@ -1,0 +1,7 @@
+resources:
+  - "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.Secret
+    name: upstream_validation_context
+    validation_context:
+      trusted_ca:
+        filename: '/etc/certs/upstream-ca-cert.pem'
+      match_subject_alt_names: { exact: 'localhost' } # for prod, e.g., www.sumo.com

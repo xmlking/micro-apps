@@ -26,9 +26,10 @@ resources:
         "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
         common_tls_context:
           alpn_protocols: [ 'h2', 'http/1.1' ]
-          validation_context:
-            trusted_ca: { filename: '/etc/certs/upstream-ca-cert.pem' }
-            match_subject_alt_names: { exact: 'localhost' } # for prod, e.g., www.sumo.com
+          validation_context_sds_secret_config:
+            name: upstream_validation_context
+            sds_config:
+              path: '/etc/envoy/upstream_validation_context.yaml'
   - "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
     name: echo_service
     connect_timeout: 5s
@@ -55,9 +56,10 @@ resources:
         "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
         common_tls_context:
           alpn_protocols: [ 'h2', 'http/1.1' ]
-          validation_context:
-            trusted_ca: { filename: '/etc/certs/upstream-ca-cert.pem' }
-            match_subject_alt_names: { exact: 'localhost' } # for prod, e.g., www.sumo.com
+          validation_context_sds_secret_config:
+            name: upstream_validation_context
+            sds_config:
+              path: '/etc/envoy/upstream_validation_context.yaml'
   - "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
     name: echo_service2
     connect_timeout: 5s
