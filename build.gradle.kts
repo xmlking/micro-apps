@@ -178,6 +178,10 @@ subprojects {
             }
         }
 
+        if (path.startsWith(":libs")) {
+            group = "micro.libs" // else default. i.e., "micro.libs"
+        }
+
         // do we need this?
         configurations {
             register("bom")
