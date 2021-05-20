@@ -10,7 +10,6 @@ dependencies {
 
     // Test with JUnit4 & JUnit5
     testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit"))
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }

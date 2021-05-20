@@ -4,6 +4,7 @@ val csvVersion: String by project
 val junitVersion: String by project
 val hamcrestVersion: String by project
 val slf4jVersion: String by project
+val coroutinesVersion: String by project
 
 dependencies {
     implementation(project(":libs:core"))
@@ -20,10 +21,10 @@ dependencies {
 
     // Test with JUnit4 & JUnit5
     testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit"))
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
 }
 
