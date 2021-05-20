@@ -179,7 +179,7 @@ subprojects {
         }
 
         if (path.startsWith(":libs")) {
-            group = "micro.libs" // else default. i.e., "micro.libs"
+            group = "micro.libs" // else default. i.e., "micro.apps"
         }
 
         // do we need this?
