@@ -47,26 +47,26 @@ dependencies {
     testImplementation("io.grpc:grpc-testing:$grpcVersion")
 }
 
-tasks.run.configure {
-    // HINT: config/certs are at project root
-    workingDir = rootDir
-}
-
-tasks.test {
-    workingDir = rootDir
-}
-
 application {
     mainClass.set("micro.apps.account.AccountServerKt")
     //    applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
     applicationDefaultJvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
 }
 
-tasks.register<JavaExec>("runClient") {
-    mainClass.set("micro.apps.account.AccountClientKt")
-    classpath = sourceSets["main"].runtimeClasspath
-    workingDir = rootDir
-    jvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
+tasks {
+    register<JavaExec>("runClient") {
+        mainClass.set("micro.apps.account.AccountClientKt")
+        classpath = sourceSets["main"].runtimeClasspath
+        workingDir = rootDir
+        jvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
+    }
+    run.configure {
+        // HINT: config/certs are at project root
+        workingDir = rootDir
+    }
+    test {
+        workingDir = rootDir
+    }
 }
 
 jib {

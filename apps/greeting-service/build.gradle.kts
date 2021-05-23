@@ -73,6 +73,9 @@ tasks {
 
     quarkusDev {
         setSourceDir("$projectDir/src/main/kotlin")
+        // You can change the working directory
+        // HINT: config/certs are at project root
+        // workingDir = rootDir.absolutePath
     }
 
     buildNative {
