@@ -2,7 +2,6 @@
 
 # kotlin
 kotlin = "1.5.0"
-#kotlin = "1.5.0-RC"
 spek = "2.0.8"
 kotest = "4.4.3"
 junit = "5.7.1"
@@ -14,16 +13,17 @@ turbine = "0.4.1"
 ktlint = "0.40.0"
 mockk = "1.11.0"
 arrow = "0.10.5"
-konfig = "0.23.0"
+konfig = "1.1.2"
 mapstruct = "1.4.2.Final"
 markdown = "0.1.45"
 javafaker = "1.0.2"
+
 # gradle
-gradleTool = "7.0"
-sonarPlugin = "3.1.1"
-spotlessPlugin = "5.12.1"
-spotlessClogPlugin = "2.1.2"
-dokkaPlugin = "1.4.30"
+gradleTool = "7.0.2"
+sonarPlugin = "3.2.0"
+spotlessPlugin = "5.12.5"
+spotlessClogPlugin = "2.2.0"
+dokkaPlugin = "1.4.32"
 checkLatestPlugin = "0.38.0"
 useLatestPlugin = "0.2.16"
 axionPlugin = "1.13.2"
@@ -31,33 +31,39 @@ shadowPlugin = "7.0.0"
 jibPlugin = "3.0.0"
 loggerPlugin = "0.9.0"
 protobufPlugin = "0.8.16"
+
 # test matchers
 hamcrest = "1.3"
-restAssured = "4.3.1"
+restAssured = "4.4.0"
+
 # Jacoco
 jacoco = "0.8.7"
 # FIXME change to QualityGate to at lease 0.4
 jacocoQualityGate = "0.0"
+
 # logs
 kotlinLogging = "2.0.6"
 slf4j = "2.0.0-alpha1"
 # slf4j = "1.7.30"
+
 # quarkus
 quarkusPluginId = "io.quarkus"
-quarkusPlugin = "1.13.3.Final"
-quarkusPlatform = "1.13.3.Final"
+quarkusPlugin = "1.13.4.Final"
+quarkusPlatform = "1.13.4.Final"
 quarkusPlatformGroupId = "io.quarkus"
 quarkusPlatformArtifactId = "quarkus-universe-bom"
 # to use locally built Quarkus, use `quarkus-bom` and `999-SNAPSHOT`
 #quarkusPlatformArtifactId = "quarkus-bom"
 #quarkusPlatform = "999-SNAPSHOT"
+
 # grpc
-grpc = "1.37.0"
+grpc = "1.38.0"
 grpcKotlin = "1.1.0"
-protobuf = "3.15.8"
+protobuf = "3.17.0"
 pgv = "0.4.1"
 guava = "30.1-jre"
 sentinel = "1.8.1"
+
 # beam
 beam = "2.29.0"
 csv = "1.8"
@@ -67,11 +73,13 @@ uuid = "4.0.1"
 yaml = "2.10.3"
 # avro version
 avro = "1.9.2"
+
 # spring
-spring = "2.4.5"
-springDependencyManagement = "1.0.11.RELEASE"
+spring = "2.5.0"
+springDependencyManagementPlugin = "1.0.11.RELEASE"
+
 # google
-googlePubsub = "1.112.3"
+googlePubsub = "1.112.5"
 
 [libraries]
 guava = { module="com.google.guava:guava", version.ref="guava" }
@@ -82,6 +90,9 @@ grpc-kotlin-stub = { module="io.grpc:grpc-kotlin-stub", version.ref="grpcKotlin"
 grpc-protobuf = { module="io.grpc:grpc-protobuf", version.ref="grpc" }
 grpc-netty = { module="io.grpc:grpc-netty", version.ref="grpc" }
 protobuf-java = { module="com.google.protobuf:protobuf-java", version.ref="protobuf" }
+
+# you use this like:`implementation(libs.rest.assured)`
+rest-assured = { module="io.rest-assured:rest-assured", version.ref="restAssured" }
 
 [bundles]
 #testDependencies = ["junit-jupiter", "junit-engine"]

@@ -13,9 +13,10 @@ dependencies {
     // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
     runtimeOnly("io.grpc:grpc-netty:$grpcVersion")
     implementation("io.grpc:grpc-protobuf:$grpcVersion")
-    implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
+    // implementation("io.grpc:grpc-stub:$grpcKotlinVersion") // For Java
+    implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion") // For Kotlin
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion") // For Kotlin
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion") // For Kotlin
 
     // Protobuf - If you want to use features like protobuf JsonFormat, `protobuf-java-util` instead of `protobuf-java`
     implementation("com.google.protobuf:protobuf-java:$protobufVersion")

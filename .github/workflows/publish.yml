@@ -13,6 +13,7 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    name: Publish
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -20,14 +21,19 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Cache gradle
+      # Cache Gradle dependencies
+      - name: Setup Gradle Dependencies Cache
         uses: actions/cache@v2
         with:
           path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-      - name: Publish artifact
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
+      # Cache Gradle Wrapper
+      - name: Setup Gradle Wrapper Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+      - name: publish
         uses: eskatos/gradle-command-action@v1
         id: publish
         env:
