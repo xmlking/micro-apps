@@ -1,7 +1,7 @@
 [versions]
 
 # kotlin
-kotlin = "1.5.0"
+kotlin = "1.5.10"
 spek = "2.0.8"
 kotest = "4.4.3"
 junit = "5.7.1"
@@ -59,7 +59,7 @@ quarkusPlatformArtifactId = "quarkus-universe-bom"
 # grpc
 grpc = "1.38.0"
 grpcKotlin = "1.1.0"
-protobuf = "3.17.0"
+protobuf = "3.17.1"
 pgv = "0.4.1"
 guava = "30.1-jre"
 sentinel = "1.8.1"
@@ -72,7 +72,7 @@ uuid = "4.0.1"
 # yaml version
 yaml = "2.10.3"
 # avro version
-avro = "1.9.2"
+avro = "1.10.2"
 
 # spring
 spring = "2.5.0"
