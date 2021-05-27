@@ -163,6 +163,14 @@ http :8080/api/v1/account/id/abc123
 http :8080/api/v1/account/user-info 'Authorization:Bearer GOOGLE.TOKEN'
 ```
 
+```bash
+# no TLS
+grpcurl -plaintext \
+-protoset <(buf build -o -) \
+-d '{ "message":  "sumo" }' 0.0.0.0:9000 micro.apps.proto.echo.v1.EchoService/Echo
+```
+
+
 ### Unit tests
 
 ```bash

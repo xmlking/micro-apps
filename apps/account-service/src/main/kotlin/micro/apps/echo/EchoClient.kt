@@ -44,7 +44,7 @@ fun main(args: Array<String>) = runBlocking {
     val port = 8080
 
     val client = EchoClient(
-        ManagedChannelBuilder.forAddress("dns:///localhost", port)
+        ManagedChannelBuilder.forAddress("127.0.0.1", port)
             .usePlaintext()
             .executor(Dispatchers.Default.asExecutor())
             .build()

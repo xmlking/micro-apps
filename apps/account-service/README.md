@@ -48,6 +48,13 @@ grpcurl -cacert=config/certs/ca-cert.pem \
 -d '{ "id":  "sumo" }' localhost:9444 micro.apps.proto.account.v1.AccountService/Get
 ```
 
+```bash
+# no TLS
+grpcurl -plaintext \
+-protoset <(buf build -o -) \
+-d '{ "message":  "sumo" }' 0.0.0.0:8080 micro.apps.proto.echo.v1.EchoService/Echo
+```
+
 ### 📦 Build
 ```bash
 # clean

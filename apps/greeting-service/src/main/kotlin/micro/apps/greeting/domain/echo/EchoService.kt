@@ -10,18 +10,20 @@ import micro.apps.proto.echo.v1.EchoStreamRequest
 import micro.apps.proto.echo.v1.EchoStreamResponse
 import javax.inject.Singleton
 
-// import io.grpc.stub.StreamObserver
-// import micro.apps.proto.echo.v1.EchoServiceGrpc
+/*
+import io.grpc.stub.StreamObserver
+import micro.apps.proto.echo.v1.EchoServiceGrpc
 
-// @Singleton
-// class EchoService0 : EchoServiceGrpc.EchoServiceImplBase() {
-//    override fun echo(request: EchoRequest, responseObserver: StreamObserver<EchoResponse?>) {
-//        val name: String = request.message
-//        val message = "Hello $name"
-//        responseObserver.onNext(EchoResponse.newBuilder().setMessage(message).build())
-//        responseObserver.onCompleted()
-//    }
-// }
+@Singleton
+class EchoService0 : EchoServiceGrpc.EchoServiceImplBase() {
+    override fun echo(request: EchoRequest, responseObserver: StreamObserver<EchoResponse?>) {
+        val name: String = request.message
+        val message = "Hello $name"
+        responseObserver.onNext(EchoResponse.newBuilder().setMessage(message).build())
+        responseObserver.onCompleted()
+    }
+}
+*/
 
 @Singleton
 class EchoService : EchoServiceGrpcKt.EchoServiceCoroutineImplBase() {

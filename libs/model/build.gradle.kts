@@ -4,6 +4,7 @@ plugins {
     `java-test-fixtures`
 }
 
+val coroutinesVersion: String by project
 val serializationVersion: String by project
 val avro4kVersion: String by project
 val kamlVersion: String by project
@@ -16,5 +17,5 @@ dependencies {
     // implementation("com.charleskorn.kaml:kaml:$kamlVersion") // YAML serialization
 
     // Testing
-    testFixturesImplementation(kotlin("stdlib-jdk8"))
+    testImplementation(testFixtures(project(":libs:test")))
 }

@@ -30,6 +30,4 @@ dependencies {
 
     // Test
     testImplementation(testFixtures(project(":libs:test")))
-    // testFixturesImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
-    // testFixturesImplementation(kotlin("stdlib-jdk8"))
 }

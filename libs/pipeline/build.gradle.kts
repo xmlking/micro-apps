@@ -3,6 +3,7 @@ val junitVersion: String by project
 val hamcrestVersion: String by project
 val slf4jVersion: String by project
 val googlePubsubVersion: String by project
+val coroutinesVersion: String by project
 
 plugins {
     `java-test-fixtures`
@@ -23,8 +24,7 @@ dependencies {
     }
     testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testImplementation(testFixtures(project(":libs:test")))
-    // testFixturesImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
-    testFixturesImplementation(kotlin("stdlib-jdk8"))
+    // testFixturesImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     testFixturesImplementation("com.google.cloud:google-cloud-pubsub:$googlePubsubVersion")
 }
 

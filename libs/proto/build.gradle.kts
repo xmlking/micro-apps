@@ -35,9 +35,9 @@ dependencies {
     implementation("io.envoyproxy.protoc-gen-validate:pgv-java-stub:$pgvVersion")
 
     // Testing
+    testImplementation(testFixtures(project(":libs:test")))
     // grpc testing TODO: https://github.com/grpc/grpc-java/issues/5331
     // testImplementation("io.grpc:grpc-testing:$grpcVersion")
-    testFixturesImplementation(kotlin("stdlib-jdk8"))
     testFixturesImplementation("com.google.protobuf:protobuf-java:$protobufVersion")
 }
 
