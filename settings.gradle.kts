@@ -23,8 +23,9 @@ pluginManagement {
     }
 
     enableFeaturePreview("VERSION_CATALOGS")
+    // FIXME: https://github.com/gradle/gradle/issues/16815
+    enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
     // enableFeaturePreview("GRADLE_METADATA")
-    // enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS") // TODO
 
     plugins {
         val sonarPluginVersion: String by settings
@@ -37,12 +38,12 @@ pluginManagement {
         val shadowPluginVersion: String by settings
         val jibPluginVersion: String by settings
         val loggerPluginVersion: String by settings
-        val quarkusPluginId: String by settings
         val quarkusPluginVersion: String by settings
         val kotlinVersion: String by settings
         val protobufPluginVersion: String by settings
         val springVersion: String by settings
         val springDependencyManagementPluginVersion: String by settings
+        val graalvmPluginVersion: String by settings
 
         id("org.sonarqube") version sonarPluginVersion
         id("com.diffplug.spotless") version spotlessPluginVersion
@@ -59,10 +60,11 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version jibPluginVersion
         id("dev.jacomet.logging-capabilities") version loggerPluginVersion
         id("com.google.protobuf") version protobufPluginVersion apply false
-        id(quarkusPluginId) version quarkusPluginVersion apply false
+        id("io.quarkus") version quarkusPluginVersion apply false
         id("org.springframework.boot") version springVersion apply false
         id("io.spring.dependency-management") version springDependencyManagementPluginVersion apply false
         kotlin("plugin.spring") version kotlinVersion apply false
+        id("org.graalvm.buildtools.native") version graalvmPluginVersion apply false
     }
 }
 
@@ -82,6 +84,7 @@ include(
     ":libs:model",
     ":libs:proto",
     ":libs:test",
-    ":libs:μservice",
+//    ":libs:μservice",
+    ":libs:mservice",
     ":libs:pipeline"
 )

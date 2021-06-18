@@ -3,15 +3,6 @@ plugins {
     kotlin("plugin.allopen")
     id("io.quarkus")
 }
-val quarkusPlatformGroupId: String by project
-val quarkusPlatformVersion: String by project
-val quarkusPlatformArtifactId: String by project
-val restAssuredVersion: String by project
-val slf4jVersion: String by project
-val grpcVersion: String by project
-val grpcKotlinVersion: String by project
-val coroutinesVersion: String by project
-val mapstructVersion: String by project
 
 dependencies {
     // TODO
@@ -23,35 +14,31 @@ dependencies {
     implementation(project(":libs:proto"))
 
     // quarkus
-    implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
-    implementation("io.quarkus:quarkus-kotlin")
-    implementation("io.quarkus:quarkus-arc")
-    implementation("io.quarkus:quarkus-config-yaml")
-    // implementation("io.quarkus:quarkus-logging-json")
+    implementation(enforcedPlatform(libs.quarkus.bom.get()))
+    implementation(libs.bundles.quarkus.core)
+
+    // https://smallrye.io/smallrye-mutiny/guides/kotlin
+    implementation(libs.quarkus.mutiny.kotlin)
     // rest
-    implementation("io.quarkus:quarkus-resteasy")
-    implementation("io.quarkus:quarkus-resteasy-jsonb")
+    implementation(libs.bundles.quarkus.resteasy)
     // mapper
     // FIXME: https://github.com/quarkusio/quarkus/issues/14012
-    implementation("org.mapstruct:mapstruct:$mapstructVersion")
-    kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    implementation(libs.mapstruct.core)
+    kapt(libs.mapstruct.processor)
     // security
-    implementation("io.quarkus:quarkus-oidc")
+    implementation(libs.quarkus.oidc)
+//    implementation("io.quarkus:quarkus-oidc")
     // grpc
-    implementation("io.quarkus:quarkus-grpc")
-    implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
+    implementation(libs.quarkus.grpc)
+    implementation(libs.grpc.kotlin.stub)
+    implementation(libs.bundles.kotlinx.coroutines)
     // tooling
-    implementation("io.quarkus:quarkus-smallrye-health")
-    implementation("io.quarkus:quarkus-smallrye-metrics")
-    implementation("io.quarkus:quarkus-smallrye-openapi")
+    implementation(libs.bundles.quarkus.tools)
     // deployment
-    implementation("io.quarkus:quarkus-container-image-jib")
-    implementation("io.quarkus:quarkus-kubernetes")
+    implementation(libs.bundles.quarkus.deployment)
     // testing
-    testImplementation("io.quarkus:quarkus-junit5")
-    testImplementation("io.rest-assured:kotlin-extensions")
+    testImplementation(libs.quarkus.junit5.test)
+    testImplementation(libs.rest.assured.kotlin.test)
     testImplementation(testFixtures(project(":libs:proto")))
 }
 

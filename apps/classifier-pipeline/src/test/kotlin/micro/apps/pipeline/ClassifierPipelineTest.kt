@@ -40,7 +40,7 @@ class ClassifierPipelineTest : Serializable {
     @Rule
     @Transient
     @JvmField
-    val pipeline = TestPipeline.create()
+    val pipeline = TestPipeline.create().enableAbandonedNodeEnforcement(false)
 
     @BeforeTest
     @Throws(Exception::class)

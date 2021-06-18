@@ -12,17 +12,17 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
 
-val gradleToolVersion: String by project
-val kotlinVersion: String by project
-val jacocoVersion: String by project
 val jacocoQualityGate: String by project
-val gcloudProject: String by project
 val baseDockerImage: String by project
-val ktlintVersion: String by project
-val mockkVersion: String by project
-val slf4jVersion: String by project
-val kotlinLoggingVersion: String by project
-val kotestVersion: String by project
+
+val gradleToolVersion = libs.versions.gradleTool.get()
+val kotlinVersion = libs.versions.kotlin.get()
+val jacocoVersion = libs.versions.jacoco.get()
+val ktlintVersion = libs.versions.ktlint.get()
+val mockkVersion = libs.versions.mockk.get()
+val slf4jVersion = libs.versions.slf4j.get()
+val kotlinLoggingVersion = libs.versions.kotlinLogging.get()
+val kotestVersion = libs.versions.kotest.get()
 
 val excludedProjects = setOf("apps", "libs")
 
@@ -146,6 +146,7 @@ allprojects {
         mavenCentral()
         maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") } // TODO: remove
         maven { url = uri("https://repo.spring.io/milestone") }
+        maven { url = uri("https://packages.confluent.io/maven/") }
     }
 }
 
@@ -399,10 +400,12 @@ subprojects {
                         jvmFlags = listOf("-Djava.security.egd=file:/dev/./urandom", "-Xms512m", "-server")
                         creationTime = "USE_CURRENT_TIMESTAMP"
                         ports = listOf("8080", "8443")
-                        labels = mapOf(
-                            "version" to "${project.version}",
-                            "name" to project.name,
-                            "group" to "${project.group}"
+                        labels.putAll(
+                            mapOf(
+                                "version" to "${project.version}",
+                                "name" to project.name,
+                                "group" to "${project.group}"
+                            )
                         )
                         format = ImageFormat.OCI
                     }

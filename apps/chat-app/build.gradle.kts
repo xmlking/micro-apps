@@ -4,36 +4,36 @@ plugins {
     kotlin("plugin.spring")
 }
 
-val slf4jVersion: String by project
-val turbineVersion: String by project
-val markdownVersion: String by project
-val javafakerVersion: String by project
+val junitVersion = libs.versions.junit.get()
+val slf4jVersion = libs.versions.slf4j.get()
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    implementation("org.springframework.boot:spring-boot-starter-rsocket")
-    implementation("io.r2dbc:r2dbc-h2")
+    implementation(libs.spring.boot.starter.actuator)
+    implementation(libs.spring.boot.starter.thymeleaf)
+    implementation(libs.spring.boot.starter.webflux)
+    implementation(libs.spring.boot.starter.data.r2dbc)
+    implementation(libs.spring.boot.starter.rsocket)
+
+    implementation(libs.r2dbc.h2)
     // FIXME https://docs.uptrace.dev/guide/java.html#introduction
-    implementation("org.yaml:snakeyaml:1.28")
+    implementation(libs.snakeyaml)
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.github.javafaker:javafaker:$javafakerVersion")
+    implementation(libs.jackson.module.kotlin)
+    implementation(libs.javafaker)
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation(libs.kotlin.reflect)
+    implementation(libs.kotlin.stdlib.jdk8)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("app.cash.turbine:turbine:$turbineVersion")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.reactive)
+    implementation(libs.kotlinx.coroutines.reactor)
 
-    runtimeOnly("com.h2database:h2")
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.turbine.test)
 
-    implementation("org.jetbrains:markdown:$markdownVersion")
+    runtimeOnly(libs.h2)
+
+    implementation(libs.markdown)
 }
 
 loggingCapabilities {

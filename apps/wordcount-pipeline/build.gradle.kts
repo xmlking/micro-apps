@@ -1,22 +1,14 @@
-val kotlinVersion: String by project
-val beamVersion: String by project
-val csvVersion: String by project
-val junitVersion: String by project
-val hamcrestVersion: String by project
-val slf4jVersion: String by project
-val coroutinesVersion: String by project
+val junitVersion = libs.versions.junit.get()
+val slf4jVersion = libs.versions.slf4j.get()
 
 dependencies {
     implementation(project(":libs:core"))
     implementation(project(":libs:kbeam"))
 
     // Use Apache Beam
-    implementation("org.apache.beam:beam-sdks-java-core:$beamVersion")
-    implementation("org.apache.beam:beam-runners-direct-java:$beamVersion")
-    implementation("org.apache.beam:beam-runners-google-cloud-dataflow-java:$beamVersion")
-    implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
-    // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion")
-    // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
+    implementation(libs.bundles.beam)
+    // implementation(libs.beam.sdks.java.extensions.kryo)
+    // implementation(libs.beam.sdks.java.extensions.euphoria)
     api(libs.guava) // Force `-jre` version instead of `-android`
 
     // Test with JUnit4 & JUnit5
@@ -24,8 +16,8 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
-    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.hamcrest.all.test)
 }
 
 application {

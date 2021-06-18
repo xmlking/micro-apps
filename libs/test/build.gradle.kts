@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    testFixturesImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
+    testFixturesImplementation(libs.kotest.runner.junit5.jvm)
 }
 
 sonarqube {

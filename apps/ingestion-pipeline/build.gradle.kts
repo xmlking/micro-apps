@@ -2,19 +2,9 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-val kotlinVersion: String by project
-val beamVersion: String by project
-val csvVersion: String by project
-val junitVersion: String by project
-val hamcrestVersion: String by project
-val serializationVersion: String by project
-val avro4kVersion: String by project
-val konfigVersion: String by project
-val grpcKotlinVersion: String by project
-val coroutinesVersion: String by project
-val slf4jVersion: String by project
-val grpcVersion: String by project
-val googlePubsubVersion: String by project
+val grpcVersion = libs.versions.grpc.get()
+val junitVersion = libs.versions.junit.get()
+val slf4jVersion = libs.versions.slf4j.get()
 
 configurations.all {
     resolutionStrategy.eachDependency {
@@ -32,26 +22,22 @@ dependencies {
     implementation(project(":libs:pipeline"))
 
     // Use Apache Beam
-    implementation("org.apache.beam:beam-sdks-java-core:$beamVersion")
-    implementation("org.apache.beam:beam-runners-direct-java:$beamVersion")
-    implementation("org.apache.beam:beam-runners-google-cloud-dataflow-java:$beamVersion")
-    implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
+    implementation(libs.bundles.beam)
 
     // Use Kotlin Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion") // JSON serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$serializationVersion") // ProtoBuf serialization
-    implementation("com.sksamuel.avro4k:avro4k-core:$avro4kVersion") // Avro serialization
-    // implementation("org.apache.beam:beam-sdks-java-extensions-kryo:$beamVersion") // kryo serialization
-    // implementation("org.apache.beam:beam-sdks-java-extensions-euphoria:$beamVersion")
+    implementation(libs.bundles.kotlinx.serialization) // JSON, ProtoBuf, Avro serialization
+    // implementation(libs.beam.sdks.java.extensions.kryo) // kryo serialization
+    // implementation(libs.beam.sdks.java.extensions.euphoria)
 
     // Kotlin Config
-    implementation("com.uchuhimo:konf-core:$konfigVersion")
-    implementation("com.uchuhimo:konf-yaml:$konfigVersion")
+    implementation(libs.bundles.konf)
 
     // gRPC deps: for calling API
-    implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
+    implementation(libs.grpc.kotlin.stub)
+    // implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
+    implementation(libs.bundles.kotlinx.coroutines)
+    // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
     api(libs.guava) // Force `-jre` version instead of `-android`
 
     // Test with JUnit4 & JUnit5
@@ -59,8 +45,8 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }
-    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
-    testImplementation("com.google.cloud:google-cloud-pubsub:$googlePubsubVersion")
+    testImplementation(libs.hamcrest.all.test)
+    testImplementation(libs.google.cloud.pubsub)
     testImplementation(testFixtures(project(":libs:test")))
     testImplementation(testFixtures(project(":libs:model")))
     testImplementation(testFixtures(project(":libs:proto")))

@@ -18,7 +18,7 @@ class WordCountPipelineTest : Serializable {
     @Rule
     @Transient
     @JvmField
-    val pipeline = TestPipeline.create()
+    val pipeline = TestPipeline.create().enableAbandonedNodeEnforcement(false)
 
     @Test
     fun ShouldProcessWordCountByGroupByKey() {

@@ -35,7 +35,7 @@ class DSLPipelineTest : Serializable {
     @Rule
     @Transient
     @JvmField
-    val pipeline = TestPipeline.create()
+    val pipeline = TestPipeline.create().enableAbandonedNodeEnforcement(false)
 
     @Test
     fun runTest() {

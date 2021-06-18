@@ -1,9 +1,5 @@
-val beamVersion: String by project
-val junitVersion: String by project
-val hamcrestVersion: String by project
-val slf4jVersion: String by project
-val googlePubsubVersion: String by project
-val coroutinesVersion: String by project
+val junitVersion = libs.versions.junit.get()
+val slf4jVersion = libs.versions.slf4j.get()
 
 plugins {
     `java-test-fixtures`
@@ -11,10 +7,7 @@ plugins {
 
 dependencies {
     // Use Apache Beam
-    implementation("org.apache.beam:beam-sdks-java-core:$beamVersion")
-    implementation("org.apache.beam:beam-runners-direct-java:$beamVersion")
-    implementation("org.apache.beam:beam-runners-google-cloud-dataflow-java:$beamVersion")
-    implementation("org.apache.beam:beam-sdks-java-io-google-cloud-platform:$beamVersion")
+    implementation(libs.bundles.beam)
 
     // Test with JUnit4 & JUnit5
     testImplementation(kotlin("test"))
@@ -22,10 +15,10 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junitVersion") {
         because("allows JUnit 4 tests run along with JUnit 5")
     }
-    testImplementation("org.hamcrest:hamcrest-all:$hamcrestVersion")
+    testImplementation(libs.hamcrest.all.test)
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(testFixtures(project(":libs:test")))
-    // testFixturesImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
-    testFixturesImplementation("com.google.cloud:google-cloud-pubsub:$googlePubsubVersion")
+    testFixturesImplementation(libs.google.cloud.pubsub)
 }
 
 loggingCapabilities {

@@ -1,42 +1,36 @@
-val coroutinesVersion: String by project
-val grpcVersion: String by project
-val grpcKotlinVersion: String by project
-val protobufVersion: String by project
-val konfigVersion: String by project
-val arrowVersion: String by project
-val sentinelVersion: String by project
+plugins {
+    id("org.graalvm.buildtools.native")
+}
 
 dependencies {
     implementation(project(":libs:proto"))
-    implementation(project(":libs:μservice"))
+    // implementation(project(":libs:μservice"))
+    implementation(project(":libs:mservice"))
 
     // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
-    runtimeOnly("io.grpc:grpc-netty:$grpcVersion")
-    implementation("io.grpc:grpc-protobuf:$grpcVersion")
-    implementation("io.grpc:grpc-services:$grpcVersion") // Optional. includes grpc-protobuf
-    implementation("io.grpc:grpc-xds:$grpcVersion") // Optional. includes grpc-services, grpc-auth,  grpc-alts
-    implementation("io.grpc:grpc-kotlin-stub:$grpcKotlinVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
+    runtimeOnly(libs.grpc.netty)
+    implementation(libs.grpc.protobuf)
+    implementation(libs.grpc.kotlin.stub)
+    implementation(libs.grpc.services) // Optional. includes grpc-protobuf
+    implementation(libs.grpc.xds) // Optional. includes grpc-services, grpc-auth,  grpc-alts
+    implementation(libs.bundles.kotlinx.coroutines)
 
     // Protobuf - If you want to use features like protobuf JsonFormat, `protobuf-java-util` instead of `protobuf-java`
-    implementation("com.google.protobuf:protobuf-java:$protobufVersion")
-
+    implementation(libs.protobuf.java)
     // Google
     implementation(libs.guava)
 
     // Kotlin Config
-    implementation("com.uchuhimo:konf-core:$konfigVersion")
-    implementation("com.uchuhimo:konf-yaml:$konfigVersion")
+    implementation(libs.bundles.konf)
 
     // Resilience frameworks
-    implementation("com.alibaba.csp:sentinel-grpc-adapter:$sentinelVersion")
-    // implementation("com.netflix.concurrency-limits:concurrency-limits-grpc:$netflixConcurrencyVersion")
+    implementation(libs.sentinel.grpc.adapter)
+    // implementation(libs.concurrency.limits.grpc)
 
     // Arrow, TODO: planing to use n the future
-    // implementation("io.arrow-kt:arrow-core:$arrowVersion")
-    // implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
-    // implementation("io.arrow-kt:arrow-fx:$arrowVersion")
+    // implementation(libs.arrow.core)
+    // implementation(libs.arrow.syntax)
+    // implementation(libs.arrow.fx)
 
     // Test
     // testImplementation("io.kotest.extensions:kotest-extensions-koin:{version}")
@@ -44,7 +38,8 @@ dependencies {
     testImplementation(testFixtures(project(":libs:model")))
     testImplementation(testFixtures(project(":libs:proto")))
     // grpc testing TODO: https://github.com/grpc/grpc-java/issues/5331
-    testImplementation("io.grpc:grpc-testing:$grpcVersion")
+    testImplementation(libs.grpc.test)
+    // testImplementation("io.grpc:grpc-testing:$grpcVersion")
 }
 
 application {
@@ -66,6 +61,21 @@ tasks {
     }
     test {
         workingDir = rootDir
+    }
+
+    nativeBuild {
+        imageName.set("application")
+        mainClass.set("micro.apps.account.AccountClientKt")
+        buildArgs("--no-server")
+        debug.set(false)
+        verbose.set(false)
+        fallback.set(false)
+        jvmArgs("flag")
+        runtimeArgs("--help")
+    }
+
+    nativeTest {
+        verbose.set(true)
     }
 }
 

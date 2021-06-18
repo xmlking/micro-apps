@@ -2,23 +2,18 @@ plugins {
     kotlin("plugin.allopen")
     id("io.quarkus")
 }
-val quarkusPlatformGroupId: String by project
-val quarkusPlatformArtifactId: String by project
-val quarkusPlatformVersion: String by project
 
 dependencies {
-    implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
-    implementation("io.quarkus:quarkus-smallrye-graphql")
-    implementation("io.quarkus:quarkus-arc")
-    implementation("io.quarkus:quarkus-resteasy")
+    implementation(enforcedPlatform(libs.quarkus.bom.get()))
+    implementation(libs.quarkus.smallrye.graphql)
+    implementation(libs.quarkus.arc)
+    implementation(libs.quarkus.resteasy.core)
 
-    implementation("io.quarkus:quarkus-hibernate-orm")
-    implementation("io.quarkus:quarkus-jdbc-h2")
-    implementation("io.quarkus:quarkus-hibernate-validator")
+    implementation(libs.bundles.quarkus.hibernate)
 
-    testImplementation("io.quarkus:quarkus-junit5")
-    // testImplementation("io.quarkus:quarkus-jacoco")
-    testImplementation("io.rest-assured:rest-assured")
+    testImplementation(libs.quarkus.junit5.test)
+    // testImplementation(libs.quarkus.jacoco.test)
+    testImplementation(libs.rest.assured.test)
 }
 
 quarkus {
