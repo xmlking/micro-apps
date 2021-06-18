@@ -22,7 +22,7 @@ javafaker = "1.0.2"
 # gradle
 gradleTool = "7.1"
 sonarPlugin = "3.3"
-spotlessPlugin = "5.13.0"
+spotlessPlugin = "5.14.0"
 spotlessClogPlugin = "2.2.0"
 dokkaPlugin = "1.4.32"
 checkLatestPlugin = "0.39.0"
@@ -44,7 +44,7 @@ jacoco = "0.8.7"
 
 # logs
 kotlinLogging = "2.0.8"
-slf4j = "2.0.0-alpha1"
+slf4j = { require = "2.0.0-alpha1" }
 # slf4j = "1.7.30"
 
 # quarkus
@@ -65,7 +65,7 @@ quarkusPlatformArtifactId = "quarkus-bom"
 #quarkusPlatformVersion = "999-SNAPSHOT"
 
 # grpc
-grpc = "1.38.0"
+grpc = "1.38.1"
 grpcKotlin = "1.1.0"
 protobuf = "3.17.3"
 pgv = "0.4.1"
