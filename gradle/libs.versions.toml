@@ -143,6 +143,7 @@ quarkus-bom = { module = "io.quarkus:quarkus-bom", version.ref = "quarkusPlatfor
 quarkus-kotlin = { module = "io.quarkus:quarkus-kotlin" }
 quarkus-arc = { module = "io.quarkus:quarkus-arc" }
 quarkus-config-yaml = { module = "io.quarkus:quarkus-config-yaml" }
+quarkus-logging-slf4j = { module = "org.jboss.slf4j:slf4j-jboss-logmanager" }
 quarkus-logging-json = { module = "io.quarkus:quarkus-logging-json" }
 
 quarkus-resteasy-core = { module = "io.quarkus:quarkus-resteasy" }
@@ -256,7 +257,8 @@ quarkus-core = [
     "quarkus-kotlin",
     "quarkus-arc",
     "quarkus-config-yaml",
-    #    "quarkus-logging-json"
+    "quarkus-logging-slf4j",
+    "quarkus-logging-json"
 ]
 
 quarkus-resteasy = [

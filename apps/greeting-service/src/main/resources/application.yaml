@@ -89,6 +89,8 @@ greeting:
       access-log:
         enabled: true
     log:
+      console:
+        json: false
       category:
         "io.grpc":
           min-level: INFO
@@ -112,6 +114,9 @@ greeting:
 ---
 "%test":
   quarkus:
-   oidc:
+    log:
+      console:
+        json: false
+  oidc:
     enabled: false
-   http.auth.permission.authenticated.policy: permit
+    http.auth.permission.authenticated.policy: permit

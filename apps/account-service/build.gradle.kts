@@ -65,7 +65,7 @@ tasks {
 
     nativeBuild {
         imageName.set("application")
-        mainClass.set("micro.apps.account.AccountClientKt")
+        mainClass.set("micro.apps.account.AccountServerKt")
         buildArgs("--no-server")
         debug.set(false)
         verbose.set(false)

@@ -7,6 +7,7 @@ import org.eclipse.microprofile.graphql.GraphQLApi
 import org.eclipse.microprofile.graphql.Mutation
 import org.eclipse.microprofile.graphql.Query
 import org.eclipse.microprofile.graphql.Source
+import org.jboss.logging.Logger
 import java.util.Random
 import java.util.stream.Collectors
 import javax.enterprise.event.Observes
@@ -18,6 +19,10 @@ import javax.validation.constraints.Min
 class PersonResource {
     @Inject
     @field: Default
+    lateinit var log: Logger
+
+    @Inject
+    @field: Default
     lateinit var scoreService: ScoreService
 
     @Inject
@@ -27,6 +32,7 @@ class PersonResource {
     @Query // @Timed(name = "personTimer", description = "How long does it take to get a Person.", unit = MetricUnits.NANOSECONDS)
     // @Counted(name = "personCount", description = "How many times did we ask for Person.")
     fun getPerson(id: Long): Person {
+        log.error(id)
         return personService.getPerson(id)
     }
 

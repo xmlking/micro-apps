@@ -25,6 +25,9 @@ val kotlinLoggingVersion = libs.versions.kotlinLogging.get()
 val kotestVersion = libs.versions.kotest.get()
 
 val excludedProjects = setOf("apps", "libs")
+val springProjects = setOf("chat-app")
+val quarkusProjects = setOf("greeting-service", "person-graphql")
+val pipelineProjects = setOf("classifier-pipeline", "ingestion-pipeline", "wordcount-pipeline")
 
 plugins {
     base
@@ -165,15 +168,16 @@ subprojects {
             plugin("org.jetbrains.dokka")
             plugin("com.diffplug.spotless")
             // plugin("dev.jacomet.logging-capabilities")
-            if (name != "greeting-service") {
+            if (name !in quarkusProjects) {
                 plugin("dev.jacomet.logging-capabilities")
             }
-            // exclude for root `apps` and `greeting-service` projects
-            if (path.startsWith(":apps") && (name != "greeting-service")) {
+            // apply for apps excluding `quarkusProjects` projects
+            if (path.startsWith(":apps") && (name !in quarkusProjects + springProjects)) {
                 plugin("application")
                 plugin("com.github.johnrengelman.shadow")
                 plugin("com.google.cloud.tools.jib")
             }
+            // apply for libs
             if (path.startsWith(":libs")) {
                 plugin("java-library")
             }
@@ -290,8 +294,8 @@ subprojects {
 
             jacocoTestReport {
                 reports {
-                    html.isEnabled = true
-                    xml.isEnabled = true
+                    html.required.set(true)
+                    xml.required.set(true)
                 }
             }
 

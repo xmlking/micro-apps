@@ -9,13 +9,13 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 1. A working container runtime (Docker, podman)
 1. JDK 11 installed with JAVA_HOME configured appropriately
     ```bash
-    sdk install java 11.0.10.hs-adpt
+    sdk install java 11.0.11.hs-adpt
     export JAVA_HOME=$HOME/.sdkman/candidates/java/current
     ```
-1. GraalVM version 21.0.0.r11-grl installed and configured appropriately
+1. GraalVM version 21.1.0.r11-grl installed and configured appropriately
     ```bash
-    sdk install java  21.0.0.r11-grl
-    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/21.0.0.r11-grl
+    sdk install java  21.1.0.r11-grl
+    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/21.1.0.r11-grl
     ```
 1. Install the native-image tool using gu install:
     ```bash
@@ -82,6 +82,7 @@ You can then execute your native executable with: `./apps/greeting-service/build
 Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
 ```shell script
 gradle :apps:greeting-service:build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
+gradle :apps:greeting-service:build -Dquarkus.package.type=native -Dquarkus.native.container-build=true -Dquarkus.native.native-image-xmx=8g
 ```
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling.

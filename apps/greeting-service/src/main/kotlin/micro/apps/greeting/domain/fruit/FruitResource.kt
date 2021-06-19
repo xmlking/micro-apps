@@ -3,8 +3,11 @@ package micro.apps.greeting.domain.fruit
 import micro.apps.model.Fruit
 import org.eclipse.microprofile.openapi.annotations.tags.Tag
 import org.eclipse.microprofile.openapi.annotations.tags.Tags
+import org.jboss.logging.Logger
 import java.util.Collections
 import java.util.function.Predicate
+import javax.enterprise.inject.Default
+import javax.inject.Inject
 import javax.ws.rs.Consumes
 import javax.ws.rs.DELETE
 import javax.ws.rs.GET
@@ -21,6 +24,10 @@ import kotlin.collections.LinkedHashMap
     Tag(name = "FruitResource", description = "Fruit API")
 )
 class FruitResource {
+    @Inject
+    @field: Default
+    lateinit var log: Logger
+
     private val fruits: MutableSet<Fruit> =
         Collections.newSetFromMap(Collections.synchronizedMap(LinkedHashMap<Fruit, Boolean>()))
 
@@ -31,6 +38,7 @@ class FruitResource {
 
     @GET
     fun list(): Set<Fruit> {
+        log.error("xxx")
         return fruits
     }
 

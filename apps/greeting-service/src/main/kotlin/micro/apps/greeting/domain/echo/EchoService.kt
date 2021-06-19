@@ -9,6 +9,9 @@ import micro.apps.proto.echo.v1.EchoResponse
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
 import micro.apps.proto.echo.v1.EchoStreamRequest
 import micro.apps.proto.echo.v1.EchoStreamResponse
+import mu.KotlinLogging
+
+private val logger = KotlinLogging.logger {}
 
 /*
 import io.grpc.stub.StreamObserver
@@ -33,6 +36,8 @@ class EchoService : EchoServiceGrpcKt.EchoServiceCoroutineImplBase() {
 
     override fun echoStream(request: EchoStreamRequest): Flow<EchoStreamResponse> = flow {
         while (true) {
+            logger.error { "xxx" }
+            // logger.atError().addKeyValue("hh", "ffff").log("xxx")
             delay(1000)
             emit(EchoStreamResponse.newBuilder().setMessage("hello, ${request.message}").build())
         }
