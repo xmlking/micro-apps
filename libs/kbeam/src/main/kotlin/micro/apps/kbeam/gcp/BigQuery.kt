@@ -4,7 +4,6 @@ import com.google.api.services.bigquery.model.TableReference
 import com.google.api.services.bigquery.model.TableRow
 import com.google.api.services.bigquery.model.TableSchema
 import com.google.api.services.bigquery.model.TimePartitioning
-import org.apache.beam.sdk.coders.Coder
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO
 import org.apache.beam.sdk.io.gcp.bigquery.TableRowJsonCoder
 import org.apache.beam.sdk.io.gcp.bigquery.WriteResult
@@ -65,10 +64,10 @@ fun PCollection<TableRow>.toBigqueryTable(
  * @return The parsed [TableRow] object.
  */
 fun convertJsonToTableRow(json: String): TableRow? {
-    var row: TableRow? = null
+    var row: TableRow?
     try {
         ByteArrayInputStream(json.toByteArray(StandardCharsets.UTF_8)).use { inputStream ->
-            row = TableRowJsonCoder.of().decode(inputStream, Coder.Context.OUTER)
+            row = TableRowJsonCoder.of().decode(inputStream)
         }
     } catch (e: IOException) {
         throw RuntimeException("Failed to serialize json to table row: $json", e)
