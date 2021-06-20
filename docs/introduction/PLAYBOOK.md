@@ -92,8 +92,8 @@ gradle init --type kotlin-application --dsl kotlin
 TODO
 ```bash
 cd apps/greeting-api
-mn create-controller micro.apps.greeting.controllers.greeting
-mn create-bean  micro.apps.greeting.services.greetingService
+mn create-controller micro.apps.service.controllers.greeting
+mn create-bean  micro.apps.service.services.greetingService
 mn create-client greetingClient
 ```
 

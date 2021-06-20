@@ -11,20 +11,23 @@ Showcase backpressure handling techniques:
 
 ### 🚀 Run
 
- 
-
 ```bash
 # server
 gradle :apps:account-service:run
 # proxy
 docker compose up envoy
 # client -> proxy -> server
-gradle :apps:account-service:runClient
+gradle :apps:account-service:runAccountClient
 # client -> server
 CERTS_CACERT=config/certs/upstream-ca-cert.pem \
 ACCOUNT_ENDPOINT=dns:///localhost:5000 \
 ACCOUNT_AUTHORITY=localhost \
-gradle :apps:account-service:runClient
+gradle :apps:account-service:runAccountClient
+
+CERTS_CACERT=config/certs/upstream-ca-cert.pem \
+ACCOUNT_ENDPOINT=dns:///localhost:5000 \
+ACCOUNT_AUTHORITY=localhost \
+gradle :apps:account-service:runEchoClient
 ```
 
 ### 🔭 Test
@@ -40,19 +43,29 @@ grpcurl -insecure \
 -protoset <(buf build -o -) \
 -d '{ "id":  "sumo" }' 0.0.0.0:5000 micro.apps.proto.account.v1.AccountService/Get
 
+grpcurl -insecure \
+-protoset <(buf build -o -) \
+-d '{ "message":  "sumo" }' 0.0.0.0:5000 micro.apps.proto.echo.v1.EchoService/Echo
+
 # test API via envoy with TLS, and client cert
 grpcurl -cacert=config/certs/ca-cert.pem \
 -cert=config/certs/client-cert.pem \
 -key=config/certs/client-key.pem \
 -protoset <(buf build -o -) \
 -d '{ "id":  "sumo" }' localhost:9444 micro.apps.proto.account.v1.AccountService/Get
+
+grpcurl -cacert=config/certs/ca-cert.pem \
+-cert=config/certs/client-cert.pem \
+-key=config/certs/client-key.pem \
+-protoset <(buf build -o -) \
+-d '{ "message":  "sumo" }' localhost:9444 micro.apps.proto.echo.v1.EchoService/Echo
 ```
 
 ```bash
 # no TLS
 grpcurl -plaintext \
 -protoset <(buf build -o -) \
--d '{ "message":  "sumo" }' 0.0.0.0:8080 micro.apps.proto.echo.v1.EchoService/Echo
+-d '{ "message":  "sumo" }' 0.0.0.0:9090 micro.apps.proto.echo.v1.EchoService/Echo
 ```
 
 ### 📦 Build

@@ -42,14 +42,20 @@ dependencies {
 }
 
 application {
-    mainClass.set("micro.apps.account.AccountServerKt")
+    mainClass.set("micro.apps.service.AccountApplicationKt")
     //    applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
     applicationDefaultJvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
 }
 
 tasks {
-    register<JavaExec>("runClient") {
-        mainClass.set("micro.apps.account.AccountClientKt")
+    register<JavaExec>("runAccountClient") {
+        mainClass.set("micro.apps.service.domain.account.AccountClientKt")
+        classpath = sourceSets["main"].runtimeClasspath
+        workingDir = rootDir
+        jvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
+    }
+    register<JavaExec>("runEchoClient") {
+        mainClass.set("micro.apps.service.domain.echo.EchoClientKt")
         classpath = sourceSets["main"].runtimeClasspath
         workingDir = rootDir
         jvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
@@ -64,7 +70,7 @@ tasks {
 
     nativeBuild {
         imageName.set("application")
-        mainClass.set("micro.apps.account.AccountServerKt")
+        mainClass.set("micro.apps.service.AccountApplicationKt")
         buildArgs("--no-server")
         debug.set(false)
         verbose.set(false)

@@ -36,7 +36,7 @@ mvn io.quarkus:quarkus-maven-plugin:1.11.0.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-service \
     -DprojectVersion=0.1.0 \
-    -DclassName="micro.apps.greeting.GreetingResource" \
+    -DclassName="micro.apps.service.GreetingResource" \
     -Dpath="/greeting" \
     -Dextensions="kotlin, config-yaml, resteasy-jsonb, oidc, kubernetes, jib, grpc" \
     -DbuildTool=gradle
