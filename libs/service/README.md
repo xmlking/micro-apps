@@ -1,6 +1,6 @@
-# μService
+# Service
 
-`μService Lib module` contains **shared** code for all **μServices** 
+`Micro Service Lib module` contains **shared** code for all **Services** 
 
 Any  duplicate business logic code from all `apps/***-service` should be centralized in this module.
 
@@ -8,10 +8,10 @@ Any  duplicate business logic code from all `apps/***-service` should be central
  
 ### Test
 ```bash
-gradle libs:μservice:test
+gradle libs:service:test
 ```
 ### Build
 ```bash
-gradle libs:μservice:clean
-gradle libs:μservice:build
+gradle libs:service:clean
+gradle libs:service:build
 ```

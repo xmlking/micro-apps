@@ -1,4 +1,4 @@
-package micro.apps.μservice
+package micro.apps.service
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe

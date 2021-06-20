@@ -1,4 +1,4 @@
-package micro.apps.μservice.interceptors
+package micro.apps.service.interceptors
 
 import io.grpc.ForwardingServerCall
 import io.grpc.Metadata

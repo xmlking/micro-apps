@@ -4,8 +4,7 @@ plugins {
 
 dependencies {
     implementation(project(":libs:proto"))
-    // implementation(project(":libs:μservice"))
-    implementation(project(":libs:mservice"))
+    implementation(project(":libs:service"))
 
     // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
     runtimeOnly(libs.grpc.netty)

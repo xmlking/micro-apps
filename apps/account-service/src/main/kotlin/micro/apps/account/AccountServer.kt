@@ -11,7 +11,7 @@ import io.grpc.protobuf.services.ProtoReflectionService
 // import io.grpc.xds.XdsServerCredentials
 import micro.apps.account.config.TLS
 import micro.apps.account.config.config
-import micro.apps.μservice.interceptors.UnknownStatusInterceptor
+import micro.apps.service.interceptors.UnknownStatusInterceptor
 import mu.KotlinLogging
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import java.io.File

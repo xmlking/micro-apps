@@ -84,7 +84,6 @@ include(
     ":libs:model",
     ":libs:proto",
     ":libs:test",
-//    ":libs:μservice",
-    ":libs:mservice",
+    ":libs:service",
     ":libs:pipeline"
 )

@@ -1,4 +1,4 @@
-package micro.apps.μservice
+package micro.apps.service
 
 import com.alibaba.csp.sentinel.adapter.grpc.SentinelGrpcClientInterceptor
 import io.grpc.ChannelCredentials
