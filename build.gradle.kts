@@ -310,13 +310,10 @@ subprojects {
                 }
             }
 
-            check {
-                dependsOn("jacocoTestCoverageVerification")
-                dependsOn("jacocoTestReport")
-            }
-
             test {
-                useJUnitPlatform()
+                useJUnitPlatform {
+                    excludeTags("slow", "integration")
+                }
                 filter {
                     isFailOnNoMatchingTests = false
                 }
@@ -328,6 +325,29 @@ subprojects {
                     events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
                 }
                 finalizedBy("jacocoTestReport")
+            }
+
+            val integrationTest = register<Test>("integrationTest") {
+                useJUnitPlatform {
+                    includeTags("integration")
+                }
+                filter {
+                    isFailOnNoMatchingTests = false
+                }
+                testLogging {
+                    exceptionFormat = FULL
+                    showExceptions = true
+                    showStandardStreams = true
+                    events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
+                }
+                shouldRunAfter(test)
+                finalizedBy("jacocoTestReport")
+            }
+
+            check {
+                dependsOn("jacocoTestCoverageVerification")
+                dependsOn("jacocoTestReport")
+                // dependsOn(integrationTest)
             }
 
             dokkaHtml {

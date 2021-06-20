@@ -18,6 +18,7 @@ import org.apache.beam.sdk.transforms.Create
 import org.apache.beam.sdk.transforms.MapElements
 import org.joda.time.Instant
 import org.junit.Rule
+import org.junit.jupiter.api.Tag
 import java.io.Serializable
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -80,7 +81,7 @@ class PubSubProducerTest : Serializable {
     }
 
     // NOTE:Google PubSub Emulator must be running for this test to be passed.
-    @Test @Ignore // TODO: remove @Ignore to use it
+    @Test @Tag("integration")
     fun generateTestData() {
         val serializer = Person.serializer()
         val schema = Avro.default.schema(serializer)
