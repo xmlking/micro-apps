@@ -1,4 +1,6 @@
-# person-graphql project
+# Person GraphQL
+
+Person GraphQL service
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -11,7 +13,7 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 You can run your application in dev mode that enables live coding using:
 ```shell script
-gradle :apps:person-graphql:quarkusDev
+gradle :apps:person-service:quarkusDev
 open http://localhost:8080/q/graphql-ui/
 open http://localhost:8080/graphql/schema.graphql
 ```

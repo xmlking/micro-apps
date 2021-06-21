@@ -4,9 +4,9 @@
    
 ## Run
 ```bash
-gradle :apps:chat-app:bootRun
+gradle :apps:chat-service:bootRun
 # log at debug level
-gradle :apps:chat-app:bootRun --debug
+gradle :apps:chat-service:bootRun --debug
 ```
 
 Open two browser tabs and start chatting...

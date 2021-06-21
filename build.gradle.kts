@@ -25,9 +25,9 @@ val kotlinLoggingVersion = libs.versions.kotlinLogging.get()
 val kotestVersion = libs.versions.kotest.get()
 
 val excludedProjects = setOf("apps", "libs")
-val springProjects = setOf("chat-app")
+val springProjects = setOf("chat-service")
 val grpcProjects = setOf("account-service", "keying-service", "linking-service")
-val quarkusProjects = setOf("greeting-service", "person-graphql")
+val quarkusProjects = setOf("greeting-service", "person-service")
 val pipelineProjects = setOf("classifier-pipeline", "ingestion-pipeline", "wordcount-pipeline")
 
 plugins {

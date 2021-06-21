@@ -71,7 +71,7 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 > Start [Kotlin-gRPC API](./apps/account-service/)
 
 #### Spring-RSocket
-> Start [Spring Chat APP](./apps/chat-app/)
+> Start [Spring Chat APP](./apps/chat-service/)
 
 #### Micronaut
 

@@ -70,13 +70,12 @@ pluginManagement {
 
 rootProject.name = "micro-apps"
 include(
-
     ":apps:account-service",
-    ":apps:chat-app",
-    ":apps:greeting-service",
-    ":apps:person-graphql",
     ":apps:keying-service",
     ":apps:linking-service",
+    ":apps:greeting-service",
+    ":apps:person-service",
+    ":apps:chat-service",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",
