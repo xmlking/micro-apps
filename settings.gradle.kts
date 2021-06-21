@@ -75,6 +75,8 @@ include(
     ":apps:chat-app",
     ":apps:greeting-service",
     ":apps:person-graphql",
+    ":apps:keying-service",
+    ":apps:linking-service",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",

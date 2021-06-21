@@ -1,4 +1,4 @@
-package micro.apps.service.domain.account
+package micro.apps.service.domain.order
 
 import com.google.protobuf.Any
 import com.google.protobuf.StringValue
@@ -9,9 +9,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
-import micro.apps.proto.account.v1.AccountServiceGrpcKt.AccountServiceCoroutineStub
-import micro.apps.proto.utils.GetAccountRequest
-import micro.apps.proto.utils.SearchAccountRequest
+import micro.apps.proto.order.v1.ProductServiceGrpcKt.ProductServiceCoroutineStub
+import micro.apps.proto.utils.GetProductRequest
+import micro.apps.proto.utils.SearchProductRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config
@@ -24,20 +24,20 @@ import java.util.concurrent.TimeUnit
 
 private val logger = KotlinLogging.logger {}
 
-class AccountClient(private val channel: ManagedChannel) : Closeable {
-    private val stub: AccountServiceCoroutineStub = AccountServiceCoroutineStub(channel)
+class ProductClient(private val channel: ManagedChannel) : Closeable {
+    private val stub: ProductServiceCoroutineStub = ProductServiceCoroutineStub(channel)
 
     suspend fun get(idReq: String) = coroutineScope {
-        val request = GetAccountRequest { id = StringValue.of(idReq) }
+        val request = GetProductRequest { id = StringValue.of(idReq) }
         val response = async { stub.get(request) }
-        println("Received from Get: ${response.await().account.firstName}")
+        println("Received from Get: ${response.await().product.name}")
     }
 
     fun search(filterReq: String) = runBlocking {
-        val request = SearchAccountRequest { filter = Any.pack(StringValue.of(filterReq)) }
+        val request = SearchProductRequest { filter = Any.pack(StringValue.of(filterReq)) }
         val flow = stub.search(request)
         flow.collect { response ->
-            println("Received from Search: ${response.account.firstName}")
+            println("Received from Search: ${response.product.name}")
         }
     }
 
@@ -63,7 +63,7 @@ fun main(args: Array<String>) = runBlocking {
         // .executor(Dispatchers.Default.asExecutor())
         .build()
 
-    val client = AccountClient(channel)
+    val client = ProductClient(channel)
 
     val user = args.singleOrNull() ?: "world"
     client.get(user)

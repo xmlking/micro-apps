@@ -74,9 +74,11 @@ protobuf {
                 id("grpc")
                 // Generate Kotlin gRPC classes
                 id("grpckt")
-                id("javapgv") {
-                    option("lang=java")
-                }
+                // Generate Validation classes
+                // TODO enable this...
+//                id("javapgv") {
+//                    option("lang=java")
+//                }
             }
             it.generateDescriptorSet = true
         }

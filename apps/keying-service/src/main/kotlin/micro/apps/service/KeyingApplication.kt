@@ -11,10 +11,6 @@ import io.grpc.protobuf.services.ProtoReflectionService
 // import io.grpc.xds.XdsServerCredentials
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config
-import micro.apps.service.domain.account.AccountService
-import micro.apps.service.domain.address.AddressService
-import micro.apps.service.domain.echo.EchoService
-import micro.apps.service.domain.order.ProductService
 import micro.apps.service.interceptors.UnknownStatusInterceptor
 import mu.KotlinLogging
 import org.bouncycastle.jce.provider.BouncyCastleProvider
@@ -24,7 +20,7 @@ import java.util.concurrent.TimeUnit
 
 private val logger = KotlinLogging.logger {}
 
-class AccountApplication(private val port: Int) {
+class KeyingApplication(private val port: Int) {
 
 //    var creds = InsecureServerCredentials.create()
 
@@ -50,13 +46,10 @@ class AccountApplication(private val port: Int) {
 
     val server: Server = Grpc
         .newServerBuilderForPort(port, creds)
-        .addService(AccountService())
-        .addService(AddressService())
-        .addService(ProductService())
-        .addService(EchoService())
+        .addService(KeyingService())
         .addService(ProtoReflectionService.newInstance()) // convenient for command line tools
         .addService(health.healthService) // allow management servers to monitor health
-        .addService(ServerInterceptors.intercept(AccountService(), UnknownStatusInterceptor()))
+        .addService(ServerInterceptors.intercept(KeyingService(), UnknownStatusInterceptor()))
         .build()
 
     fun start() {
@@ -65,7 +58,7 @@ class AccountApplication(private val port: Int) {
         Runtime.getRuntime().addShutdownHook(
             Thread {
                 logger.atInfo().log("*** shutting down gRPC server since JVM is shutting down")
-                this@AccountApplication.stop()
+                this@KeyingApplication.stop()
                 logger.atInfo().log("*** server shut down")
             }
         )
@@ -110,7 +103,7 @@ fun main() {
         .log("Config:")
 
     val port = System.getenv("PORT")?.toInt() ?: 5000
-    val server = AccountApplication(port)
+    val server = KeyingApplication(port)
     server.start()
     server.blockUntilShutdown()
 }

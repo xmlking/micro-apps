@@ -10,14 +10,12 @@ import micro.apps.proto.common.v1.Product
 // val batman = mockPerson(mockId = 1, lastName = "demo")
 fun mockPerson(
     mockId: Int,
-    id: String = "id#$mockId",
     firstName: String = "firstName$mockId",
     lastName: String = "lastName$mockId",
     phone: String = "$mockId$mockId$mockId",
     email: String = "user$mockId@gmail.com"
 ): Person {
     return with(Person.newBuilder()) {
-        this.id = id
         this.firstName = firstName
         this.lastName = lastName
         this.phone = phone

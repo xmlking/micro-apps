@@ -12,8 +12,21 @@ lint:
   ignore:
     - validate
   ignore_only:
+    RPC_REQUEST_RESPONSE_UNIQUE:
+      - micro/apps/proto/account/v1/account.proto
+      - micro/apps/proto/address/v1/address.proto
+      - micro/apps/proto/keying/v1/keying.proto
+      - micro/apps/proto/linking/v1/linking.proto
+      - micro/apps/proto/order/v1/product.proto
+    RPC_REQUEST_STANDARD_NAME:
+      - micro/apps/proto/keying/v1/keying.proto
+      - micro/apps/proto/linking/v1/linking.proto
     RPC_RESPONSE_STANDARD_NAME:
       - micro/apps/proto/account/v1/account.proto
+      - micro/apps/proto/address/v1/address.proto
+      - micro/apps/proto/keying/v1/keying.proto
+      - micro/apps/proto/linking/v1/linking.proto
+      - micro/apps/proto/order/v1/product.proto
   rpc_allow_google_protobuf_empty_requests: true
   rpc_allow_google_protobuf_empty_responses: true
 

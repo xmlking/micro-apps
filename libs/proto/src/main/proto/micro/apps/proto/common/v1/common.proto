@@ -13,12 +13,33 @@ enum Currency {
     CURRENCY_INR = 1;
 }
 
+enum Status {
+    STATUS_OK_UNSPECIFIED = 0;
+    STATUS_NEW = 2;
+    STATUS_NOHIT = 3;
+}
+
+enum Profile {
+    PROFILE_UNSPECIFIED = 0;
+    PROFILE_RO = 1;
+    PROFILE_RW_FULL_MATCH = 2;
+    PROFILE_RW_PARTIAL_MATCH = 3;
+}
+
 message Person {
-    string id = 1;
     string first_name = 2;
     string last_name = 3;
     string phone = 4;
     string email = 5;
+}
+
+message Address {
+    string suite = 1;
+    string street = 2;
+    string city = 3;
+    string state = 4;
+    string code = 5;
+    string country = 6;
 }
 
 message Product {

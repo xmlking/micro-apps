@@ -1,32 +1,34 @@
-package micro.apps.service.domain.account
+package micro.apps.service.domain.address
 
 import com.google.protobuf.StringValue
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import micro.apps.proto.account.v1.AccountServiceGrpcKt
-import micro.apps.proto.account.v1.CreateRequest
-import micro.apps.proto.account.v1.GetRequest
-import micro.apps.proto.account.v1.GetResponse
-import micro.apps.proto.account.v1.SearchRequest
-import micro.apps.proto.account.v1.SearchResponse
-import micro.apps.proto.common.v1.Person
-import micro.apps.proto.utils.GetAccountResponse
-import micro.apps.proto.utils.SearchAccountResponse
+import micro.apps.proto.address.v1.AddressServiceGrpcKt
+import micro.apps.proto.address.v1.CreateRequest
+import micro.apps.proto.address.v1.GetRequest
+import micro.apps.proto.address.v1.GetResponse
+import micro.apps.proto.address.v1.SearchRequest
+import micro.apps.proto.address.v1.SearchResponse
+import micro.apps.proto.common.v1.Address
+import micro.apps.proto.utils.GetAddressResponse
+import micro.apps.proto.utils.SearchAddressResponse
 import mu.KotlinLogging
 
-var person = with(Person.newBuilder()) {
-    firstName = "sumo"
-    lastName = "demo"
-    phone = "000-000-0000"
+var address = with(Address.newBuilder()) {
+    state = "1234"
+    street = "FourWinds Dr"
+    city = "Riverside"
+    state = "California"
+    country = "USA"
     return@with build()
 }
 
 private val logger = KotlinLogging.logger {}
 
-class AccountService : AccountServiceGrpcKt.AccountServiceCoroutineImplBase() {
+class AddressService : AddressServiceGrpcKt.AddressServiceCoroutineImplBase() {
 
-    override suspend fun get(request: GetRequest): GetResponse = GetAccountResponse { account = person }
+    override suspend fun get(request: GetRequest): GetResponse = GetAddressResponse { address = address }
 
     override suspend fun create(request: CreateRequest): StringValue {
         // TODO("not implemented")
@@ -41,9 +43,9 @@ class AccountService : AccountServiceGrpcKt.AccountServiceCoroutineImplBase() {
         while (true) {
             delay(1000)
             emit(
-                SearchAccountResponse {
+                SearchAddressResponse {
                     id = StringValue.of("123e4567-e89b-12d3-a456-426614174000")
-                    account = person
+                    address = address
                 }
             )
         }

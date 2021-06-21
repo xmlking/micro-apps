@@ -1,0 +1,17 @@
+certs:
+    caCert: config/certs/upstream-ca-cert.pem
+    clientKey: config/certs/client-key.pem
+    clientCert: config/certs/client-cert.pem
+    proxyKey: config/certs/proxy-key.pem
+    proxyCert: config/certs/proxy-cert.pem
+    upstreamKey: config/certs/upstream-localhost-key.pem
+    upstreamCert: config/certs/upstream-localhost-cert.pem
+    upstreamCaCert: config/certs/upstream-ca-cert.pem
+account:
+    endpoint: 0.0.0.0:5000
+    authority: localhost
+    maxRetry: 3
+    deadline: 2s
+endpoints:
+    account: 127.0.0.2:8080
+    echo: 127.0.0.3:8080

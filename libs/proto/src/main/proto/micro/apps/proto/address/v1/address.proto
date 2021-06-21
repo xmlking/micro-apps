@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package micro.apps.proto.account.v1;
+package micro.apps.proto.address.v1;
 
 option java_multiple_files = true;
-option java_outer_classname = "AccountServiceProto";
-option java_package = "micro.apps.proto.account.v1";
+option java_outer_classname = "AddressServiceProto";
+option java_package = "micro.apps.proto.address.v1";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
@@ -12,8 +12,8 @@ import "google/protobuf/any.proto";
 import "validate/validate.proto";
 import "micro/apps/proto/common/v1/common.proto";
 
-// Account Service
-service AccountService {
+// Address Service
+service AddressService {
     rpc Get(GetRequest) returns (GetResponse);
     rpc List(ListRequest) returns (ListResponse);
     rpc Count(google.protobuf.Empty) returns (google.protobuf.UInt32Value);
@@ -30,7 +30,7 @@ message GetRequest {
 }
 
 message GetResponse {
-    micro.apps.proto.common.v1.Person account = 1;
+    micro.apps.proto.common.v1.Address address = 2;
 }
 
 message ListRequest {
@@ -41,7 +41,7 @@ message ListRequest {
 }
 
 message ListResponse {
-    map<string, micro.apps.proto.common.v1.Person> results = 1;
+    map<string, micro.apps.proto.common.v1.Address> results = 1;
     google.protobuf.Int64Value count = 2;
 }
 
@@ -51,16 +51,16 @@ message SearchRequest {
 
 message SearchResponse {
     google.protobuf.StringValue id = 1;
-    micro.apps.proto.common.v1.Person account = 2;
+    micro.apps.proto.common.v1.Address address = 2;
 }
 
 message CreateRequest {
-    micro.apps.proto.common.v1.Person account = 1;
+    micro.apps.proto.common.v1.Address address = 1;
 }
 
 message UpdateRequest {
     google.protobuf.StringValue id = 1;
-    micro.apps.proto.common.v1.Person account = 2;
+    micro.apps.proto.common.v1.Address address = 2;
 }
 
 message DeleteRequest {
