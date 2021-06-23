@@ -2,8 +2,6 @@
 
 **SpringBoot** app showcasing *Kotlin Coroutines* and *RSocket* 
 
-chat-app.png
-
 ## Overview
 
 <p align="center">
