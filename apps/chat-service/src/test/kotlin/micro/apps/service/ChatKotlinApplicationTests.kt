@@ -1,4 +1,4 @@
-package micro.apps.chat
+package micro.apps.service
 
 import app.cash.turbine.test
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import micro.apps.chat.repository.ContentType
-import micro.apps.chat.repository.Message
-import micro.apps.chat.repository.MessageRepository
-import micro.apps.chat.service.MessageVM
-import micro.apps.chat.service.UserVM
+import micro.apps.service.repository.ContentType
+import micro.apps.service.repository.Message
+import micro.apps.service.repository.MessageRepository
+import micro.apps.service.service.MessageVM
+import micro.apps.service.service.UserVM
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -28,6 +28,7 @@ import java.net.URI
 import java.net.URL
 import java.time.Instant
 import java.time.temporal.ChronoUnit.MILLIS
+import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
 
@@ -181,7 +182,7 @@ class ChatKotlinApplicationTests(
                     .collect()
             }
 
-            delay(2.seconds)
+            delay(Duration.seconds(2))
 
             messageRepository.findAll()
                 .first { it.content.contains("HelloWorld") }

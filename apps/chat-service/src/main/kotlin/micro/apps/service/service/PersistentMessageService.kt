@@ -1,14 +1,14 @@
-package micro.apps.chat.service
+package micro.apps.service.service
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import micro.apps.chat.asDomainObject
-import micro.apps.chat.asRendered
-import micro.apps.chat.mapToViewModel
-import micro.apps.chat.repository.MessageRepository
+import micro.apps.service.asDomainObject
+import micro.apps.service.asRendered
+import micro.apps.service.mapToViewModel
+import micro.apps.service.repository.MessageRepository
 import org.springframework.stereotype.Service
 
 @Service

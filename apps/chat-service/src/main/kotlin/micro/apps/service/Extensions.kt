@@ -1,17 +1,17 @@
-package micro.apps.chat
+package micro.apps.service
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import micro.apps.chat.repository.ContentType
-import micro.apps.chat.repository.Message
-import micro.apps.chat.service.MessageVM
-import micro.apps.chat.service.UserVM
+import micro.apps.service.repository.ContentType
+import micro.apps.service.repository.Message
+import micro.apps.service.service.MessageVM
+import micro.apps.service.service.UserVM
 import org.intellij.markdown.flavours.commonmark.CommonMarkFlavourDescriptor
 import org.intellij.markdown.html.HtmlGenerator
 import org.intellij.markdown.parser.MarkdownParser
 import java.net.URL
 
-fun MessageVM.asDomainObject(contentType: ContentType = micro.apps.chat.repository.ContentType.MARKDOWN): Message =
+fun MessageVM.asDomainObject(contentType: ContentType = micro.apps.service.repository.ContentType.MARKDOWN): Message =
     Message(
         content,
         contentType,
@@ -28,7 +28,7 @@ fun Message.asViewModel(): MessageVM = MessageVM(
     id
 )
 
-fun MessageVM.asRendered(contentType: ContentType = micro.apps.chat.repository.ContentType.MARKDOWN): MessageVM =
+fun MessageVM.asRendered(contentType: ContentType = micro.apps.service.repository.ContentType.MARKDOWN): MessageVM =
     this.copy(content = contentType.render(this.content))
 
 fun Flow<Message>.mapToViewModel(): Flow<MessageVM> = map { it.asViewModel() }

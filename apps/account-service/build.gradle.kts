@@ -1,5 +1,6 @@
 plugins {
-    id("org.graalvm.buildtools.native")
+    // FIXME: https://github.com/graalvm/native-build-tools/issues/70
+    // id("org.graalvm.buildtools.native")
 }
 
 dependencies {
@@ -67,7 +68,7 @@ tasks {
     test {
         workingDir = rootDir
     }
-
+/*
     nativeBuild {
         imageName.set("application")
         mainClass.set("micro.apps.service.AccountApplicationKt")
@@ -82,6 +83,7 @@ tasks {
     nativeTest {
         verbose.set(true)
     }
+*/
 }
 
 jib {

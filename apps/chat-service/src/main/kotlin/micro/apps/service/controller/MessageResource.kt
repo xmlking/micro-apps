@@ -1,10 +1,10 @@
-package micro.apps.chat.controller
+package micro.apps.service.controller
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.onStart
-import micro.apps.chat.service.MessageService
-import micro.apps.chat.service.MessageVM
+import micro.apps.service.service.MessageService
+import micro.apps.service.service.MessageVM
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.Payload
 import org.springframework.stereotype.Controller

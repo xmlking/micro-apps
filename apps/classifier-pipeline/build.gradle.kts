@@ -25,7 +25,7 @@ dependencies {
     implementation(libs.bundles.beam)
 
     // Use Kotlin Serialization
-    implementation(libs.bundles.kotlinx.serialization) // JSON, ProtoBuf, Avro serialization
+    implementation(libs.bundles.kotlinx.serialization.all) // JSON, ProtoBuf, Avro serialization
     // implementation(libs.beam.sdks.java.extensions.kryo) // kryo serialization
     // implementation(libs.beam.sdks.java.extensions.euphoria)
 

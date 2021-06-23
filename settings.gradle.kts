@@ -1,6 +1,7 @@
 pluginManagement {
     repositories {
         // maven { url = uri("https://mycompany.nexus/") }
+        maven { url = uri("https://repo.spring.io/release") }
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
@@ -41,9 +42,10 @@ pluginManagement {
         val quarkusPluginVersion: String by settings
         val kotlinVersion: String by settings
         val protobufPluginVersion: String by settings
-        val springVersion: String by settings
-        val springDependencyManagementPluginVersion: String by settings
+        val springPluginVersion: String by settings
+        val SpringNativePluginVersion: String by settings
         val graalvmPluginVersion: String by settings
+        val springDependencyManagementPluginVersion: String by settings
 
         id("org.sonarqube") version sonarPluginVersion
         id("com.diffplug.spotless") version spotlessPluginVersion
@@ -61,7 +63,8 @@ pluginManagement {
         id("dev.jacomet.logging-capabilities") version loggerPluginVersion
         id("com.google.protobuf") version protobufPluginVersion apply false
         id("io.quarkus") version quarkusPluginVersion apply false
-        id("org.springframework.boot") version springVersion apply false
+        id("org.springframework.boot") version springPluginVersion apply false
+        id("org.springframework.experimental.aot") version SpringNativePluginVersion apply false
         id("io.spring.dependency-management") version springDependencyManagementPluginVersion apply false
         kotlin("plugin.spring") version kotlinVersion apply false
         id("org.graalvm.buildtools.native") version graalvmPluginVersion apply false
@@ -76,6 +79,7 @@ include(
     ":apps:greeting-service",
     ":apps:person-service",
     ":apps:chat-service",
+    ":apps:entity-service",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",

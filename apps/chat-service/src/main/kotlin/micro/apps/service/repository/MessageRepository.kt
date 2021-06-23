@@ -1,4 +1,4 @@
-package micro.apps.chat.repository
+package micro.apps.service.repository
 
 import kotlinx.coroutines.flow.Flow
 import org.springframework.data.r2dbc.repository.Query

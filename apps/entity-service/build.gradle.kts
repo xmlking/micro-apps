@@ -1,0 +1,44 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
+plugins {
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    kotlin("plugin.spring")
+    id("org.springframework.experimental.aot")
+    id("org.graalvm.buildtools.native")
+
+    // kotlin("plugin.serialization")
+}
+
+val slf4jVersion = libs.versions.slf4j.get()
+
+dependencies {
+    // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
+    implementation(libs.bundles.spring.basic)
+    implementation(libs.spring.boot.starter.rsocket)
+
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    testImplementation("io.projectreactor:reactor-test")
+
+    testImplementation(libs.spring.boot.starter.test)
+}
+
+loggingCapabilities {
+    selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
+}
+
+tasks.withType<BootBuildImage> {
+    builder = "paketobuildpacks/builder:tiny"
+    environment = mapOf(
+        "BP_NATIVE_IMAGE" to "true",
+        "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "--enable-https " +
+            "-H:+ReportExceptionStackTraces -H:+ReportUnsupportedElementsAtRuntime " +
+            "--initialize-at-build-time=org.slf4j.jul.JDK14LoggerAdapter,org.slf4j.simple.SimpleLogger,org.slf4j.LoggerFactory",
+    )
+}
+
+// springAot {
+//    removeSpelSupport.set(true)
+//    removeYamlSupport.set(true)
+// }

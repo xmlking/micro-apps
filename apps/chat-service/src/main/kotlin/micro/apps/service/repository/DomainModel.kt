@@ -1,4 +1,4 @@
-package micro.apps.chat.repository
+package micro.apps.service.repository
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table

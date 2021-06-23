@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     // Use Kotlin Serialization
-    implementation(libs.bundles.kotlinx.serialization) // JSON, ProtoBuf, Avro serialization
+    implementation(libs.bundles.kotlinx.serialization.all) // JSON, ProtoBuf, Avro serialization
     // implementation(libs.kotlinx.serialization.yaml) // YAML serialization
 
     // Testing

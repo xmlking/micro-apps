@@ -1,7 +1,3 @@
-plugins {
-    id("org.graalvm.buildtools.native")
-}
-
 dependencies {
     implementation(project(":libs:proto"))
     implementation(project(":libs:service"))
@@ -55,21 +51,6 @@ tasks {
     }
     test {
         workingDir = rootDir
-    }
-
-    nativeBuild {
-        imageName.set("application")
-        mainClass.set("micro.apps.service.LinkingApplicationKt")
-        buildArgs("--no-server")
-        debug.set(false)
-        verbose.set(false)
-        fallback.set(false)
-        jvmArgs("flag")
-        runtimeArgs("--help")
-    }
-
-    nativeTest {
-        verbose.set(true)
     }
 }
 

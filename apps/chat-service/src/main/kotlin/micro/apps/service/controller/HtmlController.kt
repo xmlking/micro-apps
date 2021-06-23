@@ -1,4 +1,4 @@
-package micro.apps.chat.controller
+package micro.apps.service.controller
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping

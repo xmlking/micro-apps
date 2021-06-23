@@ -1,4 +1,4 @@
-package micro.apps.chat.service
+package micro.apps.service.service
 
 import java.net.URL
 import java.time.Instant

@@ -6,16 +6,23 @@ bin/
 
 ### IntelliJ IDEA ###
 .idea
-*.ipr
-*.iml
 *.iws
+*.iml
+*.ipr
 out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-# NetBeans
-nb-configuration.xml
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-# Visual Studio Code
-.vscode
+
+### VS Code ###
+.vscode/
 .factorypath
 
 # OSX

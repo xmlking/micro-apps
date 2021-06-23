@@ -1,4 +1,4 @@
-package micro.apps.chat
+package micro.apps.service
 
 import io.r2dbc.spi.ConnectionFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication

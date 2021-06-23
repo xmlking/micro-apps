@@ -25,7 +25,7 @@ val kotlinLoggingVersion = libs.versions.kotlinLogging.get()
 val kotestVersion = libs.versions.kotest.get()
 
 val excludedProjects = setOf("apps", "libs")
-val springProjects = setOf("chat-service")
+val springProjects = setOf("chat-service", "entity-service")
 val grpcProjects = setOf("account-service", "keying-service", "linking-service")
 val quarkusProjects = setOf("greeting-service", "person-service")
 val pipelineProjects = setOf("classifier-pipeline", "ingestion-pipeline", "wordcount-pipeline")
@@ -149,7 +149,7 @@ allprojects {
         mavenLocal()
         mavenCentral()
         maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") } // TODO: remove
-        maven { url = uri("https://repo.spring.io/milestone") }
+        maven { url = uri("https://repo.spring.io/release") }
         maven { url = uri("https://packages.confluent.io/maven/") }
     }
 }
@@ -172,8 +172,8 @@ subprojects {
             if (name !in quarkusProjects) {
                 plugin("dev.jacomet.logging-capabilities")
             }
-            // apply for apps excluding `quarkusProjects` projects
-            if (path.startsWith(":apps") && (name !in quarkusProjects + springProjects)) {
+            // apply for `grpcProjects` & `pipelineProjects` projects under `apps`
+            if (path.startsWith(":apps") && (name in grpcProjects + pipelineProjects)) {
                 plugin("application")
                 plugin("com.github.johnrengelman.shadow")
                 plugin("com.google.cloud.tools.jib")
@@ -276,7 +276,7 @@ subprojects {
                         "-Xopt-in=kotlin.OptIn"
                     )
                 }
-                dependsOn("spotlessCheck")
+                // dependsOn("spotlessCheck") // TODO: Circular dependency for generateTestAot
             }
             compileTestKotlin {
                 kotlinOptions {

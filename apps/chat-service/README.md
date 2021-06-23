@@ -1,7 +1,16 @@
 # Chat App
 
 **SpringBoot** app showcasing *Kotlin Coroutines* and *RSocket* 
-   
+
+chat-app.png
+
+## Overview
+
+<p align="center">
+  <img src="../../docs/images/chat-app.png" width="60%">
+</p>
+
+
 ## Run
 ```bash
 gradle :apps:chat-service:bootRun

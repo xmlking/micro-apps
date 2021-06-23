@@ -1,10 +1,13 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
     kotlin("plugin.spring")
+    id("org.springframework.experimental.aot")
+    id("org.graalvm.buildtools.native")
 }
 
-val junitVersion = libs.versions.junit.get()
 val slf4jVersion = libs.versions.slf4j.get()
 
 dependencies {
@@ -39,3 +42,13 @@ dependencies {
 loggingCapabilities {
     selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }
+
+tasks.withType<BootBuildImage> {
+    builder = "paketobuildpacks/builder:tiny"
+    environment = mapOf("BP_NATIVE_IMAGE" to "true")
+}
+
+// springAot {
+//    removeSpelSupport.set(true)
+//    removeYamlSupport.set(true)
+// }
