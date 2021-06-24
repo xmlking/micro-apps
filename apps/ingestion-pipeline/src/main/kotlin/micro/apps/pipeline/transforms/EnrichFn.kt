@@ -15,13 +15,15 @@ import org.apache.beam.sdk.transforms.DoFn
 import org.apache.beam.sdk.values.PCollectionView
 
 private val logger = KotlinLogging.logger {}
+
 @ExperimentalSerializationApi
 class EnrichFn(private val keysView: PCollectionView<List<String>>) : DoFn<GenericRecord, GenericRecord>() {
 
     private val enrichedPersons = Metrics.counter(EnrichFn::class.java, "enrichedPersons")
     private val failedPersons = Metrics.counter(EnrichFn::class.java, "failedPersons")
 
-    @Transient lateinit var keys: List<String>
+    @Transient
+    lateinit var keys: List<String>
 
     @Setup
     fun setup() {
@@ -32,16 +34,19 @@ class EnrichFn(private val keysView: PCollectionView<List<String>>) : DoFn<Gener
         println(config.containsRequired())
         println(config[Cloud.Dataflow.windowDuration])
     }
+
     @Teardown
     fun teardown() {
         logger.debug { "EnrichFn teardown()" }
     }
+
     @StartBundle
     fun startBundle(c: StartBundleContext) {
         val options = c.pipelineOptions.`as`(IngestionOptions::class.java)
         logger.debug { "EnrichFn startBundle()" }
         logger.debug { options }
     }
+
     @FinishBundle
     fun finishBundle() {
         logger.debug { "EnrichFn finishBundle()" }

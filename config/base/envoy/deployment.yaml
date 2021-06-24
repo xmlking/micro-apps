@@ -19,8 +19,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: env-vars
-#            - configMapRef:
-#                name: env-vars-common
+          #            - configMapRef:
+          #                name: env-vars-common
           volumeMounts:
             - name: config
               mountPath: /etc/envoy

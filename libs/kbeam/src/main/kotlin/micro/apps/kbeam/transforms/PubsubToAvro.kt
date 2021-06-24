@@ -28,7 +28,8 @@ class PubsubToSpecific<T>() : SimpleFunction<PubsubMessage, T>() {
     }
 }
 
-class AvroToPubsub(private val attributes: Map<String, String> = ImmutableMap.of()) : SimpleFunction<IndexedRecord, PubsubMessage>() {
+class AvroToPubsub(private val attributes: Map<String, String> = ImmutableMap.of()) :
+    SimpleFunction<IndexedRecord, PubsubMessage>() {
     override fun apply(input: IndexedRecord): PubsubMessage {
         return ByteArrayOutputStream()
             .use {

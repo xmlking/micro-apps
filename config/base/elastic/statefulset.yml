@@ -30,7 +30,7 @@ spec:
         - name: volume-mount-fix
           image: busybox
           imagePullPolicy: Always
-          command: ["sh", "-c", "chmod -R 777 /usr/share/elasticsearch/data"]
+          command: [ "sh", "-c", "chmod -R 777 /usr/share/elasticsearch/data" ]
           volumeMounts:
             - name: elasticsearch-storage
               mountPath: /usr/share/elasticsearch/data
@@ -80,10 +80,10 @@ spec:
           imagePullPolicy: IfNotPresent
           name: prometheus
           args:
-          - '--es.uri=http://localhost:9200'
-          - '--es.all'
-          - '--es.indices'
-          - '--es.snapshots'
+            - '--es.uri=http://localhost:9200'
+            - '--es.all'
+            - '--es.indices'
+            - '--es.snapshots'
           ports:
             - protocol: TCP
               containerPort: 9114

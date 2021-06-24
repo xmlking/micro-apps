@@ -13,6 +13,7 @@ import java.io.OutputStream
 class AvroPersonCoder : CustomCoder<Person>() {
     @Transient
     private val serializer = Person.serializer()
+
     @Transient
     private val personSchema = Avro.default.schema(Person.serializer())
 

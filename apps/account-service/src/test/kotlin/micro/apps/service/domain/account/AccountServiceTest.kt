@@ -15,7 +15,6 @@ import micro.apps.proto.account.v1.AccountServiceGrpcKt
 import micro.apps.proto.account.v1.SearchRequest
 import micro.apps.proto.account.v1.SearchResponse
 import micro.apps.proto.common.fixtures.mockPerson
-import micro.apps.service.config.config
 import micro.apps.test.E2E
 import micro.apps.test.Slow
 import org.bouncycastle.jce.provider.BouncyCastleProvider

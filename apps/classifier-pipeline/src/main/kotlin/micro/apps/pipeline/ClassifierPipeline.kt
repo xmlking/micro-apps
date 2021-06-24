@@ -39,7 +39,10 @@ object ClassifierPipeline {
         val schema = Schema.Parser().parse(javaClass.getResourceAsStream("/data/person.avsc"))
 
         val input = pipe
-            .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))
+            .apply(
+                "Read new Data from PubSub",
+                PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription)
+            )
             // Batch events into 5 minute windows
             .apply(
                 "Batch Events, windowDuration: ${options.windowDuration}",
@@ -51,7 +54,8 @@ object ClassifierPipeline {
                     .withAllowedLateness(Duration.standardSeconds(300))
             )
 
-            .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema))).setCoder(AvroCoder.of(schema))
+            .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema)))
+            .setCoder(AvroCoder.of(schema))
 
             .parDo<GenericRecord, GenericRecord>("decrypt and enrich record") {
                 println(element)

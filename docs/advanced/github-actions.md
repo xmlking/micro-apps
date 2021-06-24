@@ -42,7 +42,7 @@ See [github actions](../../.github/main.yml)
 
 - deploy to GKE
 
-
 ## Reference
+
 - https://medium.com/@max.day/how-to-use-github-actions-to-deploy-your-quarkus-app-to-gcp-6ed5d9fdecb3
 - https://github.com/maxday/quarkus-demo-actions

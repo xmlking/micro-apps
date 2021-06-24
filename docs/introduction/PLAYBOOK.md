@@ -2,8 +2,8 @@
 
 Do-it-yourself step-by-step instructions to create this project structure from scratch.
 
+### Prerequisites
 
-### Prerequisites  
 > you need following tools. versions listed here are minimal versions tested.
 
 | Software                      | Version         | Optional         |  
@@ -16,8 +16,8 @@ Do-it-yourself step-by-step instructions to create this project structure from s
 | SDKMan                        | latest          |                  |
 | Micronaut                     |                 | 1.0.0            |
 
-
 ### Install Prerequisites
+
 ```bash
 # install or Update Node with brew or NVM
 sdk install java 11.0.6.hs-adpt
@@ -37,8 +37,10 @@ sdk install
 sdk selfupdate
 ```
 
-### IntelliJ IDEA 
-Be sure to enable delegate IDE build/run actions to Gradle so that Intellij does not use its internal build mechanism to compile source code. 
+### IntelliJ IDEA
+
+Be sure to enable delegate IDE build/run actions to Gradle so that Intellij does not use its internal build mechanism to
+compile source code.
 
 ```
 Settings -> Build, Execution, Deployment
@@ -47,6 +49,7 @@ Settings -> Build, Execution, Deployment
 ```
 
 Point to local Gradle instead of gradle in wrapper
+
 ```
 Settings -> Build, Execution, Deployment
     -> Build Tools -> Gradle
@@ -72,24 +75,29 @@ ktlint
 ```
 
 ### Install Kubernetes (optional)
-follow instructions [here](https://gist.github.com/xmlking/62ab53753c0f0f5247d0e174b31dab21) to install kubernetes toolchain:
+
+follow instructions [here](https://gist.github.com/xmlking/62ab53753c0f0f5247d0e174b31dab21) to install kubernetes
+toolchain:
+
 1. Docker for Mac (edge version)
 2. Kustomize (optional)
 3. kubectx (optional)
 
-
 ### Scaffold Project
+
 > steps below are for setting up a new project from the scratch.
 
-
 #### Create Workspace
+
 ```bash
 mkdir micro-apps && cd micro-apps
 gradle init --type kotlin-application --dsl kotlin
 ```
- 
+
 #### Generate Artifacts
+
 TODO
+
 ```bash
 cd apps/greeting-api
 mn create-controller micro.apps.service.controllers.greeting

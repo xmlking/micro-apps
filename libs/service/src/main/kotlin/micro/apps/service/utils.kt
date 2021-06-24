@@ -15,7 +15,10 @@ fun channelForTarget(target: String, creds: ChannelCredentials = InsecureChannel
         .build()
 }
 
-fun sentinelChannelForTarget(target: String, creds: ChannelCredentials = InsecureChannelCredentials.create()): ManagedChannel {
+fun sentinelChannelForTarget(
+    target: String,
+    creds: ChannelCredentials = InsecureChannelCredentials.create()
+): ManagedChannel {
     return Grpc.newChannelBuilder(target, creds)
         .defaultLoadBalancingPolicy("round_robin")
         .intercept(SentinelGrpcClientInterceptor())

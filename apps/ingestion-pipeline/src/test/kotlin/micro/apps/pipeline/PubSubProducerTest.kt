@@ -75,13 +75,15 @@ class PubSubProducerTest : Serializable {
         println("cleaning...")
     }
 
-    @Test @Ignore
+    @Test
+    @Ignore
     fun tummyTest() {
         println("tummyTest...")
     }
 
     // NOTE:Google PubSub Emulator must be running for this test to be passed.
-    @Test @Tag("integration")
+    @Test
+    @Tag("integration")
     fun generateTestData() {
         val serializer = Person.serializer()
         val schema = Avro.default.schema(serializer)

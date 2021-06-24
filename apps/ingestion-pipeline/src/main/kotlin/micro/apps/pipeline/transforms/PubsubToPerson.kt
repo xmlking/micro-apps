@@ -21,7 +21,8 @@ class PubsubToPerson : SimpleFunction<PubsubMessage, Person>() {
 }
 
 @ExperimentalSerializationApi
-class PersonToPubsub(private val attributes: Map<String, String> = ImmutableMap.of()) : SimpleFunction<Person, PubsubMessage>() {
+class PersonToPubsub(private val attributes: Map<String, String> = ImmutableMap.of()) :
+    SimpleFunction<Person, PubsubMessage>() {
     private val serializer = Person.serializer()
     private val personSchema = Avro.default.schema(Person.serializer())
 

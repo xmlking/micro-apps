@@ -3,6 +3,7 @@
 Generated code from ProtoBuf files.
 
 ### Prerequisites
+
 ```bash
 # buf: proto tool https://buf.build/docs/tour-1
 brew tap bufbuild/buf
@@ -10,6 +11,7 @@ brew install buf
 ```
 
 ### Buf
+
 ```bash
 # To list all files Buf is configured to use:
 buf ls-files
@@ -19,6 +21,7 @@ buf breaking --against-input '.git#branch=master'
 ```
 
 ### Test
+
 ```bash
 gradle libs:proto:test
 
@@ -30,12 +33,14 @@ ghz --protoset <(buf image build -o -) ...
 ```
 
 ### Build
+
 ```bash
 gradle libs:proto:generateProto
 gradle libs:proto:build
 ```
 
-### Example 
+### Example
+
 ```kotlin
 package com.baegoon.api.controller
 
@@ -72,7 +77,8 @@ class GreetingController {
 }
 ```
 
-### Reference 
+### Reference
+
 1. https://grpc.io/docs/tutorials/basic/java/
 2. https://developers.google.com/protocol-buffers/docs/javatutorial
 3. https://developers.google.com/protocol-buffers/docs/reference/java-generated

@@ -30,7 +30,6 @@ import java.time.Instant
 import java.time.temporal.ChronoUnit.MILLIS
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
-import kotlin.time.seconds
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,

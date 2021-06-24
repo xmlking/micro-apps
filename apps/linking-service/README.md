@@ -1,7 +1,6 @@
 # 🔗 Linking
 
-Linking gRPC service. 
-
+Linking gRPC service.
 
 ### 🚀 Run
 
@@ -20,6 +19,7 @@ gradle :apps:linking-service:runLinkingClient
 ```
 
 ### 🔭 Test
+
 ```bash
 gradle :apps:linking-service:test
 gradle :apps:linking-service:test -Dkotest.tags.exclude=Slow
@@ -27,6 +27,7 @@ gradle :apps:linking-service:test -Dkotest.tags.include=E2E
 ```
 
 ### 📦 Build
+
 ```bash
 # clean
 gradle :apps:linking-service:clean

@@ -5,8 +5,8 @@ resources:
   - greeting
 
 configMapGenerator:
-#  - name: env-vars
-#    behavior: merge
+  #  - name: env-vars
+  #    behavior: merge
   - name: env-vars-common
     literals:
       - APP_ENV=development

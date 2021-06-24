@@ -8,7 +8,13 @@ import org.apache.beam.sdk.options.*
 
 /* ktlint-enable no-wildcard-imports */
 
-interface BaseStreamingOptions : ApplicationNameOptions, PipelineOptions, DirectOptions, GcpOptions, StreamingOptions, PubsubOptions {
+interface BaseStreamingOptions :
+    ApplicationNameOptions,
+    PipelineOptions,
+    DirectOptions,
+    GcpOptions,
+    StreamingOptions,
+    PubsubOptions {
 
     /**
      * PubSub Options

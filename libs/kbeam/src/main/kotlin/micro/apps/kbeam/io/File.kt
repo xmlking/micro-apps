@@ -76,7 +76,10 @@ class TextReadConfig(
 /**
  * Reads a text files as a PCollection of lines
  */
-fun Pipeline.readTextFile(name: String? = "Read from Text", configurator: TextReadConfig.() -> Unit): PCollection<String> {
+fun Pipeline.readTextFile(
+    name: String? = "Read from Text",
+    configurator: TextReadConfig.() -> Unit
+): PCollection<String> {
     val readConfig: TextReadConfig = TextReadConfig()
     configurator(readConfig)
     if (readConfig.watchForNewFiles) {

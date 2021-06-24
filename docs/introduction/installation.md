@@ -1,8 +1,6 @@
 # Installation
 
-
 Installing prerequisites and get started
-
 
 ## Getting Started
 
@@ -12,7 +10,8 @@ install the package from npm/brew
 
 1. [gitflow](https://github.com/petervanderdoes/gitflow-avh) git extension
 
-    Check installation [instructions](https://github.com/petervanderdoes/gitflow-avh/wiki/Installation) for your platform.
+   Check installation [instructions](https://github.com/petervanderdoes/gitflow-avh/wiki/Installation) for your
+   platform.
     ```bash
     brew install git-flow-avh
     ```
@@ -38,7 +37,7 @@ install the package from npm/brew
     ```
 1. [SonarLint]()
 
-    Install **SonarLint** Plugin for IntelliJ
+   Install **SonarLint** Plugin for IntelliJ
 
 ### Usage
 

@@ -4,16 +4,16 @@
 
 1. ### Axion plugin
 
-    We are using Gradle's [axion-release](https://axion-release-plugin.readthedocs.io/en/latest/) plugin for  release & version management.
-    
-    If current commit is tagged commit, project has a release version( i.e., 0.1.0).<br/>
-    If there were any commits after last tag, project is in SNAPSHOT version( i.e., 0.1.1-SNAPSHOT). 
-    
-    > `axion-release` follows the structure of git, only knows about tags on given branch.
+   We are using Gradle's [axion-release](https://axion-release-plugin.readthedocs.io/en/latest/) plugin for release &
+   version management.
 
+   If current commit is tagged commit, project has a release version( i.e., 0.1.0).<br/>
+   If there were any commits after last tag, project is in SNAPSHOT version( i.e., 0.1.1-SNAPSHOT).
+
+   > `axion-release` follows the structure of git, only knows about tags on given branch.
 
 ## Usage
- 
+
 > first time generating a new library project
 
 ```bash
@@ -26,7 +26,7 @@ Check Task Dependencies With a Dry Run with dryRun: -m or --dry-run i.e., `gradl
 
 ### Version
 
-> display computed version 
+> display computed version
 
 ```bash
 gradle cV
@@ -37,6 +37,7 @@ echo $VERSION
 ```
 
 ### Verification
+
 ```bash
 gradle test
 gradle jacocoTestReport
@@ -47,6 +48,7 @@ gradle sonarqube
 ```
 
 ### Spotless tasks
+
 ```bash
 # spotlessCheck - Checks that sourcecode satisfies formatting steps.
 gradle spotlessCheck
@@ -55,6 +57,7 @@ gradle spotlessApply
 ```
 
 ### Quarkus tasks
+
 ```bash
 # addExtension - Adds Quarkus extensions specified by the user to the project.
 gradle :apps:greeting-service:addExtension --extensions="health,metrics,openapi"
@@ -84,6 +87,7 @@ gradle build -Prelease.forceVersion=3.0.0
 ```
 
 ### Run
+
 ```bash
 gradle run
 ```
@@ -218,6 +222,7 @@ gradle cV
 ```
 
 ### Reference
+
 - https://github.com/banan1988/spring-demo/
 - https://github.com/detekt/sonar-kotlin
 - https://android.jlelse.eu/sonarqube-code-coverage-for-kotlin-on-android-with-bitrise-71b2fee0b797

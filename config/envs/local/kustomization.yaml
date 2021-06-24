@@ -16,7 +16,7 @@ resources:
   - ../../base
 
 configMapGenerator:
-#  - name: env-vars
+  #  - name: env-vars
   - name: env-vars-common
     behavior: merge
     literals:

@@ -4,7 +4,6 @@ deploying with **appctl** and **Kustomize**
 
 ### Structure
 
-
 ```
 ├── config
 │   ├── base
@@ -28,19 +27,22 @@ e.g., base, envs, <regions/zones>
 
 #### config/base
 
-  Configuration in the directory `config/base` applies to all environments. Additional configuration in `config/envs` can modify this configuration.
+Configuration in the directory `config/base` applies to all environments. Additional configuration in `config/envs` can
+modify this configuration.
 
 #### config/envs
 
-  The repository contains information on two environments, defined in the directory `config/envs`: `prod` and `staging`.
+The repository contains information on two environments, defined in the directory `config/envs`: `prod` and `staging`.
 
-  The `prod` environment refers only to the configuration in `config/base/myapp.yaml`.
+The `prod` environment refers only to the configuration in `config/base/myapp.yaml`.
 
-  The `staging` environment has an additional customization in `config/envs/staging/patch-replicas.yaml`. This customization is referenced in `config/envs/staging/kustomization.yaml`.
+The `staging` environment has an additional customization in `config/envs/staging/patch-replicas.yaml`. This
+customization is referenced in `config/envs/staging/kustomization.yaml`.
 
 #### delivery/envs
 
-  Subdirectories in `delivery/envs` contain information on the GKE clusters that host each environment. These files are automatically generated and don't need to be modified directly.
+Subdirectories in `delivery/envs` contain information on the GKE clusters that host each environment. These files are
+automatically generated and don't need to be modified directly.
 
 ### Install
 

@@ -1,7 +1,5 @@
 ---
-name: Question
-about: Questions on micro-apps usage
-title: ''
+name: Question about: Questions on micro-apps usage title: ''
 labels: ''
 assignees: ''
 

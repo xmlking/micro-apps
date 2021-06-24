@@ -15,7 +15,8 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 class EchoService : EchoServiceGrpcKt.EchoServiceCoroutineImplBase() {
-    override suspend fun echo(request: EchoRequest): EchoResponse = EchoResponse { message = "Hello ${request.message}" }
+    override suspend fun echo(request: EchoRequest): EchoResponse =
+        EchoResponse { message = "Hello ${request.message}" }
 
     override fun echoStream(request: EchoStreamRequest): Flow<EchoStreamResponse> = flow {
         logger.atDebug().log("request: {}", request)

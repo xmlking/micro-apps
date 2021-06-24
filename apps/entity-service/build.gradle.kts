@@ -13,15 +13,22 @@ plugins {
 val slf4jVersion = libs.versions.slf4j.get()
 
 dependencies {
+    implementation(project(":libs:model"))
     // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
     implementation(libs.bundles.spring.basic)
     implementation(libs.spring.boot.starter.rsocket)
 
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    testImplementation("io.projectreactor:reactor-test")
+    // implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    // testImplementation("io.projectreactor:reactor-test")
 
-    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(project(":libs:model")))
+    testImplementation(libs.spring.boot.starter.test) {
+        exclude(module = "mockito-core")
+    }
+    testImplementation(libs.spring.boot.mockk.test)
+    testImplementation(libs.kotest.extensions.spring)
 }
 
 loggingCapabilities {

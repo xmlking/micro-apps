@@ -12,10 +12,10 @@ metadata:
       server_tokens off;
 spec:
   rules:
-  - host: nifi.kashmora.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: nifi
-          servicePort: 8080
+    - host: nifi.kashmora.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: nifi
+              servicePort: 8080

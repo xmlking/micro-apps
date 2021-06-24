@@ -28,12 +28,12 @@ spec:
                   key: DATABASE_PASSWORD
           livenessProbe:
             exec:
-              command: ["pg_isready", "-U", "$(POSTGRES_USER)"]
+              command: [ "pg_isready", "-U", "$(POSTGRES_USER)" ]
             initialDelaySeconds: 3
             timeoutSeconds: 2
           readinessProbe:
             exec:
-              command: ["pg_isready", "-U", "$(POSTGRES_USER)"]
+              command: [ "pg_isready", "-U", "$(POSTGRES_USER)" ]
             initialDelaySeconds: 3
             timeoutSeconds: 2
           volumeMounts:
@@ -43,7 +43,7 @@ spec:
     - metadata:
         name: postgres-storage
       spec:
-        accessModes: ["ReadWriteOnce"]
+        accessModes: [ "ReadWriteOnce" ]
         # storageClassName: <custom storage class>
         resources:
           requests:

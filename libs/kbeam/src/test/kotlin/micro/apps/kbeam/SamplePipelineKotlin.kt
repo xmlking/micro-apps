@@ -42,12 +42,16 @@ class DSLPipelineTest : Serializable {
         val (pipeline, options) = PipeBuilder.from<KMyOptions>(arrayOf("--test=toto"))
         println("$pipeline, $options")
 
-        val countryCodes = pipeline.readTextFile { filePattern = StaticValueProvider.of("src/test/resources/data/country_codes.jsonl") }
+        val countryCodes = pipeline.readTextFile {
+            filePattern = StaticValueProvider.of("src/test/resources/data/country_codes.jsonl")
+        }
             .apply("Parse", ParseJsons.of(CountryCodeEntry::class.java))
             .setCoder(SerializableCoder.of(CountryCodeEntry::class.java))
             .map("Convert to KV") { KV.of(it.code, it.name) }.toMap()
 
-        val test = pipeline.readTextFile(name = "Read Lines") { filePattern = StaticValueProvider.of("src/test/resources/data/test.csv") }
+        val test = pipeline.readTextFile(name = "Read Lines") {
+            filePattern = StaticValueProvider.of("src/test/resources/data/test.csv")
+        }
             .filter { it.isNotEmpty() }
             .map(name = "Map to entries") {
                 val words = it.split(",")

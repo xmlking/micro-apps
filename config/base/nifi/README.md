@@ -1,6 +1,7 @@
 # Kubernetes NiFi Cluster
 
-[Apache NiFi](https://nifi.apache.org/) supports powerful and scalable directed graphs of data routing, transformation, and system mediation logic.
+[Apache NiFi](https://nifi.apache.org/) supports powerful and scalable directed graphs of data routing, transformation,
+and system mediation logic.
 
 My goal is to show how to run Apache NiFi Cluster in Kubernetes
 
@@ -33,6 +34,6 @@ This will create:
 kubectl get all,ing --namespace nifi
 ```
 
-
 ## Reference
+
 - https://github.com/AlexsJones/nifi

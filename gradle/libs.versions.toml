@@ -85,6 +85,8 @@ avro = "1.10.2"
 
 # spring
 spring = "2.5.1"
+kotestSpring = "1.0.0"
+springMockk = "3.0.1"
 snakeyaml = "1.28"
 
 # google
@@ -185,6 +187,7 @@ kotest-framework-api-jvm = { module = "io.kotest:kotest-framework-api-jvm", vers
 kotest-assertions-core-jvm = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
 kotest-property-jvm = { module = "io.kotest:kotest-property-jvm", version.ref = "kotest" }
 kotest-runner-junit5-jvm = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
+kotest-extensions-spring = { module = "io.kotest.extensions:kotest-extensions-spring", version.ref = "kotestSpring" }
 
 mockk-test = { module = "io.mockk:mockk", version.ref = "mockk" }
 hamcrest-all-test = { module = "org.hamcrest:hamcrest-all", version.ref = "hamcrest" }
@@ -195,6 +198,7 @@ quarkus-junit5-test = { module = "io.quarkus:quarkus-junit5" }
 quarkus-jacoco-test = { module = "io.quarkus:quarkus-jacoco" }
 grpc-test = { module = "io.grpc:grpc-testing", version.ref = "grpc" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-mockk-test = { module = "com.ninja-squad:springmockk", version.ref = "springMockk" }
 turbine-test = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 # beam dependencies

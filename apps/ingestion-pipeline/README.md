@@ -1,19 +1,19 @@
 # ingestion-pipeline
 
-Streaming pipeline demo. 
+Streaming pipeline demo.
 
 ## Prerequisites
 
-1. Google PubSub [Emulator](https://cloud.google.com/pubsub/docs/emulator) 
+1. Google PubSub [Emulator](https://cloud.google.com/pubsub/docs/emulator)
     ```bash
     gcloud components install pubsub-emulator
     ```
-   
+
 ## Run
 
-### Local Run  
+### Local Run
 
-#### Start Google PubSub Emulator 
+#### Start Google PubSub Emulator
 
 ```bash
 export PROJECT_ID=my-project-id
@@ -64,8 +64,8 @@ java -jar ./apps/ingestion-pipeline/build/libs/ingestion-pipeline-0.1.2-SNAPSHOT
 --pubsubRootUrl=${PUBSUB_EMULATOR_HOST}
 ```
 
+### Cloud Run
 
-### Cloud Run  
 ```bash
 PROJECT_ID=<my-project-id>
 PIPELINE_NAME=streaming
@@ -95,11 +95,13 @@ java -jar ./apps/ingestion-pipeline/build/libs/ingestion-pipeline-0.1.2-SNAPSHOT
 ```
 
 ### Creating Template
+
 ```bash
 gradle :apps:ingestion-pipeline:run --args="--runner=DataflowRunner --project=$PROJECT_ID --gcpTempLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/temp/ --stagingLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/staging/ --templateLocation=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME}"
 ```
 
 > Creating as template from VM
+
 ```bash
 java -jar ./apps/ingestion-pipeline/build/libs/ingestion-pipeline-0.1.6-SNAPSHOT-all.jar --runner=DataFlowRunner \
     --project=$PROJECT_ID \
@@ -109,7 +111,9 @@ java -jar ./apps/ingestion-pipeline/build/libs/ingestion-pipeline-0.1.6-SNAPSHOT
 ```
 
 ### Running template
+
 > Create Job
+
 ```bash
 gcloud dataflow jobs run wordcount \
     --gcs-location gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME} \
@@ -117,11 +121,13 @@ gcloud dataflow jobs run wordcount \
 ```
 
 ## Test
+
 ```bash
 gradle :apps:ingestion-pipeline:test
 ```
 
 ## Build
+
 ```bash
 # clean
 gradle :apps:ingestion-pipeline:clean
@@ -141,7 +147,7 @@ export PIPELINE_NAME=ingestion
 export PUBSUB_EMULATOR_HOST=http://localhost:8085
 ```
 
-#### Create 
+#### Create
 
 ```bash
 # Create Topics and Subscriptions every time you restart pubsub emulator 
@@ -172,7 +178,7 @@ curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${PI
 }' 
 ```
 
-#### Verify 
+#### Verify
 
 ```bash
 # List Topics (optional)
@@ -194,7 +200,8 @@ curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: applicat
 
 - https://beam.apache.org/documentation/sdks/java/euphoria/
 - [Batched RPC](https://beam.apache.org/blog/2017/08/28/timely-processing.html)
-- E2E tests with PutSub <https://github.com/stevenextwave/beam/blob/master/src/test/java/org/apache/beam/examples/test/EndToEndTest.java>
+- E2E tests with
+  PutSub <https://github.com/stevenextwave/beam/blob/master/src/test/java/org/apache/beam/examples/test/EndToEndTest.java>
 - [A Distributed Tracing Adventure in Apache Beam](http://rion.io/2020/07/04/a-distributed-tracing-adventure-in-apache-beam/)
 - [Avoiding Kotlin Minefields in Apache Beam](http://rion.io/2020/06/17/avoiding-kotlin-minefields-in-apache-beam/)
 - Async https://github.com/danielhultqvist/async-scio-future/blob/master/src/main/scala/example/FutureAsyncDoFn.scala

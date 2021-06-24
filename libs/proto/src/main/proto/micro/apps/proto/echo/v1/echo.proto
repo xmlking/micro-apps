@@ -7,16 +7,16 @@ option java_outer_classname = "EchoServiceProto";
 option java_package = "micro.apps.proto.echo.v1";
 
 service EchoService {
-  rpc Echo(EchoRequest) returns (EchoResponse);
-  rpc EchoStream(EchoStreamRequest) returns (stream EchoStreamResponse) {}
+    rpc Echo(EchoRequest) returns (EchoResponse);
+    rpc EchoStream(EchoStreamRequest) returns (stream EchoStreamResponse) {}
 }
 
 message EchoRequest {
-  string message = 1;
+    string message = 1;
 }
 
 message EchoResponse {
-  string message = 1;
+    string message = 1;
 }
 
 message EchoStreamRequest {

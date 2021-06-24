@@ -87,14 +87,20 @@ class PubsubHelper(var host: String, var projectId: String) {
     fun createSubscription(topicName: String, subscriptionName: String): Subscription {
         val projectSubscriptionName = ProjectSubscriptionName.of(projectId, subscriptionName)
         val projectTopicName = TopicName.of(projectId, topicName)
-        return subscriptionAdminClient.createSubscription(projectSubscriptionName, projectTopicName, PushConfig.getDefaultInstance(), 0)
+        return subscriptionAdminClient.createSubscription(
+            projectSubscriptionName,
+            projectTopicName,
+            PushConfig.getDefaultInstance(),
+            0
+        )
     }
 
     fun sendMessage(topicName: String, message: PubsubMessage) {
         val projectTopicName = TopicName.of(projectId, topicName)
         var publisher: Publisher? = null
         try {
-            publisher = Publisher.newBuilder(projectTopicName).setChannelProvider(transportChannelProvider).setCredentialsProvider(credentialsProvider).build()
+            publisher = Publisher.newBuilder(projectTopicName).setChannelProvider(transportChannelProvider)
+                .setCredentialsProvider(credentialsProvider).build()
             val future = publisher.publish(message)
             ApiFutures.addCallback(
                 future,

@@ -1,7 +1,6 @@
 # 🔑 Keying
 
-Keying gRPC service. 
-
+Keying gRPC service.
 
 ### 🚀 Run
 
@@ -20,6 +19,7 @@ gradle :apps:keying-service:runKeyingClient
 ```
 
 ### 🔭 Test
+
 ```bash
 gradle :apps:keying-service:test
 gradle :apps:keying-service:test -Dkotest.tags.exclude=Slow
@@ -27,6 +27,7 @@ gradle :apps:keying-service:test -Dkotest.tags.include=E2E
 ```
 
 ### 📦 Build
+
 ```bash
 # clean
 gradle :apps:keying-service:clean

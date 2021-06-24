@@ -9,10 +9,10 @@ commonLabels:
 namePrefix: nifi-
 
 resources:
-- statefulset.yml
-- secret.yml
-- service.yml
-- ingress.yml
+  - statefulset.yml
+  - secret.yml
+  - service.yml
+  - ingress.yml
 
 configMapGenerator:
   - name: env-vars

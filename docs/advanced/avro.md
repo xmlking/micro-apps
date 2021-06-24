@@ -4,7 +4,8 @@ Refer [avro-tools](https://tsypuk.github.io/avro-tools) Docs
 
 ## Install Tools
 
-you can also manually download the binary version of [hadoop-3.2.1.tar.gz](https://hadoop.apache.org/releases.html) and set `HADOOP_HOME`
+you can also manually download the binary version of [hadoop-3.2.1.tar.gz](https://hadoop.apache.org/releases.html) and
+set `HADOOP_HOME`
 
 ```bash
 brew install hadoop 

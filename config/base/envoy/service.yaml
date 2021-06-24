@@ -10,12 +10,12 @@ spec:
   # We want the servers to become available even if they're not ready
   publishNotReadyAddresses: true
   ports:
-  - name: grpc-web
-    port: 9090
-    targetPort: http
-  - name: grpc-web-secure
-    port: 9443
-    targetPort: https
-  - name: http-admin
-    port: 9901
-    targetPort: admin
+    - name: grpc-web
+      port: 9090
+      targetPort: http
+    - name: grpc-web-secure
+      port: 9443
+      targetPort: https
+    - name: http-admin
+      port: 9901
+      targetPort: admin

@@ -53,7 +53,10 @@ object IngestionPipeline {
         if (options.isStreaming) {
             logger.info { "Reading from PubSub" }
             input = pipe
-                .apply("Read new Data from PubSub", PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription))
+                .apply(
+                    "Read new Data from PubSub",
+                    PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription)
+                )
                 .apply(
                     "Batch records with windowDuration: ${options.windowDuration}",
                     Window.into<PubsubMessage>(
@@ -63,7 +66,8 @@ object IngestionPipeline {
                         .discardingFiredPanes()
                         .withAllowedLateness(Duration.standardSeconds(300))
                 )
-                .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema))).setCoder(AvroCoder.of(schema))
+                .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema)))
+                .setCoder(AvroCoder.of(schema))
         } else {
             logger.info { "Reading from GCS" }
             input = pipe.apply(
@@ -93,9 +97,15 @@ object IngestionPipeline {
         } else {
             logger.info { "Writing to GCS" }
             output.get(successTag)
-                .apply("write success records to SuccessPath", AvroIO.writeGenericRecords(schema).to(options.outputSuccessPath))
+                .apply(
+                    "write success records to SuccessPath",
+                    AvroIO.writeGenericRecords(schema).to(options.outputSuccessPath)
+                )
             output.get(successTag)
-                .apply("write error records to FailurePath", AvroIO.writeGenericRecords(schema).to(options.outputFailurePath))
+                .apply(
+                    "write error records to FailurePath",
+                    AvroIO.writeGenericRecords(schema).to(options.outputFailurePath)
+                )
         }
 
         pipe.run()

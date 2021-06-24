@@ -1,17 +1,19 @@
 # WordCount
 
-WordCount pipeline demo. 
+WordCount pipeline demo.
 
 ### Run
 
-#### Local Run  
+#### Local Run
+
 ```bash
 gradle :apps:wordcount-pipeline:run --args="--runner=DirectRunner \
 --inputFile=./src/test/resources/data/input.txt \
 --output=./build/output"
 ```
 
-#### Cloud Run  
+#### Cloud Run
+
 ```bash
 export PROJECT_ID=<my-project-id>
 export PIPELINE_NAME=wordcount
@@ -40,6 +42,7 @@ java -jar ./apps/wordcount/build/libs/wordcount-0.1.6-SNAPSHOT-all.jar  \
 ```
 
 #### Creating Template
+
 ```bash
 gradle :apps:wordcount-pipeline:run --args="--runner=DataflowRunner \
 --project=$PROJECT_ID \
@@ -49,7 +52,9 @@ gradle :apps:wordcount-pipeline:run --args="--runner=DataflowRunner \
 ```
 
 #### Running template
+
 > Create Job
+
 ```bash
 gcloud dataflow jobs run wordcount \
     --gcs-location gs://${PROJECT_ID}/dataflow/${PIPELINE_NAME}/template/${PIPELINE_NAME} \
@@ -57,11 +62,13 @@ gcloud dataflow jobs run wordcount \
 ```
 
 ### Test
+
 ```bash
 gradle :apps:wordcount-pipeline:test
 ```
 
 ### Build
+
 ```bash
 # clean
 gradle :apps:wordcount-pipeline:clean

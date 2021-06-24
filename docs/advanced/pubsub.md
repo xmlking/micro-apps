@@ -1,13 +1,15 @@
 # Using Google PubSub Emulator
- 
->  emulator currently does not support dead letter topics
+
+> emulator currently does not support dead letter topics
 
 ## Install PubSub Emulator
-Google PubSub [Emulator](https://cloud.google.com/pubsub/docs/emulator) 
+
+Google PubSub [Emulator](https://cloud.google.com/pubsub/docs/emulator)
+
 ```bash
 gcloud components install pubsub-emulator
 ```
-    
+
 ## Start PubSub Emulator
 
 ```
@@ -27,7 +29,7 @@ export ENVIRONMENT=dev
 export PUBSUB_EMULATOR_HOST=http://localhost:8085
 ```
 
-### Create 
+### Create
 
 ```bash
 # Create Topics and Subscriptions every time you restart pubsub emulator 
@@ -52,7 +54,7 @@ curl -X PUT ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${DO
 }' 
 ```
 
-### Verify 
+### Verify
 
 ```bash
 # List Topics (optional)
@@ -69,8 +71,6 @@ curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: applicat
 # Read messages from success topic
 curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: application/json" -X POST ${PUBSUB_EMULATOR_HOST}/v1/projects/${PROJECT_ID}/subscriptions/${DOMAIN}-out-${ENVIRONMENT}:pull
 ``` 
-
-
 
 ## Automation
 

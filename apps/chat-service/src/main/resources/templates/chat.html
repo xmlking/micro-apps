@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Chat</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    <script crossorigin="anonymous"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet"/>
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" rel="stylesheet"/>
 
     <!-- Awesome Font-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    <script crossorigin="anonymous"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src='https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js'></script>
     <style>
@@ -55,6 +55,7 @@
             width: 100%;
             border: none;
         }
+
         .chat-input button {
             position: absolute;
             right: 10px;
@@ -68,7 +69,7 @@
             <div class="row current-chat-area">
                 <div class="col-md-12">
                     <ul class="media-list">
-                        <li th:each="message : ${messages}" class="media">
+                        <li class="media" th:each="message : ${messages}">
                             <div class="media-body">
                                 <div class="media">
                                     <a class="pull-left" href="#">
@@ -76,7 +77,7 @@
                                              th:src="${message.getUser().getAvatarImageLink()}"/>
                                     </a>
                                     <div class="media-body" th:inline="none">
-                                        <span th:utext="${message.getContent()}" th:remove="tag">title</span>
+                                        <span th:remove="tag" th:utext="${message.getContent()}">title</span>
                                         <br/>
                                         <small class="text-muted"
                                                th:text="${message.getUser().getName()
@@ -93,7 +94,8 @@
             <div class="row chat-input">
                 <div class="col-sm-12">
                     <textarea class="write_msg" placeholder="Type a message"></textarea>
-                    <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                    <button class="msg_send_btn" type="button"><i aria-hidden="true" class="fa fa-paper-plane-o"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -117,13 +119,13 @@
         + '' + '</div>'
         + '</div>' +
         '</li>',
-    { 'imports': { 'moment': moment } });
+        {'imports': {'moment': moment}});
 
-    var user = { };
+    var user = {};
     $.ajax({
         url: 'https://randomuser.me/api/',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             user.name = data.results[0].name.first + " " + data.results[0].name.last;
             user.avatarImageLink = data.results[0].picture.large;
         }
@@ -134,13 +136,13 @@
     var messageButton = $('.chat-input button');
     var messageInput = $('.chat-input textarea');
 
-    messageButton.on("click", function() {
+    messageButton.on("click", function () {
         var content = messageInput.val();
         messageInput.val("");
         if (content) {
             $.post({
                 url: "/api/v1/messages",
-                data: JSON.stringify({content: content , user: user, sent: new Date().toISOString()}),
+                data: JSON.stringify({content: content, user: user, sent: new Date().toISOString()}),
                 contentType: 'application/json'
             });
         }

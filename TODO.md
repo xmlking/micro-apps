@@ -1,7 +1,5 @@
 # TODO
 
-
-
 * Building Reactive Pipelines with Kotlin & Spring
     * https://github.com/mkheck/building-reactive-pipelines-with-kotlin
 * Aggregated Jacoco reports in a multi-project Gradle build

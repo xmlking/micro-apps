@@ -25,6 +25,6 @@ k9s
 - popeye
 - kubeval
 
-
 ## Reference
+
 - [Compendium of Kubernetes Application Deployment Tools](https://medium.com/@KarlKFI/compendium-of-kubernetes-application-deployment-tools-80a828c91e8f)

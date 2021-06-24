@@ -1,0 +1,5 @@
+spring.application.name: entity-service
+
+spring.rsocket.server.transport: websocket
+spring.rsocket.server.mapping-path: /rsocket
+

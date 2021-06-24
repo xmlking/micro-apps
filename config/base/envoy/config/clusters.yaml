@@ -11,7 +11,7 @@ resources:
       envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
         "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
         explicit_http_config:
-          http2_protocol_options: {}
+          http2_protocol_options: { }
     load_assignment:
       cluster_name: account_service
       endpoints:
@@ -41,7 +41,7 @@ resources:
       envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
         "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
         explicit_http_config:
-          http2_protocol_options: {}
+          http2_protocol_options: { }
     load_assignment:
       cluster_name: echo_service
       endpoints:
@@ -72,4 +72,4 @@ resources:
       envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
         "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
         explicit_http_config:
-          http2_protocol_options: {}
+          http2_protocol_options: { }

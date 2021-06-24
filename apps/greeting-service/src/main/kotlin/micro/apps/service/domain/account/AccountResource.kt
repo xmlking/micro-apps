@@ -8,7 +8,6 @@ import micro.apps.service.util.Success
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.eclipse.microprofile.openapi.annotations.tags.Tag
 import org.eclipse.microprofile.openapi.annotations.tags.Tags
-import java.lang.Exception
 import javax.enterprise.inject.Default
 import javax.inject.Inject
 import javax.ws.rs.BadRequestException

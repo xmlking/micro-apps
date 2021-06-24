@@ -120,7 +120,10 @@ inline fun <I, reified O> PCollection<I>.parDo(
  *
  * The executed lambda has access to an implicit process context as *this* if needed
  */
-inline fun <reified I> PCollection<I>.filter(name: String = "filter", crossinline function: (I) -> Boolean): PCollection<I> {
+inline fun <reified I> PCollection<I>.filter(
+    name: String = "filter",
+    crossinline function: (I) -> Boolean
+): PCollection<I> {
     return this.parDo(name) {
         if (function(element)) {
             output(element)
@@ -133,7 +136,10 @@ inline fun <reified I> PCollection<I>.filter(name: String = "filter", crossinlin
  * nulls are suppressed by default from the output
  * The executed lambda has access to an implicit process context as *this* if needed
  */
-inline fun <I, reified O> PCollection<I>.map(name: String = "map to ${O::class.simpleName}", crossinline function: (I) -> O): PCollection<O> {
+inline fun <I, reified O> PCollection<I>.map(
+    name: String = "map to ${O::class.simpleName}",
+    crossinline function: (I) -> O
+): PCollection<O> {
     return this.parDo(name) {
         val o = function(element)
         if (o != null) {
@@ -146,7 +152,10 @@ inline fun <I, reified O> PCollection<I>.map(name: String = "map to ${O::class.s
  * FlatMap input PCollection
  * The executed lambda has access to an implicit process context as *this* if needed
  */
-inline fun <I, reified O> PCollection<I>.flatMap(name: String = "flatMap to ${O::class.simpleName}", crossinline function: (I) -> Iterable<O>): PCollection<O> {
+inline fun <I, reified O> PCollection<I>.flatMap(
+    name: String = "flatMap to ${O::class.simpleName}",
+    crossinline function: (I) -> Iterable<O>
+): PCollection<O> {
     return this.parDo(name) {
         val l = function(element)
         l.forEach {
@@ -155,7 +164,10 @@ inline fun <I, reified O> PCollection<I>.flatMap(name: String = "flatMap to ${O:
     }
 }
 
-inline fun <reified I> PCollection<I>.split(name: String = "split", crossinline function: (I) -> Boolean): DoFn2Outputs<I, I> {
+inline fun <reified I> PCollection<I>.split(
+    name: String = "split",
+    crossinline function: (I) -> Boolean
+): DoFn2Outputs<I, I> {
     return this.parDo2(name) {
         if (function(element)) {
             output(element)
@@ -194,7 +206,10 @@ inline fun <I, reified O1, reified O2> PCollection<I>.parDo2(
 
 data class DoFn2Outputs<O1, O2>(val output1: PCollection<O1>, val output2: PCollection<O2>)
 
-class DoFnContextWrapper2Outputs<I, O1, O2>(processContext: DoFn<I, O1>.ProcessContext, private val tag2: TupleTag<O2>) : DoFnContextWrapper<I, O1>(processContext) {
+class DoFnContextWrapper2Outputs<I, O1, O2>(
+    processContext: DoFn<I, O1>.ProcessContext,
+    private val tag2: TupleTag<O2>
+) : DoFnContextWrapper<I, O1>(processContext) {
 
     fun output2(item: O2) {
         outputTagged(tag2, item)

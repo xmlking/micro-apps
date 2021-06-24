@@ -88,7 +88,8 @@ class IngestionPipelineTest : Serializable {
     }
 
     // NOTE:Google PubSub Emulator must be running for this test to be passed.
-    @Test @Ignore
+    @Test
+    @Ignore
     fun runE2ETest() {
         assertEquals("310s", testOptions.windowDuration)
 

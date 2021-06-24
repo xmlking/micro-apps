@@ -79,3 +79,7 @@ data class Person(
     @ProtoNumber(8) val avatar: String = "http://www.gravatar.com/avatar", // Optional
     @Transient val valid: Boolean = false // not serialized: explicitly transient
 )
+
+typealias PersonId = String
+
+class DuplicateCustomerIdException(personId: PersonId) : RuntimeException("A person with id $personId already exist")
