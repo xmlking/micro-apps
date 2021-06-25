@@ -23,7 +23,7 @@ buf breaking --against-input '.git#branch=master'
 ### Test
 
 ```bash
-gradle libs:proto:test
+gradle :libs:proto:test
 
 # To use Buf-produced FileDescriptorSets with grpcurl on the fly:
 grpcurl -protoset <(buf image build -o -) ...
@@ -35,8 +35,8 @@ ghz --protoset <(buf image build -o -) ...
 ### Build
 
 ```bash
-gradle libs:proto:generateProto
-gradle libs:proto:build
+gradle :libs:proto:generateProto
+gradle :libs:proto:build
 ```
 
 ### Example

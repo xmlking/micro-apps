@@ -30,13 +30,15 @@ pluginManagement {
     // enableFeaturePreview("GRADLE_METADATA")
 
     plugins {
+        val kotlinVersion = "1.5.20"
+
+        kotlin("jvm") version kotlinVersion
+        kotlin("plugin.serialization") version kotlinVersion apply false
+        kotlin("plugin.allopen") version kotlinVersion apply false
+        kotlin("kapt") version kotlinVersion apply false
+        kotlin("plugin.spring") version kotlinVersion apply false
         id("org.sonarqube") version "3.3"
         id("com.diffplug.spotless") version "5.14.0"
-        kotlin("jvm") version "1.5.10"
-        kotlin("plugin.serialization") version "1.5.10" apply false
-        kotlin("plugin.allopen") version "1.5.10" apply false
-        kotlin("kapt") version "1.5.10" apply false
-        kotlin("plugin.spring") version "1.5.10" apply false
         id("org.jetbrains.dokka") version "1.4.32"
         id("com.github.ben-manes.versions") version "0.39.0"
         id("com.diffplug.spotless-changelog") version "2.2.0"
@@ -46,8 +48,8 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version "3.1.1"
         id("dev.jacomet.logging-capabilities") version "0.9.0"
         id("com.google.protobuf") version "0.8.16" apply false
-        id("io.quarkus") version "2.0.0.CR2" apply false
-        id("org.springframework.boot") version "2.5.1" apply false
+        id("io.quarkus") version "2.0.0.Final" apply false
+        id("org.springframework.boot") version "2.5.2" apply false
         id("org.springframework.experimental.aot") version "0.10.0" apply false
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
         id("org.graalvm.buildtools.native") version "0.9.0" apply false

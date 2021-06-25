@@ -1,7 +1,7 @@
 [versions]
 
 # kotlin
-kotlin = "1.5.10"
+kotlin = "1.5.20"
 spek = "2.0.8"
 kotest = "4.6.0"
 junit = "5.7.2"
@@ -35,17 +35,18 @@ slf4j = { require = "2.0.0-alpha1" }
 # slf4j = "1.7.30"
 
 # quarkus
-#quarkusPluginId = "io.quarkus"
-#quarkusPluginVersion = "1.13.5.Final"
-#quarkusPlatformVersion = "1.13.5.Final"
-#quarkusPlatformGroupId = "io.quarkus"
-#quarkusPlatformArtifactId = "quarkus-universe-bom"
-
 quarkusPluginId = "io.quarkus"
-quarkusPluginVersion = "2.0.0.CR2"
-quarkusPlatformVersion = "2.0.0.CR2"
-quarkusPlatformGroupId = "io.quarkus"
-quarkusPlatformArtifactId = "quarkus-bom"
+quarkusPluginVersion = "2.0.0.Final"
+quarkusPlatformVersion = "2.0.0.Final"
+quarkusPlatformGroupId = "2.0.0.Final"
+quarkusPlatformArtifactId = "quarkus-universe-bom"
+
+# for pre-released versions
+#quarkusPluginId = "io.quarkus"
+#quarkusPluginVersion = "2.0.0.CR3"
+#quarkusPlatformVersion = "2.0.0.CR3"
+#quarkusPlatformGroupId = "io.quarkus"
+#quarkusPlatformArtifactId = "quarkus-bom"
 
 # to use locally built Quarkus, use `quarkus-bom` and `999-SNAPSHOT`
 #quarkusPlatformArtifactId = "quarkus-bom"
@@ -70,13 +71,13 @@ yaml = "2.10.3"
 avro = "1.10.2"
 
 # spring
-spring = "2.5.1"
+spring = "2.5.2"
 kotestSpring = "1.0.0"
 springMockk = "3.0.1"
 snakeyaml = "1.28"
 
 # google
-googlePubsub = "1.113.3"
+googlePubsub = "1.113.4"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
