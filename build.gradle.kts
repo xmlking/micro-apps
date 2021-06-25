@@ -520,4 +520,10 @@ tasks {
     wrapper {
         distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleToolVersion-bin.zip"
     }
+
+    val affected = register<Test>("affected") {
+        subprojects.forEach {
+            println("Is ${it.name} Affected? : "+ com.dropbox.affectedmoduledetector.AffectedModuleDetector.isProjectAffected(it))
+        }
+    }
 }
