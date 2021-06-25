@@ -20,6 +20,8 @@ dependencies {
     testImplementation(libs.hamcrest.all.test)
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 application {
     mainClass.set("micro.apps.pipeline.WordCountPipeline")
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")

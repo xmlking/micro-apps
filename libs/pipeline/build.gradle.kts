@@ -21,6 +21,8 @@ dependencies {
     testFixturesImplementation(libs.google.cloud.pubsub)
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 loggingCapabilities {
     selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }

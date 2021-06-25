@@ -5,19 +5,19 @@ Apache beam kotlin DSL.
 ### Run
 
 ```bash
-gradle libs:kbeam:clean
+gradle :libs:kbeam:clean
 ```
 
 ### Test
 
 ```bash
-gradle libs:kbeam:test
+gradle :libs:kbeam:test
 ```
 
 ### Build
 
 ```bash
-gradle libs:kbeam:build
+gradle :libs:kbeam:build
 ```
 
 ### Reference

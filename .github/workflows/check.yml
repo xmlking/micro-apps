@@ -5,14 +5,20 @@ on:
     branches:
       - develop
       - feature/*
-    pull_request:
-      branches:
-        - '*'
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+      - '*'
+    paths-ignore:
+      - '**.md'
 env:
   CI: true
 
 jobs:
   check:
+    # Skip build if head commit contains 'skip ci'
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     name: Check code quality
     steps:
@@ -27,7 +33,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties', 'gradle/libs.versions.toml') }}
       # Cache Gradle Wrapper
       - name: Setup Gradle Wrapper Cache
         uses: actions/cache@v2
@@ -40,8 +46,8 @@ jobs:
         env:
           CI: true
         with:
-          gradle-version: 6.8
-          arguments: check
+          gradle-version: 7.1
+          arguments: runAffectedUnitTests -Paffected_module_detector.enable
       - name: comment
         uses: unsplash/comment-on-pr@master
         if: failure()

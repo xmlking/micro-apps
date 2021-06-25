@@ -64,6 +64,8 @@ plugins {
     id("com.google.cloud.tools.jib")
     // detect slf4j conflicts and configure desired backend
     id("dev.jacomet.logging-capabilities")
+    // Affected Module Detector: must only be apply to rootProject
+    id("com.dropbox.affectedmoduledetector")
 }
 
 // rootProject config
@@ -92,6 +94,16 @@ scmVersion {
     //             "replacement" to """{v, p -> "'$'v"}]))"""))
     //     pre("commit")
     // })
+}
+
+// rootProject config
+affectedModuleDetector {
+    baseDir = "${project.rootDir}"
+    pathsAffectingAllModules = setOf("gradle/libs.versions.toml")
+    logFilename = "output.log"
+    logFolder = "${rootProject.buildDir}/affectedModuleDetector"
+    specifiedBranch = "develop"
+    compareFrom = "SpecifiedBranchCommit" // default is PreviousCommit
 }
 
 version = scmVersion.version
@@ -226,6 +238,9 @@ subprojects {
             }
         }
 
+        // FIXME: specify which task to run per subproject
+        // affectedTestConfiguration { jvmTestTask = "check" }
+
         java {
             toolchain {
                 languageVersion.set(JavaLanguageVersion.of(11))
@@ -252,8 +267,10 @@ subprojects {
                 removeUnusedImports()
                 trimTrailingWhitespace()
                 endWithNewline()
+                targetExclude("**/build/**")
             }
             kotlin {
+                targetExclude("**/build/**")
                 ktlint(ktlintVersion)
             }
             kotlinGradle {
@@ -265,6 +282,8 @@ subprojects {
         tasks {
             compileKotlin {
                 kotlinOptions {
+                    // TODO: Ultimately we need allWarningsAsErrors = true
+                    // allWarningsAsErrors = true // Treat all Kotlin warnings as errors
                     jvmTarget = JavaVersion.VERSION_11.toString()
                     // languageVersion = "1.6"
                     // apiVersion = "1.6"

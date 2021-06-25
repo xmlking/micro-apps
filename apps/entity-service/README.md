@@ -20,6 +20,12 @@ gradle :apps:entity-service:bootRun --debug
 open http://localhost:8080/
 ```
 
+## Test
+
+```
+gradle :apps:entity-service:test
+```
+
 ## Build
 
 ### Build fatJar

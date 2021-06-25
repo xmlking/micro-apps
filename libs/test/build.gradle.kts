@@ -9,6 +9,8 @@ dependencies {
     testFixturesImplementation(libs.kotest.runner.junit5.jvm)
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 sonarqube {
     isSkipProject = true
 }

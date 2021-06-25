@@ -40,6 +40,8 @@ dependencies {
     testFixturesImplementation(libs.protobuf.java)
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 sourceSets {
     main {
         proto {

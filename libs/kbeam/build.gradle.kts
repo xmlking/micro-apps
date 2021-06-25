@@ -14,3 +14,5 @@ dependencies {
     testImplementation(libs.hamcrest.all.test)
     testImplementation(libs.beam.sdks.java.extensions.json.jackson)
 }
+
+affectedTestConfiguration { jvmTestTask = "check" }

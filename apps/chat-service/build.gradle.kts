@@ -39,6 +39,8 @@ dependencies {
     implementation(libs.markdown)
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 loggingCapabilities {
     selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }

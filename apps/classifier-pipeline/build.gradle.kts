@@ -43,6 +43,8 @@ dependencies {
     testImplementation(testFixtures(project(":libs:pipeline")))
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 // gradle test -Dkotest.tags.include=Beam -Dkotest.tags.exclude=E2E
 tasks {
     test {

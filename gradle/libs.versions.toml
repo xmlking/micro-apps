@@ -21,20 +21,6 @@ javafaker = "1.0.2"
 
 # gradle
 gradleTool = "7.1"
-sonarPlugin = "3.3"
-spotlessPlugin = "5.14.0"
-spotlessClogPlugin = "2.2.0"
-dokkaPlugin = "1.4.32"
-checkLatestPlugin = "0.39.0"
-useLatestPlugin = "0.2.17"
-axionPlugin = "1.13.2"
-shadowPlugin = "7.0.0"
-jibPlugin = "3.1.1"
-loggerPlugin = "0.9.0"
-protobufPlugin = "0.8.16"
-springNativePlugin = "0.10.0"
-graalvmPlugin = "0.9.0"
-springDependencyManagementPlugin = "1.0.11.RELEASE"
 
 # test matchers
 hamcrest = "1.3"

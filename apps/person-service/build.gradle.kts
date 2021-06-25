@@ -16,6 +16,8 @@ dependencies {
     testImplementation(libs.rest.assured.test)
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 quarkus {
     setOutputDirectory("$projectDir/build/classes/kotlin/main")
 }

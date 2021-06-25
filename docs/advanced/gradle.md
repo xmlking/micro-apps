@@ -75,6 +75,28 @@ gradle :apps:greeting-service:quarkusDev -Dsuspend -Ddebug
 # quarkusTestConfig - Sets the necessary system properties for the Quarkus tests to run.
 ```
 
+### Affected Module Detector
+
+The detector allows for three options for affected modules:
+
+- **Changed Projects:** These are projects which had files changed within them – enabled with `-Paffected_module_detector.changedProjects`)
+- **Dependent Projects:** These are projects which are dependent on projects which had changes within them enabled with `-Paffected_module_detector.dependentProjects`)
+- **All Affected Projects:** This is the union of Changed Projects and Dependent Projects (this is the default configuration)
+
+```bash
+# Running All Affected Projects (Changed Projects + Dependent Projects)
+gradle runAffectedUnitTests -Paffected_module_detector.enable
+# Running All Changed Projects
+gradle runAffectedUnitTests -Paffected_module_detector.enable -Paffected_module_detector.changedProjects
+# Running All Dependent Projects
+gradle runAffectedUnitTests -Paffected_module_detector.enable -Paffected_module_detector.dependentProjects
+ 
+ # runs connected tests
+gradle runAffectedAndroidTests -Paffected_module_detector.enable
+# assembles but does not run on device tests, useful when working with device labs
+gradle assembleAffectedAndroidTests -Paffected_module_detector.enable 
+```
+
 ### Build
 
 > build jar

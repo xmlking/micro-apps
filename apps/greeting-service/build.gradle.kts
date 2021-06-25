@@ -42,6 +42,8 @@ dependencies {
     testImplementation(testFixtures(project(":libs:proto")))
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 quarkus {
     setOutputDirectory("$projectDir/build/classes/kotlin/main")
 }

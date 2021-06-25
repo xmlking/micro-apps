@@ -1,9 +1,9 @@
 package micro.apps.service.config
 
-import io.quarkus.arc.config.ConfigProperties
+import io.smallrye.config.ConfigMapping
 import org.eclipse.microprofile.config.inject.ConfigProperty
 
-@ConfigProperties(prefix = "greeting")
+@ConfigMapping(prefix = "greeting")
 interface AppConfig {
     @ConfigProperty(name = "application.name")
     fun applicationName(): String?

@@ -30,3 +30,5 @@ dependencies {
     // Test
     testImplementation(testFixtures(project(":libs:test")))
 }
+
+affectedTestConfiguration { jvmTestTask = "check" }

@@ -53,6 +53,12 @@ dependencies {
     testImplementation(testFixtures(project(":libs:pipeline")))
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
+loggingCapabilities {
+    selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
+}
+
 // gradle test -Dkotest.tags.include=Beam -Dkotest.tags.exclude=E2E
 tasks {
     test {
@@ -65,8 +71,4 @@ application {
     // applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
     applicationDefaultJvmArgs =
         listOf("-Djava.util.logging.config.file=src/main/resources/logging.properties", "-Dmicro.apps.level=FINE")
-}
-
-loggingCapabilities {
-    selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }

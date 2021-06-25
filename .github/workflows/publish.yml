@@ -39,7 +39,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          gradle-version: 6.8
+          gradle-version: 7.1
           arguments: publish
 
 # TODO https://github.com/marketplace/actions/publish-docker

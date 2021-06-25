@@ -13,7 +13,7 @@ class AccountKtTest : FunSpec({
             phone = "000-000-0000"
             return@with build()
         }
-        person.id.isEmpty() shouldBe true
+        person.email.isEmpty() shouldBe true
         person.firstName shouldBe "sumo"
     }
 })

@@ -9,10 +9,10 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import micro.apps.proto.common.v1.Address
 import micro.apps.proto.common.v1.Profile
-import micro.apps.proto.keying.v1.KeyRequest
-import micro.apps.proto.keying.v1.KeyResponse
-import micro.apps.proto.keying.v1.KeyingServiceGrpcKt.KeyingServiceCoroutineStub
-import micro.apps.service.KeyingService
+import micro.apps.proto.linking.v1.LinkRequest
+import micro.apps.proto.linking.v1.LinkResponse
+import micro.apps.proto.linking.v1.LinkingServiceGrpcKt.LinkingServiceCoroutineStub
+import micro.apps.service.LinkingService
 import micro.apps.test.E2E
 
 class KeyingServiceTest : FunSpec({
@@ -22,7 +22,7 @@ class KeyingServiceTest : FunSpec({
 
     beforeSpec {
         uniqueName = InProcessServerBuilder.generateName()
-        server = InProcessServerBuilder.forName(uniqueName).directExecutor().addService(KeyingService()).build()
+        server = InProcessServerBuilder.forName(uniqueName).directExecutor().addService(LinkingService()).build()
         server.start()
     }
 
@@ -38,10 +38,10 @@ class KeyingServiceTest : FunSpec({
         channel.shutdownNow()
     }
 
-    test("should be able to call KeyingService/Key method").config(tags = setOf(E2E)) {
-        val keyingStub = KeyingServiceCoroutineStub(channel)
+    test("should be able to call LinkingService/Link method").config(tags = setOf(E2E)) {
+        val linkingStub = LinkingServiceCoroutineStub(channel)
 
-        lateinit var response: KeyResponse
+        lateinit var response: LinkResponse
 
         var address = with(Address.newBuilder()) {
             suite = "1234"
@@ -53,10 +53,10 @@ class KeyingServiceTest : FunSpec({
         }
 
         shouldNotThrowAny {
-            val request = KeyRequest.newBuilder().setProfile(Profile.PROFILE_RO).setAddress(address).build()
-            response = keyingStub.key(request)
+            val request = LinkRequest.newBuilder().setProfile(Profile.PROFILE_RO).addAddresses(address).build()
+            response = linkingStub.link(request)
         }
 
-        response.key shouldBe "123e4567-e89b-12d3-a456-426614174000"
+        response.personId shouldBe "123e4567-e89b-12d3-a456-426614174000"
     }
 })

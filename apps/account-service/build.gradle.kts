@@ -42,6 +42,8 @@ dependencies {
     // testImplementation("io.grpc:grpc-testing:$grpcVersion")
 }
 
+affectedTestConfiguration { jvmTestTask = "check" }
+
 application {
     mainClass.set("micro.apps.service.AccountApplicationKt")
     //    applicationDefaultJvmArgs = listOf("-noverify", "-XX:TieredStopAtLevel=1")
