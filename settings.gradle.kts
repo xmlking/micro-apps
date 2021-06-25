@@ -37,6 +37,7 @@ pluginManagement {
         kotlin("plugin.allopen") version kotlinVersion apply false
         kotlin("kapt") version kotlinVersion apply false
         kotlin("plugin.spring") version kotlinVersion apply false
+        kotlin("plugin.lombok") version kotlinVersion apply false
         id("org.sonarqube") version "3.3"
         id("com.diffplug.spotless") version "5.14.0"
         id("org.jetbrains.dokka") version "1.4.32"

@@ -66,6 +66,8 @@ plugins {
     id("dev.jacomet.logging-capabilities")
     // Affected Module Detector: must only be apply to rootProject
     id("com.dropbox.affectedmoduledetector")
+    // TODO: https://kotlinlang.org/docs/lombok.html
+    // kotlin("plugin.lombok")
 }
 
 // rootProject config
