@@ -4,6 +4,7 @@ import com.google.api.gax.rpc.ApiException
 import com.google.api.gax.rpc.StatusCode.Code.ALREADY_EXISTS
 import com.google.common.collect.ImmutableMap
 import com.sksamuel.avro4k.Avro
+import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.kbeam.transforms.AvroToPubsub
 import micro.apps.model.Person
 import micro.apps.model.fixtures.mockPersonList
@@ -27,6 +28,7 @@ import kotlin.test.Ignore
 import kotlin.test.Test
 
 // use Avro.default.fromRecord(serializer, rec) , Avro.default.toRecord Avro.default.toRecord(serializer, obj) to convert GenericRecord <==> Data Class
+@OptIn(ExperimentalSerializationApi::class)
 class PubSubProducerTest : Serializable {
 
     private val host = "localhost:8085"

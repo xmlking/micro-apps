@@ -5,6 +5,7 @@ import com.google.api.gax.rpc.StatusCode.Code.ALREADY_EXISTS
 import com.google.protobuf.ByteString
 import com.google.pubsub.v1.PubsubMessage
 import com.sksamuel.avro4k.Avro
+import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.kbeam.map
 import micro.apps.model.Person
 import micro.apps.model.fixtures.mockPersonList
@@ -24,6 +25,7 @@ import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@OptIn(ExperimentalSerializationApi::class)
 class IngestionPipelineTest : Serializable {
 
     private val host = "localhost:8085"
