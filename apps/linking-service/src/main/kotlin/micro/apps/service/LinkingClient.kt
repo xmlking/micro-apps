@@ -15,7 +15,7 @@ import micro.apps.proto.common.v1.Person
 import micro.apps.proto.common.v1.Profile
 import micro.apps.proto.linking.v1.LinkRequest
 import micro.apps.proto.linking.v1.LinkingServiceGrpcKt.LinkingServiceCoroutineStub
-import micro.apps.proto.utils.LinkRequest
+import micro.apps.proto.util.LinkRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config

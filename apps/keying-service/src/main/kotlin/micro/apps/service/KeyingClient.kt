@@ -14,7 +14,7 @@ import micro.apps.proto.common.v1.Address
 import micro.apps.proto.common.v1.Profile
 import micro.apps.proto.keying.v1.KeyRequest
 import micro.apps.proto.keying.v1.KeyingServiceGrpcKt.KeyingServiceCoroutineStub
-import micro.apps.proto.utils.KeyRequest
+import micro.apps.proto.util.KeyRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config

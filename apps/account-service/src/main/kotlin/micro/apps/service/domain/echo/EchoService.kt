@@ -8,8 +8,8 @@ import micro.apps.proto.echo.v1.EchoResponse
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
 import micro.apps.proto.echo.v1.EchoStreamRequest
 import micro.apps.proto.echo.v1.EchoStreamResponse
-import micro.apps.proto.utils.EchoResponse
-import micro.apps.proto.utils.EchoStreamResponse
+import micro.apps.proto.util.EchoResponse
+import micro.apps.proto.util.EchoStreamResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}

@@ -8,7 +8,7 @@ import micro.apps.proto.common.v1.Status
 import micro.apps.proto.keying.v1.KeyRequest
 import micro.apps.proto.keying.v1.KeyResponse
 import micro.apps.proto.keying.v1.KeyingServiceGrpcKt
-import micro.apps.proto.utils.KeyResponse
+import micro.apps.proto.util.KeyResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}

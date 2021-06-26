@@ -10,8 +10,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.account.v1.AccountServiceGrpcKt.AccountServiceCoroutineStub
-import micro.apps.proto.utils.GetAccountRequest
-import micro.apps.proto.utils.SearchAccountRequest
+import micro.apps.proto.util.GetAccountRequest
+import micro.apps.proto.util.SearchAccountRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config

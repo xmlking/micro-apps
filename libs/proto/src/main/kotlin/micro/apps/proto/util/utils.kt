@@ -1,4 +1,4 @@
-package micro.apps.proto.utils
+package micro.apps.proto.util
 
 import micro.apps.proto.echo.v1.EchoRequest
 import micro.apps.proto.echo.v1.EchoResponse

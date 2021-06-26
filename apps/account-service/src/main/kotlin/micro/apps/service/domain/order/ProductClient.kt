@@ -10,8 +10,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.order.v1.ProductServiceGrpcKt.ProductServiceCoroutineStub
-import micro.apps.proto.utils.GetProductRequest
-import micro.apps.proto.utils.SearchProductRequest
+import micro.apps.proto.util.GetProductRequest
+import micro.apps.proto.util.SearchProductRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config

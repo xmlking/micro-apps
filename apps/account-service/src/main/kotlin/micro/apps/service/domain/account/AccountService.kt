@@ -11,8 +11,8 @@ import micro.apps.proto.account.v1.GetResponse
 import micro.apps.proto.account.v1.SearchRequest
 import micro.apps.proto.account.v1.SearchResponse
 import micro.apps.proto.common.v1.Person
-import micro.apps.proto.utils.GetAccountResponse
-import micro.apps.proto.utils.SearchAccountResponse
+import micro.apps.proto.util.GetAccountResponse
+import micro.apps.proto.util.SearchAccountResponse
 import mu.KotlinLogging
 
 var person = with(Person.newBuilder()) {

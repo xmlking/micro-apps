@@ -13,8 +13,8 @@ import micro.apps.proto.order.v1.GetResponse
 import micro.apps.proto.order.v1.ProductServiceGrpcKt
 import micro.apps.proto.order.v1.SearchRequest
 import micro.apps.proto.order.v1.SearchResponse
-import micro.apps.proto.utils.GetProductResponse
-import micro.apps.proto.utils.SearchProductResponse
+import micro.apps.proto.util.GetProductResponse
+import micro.apps.proto.util.SearchProductResponse
 import mu.KotlinLogging
 
 var product = with(Product.newBuilder()) {

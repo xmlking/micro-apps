@@ -11,8 +11,8 @@ import micro.apps.proto.address.v1.GetResponse
 import micro.apps.proto.address.v1.SearchRequest
 import micro.apps.proto.address.v1.SearchResponse
 import micro.apps.proto.common.v1.Address
-import micro.apps.proto.utils.GetAddressResponse
-import micro.apps.proto.utils.SearchAddressResponse
+import micro.apps.proto.util.GetAddressResponse
+import micro.apps.proto.util.SearchAddressResponse
 import mu.KotlinLogging
 
 var address = with(Address.newBuilder()) {

@@ -8,8 +8,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt.EchoServiceCoroutineStub
-import micro.apps.proto.utils.EchoRequest
-import micro.apps.proto.utils.EchoStreamRequest
+import micro.apps.proto.util.EchoRequest
+import micro.apps.proto.util.EchoStreamRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config

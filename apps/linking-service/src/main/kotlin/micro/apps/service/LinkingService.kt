@@ -8,7 +8,7 @@ import micro.apps.proto.common.v1.Status
 import micro.apps.proto.linking.v1.LinkRequest
 import micro.apps.proto.linking.v1.LinkResponse
 import micro.apps.proto.linking.v1.LinkingServiceGrpcKt
-import micro.apps.proto.utils.LinkResponse
+import micro.apps.proto.util.LinkResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}

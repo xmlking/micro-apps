@@ -10,8 +10,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.address.v1.AddressServiceGrpcKt.AddressServiceCoroutineStub
-import micro.apps.proto.utils.GetAddressRequest
-import micro.apps.proto.utils.SearchAddressRequest
+import micro.apps.proto.util.GetAddressRequest
+import micro.apps.proto.util.SearchAddressRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config

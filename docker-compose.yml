@@ -106,6 +106,15 @@ services:
   #      - ./config/nifi:/opt/nifi/nifi-current/conf
   #      - nifi:/opt/nifi/nifi-current/extensions
 
+  scylla:
+    image: scylladb/scylla:4.5
+    command: "--smp 2"
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    mem_limit: 600m
 
   envoy:
     image: docker.io/envoyproxy/envoy-alpine:v1.18.3
