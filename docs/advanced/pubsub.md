@@ -93,7 +93,7 @@ gcps
 As alternative, you can also start emulator via docker
 
 ```bash
-docker-compose up pub-sub-emulator
+docker compose up pub-sub-emulator
 ```
 
 #### Setup PubSub
@@ -118,6 +118,6 @@ gcpl
 ```bash
 # when using gcloud cli to start emulator
 gcpk
-# or if you are using docker-compose
-docker-compose up down
+# or if you are using docker compose
+docker compose up down
 ```
