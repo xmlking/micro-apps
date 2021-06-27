@@ -5,9 +5,10 @@ plugins {
     id("io.spring.dependency-management")
     kotlin("plugin.spring")
     id("org.springframework.experimental.aot")
-    id("org.graalvm.buildtools.native")
+    //id("org.graalvm.buildtools.native")
 
     // kotlin("plugin.serialization")
+    id("com.avast.gradle.docker-compose")
 }
 
 val slf4jVersion = libs.versions.slf4j.get()
@@ -19,8 +20,10 @@ dependencies {
     implementation(libs.spring.boot.starter.rsocket)
 
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    // implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    // testImplementation("io.projectreactor:reactor-test")
+
+    // projectreactor
+    implementation(libs.spring.boot.reactor.kotlin.extensions)
+    testImplementation(libs.spring.boot.reactor.test)
 
     testImplementation(testFixtures(project(":libs:test")))
     testImplementation(testFixtures(project(":libs:model")))
@@ -28,6 +31,7 @@ dependencies {
         exclude(module = "mockito-core")
     }
     testImplementation(libs.spring.boot.mockk.test)
+    testImplementation(libs.kotest.assertions.json.jvm)
     testImplementation(libs.kotest.extensions.spring)
 }
 
@@ -35,6 +39,13 @@ affectedTestConfiguration { jvmTestTask = "check" }
 
 loggingCapabilities {
     selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
+}
+
+dockerCompose {
+    nested("redis").apply {
+        useComposeFiles = listOf("docker/redis.yml")
+        isRequiredBy(tasks.integrationTest)
+    }
 }
 
 tasks.withType<BootBuildImage> {

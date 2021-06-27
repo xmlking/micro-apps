@@ -119,7 +119,7 @@ spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
 spring-boot-starter-data-r2dbc = { module = "org.springframework.boot:spring-boot-starter-data-r2dbc" }
 spring-boot-starter-rsocket = { module = "org.springframework.boot:spring-boot-starter-rsocket" }
-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+spring-boot-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
 
 h2 = { module = "com.h2database:h2" }
 r2dbc-h2 = { module = "io.r2dbc:r2dbc-h2" }
@@ -172,6 +172,7 @@ slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" } # ru
 kotest-framework-engine-jvm = { module = "io.kotest:kotest-framework-engine-jvm", version.ref = "kotest" }
 kotest-framework-api-jvm = { module = "io.kotest:kotest-framework-api-jvm", version.ref = "kotest" }
 kotest-assertions-core-jvm = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
+kotest-assertions-json-jvm = { module = "io.kotest:kotest-assertions-json-jvm", version.ref = "kotest" }
 kotest-property-jvm = { module = "io.kotest:kotest-property-jvm", version.ref = "kotest" }
 kotest-runner-junit5-jvm = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
 kotest-extensions-spring = { module = "io.kotest.extensions:kotest-extensions-spring", version.ref = "kotestSpring" }
@@ -186,6 +187,7 @@ quarkus-jacoco-test = { module = "io.quarkus:quarkus-jacoco" }
 grpc-test = { module = "io.grpc:grpc-testing", version.ref = "grpc" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-mockk-test = { module = "com.ninja-squad:springmockk", version.ref = "springMockk" }
+spring-boot-reactor-test = { module = "io.projectreactor:reactor-test" }
 turbine-test = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 # beam dependencies

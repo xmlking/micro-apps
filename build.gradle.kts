@@ -351,7 +351,7 @@ subprojects {
 
             val integrationTest = register<Test>("integrationTest") {
                 useJUnitPlatform {
-                    includeTags("integration")
+                    includeTags("integration", "e2e")
                 }
                 filter {
                     isFailOnNoMatchingTests = false

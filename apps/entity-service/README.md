@@ -10,6 +10,23 @@ here
 
 ## Run
 
+### Redis
+
+```bash
+# start local redis
+gradle :apps:entity-service:redisComposeUp
+# stop local redis before restart again
+gradle :apps:entity-service:redisComposeDown
+```
+
+**Redis Insight:** Redis db visualization dashboard
+
+> when prompted, use host:redisearch, port:6379 and name:any_name
+
+```bash
+open http://localhost:8001/
+```
+
 ```bash
 gradle :apps:entity-service:bootRun
 # log at debug level
@@ -24,6 +41,7 @@ open http://localhost:8080/
 
 ```
 gradle :apps:entity-service:test
+gradle :apps:entity-service:integrationTest
 ```
 
 ## Build
