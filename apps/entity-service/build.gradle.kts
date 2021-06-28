@@ -8,7 +8,6 @@ plugins {
     //id("org.graalvm.buildtools.native")
 
     // kotlin("plugin.serialization")
-    id("com.avast.gradle.docker-compose")
 }
 
 val slf4jVersion = libs.versions.slf4j.get()
@@ -41,12 +40,7 @@ loggingCapabilities {
     selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }
 
-dockerCompose {
-    nested("redis").apply {
-        useComposeFiles = listOf("docker/redis.yml")
-        isRequiredBy(tasks.integrationTest)
-    }
-}
+tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
 
 tasks.withType<BootBuildImage> {
     builder = "paketobuildpacks/builder:tiny"

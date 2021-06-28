@@ -1,27 +1,30 @@
-version: "3.7"
+version: "3.9"
 
 services:
-  redisearch:
-    image: redislabs/redisearch:2.0.9
+  redis:
+    image: redislabs/redismod:latest
     environment:
       # make a test user and database
-      - REDIS_PASSWORD=password
+      - REDIS_PASSWORD=redis
     ports:
       - 6379:6379
     volumes:
-      # - ../db_scripts/1-schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      # - ./db_scripts/1-schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
       - redisearch:/data
     command:
       # you've to load the associated *.so for the module to work in docker
       - "--loadmodule /usr/lib/redis/modules/redisearch.so"
+      - "--loadmodule /usr/lib/redis/modules/redisgraph.so"
       # redis rdb backup config.
       # Save if 100 keys are added in every 10 seconds
       - "--save 10 100"
 
-  redisinsight:
+  insight:
     image: redislabs/redisinsight:1.10.1
     ports:
       - '8001:8001'
+    depends_on:
+      - redis
     volumes:
       - redisinsight:/db
 

@@ -75,6 +75,18 @@ gradle :apps:greeting-service:quarkusDev -Dsuspend -Ddebug
 # quarkusTestConfig - Sets the necessary system properties for the Quarkus tests to run.
 ```
 
+### Docker Compose
+
+start/stop dependent services for your app
+```bash
+# start local redis
+gradle redisComposeUp
+# stop local redis before restart again
+gradle redisComposeDown
+# copy container logs to `build/containers-logs`
+gradle redisComposeLogs
+```
+
 ### Affected Module Detector
 
 The detector allows for three options for affected modules:

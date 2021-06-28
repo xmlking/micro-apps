@@ -14,9 +14,11 @@ here
 
 ```bash
 # start local redis
-gradle :apps:entity-service:redisComposeUp
+gradle redisComposeUp
 # stop local redis before restart again
-gradle :apps:entity-service:redisComposeDown
+gradle redisComposeDown
+# copy container logs to `build/containers-logs`
+gradle redisComposeLogs
 ```
 
 **Redis Insight:** Redis db visualization dashboard

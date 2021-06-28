@@ -68,6 +68,7 @@ plugins {
     id("com.dropbox.affectedmoduledetector")
     // TODO: https://kotlinlang.org/docs/lombok.html
     // kotlin("plugin.lombok")
+    id("com.avast.gradle.docker-compose")
 }
 
 // rootProject config
@@ -153,6 +154,17 @@ sonarqube {
 
             dependsOn(":${it.path}:check")
         }
+    }
+}
+
+// HINT: add this like to all subprojects that depends on dockerCompose
+// tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
+dockerCompose {
+    nested("redis").apply {
+        useComposeFiles = listOf("infra/redis.yml")
+    }
+    nested("dgraph").apply {
+        useComposeFiles = listOf("infra/dgraph.yml")
     }
 }
 
@@ -349,7 +361,7 @@ subprojects {
                 finalizedBy("jacocoTestReport")
             }
 
-            val integrationTest = register<Test>("integrationTest") {
+            register<Test>("integrationTest") {
                 useJUnitPlatform {
                     includeTags("integration", "e2e")
                 }
