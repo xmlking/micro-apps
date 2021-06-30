@@ -8,6 +8,8 @@ Generate a native image to improve the start-up time.
 Find more *Spring Native* [samples](https://github.com/spring-projects-experimental/spring-native/tree/main/samples)
 here
 
+This µService also showcase running both **REST** and **gRPC** services on single server.
+
 ## Run
 
 ### Redis
@@ -44,6 +46,18 @@ open http://localhost:8080/
 ```
 gradle :apps:entity-service:test
 gradle :apps:entity-service:integrationTest
+```
+
+Test gRPC services 
+
+```bash
+grpcurl -plaintext \
+-protoset <(buf build -o -) \
+-d '{ "message":  "sumo" }' 0.0.0.0:6565 micro.apps.proto.echo.v1.EchoService/Echo      
+
+grpcurl -plaintext \
+-protoset <(buf build -o -) \
+-d '{ "message":  "sumo" }' 0.0.0.0:6565 micro.apps.proto.echo.v1.EchoService/EchoStream
 ```
 
 ## Build

@@ -1,3 +1,7 @@
+plugins {
+    id("org.graalvm.buildtools.native")
+}
+
 dependencies {
     implementation(project(":libs:proto"))
     implementation(project(":libs:service"))

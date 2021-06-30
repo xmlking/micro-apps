@@ -4,8 +4,8 @@ plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
     kotlin("plugin.spring")
-    id("org.springframework.experimental.aot")
-    //id("org.graalvm.buildtools.native")
+//    id("org.springframework.experimental.aot")
+//    id("org.graalvm.buildtools.native")
 
     // kotlin("plugin.serialization")
 }
@@ -16,9 +16,16 @@ dependencies {
     implementation(project(":libs:model"))
     // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
     implementation(libs.bundles.spring.basic)
+
+    // Optional: if you also want rsocket
     implementation(libs.spring.boot.starter.rsocket)
 
+    // Optional: for redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    // Optional: if you also want to add some gRPC services
+    implementation(project(":libs:proto"))
+    implementation(libs.bundles.spring.grpc)
 
     // projectreactor
     implementation(libs.spring.boot.reactor.kotlin.extensions)

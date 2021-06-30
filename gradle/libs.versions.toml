@@ -75,6 +75,7 @@ spring = "2.5.2"
 kotestSpring = "1.0.0"
 springMockk = "3.0.1"
 snakeyaml = "1.28"
+springGrpc = "4.5.4"
 
 # google
 googlePubsub = "1.113.4"
@@ -120,6 +121,7 @@ spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-s
 spring-boot-starter-data-r2dbc = { module = "org.springframework.boot:spring-boot-starter-data-r2dbc" }
 spring-boot-starter-rsocket = { module = "org.springframework.boot:spring-boot-starter-rsocket" }
 spring-boot-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+spring-boot-starter-grpc  = { module = "io.github.lognet:grpc-spring-boot-starter", version.ref = "springGrpc" }
 
 h2 = { module = "com.h2database:h2" }
 r2dbc-h2 = { module = "io.r2dbc:r2dbc-h2" }
@@ -247,6 +249,10 @@ spring-basic = [
     "kotlinx-coroutines-reactor",
 ]
 
+spring-grpc = [
+    "grpc-kotlin-stub",
+    "spring-boot-starter-grpc"
+]
 
 arrow = [
     "arrow-core",

@@ -4,3 +4,7 @@ spring.rsocket.server.transport: websocket
 spring.rsocket.server.mapping-path: /rsocket
 
 redis.url: localhost:6379
+
+grpc:
+  port: 6565
+  enableReflection: true

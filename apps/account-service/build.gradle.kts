@@ -1,6 +1,5 @@
 plugins {
-    // FIXME: https://github.com/graalvm/native-build-tools/issues/70
-    // id("org.graalvm.buildtools.native")
+    id("org.graalvm.buildtools.native")
 }
 
 dependencies {
