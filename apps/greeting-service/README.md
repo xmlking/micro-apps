@@ -4,8 +4,7 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-Many Quarkus QuickStarts [sample](https://github.com/quarkusio/quarkus-quickstarts) could be found here.
-
+Find more *Quarkus QuickStart* [samples](https://github.com/quarkusio/quarkus-quickstarts) here
 
 ## Prerequisites
 

@@ -22,6 +22,20 @@ Open two browser tabs and start chatting...
 open http://localhost:8080/
 ```
 
+## Build
+
+### Build fatJar
+
+```bash
+gradle :apps:chat-service:build
+```
+
+### Build native image
+
+```bash
+gradle :apps:chat-service:bootBuildImage 
+```
+
 ### Reference
 
 * [Spring Boot with Kotlin and RSocket](https://spring.io/guides/tutorials/spring-webflux-kotlin-rsocket/)

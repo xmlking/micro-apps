@@ -64,13 +64,13 @@ grpcurl -plaintext \
 
 ### Build fatJar
 
-```
+```bash
 gradle :apps:entity-service:build
 ```
 
 ### Build native image
 
-```
+```bash
 gradle :apps:entity-service:bootBuildImage 
 ```
 

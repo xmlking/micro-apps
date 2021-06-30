@@ -4,8 +4,8 @@ plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
     kotlin("plugin.spring")
-//    id("org.springframework.experimental.aot")
-//    id("org.graalvm.buildtools.native")
+    id("org.springframework.experimental.aot")
+    id("org.graalvm.buildtools.native")
 
     // kotlin("plugin.serialization")
 }
@@ -59,7 +59,8 @@ tasks.withType<BootBuildImage> {
     )
 }
 
-// springAot {
+springAot {
+    failOnMissingSelectorHint.set(false)
 //    removeSpelSupport.set(true)
 //    removeYamlSupport.set(true)
-// }
+}

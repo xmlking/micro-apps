@@ -50,7 +50,8 @@ tasks.withType<BootBuildImage> {
     environment = mapOf("BP_NATIVE_IMAGE" to "true")
 }
 
-// springAot {
-//    removeSpelSupport.set(true)
-//    removeYamlSupport.set(true)
-// }
+springAot {
+    failOnMissingSelectorHint.set(false)
+//     removeSpelSupport.set(true)
+//     removeYamlSupport.set(true)
+}
