@@ -46,12 +46,15 @@ loggingCapabilities {
 }
 
 tasks.withType<BootBuildImage> {
+    // isVerboseLogging = true
+    // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
+    // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/certificates")
     builder = "paketobuildpacks/builder:tiny"
     environment = mapOf("BP_NATIVE_IMAGE" to "true")
 }
 
 springAot {
     failOnMissingSelectorHint.set(false)
-//     removeSpelSupport.set(true)
-//     removeYamlSupport.set(true)
+//    removeSpelSupport.set(true)
+//    removeYamlSupport.set(true)
 }
