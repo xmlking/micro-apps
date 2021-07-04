@@ -8,3 +8,17 @@ redis.url: localhost:6379
 grpc:
   port: 6565
   enableReflection: true
+
+#APP_REDIS_HOST: localhost
+#APP_REDIS_PORT: 6379
+#
+#spring:
+#  cache:
+#    type: redis
+#    redis:
+#      time-to-live: 100000
+#      key-prefix: 'suggestion-track::'
+#  redis:
+#    timeout: 100
+#    host: '${APP_REDIS_HOST}'
+#    port: '${APP_REDIS_PORT}'

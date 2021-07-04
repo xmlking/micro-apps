@@ -23,6 +23,17 @@ gradle redisComposeDown
 gradle redisComposeLogs
 ```
 
+via docker-compose
+
+```bash
+# start local redis
+docker compose -f infra/redis.yml up
+# stop local redis before restart again
+docker compose -f infra/redis.yml down
+# this will stop redis and remove all volumes
+docker compose -f infra/redis.yml down -v 
+```
+
 **Redis Insight:** Redis db visualization dashboard
 
 > when prompted, use host:redisearch, port:6379 and name:any_name

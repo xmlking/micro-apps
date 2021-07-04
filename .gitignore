@@ -27,7 +27,6 @@ out/
 
 # OSX
 .DS_Store
-.DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
@@ -59,6 +58,7 @@ build/
 .deployment/
 
 ### Project ###
+.env
 favicon.*
 *.mv.db
 *.trace.db

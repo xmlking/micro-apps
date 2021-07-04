@@ -28,6 +28,30 @@ services:
     volumes:
       - redisinsight:/db
 
+  grafana:
+    image: grafana/grafana:8.0.4
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+      - GF_ENABLE_GZIP=true
+      - GF_USERS_DEFAULT_THEME=dark
+      - GF_INSTALL_PLUGINS=redis-datasource,redis-app
+      # defend following secrets in .env and don't commit `.env` file to git.
+      - REDIS_CLOUD_HOST
+      - REDIS_CLOUD_PASSWORD
+    volumes:
+      - ./grafana/provisioning/datasources/:/etc/grafana/provisioning/datasources/
+      - ./grafana/provisioning/dashboards/:/etc/grafana/provisioning/dashboards/
+      - grafana:/var/lib/grafana
+    links:
+      - redis
+    depends_on:
+      - redis
+
 volumes:
   redisearch:
   redisinsight:
+  grafana:

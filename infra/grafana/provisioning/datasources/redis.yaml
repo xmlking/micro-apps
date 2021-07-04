@@ -1,0 +1,38 @@
+apiVersion: 1
+
+datasources:
+  - name: Redis
+    type: redis-datasource
+    typeLogoUrl: public/plugins/redis-datasource/img/logo.svg
+    access: proxy
+    orgId: 1
+    isDefault: true
+    version: 1
+    url: redis://redis:6379
+    jsonData:
+      poolSize: 5
+      timeout: 10
+      pingInterval: 0
+      pipelineWindow: 0
+    editable: true
+  - name: Redis Cloud
+    type: redis-datasource
+    typeLogoUrl: public/plugins/redis-datasource/img/logo.svg
+    access: proxy
+    orgId: 1
+    isDefault: false
+    version: 1
+    url: redis://$REDIS_CLOUD_HOST
+    secureJsonData:
+      password: $REDIS_CLOUD_PASSWORD
+#      tlsCACert: "..."
+#      tlsClientCert: "..."
+#      tlsClientKey: "..."
+    jsonData:
+      acl: true
+      user: asumo
+      poolSize: 5
+      timeout: 10
+      pingInterval: 0
+      pipelineWindow: 0
+    editable: true
