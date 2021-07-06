@@ -1,6 +1,19 @@
-# create-svelte
+# entity-webapp
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+**entity-webapp** is powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte)
+
+This will be embedded into [chat-service](../chat-service)
+
+Curated **SvelteKit** [links](../../docs/advanced/svelte.md)
+
+## Gradle Commands
+
+```bash
+gradle :apps:entity-webapp:run
+gradle :apps:entity-webapp:npmClean
+gradle :apps:entity-webapp:npmBuild
+gradle :apps:entity-webapp:jar
+```
 
 ## Creating a project
 
