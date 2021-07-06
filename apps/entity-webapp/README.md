@@ -2,7 +2,7 @@
 
 **entity-webapp** is powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte)
 
-This will be embedded into [chat-service](../chat-service)
+This will be embedded into [entity-service](../entity-service)
 
 Curated **SvelteKit** [links](../../docs/advanced/svelte.md)
 
