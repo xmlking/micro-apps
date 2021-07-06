@@ -56,6 +56,7 @@ pluginManagement {
         id("org.graalvm.buildtools.native") version "0.9.1" apply false
         id("com.dropbox.affectedmoduledetector") version "0.1.2" apply false
         id("com.avast.gradle.docker-compose") version "0.14.3" apply false
+        id("com.github.node-gradle.node") version "3.1.0" apply false
     }
 }
 
@@ -68,6 +69,7 @@ include(
     ":apps:person-service",
     ":apps:chat-service",
     ":apps:entity-service",
+    ":apps:entity-webapp",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",
     ":apps:wordcount-pipeline",

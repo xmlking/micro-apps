@@ -13,6 +13,7 @@ plugins {
 val slf4jVersion = libs.versions.slf4j.get()
 
 dependencies {
+    implementation(project(":apps:entity-webapp"))
     implementation(project(":libs:model"))
     // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
     implementation(libs.bundles.spring.basic)

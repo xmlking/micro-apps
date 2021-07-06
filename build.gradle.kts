@@ -25,6 +25,7 @@ val kotlinLoggingVersion = libs.versions.kotlinLogging.get()
 val kotestVersion = libs.versions.kotest.get()
 
 val excludedProjects = setOf("apps", "libs")
+val webappProjects = setOf("entity-webapp")
 val springProjects = setOf("chat-service", "entity-service")
 val grpcProjects = setOf("account-service", "keying-service", "linking-service")
 val quarkusProjects = setOf("greeting-service", "person-service")
