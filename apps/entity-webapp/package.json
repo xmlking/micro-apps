@@ -1,36 +1,46 @@
 {
-  "name": "~TODO~",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "preview": "svelte-kit preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "prettier --write --plugin-search-dir=. ."
-  },
-  "devDependencies": {
-    "@sveltejs/adapter-static": "^1.0.0-next.13",
-    "@sveltejs/kit": "next",
-    "@types/cookie": "^0.4.0",
-    "@typescript-eslint/eslint-plugin": "^4.19.0",
-    "@typescript-eslint/parser": "^4.19.0",
-    "eslint": "^7.22.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-svelte3": "^3.2.0",
-    "prettier": "~2.2.1",
-    "prettier-plugin-svelte": "^2.2.0",
-    "svelte": "^3.34.0",
-    "svelte-check": "^2.0.0",
-    "svelte-preprocess": "^4.0.0",
-    "tslib": "^2.0.0",
-    "typescript": "^4.0.0"
-  },
-  "type": "module",
-  "dependencies": {
-    "@fontsource/fira-mono": "^4.2.2",
-    "@lukeed/uuid": "^2.0.0",
-    "cookie": "^0.4.1"
-  }
+	"name": "entity-webapp",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"preview": "svelte-kit preview",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+		"format": "prettier --write --plugin-search-dir=. .",
+    "deploy": "npm run build && npx gh-pages -d build/dist"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-node": "1.0.0-next.0",
+		"@sveltejs/adapter-static": "1.0.0-next.13",
+		"@sveltejs/kit": "1.0.0-next.124",
+		"@types/cookie": "0.4.1",
+		"@typescript-eslint/eslint-plugin": "4.28.2",
+		"@typescript-eslint/parser": "4.28.2",
+		"autoprefixer": "10.3.0",
+		"cssnano": "5.0.6",
+		"eslint": "7.30.0",
+		"eslint-config-prettier": "8.3.0",
+		"eslint-plugin-svelte3": "3.2.0",
+		"gh-pages": "3.2.3",
+		"postcss": "8.3.5",
+		"postcss-load-config": "3.1.0",
+		"prettier": "2.3.2",
+		"prettier-plugin-svelte": "2.3.1",
+		"sass": "1.35.2",
+		"svelte": "3.38.3",
+		"svelte-check": "2.2.2",
+		"svelte-preprocess": "4.7.4",
+		"tailwindcss": "2.2.4",
+		"tslib": "2.3.0",
+		"typescript": "4.3.5"
+	},
+	"type": "module",
+	"dependencies": {
+		"@fontsource/fira-mono": "4.5.0",
+		"@lukeed/uuid": "2.0.0",
+		"@sveltestack/svelte-query": "1.4.1",
+		"cookie": "0.4.1"
+	}
 }

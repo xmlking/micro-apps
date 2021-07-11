@@ -6,6 +6,8 @@ This will be embedded into [entity-service](../entity-service)
 
 Curated **SvelteKit** [links](../../docs/advanced/svelte.md)
 
+This project is based on SvelteKit-Starter [template](https://github.com/navneetsharmaui/sveltekit-starter)
+
 ## Gradle Commands
 
 ```bash
@@ -49,3 +51,11 @@ npm run build
 ```
 
 > You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+
+## Deploy
+
+### Deploy to [GitHub Pages](https://github.com/svelteland/svelte-kit-blog-demo/blob/main/src/posts/deply-to-github.md)
+
+```bash
+npm run deploy
+```

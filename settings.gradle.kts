@@ -39,17 +39,17 @@ pluginManagement {
         kotlin("plugin.spring") version kotlinVersion apply false
         kotlin("plugin.lombok") version kotlinVersion apply false
         id("org.sonarqube") version "3.3"
-        id("com.diffplug.spotless") version "5.14.0"
-        id("org.jetbrains.dokka") version "1.4.32"
+        id("com.diffplug.spotless") version "5.14.1"
+        id("org.jetbrains.dokka") version "1.5.0"
         id("com.github.ben-manes.versions") version "0.39.0"
         id("com.diffplug.spotless-changelog") version "2.2.0"
         id("se.patrikerdes.use-latest-versions") version "0.2.17"
         id("pl.allegro.tech.build.axion-release") version "1.13.3"
         id("com.github.johnrengelman.shadow") version "7.0.0"
-        id("com.google.cloud.tools.jib") version "3.1.1"
+        id("com.google.cloud.tools.jib") version "3.1.2"
         id("dev.jacomet.logging-capabilities") version "0.9.0"
         id("com.google.protobuf") version "0.8.16" apply false
-        id("io.quarkus") version "2.0.0.Final" apply false
+        id("io.quarkus") version "2.0.1.Final" apply false
         id("org.springframework.boot") version "2.5.2" apply false
         id("org.springframework.experimental.aot") version "0.10.1" apply false
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false

@@ -54,6 +54,7 @@ tasks.withType<BootBuildImage> {
 }
 
 springAot {
+    // FIXME: https://github.com/LogNet/grpc-spring-boot-starter/issues/226
     failOnMissingSelectorHint.set(false)
 //    removeSpelSupport.set(true)
 //    removeYamlSupport.set(true)

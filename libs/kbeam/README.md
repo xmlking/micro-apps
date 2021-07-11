@@ -23,3 +23,4 @@ gradle :libs:kbeam:build
 ### Reference
 
 - [Idiomatic Kotlin Pipelines for Apache Beam](https://github.com/sfeir-open-source/kbeam)
+- [Beam Kotlin Examples](https://github.com/apache/beam/tree/master/examples/kotlin)

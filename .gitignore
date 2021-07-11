@@ -57,6 +57,20 @@ build/
 .appctlconfig
 .deployment/
 
+### docusaurus ###
+documentation/site/
+node_modules/
+.docusaurus
+
+# environment files #
+#####################
+/.env
+/.env.*
+/.env.local
+/.env.*.local
+!.env.example
+
+
 ### Project ###
 .env
 favicon.*
@@ -64,8 +78,4 @@ favicon.*
 *.trace.db
 libs/demo/src/main/jenkinsfile/ssh
 TODO
-
-### docusaurus ###
-documentation/site/
-node_modules/
-.docusaurus
+apps/sveltekit-starter

@@ -22,7 +22,7 @@ dependencies {
     implementation(libs.spring.boot.starter.rsocket)
 
     // Optional: for redis
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
 
     // Optional: if you also want to add some gRPC services
     implementation(project(":libs:proto"))
