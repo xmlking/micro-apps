@@ -25,14 +25,14 @@ class RedisEntityRepository() : EntityRepository {
     override suspend fun get(id: String): Person? {
         return Person(
             name = Name(first = "sumo1", last = "demo1"),
-            address = Address(
+            addresses = setOf(Address(
                 suite = "1234",
                 street = "Wood Road",
                 city = "Riverside",
                 state = "California",
                 code = "92505",
                 country = "CA"
-            ),
+            )),
             gender = Gender.MALE, age = 99,
             email = "sumo1@demo.com", phone = "0000000000"
         )

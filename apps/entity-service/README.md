@@ -36,7 +36,7 @@ docker compose -f infra/redis.yml down -v
 
 **Redis Insight:** Redis db visualization dashboard
 
-> when prompted, use host:redisearch, port:6379 and name:any_name
+> when prompted, use host:redis, port:6379 and name:any_name
 
 ```bash
 open http://localhost:8001/
@@ -71,6 +71,11 @@ grpcurl -plaintext \
 -d '{ "message":  "sumo" }' 0.0.0.0:6565 micro.apps.proto.echo.v1.EchoService/EchoStream
 ```
 
+```bash
+curl -X POST “http://localhost:8080/save?firstName=John&lastName=Doe"
+curl http://localhost:8080/account
+```
+
 ## Build
 
 ### Build fatJar
@@ -92,3 +97,4 @@ gradle :apps:entity-service:bootBuildImage
 - [KoFu](https://github.com/spring-projects-experimental/spring-fu/tree/main/kofu)
 - [KoFu Samples](https://github.com/spring-projects-experimental/spring-fu/tree/main/samples)
 - [Functional Bean Registration Example](https://github.com/pwestlin/webshopkotlin/blob/master/core-service/src/main/kotlin/nu/westlin/webshop/core/CoreApplication.kt)
+

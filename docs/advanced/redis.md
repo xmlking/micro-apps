@@ -21,6 +21,18 @@ docker compose -f infra/redis.yml down
 docker compose -f infra/redis.yml down -v 
 ```
 
+#### Redis Insight
+
+Redis db visualization dashboard
+
+> when prompted, use host:redis, port:6379 and name:any_name
+
+```bash
+open http://localhost:8001/
+```
+
+#### Redis Grafana
+
 For the first time, enable **Redis-Application** plugin at:
 
 http://localhost:3000/plugins/redis-app/
@@ -28,6 +40,18 @@ http://localhost:3000/plugins/redis-app/
 ### Schema
 
 ### Queries
+
+```bash
+PING Marco!
+MODULE LIST
+
+KEYS *
+
+HGETALL people:22a985b7-983a-419a-b1cd-91a9f8a044b2
+
+# Delete all keys of the currently selected Redis database:
+FLUSHDB
+```
 
 ### Data Loading
 
@@ -49,8 +73,17 @@ http://localhost:3000/plugins/redis-app/
     - RedisGraph [commands](https://oss.redislabs.com/redisgraph/commands/)
     - [RedisGraph bulk loader](https://github.com/RedisGraph/redisgraph-bulk-loader)
     - [search-graph-demo](https://github.com/stockholmux/conf19-search-graph-demo)
+    - [Redis and Spring: Building High Performance RESTful APIs](https://github.com/wilvdb/redi2read/blob/main/src/main/kotlin/com/redislabs/edu/redi2read/services/RecommendationService.kt)
     
 - **Redis Spring**
     - [Spring Data Redis](https://docs.spring.io/spring-data/redis/docs/2.5.2/reference/html/#why-spring-redis)
+    - [Accessing Data Reactively with Redis](https://spring.io/guides/gs/spring-data-reactive-redis/)
+    - [Redis Reactive kotlin tests](https://github.com/spring-projects/spring-data-redis/blob/main/src/test/kotlin/org/springframework/data/redis/core/ReactiveHashOperationsExtensionsUnitTests.kt)
+    
 - **Redis Quarkus**
     - QUARKUS - USING THE [REDIS CLIENT](https://quarkus.io/guides/redis)
+
+- **Example Projects**
+    - [Microservices with Redis](https://github.com/redis-developer/redis-microservices-demo)
+        - Has Streams, Graph and Search
+        - Deploy the application on [Kubernetes](https://github.com/redis-developer/redis-microservices-demo/tree/master/kubernetes)

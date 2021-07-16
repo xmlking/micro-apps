@@ -23,7 +23,7 @@ fun mockPerson(
     return Person(
         id = id,
         name = name,
-        address = address,
+        addresses = setOf(address),
         gender = gender,
         age = age,
         email = email,
@@ -68,27 +68,27 @@ fun mockName(
 fun mockPersonList() = listOf(
     Person(
         name = Name(first = "sumo1", last = "demo1"),
-        address = Address(
+        addresses = setOf(Address(
             suite = "1234",
             street = "Wood Road",
             city = "Riverside",
             state = "California",
             code = "92505",
             country = "CA"
-        ),
+        )),
         gender = Gender.MALE, age = 99,
         email = "sumo1@demo.com", phone = "0000000000"
     ),
     Person(
         name = Name(first = "sumo2", last = "demo2"),
-        address = Address(
+        addresses = setOf(Address(
             suite = "4321",
             street = "Wood Road",
             city = "Riverside",
             state = "California",
             code = "92505",
             country = "CA"
-        ),
+        )),
         gender = Gender.FEMALE, age = 99,
         email = "sumo2@demo.com", phone = "1111111111"
     )

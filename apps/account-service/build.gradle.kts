@@ -69,7 +69,7 @@ tasks {
     test {
         workingDir = rootDir
     }
-/*
+
     nativeBuild {
         imageName.set("application")
         mainClass.set("micro.apps.service.AccountApplicationKt")
@@ -84,7 +84,7 @@ tasks {
     nativeTest {
         verbose.set(true)
     }
-*/
+
 }
 
 jib {

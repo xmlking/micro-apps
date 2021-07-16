@@ -3,22 +3,35 @@ spring.application.name: entity-service
 spring.rsocket.server.transport: websocket
 spring.rsocket.server.mapping-path: /rsocket
 
-redis.url: localhost:6379
-
+# =============== grpc ===============
 grpc:
   port: 6565
   enableReflection: true
 
-#APP_REDIS_HOST: localhost
-#APP_REDIS_PORT: 6379
-#
-#spring:
-#  cache:
-#    type: redis
-#    redis:
-#      time-to-live: 100000
-#      key-prefix: 'suggestion-track::'
-#  redis:
-#    timeout: 100
-#    host: '${APP_REDIS_HOST}'
-#    port: '${APP_REDIS_PORT}'
+
+spring.data.redis.repositories.enabled: true
+
+
+
+APP_REDIS_HOST: localhost
+APP_REDIS_PORT: 6379
+
+spring:
+
+# =============== redis ===============
+  redis:
+#    cluster:
+#      nodes:
+#    url: redis://localhost:6379
+    host: '${APP_REDIS_HOST}'
+    port: '${APP_REDIS_PORT}'
+    password: redis
+    database: 0
+    timeout: 100
+    lettuce:
+      shutdown-timeout: PT0S
+      pool:
+        max-active: 8
+        max-wait: PT10S
+        max-idle: 8
+        min-idle: 1

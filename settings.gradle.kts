@@ -30,14 +30,16 @@ pluginManagement {
     // enableFeaturePreview("GRADLE_METADATA")
 
     plugins {
-        val kotlinVersion = "1.5.20"
+        val kotlinVersion = "1.5.21"
 
         kotlin("jvm") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion apply false
         kotlin("plugin.allopen") version kotlinVersion apply false
         kotlin("kapt") version kotlinVersion apply false
         kotlin("plugin.spring") version kotlinVersion apply false
+        kotlin("plugin.noarg") version kotlinVersion apply false
         kotlin("plugin.lombok") version kotlinVersion apply false
+        id("io.freefair.lombok") version "6.0.0-m2" apply false
         id("org.sonarqube") version "3.3"
         id("com.diffplug.spotless") version "5.14.1"
         id("org.jetbrains.dokka") version "1.5.0"
@@ -48,14 +50,14 @@ pluginManagement {
         id("com.github.johnrengelman.shadow") version "7.0.0"
         id("com.google.cloud.tools.jib") version "3.1.2"
         id("dev.jacomet.logging-capabilities") version "0.9.0"
-        id("com.google.protobuf") version "0.8.16" apply false
-        id("io.quarkus") version "2.0.1.Final" apply false
+        id("com.google.protobuf") version "0.8.17" apply false
+        id("io.quarkus") version "2.1.0.CR1" apply false
         id("org.springframework.boot") version "2.5.2" apply false
         id("org.springframework.experimental.aot") version "0.10.1" apply false
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
-        id("org.graalvm.buildtools.native") version "0.9.1" apply false
+        id("org.graalvm.buildtools.native") version "0.9.2" apply false
         id("com.dropbox.affectedmoduledetector") version "0.1.2" apply false
-        id("com.avast.gradle.docker-compose") version "0.14.3" apply false
+        id("com.avast.gradle.docker-compose") version "0.14.4" apply false
         id("com.github.node-gradle.node") version "3.1.0" apply false
     }
 }

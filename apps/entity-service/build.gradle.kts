@@ -1,28 +1,36 @@
-import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
-
 plugins {
+    kotlin("plugin.noarg")
+    kotlin("plugin.spring")
+    kotlin("plugin.serialization")
+
+    //kotlin("plugin.lombok")
+    //id("io.freefair.lombok")
+
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    kotlin("plugin.spring")
+
     id("org.springframework.experimental.aot")
     id("org.graalvm.buildtools.native")
-
-    // kotlin("plugin.serialization")
 }
 
 val slf4jVersion = libs.versions.slf4j.get()
 
 dependencies {
-    implementation(project(":apps:entity-webapp"))
+    // TODO: enable when `entity-webapp` is ready
+    // implementation(project(":apps:entity-webapp"))
     implementation(project(":libs:model"))
     // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
     implementation(libs.bundles.spring.basic)
+    api(libs.spring.boot.starter.validation)
 
     // Optional: if you also want rsocket
     implementation(libs.spring.boot.starter.rsocket)
 
     // Optional: for redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+    implementation("org.apache.commons:commons-pool2")
+    // implementation("com.redislabs:spring-redisearch")
+    // implementation("com.redislabs:jredisgraph")
 
     // Optional: if you also want to add some gRPC services
     implementation(project(":libs:proto"))
@@ -50,21 +58,31 @@ loggingCapabilities {
 
 tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
 
-tasks.withType<BootBuildImage> {
-    // isVerboseLogging = true
-    // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
-    // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/certificates")
-    builder = "paketobuildpacks/builder:tiny"
-    environment = mapOf(
-        "BP_NATIVE_IMAGE" to "true",
-        "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "--enable-https " +
-            "-H:+ReportExceptionStackTraces -H:+ReportUnsupportedElementsAtRuntime " +
-            "--initialize-at-build-time=org.slf4j.jul.JDK14LoggerAdapter,org.slf4j.simple.SimpleLogger,org.slf4j.LoggerFactory",
-    )
-}
+tasks {
+    bootBuildImage {
+        // isVerboseLogging = true
+        // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
+        // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/certificates")
+        builder = "paketobuildpacks/builder:tiny"
+        environment = mapOf(
+            "BP_NATIVE_IMAGE" to "true",
+            "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "--enable-https " +
+                "-H:+ReportExceptionStackTraces -H:+ReportUnsupportedElementsAtRuntime " +
+                "--initialize-at-build-time=org.slf4j.jul.JDK14LoggerAdapter,org.slf4j.simple.SimpleLogger,org.slf4j.LoggerFactory",
+        )
+    }
 
+    bootRun {
+        jvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
+    }
+}
 springAot {
     failOnMissingSelectorHint.set(false)
 //    removeSpelSupport.set(true)
 //    removeYamlSupport.set(true)
 }
+
+noArg {
+    annotation("org.springframework.data.redis.core.RedisHash")
+}
+

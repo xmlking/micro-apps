@@ -124,4 +124,9 @@ class SerializationTest : FunSpec({
         val generatedSchema = Avro.default.schema(Pizza.serializer())
         expectedSchema.toString(true) shouldBe generatedSchema.toString(true)
     }
+
+    test("no-arg constructor") {
+        val actual = Test::class.java.getConstructor().newInstance()
+        actual.id shouldBe 0
+    }
 })
