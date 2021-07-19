@@ -28,106 +28,32 @@ class RedisReactiveAccountService(
     private val redisTemplate: ReactiveRedisTemplate<String, PersonEntity>,
 ) : AccountService {
     val hashOperations = redisTemplate.opsForHash<String, PersonEntity>()
+    override suspend fun getPerson(id: String): PersonEntity {
+        TODO("Not yet implemented")
+    }
 
-    override suspend fun getPerson(id: String): PersonEntity =
-        personRepository.findById(id).orElseThrow { RecordNotFoundException("Person with id - $id not found") }
-
-    override suspend fun getAllPeople(): Flow<PersonEntity> = personRepository.findAll().asFlow()
-
-    suspend fun findAllAdults(): Flow<PersonEntity> {
-        return personRepository.findAll().filter {
-            it.age?.let { it >= 18 } ?: false
-        }.asFlow()
+    override suspend fun getAllPeople(): Flow<PersonEntity> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun updatePerson(id: String, personDto: PersonDto): PersonEntity {
-        logger.atDebug().addKeyValue("id", id).log("service updatePerson")
-
-        val person = getPerson(id)
-
-        // do deep non-null copy person <-- personDto
-        // TODO: wish `with(person)` or `person.apply {}` works
-        val upActor = person.copy(
-            name = personDto.name?.let {
-                person.name?.copy(
-                    first = personDto.name.first ?: person.name.first,
-                    last = personDto.name.last ?: person.name.last,
-                    title = personDto.name.title ?: person.name.title
-                )
-            } ?: person.name,
-            addresses = personDto.addresses?.let { it -> it.map { it.toEntity() } }?.toSet() ?: person.addresses,
-            gender = personDto.gender ?: person.gender,
-            age = personDto.age ?: person.age,
-            email = personDto.email ?: person.email,
-            phone = personDto.phone ?: person.phone,
-        )
-        return updatePerson(upActor)
+        TODO("Not yet implemented")
     }
 
-    @Transactional
     override suspend fun updatePerson(person: PersonEntity): PersonEntity {
-        person.addresses?.forEach {
-            addressRepository.save(it)
-        }
-        return personRepository.save(person)
+        TODO("Not yet implemented")
     }
 
-    @Transactional
     override suspend fun createPerson(personDto: PersonDto): PersonEntity {
-        val addresses = personDto.addresses?.map { it.toEntity() }?.map { addressRepository.save(it) }?.toSet()
-        return personRepository.save(
-            PersonEntity(
-                null,
-                personDto.name,
-                addresses,
-                personDto.gender,
-                personDto.age,
-                personDto.email,
-                personDto.phone,
-                personDto.avatar
-            )
-        )
+        TODO("Not yet implemented")
     }
 
-    @Transactional
     override suspend fun deletePerson(id: String) {
-        val person = getPerson(id)
-        person.addresses?.forEach {
-            addressRepository.delete(it)
-        }
-        personRepository.delete(person)
+        TODO("Not yet implemented")
     }
 
-    @Transactional
     override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity {
-        // Run 2 findById parallel
-        val person: PersonEntity = personRepository.findById(personId).orElseThrow {
-            RecordNotFoundException("Unable to find person for $personId id")
-        }
-        val address: AddressEntity = addressRepository.findById(addressId).orElseThrow {
-            RecordNotFoundException("Unable to find address for $addressId id")
-        }
-        (person.addresses as HashSet).add(address)
-        return updatePerson(person)
+        TODO("Not yet implemented")
     }
 
-    // suspend fun addAddressToPerson2(addressId: String, personId: String): PersonEntity = coroutineScope {
-    suspend fun addAddressToPerson2(addressId: String, personId: String): PersonEntity = withContext(Dispatchers.IO) {
-        lateinit var person: PersonEntity
-        lateinit var address: AddressEntity
-        awaitAll(
-            async {
-                person = personRepository.findById(personId).orElseThrow {
-                    RecordNotFoundException("Unable to find person for $personId id")
-                }
-            },
-            async {
-                address = addressRepository.findById(addressId).orElseThrow {
-                    RecordNotFoundException("Unable to find address for $addressId id")
-                }
-            }
-        )
-        ((person).addresses as HashSet).add(address)
-        updatePerson(person)
-    }
 }

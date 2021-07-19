@@ -122,7 +122,7 @@ class RedisAccountService(
     }
 
     @Transactional
-    override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity {
+    suspend fun addAddressToPersonSequential(addressId: String, personId: String): PersonEntity {
         // Run 2 findById parallel
         val person: PersonEntity = personRepository.findById(personId).orElseThrow {
             RecordNotFoundException("Unable to find person for $personId id")
@@ -134,8 +134,8 @@ class RedisAccountService(
         return updatePerson(person)
     }
 
-    // suspend fun addAddressToPerson2(addressId: String, personId: String): PersonEntity = coroutineScope {
-    suspend fun addAddressToPerson2(addressId: String, personId: String): PersonEntity = withContext(Dispatchers.IO) {
+    // suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = coroutineScope {
+    override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = withContext(Dispatchers.IO) {
         lateinit var person: PersonEntity
         lateinit var address: AddressEntity
         awaitAll(

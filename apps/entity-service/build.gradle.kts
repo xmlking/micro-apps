@@ -68,7 +68,9 @@ tasks {
     bootBuildImage {
         // isVerboseLogging = true
         // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
-        // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/certificates")
+        // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates")
+
+        /* FIXME: https://github.com/eclipse-vertx/vert.x/issues/3960 & JDK14LoggerAdapter
         builder = "paketobuildpacks/builder:tiny"
         environment = mapOf(
             "BP_NATIVE_IMAGE" to "true",
@@ -76,6 +78,7 @@ tasks {
                 "-H:+ReportExceptionStackTraces -H:+ReportUnsupportedElementsAtRuntime " +
                 "--initialize-at-build-time=org.slf4j.jul.JDK14LoggerAdapter,org.slf4j.simple.SimpleLogger,org.slf4j.LoggerFactory",
         )
+        */
     }
 
     bootRun {
@@ -85,6 +88,7 @@ tasks {
 }
 
 springAot {
+    verify.set(false)
     failOnMissingSelectorHint.set(false)
 //    removeSpelSupport.set(true)
 //    removeYamlSupport.set(true)

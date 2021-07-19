@@ -57,7 +57,7 @@ pluginManagement {
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
         id("org.graalvm.buildtools.native") version "0.9.2" apply false
         id("com.dropbox.affectedmoduledetector") version "0.1.2" apply false
-        id("com.avast.gradle.docker-compose") version "0.14.4" apply false
+        id("com.avast.gradle.docker-compose") version "0.14.5" apply false
         id("com.github.node-gradle.node") version "3.1.0" apply false
     }
 }
