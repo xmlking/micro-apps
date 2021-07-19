@@ -54,10 +54,7 @@ class GlobalExceptionHandler(private val messageSource: MessageSource /* private
     }
 
     @ExceptionHandler(HttpMessageNotReadableException::class)
-    fun handleBindingError(
-        ex: HttpMessageNotReadableException,
-        exchange: ServerWebExchange
-    ): ResponseEntity<ErrorResponse> {
+    fun handleBindingError(ex: HttpMessageNotReadableException, exchange: ServerWebExchange): ResponseEntity<ErrorResponse> {
         logger.atError().addArgument(ex).log("got HttpMessageNotReadableException:")
         val request = exchange.request
         val details = mapOf("path" to request.path.value())
@@ -65,10 +62,7 @@ class GlobalExceptionHandler(private val messageSource: MessageSource /* private
     }
 
     @ExceptionHandler(SerializationException::class)
-    fun handleSerializationError(
-        ex: SerializationException,
-        exchange: ServerWebExchange
-    ): ResponseEntity<ErrorResponse> {
+    fun handleSerializationError(ex: SerializationException, exchange: ServerWebExchange): ResponseEntity<ErrorResponse> {
         logger.atError().addArgument(ex).log("got serialization error:")
         val request = exchange.request
         val details = mapOf("path" to request.path.value())
@@ -82,7 +76,7 @@ class GlobalExceptionHandler(private val messageSource: MessageSource /* private
         val vErrors = ex.bindingResult.fieldErrors.map {
             ValidationError(it.field, it.defaultMessage, it.rejectedValue)
         }.associateBy({ it.field }, { it })
-        return ResponseEntity.badRequest().body(ErrorResponse(BAD_REQUEST, ex.message.orEmpty(), vErrors))
+        return ResponseEntity.badRequest().body(ErrorResponse(BAD_REQUEST, "Validation failed with ${ex.bindingResult.errorCount} error(s)", vErrors))
     }
 
     @ExceptionHandler(WebExchangeBindException::class)
@@ -91,9 +85,10 @@ class GlobalExceptionHandler(private val messageSource: MessageSource /* private
         exchange: ServerWebExchange
     ): ResponseEntity<ErrorResponse> {
         logger.atError().addArgument(ex).log("got WebExchangeBindException:")
-        val request = exchange.request
-        val details = mapOf("path" to request.path.value())
-        return ResponseEntity.badRequest().body(ErrorResponse(ex.status, ex.message.orEmpty(), details))
+        val vErrors = ex.bindingResult.fieldErrors.map {
+            ValidationError(it.field, it.defaultMessage, it.rejectedValue)
+        }.associateBy({ it.field }, { it })
+        return ResponseEntity.badRequest().body(ErrorResponse(ex.status, "Validation failed with ${ex.bindingResult.errorCount} error(s)", vErrors))
     }
 
     @ExceptionHandler(RuntimeException::class)
@@ -110,7 +105,7 @@ class GlobalExceptionHandler(private val messageSource: MessageSource /* private
 data class ValidationError(
     val field: String,
     val message: String?,
-    @Contextual val value: @Serializable(with = DynamicLookupSerializer::class) Any?
+    val value: @Contextual @Serializable(with = DynamicLookupSerializer::class) Any?
 )
 
 @ExperimentalSerializationApi

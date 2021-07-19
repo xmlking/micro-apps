@@ -1,5 +1,6 @@
 package micro.apps.service.domain.account
 
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Gender
 import micro.apps.model.Name
@@ -15,9 +16,9 @@ fun mockPersonDto(
     name: Name = mockName(mockId),
     address: AddressDto = mockAddressDto(mockId),
     gender: Gender = Gender.UNKNOWN,
-    age: Int = mockId,
+    age: Int = mockId + 20,
     email: String = "user$mockId@gmail.com",
-    phone: String = "$mockId$mockId$mockId",
+    phone: String = "$mockId$mockId$mockId-4445555",
     avatar: String = "avatar#$mockId"
 ): PersonDto {
     return PersonDto(
@@ -39,7 +40,7 @@ fun mockAddressDto(
     street: String = "first line $mockId",
     city: String = "city$mockId",
     state: String = "state$mockId",
-    code: String = "$mockId",
+    code: String = "$mockId$mockId$mockId$mockId$mockId",
     country: String = "country$mockId"
 ): AddressDto {
     return AddressDto(
@@ -56,9 +57,9 @@ fun mockAddressDto(
 @OptIn(ExperimentalSerializationApi::class)
 fun mockName(
     mockId: Int,
-    first: String = "first $mockId",
-    last: String = "last $mockId",
-    title: String = "title $mockId"
+    first: String = "first$mockId",
+    last: String = "last$mockId",
+    title: String = "title$mockId"
 ): Name {
     return Name(
         first = first,
@@ -104,7 +105,7 @@ fun mockPersonList() = listOf(
         age = 99,
         email = "sumo2@demo.com", phone = "1111111111"
     )
-)
+).asFlow()
 
 @OptIn(ExperimentalSerializationApi::class)
 fun mockAddressEntity(
@@ -114,7 +115,7 @@ fun mockAddressEntity(
     street: String = "first line $mockId",
     city: String = "city$mockId",
     state: String = "state$mockId",
-    code: String = "$mockId",
+    code: String = "$mockId$mockId$mockId$mockId$mockId",
     country: String = "country$mockId",
     location: Point = Point(mockId.toDouble(), mockId.toDouble())
 ): AddressEntity {
@@ -139,7 +140,7 @@ fun mockPersonEntity(
     gender: Gender = Gender.UNKNOWN,
     age: Int = mockId,
     email: String = "user$mockId@gmail.com",
-    phone: String = "$mockId$mockId$mockId",
+    phone: String = "$mockId$mockId$mockId-4445555",
     avatar: String = "avatar#$mockId"
 ): PersonEntity {
     return PersonEntity(

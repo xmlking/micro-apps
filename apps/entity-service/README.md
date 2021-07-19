@@ -126,12 +126,12 @@ http POST :8080/account << END
     "phone": "3334442222"
   }
 END
-# bad request
+# create person2
 http POST :8080/account << END 
 {
     "name": {
-      "first": "q😀"
-      "last": ""
+      "first": "sumo2",
+      "last": "demo2"
     },
     "addresses": [
       {
@@ -142,23 +142,68 @@ http POST :8080/account << END
         "code": "34453",
         "country": "USA",
         "location": [-77.0364, -38.8951]
-      },
+      }
+    ],
+    "gender": "MALE",
+    "age": 34,
+    "email": "sumo2@demo.com",
+    "phone": "2222222222"
+  }
+END
+# add person2's address to person1
+http PATCH :8080/account/f04d75c1-20cb-45a6-9b5a-2f05c6432dd1/link/d3d2c06f-f686-4159-9e8d-277b9c100c3d
+# bad create request
+http POST :8080/account << END 
+{
+    "name": {
+      "first": "sumo😀"
+      "last": ""
+    },
+    "addresses": [
       {
-        "suite": "B212",
-        "street": "ThreeWinds Dr",
+        "suite": "A212",
+        "street": "FourWinds Dr",
         "city": "Corona",
         "state": "CA",
-        "code": "11",
+        "code": "22",
         "country": "USA",
         "location": [-77.0364, -38.8951]
       }
     ],
     "gender": "MALE",
     "age": 11,
-    "email": "sumodemo.com",
+    "email": "sumo@demo.com",
     "phone": "3334442222"
   }
 END
+# Update by Id
+http PUT :8080/account/f5506576-7eca-4bd1-adb4-744b4981515b << END 
+{
+    "name": {
+      "first": "sumo33",
+      "last": "demo3"
+    },
+    "addresses": [
+      {
+        "suite": "C212",
+        "street": "FourWinds Dr",
+        "city": "Corona",
+        "state": "CA",
+        "code": "33333",
+        "country": "USA",
+        "location": [-77.0364, -38.8951]
+      }
+    ],
+    "gender": "MALE",
+    "age": 31,
+    "email": "sumo3@demo.com",
+    "phone": "3333333333"
+  }
+END
+
+# Delete by Id
+http DELETE :8080/account/ff44f30c-a042-4ba9-bc91-ebd9679b54dc
+
 ```
 
 ## Build

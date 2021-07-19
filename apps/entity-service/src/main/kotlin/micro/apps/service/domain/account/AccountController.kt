@@ -26,11 +26,7 @@ private val logger = KotlinLogging.logger {}
 class AccountController(private val accountService: AccountService) {
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-//    suspend fun createPerson(@RequestBody @Valid person: PersonDto): PersonEntity = accountService.createPerson(person)
-    suspend fun createPerson(@RequestBody @Valid person: PersonDto): PersonEntity {
-        logger.atDebug().addKeyValue("PersonDto", person).log("in createPerson")
-        return accountService.createPerson(person)
-    }
+    suspend fun createPerson(@Valid @RequestBody person: PersonDto): PersonEntity = accountService.createPerson(person)
 
     @GetMapping(value = ["/{id}"])
     @ResponseStatus(HttpStatus.OK)
@@ -38,7 +34,7 @@ class AccountController(private val accountService: AccountService) {
 
     @PutMapping(value = ["/{id}"])
     @ResponseStatus(HttpStatus.OK)
-    suspend fun updatePerson(@PathVariable id: String, @RequestBody @Valid person: PersonDto): PersonEntity {
+    suspend fun updatePerson(@PathVariable id: String, @Valid @RequestBody person: PersonDto): PersonEntity {
         logger.atDebug().addKeyValue("id", id).log("controller updatePerson")
         return accountService.updatePerson(id, person)
     }

@@ -86,10 +86,13 @@ class RedisAccountService(
 
     @Transactional
     override suspend fun updatePerson(person: PersonEntity): PersonEntity {
-        person.addresses?.forEach {
-            addressRepository.save(it)
+        val savedAddresses = person.addresses?.map { addressRepository.save(it) }?.toSet()
+
+        if (savedAddresses != null) {
+            return personRepository.save(person.copy(addresses = savedAddresses))
+        } else {
+            return personRepository.save(person)
         }
-        return personRepository.save(person)
     }
 
     @Transactional

@@ -52,9 +52,9 @@ class AccountRepositoryTests(
     val person2 = PersonEntity(
         name = Name(first = "sumo2", last = "demo2"),
         gender = Gender.MALE,
-        age = 3,
-        phone = "3334442222",
-        email = "sumo@demo.com",
+        age = 32,
+        phone = "4466774433",
+        email = "sumo2@demo.com",
     )
 
     lateinit var savedAddress1: AddressEntity
@@ -63,18 +63,22 @@ class AccountRepositoryTests(
     lateinit var savedPerson2: PersonEntity
 
     beforeSpec {
+        println("***DID YOU RUN `FLUSHDB` REDIS COMMAND TO CLEAN THE DATABASE?")
         savedAddress1 = addressRepository.save(address1)
         savedAddress2 = addressRepository.save(address2)
         val person1WithAddress1 = person1.copy(addresses = setOf(savedAddress1, savedAddress2))
         savedPerson1 = personRepository.save(person1WithAddress1)
         savedPerson1.shouldBeEqualToIgnoringFields(person1WithAddress1, PersonEntity::id)
+
+        val person2WithAddress2 = person2.copy(addresses = setOf(savedAddress2))
+        savedPerson2 = personRepository.save(person2WithAddress2)
     }
 
     afterSpec {
-//        addressRepository.delete(savedAddress1);
-//        personRepository.delete(savedPerson1);
-//        addressRepository.delete(savedAddress2);
-//        personRepository.delete(savedPerson2);
+        addressRepository.delete(savedAddress1)
+        personRepository.delete(savedPerson1)
+        addressRepository.delete(savedAddress2)
+        personRepository.delete(savedPerson2)
     }
 
     test("findById returns Person") {
@@ -89,17 +93,18 @@ class AccountRepositoryTests(
 
     test("count should be one") {
         val actual = personRepository.count()
-        actual shouldBe 1
+        actual shouldBe 2
     }
 
     test("!this test will be ignored") {
         println(savedPerson1)
     }
 
-    test("save with invalid age should throw validation error") {
-        val person2WithAddress2 = person1.copy(addresses = setOf(savedAddress2))
-        savedPerson2 = personRepository.save(person2WithAddress2)
-        println(savedPerson2)
+    test("update person1 age and email") {
+        val savedPerson1Updated = personRepository.save(savedPerson1.copy(age = 75, email = "me2@demo.com"))
+        savedPerson1Updated.id shouldBe savedPerson1.id
+        savedPerson1Updated.age shouldBe 75
+        savedPerson1Updated.email shouldBe "me2@demo.com"
     }
 
     test("list all") {

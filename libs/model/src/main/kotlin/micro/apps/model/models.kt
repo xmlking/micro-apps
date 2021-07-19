@@ -13,6 +13,7 @@ import java.time.Instant
 import java.util.UUID
 import javax.validation.constraints.Email
 import javax.validation.constraints.Min
+import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
@@ -55,11 +56,11 @@ enum class Gender {
 @AvroProp("pii", "yes")
 data class Name(
     @NotNull
-    @Pattern(regexp = "[A-Za-z0-9_]+", message = "FirstName must contain only letters and numbers")
-    @Size(min = 4, max = 26, message = "FirstName must be between {min} and {max} characters")
+    @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "FirstName must contain only letters and numbers")
+    @field:Size(min = 4, max = 26, message = "FirstName must be between {min} and {max} characters")
     @ProtoNumber(1) val first: String?,
-    @NotNull
-    @Pattern(regexp = "[A-Za-z0-9_]+", message = "LastName must contain only letters and numbers")
+    @field:NotBlank
+    @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "LastName must contain only letters and numbers")
     @ProtoNumber(2) val last: String?,
     @ProtoNumber(3) val title: String? = null
 )
@@ -72,7 +73,7 @@ data class Address(
     @ProtoNumber(2) val street: String?,
     @ProtoNumber(3) val city: String?,
     @ProtoNumber(4) val state: String?,
-    @Size(min = 5, max = 15)
+    @field:Size(min = 5, max = 15)
     @ProtoNumber(5) val code: String?,
     @ProtoNumber(6) val country: String?,
     // @ProtoNumber(7) @Contextual val location: Point?
@@ -85,9 +86,9 @@ data class Person(
     @ProtoNumber(2) val name: Name,
     @ProtoNumber(3) val addresses: Set<Address>? = setOf(),
     @ProtoNumber(4) @AvroProp("pii", "yes") val gender: Gender,
-    @Min(value = 18, message = "age must be at least {value}")
+    @field:Min(value = 18, message = "age must be at least {value}")
     @ProtoNumber(5) @AvroProp("pii", "yes") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
-    @Email(message = "Email should be valid")
+    @field:Email(message = "Email should be valid")
     @ProtoNumber(6) @AvroProp("encrypted", "yes") val email: String,
     @ProtoNumber(7) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String,
     @ProtoNumber(8) val avatar: String = "https://www.gravatar.com/avatar", // Optional

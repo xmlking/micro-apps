@@ -16,6 +16,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Reference
 import org.springframework.data.geo.Point
 import org.springframework.data.redis.core.RedisHash
+import javax.validation.Valid
 import javax.validation.constraints.Email
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
@@ -56,9 +57,9 @@ data class PersonEntity(
     @Reference
     val addresses: Set<AddressEntity>? = setOf(),
     val gender: Gender?,
-    @Min(value = 18, message = "age must be at least {value}")
+    @field:Min(value = 18, message = "age must be at least {value}")
     val age: Int?,
-    @Email(message = "Email should be valid")
+    @field:Email(message = "Email should be valid")
     val email: String?,
     val phone: String?,
     val avatar: String? = "https://www.gravatar.com/avatarr"
@@ -74,42 +75,43 @@ data class AddressEntity(
     val street: String?,
     val city: String?,
     val state: String?,
-    @Size(min = 5, max = 15)
+    @field:Size(min = 5, max = 15)
     val code: String?,
     val country: String?,
     // @GeoIndexed
     @Serializable(with = PointSerializer::class) val location: Point?
 )
 
-@ExperimentalSerializationApi
-@Serializable
-data class AddressDto(
-    val suite: String?,
-    val street: String?,
-    @NotBlank
-    val city: String?,
-    @NotBlank
-    @Size(min = 4, max = 16, message = "State must be between {min} and {max} characters")
-    val state: String?,
-    @Size(min = 5, max = 16, message = "Postal Code must be between {min} and {max} characters")
-    val code: String?,
-    val country: String?,
-    @Serializable(with = PointSerializer::class) val location: Point?
-)
-
 @Serializable
 @ExperimentalSerializationApi
 data class PersonDto(
+    @field:Valid
     val name: Name?,
-    val addresses: Set<AddressDto>? = setOf(),
+    @field:Valid val addresses: Set<AddressDto>? = setOf(),
     val gender: Gender?,
-    @Min(value = 18, message = "age must be at least {value}")
+    @field:Min(value = 18, message = "age must be at least {value}")
     val age: Int?,
-    @Email(message = "Email should be valid")
+    @field:Email(message = "Email should be valid")
     val email: String?,
     val phone: String?,
     val avatar: String? = "https://www.gravatar.com/avatar", // Optional
     @Transient val valid: Boolean = false // not serialized: explicitly transient
+)
+
+@ExperimentalSerializationApi
+@Serializable
+data class AddressDto(
+    val suite: String?,
+    @field:NotBlank
+    val street: String?,
+    @field:NotBlank
+    val city: String?,
+    @field:NotBlank
+    val state: String?,
+    @field:Size(min = 5, max = 16, message = "Postal Code must be between {min} and {max} characters")
+    val code: String?,
+    val country: String?,
+    @Serializable(with = PointSerializer::class) val location: Point?
 )
 
 @OptIn(ExperimentalSerializationApi::class)
