@@ -1,9 +1,8 @@
 package micro.apps.service.config
 
-
-//@EnableSwagger2
-//@Configuration
-//class SwaggerConfig {
+// @EnableSwagger2
+// @Configuration
+// class SwaggerConfig {
 //
 //    @Bean
 //    fun configureSwagger() = Docket(DocumentationType.SWAGGER_2)
@@ -11,4 +10,4 @@ package micro.apps.service.config
 //        .apis(RequestHandlerSelectors.any())
 //        .paths(regex("/v1/.*"))
 //        .build()
-//}
+// }

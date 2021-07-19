@@ -1,12 +1,12 @@
 package micro.apps.service.domain.account
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.Transient
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
@@ -18,6 +18,7 @@ import org.springframework.data.geo.Point
 import org.springframework.data.redis.core.RedisHash
 import javax.validation.constraints.Email
 import javax.validation.constraints.Min
+import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 // import org.springframework.data.annotation.Transient
@@ -51,18 +52,17 @@ import javax.validation.constraints.Size
 @RedisHash("people")
 data class PersonEntity(
     @Id val id: String? = null,
-    val name: Name,
+    val name: Name?,
     @Reference
     val addresses: Set<AddressEntity>? = setOf(),
-    val gender: Gender,
+    val gender: Gender?,
     @Min(value = 18, message = "age must be at least {value}")
-    val age: Int,
+    val age: Int?,
     @Email(message = "Email should be valid")
     val email: String?,
     val phone: String?,
     val avatar: String? = "https://www.gravatar.com/avatarr"
 )
-
 
 // HINT: spring-data need no-arg constructor or all properties nullable
 @ExperimentalSerializationApi
@@ -78,14 +78,52 @@ data class AddressEntity(
     val code: String?,
     val country: String?,
     // @GeoIndexed
-    @Serializable(with = PointSerializer::class) @Contextual val location: Point?
+    @Serializable(with = PointSerializer::class) val location: Point?
 )
 
-// TODO
+@ExperimentalSerializationApi
+@Serializable
+data class AddressDto(
+    val suite: String?,
+    val street: String?,
+    @NotBlank
+    val city: String?,
+    @NotBlank
+    @Size(min = 4, max = 16, message = "State must be between {min} and {max} characters")
+    val state: String?,
+    @Size(min = 5, max = 16, message = "Postal Code must be between {min} and {max} characters")
+    val code: String?,
+    val country: String?,
+    @Serializable(with = PointSerializer::class) val location: Point?
+)
+
+@Serializable
+@ExperimentalSerializationApi
+data class PersonDto(
+    val name: Name?,
+    val addresses: Set<AddressDto>? = setOf(),
+    val gender: Gender?,
+    @Min(value = 18, message = "age must be at least {value}")
+    val age: Int?,
+    @Email(message = "Email should be valid")
+    val email: String?,
+    val phone: String?,
+    val avatar: String? = "https://www.gravatar.com/avatar", // Optional
+    @Transient val valid: Boolean = false // not serialized: explicitly transient
+)
+
 @OptIn(ExperimentalSerializationApi::class)
 @Serializer(forClass = Point::class)
 object PointSerializer : KSerializer<Point> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Point", PrimitiveKind.STRING)
-    override fun serialize(encoder: Encoder, value: Point) = encoder.encodeString("${value.x}-${value.y}")
-    override fun deserialize(decoder: Decoder): Point = Point(1.1,1.1)
+    private val serializer = ListSerializer(Double.serializer())
+    override val descriptor: SerialDescriptor = serializer.descriptor
+
+    override fun serialize(encoder: Encoder, value: Point) {
+        encoder.encodeSerializableValue(serializer, listOf(value.x, value.y))
+    }
+
+    override fun deserialize(decoder: Decoder): Point {
+        val (x, y) = decoder.decodeSerializableValue(serializer)
+        return Point(x, y)
+    }
 }

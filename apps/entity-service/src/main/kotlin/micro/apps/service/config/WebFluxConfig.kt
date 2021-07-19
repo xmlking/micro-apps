@@ -22,4 +22,27 @@ class WebFluxConfig : WebFluxConfigurer {
         configurer.customCodecs().registerWithDefaultConfig(KotlinSerializationJsonDecoder(json))
     }
 
+//    @Bean
+//    @Primary
+//    fun corsWebFilter(
+//        appConfiguration: ApplicationCorsConfiguration
+//    ): CorsWebFilter {
+//        val configuration = CorsConfiguration()
+//        configuration.maxAge = appConfiguration.maxAge
+//        configuration.allowedOrigins = appConfiguration.allowedOrigins
+//        configuration.allowedMethods = listOf(
+//            HttpMethod.GET,
+//            HttpMethod.POST,
+//            HttpMethod.PUT,
+//            HttpMethod.DELETE,
+//        ).map(HttpMethod::name)
+//        configuration.allowedHeaders = listOf(
+//            HttpHeaders.CONTENT_TYPE
+//        )
+//
+//        val source = UrlBasedCorsConfigurationSource()
+//        source.registerCorsConfiguration("/**", configuration)
+//
+//        return CorsWebFilter(source)
+//    }
 }

@@ -14,6 +14,7 @@ import java.util.UUID
 import javax.validation.constraints.Email
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 import java.io.Serializable as JavaSerializable
 
@@ -54,9 +55,12 @@ enum class Gender {
 @AvroProp("pii", "yes")
 data class Name(
     @NotNull
-    @ProtoNumber(1) val first: String,
+    @Pattern(regexp = "[A-Za-z0-9_]+", message = "FirstName must contain only letters and numbers")
+    @Size(min = 4, max = 26, message = "FirstName must be between {min} and {max} characters")
+    @ProtoNumber(1) val first: String?,
     @NotNull
-    @ProtoNumber(2) val last: String,
+    @Pattern(regexp = "[A-Za-z0-9_]+", message = "LastName must contain only letters and numbers")
+    @ProtoNumber(2) val last: String?,
     @ProtoNumber(3) val title: String? = null
 )
 
@@ -90,10 +94,61 @@ data class Person(
     @Transient val valid: Boolean = false // not serialized: explicitly transient
 )
 
-typealias PersonId = String
+// *** Example  KSerializer for 3rd party classes ***//
 
-/*** Exceptions ***/
-class DuplicateCustomerIdException(personId: PersonId) : RuntimeException("A person with id $personId already exist")
-class PersonNotFoundException(override val message: String): Exception(message)
-class AddressNotFoundException(override val message: String): Exception(message)
+/*
+@OptIn(ExperimentalSerializationApi::class)
+@Serializer(forClass = Any::class)
+object AnySerializer : KSerializer<Any> {
+    override val descriptor: SerialDescriptor
+        get() = buildClassSerialDescriptor("kotlin.Any") {
+        }
 
+    override fun serialize(encoder: Encoder, value: Any) {
+        encoder.encodeStructure(descriptor) {
+        }
+    }
+    override fun deserialize(decoder: Decoder): Any {
+        return decoder.decodeStructure(descriptor) {
+            Any()
+        }
+    }
+}
+*/
+
+/*
+@OptIn(ExperimentalSerializationApi::class)
+@Serializer(forClass = Point::class)
+object PointSerializer : KSerializer<Point> {
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Point") {
+        element("x", Double.serializer().descriptor)
+        element("y", Double.serializer().descriptor)
+    }
+    override fun serialize(encoder: Encoder, value: Point) =  encoder.encodeStructure(descriptor) {
+        encoder.beginStructure(descriptor).apply {
+            encodeDoubleElement(descriptor, 0, value.x)
+            encodeDoubleElement(descriptor, 1, value.y)
+            endStructure(descriptor)
+        }
+
+    }
+    override fun deserialize(decoder: Decoder): Point = decoder.decodeStructure(descriptor) {
+        var x: Double = 0.0
+        var y: Double = 0.0
+        if (decodeSequentially()) {
+            x = decodeDoubleElement(descriptor, 0)
+            y = decodeDoubleElement(descriptor, 1)
+        } else {
+            while (true) {
+                when (val index = decodeElementIndex(descriptor)) {
+                    0 -> x = decodeDoubleElement(descriptor, index)
+                    1 -> y = decodeDoubleElement(descriptor, index)
+                    CompositeDecoder.DECODE_DONE -> break
+                    else -> error("Unexpected index: $index")
+                }
+            }
+        }
+        Point(x, y)
+    }
+}
+*/

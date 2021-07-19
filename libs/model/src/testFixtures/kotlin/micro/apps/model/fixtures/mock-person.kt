@@ -9,7 +9,7 @@ import micro.apps.model.Person
 
 // creates the entire Person graph!
 // val batman = mockPerson(mockId = 1, age = 44)
-fun mockPerson(
+fun mockPersonDto(
     mockId: Int,
     id: String = "id#$mockId",
     name: Name = mockName(mockId),
@@ -68,27 +68,31 @@ fun mockName(
 fun mockPersonList() = listOf(
     Person(
         name = Name(first = "sumo1", last = "demo1"),
-        addresses = setOf(Address(
-            suite = "1234",
-            street = "Wood Road",
-            city = "Riverside",
-            state = "California",
-            code = "92505",
-            country = "CA"
-        )),
+        addresses = setOf(
+            Address(
+                suite = "1234",
+                street = "Wood Road",
+                city = "Riverside",
+                state = "California",
+                code = "92505",
+                country = "CA"
+            )
+        ),
         gender = Gender.MALE, age = 99,
         email = "sumo1@demo.com", phone = "0000000000"
     ),
     Person(
         name = Name(first = "sumo2", last = "demo2"),
-        addresses = setOf(Address(
-            suite = "4321",
-            street = "Wood Road",
-            city = "Riverside",
-            state = "California",
-            code = "92505",
-            country = "CA"
-        )),
+        addresses = setOf(
+            Address(
+                suite = "4321",
+                street = "Wood Road",
+                city = "Riverside",
+                state = "California",
+                code = "92505",
+                country = "CA"
+            )
+        ),
         gender = Gender.FEMALE, age = 99,
         email = "sumo2@demo.com", phone = "1111111111"
     )

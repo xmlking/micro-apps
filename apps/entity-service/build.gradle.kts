@@ -3,8 +3,8 @@ plugins {
     kotlin("plugin.spring")
     kotlin("plugin.serialization")
 
-    //kotlin("plugin.lombok")
-    //id("io.freefair.lombok")
+    // kotlin("plugin.lombok")
+    // id("io.freefair.lombok")
 
     id("org.springframework.boot")
     id("io.spring.dependency-management")
@@ -19,18 +19,24 @@ dependencies {
     // TODO: enable when `entity-webapp` is ready
     // implementation(project(":apps:entity-webapp"))
     implementation(project(":libs:model"))
+    implementation(project(":libs:service"))
+
     // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
 
     // Optional: if you also want rsocket
-    implementation(libs.spring.boot.starter.rsocket)
+    // implementation(libs.spring.boot.starter.rsocket)
 
     // Optional: for redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
     implementation("org.apache.commons:commons-pool2")
     // implementation("com.redislabs:spring-redisearch")
     // implementation("com.redislabs:jredisgraph")
+
+    // Required for redis translations
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("com.h2database:h2")
 
     // Optional: if you also want to add some gRPC services
     implementation(project(":libs:proto"))
@@ -73,9 +79,11 @@ tasks {
     }
 
     bootRun {
-        jvmArgs = listOf("-Dorg.slf4j.simpleLogger.log.micro.apps=debug")
+        // This will set logs level DEBUG only for local development.
+        jvmArgs = listOf("-Dlogging.level.micro.apps=DEBUG")
     }
 }
+
 springAot {
     failOnMissingSelectorHint.set(false)
 //    removeSpelSupport.set(true)
@@ -85,4 +93,3 @@ springAot {
 noArg {
     annotation("org.springframework.data.redis.core.RedisHash")
 }
-

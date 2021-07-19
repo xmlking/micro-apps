@@ -81,6 +81,7 @@ include(
     ":libs:model",
     ":libs:proto",
     ":libs:test",
+    ":libs:grpc",
     ":libs:service",
     ":libs:pipeline"
 )

@@ -10,6 +10,19 @@ here
 
 This µService also showcase running both **REST** and **gRPC** services on single server.
 
+## Features
+
+- [x] Kotlin Coroutines
+- [x] Kotlin [Serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serialization-guide.md)
+- [x] Global Exception Handler
+- [x] Input Validation
+- [x] Spring Data Redis Repositories 
+    - [x] Redis Hash
+    - [ ] Redis Search 
+    - [ ] Redis Graph
+- [ ] Observability
+
+
 ## Run
 
 ### Redis
@@ -71,9 +84,81 @@ grpcurl -plaintext \
 -d '{ "message":  "sumo" }' 0.0.0.0:6565 micro.apps.proto.echo.v1.EchoService/EchoStream
 ```
 
+We are using [httpie](https://httpie.io/) CLI for REST testing
+
 ```bash
-curl -X POST “http://localhost:8080/save?firstName=John&lastName=Doe"
-curl http://localhost:8080/account
+# list
+http :8080/account
+
+# get by Id
+http :8080/account/67531e6d-fe00-4d78-afa1-ac008ced47af
+
+# create
+http POST :8080/account << END 
+{
+    "name": {
+      "first": "sumo",
+      "last": "demo"
+    },
+    "addresses": [
+      {
+        "suite": "A212",
+        "street": "FourWinds Dr",
+        "city": "Corona",
+        "state": "CA",
+        "code": "34453",
+        "country": "USA",
+        "location": [-77.0364, -38.8951]
+      },
+      {
+        "suite": "B212",
+        "street": "ThreeWinds Dr",
+        "city": "Corona",
+        "state": "CA",
+        "code": "44553",
+        "country": "USA",
+        "location": [-77.0364, -38.8951]
+      }
+    ],
+    "gender": "MALE",
+    "age": 34,
+    "email": "sumo@demo.com",
+    "phone": "3334442222"
+  }
+END
+# bad request
+http POST :8080/account << END 
+{
+    "name": {
+      "first": "q😀"
+      "last": ""
+    },
+    "addresses": [
+      {
+        "suite": "A212",
+        "street": "FourWinds Dr",
+        "city": "Corona",
+        "state": "CA",
+        "code": "34453",
+        "country": "USA",
+        "location": [-77.0364, -38.8951]
+      },
+      {
+        "suite": "B212",
+        "street": "ThreeWinds Dr",
+        "city": "Corona",
+        "state": "CA",
+        "code": "11",
+        "country": "USA",
+        "location": [-77.0364, -38.8951]
+      }
+    ],
+    "gender": "MALE",
+    "age": 11,
+    "email": "sumodemo.com",
+    "phone": "3334442222"
+  }
+END
 ```
 
 ## Build

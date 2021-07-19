@@ -20,7 +20,7 @@ import org.springframework.data.geo.Point
 class AccountRepositoryTests(
     private val personRepository: PersonRepository,
     private val addressRepository: AddressRepository
-    ) : FunSpec({
+) : FunSpec({
     // defaultTestConfig
     TestCaseConfig(tags = setOf(E2E, Slow))
 
@@ -31,7 +31,7 @@ class AccountRepositoryTests(
         state = "CA",
         code = "34453",
         country = "USA",
-        location = Point(-77.0364,38.8951)
+        location = Point(-77.0364, 38.8951)
     )
     val address2 = AddressEntity(
         suite = "B212",
@@ -40,7 +40,7 @@ class AccountRepositoryTests(
         state = "CA",
         code = "44553",
         country = "USA",
-        location = Point( 41.40338, 2.17403)
+        location = Point(41.40338, 2.17403)
     )
     val person1 = PersonEntity(
         name = Name(first = "sumo", last = "demo"),
@@ -49,7 +49,7 @@ class AccountRepositoryTests(
         phone = "3334442222",
         email = "sumo@demo.com",
     )
-    val person2 =PersonEntity(
+    val person2 = PersonEntity(
         name = Name(first = "sumo2", last = "demo2"),
         gender = Gender.MALE,
         age = 3,
@@ -62,7 +62,6 @@ class AccountRepositoryTests(
     lateinit var savedAddress2: AddressEntity
     lateinit var savedPerson2: PersonEntity
 
-
     beforeSpec {
         savedAddress1 = addressRepository.save(address1)
         savedAddress2 = addressRepository.save(address2)
@@ -72,10 +71,10 @@ class AccountRepositoryTests(
     }
 
     afterSpec {
-        addressRepository.delete(savedAddress1);
-        personRepository.delete(savedPerson1);
-        addressRepository.delete(savedAddress2);
-        personRepository.delete(savedPerson2);
+//        addressRepository.delete(savedAddress1);
+//        personRepository.delete(savedPerson1);
+//        addressRepository.delete(savedAddress2);
+//        personRepository.delete(savedPerson2);
     }
 
     test("findById returns Person") {
@@ -83,7 +82,7 @@ class AccountRepositoryTests(
         actual shouldBe savedPerson1
         /*
         val actual = personRepository.findById(savedPerson1.id!!).ifPresent {
-            it shouldBe saved
+            it shouldBe savedPerson1
         }
          */
     }
@@ -92,7 +91,6 @@ class AccountRepositoryTests(
         val actual = personRepository.count()
         actual shouldBe 1
     }
-
 
     test("!this test will be ignored") {
         println(savedPerson1)
@@ -111,6 +109,4 @@ class AccountRepositoryTests(
         println(actual)
         // actual shouldBe 1
     }
-
 })
-

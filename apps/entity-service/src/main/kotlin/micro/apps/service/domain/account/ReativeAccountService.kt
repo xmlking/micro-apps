@@ -9,43 +9,23 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.service.RecordNotFoundException
 import mu.KotlinLogging
-import org.springframework.context.annotation.Primary
-import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.data.redis.core.ReactiveRedisTemplate
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 // https://github.com/Taras48/RedisCache/blob/master/src/main/kotlin/com/redis/cache/RedisCache/service/ActorServiceImpl.kt
-
-@OptIn(ExperimentalSerializationApi::class)
-interface AccountService {
-    @Throws(RecordNotFoundException::class)
-    suspend fun getPerson(id: String): PersonEntity
-
-    suspend fun getAllPeople(): Flow<PersonEntity>
-
-    @Throws(RecordNotFoundException::class)
-    suspend fun updatePerson(id: String, personDto: PersonDto): PersonEntity
-
-    suspend fun updatePerson(person: PersonEntity): PersonEntity
-
-    suspend fun createPerson(personDto: PersonDto): PersonEntity
-
-    @Throws(RecordNotFoundException::class)
-    suspend fun deletePerson(id: String)
-
-    @Throws(RecordNotFoundException::class)
-    suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity
-}
+// TODO: https://todd.ginsberg.com/post/springboot-reactive-kotlin-coroutines/
 
 private val logger = KotlinLogging.logger {}
 
 @OptIn(ExperimentalSerializationApi::class)
-@Service
-@Primary
-class RedisAccountService(
+@Service()
+@Qualifier("reactive")
+class RedisReactiveAccountService(
     private val personRepository: PersonRepository,
     private val addressRepository: AddressRepository,
-    private val redisTemplate: RedisTemplate<String, PersonEntity>,
+    private val redisTemplate: ReactiveRedisTemplate<String, PersonEntity>,
 ) : AccountService {
     val hashOperations = redisTemplate.opsForHash<String, PersonEntity>()
 

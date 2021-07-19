@@ -1,34 +1,51 @@
-val coroutinesVersion: String by project
-val grpcVersion: String by project
-val grpcKotlinVersion: String by project
-val protobufVersion: String by project
-val arrowVersion: String by project
-val sentinelVersion: String by project
-
 plugins {
+    kotlin("plugin.noarg")
+    kotlin("plugin.spring")
+    kotlin("plugin.serialization")
+
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+
     `java-test-fixtures`
 }
 
+val slf4jVersion = libs.versions.slf4j.get()
+
 dependencies {
-    // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
-    runtimeOnly(libs.grpc.netty)
-    implementation(libs.grpc.protobuf)
-    // implementation(libs.grpc.stub) // For Java
-    implementation(libs.grpc.kotlin.stub) // For Kotlin
-    implementation(libs.bundles.kotlinx.coroutines)
+    // Spring
+    implementation(libs.bundles.spring.basic)
+    api(libs.spring.boot.starter.validation)
 
-    // Protobuf - If you want to use features like protobuf JsonFormat, `protobuf-java-util` instead of `protobuf-java`
-    implementation(libs.protobuf.java)
-
-    // Google
-    implementation(libs.guava)
-
-    // Resilience frameworks
-    implementation(libs.sentinel.grpc.adapter)
-    // implementation(libs.concurrency.limits.grpc)
+    // projectreactor
+    implementation(libs.spring.boot.reactor.kotlin.extensions)
+    testImplementation(libs.spring.boot.reactor.test)
 
     // Test
     testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(libs.spring.boot.starter.test) {
+        exclude(module = "mockito-core")
+    }
+    testImplementation(libs.spring.boot.mockk.test)
+    testImplementation(libs.kotest.assertions.json.jvm)
+    testImplementation(libs.kotest.extensions.spring)
+}
+
+tasks {
+    bootJar {
+        enabled = false
+    }
+
+    jar {
+        enabled = true
+    }
 }
 
 affectedTestConfiguration { jvmTestTask = "check" }
+
+loggingCapabilities {
+    selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
+}
+
+noArg {
+    annotation("org.springframework.data.redis.core.RedisHash")
+}
