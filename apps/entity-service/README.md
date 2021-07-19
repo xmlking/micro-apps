@@ -16,7 +16,7 @@ This µService also showcase running both **REST** and **gRPC** services on sing
 - [x] Kotlin [Serialization](https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/serialization-guide.md)
 - [x] Global Exception Handler
 - [x] Input Validation
-- [x] Spring Data Redis Repositories 
+- [x] **Spring Data Redis** Repositories CRUD API
     - [x] Redis Hash
     - [ ] Redis Search 
     - [ ] Redis Graph
