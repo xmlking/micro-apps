@@ -70,15 +70,10 @@ tasks {
         // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
         // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates")
 
-        /* FIXME: https://github.com/eclipse-vertx/vert.x/issues/3960 & JDK14LoggerAdapter
         builder = "paketobuildpacks/builder:tiny"
         environment = mapOf(
-            "BP_NATIVE_IMAGE" to "true",
-            "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "--enable-https " +
-                "-H:+ReportExceptionStackTraces -H:+ReportUnsupportedElementsAtRuntime " +
-                "--initialize-at-build-time=org.slf4j.jul.JDK14LoggerAdapter,org.slf4j.simple.SimpleLogger,org.slf4j.LoggerFactory",
+            "BP_NATIVE_IMAGE" to "true"
         )
-        */
     }
 
     bootRun {

@@ -99,7 +99,7 @@ gradle :apps:entity-service:build
 ### Build native image
 
 ```bash
-gradle :apps:entity-service:bootBuildImage 
+gradle :apps:entity-service:bootBuildImage -x test
 ```
 
 ## Reference
