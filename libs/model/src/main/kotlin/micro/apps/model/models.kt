@@ -3,8 +3,15 @@ package micro.apps.model
 import com.sksamuel.avro4k.AvroFixed
 import com.sksamuel.avro4k.AvroProp
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.contextual
 import kotlinx.serialization.protobuf.ProtoIntegerType
 import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoType
@@ -97,6 +104,37 @@ data class Person(
 
 // *** Example  KSerializer for 3rd party classes ***//
 
+@OptIn(ExperimentalSerializationApi::class)
+val jsonCodecConfig: Json by lazy {
+    Json {
+        prettyPrint = true
+        // isLenient = true
+        ignoreUnknownKeys = true
+        serializersModule = modelSerializersModule
+        classDiscriminator = "type"
+    }
+}
+
+@OptIn(ExperimentalSerializationApi::class)
+val modelSerializersModule: SerializersModule by lazy {
+    SerializersModule {
+        contextual(UUIDSerializer)
+        // contextual(PointSerializer)
+    }
+}
+
+object UUIDSerializer : KSerializer<UUID> {
+    private val serializer = String.serializer()
+
+    override val descriptor = serializer.descriptor
+
+    override fun serialize(encoder: Encoder, value: UUID) =
+        serializer.serialize(encoder, value.toString())
+
+    override fun deserialize(decoder: Decoder) =
+        UUID.fromString(serializer.deserialize(decoder))
+}
+
 /*
 @OptIn(ExperimentalSerializationApi::class)
 @Serializer(forClass = Any::class)
@@ -122,8 +160,8 @@ object AnySerializer : KSerializer<Any> {
 @Serializer(forClass = Point::class)
 object PointSerializer : KSerializer<Point> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Point") {
-        element("x", Double.serializer().descriptor)
-        element("y", Double.serializer().descriptor)
+        element("x", Double.serializer().descriptor, isOptional = true)
+        element("y", Double.serializer().descriptor, isOptional = true)
     }
     override fun serialize(encoder: Encoder, value: Point) =  encoder.encodeStructure(descriptor) {
         encoder.beginStructure(descriptor).apply {

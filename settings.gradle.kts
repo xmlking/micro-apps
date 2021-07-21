@@ -69,6 +69,7 @@ include(
     ":apps:linking-service",
     ":apps:greeting-service",
     ":apps:person-service",
+    ":apps:spring-service",
     ":apps:chat-service",
     ":apps:entity-service",
     ":apps:entity-webapp",

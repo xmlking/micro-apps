@@ -1,19 +1,5 @@
 # API Test
 
-
-
-## Test gRPC services 
-
-```bash
-grpcurl -plaintext \
--protoset <(buf build -o -) \
--d '{ "message":  "sumo" }' 0.0.0.0:6565 micro.apps.proto.echo.v1.EchoService/Echo      
-
-grpcurl -plaintext \
--protoset <(buf build -o -) \
--d '{ "message":  "sumo" }' 0.0.0.0:6565 micro.apps.proto.echo.v1.EchoService/EchoStream
-```
-
 ## Test REST services
 
 We are using [httpie](https://httpie.io/) CLI for REST testing

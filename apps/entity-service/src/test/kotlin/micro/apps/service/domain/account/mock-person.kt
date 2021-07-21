@@ -1,6 +1,5 @@
 package micro.apps.service.domain.account
 
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Gender
 import micro.apps.model.Name
@@ -105,7 +104,7 @@ fun mockPersonList() = listOf(
         age = 99,
         email = "sumo2@demo.com", phone = "1111111111"
     )
-).asFlow()
+)
 
 @OptIn(ExperimentalSerializationApi::class)
 fun mockAddressEntity(

@@ -1,5 +1,4 @@
 plugins {
-    kotlin("plugin.noarg")
     kotlin("plugin.spring")
     kotlin("plugin.serialization")
 
@@ -21,21 +20,21 @@ dependencies {
     implementation(project(":libs:model"))
     implementation(project(":libs:service"))
 
+    // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
 
     // Optional: if you also want rsocket
     // implementation(libs.spring.boot.starter.rsocket)
 
-    // Optional: for redis
-    implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
-    implementation("org.apache.commons:commons-pool2")
-    // implementation("com.redislabs:spring-redisearch")
-    // implementation("com.redislabs:jredisgraph")
-
-    // Required for redis translations
+    // Optional: JPA
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("io.r2dbc:r2dbc-h2")
+
+    // Optional: if you also want to add some gRPC services
+    // TODO: gRPC not working with GraalVM
+    implementation(project(":libs:proto"))
+    implementation(libs.bundles.spring.grpc)
 
     // projectreactor
     implementation(libs.spring.boot.reactor.kotlin.extensions)
@@ -56,8 +55,6 @@ affectedTestConfiguration { jvmTestTask = "check" }
 loggingCapabilities {
     selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }
-
-tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
 
 tasks {
     bootBuildImage {
@@ -82,8 +79,4 @@ springAot {
     failOnMissingSelectorHint.set(false)
 //    removeSpelSupport.set(true)
 //    removeYamlSupport.set(true)
-}
-
-noArg {
-    annotation("org.springframework.data.redis.core.RedisHash")
 }

@@ -14,17 +14,20 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies
         .build()
  */
 
-val json = Json {
-    isLenient = true
-    ignoreUnknownKeys = true
+val jsonCodecConfig: Json by lazy {
+    Json {
+        prettyPrint = true
+        isLenient = true
+        ignoreUnknownKeys = true
+    }
 }
 
 // Polymorphic serialization
 var strategies = ExchangeStrategies.builder()
     .codecs { clientDefaultCodecsConfigurer: ClientCodecConfigurer ->
         clientDefaultCodecsConfigurer.defaultCodecs()
-            .kotlinSerializationJsonEncoder(KotlinSerializationJsonEncoder(json))
+            .kotlinSerializationJsonEncoder(KotlinSerializationJsonEncoder(jsonCodecConfig))
         clientDefaultCodecsConfigurer.defaultCodecs()
-            .kotlinSerializationJsonDecoder(KotlinSerializationJsonDecoder(json))
+            .kotlinSerializationJsonDecoder(KotlinSerializationJsonDecoder(jsonCodecConfig))
     }
     .build()

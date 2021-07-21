@@ -6,11 +6,6 @@ spring.rsocket.server.mapping-path: /rsocket
 APP_REDIS_HOST: localhost
 APP_REDIS_PORT: 6379
 
-# =============== grpc ===============
-grpc:
-  port: 6565
-  enableReflection: true
-
 spring:
 
 # =============== redis ===============
