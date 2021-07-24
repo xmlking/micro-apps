@@ -1,3 +1,6 @@
+greeting:
+  application-name: sumo
+
 quarkus:
   #  ssl:
   #    native: true

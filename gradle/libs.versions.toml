@@ -36,18 +36,18 @@ slf4j = { require = "2.0.0-alpha1" }
 # slf4j = "1.7.31"
 
 # quarkus
-#quarkusPluginId = "io.quarkus"
-#quarkusPluginVersion = "2.0.2.Final"
-#quarkusPlatformVersion = "2.0.2.Final"
-#quarkusPlatformGroupId = "io.quarkus"
-#quarkusPlatformArtifactId = "quarkus-universe-bom"
+quarkusPluginId = "io.quarkus"
+quarkusPluginVersion = "2.1.0.Final"
+quarkusPlatformVersion = "2.1.0.Final"
+quarkusPlatformGroupId = "io.quarkus"
+quarkusPlatformArtifactId = "quarkus-universe-bom"
 
 # for pre-released versions
-quarkusPluginId = "io.quarkus"
-quarkusPluginVersion = "2.1.0.CR1"
-quarkusPlatformVersion = "2.1.0.CR1"
-quarkusPlatformGroupId = "io.quarkus"
-quarkusPlatformArtifactId = "quarkus-bom"
+#quarkusPluginId = "io.quarkus"
+#quarkusPluginVersion = "2.2.0.CR1"
+#quarkusPlatformVersion = "2.2.0.CR1"
+#quarkusPlatformGroupId = "io.quarkus"
+#quarkusPlatformArtifactId = "quarkus-bom"
 
 # to use locally built Quarkus, use `quarkus-bom` and `999-SNAPSHOT`
 #quarkusPlatformArtifactId = "quarkus-bom"
@@ -72,7 +72,7 @@ yaml = "2.10.3"
 avro = "1.10.2"
 
 # spring
-spring = "2.5.2"
+spring = "2.5.3"
 kotestSpring = "1.0.0"
 springMockk = "3.0.1"
 snakeyaml = "1.28"

@@ -29,6 +29,7 @@ dependencies {
 
     // Optional: for redis
     implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+    // spring-boot 2.6.0 will now automatically enable redis pooling when commons-pool2 is on the classpath
     implementation("org.apache.commons:commons-pool2")
     // implementation("com.redislabs:spring-redisearch")
     // implementation("com.redislabs:jredisgraph")

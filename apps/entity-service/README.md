@@ -8,6 +8,10 @@ Generate a native image to improve the start-up time.
 Find more *Spring Native* [samples](https://github.com/spring-projects-experimental/spring-native/tree/main/samples)
 here
 
+### Showcase
+
+- Interacting with *Reactive* Redis API with Kotlin *Coroutines*. Check the [blog](https://todd.ginsberg.com/post/springboot-reactive-kotlin-coroutines/)
+
 ## Features
 
 - [x] Kotlin Coroutines

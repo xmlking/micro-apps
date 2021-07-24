@@ -1,9 +1,11 @@
 import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
+    kotlin("plugin.spring")
+
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    kotlin("plugin.spring")
+
     id("org.springframework.experimental.aot")
     id("org.graalvm.buildtools.native")
 }
@@ -45,12 +47,24 @@ loggingCapabilities {
     selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }
 
-tasks.withType<BootBuildImage> {
-    // isVerboseLogging = true
-    // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
-    // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/certificates")
-    builder = "paketobuildpacks/builder:tiny"
-    environment = mapOf("BP_NATIVE_IMAGE" to "true")
+tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
+
+tasks {
+    bootBuildImage {
+        // isVerboseLogging = true
+        // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
+        // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates")
+
+        builder = "paketobuildpacks/builder:tiny"
+        environment = mapOf(
+            "BP_NATIVE_IMAGE" to "true"
+        )
+    }
+
+    bootRun {
+        // This will set logs level DEBUG only for local development.
+        jvmArgs = listOf("-Dlogging.level.micro.apps=DEBUG")
+    }
 }
 
 springAot {

@@ -86,6 +86,7 @@ class RedisAccountService(
 
     @Transactional
     override suspend fun updatePerson(person: PersonEntity): PersonEntity {
+        logger.atDebug().log("saving person")
         val savedAddresses = person.addresses?.map { addressRepository.save(it) }?.toSet()
 
         if (savedAddresses != null) {
@@ -134,23 +135,26 @@ class RedisAccountService(
         return updatePerson(person)
     }
 
-    // suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = coroutineScope {
-    override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = withContext(Dispatchers.IO) {
-        lateinit var person: PersonEntity
-        lateinit var address: AddressEntity
-        awaitAll(
-            async {
-                person = personRepository.findById(personId).orElseThrow {
-                    RecordNotFoundException("Unable to find person for $personId id")
+    // override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = coroutineScope {
+    override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity =
+        withContext(Dispatchers.IO) {
+            // HINT: awaitAll() cancel all other jobs as-soon-as, if any one of the jobs fail
+            val (person, address) = awaitAll(
+                async {
+                    logger.atDebug().log("getting person async")
+                    personRepository.findById(personId).orElseThrow {
+                        RecordNotFoundException("Unable to find person for $personId id")
+                    }
+                },
+                async {
+                    logger.atDebug().log("getting address async")
+                    addressRepository.findById(addressId).orElseThrow {
+                        RecordNotFoundException("Unable to find address for $addressId id")
+                    }
                 }
-            },
-            async {
-                address = addressRepository.findById(addressId).orElseThrow {
-                    RecordNotFoundException("Unable to find address for $addressId id")
-                }
-            }
-        )
-        ((person).addresses as HashSet).add(address)
-        updatePerson(person)
-    }
+            )
+
+            ((person as PersonEntity).addresses as HashSet).add(address as AddressEntity)
+            updatePerson(person)
+        }
 }

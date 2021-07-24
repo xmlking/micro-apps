@@ -1,38 +1,32 @@
-# DIY Playbook
-
-Do-it-yourself step-by-step instructions to create this project structure from scratch.
-
+# Java Prerequisites
+ 
 ### Prerequisites
 
 > you need following tools. versions listed here are minimal versions tested.
 
 | Software                      | Version         | Optional         |  
 |-------------------------------|-----------------|------------------| 
-| Java                          | 11.0.6          | 20.0.0.r11       | 
+| Java                          | 11.0.11.hs-adpt | 21.2.0.r11-grl   | 
 | Kotlin                        | 1.13.70         |                  | 
-| Gradle                        | 6.2.2           |                  |
-| IntelliJ                      |                 | 2020.1           |
+| Gradle                        | 7.1.1           |                  |
+| IntelliJ                      |                 | 2021.1           |
 | Docker for Mac                | latest          |                  |
 | SDKMan                        | latest          |                  |
-| Micronaut                     |                 | 1.0.0            |
+
 
 ### Install Prerequisites
 
 ```bash
 # install or Update Node with brew or NVM
-sdk install java 11.0.6.hs-adpt
-sdk install java 8.0.242.hs-adpt
-sdk install java 120.0.0.r11-grl 
-sdk default java 20.0.0.r11-grl
+sdk install java 11.0.11.hs-adpt
+sdk install java 21.2.0.r11-grl
+sdk default java 11.0.11.hs-adpt
 sdk install gradle
 # to remove old version e.g., gradle 4.10:
-sdk remove gradle 4.10
+sdk remove gradle 7.1.1
 sdk install kotlin 
-sdk install micronaut
 # Optional
 sdk install maven
-sdk install spark
-sdk install
 #sdkman self upgrade
 sdk selfupdate
 ```
@@ -92,16 +86,5 @@ toolchain:
 ```bash
 mkdir micro-apps && cd micro-apps
 gradle init --type kotlin-application --dsl kotlin
-```
-
-#### Generate Artifacts
-
-TODO
-
-```bash
-cd apps/greeting-api
-mn create-controller micro.apps.service.controllers.greeting
-mn create-bean  micro.apps.service.services.greetingService
-mn create-client greetingClient
 ```
 

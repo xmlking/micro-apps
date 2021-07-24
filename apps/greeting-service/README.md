@@ -14,10 +14,10 @@ Find more *Quarkus QuickStart* [samples](https://github.com/quarkusio/quarkus-qu
     sdk install java 11.0.11.hs-adpt
     export JAVA_HOME=$HOME/.sdkman/candidates/java/current
     ```
-1. GraalVM version 21.1.0.r11-grl installed and configured appropriately
+1. GraalVM version 21.2.0.r11-grl installed and configured appropriately
     ```bash
-    sdk install java  21.1.0.r11-grl
-    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/21.1.0.r11-grl
+    sdk install java  21.2.0.r11-grl
+    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/21.2.0.r11-grl
     ```
 1. Install the native-image tool using gu install:
     ```bash
@@ -36,7 +36,7 @@ Find more *Quarkus QuickStart* [samples](https://github.com/quarkusio/quarkus-qu
 
 ```bash
 cd apps
-mvn io.quarkus:quarkus-maven-plugin:1.11.0.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:2.1.0.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-service \
     -DprojectVersion=0.1.0 \
@@ -150,6 +150,8 @@ docker image prune -f
 
 ## Testing
 
+### REST
+
 ```bash
 gradle :apps:greeting-service:quarkusDev
 open http://localhost:8080/q/swagger-ui/
@@ -176,11 +178,17 @@ http :8080/api/v1/account/id/abc123
 http :8080/api/v1/account/user-info 'Authorization:Bearer GOOGLE.TOKEN'
 ```
 
+### GRPC
+
 ```bash
 # no TLS
 grpcurl -plaintext \
 -protoset <(buf build -o -) \
 -d '{ "message":  "sumo" }' 0.0.0.0:9000 micro.apps.proto.echo.v1.EchoService/Echo
+
+grpcurl -plaintext \
+-protoset <(buf build -o -) \
+-d '{ "message":  "sumo" }' 0.0.0.0:9000 micro.apps.proto.echo.v1.EchoService/EchoStream
 ```
 
 ### Unit tests
