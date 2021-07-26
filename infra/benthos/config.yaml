@@ -1,0 +1,116 @@
+## Job ##
+input:
+  resource: npidata
+pipeline:
+  # threads: 4
+  processors:
+    - resource: filter_empty_npi
+    - resource: map_data
+    - catch:
+        - log:
+            message: "Processing failed due to: ${!error()}"
+output:
+  switch:
+    cases:
+      # Skip if there is error.
+      - check: errored()
+        output:
+          type: stdout
+      - output:
+          resource: json_out
+
+
+## Input Resources ##
+input_resources:
+  - label: npidata
+    csv:
+      paths: [ "./npidata.csv" ]
+      parse_header_row: false
+      delimiter: ','
+      batch_count: 1
+  - label: npidata_file
+    file:
+      paths: [ "./npidata.csv" ]
+      codec: csv
+
+## Processor Resources ##
+processor_resources:
+  - label: filter_empty_npi
+    bloblang: |
+      root = if this.index(1) == "" || this.index(1).number().catch(5) > 1 || this.index(0) == "" { deleted() }
+  - label: map_data
+    bloblang: |
+      # root.eventdata = this.string()
+      name.first = "%s %s".format(this.index(6), this.index(7)).trim()
+      name.last = "%s %s".format(this.index(5), this.index(9)).trim()
+      name.title = if this.index(8).trim() != "" { this.index(8).trim() } else { deleted() }
+
+      gender = match this.index(41).trim() {
+        this == "M" => "MALE"
+        this == "F" => "FEMALE"
+        _ => "UNKNOWN"
+      }
+      dob = this.index(37).parse_timestamp_strptime("%m/%d/%Y").format_timestamp_unix()
+      phone = if this.index(26).trim() != "" { this.index(26).trim() } else { deleted() }
+      id = this.index(0)
+
+      addresses = [
+        {
+          "suite": if this.index(21).trim() != "" { this.index(21).trim() } else { deleted() },
+          "street": this.index(20),
+          "city": this.index(22),
+          "state": this.index(23),
+          "code": this.index(24),
+          "country": this.index(25),
+        },
+        {
+          "suite": if this.index(29).trim() != "" { this.index(29).trim() } else { deleted() },
+          "street": this.index(28),
+          "city": this.index(30),
+          "state": this.index(31),
+          "code": this.index(32),
+          "country": this.index(33),
+        },
+      ]
+
+      # eventid = uuid_v4()
+
+
+## Output Resources ##
+output_resources:
+  - label: json_out
+    file:
+      path: ./npidata.jsonl
+      codec: lines
+#  - label: redis_out
+#    redis_hash:
+#      url: tcp://localhost:6379
+#      kind: simple
+#      walk_metadata: false
+#      walk_json_object: false
+#      max_in_flight: 1
+#      key: ${!json("NPI")}
+#      fields:
+#        NPI: ${!json("document.NPI")}
+#        eventid: $${!json("document.eventid")}
+#        aggregateid: ${!json("document.aggregateid")}
+
+## Observability ##
+logger:
+  level: WARN # Option: ERROR, ALL
+  format: classic # Option: logfmt, classic, json
+  add_timestamp: true
+  static_fields:
+    '@service': benthos
+
+#metrics:
+#  prometheus:
+#    prefix: benthos
+#    push_interval: 1s
+#    push_job_name: benthos_push
+#    push_url: "http://localhost:9091"
+
+#tracer:
+#  jaeger:
+#    agent_address: localhost:6831
+#    service_name: benthos

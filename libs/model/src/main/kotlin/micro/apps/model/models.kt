@@ -1,3 +1,5 @@
+@file:UseSerializers(LocalDateTimeSerializer::class)
+
 package micro.apps.model
 
 import com.sksamuel.avro4k.AvroFixed
@@ -5,8 +7,13 @@ import com.sksamuel.avro4k.AvroProp
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.Transient
+import kotlinx.serialization.UseSerializers
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
@@ -17,11 +24,15 @@ import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoType
 import java.math.BigDecimal
 import java.time.Instant
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Date
 import java.util.UUID
 import javax.validation.constraints.Email
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Past
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 import java.io.Serializable as JavaSerializable
@@ -76,7 +87,7 @@ data class Name(
 @Serializable
 @AvroProp("pii", "yes")
 data class Address(
-    @ProtoNumber(1) val suite: String?,
+    @ProtoNumber(1) val suite: String? = null,
     @ProtoNumber(2) val street: String?,
     @ProtoNumber(3) val city: String?,
     @ProtoNumber(4) val state: String?,
@@ -95,10 +106,13 @@ data class Person(
     @ProtoNumber(4) @AvroProp("pii", "yes") val gender: Gender,
     @field:Min(value = 18, message = "age must be at least {value}")
     @ProtoNumber(5) @AvroProp("pii", "yes") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
+    // @Serializable(with = DateAsLongSerializer::class) // @Polymorphic
+    @field:Past(message = "invalid DOB: {value}")
+    @ProtoNumber(6) @AvroProp("pii", "yes") val dob: LocalDateTime?,
     @field:Email(message = "Email should be valid")
-    @ProtoNumber(6) @AvroProp("encrypted", "yes") val email: String,
-    @ProtoNumber(7) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String,
-    @ProtoNumber(8) val avatar: String = "https://www.gravatar.com/avatar", // Optional
+    @ProtoNumber(7) @AvroProp("encrypted", "yes") val email: String? = null,
+    @ProtoNumber(8) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String? = null,
+    @ProtoNumber(9) val avatar: String = "https://www.gravatar.com/avatar", // Optional
     @Transient val valid: Boolean = false // not serialized: explicitly transient
 )
 
@@ -133,6 +147,36 @@ object UUIDSerializer : KSerializer<UUID> {
 
     override fun deserialize(decoder: Decoder) =
         UUID.fromString(serializer.deserialize(decoder))
+}
+
+@OptIn(ExperimentalSerializationApi::class)
+@Serializer(forClass = Date::class)
+object DateAsLongSerializer : KSerializer<Date> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("DateSerializer", PrimitiveKind.LONG)
+    override fun serialize(encoder: Encoder, value: Date) = encoder.encodeLong(value.time)
+    override fun deserialize(decoder: Decoder): Date = Date(decoder.decodeLong())
+}
+
+@OptIn(ExperimentalSerializationApi::class)
+@Serializer(forClass = LocalDateTime::class)
+object LocalDateTimeSerializer : KSerializer<LocalDateTime> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("LocalDateTimeSerializer", PrimitiveKind.STRING)
+    override fun serialize(encoder: Encoder, value: LocalDateTime) = encoder.encodeString(DateTimeFormatter.ISO_DATE_TIME.format(value))
+    override fun deserialize(decoder: Decoder) = LocalDateTime.parse(decoder.decodeString())
+
+/*
+    override fun deserialize(decoder: Decoder): LocalDateTime {
+        return ZonedDateTime.parse(decoder.decodeString(), DateTimeFormatter.ISO_DATE_TIME).toLocalDateTime()
+    }
+
+    override fun serialize(encoder: Encoder, value: LocalDateTime) {
+        encoder.encodeString(
+            value.atZone(ZoneId.systemDefault())
+                .withFixedOffsetZone()
+                .format(DateTimeFormatter.ISO_DATE_TIME)
+        )
+    }
+ */
 }
 
 /*

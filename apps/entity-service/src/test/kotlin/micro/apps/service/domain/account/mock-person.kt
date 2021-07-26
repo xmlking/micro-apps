@@ -1,21 +1,23 @@
 package micro.apps.service.domain.account
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import micro.apps.core.dateOf
 import micro.apps.model.Gender
 import micro.apps.model.Name
 import org.springframework.data.geo.Point
+import java.util.Date
 
 // https://medium.com/@june.pravin/better-kotlin-unit-testing-with-mock-helper-functions-38dc1a6c4684
 
 // creates the entire Person graph!
-// val batman = mockPersonDto(mockId = 1, age = 44)
+// val batman = mockPersonDto(mockId = 1, dob = 1392249600)
 @OptIn(ExperimentalSerializationApi::class)
 fun mockPersonDto(
     mockId: Int,
     name: Name = mockName(mockId),
     address: AddressDto = mockAddressDto(mockId),
     gender: Gender = Gender.UNKNOWN,
-    age: Int = mockId + 20,
+    dob: Date = dateOf(2014, 1, 11),
     email: String = "user$mockId@gmail.com",
     phone: String = "$mockId$mockId$mockId-4445555",
     avatar: String = "avatar#$mockId"
@@ -24,7 +26,7 @@ fun mockPersonDto(
         name = name,
         addresses = setOf(address),
         gender = gender,
-        age = age,
+        dob = dob,
         email = email,
         phone = phone,
         avatar = avatar
@@ -84,7 +86,7 @@ fun mockPersonList() = listOf(
             )
         ),
         gender = Gender.MALE,
-        age = 99,
+        dob = dateOf(2010, 5, 22),
         email = "sumo1@demo.com", phone = "0000000000"
     ),
     PersonEntity(
@@ -101,7 +103,7 @@ fun mockPersonList() = listOf(
             )
         ),
         gender = Gender.FEMALE,
-        age = 99,
+        dob = dateOf(2010, 5, 22),
         email = "sumo2@demo.com", phone = "1111111111"
     )
 )
@@ -137,7 +139,7 @@ fun mockPersonEntity(
     name: Name = mockName(mockId),
     address: AddressEntity = mockAddressEntity(mockId),
     gender: Gender = Gender.UNKNOWN,
-    age: Int = mockId,
+    dob: Date = dateOf(2014, 1, 11),
     email: String = "user$mockId@gmail.com",
     phone: String = "$mockId$mockId$mockId-4445555",
     avatar: String = "avatar#$mockId"
@@ -147,7 +149,7 @@ fun mockPersonEntity(
         name = name,
         addresses = setOf(address),
         gender = gender,
-        age = age,
+        dob = dob,
         email = email,
         phone = phone,
         avatar = avatar

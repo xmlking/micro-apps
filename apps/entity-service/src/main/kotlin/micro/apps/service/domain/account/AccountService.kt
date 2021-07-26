@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Primary
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.Calendar
 
 // https://github.com/Taras48/RedisCache/blob/master/src/main/kotlin/com/redis/cache/RedisCache/service/ActorServiceImpl.kt
 
@@ -56,7 +57,8 @@ class RedisAccountService(
 
     suspend fun findAllAdults(): Flow<PersonEntity> {
         return personRepository.findAll().filter {
-            it.age?.let { it >= 18 } ?: false
+            val today = Calendar.getInstance()
+            it.dob?.let { today[Calendar.YEAR] - it.year > 18 } ?: false
         }.asFlow()
     }
 
@@ -77,7 +79,7 @@ class RedisAccountService(
             } ?: person.name,
             addresses = personDto.addresses?.let { it -> it.map { it.toEntity() } }?.toSet() ?: person.addresses,
             gender = personDto.gender ?: person.gender,
-            age = personDto.age ?: person.age,
+            dob = personDto.dob ?: person.dob,
             email = personDto.email ?: person.email,
             phone = personDto.phone ?: person.phone,
         )
@@ -105,7 +107,7 @@ class RedisAccountService(
                 personDto.name,
                 addresses,
                 personDto.gender,
-                personDto.age,
+                personDto.dob,
                 personDto.email,
                 personDto.phone,
                 personDto.avatar
@@ -136,25 +138,24 @@ class RedisAccountService(
     }
 
     // override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = coroutineScope {
-    override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity =
-        withContext(Dispatchers.IO) {
-            // HINT: awaitAll() cancel all other jobs as-soon-as, if any one of the jobs fail
-            val (person, address) = awaitAll(
-                async {
-                    logger.atDebug().log("getting person async")
-                    personRepository.findById(personId).orElseThrow {
-                        RecordNotFoundException("Unable to find person for $personId id")
-                    }
-                },
-                async {
-                    logger.atDebug().log("getting address async")
-                    addressRepository.findById(addressId).orElseThrow {
-                        RecordNotFoundException("Unable to find address for $addressId id")
-                    }
+    override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = withContext(Dispatchers.IO) {
+        // HINT: awaitAll() cancel all other jobs as-soon-as, if any one of the jobs fail
+        val (person, address) = awaitAll(
+            async {
+                logger.atDebug().log("getting person async")
+                personRepository.findById(personId).orElseThrow {
+                    RecordNotFoundException("Unable to find person for $personId id")
                 }
-            )
+            },
+            async {
+                logger.atDebug().log("getting address async")
+                addressRepository.findById(addressId).orElseThrow {
+                    RecordNotFoundException("Unable to find address for $addressId id")
+                }
+            }
+        )
 
-            ((person as PersonEntity).addresses as HashSet).add(address as AddressEntity)
-            updatePerson(person)
-        }
+        ((person as PersonEntity).addresses as HashSet).add(address as AddressEntity)
+        updatePerson(person)
+    }
 }

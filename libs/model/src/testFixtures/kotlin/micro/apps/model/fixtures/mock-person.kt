@@ -4,6 +4,8 @@ import micro.apps.model.Address
 import micro.apps.model.Gender
 import micro.apps.model.Name
 import micro.apps.model.Person
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
 
 // https://medium.com/@june.pravin/better-kotlin-unit-testing-with-mock-helper-functions-38dc1a6c4684
 
@@ -16,6 +18,7 @@ fun mockPersonDto(
     address: Address = mockAddress(mockId),
     gender: Gender = Gender.UNKNOWN,
     age: Int = mockId,
+    dob: LocalDateTime = now(),
     email: String = "user$mockId@gmail.com",
     phone: String = "$mockId$mockId$mockId",
     avatar: String = "avatar#$mockId"
@@ -26,6 +29,7 @@ fun mockPersonDto(
         addresses = setOf(address),
         gender = gender,
         age = age,
+        dob = dob,
         email = email,
         phone = phone,
         avatar = avatar
@@ -78,6 +82,7 @@ fun mockPersonList() = listOf(
                 country = "CA"
             )
         ),
+        dob = now(),
         gender = Gender.MALE, age = 99,
         email = "sumo1@demo.com", phone = "0000000000"
     ),
@@ -93,6 +98,7 @@ fun mockPersonList() = listOf(
                 country = "CA"
             )
         ),
+        dob = now(),
         gender = Gender.FEMALE, age = 99,
         email = "sumo2@demo.com", phone = "1111111111"
     )

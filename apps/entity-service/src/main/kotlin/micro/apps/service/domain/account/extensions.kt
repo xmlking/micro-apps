@@ -5,7 +5,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 @OptIn(ExperimentalSerializationApi::class)
 fun PersonDto.toEntity(): PersonEntity {
     val addresses = this.addresses?.map { it.toEntity() }?.toSet()
-    return PersonEntity(null, name, addresses, gender, age, email, phone, avatar)
+    return PersonEntity(null, name, addresses, gender, dob, email, phone, avatar)
 }
 
 @OptIn(ExperimentalSerializationApi::class)

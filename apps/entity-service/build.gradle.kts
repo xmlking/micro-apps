@@ -16,6 +16,7 @@ plugins {
 val slf4jVersion = libs.versions.slf4j.get()
 
 dependencies {
+    implementation(project(":libs:core"))
     // TODO: enable when `entity-webapp` is ready
     // implementation(project(":apps:entity-webapp"))
     implementation(project(":libs:model"))

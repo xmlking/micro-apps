@@ -6,6 +6,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAdjusters
+import java.util.Date
 
 /**
  * Format an Instant as an ISO8601 timestamp
@@ -38,3 +39,8 @@ fun <T : Any> T?.whenNotNull(callback: (it: T) -> Unit) {
 fun <T : Any> T?.whenNull(callback: () -> Unit) {
     this ?: callback()
 }
+
+/**
+ * Create PST Date
+ */
+fun dateOf(year: Int, month: Int, day: Int): Date = Date.from(LocalDate.of(year, month, day).atStartOfDay(ZoneId.of("America/Los_Angeles")).toInstant())

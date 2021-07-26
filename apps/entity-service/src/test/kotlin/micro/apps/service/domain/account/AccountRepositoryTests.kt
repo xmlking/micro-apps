@@ -2,18 +2,19 @@ package micro.apps.service.domain.account
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.TestCaseConfig
+import io.kotest.matchers.collections.shouldExistInOrder
 import io.kotest.matchers.equality.shouldBeEqualToIgnoringFields
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.delay
 import kotlinx.serialization.ExperimentalSerializationApi
-import micro.apps.model.Gender
-import micro.apps.model.Name
+import kotlinx.serialization.json.Json
+import micro.apps.core.dateOf
 import micro.apps.test.E2E
 import micro.apps.test.Slow
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
 import org.springframework.data.domain.Sort
 import org.springframework.data.domain.Sort.Direction.ASC
 import org.springframework.data.domain.Sort.Order
-import org.springframework.data.geo.Point
 
 @OptIn(ExperimentalSerializationApi::class)
 @DataRedisTest
@@ -24,94 +25,64 @@ class AccountRepositoryTests(
     // defaultTestConfig
     TestCaseConfig(tags = setOf(E2E, Slow))
 
-    val address1 = AddressEntity(
-        suite = "A212",
-        street = "FourWinds Dr",
-        city = "Corona",
-        state = "CA",
-        code = "34453",
-        country = "USA",
-        location = Point(-77.0364, 38.8951)
-    )
-    val address2 = AddressEntity(
-        suite = "B212",
-        street = "ThreeWinds Dr",
-        city = "Corona",
-        state = "CA",
-        code = "44553",
-        country = "USA",
-        location = Point(41.40338, 2.17403)
-    )
-    val person1 = PersonEntity(
-        name = Name(first = "sumo", last = "demo"),
-        gender = Gender.MALE,
-        age = 34,
-        phone = "3334442222",
-        email = "sumo@demo.com",
-    )
-    val person2 = PersonEntity(
-        name = Name(first = "sumo2", last = "demo2"),
-        gender = Gender.MALE,
-        age = 32,
-        phone = "4466774433",
-        email = "sumo2@demo.com",
-    )
-
-    lateinit var savedAddress1: AddressEntity
-    lateinit var savedPerson1: PersonEntity
-    lateinit var savedAddress2: AddressEntity
-    lateinit var savedPerson2: PersonEntity
+    val aPersonId = "1073516001"
+    lateinit var aPerson: PersonEntity
 
     beforeSpec {
         println("***DID YOU RUN `FLUSHDB` REDIS COMMAND TO CLEAN THE DATABASE?")
-        savedAddress1 = addressRepository.save(address1)
-        savedAddress2 = addressRepository.save(address2)
-        val person1WithAddress1 = person1.copy(addresses = setOf(savedAddress1, savedAddress2))
-        savedPerson1 = personRepository.save(person1WithAddress1)
-        savedPerson1.shouldBeEqualToIgnoringFields(person1WithAddress1, PersonEntity::id)
 
-        val person2WithAddress2 = person2.copy(addresses = setOf(savedAddress2))
-        savedPerson2 = personRepository.save(person2WithAddress2)
+        javaClass.getResourceAsStream("/npidata.jsonl").use {
+            it?.bufferedReader()?.forEachLine { line ->
+                val person = Json.decodeFromString(PersonEntity.serializer(), line)
+                val savedAddresses: MutableSet<AddressEntity> = mutableSetOf()
+                person.addresses?.forEach {
+                    savedAddresses += addressRepository.save(it)
+                }
+                val personWithSavedAddresses = person.copy(addresses = savedAddresses)
+                personRepository.save(personWithSavedAddresses)
+            }
+            delay(1000L)
+            aPerson = personRepository.findById(aPersonId).get()
+        }
     }
 
     afterSpec {
-        addressRepository.delete(savedAddress1)
-        personRepository.delete(savedPerson1)
-        addressRepository.delete(savedAddress2)
-        personRepository.delete(savedPerson2)
+        addressRepository.deleteAll()
+        personRepository.deleteAll()
     }
 
     test("findById returns Person") {
-        val actual = personRepository.findById(savedPerson1.id!!).get()
-        actual shouldBe savedPerson1
+        val actual = personRepository.findById(aPersonId).get()
+        actual shouldBe aPerson
         /*
-        val actual = personRepository.findById(savedPerson1.id!!).ifPresent {
-            it shouldBe savedPerson1
+        val actual = personRepository.findById(aPersonId).ifPresent {
+            it shouldBe aPerson
         }
          */
     }
 
     test("count should be one") {
         val actual = personRepository.count()
-        actual shouldBe 2
+        actual shouldBe 100
     }
 
     test("!this test will be ignored") {
-        println(savedPerson1)
+        println(aPerson)
     }
 
-    test("update person1 age and email") {
-        val savedPerson1Updated = personRepository.save(savedPerson1.copy(age = 75, email = "me2@demo.com"))
-        savedPerson1Updated.id shouldBe savedPerson1.id
-        savedPerson1Updated.age shouldBe 75
-        savedPerson1Updated.email shouldBe "me2@demo.com"
+    test("update aPerson's dob and email") {
+        val savedAPersonUpdated =
+            personRepository.save(aPerson.copy(dob = dateOf(1965, 8, 26), email = "me2@demo.com"))
+        savedAPersonUpdated.id shouldBe aPerson.id
+        savedAPersonUpdated.dob shouldBe dateOf(1965, 8, 26)
+        savedAPersonUpdated.email shouldBe "me2@demo.com"
+        savedAPersonUpdated.shouldBeEqualToIgnoringFields(aPerson, PersonEntity::dob, PersonEntity::email)
     }
 
     test("list all") {
         // val sort = Sort.sort(Person::class.java).by(Person::getFirstName).ascending()
-        // val actual = personRepository.findAll(PageRequest.of(0, 5))
-        val actual = personRepository.findAll(Sort.by(Order(ASC, "age")))
-        println(actual)
-        // actual shouldBe 1
+        // val sorted = personRepository.findAll(PageRequest.of(0, 5))
+        val sorted = personRepository.findAll(Sort.by(Order(ASC, "dob")))
+        sorted shouldExistInOrder listOf { it.id != null }
     }
 })

@@ -7,6 +7,7 @@ import micro.apps.model.Gender
 import micro.apps.model.Name
 import micro.apps.model.Person
 import org.springframework.stereotype.Repository
+import java.time.LocalDateTime
 
 @OptIn(ExperimentalSerializationApi::class)
 interface EntityRepository {
@@ -35,6 +36,7 @@ class RedisEntityRepository() : EntityRepository {
                     country = "CA"
                 )
             ),
+            dob = LocalDateTime.of(2013, 12, 18, 14, 30),
             gender = Gender.MALE, age = 99,
             email = "sumo1@demo.com", phone = "0000000000"
         )

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.transaction.reactive.TransactionalOperator
 import org.springframework.transaction.reactive.executeAndAwait
+import java.util.Date
 
 // https://github.com/Taras48/RedisCache/blob/master/src/main/kotlin/com/redis/cache/RedisCache/service/ActorServiceImpl.kt
 // TODO: https://todd.ginsberg.com/post/springboot-reactive-kotlin-coroutines/
@@ -45,7 +46,7 @@ class RedisReactiveAccountService(
     }
 
     suspend fun updatePersonTrans(person: PersonEntity): PersonEntity? = operator.executeAndAwait {
-        PersonEntity(age = 55, email = "", gender = Gender.FEMALE, name = Name("", ""), phone = "")
+        PersonEntity(dob = Date(), email = "", gender = Gender.FEMALE, name = Name("", ""), phone = "")
     }
 
     override suspend fun createPerson(personDto: PersonDto): PersonEntity {

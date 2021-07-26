@@ -47,7 +47,8 @@ MODULE LIST
 
 KEYS *
 
-HGETALL people:22a985b7-983a-419a-b1cd-91a9f8a044b2
+HGETALL people:1750384707
+HGETALL address:92a87e94-dbf0-44ff-a755-f7afc04116a8
 
 # Delete all keys of the currently selected Redis database:
 FLUSHDB
@@ -76,7 +77,7 @@ FLUSHDB
     - [Redis and Spring: Building High Performance RESTful APIs](https://github.com/wilvdb/redi2read/blob/main/src/main/kotlin/com/redislabs/edu/redi2read/services/RecommendationService.kt)
     
 - **Redis Spring**
-    - [Spring Data Redis](https://docs.spring.io/spring-data/redis/docs/2.5.2/reference/html/#why-spring-redis)
+    - [Spring Data Redis](https://docs.spring.io/spring-data/redis/docs/2.5.3/reference/html/#why-spring-redis)
     - [Accessing Data Reactively with Redis](https://spring.io/guides/gs/spring-data-reactive-redis/)
     - [Redis Reactive kotlin tests](https://github.com/spring-projects/spring-data-redis/blob/main/src/test/kotlin/org/springframework/data/redis/core/ReactiveHashOperationsExtensionsUnitTests.kt)
     

@@ -16,6 +16,8 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBody
+import java.lang.System.currentTimeMillis
+import java.util.Date
 
 @OptIn(ExperimentalSerializationApi::class)
 @WebFluxTest
@@ -96,7 +98,7 @@ class AccountControllerTests(private val client: WebTestClient) : FunSpec() {
 
         test("POST invalid PersonDto should throw validation error") {
             // given
-            val mockPersonDtoInvalid = mockPersonDto(1).copy(age = 11)
+            val mockPersonDtoInvalid = mockPersonDto(1).copy(dob = Date(currentTimeMillis() + 100 * 1000))
             coEvery { accountService.createPerson(mockPersonDtoInvalid) } returns mockPersonEntity(1)
 
             // when
