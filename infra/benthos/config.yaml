@@ -43,7 +43,7 @@ processor_resources:
       # root.eventdata = this.string()
       name.first = "%s %s".format(this.index(6), this.index(7)).trim()
       name.last = "%s %s".format(this.index(5), this.index(9)).trim()
-      name.title = if this.index(8).trim() != "" { this.index(8).trim() } else { deleted() }
+      name.title = this.index(8).not_empty().catch(deleted())
 
       gender = match this.index(41).trim() {
         this == "M" => "MALE"
@@ -51,12 +51,12 @@ processor_resources:
         _ => "UNKNOWN"
       }
       dob = this.index(37).parse_timestamp_strptime("%m/%d/%Y").format_timestamp_unix()
-      phone = if this.index(26).trim() != "" { this.index(26).trim() } else { deleted() }
+      phone = this.index(26).not_empty().catch(deleted())
       id = this.index(0)
 
       addresses = [
         {
-          "suite": if this.index(21).trim() != "" { this.index(21).trim() } else { deleted() },
+          "suite": this.index(21).not_empty().catch(deleted()),
           "street": this.index(20),
           "city": this.index(22),
           "state": this.index(23),
@@ -64,7 +64,7 @@ processor_resources:
           "country": this.index(25),
         },
         {
-          "suite": if this.index(29).trim() != "" { this.index(29).trim() } else { deleted() },
+          "suite": this.index(29).not_empty().catch(deleted()),
           "street": this.index(28),
           "city": this.index(30),
           "state": this.index(31),
