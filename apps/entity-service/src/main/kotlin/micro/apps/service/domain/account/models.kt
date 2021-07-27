@@ -1,4 +1,4 @@
-@file:UseSerializers(DateAsLongSerializer::class)
+@file:UseSerializers(DateAsLongSerializer::class, LocalDateTimeSerializer::class)
 
 package micro.apps.service.domain.account
 
@@ -15,11 +15,14 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import micro.apps.model.DateAsLongSerializer
 import micro.apps.model.Gender
+import micro.apps.model.LocalDateTimeSerializer
 import micro.apps.model.Name
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Reference
 import org.springframework.data.geo.Point
 import org.springframework.data.redis.core.RedisHash
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.Date
 import javax.validation.Valid
 import javax.validation.constraints.Email
@@ -118,6 +121,17 @@ data class AddressDto(
     val code: String?,
     val country: String?,
     @Serializable(with = PointSerializer::class) val location: Point? = null
+)
+
+enum class Action { CREATED, UPDATED, DELETED }
+
+@ExperimentalSerializationApi
+@Serializable
+class ChangeEvent(
+    val id: String,
+    val action: Action,
+    // val at: ZonedDateTime = ZonedDateTime.now(ZoneId.of("UTC"))
+    val at: LocalDateTime = LocalDateTime.now(ZoneId.of("UTC"))
 )
 
 @OptIn(ExperimentalSerializationApi::class)

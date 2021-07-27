@@ -71,7 +71,7 @@ END
 
 # add person2's address to person1
 # http PATCH :8080/account/<addressId>/link/<personId>
-http PATCH :8080/account/e21c5d17-b089-42d8-8537-d82c13fde7e3/link/772cbbf3-05dd-4ce2-8caf-75535486270b
+http PATCH :8080/account/87a1120b-e05f-4e42-abde-0d92a7e39415/link/5bc4bb54-1eb5-4cfc-9332-72cab72276f5
 
 # bad create request
 http POST :8080/account << END 
@@ -125,4 +125,6 @@ END
 # Delete by Id
 http DELETE :8080/account/ff44f30c-a042-4ba9-bc91-ebd9679b54dc
 
+# Stream events
+http :8080/account/events
 ```

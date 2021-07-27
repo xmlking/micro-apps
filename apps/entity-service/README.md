@@ -57,6 +57,13 @@ docker compose -f infra/redis.yml down -v
 open http://localhost:8001/
 ```
 
+To monitor redis, use Grafana Dashboard
+
+```bash
+open http://localhost:3000/
+```
+
+
 ```bash
 gradle :apps:entity-service:bootRun
 # log at debug level

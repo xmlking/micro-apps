@@ -52,6 +52,9 @@ HGETALL address:92a87e94-dbf0-44ff-a755-f7afc04116a8
 
 # Delete all keys of the currently selected Redis database:
 FLUSHDB
+
+# Getting data from Streams
+XRANGE events - +
 ```
 
 ### Data Loading

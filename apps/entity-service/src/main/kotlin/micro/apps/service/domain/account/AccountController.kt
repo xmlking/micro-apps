@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.ExperimentalSerializationApi
 import mu.KotlinLogging
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -39,8 +40,8 @@ class AccountController(private val accountService: AccountService) {
         return accountService.updatePerson(id, person)
     }
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
+    // @GetMapping(produces = [TEXT_EVENT_STREAM_VALUE])
+    @GetMapping @ResponseStatus(HttpStatus.OK)
     suspend fun getPeople(): Flow<PersonEntity> = accountService.getAllPeople()
 
     @DeleteMapping(value = ["/{id}"])
@@ -49,4 +50,7 @@ class AccountController(private val accountService: AccountService) {
 
     @PatchMapping("/{addressId}/link/{personId}")
     suspend fun addAddressToPerson(@PathVariable addressId: String, @PathVariable personId: String): PersonEntity = accountService.addAddressToPerson(addressId, personId)
+
+    @GetMapping(value = ["/events"], produces = [TEXT_EVENT_STREAM_VALUE])
+    suspend fun events(): Flow<ChangeEvent> = accountService.events()
 }

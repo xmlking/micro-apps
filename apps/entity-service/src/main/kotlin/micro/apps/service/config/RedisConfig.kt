@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 @OptIn(ExperimentalSerializationApi::class)
 class RedisConfig {
 
+    // TODO https://github.com/ptr-dorjin/reactive-sensor/blob/main/reactive-server-redis/src/main/kotlin/pd/sensor/reactive/server/repository/RedisConfig.kt
+
     @Bean
     fun reactiveRedisTemplate(connectionFactory: ReactiveRedisConnectionFactory, objectMapper: ObjectMapper): ReactiveRedisTemplate<String, PersonEntity> {
         val valueSerializer = Jackson2JsonRedisSerializer(PersonEntity::class.java).apply {
@@ -57,6 +59,7 @@ class RedisConfig {
     }
     */
 
+    // to EnableTransactionSupport
     @OptIn(ExperimentalSerializationApi::class)
     @Bean
     @Primary

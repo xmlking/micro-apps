@@ -5,12 +5,18 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.service.RecordNotFoundException
 import mu.KotlinLogging
 import org.springframework.context.annotation.Primary
-import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.connection.stream.ObjectRecord
+import org.springframework.data.redis.connection.stream.RecordId
+import org.springframework.data.redis.connection.stream.StreamOffset
+import org.springframework.data.redis.core.ReactiveRedisTemplate
+import org.springframework.data.redis.core.addAndAwait
+import org.springframework.data.redis.core.readWithTypeAsFlow
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.Calendar
@@ -22,7 +28,7 @@ interface AccountService {
     @Throws(RecordNotFoundException::class)
     suspend fun getPerson(id: String): PersonEntity
 
-    suspend fun getAllPeople(): Flow<PersonEntity>
+    fun getAllPeople(): Flow<PersonEntity>
 
     @Throws(RecordNotFoundException::class)
     suspend fun updatePerson(id: String, personDto: PersonDto): PersonEntity
@@ -36,6 +42,8 @@ interface AccountService {
 
     @Throws(RecordNotFoundException::class)
     suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity
+
+    fun events(): Flow<ChangeEvent>
 }
 
 private val logger = KotlinLogging.logger {}
@@ -46,14 +54,15 @@ private val logger = KotlinLogging.logger {}
 class RedisAccountService(
     private val personRepository: PersonRepository,
     private val addressRepository: AddressRepository,
-    private val redisTemplate: RedisTemplate<String, PersonEntity>,
+    private val redisTemplate: ReactiveRedisTemplate<String, PersonEntity>,
 ) : AccountService {
     val hashOperations = redisTemplate.opsForHash<String, PersonEntity>()
+    val streamOperations = redisTemplate.opsForStream<String, ChangeEvent>()
 
     override suspend fun getPerson(id: String): PersonEntity =
         personRepository.findById(id).orElseThrow { RecordNotFoundException("Person with id - $id not found") }
 
-    override suspend fun getAllPeople(): Flow<PersonEntity> = personRepository.findAll().asFlow()
+    override fun getAllPeople(): Flow<PersonEntity> = personRepository.findAll().asFlow()
 
     suspend fun findAllAdults(): Flow<PersonEntity> {
         return personRepository.findAll().filter {
@@ -89,18 +98,27 @@ class RedisAccountService(
     @Transactional
     override suspend fun updatePerson(person: PersonEntity): PersonEntity {
         logger.atDebug().log("saving person")
-        val savedAddresses = person.addresses?.map { addressRepository.save(it) }?.toSet()
+        val savedAddresses = person.addresses?.map {
+            addressRepository.save(it)
+                .also { publishChangeEvent(ADDRESS, it.id, Action.UPDATED) }
+        }?.toSet()
 
         if (savedAddresses != null) {
             return personRepository.save(person.copy(addresses = savedAddresses))
+                .also { publishChangeEvent(PEOPLE, it.id, Action.UPDATED) }
         } else {
             return personRepository.save(person)
+                .also { publishChangeEvent(PEOPLE, it.id, Action.UPDATED) }
         }
     }
 
     @Transactional
     override suspend fun createPerson(personDto: PersonDto): PersonEntity {
-        val addresses = personDto.addresses?.map { it.toEntity() }?.map { addressRepository.save(it) }?.toSet()
+        val addresses = personDto.addresses?.map { it.toEntity() }?.map {
+            addressRepository.save(it)
+                .also { publishChangeEvent(ADDRESS, it.id, Action.CREATED) }
+        }?.toSet()
+
         return personRepository.save(
             PersonEntity(
                 null,
@@ -113,32 +131,30 @@ class RedisAccountService(
                 personDto.avatar
             )
         )
+            .also { publishChangeEvent(PEOPLE, it.id, Action.CREATED) }
     }
 
     @Transactional
     override suspend fun deletePerson(id: String) {
         val person = getPerson(id)
-        person.addresses?.forEach {
-            addressRepository.delete(it)
+        person.addresses?.forEach { address ->
+            addressRepository.delete(address)
+                .also { publishChangeEvent(ADDRESS, address.id, Action.DELETED) }
         }
         personRepository.delete(person)
+            .also { publishChangeEvent(PEOPLE, id, Action.DELETED) }
     }
 
     @Transactional
-    suspend fun addAddressToPersonSequential(addressId: String, personId: String): PersonEntity {
-        // Run 2 findById parallel
-        val person: PersonEntity = personRepository.findById(personId).orElseThrow {
-            RecordNotFoundException("Unable to find person for $personId id")
-        }
-        val address: AddressEntity = addressRepository.findById(addressId).orElseThrow {
-            RecordNotFoundException("Unable to find address for $addressId id")
-        }
-        (person.addresses as HashSet).add(address)
-        return updatePerson(person)
-    }
-
     // override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = coroutineScope {
     override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = withContext(Dispatchers.IO) {
+        // val person: PersonEntity = personRepository.findById(personId).orElseThrow {
+        //     RecordNotFoundException("Unable to find person for $personId id")
+        // }
+        // val address: AddressEntity = addressRepository.findById(addressId).orElseThrow {
+        //     RecordNotFoundException("Unable to find address for $addressId id")
+        // }
+
         // HINT: awaitAll() cancel all other jobs as-soon-as, if any one of the jobs fail
         val (person, address) = awaitAll(
             async {
@@ -156,6 +172,20 @@ class RedisAccountService(
         )
 
         ((person as PersonEntity).addresses as HashSet).add(address as AddressEntity)
-        updatePerson(person)
+        personRepository.save(person)
+            .also { publishChangeEvent(PEOPLE, personId, Action.UPDATED) }
+    }
+
+    override fun events() = streamOperations
+        .readWithTypeAsFlow<String, ChangeEvent>(StreamOffset.fromStart(EVENTS)).map { it.value }
+
+    private suspend fun publishChangeEvent(prefix: String, id: String?, action: Action): RecordId {
+        return streamOperations.addAndAwait(ObjectRecord.create(EVENTS, ChangeEvent("$prefix:$id", action = action)))
+    }
+
+    companion object {
+        private const val ADDRESS = "address"
+        private const val PEOPLE = "people"
+        private const val EVENTS = "events"
     }
 }
