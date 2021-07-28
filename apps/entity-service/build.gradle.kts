@@ -2,6 +2,7 @@ plugins {
     kotlin("plugin.noarg")
     kotlin("plugin.spring")
     kotlin("plugin.serialization")
+    kotlin("kapt")
 
     // kotlin("plugin.lombok")
     // id("io.freefair.lombok")
@@ -22,8 +23,11 @@ dependencies {
     implementation(project(":libs:model"))
     implementation(project(":libs:service"))
 
+    // spring boot
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
+    kapt(libs.spring.boot.configuration.processor) // For ConfigurationProperties
+    compileOnly(libs.spring.boot.configuration.processor) // FIXME: https://youtrack.jetbrains.com/issue/KT-15040
 
     // Optional: if you also want rsocket
     // implementation(libs.spring.boot.starter.rsocket)

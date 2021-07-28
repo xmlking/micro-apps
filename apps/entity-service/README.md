@@ -24,6 +24,12 @@ here
     - [ ] Redis Graph
 - [ ] Observability
 
+## Setup
+
+```bash
+# To generate your own metadata using the annotation processor.
+gradle :apps:entity-service:kaptKotlin
+```
 
 ## Run
 

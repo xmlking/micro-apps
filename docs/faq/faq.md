@@ -12,6 +12,12 @@
   touch foo
   git cz -a
   ```
+  
+- How to setup IntelliJ IDEA for Spring Boot?
+    - 
+    - Make sure Spring Boot plugin in enabled in menu *File | Settings | Plugins | Spring Boot*
+    - Enable [annotation processing](https://www.jetbrains.com/help/idea/annotation-processors-support.html) via menu *File | Settings | Build, Execution, Deployment | Compiler | Annotation Processors | Enable annotation processing*
+    - Since [Kapt is not yet integrated in IDEA](https://youtrack.jetbrains.com/issue/KT-15040), you need to run manually the command `gradle kaptKotlin` to generate the metadata
 
 - How to configure SLF4J with different logger implementations?
     - 

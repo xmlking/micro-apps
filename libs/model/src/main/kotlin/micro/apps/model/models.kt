@@ -73,7 +73,7 @@ enum class Gender {
 @Serializable
 @AvroProp("pii", "yes")
 data class Name(
-    @NotNull
+    @field:NotNull
     @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "FirstName must contain only letters and numbers")
     @field:Size(min = 4, max = 26, message = "FirstName must be between {min} and {max} characters")
     @ProtoNumber(1) val first: String?,

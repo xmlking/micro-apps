@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.service.RecordNotFoundException
+import micro.apps.service.config.ChangeEventProperties
 import mu.KotlinLogging
 import org.springframework.context.annotation.Primary
 import org.springframework.data.redis.connection.stream.ObjectRecord
-import org.springframework.data.redis.connection.stream.RecordId
 import org.springframework.data.redis.connection.stream.StreamOffset
 import org.springframework.data.redis.core.ReactiveRedisTemplate
 import org.springframework.data.redis.core.addAndAwait
@@ -54,7 +54,11 @@ class RedisAccountService(
     private val personRepository: PersonRepository,
     private val addressRepository: AddressRepository,
     private val redisTemplate: ReactiveRedisTemplate<String, PersonEntity>,
+    private val ceProps: ChangeEventProperties,
 ) : AccountService {
+    val ceEnabled = ceProps.enabled
+    val ecKeyspace = ceProps.keyspace
+
     val hashOperations = redisTemplate.opsForHash<String, PersonEntity>()
     val streamOperations = redisTemplate.opsForStream<String, ChangeEvent>()
 
@@ -176,8 +180,10 @@ class RedisAccountService(
         // .onEach { logger.atDebug().addKeyValue("event", it).log("Received stream record:") }
         .map { it.value }
 
-    private suspend fun publishChangeEvent(prefix: String, id: String?, action: Action): RecordId {
-        return streamOperations.addAndAwait(ObjectRecord.create(EVENTS, ChangeEvent("$prefix:$id", action = action)))
+    private suspend fun publishChangeEvent(prefix: String, id: String?, action: Action) {
+        if (ceEnabled) {
+            streamOperations.addAndAwait(ObjectRecord.create(ecKeyspace, ChangeEvent("$prefix:$id", action = action)))
+        }
     }
 
     companion object {

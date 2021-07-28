@@ -124,7 +124,7 @@ spring-boot-starter-data-r2dbc = { module = "org.springframework.boot:spring-boo
 spring-boot-starter-rsocket = { module = "org.springframework.boot:spring-boot-starter-rsocket" }
 spring-boot-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
 spring-boot-starter-validation  = { module = "org.springframework.boot:spring-boot-starter-validation" }
-# Usage: annotationProcessor(libs.spring.boot.configuration.processor)
+# Usage: kapt(libs.spring.boot.configuration.processor)
 spring-boot-configuration-processor  = { module = "org.springframework.boot:spring-boot-configuration-processor" }
 spring-boot-starter-grpc  = { module = "io.github.lognet:grpc-spring-boot-starter", version.ref = "springGrpc" }
 
