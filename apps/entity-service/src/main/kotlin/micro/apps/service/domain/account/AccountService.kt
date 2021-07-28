@@ -18,7 +18,6 @@ import org.springframework.data.redis.core.ReactiveRedisTemplate
 import org.springframework.data.redis.core.addAndAwait
 import org.springframework.data.redis.core.readWithTypeAsFlow
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import java.util.Calendar
 
 // https://github.com/Taras48/RedisCache/blob/master/src/main/kotlin/com/redis/cache/RedisCache/service/ActorServiceImpl.kt
@@ -95,7 +94,6 @@ class RedisAccountService(
         return updatePerson(upActor)
     }
 
-    @Transactional
     override suspend fun updatePerson(person: PersonEntity): PersonEntity {
         logger.atDebug().log("saving person")
         val savedAddresses = person.addresses?.map {
@@ -112,7 +110,6 @@ class RedisAccountService(
         }
     }
 
-    @Transactional
     override suspend fun createPerson(personDto: PersonDto): PersonEntity {
         val addresses = personDto.addresses?.map { it.toEntity() }?.map {
             addressRepository.save(it)
@@ -134,7 +131,6 @@ class RedisAccountService(
             .also { publishChangeEvent(PEOPLE, it.id, Action.CREATED) }
     }
 
-    @Transactional
     override suspend fun deletePerson(id: String) {
         val person = getPerson(id)
         person.addresses?.forEach { address ->
@@ -145,7 +141,6 @@ class RedisAccountService(
             .also { publishChangeEvent(PEOPLE, id, Action.DELETED) }
     }
 
-    @Transactional
     // override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = coroutineScope {
     override suspend fun addAddressToPerson(addressId: String, personId: String): PersonEntity = withContext(Dispatchers.IO) {
         // val person: PersonEntity = personRepository.findById(personId).orElseThrow {
@@ -177,7 +172,9 @@ class RedisAccountService(
     }
 
     override fun events() = streamOperations
-        .readWithTypeAsFlow<String, ChangeEvent>(StreamOffset.fromStart(EVENTS)).map { it.value }
+        .readWithTypeAsFlow<String, ChangeEvent>(StreamOffset.fromStart(EVENTS))
+        // .onEach { logger.atDebug().addKeyValue("event", it).log("Received stream record:") }
+        .map { it.value }
 
     private suspend fun publishChangeEvent(prefix: String, id: String?, action: Action): RecordId {
         return streamOperations.addAndAwait(ObjectRecord.create(EVENTS, ChangeEvent("$prefix:$id", action = action)))

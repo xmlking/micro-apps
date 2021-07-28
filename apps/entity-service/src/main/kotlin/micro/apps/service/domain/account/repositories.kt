@@ -4,6 +4,9 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 
+/*
+ * Note: Redis Repositories DO NOT work with transactions
+ */
 @OptIn(ExperimentalSerializationApi::class)
 @Repository
 // interface PersonRepository : ReactiveCrudRepository<PersonEntity, String> {

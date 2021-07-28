@@ -35,10 +35,6 @@ dependencies {
     // implementation("com.redislabs:spring-redisearch")
     // implementation("com.redislabs:jredisgraph")
 
-    // Required for redis translations
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    implementation("io.r2dbc:r2dbc-h2")
-
     // projectreactor
     implementation(libs.spring.boot.reactor.kotlin.extensions)
     testImplementation(libs.spring.boot.reactor.test)
