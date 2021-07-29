@@ -56,7 +56,8 @@ class RedisAccountService(
     private val redisTemplate: ReactiveRedisTemplate<String, PersonEntity>,
     private val ceProps: ChangeEventProperties,
 ) : AccountService {
-    val ceEnabled = ceProps.enabled
+    //  val (ceEnabled, ecKeyspace)  = ceProps
+    val ceEnabled  = ceProps.enabled
     val ecKeyspace = ceProps.keyspace
 
     val hashOperations = redisTemplate.opsForHash<String, PersonEntity>()
