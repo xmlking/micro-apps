@@ -7,17 +7,18 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 ### Features
 
 1. **Polyglot** - Support multiple languages (java, kotlin, groovy)
-1. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)
-1. Support multiple serialization methods (JSON, Avro, ProtoBuf)
-1. A type-safe cascading configuration with [konf](https://github.com/uchuhimo/konf)
-1. Integrated with best testing frameworks ([kotest](https://github.com/kotest/kotest/blob/master/doc/reference.md)
+2. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)
+3. Support multiple serialization methods (JSON, Avro, ProtoBuf)
+4. A type-safe cascading configuration with [konf](https://github.com/uchuhimo/konf)
+5. Integrated with best testing frameworks ([kotest](https://github.com/kotest/kotest/blob/master/doc/reference.md)
    , [MockK](https://mockk.io/))
-1. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images
-   with [Jib](https://github.com/GoogleContainerTools/jib)
-1. Build native binaries using [GraalVM](https://www.graalvm.org/)
-1. Cloud Native (Service Mesh, health checks, observability)
-1. Deployment automation with [kustomize](https://kustomize.io/) and Event-driven Autoscaling
-   with [KEDA](https://keda.sh/)
+6. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images
+   with [Jib](https://github.com/GoogleContainerTools/jib) 
+7. Build native binaries using [GraalVM](https://www.graalvm.org/)
+8. Cloud Native (Service Mesh, health checks, observability)
+9. Platform independent Observability instrumentation via [OpenTelemetry](https://opentelemetry.io/) 
+10. Deployment automation with [kustomize](https://kustomize.io/) and Event-driven Autoscaling
+    with [KEDA](https://keda.sh/)
 
 [![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
 [![Version](https://img.shields.io/github/v/tag/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/tags)
@@ -62,27 +63,61 @@ access **sonarqube** at http://localhost:9000/ (admin/admin)
 
 See [gradle commands](docs/advanced/gradle.md) for this project.
 
-#### Apache Beam pipelines
+### Apps
 
-> Start [wordcount Pipeline](./apps/wordcount-pipeline/)
->
-> Start [streaming Pipeline](./apps/ingestion-pipeline/)
+#### Apache Beam Pipelines
+
+> Explore [Wordcount Pipeline](./apps/wordcount-pipeline/)
+
+> Explore [Streaming Ingestion Pipeline](./apps/ingestion-pipeline/)
+
+> Explore [Classifier Pipeline](./apps/classifier-pipeline/)
 
 #### Quarkus
 
-> Start [Greeting API](./apps/greeting-service/)
+> Explore [REST, OpenAPI, OpenID Connect,  API](./apps/greeting-service/)
+
+> Explore [GraphQL API](./apps/person-service/)
 
 #### Kotlin-gRPC
 
-> Start [Kotlin-gRPC API](./apps/account-service/)
+> Explore [Account-gRPC API](./apps/account-service/)
 
-#### Spring-RSocket
+> Explore [Kotlin-gRPC API](./apps/keying-service/)
 
-> Start [Spring Chat APP](./apps/chat-service/)
+> Explore [Kotlin-gRPC API](./apps/linking-service/)
 
-#### Micronaut
+#### Spring
 
-> Start [Greeting API](./apps/greeting-micronaut/)
+> Explore [Spring-RSocket Chat APP](./apps/chat-service/)
+
+> Explore [Spring CRUD + Redis Search API](./apps/entity-service/)
+
+#### Svelte
+
+> Explore [SvelteKit WebApp](./apps/entity-webapp/)
+
+### Libs
+
+#### Reusable libraries
+
+> Explore [Apache Beam Kotlin Extensions](./libs/kbeam/)
+
+> Explore [Shared gRPC Components](./libs/grpc/)
+
+#### Shared code within this repo
+
+> Explore [Shared Core Code](./libs/core/)
+
+> Explore [Shared Model Objects](./libs/model/)
+ 
+> Explore [Shared Pipelines Code](./libs/pipeline/)
+
+> Explore [Shared Services Code](./libs/service/)
+
+> Explore [Shared ProtoBuf Contracts](./libs/proto/)
+
+> Explore [Shared Test Fixtures](./libs/test/)
 
 ### Inspiration
 

@@ -70,6 +70,7 @@ gradle :apps:spring-service:bootBuildImage -x test
 ## Reference
 
 - [Spring Kotlin](https://docs.spring.io/spring-framework/docs/current/reference/html/languages.html#kotlin)
+- [Write Less Code with Kotlin and Spring Boot](https://www.infoq.com/presentations/kotlin-spring-boot/)
 - [The State of Kotlin Support in Spring](https://resources.jetbrains.com/storage/products/kotlin/events/kotlin14/Slides/spring.pdf)
 - [Structured Concurrency](https://spring.io/blog/2019/04/12/going-reactive-with-spring-coroutines-and-kotlin-flow)
 - [KoFu](https://github.com/spring-projects-experimental/spring-fu/tree/main/kofu)
@@ -77,3 +78,4 @@ gradle :apps:spring-service:bootBuildImage -x test
 - [Functional Bean Registration Example](https://github.com/pwestlin/webshopkotlin/blob/master/core-service/src/main/kotlin/nu/westlin/webshop/core/CoreApplication.kt)
 - [Spring WebClient and WebTestClient Tutorial with Examples](https://www.callicoder.com/spring-5-reactive-webclient-webtestclient-examples/)
 - [mockk verify](https://notwoods.github.io/mockk-guidebook/docs/mocking/verify/)
+
