@@ -86,6 +86,18 @@ services:
     depends_on:
       - postgres
 
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      - 5775:5775/udp
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 5778:5778
+      - 16686:16686
+      - 14268:14268
+      - 14250:14250
+      - 9411:9411
+
   pub-sub-emulator:
     image: google/cloud-sdk:306.0.0
     command: [ "gcloud", "beta", "emulators", "pubsub", "start", "--host-port=0.0.0.0:8085", "--project=df-key-kls-npe-8d1f" ]

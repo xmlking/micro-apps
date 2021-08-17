@@ -72,7 +72,11 @@ data class PersonEntity(
     val email: String? = null,
     val phone: String? = null,
     val avatar: String? = "https://www.gravatar.com/avatarr"
-)
+) {
+    fun addAddress(address: AddressEntity) {
+        (this.addresses as HashSet).add(address)
+    }
+}
 
 // HINT: spring-data need no-arg constructor or all properties nullable
 @ExperimentalSerializationApi

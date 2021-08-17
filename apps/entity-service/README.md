@@ -113,6 +113,12 @@ gradle :apps:entity-service:build
 gradle :apps:entity-service:bootBuildImage -x test
 ```
 
+## TODO
+
+- https://github.com/rnbWarden/jredisearch-spring-boot-starter
+- use Redis Test Container [example](https://github.com/redis-developer/lettucemod/blob/master/subprojects/spring-lettucemod/src/test/java/com/redislabs/spring/lettucemod/RedisModulesAutoConfigurationIntegrationTests.java)
+- `testImplementation("com.redislabs.testcontainers:testcontainers-redis:1.2.0")`
+
 ## Reference
 
 - [Spring Kotlin](https://docs.spring.io/spring-framework/docs/current/reference/html/languages.html#kotlin)

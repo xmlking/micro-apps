@@ -10,7 +10,7 @@ avro4k = "0.41.0"
 kaml = "0.17.0"
 coroutines = "1.5.1"
 metadata = "0.3.0"
-turbine = "0.5.2"
+turbine = "0.6.0"
 ktlint = "0.40.0"
 mockk = "1.12.0"
 arrow = "0.10.5"
@@ -32,13 +32,13 @@ jacoco = "0.8.7"
 
 # logs
 kotlinLogging = "2.0.10"
-slf4j = { require = "2.0.0-alpha1" }
+slf4j = { require = "2.0.0-alpha4" }
 # slf4j = "1.7.31"
 
 # quarkus
 quarkusPluginId = "io.quarkus"
-quarkusPluginVersion = "2.1.0.Final"
-quarkusPlatformVersion = "2.1.0.Final"
+quarkusPluginVersion = "2.1.2.Final"
+quarkusPlatformVersion = "2.1.2.Final"
 quarkusPlatformGroupId = "io.quarkus"
 quarkusPlatformArtifactId = "quarkus-universe-bom"
 
@@ -79,7 +79,7 @@ snakeyaml = "1.28"
 springGrpc = "4.5.4"
 
 # google
-googlePubsub = "1.113.5"
+googlePubsub = "1.114.0"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }

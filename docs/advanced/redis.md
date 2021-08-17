@@ -41,10 +41,17 @@ http://localhost:3000/plugins/redis-app/
 
 ### Queries
 
+Basics 
+
 ```bash
 PING Marco!
 MODULE LIST
 
+# watch all command send to redis
+MONITOR
+```
+
+```bash
 KEYS *
 
 HGETALL people:1750384707

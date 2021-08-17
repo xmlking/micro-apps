@@ -1,5 +1,9 @@
 package micro.apps.service.domain.account
 
+import com.redislabs.lettusearch.Document
+import com.redislabs.lettusearch.SearchOptions
+import com.redislabs.lettusearch.SearchResults
+import com.redislabs.lettusearch.StatefulRediSearchConnection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -19,6 +23,7 @@ import org.springframework.data.redis.core.addAndAwait
 import org.springframework.data.redis.core.readWithTypeAsFlow
 import org.springframework.stereotype.Service
 import java.util.Calendar
+import java.util.stream.Collectors
 
 // https://github.com/Taras48/RedisCache/blob/master/src/main/kotlin/com/redis/cache/RedisCache/service/ActorServiceImpl.kt
 
@@ -55,9 +60,11 @@ class RedisAccountService(
     private val addressRepository: AddressRepository,
     private val redisTemplate: ReactiveRedisTemplate<String, PersonEntity>,
     private val ceProps: ChangeEventProperties,
+    private val conn: StatefulRediSearchConnection<String, String>
+    // https://github.com/6rotoms/kimosabe/blob/master/api/src/main/java/kimosabe/api/repository/GameSearchRepository.java
 ) : AccountService {
     //  val (ceEnabled, ecKeyspace)  = ceProps
-    val ceEnabled  = ceProps.enabled
+    val ceEnabled = ceProps.enabled
     val ecKeyspace = ceProps.keyspace
 
     val hashOperations = redisTemplate.opsForHash<String, PersonEntity>()
@@ -171,6 +178,7 @@ class RedisAccountService(
             }
         )
 
+        // (person as PersonEntity).addAddress(address as AddressEntity)
         ((person as PersonEntity).addresses as HashSet).add(address as AddressEntity)
         personRepository.save(person)
             .also { publishChangeEvent(PEOPLE, personId, Action.UPDATED) }
@@ -186,6 +194,38 @@ class RedisAccountService(
             streamOperations.addAndAwait(ObjectRecord.create(ecKeyspace, ChangeEvent("$prefix:$id", action = action)))
         }
     }
+
+    fun getSearchResultsPage(searchTerm: String, pageNumber: Long, pageSize: Long): List<Document<String, String>> {
+        val options = SearchOptions.builder<String>()
+            .limit(
+                SearchOptions.Limit.builder().num(pageSize)
+                    .offset(pageNumber * pageSize).build()
+            )
+        val results: SearchResults<String, String> = conn.sync().search("games", searchTerm, options.build())
+        // return results.stream().map(GameSearchResponse::new).collect(Collectors.toList());
+        return results.stream().collect(Collectors.toList())
+    }
+
+    /*
+    val CUSTOMER_SEARCH_INDEX = "redi2hack:customer-idx"
+    fun searchCustomers(query: String): List<Customer> {
+        val commands: RediSearchCommands<String, String> = conn.sync()
+        val results = try {
+            val sortByName = SearchOptions.SortBy.builder<String>()
+                .field("name")
+                .build()
+            val searchOptions = SearchOptions.builder<String>()
+                .sortBy(sortByName)
+                .build()
+            commands.search(CUSTOMER_SEARCH_INDEX, query, searchOptions)
+        } catch (e: Exception) {
+            return java.util.List.of<Customer?>()
+        }
+        return results.stream()
+            .map<Any?>(Customer::from)
+            .collect(Collectors.toList())
+    }
+    */
 
     companion object {
         private const val ADDRESS = "address"

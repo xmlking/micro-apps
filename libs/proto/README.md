@@ -2,6 +2,8 @@
 
 Generated code from ProtoBuf files.
 
+![Architecture](../../docs/images/grpc-interface.svg)
+
 ### Prerequisites
 
 ```bash

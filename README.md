@@ -59,7 +59,14 @@ docker compose down -v
 docker compose up nexus
 ```
 
-access **sonarqube** at http://localhost:9000/ (admin/admin)
+#### Dashboard access
+
+* SonarQube → Browser http://localhost:9000 → `user: admin, password: admin`
+* Grafana → Browser http://localhost:3000/plugins/redis-app/ → `user: admin, password: admin`
+* Redis Insight → Browser http://localhost:8001/
+* Jaeger → Browser http://localhost:16686
+* Kibana → Browser http://localhost:5601
+* Prometheus → Browser http://localhost:9090
 
 See [gradle commands](docs/advanced/gradle.md) for this project.
 

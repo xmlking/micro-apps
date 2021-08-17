@@ -78,4 +78,4 @@ gradle :apps:spring-service:bootBuildImage -x test
 - [Functional Bean Registration Example](https://github.com/pwestlin/webshopkotlin/blob/master/core-service/src/main/kotlin/nu/westlin/webshop/core/CoreApplication.kt)
 - [Spring WebClient and WebTestClient Tutorial with Examples](https://www.callicoder.com/spring-5-reactive-webclient-webtestclient-examples/)
 - [mockk verify](https://notwoods.github.io/mockk-guidebook/docs/mocking/verify/)
-
+- [Tracing in Spring Boot with OpenTracing/OpenTelemetry](https://medium.com/swlh/tracing-in-spring-boot-with-opentracing-opentelemetry-dd724134ca93), and Sample [Code](https://github.com/fpaparoni/tracing)

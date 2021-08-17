@@ -5,9 +5,20 @@ import micro.apps.model.Gender
 import micro.apps.model.Name
 import micro.apps.model.Person
 import java.time.LocalDateTime
-import java.time.LocalDateTime.now
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
+import java.time.temporal.ChronoField
 
 // https://medium.com/@june.pravin/better-kotlin-unit-testing-with-mock-helper-functions-38dc1a6c4684
+
+val fmt: DateTimeFormatter = DateTimeFormatterBuilder()
+    .appendPattern("yyyy-MM-dd")
+    .optionalStart()
+    .appendPattern(" HH:mm")
+    .optionalEnd()
+    .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+    .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+    .toFormatter()
 
 // creates the entire Person graph!
 // val batman = mockPerson(mockId = 1, age = 44)
@@ -18,7 +29,7 @@ fun mockPersonDto(
     address: Address = mockAddress(mockId),
     gender: Gender = Gender.UNKNOWN,
     age: Int = mockId,
-    dob: LocalDateTime = now(),
+    dob: LocalDateTime = LocalDateTime.parse("1999-05-30", fmt),
     email: String = "user$mockId@gmail.com",
     phone: String = "$mockId$mockId$mockId",
     avatar: String = "avatar#$mockId"
@@ -82,7 +93,7 @@ fun mockPersonList() = listOf(
                 country = "CA"
             )
         ),
-        dob = now(),
+        dob = LocalDateTime.parse("1999-05-30", fmt),
         gender = Gender.MALE, age = 99,
         email = "sumo1@demo.com", phone = "0000000000"
     ),
@@ -98,7 +109,7 @@ fun mockPersonList() = listOf(
                 country = "CA"
             )
         ),
-        dob = now(),
+        dob = LocalDateTime.parse("1999-05-30", fmt),
         gender = Gender.FEMALE, age = 99,
         email = "sumo2@demo.com", phone = "1111111111"
     )
