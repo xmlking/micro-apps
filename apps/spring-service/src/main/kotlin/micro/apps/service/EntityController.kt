@@ -25,8 +25,8 @@ class EntityController(
     private val meter: Meter,
 ) {
 
-    var counter = meter.createCounter("example_counter", "example counter")
-    var recorder = meter.createHistogram("super_timer", "API latency time")
+    var counter = meter.createCounter("entity_request_counter", "Entity API request counter")
+    var recorder = meter.createHistogram("entity_request_latency", "Entity API latency time", "ms")
 
     @GetMapping("/entity/{id}")
     suspend fun findOne(@PathVariable("id") id: String): Person? {
@@ -39,7 +39,7 @@ class EntityController(
         val timeInMillis = measureTimeMillis {
             val span = tracer.spanBuilder("time").startSpan()
             span.setAttribute("what.am.i", "Tu es une legume")
-            // span.setStatus(StatusCode.ERROR);
+            // span.setStatus(StatusCode.ERROR)
             counter.add(1, Attributes.of(DIMENSION_API_NAME, "intro", DIMENSION_STATUS_CODE, "200"))
             delay(1000)
             span.end()

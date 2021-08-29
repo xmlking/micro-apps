@@ -18,6 +18,11 @@ gradle :apps:spring-service:bootRun
 gradle :apps:spring-service:bootRun --debug
 ```
 
+#### Options
+``` 
+-Dspring.devtools.restart.enabled=true
+```
+
 ```bash
 open http://localhost:8080/intro
 ```

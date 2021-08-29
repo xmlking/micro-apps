@@ -129,9 +129,13 @@ spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-s
 spring-boot-starter-data-r2dbc = { module = "org.springframework.boot:spring-boot-starter-data-r2dbc" }
 spring-boot-starter-rsocket = { module = "org.springframework.boot:spring-boot-starter-rsocket" }
 spring-boot-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+# Usage: developmentOnly(libs.spring.boot.devtools)
+spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
 spring-boot-starter-validation  = { module = "org.springframework.boot:spring-boot-starter-validation" }
 # Usage: kapt(libs.spring.boot.configuration.processor)
-spring-boot-configuration-processor  = { module = "org.springframework.boot:spring-boot-configuration-processor" }
+spring-boot-configuration-processor  = { module = "org.springframework.boot:spring-boot-configuration-processor" }  # to validate auto-completion on configuration properties
+# Usage: kapt(libs.spring.boot.autoconfigure.processor)
+spring-boot-autoconfigure-processor  = { module = "org.springframework.boot:spring-boot-autoconfigure-processor" }
 spring-boot-starter-grpc  = { module = "io.github.lognet:grpc-spring-boot-starter", version.ref = "springGrpc" }
 
 h2 = { module = "com.h2database:h2" }
@@ -173,6 +177,7 @@ quarkus-mutiny-kotlin = { module = "io.smallrye.reactive:mutiny-kotlin" }
 # mapstruct dependencies
 # FIXME: https://github.com/quarkusio/quarkus/issues/14012
 mapstruct-core = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct" }
+# Usage: kapt(libs.mapstruct.processor)
 mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapstruct" }
 
 # Logging dependencies
@@ -199,13 +204,14 @@ opentelemetry-extension-kotlin = { module = "io.opentelemetry:opentelemetry-exte
 opentelemetry-spring-boot-autoconfigure = { module = "io.opentelemetry.instrumentation:opentelemetry-spring-boot-autoconfigure"}
 opentelemetry-sdk-extension-autoconfigure = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure"}
 
-# exporter
 opentelemetry-exporter-logging = { module = "io.opentelemetry:opentelemetry-exporter-logging" }
 opentelemetry-exporter-jaeger = { module = "io.opentelemetry:opentelemetry-exporter-jaeger" }
 opentelemetry-exporter-otlp = { module = "io.opentelemetry:opentelemetry-exporter-otlp" }
 opentelemetry-exporter-prometheus = { module = "io.opentelemetry:opentelemetry-exporter-prometheus" }
 
 opentelemetry-sdk-testing = { module = "io.opentelemetry:opentelemetry-sdk-testing" }
+
+micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-prometheus" }
 
 # Testing dependencies
 kotest-framework-engine-jvm = { module = "io.kotest:kotest-framework-engine-jvm", version.ref = "kotest" }

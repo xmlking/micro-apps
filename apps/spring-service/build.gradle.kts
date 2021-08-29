@@ -20,7 +20,7 @@ dependencies {
     implementation(project(":libs:model"))
     implementation(project(":libs:service"))
 
-    // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
+    developmentOnly(libs.spring.boot.devtools)
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
 
@@ -56,15 +56,16 @@ dependencies {
 
     // openTelemetry essential
     implementation(libs.bundles.opentelemetry.api)
-    // implementation(libs.bundles.opentelemetry.sdk)
+    implementation(libs.bundles.opentelemetry.sdk) // Optional
 
-//    implementation(libs.opentelemetry.exporter.logging)
-//    implementation(libs.opentelemetry.exporter.prometheus)
-//    implementation("io.prometheus:simpleclient_common")
-//    implementation("io.prometheus:simpleclient_httpserver")
+    // openTelemetry exporters
+    implementation(libs.opentelemetry.exporter.prometheus) // Optional
+    // implementation(libs.opentelemetry.exporter.logging)
+    // implementation(libs.opentelemetry.exporter.otlp)
+    // implementation(libs.opentelemetry.exporter.jaeger)
 
     // micrometer for openTelemetry
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+    runtimeOnly(libs.micrometer.registry.prometheus)
 
     // extensions for openTelemetry
     implementation(libs.opentelemetry.extension.annotations) // to use  @WithSpan etc

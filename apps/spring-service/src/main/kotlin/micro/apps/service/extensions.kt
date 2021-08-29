@@ -16,11 +16,11 @@ fun Tracer.startSpanWithParent(spanName: String): Span =
         .setParent(Context.current().with(Span.current()))
         .startSpan()
 
-fun Meter.createCounter(name: String, description: String = name): LongCounter =
-    this.counterBuilder(name).setDescription(description).setUnit("one").build()
+fun Meter.createCounter(name: String, description: String = name, unit: String = "one"): LongCounter =
+    this.counterBuilder(name).setDescription(description).setUnit(unit).build()
 
-fun Meter.createHistogram(name: String, description: String = name): LongHistogram =
-    this.histogramBuilder(name).setDescription(description).ofLongs().setUnit("ms").build()
+fun Meter.createHistogram(name: String, description: String = name, unit: String = "ms"): LongHistogram =
+    this.histogramBuilder(name).setDescription(description).ofLongs().setUnit(unit).build()
 
 /**
  * Usage:
