@@ -24,6 +24,7 @@ configurations.all {
 dependencies {
     // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
     implementation(libs.grpc.protobuf)
+    implementation(libs.grpc.stub) // FIXME: remove me when grpc-kotlin support latest grpc-java version
     implementation(libs.grpc.kotlin.stub)
     implementation(libs.kotlinx.coroutines.core)
 

@@ -12,3 +12,5 @@ grpc:
   enableReflection: true
 
 spring:
+
+management.endpoints.web.exposure.include: prometheus,health,info,metrics

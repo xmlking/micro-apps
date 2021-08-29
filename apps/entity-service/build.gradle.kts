@@ -9,9 +9,6 @@ plugins {
 
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-
-    id("org.springframework.experimental.aot")
-    id("org.graalvm.buildtools.native")
 }
 
 val slf4jVersion = libs.versions.slf4j.get()
@@ -27,7 +24,7 @@ dependencies {
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
     kapt(libs.spring.boot.configuration.processor) // For ConfigurationProperties
-    compileOnly(libs.spring.boot.configuration.processor) // FIXME: https://youtrack.jetbrains.com/issue/KT-15040
+    compileOnly(libs.spring.boot.configuration.processor) // Workaround FIXME: https://youtrack.jetbrains.com/issue/KT-15040
 
     // Optional: if you also want rsocket
     // implementation(libs.spring.boot.starter.rsocket)
@@ -70,27 +67,47 @@ tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisCompose
 
 tasks {
     bootBuildImage {
-        // isVerboseLogging = true
-        // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
-        // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates")
+        isVerboseLogging = true
 
-        builder = "paketobuildpacks/builder:tiny"
-        environment = mapOf(
-            "BP_NATIVE_IMAGE" to "true"
+        // buildpacks = listOf("gcr.io/paketo-buildpacks/adopt-openjdk")
+
+        // add `ca-certificates` bindings, if you are running `gradle bootBuildImage` from behind corp proxy.
+        bindings = listOf(
+            // "${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates",
+            // "$buildDir/agent:/workspace/agent:ro"
         )
+
+        // builder = "paketobuildpacks/builder:tiny"
+        // runImage = "paketobuildpacks/run:tiny:tiny-cnb"
+
+        environment = mapOf(
+            // "HTTPS_PROXY" to "https://proxy.example.com",
+            // "HTTPS_PROXY" to "https://proxy.example.com"
+            // "BP_DEBUG_ENABLED" to "true",
+            "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
+            "BPE_JAVA_TOOL_OPTIONS" to "-Dfile.encoding=UTF-8", // Optional, just for docs
+            "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-XX:+HeapDumpOnOutOfMemoryError",
+            "BPE_BPL_SPRING_CLOUD_BINDINGS_ENABLED" to "false",
+        )
+
+        /* Image Publishing
+        imageName = "docker.example.com/library/${project.name}"
+        isPublish = true
+        docker {
+            publishRegistry {
+                username = "user"
+                password = "secret"
+                url = "https://docker.example.com/v1/"
+                email = "user@example.com"
+            }
+        }
+        */
     }
 
     bootRun {
         // This will set logs level DEBUG only for local development.
         jvmArgs = listOf("-Dlogging.level.micro.apps=DEBUG")
     }
-}
-
-springAot {
-    verify.set(false)
-    failOnMissingSelectorHint.set(false)
-//    removeSpelSupport.set(true)
-//    removeYamlSupport.set(true)
 }
 
 noArg {

@@ -113,6 +113,12 @@ gradle :apps:entity-service:build
 gradle :apps:entity-service:bootBuildImage -x test
 ```
 
+Then, you can run the app like any other container:
+
+```bash
+docker run -i --rm -p 8080:8080 entity-service:1.6.5-SNAPSHOT
+```
+
 ## TODO
 
 - https://github.com/rnbWarden/jredisearch-spring-boot-starter

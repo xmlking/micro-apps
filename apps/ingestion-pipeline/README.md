@@ -2,6 +2,9 @@
 
 Streaming pipeline demo.
 
+## Features
+- [x] Deduplication
+
 ## Prerequisites
 
 1. Google PubSub [Emulator](https://cloud.google.com/pubsub/docs/emulator)
@@ -205,3 +208,6 @@ curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: applicat
 - [A Distributed Tracing Adventure in Apache Beam](http://rion.io/2020/07/04/a-distributed-tracing-adventure-in-apache-beam/)
 - [Avoiding Kotlin Minefields in Apache Beam](http://rion.io/2020/06/17/avoiding-kotlin-minefields-in-apache-beam/)
 - Async https://github.com/danielhultqvist/async-scio-future/blob/master/src/main/scala/example/FutureAsyncDoFn.scala
+
+- [Deduplication: Where Beam Fits In](https://www.youtube.com/watch?v=9OfJKDs3h40)
+  - Talk's [Source Code](https://github.com/mozilla/gcp-ingestion)

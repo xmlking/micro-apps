@@ -30,7 +30,7 @@ pluginManagement {
     // enableFeaturePreview("GRADLE_METADATA")
 
     plugins {
-        val kotlinVersion = "1.5.21"
+        val kotlinVersion = "1.5.30"
 
         kotlin("jvm") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion apply false
@@ -41,7 +41,7 @@ pluginManagement {
         kotlin("plugin.lombok") version kotlinVersion apply false
         id("io.freefair.lombok") version "6.0.0-m2" apply false
         id("org.sonarqube") version "3.3"
-        id("com.diffplug.spotless") version "5.14.2"
+        id("com.diffplug.spotless") version "5.14.3"
         id("org.jetbrains.dokka") version "1.5.0"
         id("com.github.ben-manes.versions") version "0.39.0"
         id("com.diffplug.spotless-changelog") version "2.2.0"
@@ -51,12 +51,13 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version "3.1.4"
         id("dev.jacomet.logging-capabilities") version "0.9.0"
         id("com.google.protobuf") version "0.8.17" apply false
-        id("io.quarkus") version "2.1.2.Final" apply false
-        id("org.springframework.boot") version "2.5.3" apply false
-        id("org.springframework.experimental.aot") version "0.10.2" apply false
+        id("io.quarkus") version "2.2.0.Final" apply false
+        id("org.springframework.boot") version "2.5.4" apply false
+        id("org.springframework.experimental.aot") version "0.10.3" apply false
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
-        id("org.graalvm.buildtools.native") version "0.9.2" apply false
+        id("org.graalvm.buildtools.native") version "0.9.4" apply false
         id("com.dropbox.affectedmoduledetector") version "0.1.2" apply false
+        // FIXME: upgrade from 0.14.5 https://github.com/avast/gradle-docker-compose-plugin/issues/315
         id("com.avast.gradle.docker-compose") version "0.14.5" apply false
         id("com.github.node-gradle.node") version "3.1.0" apply false
     }

@@ -36,9 +36,14 @@ We are using [httpie](https://httpie.io/) CLI for REST testing
 ```bash
 # list
 http :8080/intro
+http :8080/entity/abcd
 # health
 http :8080/actuator
 http :8080/actuator/health
+http :8080/actuator/info
+http :8080/actuator/metrics
+http :8080/actuator/metrics/http.server.requests
+http :8080/actuator/prometheus
 ````
 
 ### Test gRPC services 
@@ -67,6 +72,18 @@ gradle :apps:spring-service:build
 gradle :apps:spring-service:bootBuildImage -x test
 ```
 
+Then, you can run the app like any other container:
+
+```bash
+docker run -i --rm -p 8080:8080 -p 6565:6565 spring-service:1.6.5-SNAPSHOT
+```
+
+To debug docker image layers:
+
+```bash
+dive spring-service:1.6.5-SNAPSHOT
+```
+
 ## Reference
 
 - [Spring Kotlin](https://docs.spring.io/spring-framework/docs/current/reference/html/languages.html#kotlin)
@@ -79,3 +96,7 @@ gradle :apps:spring-service:bootBuildImage -x test
 - [Spring WebClient and WebTestClient Tutorial with Examples](https://www.callicoder.com/spring-5-reactive-webclient-webtestclient-examples/)
 - [mockk verify](https://notwoods.github.io/mockk-guidebook/docs/mocking/verify/)
 - [Tracing in Spring Boot with OpenTracing/OpenTelemetry](https://medium.com/swlh/tracing-in-spring-boot-with-opentracing-opentelemetry-dd724134ca93), and Sample [Code](https://github.com/fpaparoni/tracing)
+- OpenTelemetry Java SDK
+  - [Getting Started with the Java SDK on Traces and Metrics Instrumentation](https://aws-otel.github.io/docs/getting-started/java-sdk)
+  - [Manual Instrumentation](https://opentelemetry.io/docs/java/manual_instrumentation/)
+  - [Instrumentation Examples](https://github.com/mnadeem/boot-opentelemetry-tempo)

@@ -255,6 +255,10 @@ gradle -q :apps:greeting-service:dependencyInsight  --dependency org.ow2.asm:asm
 gradle cV
 ```
 
+### FAQ
+
+- Gradle [version catalogs](https://melix.github.io/blog/2021/03/version-catalogs-faq.html) FAQ
+
 ### Reference
 
 - https://github.com/banan1988/spring-demo/

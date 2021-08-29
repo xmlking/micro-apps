@@ -1,0 +1,8 @@
+diff:
+  # You can change the default files shown in the filetree (right pane). All diff types are shown by default.
+  hide:
+    - unmodified
+
+filetree:
+  # Show the file attributes next to the filetree
+  show-attributes: false

@@ -1,11 +1,14 @@
 package micro.apps.service
 
+import io.opentelemetry.api.trace.Span
+import io.opentelemetry.extension.annotations.WithSpan
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Address
 import micro.apps.model.Gender
 import micro.apps.model.Name
 import micro.apps.model.Person
+import mu.KotlinLogging
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
 
@@ -16,6 +19,8 @@ interface EntityRepository {
     suspend fun add(customer: Person): Result<Unit>
 }
 
+private val logger = KotlinLogging.logger {}
+
 @Repository
 @OptIn(ExperimentalSerializationApi::class)
 class RedisEntityRepository() : EntityRepository {
@@ -23,7 +28,12 @@ class RedisEntityRepository() : EntityRepository {
         TODO("Not yet implemented")
     }
 
+    @WithSpan
     override suspend fun get(id: String): Person? {
+        val span = Span.current()
+        logger.atInfo().addKeyValue("traceId", span.spanContext.traceId).log("traceId")
+        span.setAttribute("attribute.a2", "some value")
+
         return Person(
             name = Name(first = "sumo1", last = "demo1"),
             addresses = setOf(

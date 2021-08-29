@@ -23,7 +23,7 @@ sdk install java 21.2.0.r11-grl
 sdk default java 11.0.11.hs-adpt
 sdk install gradle
 # to remove old version e.g., gradle 4.10:
-sdk remove gradle 7.1.1
+sdk remove gradle 7.2
 sdk install kotlin 
 # Optional
 sdk install maven
