@@ -1,0 +1,76 @@
+apiVersion: skaffold/v2beta21
+kind: Config
+metadata:
+  name: micro-apps
+build:
+  artifacts:
+    - image: xmlking/entity-service
+      context: apps/entity-service
+      buildpacks:
+        builder: paketobuildpacks/builder:tiny
+    - image: xmlking/spring-service
+      context: apps/spring-service
+      buildpacks:
+        builder: paketobuildpacks/builder:base
+  tagPolicy:
+    gitCommit: {}
+deploy:
+  kustomize:
+    paths:
+      - config/base
+profiles:
+  - name: elastic
+    deploy:
+      kustomize:
+        paths:
+          - config/base/elastic
+  - name: envoy
+    deploy:
+      kustomize:
+        paths:
+          - config/base/envoy
+  - name: nifi
+    deploy:
+      kustomize:
+        paths:
+          - config/base/nifi
+  - name: postgres
+    deploy:
+      kustomize:
+        paths:
+          - config/base/postgres
+  - name: service
+    deploy:
+      kustomize:
+        paths:
+          - config/base/service
+  - name: greeting
+    deploy:
+      kustomize:
+        paths:
+          - config/base/service/greeting
+  - name: spring
+    deploy:
+      kustomize:
+        paths:
+          - config/base/service/spring
+  - name: development
+    deploy:
+      kustomize:
+        paths:
+          - config/envs/development
+  - name: local
+    deploy:
+      kustomize:
+        paths:
+          - config/envs/local
+  - name: production
+    deploy:
+      kustomize:
+        paths:
+          - config/envs/production
+  - name: staging
+    deploy:
+      kustomize:
+        paths:
+          - config/envs/staging

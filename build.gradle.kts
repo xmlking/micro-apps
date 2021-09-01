@@ -294,6 +294,9 @@ subprojects {
             }
         }
 
+        // FIXME: remove me. it is a workaround for https://youtrack.jetbrains.com/issue/KT-46165
+        tasks.withType<org.gradle.jvm.tasks.Jar> { duplicatesStrategy = DuplicatesStrategy.INCLUDE}
+
         tasks {
             compileKotlin {
                 kotlinOptions {
