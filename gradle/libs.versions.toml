@@ -37,15 +37,15 @@ slf4j = { require = "2.0.0-alpha4" }
 
 # quarkus
 quarkusPluginId = "io.quarkus"
-quarkusPluginVersion = "2.2.0.Final"
-quarkusPlatformVersion = "2.2.0.Final"
+quarkusPluginVersion = "2.2.1.Final"
+quarkusPlatformVersion = "2.2.1.Final"
 quarkusPlatformGroupId = "io.quarkus"
 quarkusPlatformArtifactId = "quarkus-universe-bom"
 
 # for pre-released versions
 #quarkusPluginId = "io.quarkus"
-#quarkusPluginVersion = "2.2.0.CR1"
-#quarkusPlatformVersion = "2.2.0.CR1"
+#quarkusPluginVersion = "2.2.1.CR1"
+#quarkusPlatformVersion = "2.2.1.CR1"
 #quarkusPlatformGroupId = "io.quarkus"
 #quarkusPlatformArtifactId = "quarkus-bom"
 
@@ -84,7 +84,7 @@ googlePubsub = "1.114.2"
 # telemetry
 otel = "1.5.0"
 otel-alpha = "1.5.0-alpha"
-otel-agent = "1.5.2"
+otel-agent = "1.5.3"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
