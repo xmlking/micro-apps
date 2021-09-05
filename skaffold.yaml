@@ -8,6 +8,12 @@ build:
       context: apps/entity-service
       buildpacks:
         builder: paketobuildpacks/builder:tiny
+#        runImage: image3
+#      requires:
+#        - image: image2
+#        - image: image3
+#    - image: image2 # builder artifact
+#    - image: image3 # run image artifact
     - image: xmlking/spring-service
       context: apps/spring-service
       buildpacks:

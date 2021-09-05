@@ -44,12 +44,14 @@ class KeyingApplication(private val port: Int) {
 
     val health: HealthStatusManager = HealthStatusManager()
 
+    private val keyingServ = KeyingService()
+
     val server: Server = Grpc
         .newServerBuilderForPort(port, creds)
-        .addService(KeyingService())
+        .addService(keyingServ)
         .addService(ProtoReflectionService.newInstance()) // convenient for command line tools
         .addService(health.healthService) // allow management servers to monitor health
-        .addService(ServerInterceptors.intercept(KeyingService(), UnknownStatusInterceptor()))
+        .addService(ServerInterceptors.intercept(keyingServ, UnknownStatusInterceptor()))
         .build()
 
     fun start() {

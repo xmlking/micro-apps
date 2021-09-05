@@ -16,6 +16,8 @@ dependencies {
 
     // Protobuf - If you want to use features like protobuf JsonFormat, `protobuf-java-util` instead of `protobuf-java`
     implementation(libs.protobuf.java)
+    implementation(libs.protobuf.kotlin)
+
     // Google
     implementation(libs.guava)
 

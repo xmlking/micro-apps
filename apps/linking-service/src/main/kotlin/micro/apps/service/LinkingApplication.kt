@@ -44,12 +44,13 @@ class LinkingApplication(private val port: Int) {
 
     val health: HealthStatusManager = HealthStatusManager()
 
+    private val linkingService = LinkingService()
     val server: Server = Grpc
         .newServerBuilderForPort(port, creds)
-        .addService(LinkingService())
+        .addService(linkingService)
         .addService(ProtoReflectionService.newInstance()) // convenient for command line tools
         .addService(health.healthService) // allow management servers to monitor health
-        .addService(ServerInterceptors.intercept(LinkingService(), UnknownStatusInterceptor()))
+        .addService(ServerInterceptors.intercept(linkingService, UnknownStatusInterceptor()))
         .build()
 
     fun start() {

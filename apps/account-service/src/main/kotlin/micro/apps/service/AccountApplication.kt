@@ -48,15 +48,17 @@ class AccountApplication(private val port: Int) {
 
     val health: HealthStatusManager = HealthStatusManager()
 
+    private val accountServ = AccountService()
+
     val server: Server = Grpc
         .newServerBuilderForPort(port, creds)
-        .addService(AccountService())
+        .addService(accountServ)
         .addService(AddressService())
         .addService(ProductService())
         .addService(EchoService())
         .addService(ProtoReflectionService.newInstance()) // convenient for command line tools
         .addService(health.healthService) // allow management servers to monitor health
-        .addService(ServerInterceptors.intercept(AccountService(), UnknownStatusInterceptor()))
+        .addService(ServerInterceptors.intercept(accountServ, UnknownStatusInterceptor()))
         .build()
 
     fun start() {

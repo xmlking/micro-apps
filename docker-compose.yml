@@ -86,6 +86,22 @@ services:
     depends_on:
       - postgres
 
+  graphql-engine:
+    image: hasura/graphql-engine:v2.0.0-beta.1
+    ports:
+      - "18080:8080"
+    depends_on:
+      - "postgres"
+    networks:
+      - demo-network
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_JWT_SECRET: "{\"jwk_url\":\"http://keycloak:8080/auth/realms/hasura/protocol/openid-connect/certs\"}"
+
   jaeger:
     image: jaegertracing/all-in-one
     ports:

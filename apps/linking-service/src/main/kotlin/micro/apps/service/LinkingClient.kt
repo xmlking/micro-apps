@@ -50,8 +50,7 @@ class LinkingClient(private val channel: ManagedChannel) : Closeable {
         val request = linkRequest {
             profile = Profile.PROFILE_RO
             this.person = person
-            // FIXME: https://github.com/grpc/grpc-kotlin/pull/266
-            // addresses += address
+            addresses += address
         }
         val response = async { stub.link(request) }
         println("Received: ${response.await().personId}")
@@ -78,8 +77,7 @@ class LinkingClient(private val channel: ManagedChannel) : Closeable {
                 val request = linkRequest {
                     profile = Profile.PROFILE_RO
                     this.person = person
-                    // FIXME: https://github.com/grpc/grpc-kotlin/pull/266
-                    // addresses.add(address)
+                    addresses += address
                 }
                 emit(request)
                 delay(500)

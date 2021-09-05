@@ -54,8 +54,7 @@ class KeyingServiceTest : FunSpec({
         shouldNotThrowAny {
             val request = linkRequest {
                 profile = Profile.PROFILE_RO
-                // FIXME: https://github.com/grpc/grpc-kotlin/pull/266
-                // addresses.add(address)
+                addresses += address
             }
             response = linkingStub.link(request)
         }
