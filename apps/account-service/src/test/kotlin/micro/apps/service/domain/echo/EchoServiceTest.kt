@@ -7,9 +7,9 @@ import io.grpc.inprocess.InProcessServerBuilder
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import micro.apps.proto.echo.v1.EchoRequest
 import micro.apps.proto.echo.v1.EchoResponse
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
+import micro.apps.proto.echo.v1.echoRequest
 import micro.apps.test.E2E
 
 class EchoServiceTest : FunSpec({
@@ -41,7 +41,7 @@ class EchoServiceTest : FunSpec({
         lateinit var response: EchoResponse
 
         shouldNotThrowAny {
-            val request = EchoRequest.newBuilder().setMessage("sumo").build()
+            val request = echoRequest { message = "sumo" }
             response = echoStub.echo(request)
         }
 

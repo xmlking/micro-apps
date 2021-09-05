@@ -12,8 +12,8 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withTimeoutOrNull
 import micro.apps.proto.account.v1.AccountServiceGrpcKt
-import micro.apps.proto.account.v1.SearchRequest
 import micro.apps.proto.account.v1.SearchResponse
+import micro.apps.proto.account.v1.searchRequest
 import micro.apps.proto.common.fixtures.mockPerson
 import micro.apps.test.E2E
 import micro.apps.test.Slow
@@ -62,7 +62,7 @@ class AccountServiceTest : FunSpec({
         lateinit var searchResponse: SearchResponse
 
         shouldNotThrowAny {
-            val request = SearchRequest.newBuilder().setFilter(Any.pack(StringValue.of("filter"))).build()
+            val request = searchRequest { filter = Any.pack(StringValue.of("filter")) }
             val accountFlow = accountStub.search(request)
             withTimeoutOrNull(5000) { // Timeout after 5000ms
                 accountFlow.collect { response ->

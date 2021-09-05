@@ -10,25 +10,24 @@ import micro.apps.proto.address.v1.GetRequest
 import micro.apps.proto.address.v1.GetResponse
 import micro.apps.proto.address.v1.SearchRequest
 import micro.apps.proto.address.v1.SearchResponse
-import micro.apps.proto.common.v1.Address
-import micro.apps.proto.util.GetAddressResponse
-import micro.apps.proto.util.SearchAddressResponse
+import micro.apps.proto.address.v1.getResponse
+import micro.apps.proto.address.v1.searchResponse
+import micro.apps.proto.common.v1.address
 import mu.KotlinLogging
 
-var address = with(Address.newBuilder()) {
+var address = address {
     state = "1234"
     street = "FourWinds Dr"
     city = "Riverside"
     state = "California"
     country = "USA"
-    return@with build()
 }
 
 private val logger = KotlinLogging.logger {}
 
 class AddressService : AddressServiceGrpcKt.AddressServiceCoroutineImplBase() {
 
-    override suspend fun get(request: GetRequest): GetResponse = GetAddressResponse { address = address }
+    override suspend fun get(request: GetRequest): GetResponse = getResponse { address = address }
 
     override suspend fun create(request: CreateRequest): StringValue {
         // TODO("not implemented")
@@ -43,7 +42,7 @@ class AddressService : AddressServiceGrpcKt.AddressServiceCoroutineImplBase() {
         while (true) {
             delay(1000)
             emit(
-                SearchAddressResponse {
+                searchResponse {
                     id = StringValue.of("123e4567-e89b-12d3-a456-426614174000")
                     address = address
                 }

@@ -102,7 +102,7 @@ fun main() {
         .addKeyValue("upstreamCaCert", config[TLS.upstreamCaCert])
         .log("Config:")
 
-    val port = System.getenv("PORT")?.toInt() ?: 5000
+    val port = System.getenv("PORT")?.toInt() ?: 5002
     val server = KeyingApplication(port)
     server.start()
     server.blockUntilShutdown()

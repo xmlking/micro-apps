@@ -8,7 +8,7 @@ certs:
   upstreamCert: config/certs/upstream-localhost-cert.pem
   upstreamCaCert: config/certs/upstream-ca-cert.pem
 account:
-  endpoint: 0.0.0.0:5000
+  endpoint: 0.0.0.0:5002
   authority: localhost
   maxRetry: 3
   deadline: 2s

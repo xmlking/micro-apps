@@ -9,6 +9,8 @@ import micro.apps.proto.echo.v1.EchoResponse
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
 import micro.apps.proto.echo.v1.EchoStreamRequest
 import micro.apps.proto.echo.v1.EchoStreamResponse
+import micro.apps.proto.echo.v1.echoResponse
+import micro.apps.proto.echo.v1.echoStreamResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
@@ -30,16 +32,16 @@ class EchoService0 : EchoServiceGrpc.EchoServiceImplBase() {
 
 @GrpcService
 class EchoService : EchoServiceGrpcKt.EchoServiceCoroutineImplBase() {
-    override suspend fun echo(request: EchoRequest): EchoResponse = EchoResponse.newBuilder()
-        .setMessage("Hello ${request.message}")
-        .build()
+    override suspend fun echo(request: EchoRequest): EchoResponse = echoResponse {
+        message = "Hello ${request.message}"
+    }
 
     override fun echoStream(request: EchoStreamRequest): Flow<EchoStreamResponse> = flow {
         while (true) {
             logger.error { "xxx" }
             // logger.atError().addKeyValue("hh", "ffff").log("xxx")
             delay(1000)
-            emit(EchoStreamResponse.newBuilder().setMessage("hello, ${request.message}").build())
+            emit(echoStreamResponse { message = "hello, ${request.message}" })
         }
     }
 }

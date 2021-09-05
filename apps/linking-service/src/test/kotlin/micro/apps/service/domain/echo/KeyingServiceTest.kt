@@ -7,11 +7,11 @@ import io.grpc.inprocess.InProcessServerBuilder
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import micro.apps.proto.common.v1.Address
 import micro.apps.proto.common.v1.Profile
-import micro.apps.proto.linking.v1.LinkRequest
+import micro.apps.proto.common.v1.address
 import micro.apps.proto.linking.v1.LinkResponse
 import micro.apps.proto.linking.v1.LinkingServiceGrpcKt.LinkingServiceCoroutineStub
+import micro.apps.proto.linking.v1.linkRequest
 import micro.apps.service.LinkingService
 import micro.apps.test.E2E
 
@@ -43,17 +43,20 @@ class KeyingServiceTest : FunSpec({
 
         lateinit var response: LinkResponse
 
-        var address = with(Address.newBuilder()) {
+        var address = address {
             suite = "1234"
             street = "FourWinds Dr"
             city = "Riverside"
             state = "California"
             country = "USA"
-            return@with build()
         }
 
         shouldNotThrowAny {
-            val request = LinkRequest.newBuilder().setProfile(Profile.PROFILE_RO).addAddresses(address).build()
+            val request = linkRequest {
+                profile = Profile.PROFILE_RO
+                // FIXME: https://github.com/grpc/grpc-kotlin/pull/266
+                // addresses.add(address)
+            }
             response = linkingStub.link(request)
         }
 

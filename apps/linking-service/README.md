@@ -13,7 +13,7 @@ docker compose up envoy
 gradle :apps:linking-service:runLinkingClient
 # client -> server
 CERTS_CACERT=config/certs/upstream-ca-cert.pem \
-ACCOUNT_ENDPOINT=dns:///localhost:5000 \
+ACCOUNT_ENDPOINT=dns:///localhost:5003 \
 ACCOUNT_AUTHORITY=localhost \
 gradle :apps:linking-service:runLinkingClient
 ```

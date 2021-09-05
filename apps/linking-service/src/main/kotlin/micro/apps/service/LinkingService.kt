@@ -8,13 +8,13 @@ import micro.apps.proto.common.v1.Status
 import micro.apps.proto.linking.v1.LinkRequest
 import micro.apps.proto.linking.v1.LinkResponse
 import micro.apps.proto.linking.v1.LinkingServiceGrpcKt
-import micro.apps.proto.util.LinkResponse
+import micro.apps.proto.linking.v1.linkResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
 class LinkingService : LinkingServiceGrpcKt.LinkingServiceCoroutineImplBase() {
-    override suspend fun link(request: LinkRequest): LinkResponse = LinkResponse {
+    override suspend fun link(request: LinkRequest): LinkResponse = linkResponse {
         personId = "123e4567-e89b-12d3-a456-426614174000"
         status = Status.STATUS_NEW
     }
@@ -23,7 +23,7 @@ class LinkingService : LinkingServiceGrpcKt.LinkingServiceCoroutineImplBase() {
         requests.collect { request ->
             logger.atDebug().log("request: {}", request)
             delay(1000)
-            emit(LinkResponse { personId = "123e4567-e89b-12d3-a456-426614174000"; status = Status.STATUS_NEW })
+            emit(linkResponse { personId = "123e4567-e89b-12d3-a456-426614174000"; status = Status.STATUS_NEW })
         }
     }
 }

@@ -8,8 +8,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt.EchoServiceCoroutineStub
-import micro.apps.proto.util.EchoRequest
-import micro.apps.proto.util.EchoStreamRequest
+import micro.apps.proto.echo.v1.echoRequest
+import micro.apps.proto.echo.v1.echoStreamRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config
@@ -26,13 +26,13 @@ class EchoClient(private val channel: ManagedChannel) : Closeable {
     private val stub: EchoServiceCoroutineStub = EchoServiceCoroutineStub(channel)
 
     suspend fun echo(name: String) = coroutineScope {
-        val request = EchoRequest { message = name }
+        val request = echoRequest { message = name }
         val response = async { stub.echo(request) }
         println("Received: ${response.await().message}")
     }
 
     fun echoStream(name: String) = runBlocking {
-        val request = EchoStreamRequest { message = name }
+        val request = echoStreamRequest { message = name }
         val flow = stub.echoStream(request)
         flow.collect { response ->
             println("Received: ${response.message}")

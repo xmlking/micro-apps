@@ -13,7 +13,7 @@ docker compose up envoy
 gradle :apps:keying-service:runKeyingClient
 # client -> server
 CERTS_CACERT=config/certs/upstream-ca-cert.pem \
-ACCOUNT_ENDPOINT=dns:///localhost:5000 \
+ACCOUNT_ENDPOINT=dns:///localhost:5002 \
 ACCOUNT_AUTHORITY=localhost \
 gradle :apps:keying-service:runKeyingClient
 ```

@@ -10,12 +10,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import micro.apps.proto.common.v1.Address
-import micro.apps.proto.common.v1.Person
 import micro.apps.proto.common.v1.Profile
+import micro.apps.proto.common.v1.address
+import micro.apps.proto.common.v1.person
 import micro.apps.proto.linking.v1.LinkRequest
 import micro.apps.proto.linking.v1.LinkingServiceGrpcKt.LinkingServiceCoroutineStub
-import micro.apps.proto.util.LinkRequest
+import micro.apps.proto.linking.v1.linkRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config
@@ -32,56 +32,54 @@ class LinkingClient(private val channel: ManagedChannel) : Closeable {
     private val stub: LinkingServiceCoroutineStub = LinkingServiceCoroutineStub(channel)
 
     suspend fun key(streetNumber: String, streetName: String) = coroutineScope {
-        var person = with(Person.newBuilder()) {
-            firstName = "sumo"
+        val person = person {
+            firstName = "sumo1"
             lastName = "demo"
             phone = "000-000-0000"
             email = "sumo@demo.com"
-            return@with build()
         }
 
-        var address = with(Address.newBuilder()) {
+        val address = address {
             suite = streetNumber
             street = streetName
             city = "Riverside"
             state = "California"
             country = "USA"
-            return@with build()
         }
 
-        val request = LinkRequest {
+        val request = linkRequest {
             profile = Profile.PROFILE_RO
-            setPerson(person)
-            addAddresses(address)
+            this.person = person
+            // FIXME: https://github.com/grpc/grpc-kotlin/pull/266
+            // addresses += address
         }
         val response = async { stub.link(request) }
         println("Received: ${response.await().personId}")
     }
 
     fun keyStream(streetNumber: String, streetName: String) = runBlocking {
-        var person = with(Person.newBuilder()) {
+        val person = person {
             firstName = "sumo"
             lastName = "demo"
             phone = "000-000-0000"
             email = "sumo@demo.com"
-            return@with build()
         }
 
-        var address = with(Address.newBuilder()) {
+        val address = address {
             suite = streetNumber
             street = streetName
             city = "Riverside"
             state = "California"
             country = "USA"
-            return@with build()
         }
 
         val requests: Flow<LinkRequest> = flow {
             repeat(3) {
-                val request = LinkRequest {
+                val request = linkRequest {
                     profile = Profile.PROFILE_RO
-                    person = person
-                    addAddresses(address)
+                    this.person = person
+                    // FIXME: https://github.com/grpc/grpc-kotlin/pull/266
+                    // addresses.add(address)
                 }
                 emit(request)
                 delay(500)

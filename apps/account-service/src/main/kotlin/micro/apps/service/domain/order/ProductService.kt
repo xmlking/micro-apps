@@ -6,30 +6,29 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import micro.apps.proto.common.v1.Currency
-import micro.apps.proto.common.v1.Product
+import micro.apps.proto.common.v1.product
 import micro.apps.proto.order.v1.CreateRequest
 import micro.apps.proto.order.v1.GetRequest
 import micro.apps.proto.order.v1.GetResponse
 import micro.apps.proto.order.v1.ProductServiceGrpcKt
 import micro.apps.proto.order.v1.SearchRequest
 import micro.apps.proto.order.v1.SearchResponse
-import micro.apps.proto.util.GetProductResponse
-import micro.apps.proto.util.SearchProductResponse
+import micro.apps.proto.order.v1.getResponse
+import micro.apps.proto.order.v1.searchResponse
 import mu.KotlinLogging
 
-var product = with(Product.newBuilder()) {
+var product = product {
     id = "123e4567-e89b-12d3-a456-426614174000"
     name = "watch"
     description = "apple watch"
     currency = Currency.CURRENCY_USD_UNSPECIFIED
-    return@with build()
 }
 
 private val logger = KotlinLogging.logger {}
 
 class ProductService : ProductServiceGrpcKt.ProductServiceCoroutineImplBase() {
 
-    override suspend fun get(request: GetRequest): GetResponse = GetProductResponse { product = product }
+    override suspend fun get(request: GetRequest): GetResponse = getResponse { product = product }
 
     override suspend fun create(request: CreateRequest): Empty {
         // TODO("not implemented")
@@ -43,7 +42,7 @@ class ProductService : ProductServiceGrpcKt.ProductServiceCoroutineImplBase() {
         logger.atDebug().log("filter type: {}", filter)
         while (true) {
             delay(1000)
-            emit(SearchProductResponse { product = product })
+            emit(searchResponse { product = product })
         }
     }
 }

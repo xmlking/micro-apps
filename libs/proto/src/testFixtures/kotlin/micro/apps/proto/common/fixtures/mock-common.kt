@@ -5,6 +5,9 @@ import micro.apps.proto.common.v1.Currency
 import micro.apps.proto.common.v1.Order
 import micro.apps.proto.common.v1.Person
 import micro.apps.proto.common.v1.Product
+import micro.apps.proto.common.v1.order
+import micro.apps.proto.common.v1.person
+import micro.apps.proto.common.v1.product
 
 // creates the entire Person graph!
 // val batman = mockPerson(mockId = 1, lastName = "demo")
@@ -15,12 +18,11 @@ fun mockPerson(
     phone: String = "$mockId$mockId$mockId",
     email: String = "user$mockId@gmail.com"
 ): Person {
-    return with(Person.newBuilder()) {
+    return person {
         this.firstName = firstName
         this.lastName = lastName
         this.phone = phone
         this.email = email
-        return@with build()
     }
 }
 
@@ -32,13 +34,12 @@ fun mockProduct(
     currency: Currency = Currency.CURRENCY_USD_UNSPECIFIED,
     price: Int = mockId
 ): Product {
-    return with(Product.newBuilder()) {
+    return product {
         this.id = id
         this.slug = slug
         this.description = description
         this.currency = currency
         this.price = price
-        return@with build()
     }
 }
 
@@ -50,12 +51,11 @@ fun mockOrder(
     currency: Currency = Currency.CURRENCY_USD_UNSPECIFIED,
     totalPrice: Int = mockId
 ): Order {
-    return with(Order.newBuilder()) {
+    return order {
         this.id = id
         this.subject = StringValue.newBuilder().setValue(subject).build()
         this.body = body
         this.currency = currency
         this.totalPrice = totalPrice
-        return@with build()
     }
 }

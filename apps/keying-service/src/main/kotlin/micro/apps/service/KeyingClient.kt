@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import micro.apps.proto.common.v1.Address
 import micro.apps.proto.common.v1.Profile
+import micro.apps.proto.common.v1.address
 import micro.apps.proto.keying.v1.KeyRequest
 import micro.apps.proto.keying.v1.KeyingServiceGrpcKt.KeyingServiceCoroutineStub
-import micro.apps.proto.util.KeyRequest
+import micro.apps.proto.keying.v1.keyRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config
@@ -31,33 +31,33 @@ class KeyingClient(private val channel: ManagedChannel) : Closeable {
     private val stub: KeyingServiceCoroutineStub = KeyingServiceCoroutineStub(channel)
 
     suspend fun key(streetNumber: String, streetName: String) = coroutineScope {
-        var address = with(Address.newBuilder()) {
+        val address = address {
             suite = streetNumber
             street = streetName
             city = "Riverside"
             state = "California"
             country = "USA"
-            return@with build()
         }
 
-        val request = KeyRequest { profile = Profile.PROFILE_RO; address = address }
+        val request = keyRequest { profile = Profile.PROFILE_RO; this.address = address }
         val response = async { stub.key(request) }
+        val aaa = response.await()
+        println(aaa)
         println("Received: ${response.await().key}")
     }
 
     fun keyStream(streetNumber: String, streetName: String) = runBlocking {
-        var address = with(Address.newBuilder()) {
+        val address = address {
             suite = streetNumber
             street = streetName
             city = "Riverside"
             state = "California"
             country = "USA"
-            return@with build()
         }
 
         val requests: Flow<KeyRequest> = flow {
             repeat(3) {
-                val request = KeyRequest { profile = Profile.PROFILE_RO; address = address }
+                val request = keyRequest { profile = Profile.PROFILE_RO; this.address = address }
                 emit(request)
                 delay(500)
             }

@@ -10,8 +10,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.address.v1.AddressServiceGrpcKt.AddressServiceCoroutineStub
-import micro.apps.proto.util.GetAddressRequest
-import micro.apps.proto.util.SearchAddressRequest
+import micro.apps.proto.address.v1.getRequest
+import micro.apps.proto.address.v1.searchRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config
@@ -28,13 +28,13 @@ class AddressClient(private val channel: ManagedChannel) : Closeable {
     private val stub: AddressServiceCoroutineStub = AddressServiceCoroutineStub(channel)
 
     suspend fun get(idReq: String) = coroutineScope {
-        val request = GetAddressRequest { id = StringValue.of(idReq) }
+        val request = getRequest { id = StringValue.of(idReq) }
         val response = async { stub.get(request) }
         println("Received from Get: ${response.await().address.city}")
     }
 
     fun search(filterReq: String) = runBlocking {
-        val request = SearchAddressRequest { filter = Any.pack(StringValue.of(filterReq)) }
+        val request = searchRequest { filter = Any.pack(StringValue.of(filterReq)) }
         val flow = stub.search(request)
         flow.collect { response ->
             println("Received from Search: ${response.address.city}")

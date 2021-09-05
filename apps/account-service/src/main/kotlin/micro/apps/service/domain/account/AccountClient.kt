@@ -10,8 +10,9 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.account.v1.AccountServiceGrpcKt.AccountServiceCoroutineStub
-import micro.apps.proto.util.GetAccountRequest
-import micro.apps.proto.util.SearchAccountRequest
+import micro.apps.proto.account.v1.getRequest
+import micro.apps.proto.account.v1.searchRequest
+import micro.apps.proto.util.PersonFieldMasks.FIRST_AND_LAST_NAME_FIELD_MASK
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config
@@ -28,16 +29,25 @@ class AccountClient(private val channel: ManagedChannel) : Closeable {
     private val stub: AccountServiceCoroutineStub = AccountServiceCoroutineStub(channel)
 
     suspend fun get(idReq: String) = coroutineScope {
-        val request = GetAccountRequest { id = StringValue.of(idReq) }
+
+        val request = getRequest {
+            id = StringValue.of(idReq)
+        }
         val response = async { stub.get(request) }
         println("Received from Get: ${response.await().account.firstName}")
     }
 
     fun search(filterReq: String) = runBlocking {
-        val request = SearchAccountRequest { filter = Any.pack(StringValue.of(filterReq)) }
+        // val FIRST_AND_LAST_NAME_FIELD_MASK: FieldMask = FieldMask.newBuilder().addPaths("firstName").addPaths("lastName").build()
+        logger.atDebug().addKeyValue("fieldMask", FIRST_AND_LAST_NAME_FIELD_MASK).log("search fieldMask:")
+
+        val request = searchRequest {
+            filter = Any.pack(StringValue.of(filterReq))
+            fieldMask = FIRST_AND_LAST_NAME_FIELD_MASK
+        }
         val flow = stub.search(request)
         flow.collect { response ->
-            println("Received from Search: ${response.account.firstName}")
+            println("Received from Search:\n${response.account}")
         }
     }
 

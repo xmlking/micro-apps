@@ -89,13 +89,14 @@ otel-agent = "1.5.3"
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 #commons-lang3 = { group = "org.apache.commons", name = "commons-lang3", version = { strictly = "[3.8,4.0[", prefer = "3.9" } }
-grpc-kotlin-stub = { module = "io.grpc:grpc-kotlin-stub", version.ref = "grpcKotlin" }
 grpc-stub = { module = "io.grpc:grpc-stub", version.ref = "grpc" }
+grpc-kotlin-stub = { module = "io.grpc:grpc-kotlin-stub", version.ref = "grpcKotlin" }
 grpc-protobuf = { module = "io.grpc:grpc-protobuf", version.ref = "grpc" }
 grpc-netty = { module = "io.grpc:grpc-netty", version.ref = "grpc" }
 grpc-services = { module = "io.grpc:grpc-services", version.ref = "grpc" } # Optional. includes grpc-protobuf
 grpc-xds = { module = "io.grpc:grpc-xds", version.ref = "grpc" } # Optional. includes grpc-services, grpc-auth,  grpc-alts
 protobuf-java = { module = "com.google.protobuf:protobuf-java", version.ref = "protobuf" }
+protobuf-kotlin = { module = "com.google.protobuf:protobuf-kotlin", version.ref = "protobuf" }
 sentinel-grpc-adapter = { module = "com.alibaba.csp:sentinel-grpc-adapter", version.ref = "sentinel" }
 pgv-java-stub = { module = "io.envoyproxy.protoc-gen-validate:pgv-java-stub", version.ref = "pgv" }
 #concurrency-limits-grpc = { module="com.netflix.concurrency-limits:concurrency-limits-grpc", version.ref="netflixConcurrency" }

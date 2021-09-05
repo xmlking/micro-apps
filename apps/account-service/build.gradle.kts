@@ -71,14 +71,28 @@ tasks {
     }
 
     nativeBuild {
-        imageName.set("application")
+        imageName.set("account-service")
         mainClass.set("micro.apps.service.AccountApplicationKt")
-        buildArgs("--no-server")
-        debug.set(false)
-        verbose.set(false)
-        fallback.set(false)
-        jvmArgs("flag")
-        runtimeArgs("--help")
+        debug.set(true)
+        verbose.set(true)
+        fallback.set(true)
+
+        configurationFileDirectories.from(file("src/graal"))
+
+        buildArgs(
+            "-H:+ReportExceptionStackTraces",
+//            "-H:+TraceClassInitialization",
+//            "-H:+PrintClassInitialization",
+            "--initialize-at-run-time=io.netty.handler.codec.compression.BrotliDecoder,io.netty.util.internal.logging.Log4JLogger",
+            "--initialize-at-build-time=org.conscrypt.Conscrypt,org.slf4j.jul.JDK14LoggerAdapter,org.slf4j.simple.SimpleLogger,org.slf4j.LoggerFactory"
+//            typeNames = ["org.slf4j.jul.JDK14LoggerAdapter", "org.slf4j.simple.SimpleLogger"],
+//            packageNames = ["org.slf4j.jul", "org.slf4j.simple"],
+        )
+
+//        // Advanced options
+//        jvmArgs.add("flag") // Passes 'flag' directly to the JVM running the native image builder
+//        // Runtime options
+//        runtimeArgs.add("--help")  // Passes '--help' to built image, during "nativeRun" task
     }
 
     nativeTest {

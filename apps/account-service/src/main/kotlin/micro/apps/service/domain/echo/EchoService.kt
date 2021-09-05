@@ -8,21 +8,21 @@ import micro.apps.proto.echo.v1.EchoResponse
 import micro.apps.proto.echo.v1.EchoServiceGrpcKt
 import micro.apps.proto.echo.v1.EchoStreamRequest
 import micro.apps.proto.echo.v1.EchoStreamResponse
-import micro.apps.proto.util.EchoResponse
-import micro.apps.proto.util.EchoStreamResponse
+import micro.apps.proto.echo.v1.echoResponse
+import micro.apps.proto.echo.v1.echoStreamResponse
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
 class EchoService : EchoServiceGrpcKt.EchoServiceCoroutineImplBase() {
     override suspend fun echo(request: EchoRequest): EchoResponse =
-        EchoResponse { message = "Hello ${request.message}" }
+        echoResponse { message = "Hello ${request.message}" }
 
     override fun echoStream(request: EchoStreamRequest): Flow<EchoStreamResponse> = flow {
         logger.atDebug().log("request: {}", request)
         while (true) {
             delay(1000)
-            emit(EchoStreamResponse { message = "Hello ${request.message}" })
+            emit(echoStreamResponse { message = "Hello ${request.message}" })
         }
     }
 }

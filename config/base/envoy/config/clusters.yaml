@@ -18,8 +18,8 @@ resources:
         - lb_endpoints:
             - endpoint:
                 address:
-                  socket_address: { address: host.docker.internal, port_value: 5000 } # for docker-4-mac
-                  # socket_address: { address:  account.default.svc.cluster.local, port_value: 5000 } # for k8s
+                  socket_address: { address: host.docker.internal, port_value: 5001 } # for docker-4-mac
+                  # socket_address: { address:  account.default.svc.cluster.local, port_value: 5001 } # for k8s
     transport_socket:
       name: envoy.transport_sockets.tls
       typed_config:
@@ -48,8 +48,8 @@ resources:
         - lb_endpoints:
             - endpoint:
                 address:
-                  socket_address: { address: host.docker.internal, port_value: 5000 } # for docker-4-mac
-                  # socket_address: { address:  account.default.svc.cluster.local, port_value: 5000 } # for k8s
+                  socket_address: { address: host.docker.internal, port_value: 5001 } # for docker-4-mac
+                  # socket_address: { address:  account.default.svc.cluster.local, port_value: 5001 } # for k8s
     transport_socket:
       name: envoy.transport_sockets.tls
       typed_config:

@@ -10,8 +10,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import micro.apps.proto.order.v1.ProductServiceGrpcKt.ProductServiceCoroutineStub
-import micro.apps.proto.util.GetProductRequest
-import micro.apps.proto.util.SearchProductRequest
+import micro.apps.proto.order.v1.getRequest
+import micro.apps.proto.order.v1.searchRequest
 import micro.apps.service.config.Account
 import micro.apps.service.config.TLS
 import micro.apps.service.config.config
@@ -28,13 +28,13 @@ class ProductClient(private val channel: ManagedChannel) : Closeable {
     private val stub: ProductServiceCoroutineStub = ProductServiceCoroutineStub(channel)
 
     suspend fun get(idReq: String) = coroutineScope {
-        val request = GetProductRequest { id = StringValue.of(idReq) }
+        val request = getRequest { id = StringValue.of(idReq) }
         val response = async { stub.get(request) }
         println("Received from Get: ${response.await().product.name}")
     }
 
     fun search(filterReq: String) = runBlocking {
-        val request = SearchProductRequest { filter = Any.pack(StringValue.of(filterReq)) }
+        val request = searchRequest { filter = Any.pack(StringValue.of(filterReq)) }
         val flow = stub.search(request)
         flow.collect { response ->
             println("Received from Search: ${response.product.name}")

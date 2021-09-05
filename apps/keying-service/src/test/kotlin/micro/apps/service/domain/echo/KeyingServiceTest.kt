@@ -7,11 +7,11 @@ import io.grpc.inprocess.InProcessServerBuilder
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import micro.apps.proto.common.v1.Address
 import micro.apps.proto.common.v1.Profile
-import micro.apps.proto.keying.v1.KeyRequest
+import micro.apps.proto.common.v1.address
 import micro.apps.proto.keying.v1.KeyResponse
 import micro.apps.proto.keying.v1.KeyingServiceGrpcKt.KeyingServiceCoroutineStub
+import micro.apps.proto.keying.v1.keyRequest
 import micro.apps.service.KeyingService
 import micro.apps.test.E2E
 
@@ -43,17 +43,19 @@ class KeyingServiceTest : FunSpec({
 
         lateinit var response: KeyResponse
 
-        var address = with(Address.newBuilder()) {
+        var address0 = address {
             suite = "1234"
             street = "FourWinds Dr"
             city = "Riverside"
             state = "California"
             country = "USA"
-            return@with build()
         }
 
         shouldNotThrowAny {
-            val request = KeyRequest.newBuilder().setProfile(Profile.PROFILE_RO).setAddress(address).build()
+            val request = keyRequest {
+                profile = Profile.PROFILE_RO
+                address = address0
+            }
             response = keyingStub.key(request)
         }
 

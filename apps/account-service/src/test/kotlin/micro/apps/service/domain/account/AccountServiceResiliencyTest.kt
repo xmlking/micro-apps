@@ -20,8 +20,8 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import micro.apps.proto.account.v1.AccountServiceGrpcKt
-import micro.apps.proto.account.v1.GetRequest
 import micro.apps.proto.account.v1.GetResponse
+import micro.apps.proto.account.v1.getRequest
 import micro.apps.test.E2E
 import micro.apps.test.Slow
 import micro.apps.test.gRPC
@@ -132,7 +132,7 @@ class AccountServiceResiliencyTest : FunSpec({
                 results = (1..10).map {
                     async {
                         logger.debug { "firing request #$it" }
-                        val request = GetRequest.newBuilder().setId(StringValue.of("sumo$it")).build()
+                        val request = getRequest { id = StringValue.of("sumo$it") }
                         val res = accountStub.get(request)
                         logger.debug { "Received: ${res.account.firstName}" }
                         res
