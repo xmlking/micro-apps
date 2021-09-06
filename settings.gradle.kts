@@ -57,8 +57,7 @@ pluginManagement {
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
         id("org.graalvm.buildtools.native") version "0.9.4" apply false
         id("com.dropbox.affectedmoduledetector") version "0.1.2" apply false
-        // FIXME: upgrade from 0.14.5 https://github.com/avast/gradle-docker-compose-plugin/issues/315
-        id("com.avast.gradle.docker-compose") version "0.14.5" apply false
+        id("com.avast.gradle.docker-compose") version "0.14.9" apply false
         id("com.github.node-gradle.node") version "3.1.0" apply false
     }
 }

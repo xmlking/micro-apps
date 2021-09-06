@@ -47,7 +47,7 @@ loggingCapabilities {
     selectSlf4JBinding("org.slf4j:slf4j-jdk14:$slf4jVersion")
 }
 
-tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
+// tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
 
 tasks {
     bootBuildImage {

@@ -162,10 +162,10 @@ sonarqube {
 // tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
 dockerCompose {
     nested("redis").apply {
-        useComposeFiles = listOf("infra/redis.yml")
+        useComposeFiles.set(listOf("infra/redis.yml"))
     }
     nested("dgraph").apply {
-        useComposeFiles = listOf("infra/dgraph.yml")
+        useComposeFiles.set(listOf("infra/dgraph.yml"))
     }
 }
 
