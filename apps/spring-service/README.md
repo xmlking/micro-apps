@@ -105,3 +105,6 @@ dive spring-service:1.6.5-SNAPSHOT
   - [Getting Started with the Java SDK on Traces and Metrics Instrumentation](https://aws-otel.github.io/docs/getting-started/java-sdk)
   - [Manual Instrumentation](https://opentelemetry.io/docs/java/manual_instrumentation/)
   - [Instrumentation Examples](https://github.com/mnadeem/boot-opentelemetry-tempo)
+- Health
+  - Liveness, Readiness [example](https://github.com/hellosatish/springboot2.3-features-demo/blob/master/probes-demo/src/main/java/org/sk/ms/probes/ExampleController.java)
+  - 

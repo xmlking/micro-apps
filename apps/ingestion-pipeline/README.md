@@ -69,6 +69,32 @@ java -jar ./apps/ingestion-pipeline/build/libs/ingestion-pipeline-0.1.2-SNAPSHOT
 
 ### Cloud Run
 
+Set variables
+```bash
+# DataHem generic settings
+PROJECT_ID='' # Required. Your google project id. Example: 'my-project'
+
+# Dataflow settings
+DF_REGION='europe-west1' # Optional. Default: us-central1
+DF_ZONE='europe-west1-b' # Optional. Default:  an availability zone from the region set in DF_REGION.
+DF_NUM_WORKERS=1 # Optional. Default: Dataflow service will determine an appropriate number of workers. Example: 2
+DF_MAX_NUM_WORKERS=1 # Optional. Default: Dataflow service will determine an appropriate number of workers. Example: 5
+DF_DISK_SIZE_GB=30 # Optional. Default: Size defined in your Cloud Platform project. Minimum is 30. Example: 50
+DF_WORKER_MACHINE_TYPE='n1-standard-1' # Optional. Default: The Dataflow service will choose the machine type based on your job. Example: 'n1-standard-1'
+JOB_NAME='' # Optional. Default: The Dataflow service will name the job if not provided
+
+# GenericStream Pipeline settings
+BUCKET_NAME=${PROJECT_ID}-schema-registry # Required. Example. ${PROJECT_ID}-schema-registry
+FILE_DESCRIPTOR_NAME='' # Required. Example: schemas.desc
+FILE_DESCRIPTOR_PROTO_NAME='' # Required. Example: datahem/protobuf/order/v1/order.proto'
+MESSAGE_TYPE='' # Required. Example: order
+PUBSUB_SUBSCRIPTION='' # Required. The name of the stream. Example: 'order-stream'
+BIGQUERY_TABLE_SPEC='' # Required. Example: streams.orders
+TAXONOMY_RESOURCE_PATTERN='' # Optional. Default: '.*'. Example: '7564324984364324'  (taxonomy id)
+```
+
+compile and run
+
 ```bash
 PROJECT_ID=<my-project-id>
 PIPELINE_NAME=streaming
@@ -120,6 +146,9 @@ java -jar ./apps/ingestion-pipeline/build/libs/ingestion-pipeline-0.1.6-SNAPSHOT
 ```bash
 gcloud dataflow jobs run wordcount \
     --gcs-location gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME} \
+    --zone=$DF_ZONE \
+    --region=$DF_REGION \
+    --max-workers=$DF_MAX_NUM_WORKERS \
     --parameters inputFile=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt,gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
 ```
 
@@ -211,3 +240,6 @@ curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: applicat
 
 - [Deduplication: Where Beam Fits In](https://www.youtube.com/watch?v=9OfJKDs3h40)
   - Talk's [Source Code](https://github.com/mozilla/gcp-ingestion)
+
+- PubSub --> BigQuery Streaming
+  - Protobuf [GenericStreamPipeline](https://github.com/mhlabs/datahem.processor/tree/master/generic/src/main/java/org/datahem/processor/generic)

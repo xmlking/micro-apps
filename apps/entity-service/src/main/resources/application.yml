@@ -11,6 +11,14 @@ features:
   change-events:
     enabled: true
 
+# =============== server ===============
+server:
+  shutdown: graceful
+
+# =============== management ===============
+management.endpoints.web.exposure.include: prometheus,health,info,metrics
+
+# =============== spring ===============
 spring:
 
 # =============== redis ===============

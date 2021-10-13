@@ -14,7 +14,7 @@ class DynamicLookupSerializer : KSerializer<Any> {
     override val descriptor: SerialDescriptor =
         ContextualSerializer(Any::class, null, emptyArray()).descriptor
 
-    @InternalSerializationApi
+    @OptIn(InternalSerializationApi::class)
     override fun serialize(encoder: Encoder, value: Any) {
         val actualSerializer =
             encoder.serializersModule.getContextual(value::class) ?: value::class.serializer()

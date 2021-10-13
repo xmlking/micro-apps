@@ -77,7 +77,7 @@ gradle :apps:entity-service:bootRun --debug
 ```
 
 ```bash
-open http://localhost:8080/
+open http://localhost:8080/account
 ```
 
 ## Test

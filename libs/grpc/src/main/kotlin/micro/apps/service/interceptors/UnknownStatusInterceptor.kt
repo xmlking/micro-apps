@@ -10,7 +10,7 @@ import io.grpc.Status
 class UnknownStatusInterceptor : ServerInterceptor {
     override fun <ReqT, RespT> interceptCall(
         call: ServerCall<ReqT, RespT>,
-        headers: io.grpc.Metadata,
+        headers: Metadata,
         next: ServerCallHandler<ReqT, RespT>
     ): ServerCall.Listener<ReqT> {
         val wrappedCall = object : ForwardingServerCall.SimpleForwardingServerCall<ReqT, RespT>(call) {

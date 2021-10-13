@@ -177,6 +177,7 @@ allprojects {
         mavenCentral()
         maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") } // TODO: remove
         maven { url = uri("https://repo.spring.io/release") }
+        maven { url = uri("https://repo.spring.io/milestone") }
         maven { url = uri("https://packages.confluent.io/maven/") }
     }
 }
@@ -258,7 +259,7 @@ subprojects {
 
         java {
             toolchain {
-                languageVersion.set(JavaLanguageVersion.of(11))
+                languageVersion.set(JavaLanguageVersion.of(17))
             }
             withSourcesJar()
             withJavadocJar()
@@ -302,7 +303,7 @@ subprojects {
                 kotlinOptions {
                     // TODO: Ultimately we need allWarningsAsErrors = true
                     // allWarningsAsErrors = true // Treat all Kotlin warnings as errors
-                    jvmTarget = JavaVersion.VERSION_11.toString()
+                    jvmTarget = JavaVersion.VERSION_17.toString() // FIXME use VERSION_17
                     // languageVersion = "1.6"
                     // apiVersion = "1.6"
                     javaParameters = true
@@ -317,7 +318,7 @@ subprojects {
             }
             compileTestKotlin {
                 kotlinOptions {
-                    jvmTarget = JavaVersion.VERSION_11.toString()
+                    jvmTarget = JavaVersion.VERSION_17.toString()
                     // languageVersion = "1.6"
                     // apiVersion = "1.6"
                     javaParameters = true

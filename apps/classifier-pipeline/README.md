@@ -102,6 +102,9 @@ java -jar ./apps/classifier-pipeline/build/libs/classifier-pipeline-0.1.6-SNAPSH
 ```bash
 gcloud dataflow jobs run wordcount \
     --gcs-location gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/template/${PIPELINE_NAME} \
+    --zone=$DF_ZONE \
+    --region=$DF_REGION \
+    --max-workers=$DF_MAX_NUM_WORKERS \
     --parameters inputFile=gs://${PROJECT_ID}/dataflow/pipelines/${PIPELINE_NAME}/input/shakespeare.txt,gs://${PROJECT_ID/dataflow/pipelines/${PIPELINE_NAME}/output/output.txt
 ```
 

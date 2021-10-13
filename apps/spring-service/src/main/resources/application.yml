@@ -3,14 +3,25 @@ spring.application.name: entity-service
 spring.rsocket.server.transport: websocket
 spring.rsocket.server.mapping-path: /rsocket
 
-APP_REDIS_HOST: localhost
-APP_REDIS_PORT: 6379
+# ==== application properties  ========
+#features:
+#  change-events:
+#    enabled: true
 
 # =============== grpc ===============
 grpc:
   port: 6565
   enableReflection: true
 
+# =============== server ===============
+server:
+  shutdown: graceful # also set `timeout-per-shutdown-phase`
+
+# =============== management ===============
+management.endpoints.web.exposure.include: prometheus,health,info,metrics
+
+# =============== spring ===============
 spring:
 
-management.endpoints.web.exposure.include: prometheus,health,info,metrics
+  lifecycle:
+    timeout-per-shutdown-phase: "10s"

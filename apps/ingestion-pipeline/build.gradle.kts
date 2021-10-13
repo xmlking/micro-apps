@@ -28,6 +28,7 @@ dependencies {
     implementation(libs.bundles.kotlinx.serialization.all) // JSON, ProtoBuf, Avro serialization
     // implementation(libs.beam.sdks.java.extensions.kryo) // kryo serialization
     // implementation(libs.beam.sdks.java.extensions.euphoria)
+    // implementation(libs.beam.sdks.java.extensions.protobuf)
 
     // Kotlin Config
     implementation(libs.bundles.konf)
@@ -38,6 +39,7 @@ dependencies {
     implementation(libs.bundles.kotlinx.coroutines)
     // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
     // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
+
     api(libs.guava) // Force `-jre` version instead of `-android`
 
     // Test with JUnit4 & JUnit5
