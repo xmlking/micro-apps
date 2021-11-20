@@ -15,11 +15,11 @@ val pgvVersion = libs.versions.pgv.get()
 
 // Workaround the Gradle bug resolving multi-platform dependencies.
 // FIXME: https://github.com/google/protobuf-gradle-plugin/issues/391
-configurations.all {
-    if (name.contains("kapt") || name.contains("proto", ignoreCase = true)) {
-        attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class.java, Usage.JAVA_RUNTIME))
-    }
-}
+//configurations.all {
+//    if (name.contains("kapt") || name.contains("proto", ignoreCase = true)) {
+//        attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class.java, Usage.JAVA_RUNTIME))
+//    }
+//}
 
 dependencies {
     // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
@@ -79,10 +79,9 @@ protobuf {
                 // Generate Kotlin gRPC classes
                 id("grpckt")
                 // Generate Validation classes
-                // TODO enable this...
-//                id("javapgv") {
-//                    option("lang=java")
-//                }
+                id("javapgv") {
+                    option("lang=java")
+                }
             }
             it.builtins {
                 id("kotlin")

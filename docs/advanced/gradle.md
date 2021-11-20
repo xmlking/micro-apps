@@ -47,6 +47,16 @@ gradle check
 gradle sonarqube
 ```
 
+#### kover
+
+Note: _Cross-module tests are not supported in reports and validation yet. For each test, only the classpath belonging to the current module is taken._
+
+```bash
+gradle koverReport -x test
+gradle koverCollectReports # # Default directory is $buildDir/reports/kover/all
+gradle koverVerify # Verifies code coverage metrics based on specified rules. Always executes before check task.
+```
+
 ### Spotless tasks
 
 ```bash
@@ -265,3 +275,4 @@ gradle cV
 - https://github.com/detekt/sonar-kotlin
 - https://android.jlelse.eu/sonarqube-code-coverage-for-kotlin-on-android-with-bitrise-71b2fee0b797
 - [Reporting code coverage with JaCoCo Sample](https://docs.gradle.org/6.4.1/samples/sample_jvm_multi_project_with_code_coverage.html)
+- [Kotlin kover](https://github.com/Kotlin/kotlinx-kover#apply-plugin-to-single-module-project)

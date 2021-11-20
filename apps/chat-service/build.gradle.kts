@@ -69,7 +69,7 @@ tasks {
 
 springAot {
     // FIXME: https://github.com/LogNet/grpc-spring-boot-starter/issues/226
-    failOnMissingSelectorHint.set(false)
+    debugVerify.set(false)
 //    removeSpelSupport.set(true)
 //    removeYamlSupport.set(true)
 }

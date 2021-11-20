@@ -70,6 +70,8 @@ plugins {
     // TODO: https://kotlinlang.org/docs/lombok.html
     // kotlin("plugin.lombok")
     id("com.avast.gradle.docker-compose")
+    // kotlin code coverage
+    id("org.jetbrains.kotlinx.kover")
 }
 
 // rootProject config
@@ -156,6 +158,15 @@ sonarqube {
             dependsOn(":${it.path}:check")
         }
     }
+}
+
+// Kotlin Code Coverage Reporing
+kover {
+    isEnabled = true                        // false to disable instrumentation of all test tasks in all modules
+    coverageEngine.set(kotlinx.kover.api.CoverageEngine.INTELLIJ) // change instrumentation agent and reporter
+    // intellijEngineVersion.set("1.0.622")    // change version of IntelliJ agent and reporter
+    jacocoEngineVersion.set(jacocoVersion)  // change version of JaCoCo agent and reporter
+    generateReportOnCheck.set(true)         // false to do not execute `koverReport` task before `check` task
 }
 
 // HINT: add this like to all subprojects that depends on dockerCompose
@@ -259,10 +270,17 @@ subprojects {
 
         java {
             toolchain {
+                // 17 is latest at the current moment
                 languageVersion.set(JavaLanguageVersion.of(17))
             }
             withSourcesJar()
             withJavadocJar()
+        }
+
+        kotlin {
+            jvmToolchain {
+                (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(17))
+            }
         }
 
         jacoco {
@@ -545,6 +563,17 @@ tasks {
         group = "Affected Module Detector"
         description = "print all affected subprojects due to code changes"
     }
+
+    koverVerify {
+        rule {
+            name = "75% Coverage"
+            bound {
+                minValue = 75
+                valueType = kotlinx.kover.api.VerificationValueType.COVERED_LINES_PERCENTAGE
+            }
+        }
+    }
+
 }
 
 // Define Custom Task
