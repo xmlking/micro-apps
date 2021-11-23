@@ -77,6 +77,8 @@ kotestSpring = "1.0.0"
 springMockk = "3.0.1"
 snakeyaml = "1.28"
 springGrpc = "4.5.5"
+springCloud = "2021.0.0-RC1"
+springCloudGcp = "2.0.5"
 
 # google
 googlePubsub = "1.114.7"
@@ -139,6 +141,17 @@ spring-boot-configuration-processor  = { module = "org.springframework.boot:spri
 # Usage: kapt(libs.spring.boot.autoconfigure.processor)
 spring-boot-autoconfigure-processor  = { module = "org.springframework.boot:spring-boot-autoconfigure-processor" }
 spring-boot-starter-grpc  = { module = "io.github.lognet:grpc-spring-boot-starter", version.ref = "springGrpc" }
+
+## Spring Cloud. Usage:
+# implementation(enforcedPlatform(libs.spring.cloud.bom.get()))
+spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloud" }
+
+## Spring Cloud GCP. Usage:
+# implementation(enforcedPlatform(libs.spring.cloud.gcp.bom.get()))
+# runtimeOnly(libs.bundles.spring.cloud.gcp)
+spring-cloud-gcp-bom = { module = "com.google.cloud:spring-cloud-gcp-dependencies", version.ref = "springCloudGcp" }
+spring-cloud-gcp-starter-metrics = { module = "com.google.cloud:spring-cloud-gcp-starter-metrics" }
+spring-cloud-gcp-logging = { module = "com.google.cloud:spring-cloud-gcp-logging" }
 
 h2 = { module = "com.h2database:h2" }
 r2dbc-h2 = { module = "io.r2dbc:r2dbc-h2" }
@@ -313,6 +326,11 @@ spring-basic = [
 spring-grpc = [
     "grpc-kotlin-stub",
     "spring-boot-starter-grpc"
+]
+
+spring-cloud-gcp = [
+    "spring-cloud-gcp-starter-metrics",
+    "spring-cloud-gcp-logging"
 ]
 
 arrow = [

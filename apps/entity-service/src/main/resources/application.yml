@@ -6,6 +6,10 @@ spring.rsocket.server.mapping-path: /rsocket
 APP_REDIS_HOST: localhost
 APP_REDIS_PORT: 6379
 
+# disable GCP for local dev
+spring.cloud.gcp.core.enabled: false
+management.metrics.export.stackdriver.enabled: false
+
 # ==== application properties  ========
 features:
   change-events:

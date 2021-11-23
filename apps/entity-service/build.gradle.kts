@@ -43,6 +43,12 @@ dependencies {
     implementation(libs.spring.boot.reactor.kotlin.extensions)
     testImplementation(libs.spring.boot.reactor.test)
 
+    // GCP logging and metrics
+    implementation(enforcedPlatform(libs.spring.cloud.gcp.bom.get()))
+    runtimeOnly(libs.bundles.spring.cloud.gcp)
+    // DevTools
+    developmentOnly(libs.spring.boot.devtools)
+
     testImplementation(testFixtures(project(":libs:test")))
     testImplementation(testFixtures(project(":libs:model")))
     testImplementation(libs.spring.boot.starter.test) {

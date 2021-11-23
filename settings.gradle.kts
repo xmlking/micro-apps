@@ -44,7 +44,7 @@ pluginManagement {
         id("io.freefair.lombok") version "6.0.0-m2" apply false
         id("org.sonarqube") version "3.3"
         id("com.diffplug.spotless") version "6.0.0"
-        id("org.jetbrains.dokka") version "1.5.31"
+        id("org.jetbrains.dokka") version "1.6.0"
         id("com.github.ben-manes.versions") version "0.39.0"
         id("com.diffplug.spotless-changelog") version "2.3.1"
         id("se.patrikerdes.use-latest-versions") version "0.2.18"

@@ -1,1 +1,9 @@
 spring.redis.url: localhost:6379
+
+spring.cloud.gcp.core.enabled: true
+spring.cloud.gcp.metrics.enabled: true
+management.metrics.export.stackdriver.enabled: true
+management.metrics.export.stackdriver.step: 5s
+
+# (optional) enable access to http://localhost:8080/actuator/metrics
+management.endpoints.web.exposure.include: metrics

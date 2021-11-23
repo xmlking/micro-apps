@@ -20,9 +20,9 @@ dependencies {
     implementation(project(":libs:model"))
     implementation(project(":libs:service"))
 
-    developmentOnly(libs.spring.boot.devtools)
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
+    developmentOnly(libs.spring.boot.devtools)
 
     // Optional: if you also want rsocket
     // implementation(libs.spring.boot.starter.rsocket)
@@ -52,7 +52,8 @@ dependencies {
     implementation(enforcedPlatform(libs.opentelemetry.bomAlpha.get()))
 
     // openTelemetry agent
-    openTelemetry(variantOf(libs.opentelemetry.javaagent) { classifier("all") })
+    // openTelemetry(variantOf(libs.opentelemetry.javaagent) { classifier("all") })
+    openTelemetry(variantOf(libs.opentelemetry.javaagent) { })
 
     // openTelemetry essential
     implementation(libs.bundles.opentelemetry.api)
@@ -162,9 +163,11 @@ tasks {
 
 /*** copy oTel agent ***/
 val copyOpenTelemetryAgent = tasks.register<Sync>("copyOpenTelemetryAgent") {
+    println(openTelemetry.asPath)
     from(openTelemetry.asPath)
     into("$buildDir/agent")
-    rename("opentelemetry-javaagent-(.+?)-all.jar", "opentelemetry-javaagent-all.jar")
+    rename("opentelemetry-javaagent-(.+?).jar", "opentelemetry-javaagent.jar")
+    // rename("opentelemetry-javaagent-(.+?)-all.jar", "opentelemetry-javaagent-all.jar")
 }
 tasks.named("processResources") {
     dependsOn(copyOpenTelemetryAgent)

@@ -119,6 +119,17 @@ Then, you can run the app like any other container:
 docker run -i --rm -p 8080:8080 entity-service:1.6.5-SNAPSHOT
 ```
 
+### Run in GCP
+Set environment variables  in GKE
+
+```bash
+GOOGLE_CLOUD_PROJECT=my-project-id
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/googleCredentials.json
+# optional
+STACKDRIVER_LOG_NAME
+STACKDRIVER_LOG_FLUSH_LEVEL
+```
+
 ## TODO
 
 - https://github.com/rnbWarden/jredisearch-spring-boot-starter
@@ -133,4 +144,4 @@ docker run -i --rm -p 8080:8080 entity-service:1.6.5-SNAPSHOT
 - [KoFu](https://github.com/spring-projects-experimental/spring-fu/tree/main/kofu)
 - [KoFu Samples](https://github.com/spring-projects-experimental/spring-fu/tree/main/samples)
 - [Functional Bean Registration Example](https://github.com/pwestlin/webshopkotlin/blob/master/core-service/src/main/kotlin/nu/westlin/webshop/core/CoreApplication.kt)
-
+- [Spring Cloud GCP](https://googlecloudplatform.github.io/spring-cloud-gcp/reference/html/index.html)
