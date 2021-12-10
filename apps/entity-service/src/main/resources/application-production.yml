@@ -1,7 +1,14 @@
 spring.redis.url: localhost:6379
 
 spring.cloud.gcp.core.enabled: true
+# Recommend specifying project ID  by the GOOGLE_CLOUD_PROJECT environment variable
+# spring.cloud.gcp.project-id: <PROJECT_ID>
+# Recommend specifying credentials file pointed by the GOOGLE_APPLICATION_CREDENTIALS environment variable
+# spring.cloud.gcp.credentials.location=file:/usr/local/key.json
+
+spring.cloud.gcp.logging.enabled: true
 spring.cloud.gcp.metrics.enabled: true
+
 management.metrics.export.stackdriver.enabled: true
 management.metrics.export.stackdriver.step: 5s
 

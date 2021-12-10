@@ -43,7 +43,7 @@ dependencies {
 
     // GCP logging and metrics
     implementation(enforcedPlatform(libs.spring.cloud.gcp.bom.get()))
-    runtimeOnly(libs.bundles.spring.cloud.gcp)
+    runtimeOnly(libs.bundles.spring.cloud.gcp.basic)
     // DevTools
     developmentOnly(libs.spring.boot.devtools)
 

@@ -157,9 +157,11 @@ spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependenci
 
 ## Spring Cloud GCP. Usage:
 # implementation(enforcedPlatform(libs.spring.cloud.gcp.bom.get()))
-# runtimeOnly(libs.bundles.spring.cloud.gcp)
+# runtimeOnly(libs.bundles.spring.cloud.gcp.basic)
 spring-cloud-gcp-bom = { module = "com.google.cloud:spring-cloud-gcp-dependencies", version.ref = "springCloudGcp" }
+spring-cloud-gcp-starter-logging = { module = "com.google.cloud:spring-cloud-gcp-starter-logging" }
 spring-cloud-gcp-starter-metrics = { module = "com.google.cloud:spring-cloud-gcp-starter-metrics" }
+spring-cloud-gcp-starter-trace = { module = "com.google.cloud:spring-cloud-gcp-starter-trace" }
 spring-cloud-gcp-logging = { module = "com.google.cloud:spring-cloud-gcp-logging" }
 
 h2 = { module = "com.h2database:h2" }
@@ -337,9 +339,9 @@ spring-grpc = [
     "spring-boot-starter-grpc"
 ]
 
-spring-cloud-gcp = [
+spring-cloud-gcp-basic = [
     "spring-cloud-gcp-starter-metrics",
-    "spring-cloud-gcp-logging"
+    "spring-cloud-gcp-starter-logging"
 ]
 
 arrow = [
