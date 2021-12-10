@@ -243,3 +243,7 @@ curl -d '{"returnImmediately":true, "maxMessages":1}' -H "Content-Type: applicat
 
 - PubSub --> BigQuery Streaming
   - Protobuf [GenericStreamPipeline](https://github.com/mhlabs/datahem.processor/tree/master/generic/src/main/java/org/datahem/processor/generic)
+
+- Data Confidentiality
+  - Reduce data risk with obfuscation and de-identification methods like masking and tokenization
+  - Seamlessly inspect and transform structured data via schema annotations. 

@@ -4,9 +4,6 @@ plugins {
     kotlin("plugin.serialization")
     kotlin("kapt")
 
-    // kotlin("plugin.lombok")
-    // id("io.freefair.lombok")
-
     id("org.springframework.boot")
     id("io.spring.dependency-management")
 }
@@ -29,21 +26,13 @@ dependencies {
     compileOnly(libs.spring.boot.configuration.processor) // Workaround FIXME: https://youtrack.jetbrains.com/issue/KT-15040
 
     // Optional: for redis
-    implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
-    // spring-boot 2.6.0 will now automatically enable redis pooling when commons-pool2 is on the classpath
-    implementation("org.apache.commons:commons-pool2")
-    implementation("com.redislabs:spring-redisearch:3.1.2")
-    // implementation("com.redislabs:lettucemod:1.7.2") // https://github.com/redis-developer/lettucemod
-    // implementation("com.redislabs:jredisgraph")
-    // implementation("com.redis.om:redis-om-spring:0.1.0-SNAPSHOT")
+//    implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+    implementation("com.redis.om:redis-om-spring:0.1.0-SNAPSHOT")
 
     // projectreactor
     implementation(libs.spring.boot.reactor.kotlin.extensions)
     testImplementation(libs.spring.boot.reactor.test)
 
-    // GCP logging and metrics
-    implementation(enforcedPlatform(libs.spring.cloud.gcp.bom.get()))
-    runtimeOnly(libs.bundles.spring.cloud.gcp)
     // DevTools
     developmentOnly(libs.spring.boot.devtools)
 

@@ -117,7 +117,7 @@ tasks {
             // "BP_DEBUG_ENABLED" to "true",
             "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
             "BPE_JAVA_TOOL_OPTIONS" to "-Dfile.encoding=UTF-8", // Optional, just for docs
-            "BPE_PREPEND_JAVA_TOOL_OPTIONS" to "-javaagent:/workspace/agent/opentelemetry-javaagent-all.jar",
+            "BPE_PREPEND_JAVA_TOOL_OPTIONS" to "-javaagent:/workspace/agent/opentelemetry-javaagent.jar",
             "BPE_APPEND_JAVA_TOOL_OPTIONS" to
                 // "-Dotel.javaagent.debug=true " +
                 // "-Dotel.traces.exporter=jaeger " +
@@ -148,7 +148,7 @@ tasks {
         jvmArgs = listOf(
             // This will set logs level DEBUG only for local development.
             "-Dlogging.level.micro.apps=DEBUG",
-            "-javaagent:$buildDir/agent/opentelemetry-javaagent-all.jar",
+            "-javaagent:$buildDir/agent/opentelemetry-javaagent.jar",
             // "-Dotel.javaagent.debug=true",
             "-Dotel.traces.exporter=logging",
             // "-Dotel.traces.exporter=jaeger",
@@ -167,7 +167,6 @@ val copyOpenTelemetryAgent = tasks.register<Sync>("copyOpenTelemetryAgent") {
     from(openTelemetry.asPath)
     into("$buildDir/agent")
     rename("opentelemetry-javaagent-(.+?).jar", "opentelemetry-javaagent.jar")
-    // rename("opentelemetry-javaagent-(.+?)-all.jar", "opentelemetry-javaagent-all.jar")
 }
 tasks.named("processResources") {
     dependsOn(copyOpenTelemetryAgent)

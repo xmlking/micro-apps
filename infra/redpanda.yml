@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  redpanda:
+    # NOTE: Please use the latest version here!
+    image: docker.vectorized.io/vectorized/redpanda:v21.9.5
+    command:
+      - redpanda start
+      - --overprovisioned
+      - --smp 1
+      - --memory 1G
+      - --reserve-memory 0M
+      - --node-id 0
+      - --check=false
+      - --kafka-addr 0.0.0.0:9092
+      - --advertise-kafka-addr redpanda:9092
+      - --pandaproxy-addr 0.0.0.0:8082
+      - --advertise-pandaproxy-addr redpanda:8082
+      - --set redpanda.enable_transactions=true
+      - --set redpanda.enable_idempotence=true
+    ports:
+      - 9092:9092
+      - 8081:8081 # schema_registry
+      - 8082:8082
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:9644/v1/status/ready"]
+      start_period: 0s
+      interval: 1s
+      retries: 30
+
+  topic-creator:
+    # NOTE: Please use the latest version here!
+    image: docker.vectorized.io/vectorized/redpanda:v21.9.5
+    command:
+      - topic
+      - --brokers redpanda:9092
+      - create
+      - sumo
+    depends_on:
+      redpanda:
+        condition: service_healthy

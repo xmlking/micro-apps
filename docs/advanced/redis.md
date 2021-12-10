@@ -25,7 +25,7 @@ docker compose -f infra/redis.yml down -v
 
 Redis db visualization dashboard
 
-> when prompted, use host:redis, port:6379 and name:any_name
+> when prompted, use host:redis, port:6379 and name:any_name (no need to enter username/password)
 
 ```bash
 open http://localhost:8001/
@@ -49,6 +49,7 @@ MODULE LIST
 
 # watch all command send to redis
 MONITOR
+# redis-cli MONITOR
 ```
 
 ```bash

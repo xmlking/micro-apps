@@ -26,7 +26,7 @@ val kotestVersion = libs.versions.kotest.get()
 
 val excludedProjects = setOf("apps", "libs")
 val webappProjects = setOf("entity-webapp")
-val springProjects = setOf("chat-service", "entity-service")
+val springProjects = setOf("chat-service", "spring-service", "entity-service", "redis-service")
 val grpcProjects = setOf("account-service", "keying-service", "linking-service")
 val quarkusProjects = setOf("greeting-service", "person-service")
 val pipelineProjects = setOf("classifier-pipeline", "ingestion-pipeline", "wordcount-pipeline")

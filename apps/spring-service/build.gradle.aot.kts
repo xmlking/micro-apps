@@ -24,9 +24,9 @@ dependencies {
     implementation(project(":libs:model"))
     implementation(project(":libs:service"))
 
-    // implementation("org.springframework.fu:spring-fu-kofu:0.4.5-SNAPSHOT")
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
+    developmentOnly(libs.spring.boot.devtools)
 
     // Optional: if you also want rsocket
     // implementation(libs.spring.boot.starter.rsocket)
@@ -44,23 +44,39 @@ dependencies {
     implementation(libs.spring.boot.reactor.kotlin.extensions)
     testImplementation(libs.spring.boot.reactor.test)
 
-    // openTelemetry minimal
-    implementation(enforcedPlatform("io.opentelemetry:opentelemetry-bom:${otelVersion}"))
-    implementation("io.opentelemetry:opentelemetry-api")
-    openTelemetry("io.opentelemetry.javaagent:opentelemetry-javaagent:${otelVersion}:all")
+    /**
+     * OpenTelemetry Note:
+     *  **Libraries** that want to export telemetry data using OpenTelemetry MUST only depend on the `opentelemetry-api`
+     *  **Applications** should also depend on the `opentelemetry-sdk`
+     *  This way, libraries will obtain a real implementation only if the user application is configured for it
+     */
 
-    implementation("io.opentelemetry:opentelemetry-sdk")
+    // openTelemetry bom
+    implementation(enforcedPlatform(libs.opentelemetry.bom.get()))
+    implementation(enforcedPlatform(libs.opentelemetry.bomAlpha.get()))
 
-//    implementation("io.opentelemetry:opentelemetry-exporter-otlp")
-//    implementation("io.opentelemetry:opentelemetry-exporter-otlp-metrics")
-//    implementation("io.opentelemetry.instrumentation:opentelemetry-otlp-exporter-starter")
+    // openTelemetry agent
+    // openTelemetry(variantOf(libs.opentelemetry.javaagent) { classifier("all") })
+    openTelemetry(variantOf(libs.opentelemetry.javaagent) { })
 
-    // micrometer for otel
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+    // openTelemetry essential
+    implementation(libs.bundles.opentelemetry.api)
+    implementation(libs.bundles.opentelemetry.sdk) // Optional
 
-    // extension for otel
-    implementation("io.opentelemetry:opentelemetry-extension-annotations") // to use  @WithSpan etc
-    implementation("io.opentelemetry:opentelemetry-extension-kotlin")
+    // openTelemetry exporters
+    implementation(libs.opentelemetry.exporter.prometheus) // Optional
+    // implementation(libs.opentelemetry.exporter.logging)
+    // implementation(libs.opentelemetry.exporter.otlp)
+    // implementation(libs.opentelemetry.exporter.jaeger)
+
+    // micrometer for openTelemetry
+    runtimeOnly(libs.micrometer.registry.prometheus)
+
+    // extensions for openTelemetry
+    implementation(libs.opentelemetry.extension.annotations) // to use  @WithSpan etc
+    implementation(libs.opentelemetry.extension.kotlin)
+
+    testImplementation(libs.bundles.opentelemetry.test)
 
     testImplementation(testFixtures(project(":libs:test")))
     testImplementation(testFixtures(project(":libs:model")))
@@ -110,10 +126,11 @@ tasks {
             "BPE_APPEND_JAVA_TOOL_OPTIONS" to
                 // "-Dotel.traces.exporter=otlp " +
                 "-Dotel.traces.exporter=logging " +
+                "-Dotel.metrics.exporter=prometheus " +
                 "-Dotel.propagators=b3,tracecontext,baggage " +
                 "-Dotel.service.name=${project.name} " +
-                "-Dotel.resource.attributes=service.name=${project.name} " +
-                "-Dotel.metrics.exporter=prometheus",
+                "-Dotel.resource.attributes=service.name=${project.name}",
+
             "BPE_BPL_SPRING_CLOUD_BINDINGS_ENABLED" to "false",
         )
 
@@ -132,11 +149,10 @@ tasks {
     }
 
     bootRun {
-        println("-javaagent:/${openTelemetry.singleFile.name}")
         jvmArgs = listOf(
             // This will set logs level DEBUG only for local development.
             "-Dlogging.level.micro.apps=DEBUG",
-            "-javaagent:$buildDir/agent/opentelemetry-javaagent-all.jar",
+            "-javaagent:$buildDir/agent/opentelemetry-javaagent.jar",
 //            "-Dotel.traces.exporter=otlp",
             "-Dotel.traces.exporter=logging",
             "-Dotel.propagators=b3,tracecontext,baggage",
@@ -156,9 +172,10 @@ springAot {
 
 /*** copy oTel agent ***/
 val copyOpenTelemetryAgent = tasks.register<Sync>("copyOpenTelemetryAgent") {
+    println(openTelemetry.asPath)
     from(openTelemetry.asPath)
     into("$buildDir/agent")
-    rename("opentelemetry-javaagent-${otelVersion}-all.jar", "opentelemetry-javaagent-all.jar")
+    rename("opentelemetry-javaagent-(.+?).jar", "opentelemetry-javaagent.jar")
 }
 tasks.named("processAotResources") {
     dependsOn(copyOpenTelemetryAgent)
