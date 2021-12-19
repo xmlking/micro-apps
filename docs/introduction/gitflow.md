@@ -37,7 +37,7 @@ like [git-chglog](https://github.com/git-chglog/git-chglog) from commits.
 Then, the __release branch__ is merged into __master__ **and** into __develop__ too, to make sure that any changes made
 in the __release branch__ aren't accidentally lost by new development.
 
-![GitFlow master branch](../images/GitFlowMasterBranch.png)
+![GitFlow main branch](../images/GitFlowMasterBranch.png)
 
 ### Master Branch
 
@@ -49,7 +49,7 @@ and __hotfix branches__.
 __Hotfix branches__ are used to create emergency fixes:
 
 - Hotfixes arise from the necessity to act immediately upon an undesired state of a live production version
-- May be branched off from the corresponding tag on the master branch that marks the production version.
+- May be branched off from the corresponding tag on the main branch that marks the production version.
 
 ![GitFlow hotfix branch](../images/GitFlowHotfixBranch.png)
 

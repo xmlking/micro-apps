@@ -48,6 +48,6 @@ generate changelog using [git-chglog](https://github.com/git-chglog/git-chglog).
 ```bash
 # first time
 git-chglog --init
-# on release branch, generate CHANGELOG.md and commit before merging back to develop & master.
+# on release branch, generate CHANGELOG.md and commit before merging back to develop & main.
 git-chglog -c .github/chglog/config.yml -o CHANGELOG.md --next-tag 2.0.0
 ```

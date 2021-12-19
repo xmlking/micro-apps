@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'documentation/**'
 jobs:
@@ -29,4 +29,4 @@ jobs:
           echo "kashmora.com" > CNAME
           git add docs -f
           git commit -m "Updated docs"
-          git push origin master:gh-pages --force
+          git push origin main:gh-pages --force

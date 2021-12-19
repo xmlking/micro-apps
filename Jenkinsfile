@@ -144,7 +144,7 @@ pipeline {
 
         stage('Deploy for Master') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 script {

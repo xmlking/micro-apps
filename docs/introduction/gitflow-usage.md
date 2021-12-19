@@ -13,7 +13,7 @@ Read  __gitflow-avh__ [wiki](https://github.com/petervanderdoes/gitflow-avh/wiki
 ### Initialization
 
 ```bash
-# on a newly created git master branch, do:
+# on a newly created git main branch, do:
 git flow init -d
 ```
 
@@ -57,7 +57,7 @@ __Remember:__
    branch regularly. (Once a day, first thing in the morning, is a good rule of thumb).
 
     ```bash
-    # pull down master and develop branches
+    # pull down main and develop branches
     git pull --all
     # merge develop into your feature branch
     git merge develop
@@ -99,7 +99,7 @@ __Remember:__
 
 2. #### Finish up a release
 
-   When you’re ready to tag the release and merge it back into `master` and `develop` branches, do this:
+   When you’re ready to tag the release and merge it back into `main` and `develop` branches, do this:
     ```bash
     git flow release finish <version-number>
     # Don't forget to push your tags, run
@@ -149,12 +149,12 @@ __Remember:__
    This closes the hotfix branch and creates a tag called `<version-number>` against the __master__ branch.
 
    __Remember:__
-    - For hotfix branches, the `<base>` arg must be `master` branch, when omitted it defaults to the  `master` branch.
+    - For hotfix branches, the `<base>` arg must be `main` branch, when omitted it defaults to the  `main` branch.
     - You can use `git flow hotfix start <version-number> <older-tag>` to create a hotfix off of an older tag.
     - However, if you look back at [Vincent’s original diagram](http://nvie.com/posts/a-successful-git-branching-model/)
       , notice how changes happen in __time__ order. When you finish this kind of hotfix, it gets merged back into the
-      latest master branch; it does not get merged into just after the tag that you branched off. This can cause
-      problems, such as __master__ ending up with the wrong version number, which you will have to spot and fix by hand
+      latest main branch; it does not get merged into just after the tag that you branched off. This can cause
+      problems, such as __main__ ending up with the wrong version number, which you will have to spot and fix by hand
       for now.
 
 ## Reference

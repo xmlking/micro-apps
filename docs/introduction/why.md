@@ -24,7 +24,7 @@ including: determining the next version number, generating the release notes and
 - Fully automated release
 - Enforce [Semantic Versioning](https://semver.org) specification
 - Use formalized commit message convention to document changes in the codebase
-- Publish on different distribution channels i.e, __SNAPSHOT__ on `develop, hotfix` branches and __Stable__ in `master`
+- Publish on different distribution channels i.e, __SNAPSHOT__ on `develop, hotfix` branches and __Stable__ in `main`
   branch
 - Avoid potential errors associated with manual releases
 
@@ -101,7 +101,7 @@ feat(blog): add comment section
 
 ### Changelog
 
-On release branch, generate __CHANGELOG.md__ and commit it, before merging back to develop & master.
+On release branch, generate __CHANGELOG.md__ and commit it, before merging back to develop & main.
 
 Generate changelog using [git-chglog](https://github.com/git-chglog/git-chglog).
 

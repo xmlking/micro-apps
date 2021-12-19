@@ -49,10 +49,10 @@ buf lint --error-format=config-ignore-yaml
 # Run breaking change detection
 # for dev local
 buf breaking --against image.bin
-buf breaking --against '.git#branch=master'
+buf breaking --against '.git#branch=main'
 # for CI
 export HTTPS_GIT=https://github.com/xmlking/yeti.git
-buf check breaking --against-input "$(HTTPS_GIT)#branch=master"
+buf check breaking --against-input "$(HTTPS_GIT)#branch=main"
 ```
 
 ### Format
