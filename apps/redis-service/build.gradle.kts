@@ -10,6 +10,10 @@ plugins {
 
 val slf4jVersion = libs.versions.slf4j.get()
 
+repositories {
+    maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots") }
+}
+
 dependencies {
     implementation(project(":libs:core"))
     // TODO: enable when `entity-webapp` is ready
@@ -106,5 +110,8 @@ tasks {
 }
 
 noArg {
+    invokeInitializers = true
+    annotation("micro.apps.model.NoArg")
+    annotation("com.redis.om.spring.annotations.Document")
     annotation("org.springframework.data.redis.core.RedisHash")
 }

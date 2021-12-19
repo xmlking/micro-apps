@@ -47,8 +47,10 @@ gradle redisComposeLogs
 via docker-compose
 
 ```bash
-# start local redis
+# start local redis and grafana 
 docker compose -f infra/redis.yml up
+# (Or) start only redis
+docker compose -f infra/redis.yml up redis
 # stop local redis before restart again
 docker compose -f infra/redis.yml down
 # this will stop redis and remove all volumes
@@ -57,7 +59,9 @@ docker compose -f infra/redis.yml down -v
 
 **Redis Insight:** Redis db visualization dashboard
 
-> when prompted, use host:redis, port:6379 and name:any_name
+After opening RedisInsight App, connect using host:localhost, port:6379 and name:any_name_is_ok
+
+for Redis Insight 1.x
 
 ```bash
 open http://localhost:8001/

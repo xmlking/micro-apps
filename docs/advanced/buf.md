@@ -15,8 +15,8 @@
 # buf: proto tool https://buf.build/docs/tour-1
 brew tap bufbuild/buf
 brew install buf
-# or use `go get` to install Buf
-GO111MODULE=on go get github.com/bufbuild/buf/cmd/buf
+# or use `go install` to install Buf
+go install github.com/bufbuild/buf/cmd/buf@latest
 ```
 
 ## Developer Workflow
@@ -27,18 +27,17 @@ GO111MODULE=on go get github.com/bufbuild/buf/cmd/buf
 # To list all files Buf is configured to use:
 buf ls-files
 # To see your currently configured lint or breaking checkers:
-buf check ls-lint-checkers
-buf check ls-breaking-checkers
+buf config ls-breaking-rules
 # To see all available lint checkers independent of configuration/defaults:
-buf check ls-lint-checkers --all
+buf config ls-lint-rules
 ```
 
 ### Build
 
 ```bash
 # check
-buf image build -o /dev/null
-buf image build -o image.bin
+buf build -o /dev/null
+buf build -o image.bin
 ```
 
 ### Lint

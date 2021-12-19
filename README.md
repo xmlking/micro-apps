@@ -132,3 +132,4 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 * Microservices in a Post-Kubernetes Era [link](https://www.infoq.com/articles/microservices-post-kubernetes)
 * Why is a [workspace](https://nrwl.io/nx/why-a-workspace) (or monorepo) needed?
 * Gradle Setup [arara](https://github.com/cereda/arara)
+* GoogleCloudPlatform's [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo)

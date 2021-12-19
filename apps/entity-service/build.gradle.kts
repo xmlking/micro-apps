@@ -20,8 +20,6 @@ dependencies {
     implementation(project(":libs:model"))
     implementation(project(":libs:service"))
 
-    //implementation(platform("org.springframework.data:spring-data-bom:2021.1.0-M2"))
-
     // spring boot
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
@@ -44,6 +42,7 @@ dependencies {
     // GCP logging and metrics
     implementation(enforcedPlatform(libs.spring.cloud.gcp.bom.get()))
     runtimeOnly(libs.bundles.spring.cloud.gcp.basic)
+
     // DevTools
     developmentOnly(libs.spring.boot.devtools)
 
@@ -117,5 +116,8 @@ tasks {
 }
 
 noArg {
+    invokeInitializers = true
+    annotation("micro.apps.model.NoArg")
+    annotation("com.redis.om.spring.annotations.Document")
     annotation("org.springframework.data.redis.core.RedisHash")
 }

@@ -21,5 +21,6 @@ dependencies {
 affectedTestConfiguration { jvmTestTask = "check" }
 
 noArg {
+    invokeInitializers = true
     annotation("micro.apps.model.NoArg")
 }

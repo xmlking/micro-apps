@@ -1,5 +1,7 @@
 # Redis
 
+My Hosted Redis https://app.redislabs.com/#/databases
+
 ## Operations
 
 ### Prerequisites
@@ -25,11 +27,8 @@ docker compose -f infra/redis.yml down -v
 
 Redis db visualization dashboard
 
-> when prompted, use host:redis, port:6379 and name:any_name (no need to enter username/password)
-
-```bash
-open http://localhost:8001/
-```
+Download desktop Redis Insight App from [redis.com](https://redis.com/redis-enterprise/redis-insight/)
+After opening app, connect using host:localhost, port:6379 and name:any_name_is_ok
 
 #### Redis Grafana
 
@@ -67,6 +66,12 @@ XRANGE events - +
 
 ### Data Loading
 
+Sample Data https://github.com/redis-developer/redis-datasets/tree/master/user-database
+
+```bash
+redis-cli -h localhost -p 6379 < apps/entity-service/data/employee.redis
+```
+
 ## Tools
 
 ## Reference
@@ -99,3 +104,6 @@ XRANGE events - +
     - [Microservices with Redis](https://github.com/redis-developer/redis-microservices-demo)
         - Has Streams, Graph and Search
         - Deploy the application on [Kubernetes](https://github.com/redis-developer/redis-microservices-demo/tree/master/kubernetes)
+
+- **Redis Datasets**
+   - Sample [Dataset](https://github.com/redis-developer/redis-datasets)

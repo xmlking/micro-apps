@@ -1,9 +1,10 @@
-version: v1beta1
-
-build:
-  roots:
-    - libs/proto/src/main/proto
-    - libs/proto/src/main/third_party_proto
+version: v1
+name: buf.build/chintha/mapps
+deps:
+  - buf.build/googleapis/googleapis
+# using pgv from local third_party_proto
+#  - buf.build/envoyproxy/protoc-gen-validate
+  - buf.build/srikrsna/protoc-gen-gotag
 
 lint:
   use:

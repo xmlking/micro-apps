@@ -1,5 +1,6 @@
 package micro.apps.service
 
+import com.redis.om.spring.annotations.EnableRedisDocumentRepositories
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import com.redis.om.spring.annotations.EnableRedisEnhancedRepositories
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
 @EnableRedisEnhancedRepositories(basePackages = ["micro.apps.service"]) // HINT without basePackages, index will not be created
+@EnableRedisDocumentRepositories(basePackages = ["micro.apps.service"])
 class RomsHashesApplication {
     @Autowired
     private lateinit var userRepo: UserRepository

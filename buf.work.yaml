@@ -1,0 +1,4 @@
+version: v1
+directories:
+  - libs/proto/src/main/proto
+  - libs/proto/src/main/third_party_proto
