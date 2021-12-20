@@ -1,6 +1,6 @@
-# Kafka
+# Redpanda
 
-we are using **Redpanda** as  **Kafka** broker
+we are using **Redpanda** as drop-in replacement for **Kafka** broker
 
 ## usage
 
@@ -8,11 +8,11 @@ we are using **Redpanda** as  **Kafka** broker
 
 ```bash
 # start redpanda
-docker compose -f infra/redpanda.yml up redpanda
+nerdctl compose -f infra/redpanda.yml up redpanda
 # this will stop redis and remove all volumes (-v to remove volumes)
-docker compose -f infra/redpanda.yml down redpanda -v 
+nerdctl compose -f infra/redpanda.yml down redpanda -v 
 # create topic
-docker compose -f infra/redpanda.yml up topic-creator
+nerdctl compose -f infra/redpanda.yml up topic-creator
 ```
 
 ### Access
@@ -26,7 +26,7 @@ Endpoints are documented with Swagger at http://localhost:8081/v1
 ```bash
 curl -s "http://localhost:8081/schemas/types" | jq .
 ```
-Publish a schema
+Publish a avro schema
 
 ```bash
 curl -s \
@@ -34,6 +34,17 @@ curl -s \
   "http://localhost:8081/subjects/sensor-value/versions" \
   -H "Content-Type: application/vnd.schemaregistry.v1+json" \
   -d '{"schema": "{\"type\":\"record\",\"name\":\"sensor_sample\",\"fields\":[{\"name\":\"timestamp\",\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},{\"name\":\"identifier\",\"type\":\"string\",\"logicalType\":\"uuid\"},{\"name\":\"value\",\"type\":\"long\"}]}"}' \
+  | jq
+```
+
+Import a Protobuf schema with a message called Simple and subject **simple.proto**:
+
+```bash
+curl -s \
+  -X POST \
+  "http://localhost:8081/subjects/simple.proto/versions" \
+  -H "Content-Type: application/json" \
+  -d '{"schema":"syntax = \"proto3\"; message Simple { string id = 1; }","schemaType":"PROTOBUF"}' \
   | jq
 ```
 
@@ -76,6 +87,13 @@ curl -s \
   | jq .
 ```
 
+Schema types
+
+```bash
+curl -s \
+  "http://localhost:8081/schemas/types" \
+  | jq .
+```
 
 
 ## Reference 

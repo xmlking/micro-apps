@@ -16,11 +16,11 @@ brew install redis-developer/tap/riot-gen
 
 ```bash
 # start local redis
-docker compose -f infra/redis.yml up
+nerdctl compose -f infra/redis.yml up
 # stop local redis before restart again
-docker compose -f infra/redis.yml down
+nerdctl compose -f infra/redis.yml down
 # this will stop redis and remove all volumes
-docker compose -f infra/redis.yml down -v 
+nerdctl compose -f infra/redis.yml down -v 
 ```
 
 #### Redis Insight

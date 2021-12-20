@@ -50,6 +50,12 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
+#          startupProbe:
+#            httpGet:
+#              path: /healthz
+#              port: liveness-port
+#            failureThreshold: 30
+#            periodSeconds: 10
           resources:
             requests:
               cpu: 200m

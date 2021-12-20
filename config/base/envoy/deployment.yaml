@@ -35,6 +35,12 @@ spec:
             httpGet:
               path: /server_info
               port: 9901
+          startupProbe:
+            httpGet:
+              path: /server_info
+              port: 9901
+            failureThreshold: 30
+            periodSeconds: 10
           ports:
             - name: admin
               containerPort: 9901

@@ -48,13 +48,13 @@ via docker-compose
 
 ```bash
 # start local redis and grafana 
-docker compose -f infra/redis.yml up
+nerdctl compose -f infra/redis.yml up
 # (Or) start only redis
-docker compose -f infra/redis.yml up redis
+nerdctl compose -f infra/redis.yml up redis
 # stop local redis before restart again
-docker compose -f infra/redis.yml down
+nerdctl compose -f infra/redis.yml down
 # this will stop redis and remove all volumes
-docker compose -f infra/redis.yml down -v 
+nerdctl compose -f infra/redis.yml down -v 
 ```
 
 **Redis Insight:** Redis db visualization dashboard
