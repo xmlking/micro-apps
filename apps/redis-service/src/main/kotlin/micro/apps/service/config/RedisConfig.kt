@@ -11,8 +11,6 @@ import org.springframework.data.redis.core.RedisTemplate
 
 @Configuration
 @OptIn(ExperimentalSerializationApi::class)
-@EnableRedisEnhancedRepositories(basePackages = ["micro.apps.service"]) // HINT without basePackages, index will not be created
-@EnableRedisDocumentRepositories(basePackages = ["micro.apps.service"], considerNestedRepositories= true)
 class RedisConfig {
 
 //    @Bean

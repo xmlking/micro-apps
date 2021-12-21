@@ -3,7 +3,7 @@ package micro.apps.service.domain.account
 import com.ninjasquad.springmockk.MockkBean
 import io.kotest.assertions.withClue
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.test.TestCaseConfig
+import io.kotest.core.test.config.TestCaseConfig
 import io.mockk.Called
 import io.mockk.coEvery
 import io.mockk.coVerify

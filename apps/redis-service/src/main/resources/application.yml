@@ -1,1 +1,5 @@
 spring.application.name: redis-service
+
+
+# debug:true
+logging.level.com.redis.om.spring: DEBUG

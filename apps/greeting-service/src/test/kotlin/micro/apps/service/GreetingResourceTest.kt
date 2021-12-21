@@ -1,7 +1,7 @@
 package micro.apps.service
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.test.TestCaseConfig
+import io.kotest.core.test.config.TestCaseConfig
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType

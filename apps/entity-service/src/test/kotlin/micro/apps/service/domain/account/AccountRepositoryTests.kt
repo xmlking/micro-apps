@@ -1,7 +1,7 @@
 package micro.apps.service.domain.account
 
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.core.test.TestCaseConfig
+import io.kotest.core.test.config.TestCaseConfig
 import io.kotest.matchers.collections.shouldExistInOrder
 import io.kotest.matchers.equality.shouldBeEqualToIgnoringFields
 import io.kotest.matchers.shouldBe

@@ -1,6 +1,8 @@
 package micro.apps.service
 
-import org.springframework.data.repository.CrudRepository
+ import com.redis.om.spring.repository.RedisDocumentRepository
+ import micro.apps.model.Gender
+ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 
@@ -14,3 +16,10 @@ interface UserRepository : CrudRepository<User, String> {
 
 @Repository
 interface RoleRepository : CrudRepository<Role, String>
+
+@Repository
+interface PersonRepository : RedisDocumentRepository<Person, String> {
+    fun findByNameStartsWithIgnoreCase(name: String): List<Person>
+    fun findByGender(gender: Gender): List<Person>
+    fun existsByEmail(email: String): Boolean
+}

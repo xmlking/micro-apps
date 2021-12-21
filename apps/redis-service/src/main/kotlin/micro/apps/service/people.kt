@@ -2,6 +2,7 @@
 
 package micro.apps.service
 
+import com.redis.om.spring.annotations.Bloom
 import com.redis.om.spring.annotations.Document
 import com.redis.om.spring.annotations.Searchable
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -18,7 +19,6 @@ import kotlinx.serialization.encoding.Encoder
 import micro.apps.model.DateAsLongSerializer
 import micro.apps.model.Gender
 import micro.apps.model.LocalDateTimeSerializer
-import micro.apps.model.Name
 import org.springframework.data.annotation.Id
 import org.springframework.data.geo.Point
 import org.springframework.data.redis.core.index.Indexed
@@ -28,38 +28,60 @@ import java.util.*
 import javax.validation.Valid
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.Past
+import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
 // import org.springframework.data.annotation.Transient
 // import org.springframework.data.redis.core.index.GeoIndexed
 // import kotlinx.serialization.Transient as STransient
 
-@ExperimentalSerializationApi
+
+
 @Serializable
+@ExperimentalSerializationApi
 @Document("person")
 data class Person(
     @Id val id: String? = null,
-    @Searchable
+    @Indexed
     val name: Name,
     @Indexed
-    val addresses: Set<Address>? = setOf(),
+    val addresses: Set<Address> = setOf(),
     val gender: Gender?,
     // @Serializable(with = DateAsLongSerializer::class) // @Polymorphic
     val dob: Date?,
-    val email: String? = null,
+    @Indexed
+    @Bloom(name = "bf_person_email", capacity = 100000, errorRate = 0.001)
+    var email: String,
+
     val phone: String? = null,
-    val avatar: String? = "https://www.gravatar.com/avatarr"
+    val avatar: String = "https://www.gravatar.com/avatarr"
 ) {
     fun addAddress(address: Address) {
         (this.addresses as HashSet).add(address)
     }
 }
 
-// HINT: spring-data need no-arg constructor or all properties nullable
-@ExperimentalSerializationApi
 @Serializable
-//@Document("address")
+@ExperimentalSerializationApi
+data class Name(
+    @Searchable
+    @field:NotNull
+    @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "FirstName must contain only letters and numbers")
+    @field:Size(min = 4, max = 26, message = "FirstName must be between {min} and {max} characters")
+    val first: String?,
+
+    @Searchable
+    @field:NotBlank
+    @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "LastName must contain only letters and numbers")
+    val last: String?,
+    val title: String? = null
+)
+
+// HINT: spring-data need no-arg constructor or all properties nullable
+@Serializable
+@ExperimentalSerializationApi
 data class Address(
     @Id val id: String? = null,
     val suite: String? = null,

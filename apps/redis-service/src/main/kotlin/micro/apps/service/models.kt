@@ -32,3 +32,4 @@ data class User(
     @Reference
     val role: Role
 )
+

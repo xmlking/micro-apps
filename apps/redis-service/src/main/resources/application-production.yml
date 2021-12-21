@@ -1,0 +1,5 @@
+# Specify the DNS URI of your Redis cluster.
+spring.redis.host: redis-17814.c238.us-central1-2.gce.cloud.redislabs.com
+spring.redis.port: 17814
+# Specify the access key for your Redis cache.
+spring.redis.password: j6AhTCPn2rbfYTxvDV9R5PJ4MJQlUB4s
