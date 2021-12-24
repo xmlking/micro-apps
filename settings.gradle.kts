@@ -43,7 +43,7 @@ pluginManagement {
         id("org.jetbrains.kotlinx.kover") version "0.4.4"
         id("io.freefair.lombok") version "6.0.0-m2" apply false
         id("org.sonarqube") version "3.3"
-        id("com.diffplug.spotless") version "6.0.5"
+        id("com.diffplug.spotless") version "6.1.0"
         id("org.jetbrains.dokka") version "1.6.0"
         id("com.github.ben-manes.versions") version "0.39.0"
         id("com.diffplug.spotless-changelog") version "2.3.2"
@@ -55,10 +55,10 @@ pluginManagement {
         id("com.google.protobuf") version "0.8.18" apply false
         id("io.quarkus") version "2.6.0.Final" apply false
         // id("org.springframework.boot") version "2.5.4" apply false
-        id("org.springframework.boot") version "2.6.1" apply false
-        id("org.springframework.experimental.aot") version "0.11.0" apply false
+        id("org.springframework.boot") version "2.6.2" apply false
+        id("org.springframework.experimental.aot") version "0.11.1" apply false
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
-        id("org.graalvm.buildtools.native") version "0.9.8" apply false
+        id("org.graalvm.buildtools.native") version "0.9.9" apply false
         id("com.dropbox.affectedmoduledetector") version "0.1.2" apply false
         id("com.avast.gradle.docker-compose") version "0.14.11" apply false
         id("com.github.node-gradle.node") version "3.1.1" apply false
@@ -76,6 +76,7 @@ include(
     ":apps:chat-service",
     ":apps:entity-service",
     ":apps:redis-service",
+    ":apps:streams-service",
     ":apps:entity-webapp",
     ":apps:classifier-pipeline",
     ":apps:ingestion-pipeline",

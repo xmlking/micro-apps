@@ -11,16 +11,17 @@ services:
       - --reserve-memory 0M
       - --node-id 0
       - --check=false
-      - --kafka-addr 0.0.0.0:9092
-      - --advertise-kafka-addr redpanda:9092
+      - --kafka-addr PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
       - --pandaproxy-addr 0.0.0.0:8082
       - --advertise-pandaproxy-addr redpanda:8082
       - --set redpanda.enable_transactions=true
       - --set redpanda.enable_idempotence=true
     ports:
-      - 8081:8081 # schema_registry
-      - 8082:8082
-      - 9092:9092
+      - "8081:8081" # schema_registry
+      - "8082:8082"
+      - "9092:9092"
+      - "29092:29092"
     healthcheck:
       test: ["CMD", "curl", "http://localhost:9644/v1/status/ready"]
       start_period: 0s

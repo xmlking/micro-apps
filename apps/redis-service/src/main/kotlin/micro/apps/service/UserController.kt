@@ -1,7 +1,9 @@
 package micro.apps.service
 
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.redis.core.RedisTemplate
+import com.redis.om.spring.ops.RedisModulesOperations
+import io.redisearch.Document
+import io.redisearch.Query
+import io.redisearch.SearchResult
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -10,19 +12,31 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
+import com.google.gson.Gson
+import kotlinx.serialization.ExperimentalSerializationApi
 
 
+@OptIn(ExperimentalSerializationApi::class)
 @RestController
 @RequestMapping("/api/users")
-class UserController(private val userRepository: UserRepository) {
-//    @Autowired
-//    private val userRepository: UserRepository? = null
-//    @Autowired
-//    private val template: RedisTemplate<String, String>? = null
+class UserController(private val userRepository: UserRepository,  private
+val modulesOperations: RedisModulesOperations<String, String>
+) {
+    var ops = modulesOperations.opsForSearch("PersonIdx")
+    private val gson: Gson = Gson()
 
     @PostMapping("/")
     fun save(@RequestBody user: User): User {
         return userRepository.save(user)
+    }
+
+    @GetMapping("/title")
+    fun findByTitle(@RequestParam title: String): Person? {
+        val result: SearchResult = ops.search(Query("@title:'$title'"))
+        if (result.totalResults > 0) {
+            val doc: Document = result.docs[0]
+            return gson.fromJson(doc.toString(), Person::class.java)
+        } else return null
     }
 
     @GetMapping("/q")

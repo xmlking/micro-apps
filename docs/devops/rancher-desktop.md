@@ -87,7 +87,19 @@ nerdctl compose -f infra/redis.yml down
 nerdctl compose -f infra/redpanda.yml down
 # this will stop redpanda and remove all volumes
 nerdctl compose -f infra/redpanda.yml down -v 
+
 nerdctl compose -f infra/redpanda.yml ps
+# name of the container can be found from output of above command 
+nerdctl exec -it infra_redpanda_1 /bin/bash
+nerdctl exec -it infra_redpanda_1 rpk version
+nerdctl exec -it infra_redpanda_1 rpk topic list
+nerdctl exec -it infra_redpanda_1 rpk cluster info
+
+
+nerdctl exec -it redpanda-1 \
+rpk topic produce twitch_chat --brokers=localhost:9092
+nerdctl exec -it redpanda-1 \
+rpk topic consume twitch_chat --brokers=localhost:9092
 ```
 
 ### Kubernetes

@@ -13,6 +13,25 @@ nerdctl compose -f infra/redpanda.yml up redpanda
 nerdctl compose -f infra/redpanda.yml down redpanda -v 
 # create topic
 nerdctl compose -f infra/redpanda.yml up topic-creator
+
+# debug
+nerdctl compose -f infra/redpanda.yml ps
+# name of the container can be found from output of the above command 
+nerdctl exec -it infra_redpanda_1 /bin/bash
+nerdctl exec -it infra_redpanda_1 rpk version
+nerdctl exec -it infra_redpanda_1 rpk topic list
+nerdctl exec -it infra_redpanda_1 rpk cluster info
+nerdctl exec -it infra_redpanda_1 rpk topic delete state-out-0 city-in-0
+
+# produce
+nerdctl exec -it infra_redpanda_1 rpk topic produce all-in-topic -k my-key
+{"name": "Red", "city": "nuur", "state": "ca"}
+{"name": "Red2", "city": "nuur2", "state": "ca"}
+# or
+nerdctl exec -it infra_redpanda_1 /bin/bash
+echo '{"name": "Red", "city": "nuur", "state": "ca"}' | rpk topic produce all-in-topic -k my-key
+# consume
+nerdctl exec -it infra_redpanda_1 rpk topic consume all-in-topic
 ```
 
 ### Access
