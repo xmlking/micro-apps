@@ -15,14 +15,13 @@ nerdctl exec -it infra_redpanda_1 rpk cluster info
 nerdctl exec -it infra_redpanda_1 rpk topic delete state-out-0 city-in-0
 
 # produce
-nerdctl exec -it infra_redpanda_1 rpk topic produce all-in-topic -k my-key
-{"name": "Red", "city": "nuur", "state": "ca"}
-{"name": "Red2", "city": "nuur2", "state": "ca"}
+nerdctl exec -it infra_redpanda_1 rpk topic produce facts -k my-key
+"hi there"
 # or
 nerdctl exec -it infra_redpanda_1 /bin/bash
-echo '{"name": "Red", "city": "nuur", "state": "ca"}' | rpk topic produce all-in-topic -k my-key
+echo 'hi there' | rpk topic produce facts -k my-key
 # consume
-nerdctl exec -it infra_redpanda_1 rpk topic consume all-in-topic
+nerdctl exec -it infra_redpanda_1 rpk topic consume facts
 ```
 
 Start µService 
@@ -38,12 +37,35 @@ gradle :apps:wordcount-service:bootRun --debug
 ```bash
 http :8080/iq/count/{word}
 http :8080/iq/count/chuck
+http :8080/iq/count/norris
+```
 
-# health
+## Operations
+
+### Metrics
+
+```bash
 http :8080/actuator
+
 http :8080/actuator/health
+
+http :8080/actuator/metrics
+http :8080/actuator/metrics/kafka.admin.client.request.total
+
 http :8080/actuator/bindings
-http :8080/actuator/bindings/state-out-0
+http :8080/actuator/bindings/processWords-in-0
+http :8080/actuator/bindings/produceChuckNorris-out-0
+http :8080/actuator/bindings/consumeCounts-in-0
 ````
+
+### Binding control
+
+```bash
+curl -d '{"state":"STOPPED"}' -H "Content-Type: application/json" -X POST localhost:8080/actuator/bindings/consumeCounts-in-0
+http :8080/actuator/bindings/consumeCounts-in-0
+curl -d '{"state":"STARTED"}' -H "Content-Type: application/json" -X POST localhost:8080/actuator/bindings/consumeCounts-in-0
+curl -d '{"state":"PAUSED"}'  -H "Content-Type: application/json" -X POST localhost:8080/actuator/bindings/consumeCounts-in-0
+curl -d '{"state":"RESUMED"}' -H "Content-Type: application/json" -X POST localhost:8080/actuator/bindings/consumeCounts-in-0
+```
 
 ## Reference

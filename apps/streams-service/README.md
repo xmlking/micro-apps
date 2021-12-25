@@ -36,13 +36,36 @@ gradle :apps:streams-service:bootRun --debug
 ## Test
 
 ```bash
-# health
+
+```
+
+## Operations
+
+### Metrics
+
+```bash
 http :8080/actuator
+
 http :8080/actuator/health
+
+http :8080/actuator/metrics
+http :8080/actuator/metrics/kafka.admin.client.request.total
+
 http :8080/actuator/bindings
 http :8080/actuator/bindings/state-out-0
+http :8080/actuator/bindings/generate-in-0
+http :8080/actuator/bindings/print-in-0
 ````
 
+### Binding control
+
+```bash
+curl -d '{"state":"STOPPED"}' -H "Content-Type: application/json" -X POST localhost:8080/actuator/bindings/print-in-0
+http :8080/actuator/bindings/print-in-0
+curl -d '{"state":"STARTED"}' -H "Content-Type: application/json" -X POST localhost:8080/actuator/bindings/print-in-0
+curl -d '{"state":"PAUSED"}'  -H "Content-Type: application/json" -X POST localhost:8080/actuator/bindings/print-in-0
+curl -d '{"state":"RESUMED"}' -H "Content-Type: application/json" -X POST localhost:8080/actuator/bindings/print-in-0
+```
 
 ### Binders 
 we need add `kafka` binder for `Supplier` functions to work
@@ -63,4 +86,4 @@ implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka-strea
 - https://github.com/spring-cloud/spring-cloud-stream-samples/tree/main/kafka-streams-samples
 - InteractiveQueryService https://github.com/piomin/sample-spring-cloud-stream-kafka/blob/master/stock-service/src/main/java/pl/piomin/samples/kafka/stock/controller/TransactionController.java
 - https://github.com/spring-cloud/spring-cloud-stream-samples/blob/main/kafka-streams-samples/kafka-streams-inventory-count/src/main/java/kafka/streams/inventory/count/KafkaStreamsInventoryCountApplication.java
-
+- https://github.com/ru-rocker/kafka-stream-employee-example
