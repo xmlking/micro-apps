@@ -1,21 +1,29 @@
-# =============== server ===============
+# ========================== server ==========================
 server:
   shutdown: graceful # also set `timeout-per-shutdown-phase`
 
-# =============== management ===============
+# ======================== management ========================
 management.endpoints.web.exposure.include: prometheus,health,info,metrics,bindings
 
-# =============== spring ===============
+# ========================== spring ==========================
 spring:
 
   lifecycle:
     timeout-per-shutdown-phase: "10s"
 
-# =============== spring-cloud-functions ===============
+# ========================== kafka ===========================
+  kafka:
+    properties:
+      # Broker
+      bootstrap.servers: localhost:9092
+      # Schema Registry
+      schema.registry.url: http://localhost:8081
+
+# ================= spring-cloud-functions ===================
 spring.cloud.function:
   definition: generate;city;state;print
 
-# =============== spring-cloud-stream ===============
+# ================= spring-cloud-stream ======================
 spring.cloud.stream:
   bindings:
     generate-out-0.destination: all-in-topic
@@ -25,30 +33,24 @@ spring.cloud.stream:
     state-out-0.destination: state-out-topic
     print-in-0.destination: city-out-topic,state-out-topic
 
-# =============== spring-cloud-stream kafka binder ====
+# =========== spring-cloud-stream kafka-binder================
 # default producer config for all kafka binder bindings.
   kafka.binder:
-    producerProperties:
+    producer-properties:
       key.serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
 #      value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
-#      schema.registry.url: http://localhost:8081
 
-# =============== spring-cloud-stream kStreams binder ====
+# ============ spring-cloud-stream kstreams-binder============
   kafka.streams.binder:
-    brokers: localhost:9092
-#    auto-create-topics: true
-#    auto-add-partitions: true
-#    min-partition-count: 4
+    deserialization-exception-handler: logAndContinue
     configuration:
-      schema.registry.url: http://localhost:8081
       specific.avro.reader: true
       default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 #      default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 #      value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
-    deserializationExceptionHandler: logAndContinue
 
-# =============== spring-cloud-stream kStreams bindings ====
+# =========== spring-cloud-stream kStreams-bindings===========
 #  kafka.streams.bindings:
 #    city-in-0.consumer:
 #      key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde

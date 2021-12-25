@@ -1,0 +1,46 @@
+# ========================== server ==========================
+server:
+  shutdown: graceful # also set `timeout-per-shutdown-phase`
+
+# ======================== management ========================
+management.endpoints.web.exposure.include: prometheus,health,info,metrics,bindings
+
+# ========================== spring ==========================
+spring:
+
+  lifecycle:
+    timeout-per-shutdown-phase: "10s"
+
+# ========================== kafka ===========================
+  kafka:
+    properties:
+      # Broker
+      bootstrap.servers: localhost:9092
+      # Schema Registry
+      schema.registry.url: http://localhost:8081
+
+# ================= spring-cloud-functions ===================
+spring.cloud.function:
+  definition: produceChuckNorris;processWords;consumeCounts
+
+# ================= spring-cloud-stream ======================
+spring.cloud.stream:
+  bindings:
+    produceChuckNorris-out-0.destination: facts
+    processWords-in-0.destination: facts
+    processWords-out-0.destination: counts
+    consumeCounts-in-0.destination: counts
+
+# =========== spring-cloud-stream kafka-binder================
+# default producer config for all kafka binder bindings.
+  kafka.binder:
+    producer-properties:
+      key.serializer: org.apache.kafka.common.serialization.StringSerializer
+
+# ============ spring-cloud-stream kstreams-binder============
+  kafka.streams.binder:
+    deserialization-exception-handler: logAndContinue
+    configuration:
+      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      default.value.serde: org.apache.kafka.common.serialization.Serdes$BytesSerde
+      commit.interval.ms: 1000

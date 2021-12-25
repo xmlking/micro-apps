@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.function.context.PollableBean
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.integration.support.MessageBuilder
 import org.springframework.kafka.support.KafkaHeaders
 import org.springframework.messaging.Message
@@ -15,24 +14,10 @@ import java.util.function.Consumer
 import java.util.function.Function
 import java.util.function.Supplier
 
-
 private val logger = KotlinLogging.logger {}
 
 @SpringBootApplication
-class StreamsApplication
-
-fun main(args: Array<String>) {
-    runApplication<StreamsApplication>(*args)
-}
-
-data class MyModel(
-    var name: String? = null,
-    var city: String? = null,
-    var state: String? = null
-)
-
-@Configuration
-class KafkaConfiguration {
+class StreamsApplication {
 
     /* Alternative to  @PollableBean
     @Bean
@@ -51,7 +36,7 @@ class KafkaConfiguration {
      * `spring-cloud-stream-binder-kafka-streams`
      * you can only use `Consumer` and `Function` with the streams binder.
      */
-    @PollableBean
+    @Bean
     fun generate(): Supplier<Message<MyModel>> = Supplier {
         MessageBuilder.withPayload(MyModel(UUID.randomUUID().toString(), "Paradise", "CA"))
             .setHeader(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString())
@@ -96,3 +81,13 @@ class KafkaConfiguration {
     }
     */
 }
+
+fun main(args: Array<String>) {
+    runApplication<StreamsApplication>(*args)
+}
+
+data class MyModel(
+    var name: String? = null,
+    var city: String? = null,
+    var state: String? = null
+)

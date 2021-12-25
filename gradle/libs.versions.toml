@@ -80,6 +80,10 @@ springGrpc = "4.5.5"
 springCloud = "2021.0.0"
 springCloudGcp = "2.0.5"
 
+# kafka
+kafkaStreams = "3.0.0"
+javaFaker = "1.0.2"
+
 # google
 googlePubsub = "1.115.0"
 

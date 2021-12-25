@@ -23,4 +23,6 @@ affectedTestConfiguration { jvmTestTask = "check" }
 noArg {
     invokeInitializers = true
     annotation("micro.apps.model.NoArg")
+    annotation("com.redis.om.spring.annotations.Document")
+    annotation("org.springframework.data.redis.core.RedisHash")
 }
