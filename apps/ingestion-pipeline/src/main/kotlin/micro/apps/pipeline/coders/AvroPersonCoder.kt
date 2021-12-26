@@ -1,7 +1,8 @@
 package micro.apps.pipeline.coders
 
-import com.sksamuel.avro4k.Avro
-import com.sksamuel.avro4k.io.AvroFormat
+import com.github.avrokotlin.avro4k.Avro
+import com.github.avrokotlin.avro4k.io.AvroDecodeFormat
+import com.github.avrokotlin.avro4k.io.AvroEncodeFormat
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Person
 import org.apache.beam.sdk.coders.CustomCoder
@@ -20,7 +21,7 @@ class AvroPersonCoder : CustomCoder<Person>() {
     @Throws(IOException::class)
     override fun encode(value: Person, outStream: OutputStream) {
         Avro.default.openOutputStream(serializer) {
-            format = AvroFormat.BinaryFormat
+            encodeFormat = AvroEncodeFormat.Data() // Other Options: AvroEncodeFormat.Binary(), AvroEncodeFormat.Json()
             this.schema = personSchema
         }.to(outStream).write(value).close()
     }
@@ -28,8 +29,8 @@ class AvroPersonCoder : CustomCoder<Person>() {
     @Throws(IOException::class)
     override fun decode(inStream: InputStream): Person {
         return Avro.default.openInputStream(serializer) {
-            format = AvroFormat.BinaryFormat
-            writerSchema = personSchema
+            decodeFormat =
+                AvroDecodeFormat.Data(personSchema) // Other Options: AvroDecodeFormat.Binary(), AvroDecodeFormat.Json()
         }.from(inStream).nextOrThrow()
     }
 }

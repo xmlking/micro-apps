@@ -1,7 +1,8 @@
 package micro.apps.pipeline
 
-import com.sksamuel.avro4k.Avro
-import com.sksamuel.avro4k.io.AvroFormat
+import com.github.avrokotlin.avro4k.Avro
+import com.github.avrokotlin.avro4k.io.AvroDecodeFormat
+import com.github.avrokotlin.avro4k.io.AvroEncodeFormat
 import io.kotest.core.spec.style.FunSpec
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Person
@@ -19,7 +20,7 @@ class SerializationTest : FunSpec({
         val schema = Avro.default.schema(serializer)
         println(schema)
         val output = Avro.default.openOutputStream(serializer) {
-            format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
+            encodeFormat = AvroEncodeFormat.Data() // Other Options: AvroEncodeFormat.Binary(), AvroEncodeFormat.Json()
             this.schema = schema
         }.to("./apps/classifier-pipeline/src/test/resources/data/person.avro")
         output.write(persons)
@@ -30,8 +31,7 @@ class SerializationTest : FunSpec({
         val serializer = Person.serializer()
         val schema = Avro.default.schema(serializer)
         val input = Avro.default.openInputStream(serializer) {
-            format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
-            writerSchema = schema
+            decodeFormat = AvroDecodeFormat.Data(schema) // Other Options: AvroDecodeFormat.Binary(), AvroDecodeFormat.Json()
         }.from(javaClass.getResourceAsStream("/data/person.avro"))
         input.iterator().forEach { println(it) }
         input.close()

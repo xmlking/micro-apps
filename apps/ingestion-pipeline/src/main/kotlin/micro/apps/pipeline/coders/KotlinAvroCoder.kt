@@ -1,7 +1,7 @@
 package micro.apps.pipeline.coders
 
-import com.sksamuel.avro4k.Avro
-import com.sksamuel.avro4k.io.AvroFormat
+import com.github.avrokotlin.avro4k.Avro
+import com.github.avrokotlin.avro4k.io.AvroEncodeFormat
 import kotlinx.serialization.KSerializer
 import org.apache.beam.sdk.coders.CoderException
 import org.apache.beam.sdk.coders.CustomCoder
@@ -19,7 +19,7 @@ class KotlinAvroCoder<T> : CustomCoder<T>() where T : KSerializable<T> {
     override fun encode(value: T, outStream: OutputStream) {
         val serializer = value.serializer()
         Avro.default.openOutputStream(serializer) {
-            format = AvroFormat.DataFormat
+            encodeFormat = AvroEncodeFormat.Data() // Other Options: AvroEncodeFormat.Binary(), AvroEncodeFormat.Json()
         }.to(outStream).write(value).close()
     }
 

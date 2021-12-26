@@ -4,7 +4,6 @@ import mu.KotlinLogging
 import org.apache.kafka.streams.kstream.KStream
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.cloud.function.context.PollableBean
 import org.springframework.context.annotation.Bean
 import org.springframework.integration.support.MessageBuilder
 import org.springframework.kafka.support.KafkaHeaders
@@ -13,6 +12,7 @@ import java.util.*
 import java.util.function.Consumer
 import java.util.function.Function
 import java.util.function.Supplier
+import micro.apps.model.MyModel
 
 private val logger = KotlinLogging.logger {}
 
@@ -85,9 +85,3 @@ class StreamsApplication {
 fun main(args: Array<String>) {
     runApplication<StreamsApplication>(*args)
 }
-
-data class MyModel(
-    var name: String? = null,
-    var city: String? = null,
-    var state: String? = null
-)

@@ -1,8 +1,9 @@
 package micro.apps.pipeline.transforms
 
+import com.github.avrokotlin.avro4k.Avro
+import com.github.avrokotlin.avro4k.io.AvroDecodeFormat
+import com.github.avrokotlin.avro4k.io.AvroEncodeFormat
 import com.google.common.collect.ImmutableMap
-import com.sksamuel.avro4k.Avro
-import com.sksamuel.avro4k.io.AvroFormat
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Person
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubMessage
@@ -11,11 +12,10 @@ import java.io.ByteArrayOutputStream
 
 @ExperimentalSerializationApi
 class PubsubToPerson : SimpleFunction<PubsubMessage, Person>() {
-    @ExperimentalSerializationApi
     override fun apply(input: PubsubMessage): Person {
         return Avro.default.openInputStream(Person.serializer()) {
-            format = AvroFormat.BinaryFormat
-            writerSchema = Avro.default.schema(Person.serializer())
+            decodeFormat =
+                AvroDecodeFormat.Data(Avro.default.schema(Person.serializer())) // Other Options: AvroDecodeFormat.Binary(), AvroDecodeFormat.Json()
         }.from(input.payload).nextOrThrow()
     }
 }
@@ -29,7 +29,7 @@ class PersonToPubsub(private val attributes: Map<String, String> = ImmutableMap.
     override fun apply(input: Person): PubsubMessage {
         val baos = ByteArrayOutputStream()
         Avro.default.openOutputStream(serializer) {
-            format = AvroFormat.BinaryFormat
+            encodeFormat = AvroEncodeFormat.Data() // Other Options: AvroEncodeFormat.Binary(), AvroEncodeFormat.Json()
             this.schema = personSchema
         }.to(baos).write(input).close()
         val data = baos.toByteArray()

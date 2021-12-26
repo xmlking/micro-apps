@@ -3,7 +3,7 @@ server:
   shutdown: graceful # also set `timeout-per-shutdown-phase`
 
 # ======================== management ========================
-management.endpoints.web.exposure.include: prometheus,health,info,metrics,bindings
+management.endpoints.web.exposure.include: prometheus,health,info,metrics,bindings,kafkastreamstopology
 
 # ========================== spring ==========================
 spring:
@@ -26,7 +26,9 @@ spring.cloud.function:
 # ================= spring-cloud-stream ======================
 spring.cloud.stream:
   bindings:
-    generate-out-0.destination: all-in-topic
+    generate-out-0:
+      destination: all-in-topic
+      producer.useNativeEncoding: true
     city-in-0.destination: all-in-topic
     city-out-0.destination: city-out-topic
     state-in-0.destination: all-in-topic
@@ -38,31 +40,13 @@ spring.cloud.stream:
   kafka.binder:
     producer-properties:
       key.serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-#      value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
+      value.serializer: com.github.thake.kafka.avro4k.serializer.KafkaAvro4kSerializer
+      record.packages: micro.apps.service
 
 # ============ spring-cloud-stream kstreams-binder============
   kafka.streams.binder:
     deserialization-exception-handler: logAndContinue
     configuration:
-      specific.avro.reader: true
+      record.packages: micro.apps.service
       default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-#      default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-#      value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
-
-# =========== spring-cloud-stream kStreams-bindings===========
-#  kafka.streams.bindings:
-#    city-in-0.consumer:
-#      key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-#      values.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-#    city-out-0.producer:
-#      key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-#      values.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-#    state-in-0.consumer:
-#      key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-#      values.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-#    state-out-0.producer:
-#      key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-#      values.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-
-
+      default.value.serde: com.github.thake.kafka.avro4k.serializer.Avro4kSerde

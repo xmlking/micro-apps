@@ -6,7 +6,8 @@ spek = "2.0.11"
 kotest = "5.0.3"
 junit = "5.8.2"
 serialization = "1.3.2"
-avro4k = "0.41.0"
+avro4k = "1.5.0"
+avro4kSerde = "0.13.0"
 kaml = "0.17.0"
 coroutines = "1.6.0"
 metadata = "0.3.0"
@@ -115,7 +116,7 @@ kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", versi
 kotlin-metadata = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm", version.ref = "metadata" }
 # Kotlin serialization dependencies
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
-kotlinx-serialization-avro = { module = "com.sksamuel.avro4k:avro4k-core", version.ref = "avro4k" }
+kotlinx-serialization-avro = { module = "com.github.avro-kotlin.avro4k:avro4k-core", version.ref = "avro4k" }
 kotlinx-serialization-yaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
 kotlinx-serialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf", version.ref = "serialization" }
 # Kotlin coroutines dependencies

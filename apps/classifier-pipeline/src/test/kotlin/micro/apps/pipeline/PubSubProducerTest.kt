@@ -1,9 +1,9 @@
 package micro.apps.pipeline
 
+import com.github.avrokotlin.avro4k.Avro
 import com.google.api.gax.rpc.ApiException
 import com.google.api.gax.rpc.StatusCode.Code.ALREADY_EXISTS
 import com.google.common.collect.ImmutableMap
-import com.sksamuel.avro4k.Avro
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.kbeam.transforms.AvroToPubsub
 import micro.apps.model.Person

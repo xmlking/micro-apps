@@ -4,7 +4,7 @@
 package micro.apps.pipeline
 
 /* ktlint-disable no-wildcard-imports */
-import com.sksamuel.avro4k.Avro
+import com.github.avrokotlin.avro4k.Avro
 import micro.apps.core.LogDefinition.Companion.config
 import micro.apps.kbeam.*
 import micro.apps.kbeam.coders.AvroToPubsub

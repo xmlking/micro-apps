@@ -2,8 +2,9 @@ package micro.apps.model
 
 // import com.charleskorn.kaml.Yaml
 // import com.charleskorn.kaml.YamlConfiguration
-import com.sksamuel.avro4k.Avro
-import com.sksamuel.avro4k.io.AvroFormat
+import com.github.avrokotlin.avro4k.Avro
+import com.github.avrokotlin.avro4k.io.AvroDecodeFormat
+import com.github.avrokotlin.avro4k.io.AvroEncodeFormat
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.config.TestCaseConfig
 import io.kotest.matchers.shouldBe
@@ -19,7 +20,6 @@ import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
 
 @Serializable
 data class Ingredient(val name: String, val sugar: Double, val fat: Double)
@@ -89,7 +89,7 @@ class SerializationTest : FunSpec({
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
         val output = Avro.default.openOutputStream(serializer) {
-            format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
+            encodeFormat = AvroEncodeFormat.Data() // Other Options: AvroEncodeFormat.Binary(), AvroEncodeFormat.Json()
             this.schema = schema
         }.to("./libs/model/src/test/resources/data/pizzas.avro")
         output.write(listOf(veg, hawaiian))
@@ -100,8 +100,8 @@ class SerializationTest : FunSpec({
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
         val input = Avro.default.openInputStream(serializer) {
-            format = AvroFormat.DataFormat // Other Options: AvroFormat.BinaryFormat, AvroFormat.JsonFormat
-            writerSchema = schema
+            decodeFormat =
+                AvroDecodeFormat.Data(schema) // Other Options: AvroDecodeFormat.Binary(), AvroDecodeFormat.Json()
         }.from(javaClass.getResourceAsStream("/data/pizzas.avro"))
         println(input.nextOrThrow()) // get first only
         input.iterator().forEach { println(it) } // get all
@@ -112,8 +112,7 @@ class SerializationTest : FunSpec({
         val serializer = Pizza.serializer()
         val schema = Avro.default.schema(serializer)
         val input = Avro.default.openInputStream() {
-            format = AvroFormat.DataFormat
-            readerSchema = schema
+            decodeFormat = AvroDecodeFormat.Data(schema)
         }.from(javaClass.getResourceAsStream("/data/pizzas.avro"))
         input.iterator().forEach { println(it as GenericRecord) }
         input.close()

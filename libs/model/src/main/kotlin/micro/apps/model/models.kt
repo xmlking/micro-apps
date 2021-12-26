@@ -2,8 +2,6 @@
 
 package micro.apps.model
 
-import com.sksamuel.avro4k.AvroFixed
-import com.sksamuel.avro4k.AvroProp
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -36,6 +34,12 @@ import javax.validation.constraints.Past
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 import java.io.Serializable as JavaSerializable
+import com.github.avrokotlin.avro4k.AvroDefault
+import com.github.avrokotlin.avro4k.Avro
+import com.github.avrokotlin.avro4k.AvroAliases
+import com.github.avrokotlin.avro4k.AvroEnumDefault
+import com.github.avrokotlin.avro4k.AvroFixed
+import com.github.avrokotlin.avro4k.AvroProp
 
 // ----------------
 //  for Kotlin Gradle NoArg plugin
@@ -61,6 +65,7 @@ data class Fruit(var name: String = "", var description: String = "")
 data class Greeting(val message: String = "")
 
 @Serializable
+@AvroEnumDefault("UNKNOWN")
 enum class Gender {
     UNKNOWN, MALE, FEMALE;
 
@@ -69,8 +74,8 @@ enum class Gender {
     fun isFemale(): Boolean = this == FEMALE
 }
 
-@ExperimentalSerializationApi
 @Serializable
+@ExperimentalSerializationApi
 @AvroProp("pii", "yes")
 data class Name(
     @field:NotNull
@@ -83,8 +88,8 @@ data class Name(
     @ProtoNumber(3) val title: String? = null
 )
 
-@ExperimentalSerializationApi
 @Serializable
+@ExperimentalSerializationApi
 @AvroProp("pii", "yes")
 data class Address(
     @ProtoNumber(1) val suite: String? = null,
@@ -98,23 +103,33 @@ data class Address(
 )
 
 @Serializable
-@kotlinx.serialization.ExperimentalSerializationApi
+@AvroAliases(["account"])
+@ExperimentalSerializationApi
 data class Person(
     @ProtoNumber(1) @AvroProp("pii", "yes") val id: String = "",
-    @ProtoNumber(2) val name: Name,
+    @ProtoNumber(2) @AvroDefault("hello") @AvroProp("sensitive", "true") val name: Name,
     @ProtoNumber(3) val addresses: Set<Address>? = setOf(),
-    @ProtoNumber(4) @AvroProp("pii", "yes") val gender: Gender,
+    @ProtoNumber(4) @AvroProp("pii", "yes") @AvroDefault("UNKNOWN") val gender: Gender,
     @field:Min(value = 18, message = "age must be at least {value}")
     @ProtoNumber(5) @AvroProp("pii", "yes") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
     // @Serializable(with = DateAsLongSerializer::class) // @Polymorphic
     @field:Past(message = "invalid DOB: {value}")
-    @ProtoNumber(6) @AvroProp("pii", "yes") val dob: LocalDateTime?,
+    @ProtoNumber(6)  @AvroDefault(Avro.NULL) @AvroProp("pii", "yes") val dob: LocalDateTime?,
     @field:Email(message = "Email should be valid")
     @ProtoNumber(7) @AvroProp("encrypted", "yes") val email: String? = null,
     @ProtoNumber(8) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String? = null,
     @ProtoNumber(9) val avatar: String = "https://www.gravatar.com/avatar", // Optional
     @Transient val valid: Boolean = false // not serialized: explicitly transient
 )
+
+@Serializable
+@ExperimentalSerializationApi
+data class MyModel(
+    @AvroProp("sensitive", "true") var name: String? = null,
+    var city: String? = null,
+    var state: String? = null
+)
+
 
 // *** Example  KSerializer for 3rd party classes ***//
 

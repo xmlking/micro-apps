@@ -1,6 +1,6 @@
 package micro.apps.pipeline.transforms
 
-import com.sksamuel.avro4k.Avro
+import com.github.avrokotlin.avro4k.Avro
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Person
 import micro.apps.pipeline.IngestionOptions

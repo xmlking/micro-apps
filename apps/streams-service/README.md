@@ -23,6 +23,7 @@ nerdctl exec -it infra_redpanda_1 /bin/bash
 echo '{"name": "Red", "city": "nuur", "state": "ca"}' | rpk topic produce all-in-topic -k my-key
 # consume
 nerdctl exec -it infra_redpanda_1 rpk topic consume all-in-topic
+nerdctl exec -it infra_redpanda_1 rpk topic consume state-out-topic
 ```
 
 Start µService 
@@ -36,6 +37,9 @@ gradle :apps:streams-service:bootRun --debug
 ## Test
 
 ```bash
+curl -s \
+  "http://localhost:8081/subjects/all-in-topic-value/versions/1" \
+  | jq .
 
 ```
 
@@ -55,6 +59,12 @@ http :8080/actuator/bindings
 http :8080/actuator/bindings/state-out-0
 http :8080/actuator/bindings/generate-in-0
 http :8080/actuator/bindings/print-in-0
+
+http :8080/actuator/kafkastreamstopology
+http :8080/actuator/kafkastreamstopology/<application-id of the processor>
+http :8080/actuator/kafkastreamstopology/state-applicationId
+http :8080/actuator/kafkastreamstopology/city-applicationId
+http :8080/actuator/kafkastreamstopology/print-applicationId
 ````
 
 ### Binding control
@@ -80,7 +90,7 @@ implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka-strea
 - [Fictional Spring Cloud Streams](https://github.com/spring-cloud/spring-cloud-stream/blob/main/docs/src/main/asciidoc/spring-cloud-stream.adoc#functions-with-multiple-input-and-output-arguments)
 - [Introducing Java Functions for Spring Cloud Stream Applications - Part 0](https://spring.io/blog/2020/07/13/introducing-java-functions-for-spring-cloud-stream-applications-part-0)
 - [spring-cloud-stream-binder-kafka Docs](https://cloud.spring.io/spring-cloud-static/spring-cloud-stream-binder-kafka/)
-
+- [No need for Schema Registry in your Spring-Kafka tests](https://medium.com/@igorvlahek1/no-need-for-schema-registry-in-your-spring-kafka-tests-a5b81468a0e1)
 ### Example projects 
 - https://github.com/spring-cloud/spring-cloud-stream-samples/
 - https://github.com/spring-cloud/spring-cloud-stream-samples/tree/main/kafka-streams-samples
