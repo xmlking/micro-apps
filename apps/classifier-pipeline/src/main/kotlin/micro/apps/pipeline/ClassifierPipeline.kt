@@ -53,10 +53,8 @@ object ClassifierPipeline {
                     .discardingFiredPanes()
                     .withAllowedLateness(Duration.standardSeconds(300))
             )
-
             .apply("convert Pubsub to GenericRecord", MapElements.via(PubsubToAvro(schema)))
             .setCoder(AvroCoder.of(schema))
-
             .parDo<GenericRecord, GenericRecord>("decrypt and enrich record") {
                 println(element)
                 println(timestamp)

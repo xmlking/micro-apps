@@ -20,6 +20,7 @@ mapstruct = "1.4.2.Final"
 markdown = "0.1.45"
 javafaker = "1.0.2"
 validation = "2.0.1.Final"
+kotlinRetry = "1.0.9"
 
 # gradle
 gradleTool = "7.3.3"

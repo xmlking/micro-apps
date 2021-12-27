@@ -1,10 +1,10 @@
 package micro.apps.service
 
- import com.redis.om.spring.repository.RedisDocumentRepository
- import micro.apps.model.Gender
- import org.springframework.data.repository.CrudRepository
+import com.redis.om.spring.repository.RedisDocumentRepository
+import micro.apps.model.Gender
+import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
-import java.util.*
+import java.util.Optional
 
 @Repository
 interface UserRepository : CrudRepository<User, String> {

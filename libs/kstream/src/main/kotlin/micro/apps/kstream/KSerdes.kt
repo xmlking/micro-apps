@@ -18,11 +18,9 @@ object KSerdes {
     inline fun <reified K, reified V> consumedWith(): Consumed<K, V> =
         Consumed.with(serdeFrom(K::class.java), serdeFrom(V::class.java))
 
-
     @KStreamsDsl
     inline fun <reified K, reified V> producedWith(): Produced<K, V> =
         Produced.with(serdeFrom(K::class.java), serdeFrom(V::class.java))
-
 
     @KStreamsDsl
     inline fun <reified K, V> producedWith(serde: Serde<V>): Produced<K, V> =

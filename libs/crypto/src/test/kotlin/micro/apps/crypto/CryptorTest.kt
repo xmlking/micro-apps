@@ -50,5 +50,4 @@ class CryptorTest : FunSpec({
         val plaintext2 = cryptor.decrypt(ciphertext)
         plaintext2 shouldBe plaintext
     }
-
 })

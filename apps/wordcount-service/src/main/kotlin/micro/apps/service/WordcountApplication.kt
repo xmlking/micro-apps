@@ -6,7 +6,6 @@ import micro.apps.kstream.KSerdes.producedWith
 import mu.KotlinLogging
 import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.kstream.KStream
-import org.apache.kafka.streams.kstream.TimeWindows
 import org.apache.kafka.streams.state.QueryableStoreTypes.keyValueStore
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -18,8 +17,8 @@ import org.springframework.messaging.Message
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
-import java.time.Duration.ofMinutes
-import java.util.*
+import java.util.Locale
+import java.util.UUID
 import java.util.function.Consumer
 import java.util.function.Function
 import java.util.function.Supplier
@@ -54,11 +53,10 @@ class WordcountApplication {
             // .windowedBy(TimeWindows.ofSizeWithNoGrace(ofMinutes(5)).advanceBy(ofMinutes(1))) // // hopping-windows
             .count(materialized("word-count-state-store"))
             .toStream()
-
             .peek { k, v -> logger.info("PROCESSES COUNTS: {}, {}", k, v) }
 
-            // .peek { k, v -> logger.info("PROCESSES COUNTS: {}, {}, {}, {}", k.key(), v, k.window().start(), k.window().end()) }
-            // .map { k, v -> KeyValue(k.key(), v) } // unwrap key: Windowed<String>
+        // .peek { k, v -> logger.info("PROCESSES COUNTS: {}, {}, {}, {}", k.key(), v, k.window().start(), k.window().end()) }
+        // .map { k, v -> KeyValue(k.key(), v) } // unwrap key: Windowed<String>
 
         countsStream.to("counts", producedWith<String, Long>())
         countsStream

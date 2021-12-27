@@ -162,11 +162,11 @@ sonarqube {
 
 // Kotlin Code Coverage Reporing
 kover {
-    isEnabled = true                        // false to disable instrumentation of all test tasks in all modules
+    isEnabled = true // false to disable instrumentation of all test tasks in all modules
     coverageEngine.set(kotlinx.kover.api.CoverageEngine.INTELLIJ) // change instrumentation agent and reporter
     // intellijEngineVersion.set("1.0.622")    // change version of IntelliJ agent and reporter
-    jacocoEngineVersion.set(jacocoVersion)  // change version of JaCoCo agent and reporter
-    generateReportOnCheck.set(true)         // false to do not execute `koverReport` task before `check` task
+    jacocoEngineVersion.set(jacocoVersion) // change version of JaCoCo agent and reporter
+    generateReportOnCheck.set(true) // false to do not execute `koverReport` task before `check` task
 }
 
 // HINT: add this like to all subprojects that depends on dockerCompose
@@ -573,7 +573,6 @@ tasks {
             }
         }
     }
-
 }
 
 // Define Custom Task

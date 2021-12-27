@@ -21,7 +21,7 @@ dependencies {
     implementation(project(":libs:model"))
     implementation(project(":libs:service"))
 
-    //implementation(platform("org.springframework.data:spring-data-bom:2021.1.0-M2"))
+    // implementation(platform("org.springframework.data:spring-data-bom:2021.1.0-M2"))
 
     // spring boot
     implementation(libs.bundles.spring.basic)

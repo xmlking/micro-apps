@@ -24,8 +24,8 @@ dependencies {
     testImplementation(libs.spring.boot.reactor.test)
 
     // java faker for data generation FIXME https://github.com/DiUS/java-faker/issues/327
-    implementation("com.github.javafaker:javafaker:$javaFakerVersion"){ exclude(module = "org.yaml") }
-    implementation( "org.yaml:snakeyaml:1.26")
+    implementation("com.github.javafaker:javafaker:$javaFakerVersion") { exclude(module = "org.yaml") }
+    implementation("org.yaml:snakeyaml:1.26")
 
     // spring-cloud bom
     implementation(enforcedPlatform(libs.spring.cloud.bom.get()))

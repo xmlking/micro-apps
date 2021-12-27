@@ -1,12 +1,11 @@
 package micro.apps.service
 
 import com.redis.om.spring.annotations.Bloom
+import com.redis.om.spring.annotations.Searchable
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Reference
 import org.springframework.data.redis.core.RedisHash
 import org.springframework.data.redis.core.index.Indexed
-
-import com.redis.om.spring.annotations.Searchable
 
 @RedisHash
 data class Role(
@@ -32,4 +31,3 @@ data class User(
     @Reference
     val role: Role
 )
-

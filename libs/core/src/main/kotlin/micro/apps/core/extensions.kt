@@ -6,7 +6,8 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAdjusters
-import java.util.*
+import java.util.Date
+import java.util.Optional
 
 /**
  * Format an Instant as an ISO8601 timestamp
@@ -45,10 +46,9 @@ fun <T : Any> T?.whenNull(callback: () -> Unit) {
  */
 fun dateOf(year: Int, month: Int, day: Int): Date = Date.from(LocalDate.of(year, month, day).atStartOfDay(ZoneId.of("America/Los_Angeles")).toInstant())
 
-
 /**
  * convert java.util.Optional to kotlin Nullable and vice versa
  * val msg: Something? = optional.toNullable()  // the type is enforced
  */
-fun <T : Any> Optional<T>.toNullable(): T? = orElse(null);
+fun <T : Any> Optional<T>.toNullable(): T? = orElse(null)
 fun <T : Any> T?.toOptional(): Optional<T> = Optional.ofNullable(this)

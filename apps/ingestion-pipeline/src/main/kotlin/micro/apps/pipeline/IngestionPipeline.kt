@@ -5,7 +5,7 @@ import micro.apps.kbeam.PipeBuilder
 import micro.apps.kbeam.toList
 import micro.apps.kbeam.transforms.AvroToPubsub
 import micro.apps.kbeam.transforms.PubsubToAvro
-//import micro.apps.proto.common.v1.person
+// import micro.apps.proto.common.v1.person
 import micro.apps.pipeline.transforms.EnrichFn
 import mu.KotlinLogging
 import org.apache.avro.Schema
@@ -56,7 +56,7 @@ object IngestionPipeline {
             input = pipe
                 .apply(
                     "Read new Data from PubSub",
-                    //PubsubIO.readProtos(person::class.java)
+                    // PubsubIO.readProtos(person::class.java)
                     PubsubIO.readMessagesWithAttributes().fromSubscription(options.inputSubscription)
                 )
                 .apply(

@@ -1,9 +1,11 @@
 package micro.apps.service
 
+import com.google.gson.Gson
 import com.redis.om.spring.ops.RedisModulesOperations
 import io.redisearch.Document
 import io.redisearch.Query
 import io.redisearch.SearchResult
+import kotlinx.serialization.ExperimentalSerializationApi
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -11,17 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
-import com.google.gson.Gson
-import kotlinx.serialization.ExperimentalSerializationApi
-
+import java.util.Optional
 
 @OptIn(ExperimentalSerializationApi::class)
 @RestController
 @RequestMapping("/api/users")
-class UserController(private val userRepository: UserRepository,  private
-val modulesOperations: RedisModulesOperations<String, String>
-) {
+class UserController(private val userRepository: UserRepository, private val modulesOperations: RedisModulesOperations<String, String>) {
     var ops = modulesOperations.opsForSearch("PersonIdx")
     private val gson: Gson = Gson()
 

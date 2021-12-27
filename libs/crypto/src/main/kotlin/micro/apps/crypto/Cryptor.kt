@@ -13,7 +13,6 @@ import java.io.File
 import java.io.IOException
 import java.security.GeneralSecurityException
 
-
 interface Cryptor {
     var aead: Aead // abstract property
 
@@ -76,7 +75,6 @@ class CryptorImpl @Throws(IOException::class, GeneralSecurityException::class) c
         // Register all AEAD key types with to Tink runtime.
         AeadConfig.register()
 
-
         val handle: KeysetHandle = if (useKms) {
             logger.info("Creating GcpKmsClient with kekUri={}, credentialFile={}", kekUri, credentialFile)
 
@@ -128,7 +126,5 @@ class CryptorImpl @Throws(IOException::class, GeneralSecurityException::class) c
             logger.error("Cannot create primitive", ex)
             throw ex
         }
-
     }
-
 }

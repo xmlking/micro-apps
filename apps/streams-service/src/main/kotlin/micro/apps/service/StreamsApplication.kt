@@ -1,5 +1,7 @@
 package micro.apps.service
 
+import kotlinx.serialization.ExperimentalSerializationApi
+import micro.apps.model.MyModel
 import mu.KotlinLogging
 import org.apache.kafka.streams.kstream.KStream
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -8,14 +10,14 @@ import org.springframework.context.annotation.Bean
 import org.springframework.integration.support.MessageBuilder
 import org.springframework.kafka.support.KafkaHeaders
 import org.springframework.messaging.Message
-import java.util.*
+import java.util.UUID
 import java.util.function.Consumer
 import java.util.function.Function
 import java.util.function.Supplier
-import micro.apps.model.MyModel
 
 private val logger = KotlinLogging.logger {}
 
+@OptIn(ExperimentalSerializationApi::class)
 @SpringBootApplication
 class StreamsApplication {
 
@@ -29,7 +31,6 @@ class StreamsApplication {
             }.log()
     }
      */
-
 
     /**
      * for `Supplier` functions work, we need `spring-cloud-stream-binder-kafka` binder along with

@@ -32,6 +32,8 @@ dependencies {
   - e.g., `crypto.kmsUri: true`
 - **crypto.credentialFile** (optional)
   - e.g., `crypto.credentialFile: /etc/config/gcp_credential.json`
+- **crypto.ignoreDecryptFailures** (optional, default:false)
+    - e.g., `crypto.ignoreDecryptFailures: true`
 
 ### Assumptions
 
@@ -54,6 +56,7 @@ gradle libs:kstream:test
 ### Build
 
 ```bash
+gradle libs:kstream:spotlessApply
 gradle libs:kstream:build
 ```
 

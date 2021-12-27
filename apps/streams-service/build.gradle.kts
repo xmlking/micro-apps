@@ -32,8 +32,11 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka-streams")
     // FIXME: Kotlin Lambda support https://github.com/spring-cloud/spring-cloud-function/issues/780
     implementation("org.springframework.cloud:spring-cloud-function-kotlin")
+
+    // kafka serializers
     // implementation("io.confluent:kafka-streams-avro-serde:$confluentVersion")
-    implementation("com.github.thake.avro4k:avro4k-kafka-serializer:$avro4kSerdeVersion")
+    // implementation("com.github.thake.avro4k:avro4k-kafka-serializer:$avro4kSerdeVersion")
+    implementation(project(":libs:kstream"))
 
     testImplementation(libs.spring.boot.starter.test) {
         exclude(module = "mockito-core")

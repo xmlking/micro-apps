@@ -24,6 +24,7 @@ echo '{"name": "Red", "city": "nuur", "state": "ca"}' | rpk topic produce all-in
 # consume
 nerdctl exec -it infra_redpanda_1 rpk topic consume all-in-topic
 nerdctl exec -it infra_redpanda_1 rpk topic consume state-out-topic
+nerdctl exec -it infra_redpanda_1 rpk topic consume city-out-topic
 ```
 
 Start µService 
@@ -34,9 +35,20 @@ gradle :apps:streams-service:bootRun
 gradle :apps:streams-service:bootRun --debug
 ```
 
+## Build
+
+```bash
+gradle apps:streams-service:spotlessApply
+gradle apps:streams-service:build
+```
+
 ## Test
 
 ```bash
+curl -s \
+  "http://localhost:8081/subjects" \
+  | jq .
+
 curl -s \
   "http://localhost:8081/subjects/all-in-topic-value/versions/1" \
   | jq .

@@ -24,7 +24,7 @@ import org.springframework.data.geo.Point
 import org.springframework.data.redis.core.index.Indexed
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.*
+import java.util.Date
 import javax.validation.Valid
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
@@ -36,8 +36,6 @@ import javax.validation.constraints.Size
 // import org.springframework.data.annotation.Transient
 // import org.springframework.data.redis.core.index.GeoIndexed
 // import kotlinx.serialization.Transient as STransient
-
-
 
 @Serializable
 @ExperimentalSerializationApi
