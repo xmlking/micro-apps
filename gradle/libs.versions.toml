@@ -84,9 +84,11 @@ springCloudGcp = "2.0.5"
 # kafka
 kafkaStreams = "3.0.0"
 javaFaker = "1.0.2"
+confluent ="7.0.1"
 
 # google
 googlePubsub = "1.115.0"
+googleTink = "1.6.1"
 
 # telemetry
 otel = "1.5.0"

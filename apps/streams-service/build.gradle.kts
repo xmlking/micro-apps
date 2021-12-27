@@ -8,6 +8,7 @@ plugins {
 
 val slf4jVersion = libs.versions.slf4j.get()
 val avro4kSerdeVersion = libs.versions.avro4kSerde.get()
+val confluentVersion = libs.versions.confluent.get()
 
 repositories {
     maven("https://packages.confluent.io/maven/")
@@ -31,7 +32,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka-streams")
     // FIXME: Kotlin Lambda support https://github.com/spring-cloud/spring-cloud-function/issues/780
     implementation("org.springframework.cloud:spring-cloud-function-kotlin")
-    // implementation("io.confluent:kafka-streams-avro-serde:7.0.1")
+    // implementation("io.confluent:kafka-streams-avro-serde:$confluentVersion")
     implementation("com.github.thake.avro4k:avro4k-kafka-serializer:$avro4kSerdeVersion")
 
     testImplementation(libs.spring.boot.starter.test) {

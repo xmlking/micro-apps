@@ -91,5 +91,6 @@ include(
     ":libs:test",
     ":libs:grpc",
     ":libs:service",
-    ":libs:pipeline"
+    ":libs:pipeline",
+    ":libs:crypto"
 )
