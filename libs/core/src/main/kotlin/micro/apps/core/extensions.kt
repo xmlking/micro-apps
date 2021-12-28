@@ -7,7 +7,9 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAdjusters
 import java.util.Date
+import java.util.Locale
 import java.util.Optional
+
 
 /**
  * Format an Instant as an ISO8601 timestamp
@@ -52,3 +54,19 @@ fun dateOf(year: Int, month: Int, day: Int): Date = Date.from(LocalDate.of(year,
  */
 fun <T : Any> Optional<T>.toNullable(): T? = orElse(null)
 fun <T : Any> T?.toOptional(): Optional<T> = Optional.ofNullable(this)
+
+/**
+ * Get property value dynamically from Any object.
+ * Usage:
+ * val p = Person("Jane", true)
+ * val name = p.getThroughReflection<String>("name")
+ * val employed = p.getThroughReflection<Boolean>("employed")
+ */
+inline fun <reified T : Any> Any.getThroughReflection(propertyName: String): T? {
+    val getterName = "get" + propertyName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+    return try {
+        javaClass.getMethod(getterName).invoke(this) as? T
+    } catch (e: NoSuchMethodException) {
+        null
+    }
+}

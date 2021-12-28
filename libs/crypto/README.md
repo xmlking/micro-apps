@@ -1,6 +1,6 @@
 # Crypto
 
-Encryption and decryption libirary using [AEAD](https://cloud.google.com/bigquery/docs/reference/standard-sql/aead-encryption-concepts) via Google's [tink](https://developers.google.com/tink)
+Encryption and decryption library using [AEAD](https://cloud.google.com/bigquery/docs/reference/standard-sql/aead-encryption-concepts) via Google's [tink](https://developers.google.com/tink)
 
 ## Prerequisites
 
@@ -25,7 +25,27 @@ Encryption and decryption libirary using [AEAD](https://cloud.google.com/bigquer
 
 ## Usage
 
+Add Gradle/Maven dependencies
 
+https://github.com/xmlking/micro-apps/packages/1168119
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/xmlking/micro-apps")
+        credentials {
+            username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+        }
+    }
+}
+
+dependencies {
+    implementation("micro.libs:crypto:1.6.5-SNAPSHOT")
+}
+```
+
+Example 
 ```kotlin
     test("Test Cryptor bootstrapped with plaintext keySet") {
     val cryptor: Cryptor = CryptorImpl("src/test/resources/aead_keyset.json")
@@ -61,7 +81,7 @@ gradle libs:crypto:build
 ### Publish
 
 ```bash
-gradle libs:crypto:publish
+CI=true gradle libs:crypto:publish
 ```
 
 ## Operations

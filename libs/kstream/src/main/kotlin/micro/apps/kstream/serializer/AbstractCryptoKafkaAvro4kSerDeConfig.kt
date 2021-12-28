@@ -12,6 +12,12 @@ abstract class AbstractCryptoKafkaAvro4kSerDeConfig(configDef: ConfigDef, props:
             ConfigDef.Importance.LOW,
             CRYPTO_KEY_FILE_DOC
         ).define(
+            CRYPTO_ASSOCIATED_DATA_FIELD_CONFIG,
+            ConfigDef.Type.STRING,
+            null,
+            ConfigDef.Importance.LOW,
+            CRYPTO_ASSOCIATED_DATA_FIELD_DOC
+        ).define(
             CRYPTO_USE_KMS_CONFIG,
             ConfigDef.Type.BOOLEAN,
             false,
@@ -38,6 +44,8 @@ abstract class AbstractCryptoKafkaAvro4kSerDeConfig(configDef: ConfigDef, props:
         ), props
     ) {
     companion object {
+        const val CRYPTO_ASSOCIATED_DATA_FIELD_CONFIG = "crypto.associatedData"
+        const val CRYPTO_ASSOCIATED_DATA_FIELD_DOC = "record's field name to used for associated data, should not be encrypted"
         const val CRYPTO_KEY_FILE_CONFIG = "crypto.keyFile"
         const val CRYPTO_KEY_FILE_DOC = "keySet file path generated with tinkey tool."
         const val CRYPTO_USE_KMS_CONFIG = "crypto.useKms"
@@ -52,6 +60,8 @@ abstract class AbstractCryptoKafkaAvro4kSerDeConfig(configDef: ConfigDef, props:
 
     val keyFile: String?
         get() = this.get(CRYPTO_KEY_FILE_CONFIG) as String?
+    val associatedDataField: String?
+        get() = this.get(CRYPTO_ASSOCIATED_DATA_FIELD_CONFIG) as String?
     val useKms: Boolean
         get() = this.get(CRYPTO_USE_KMS_CONFIG) as Boolean
     val kmsUri: String?

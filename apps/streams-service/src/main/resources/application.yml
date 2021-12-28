@@ -43,7 +43,8 @@ spring.cloud.stream:
       # value.serializer: com.github.thake.kafka.avro4k.serializer.KafkaAvro4kSerializer
       record.packages: micro.apps.service
       value.serializer: micro.apps.kstream.serializer.CryptoKafkaAvro4kSerializer
-      crypto.keyFile: /Users/schintha/Developer/Work/java/micro-apps/libs/crypto/src/test/resources/aead_keyset.json
+      crypto.keyFile: src/main/resources/aead_keyset.json
+      crypto.associatedData: name
 
 # ============ spring-cloud-stream kstreams-binder============
   kafka.streams.binder:
@@ -53,4 +54,5 @@ spring.cloud.stream:
       default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
       # default.value.serde: com.github.thake.kafka.avro4k.serializer.Avro4kSerde
       default.value.serde: micro.apps.kstream.serializer.CryptoAvro4kSerde
-      crypto.keyFile: /Users/schintha/Developer/Work/java/micro-apps/libs/crypto/src/test/resources/aead_keyset.json
+      crypto.keyFile: src/main/resources/aead_keyset.json
+      crypto.associatedData: name

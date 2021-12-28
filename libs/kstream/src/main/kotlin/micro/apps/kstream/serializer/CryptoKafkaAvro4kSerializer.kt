@@ -2,6 +2,8 @@ package micro.apps.kstream.serializer
 
 import io.confluent.kafka.schemaregistry.avro.AvroSchema
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient
+import micro.apps.core.getThroughReflection
+import mu.KotlinLogging
 import org.apache.kafka.common.serialization.Serializer
 
 class CryptoKafkaAvro4kSerializer(
@@ -9,6 +11,7 @@ class CryptoKafkaAvro4kSerializer(
     props: Map<String, *>? = null
 ) : AbstractCryptoKafkaAvro4kSerializer(), Serializer<Any?> {
     private var isKey = false
+    private var associatedDataField: String? = null
 
     init {
         props?.let { configure(this.serializerConfig(it)) }
@@ -18,12 +21,17 @@ class CryptoKafkaAvro4kSerializer(
 
     override fun configure(configs: Map<String, *>, isKey: Boolean) {
         this.isKey = isKey
+        this.associatedDataField = configs[AbstractCryptoKafkaAvro4kSerDeConfig.CRYPTO_ASSOCIATED_DATA_FIELD_CONFIG] as String?
         this.configure(CryptoKafkaAvro4kSerializerConfig(configs))
     }
 
-
     override fun serialize(topic: String?, record: Any?): ByteArray? {
         return record?.let {
+            /* TODO: how to get associatedData at Deserializer side???
+            val associatedData = associatedDataField?.let {
+                record.getThroughReflection<String>(this.associatedDataField!!)
+            }?.toByteArray()
+             */
             val aaa = this.serializeImpl(
                 this.getSubjectName(
                     topic,
@@ -32,6 +40,7 @@ class CryptoKafkaAvro4kSerializer(
                     AvroSchema(avroSchemaUtils.getSchema(it))
                 ), it
             )
+            // TODO: add associatedData, will reflect expensive?
             this.encrypt(aaa!!)
         }
     }

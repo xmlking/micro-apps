@@ -17,12 +17,13 @@ import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDe
 import kotlinx.coroutines.runBlocking
 import micro.apps.crypto.Cryptor
 import micro.apps.crypto.CryptorImpl
+import mu.KotlinLogging
 import org.apache.avro.Schema
 import org.apache.kafka.common.errors.SerializationException
 import org.slf4j.LoggerFactory
 import kotlin.coroutines.coroutineContext
 
-private val logger = LoggerFactory.getLogger(AbstractCryptoKafkaAvro4kSerDe::class.java)
+private val logger = KotlinLogging.logger {}
 
 abstract class AbstractCryptoKafkaAvro4kSerDe : AbstractKafkaSchemaSerDe() {
     var retryAttempts = AbstractKafkaAvro4kSerDeConfig.SCHEMA_REGISTRY_RETRY_ATTEMPTS_DEFAULT

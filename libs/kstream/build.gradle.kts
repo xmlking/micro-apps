@@ -5,6 +5,7 @@ val confluentVersion = libs.versions.confluent.get()
 val kotlinRetryVersion = libs.versions.kotlinRetry.get()
 
 dependencies {
+    implementation(project(":libs:core"))
     implementation(project(":libs:crypto"))
     implementation("org.apache.kafka:kafka-streams:$kafkaStreamsVersion")
     implementation("com.github.thake.avro4k:avro4k-kafka-serializer:$avro4kSerdeVersion")
