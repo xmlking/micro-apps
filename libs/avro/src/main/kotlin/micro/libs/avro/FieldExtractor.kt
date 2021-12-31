@@ -18,7 +18,6 @@ fun extractFields(
     schema: Schema,
     predicate: Predicate<Schema.Field> = { _ -> true }
 ): List<Pair<String, Schema.Field>> {
-    println("called")
     val infos = mutableListOf<Pair<String, Schema.Field>>()
     traverseSchema(schema,
         object : SchemaVisitor {
@@ -35,24 +34,19 @@ fun extractFields(
 }
 
 /**
- * memorized extractFields function
+ * Memorized extractFields function
  * traverse the given `Schema` and return all the fields that sanctify provided `Predicate`
  */
 val memorizedExtractFields = ::extractFields.memorize()
 
 /**
- * Cached FieldExtractor
+ * Cached extractFields function
  * traverse the given `Schema` and return all the fields that sanctify provided `Predicate`
  * cache results only based on **Schema**. won't respect filterFn changes
  */
 private val CACHE = ConcurrentHashMap<Schema, List<Pair<String, Schema.Field>>>()
-fun extractFieldsCached(
-    schema: Schema,
-    predicate: Predicate<Schema.Field> = { _ -> true }
-): List<Pair<String, Schema.Field>> {
-    return CACHE.computeIfAbsent(
-        schema
-    ) { _ -> extractFields(schema, predicate) }
+fun cachedExtractFields(schema: Schema, predicate: Predicate<Schema.Field> = { _ -> true }): List<Pair<String, Schema.Field>> {
+    return CACHE.computeIfAbsent(schema) { _ -> extractFields(schema, predicate) }
 }
 
 

@@ -53,7 +53,7 @@ class FieldExtractorTest : FunSpec({
         actual shouldBe expected
     }
 
-    // TODO: Test
+    // TODO: Test why memorized calls twice
     test("memorizedExtractFields with isLeafField should only call once") {
         val expected = listOf<String>("gender", "dob")
         val actual = memorizedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
@@ -64,6 +64,13 @@ class FieldExtractorTest : FunSpec({
             memorized = memorizedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
             println("turn: #$it, result: $memorized")
         }
+        memorized = memorizedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
+
+        repeat(30) {
+            memorized = cachedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
+            println("turn: #$it, result: $memorized")
+        }
+        memorized = cachedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
 
         memorized shouldBe expected
     }
