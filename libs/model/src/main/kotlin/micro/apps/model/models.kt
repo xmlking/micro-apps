@@ -76,12 +76,11 @@ enum class Gender {
 
 @Serializable
 @ExperimentalSerializationApi
-@AvroProp("pii", "yes")
 data class Name(
     @field:NotNull
     @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "FirstName must contain only letters and numbers")
     @field:Size(min = 4, max = 26, message = "FirstName must be between {min} and {max} characters")
-    @ProtoNumber(1) val first: String?,
+    @ProtoNumber(1) @AvroProp("confidential", "true") val first: String?,
     @field:NotBlank
     @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "LastName must contain only letters and numbers")
     @ProtoNumber(2) val last: String?,
@@ -90,10 +89,9 @@ data class Name(
 
 @Serializable
 @ExperimentalSerializationApi
-@AvroProp("pii", "yes")
 data class Address(
     @ProtoNumber(1) val suite: String? = null,
-    @ProtoNumber(2) val street: String?,
+    @ProtoNumber(2) @AvroProp("confidential", "true") val street: String?,
     @ProtoNumber(3) val city: String?,
     @ProtoNumber(4) val state: String?,
     @field:Size(min = 5, max = 15)
@@ -106,15 +104,15 @@ data class Address(
 @AvroAliases(["account"])
 @ExperimentalSerializationApi
 data class Person(
-    @ProtoNumber(1) @AvroProp("pii", "yes") val id: String = "",
-    @ProtoNumber(2) @AvroDefault("hello") @AvroProp("sensitive", "true") val name: Name,
+    @ProtoNumber(1)@AvroProp("confidential", "true") val id: String = "",
+    @ProtoNumber(2) @AvroProp("confidential", "true") val name: Name,
     @ProtoNumber(3) val addresses: Set<Address>? = setOf(),
-    @ProtoNumber(4) @AvroProp("pii", "yes") @AvroDefault("UNKNOWN") val gender: Gender,
+    @ProtoNumber(4) @AvroProp("confidential", "true") @AvroDefault("UNKNOWN") val gender: Gender,
     @field:Min(value = 18, message = "age must be at least {value}")
-    @ProtoNumber(5) @AvroProp("pii", "yes") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
+    @ProtoNumber(5) @AvroProp("confidential", "true") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
     // @Serializable(with = DateAsLongSerializer::class) // @Polymorphic
     @field:Past(message = "invalid DOB: {value}")
-    @ProtoNumber(6)  @AvroDefault(Avro.NULL) @AvroProp("pii", "yes") val dob: LocalDateTime?,
+    @ProtoNumber(6)  @AvroDefault(Avro.NULL) @AvroProp("confidential", "true") val dob: LocalDateTime?,
     @field:Email(message = "Email should be valid")
     @ProtoNumber(7) @AvroProp("encrypted", "yes") val email: String? = null,
     @ProtoNumber(8) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String? = null,
@@ -125,8 +123,8 @@ data class Person(
 @Serializable
 @ExperimentalSerializationApi
 data class MyModel(
-    @AvroProp("sensitive", "true") var name: String? = null,
-    var city: String? = null,
+    var name: Name? = null,
+    @AvroProp("confidential", "true") var city: String? = null,
     var state: String? = null
 )
 

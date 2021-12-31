@@ -20,6 +20,10 @@ Encryption and decryption library using [AEAD](https://cloud.google.com/bigquery
 3. [Generate](https://developers.google.com/tink/generate-plaintext-keyset) a plaintext keyset
     ```bash
     tinkey create-keyset --key-template AES128_GCM  --out-format json --out aead_keyset.json
+    # if you want to add more keys:
+    tinkey add-key  --in aead_keyset.json  --in-format json --out aead_keyset2.json --out-format json --key-template AES128_GCM
+    tinkey add-key  --in aead_keyset2.json --in-format json --out aead_keyset3.json --out-format json --key-template AES128_GCM
+it
     ```
    > **Caution:** *We don’t recommend generating plaintext keysets, as it’s easy for keys to leak. You should only use plaintext key-generation for testing purposes.*
 
@@ -96,3 +100,4 @@ CI=true gradle libs:crypto:publish
 - [Create a new key for each purpose](https://developers.google.com/tink/create-new-key-for-each-purpose)
 - [I want to protect structured data](https://developers.google.com/tink/encrypt-structured-data)
 - [I want to bind ciphertext to its context](https://developers.google.com/tink/bind-ciphertext)
+- [Tink API Guide](https://github.com/google/tink/blob/master/docs/JAVA-HOWTO.md)

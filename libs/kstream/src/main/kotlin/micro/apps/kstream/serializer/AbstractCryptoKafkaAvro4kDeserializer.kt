@@ -35,9 +35,7 @@ abstract class AbstractCryptoKafkaAvro4kDeserializer : AbstractCryptoKafkaAvro4k
 
     protected fun configure(config: CryptoKafkaAvro4kDeserializerConfig) {
         val configuredPackages = config.getRecordPackages()
-        if (configuredPackages.isEmpty()) {
-            throw IllegalArgumentException("${CryptoKafkaAvro4kDeserializerConfig.RECORD_PACKAGES} is not set correctly.")
-        }
+        require(configuredPackages.isNotEmpty()) { "${AbstractCryptoKafkaAvro4kSerDeConfig.CRYPTO_KEY_FILE_CONFIG} is not set correctly." }
         recordPackages = configuredPackages
         super.configure(config)
     }

@@ -1,0 +1,105 @@
+{
+  "type" : "record",
+  "name" : "Account",
+  "namespace" : "micro.apps.model",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "confidential" : "true"
+  }, {
+    "name" : "name",
+    "type" : {
+      "type" : "record",
+      "name" : "Name",
+      "fields" : [ {
+        "name" : "first",
+        "type" : [ "null", "string" ],
+        "confidential" : "true"
+      }, {
+        "name" : "last",
+        "type" : [ "null", "string" ]
+      }, {
+        "name" : "title",
+        "type" : [ "null", "string" ]
+      } ]
+    },
+    "confidential" : "true"
+  }, {
+    "name" : "addresses",
+    "type" : [ "null", {
+      "type" : "array",
+      "items" : {
+        "type" : "record",
+        "name" : "Address",
+        "fields" : [ {
+          "name" : "suite",
+          "type" : [ "null", "string" ]
+        }, {
+          "name" : "street",
+          "type" : [ "null", "string" ],
+          "confidential" : "true"
+        }, {
+          "name" : "city",
+          "type" : [ "null", "string" ]
+        }, {
+          "name" : "state",
+          "type" : [ "null", "string" ]
+        }, {
+          "name" : "code",
+          "type" : [ "null", "string" ]
+        }, {
+          "name" : "country",
+          "type" : [ "null", "string" ]
+        } ]
+      }
+    } ]
+  }, {
+    "name" : "gender",
+    "type" : {
+      "type" : "enum",
+      "name" : "Gender",
+      "symbols" : [ "UNKNOWN", "MALE", "FEMALE" ],
+      "default" : "UNKNOWN"
+    },
+    "default" : "UNKNOWN",
+    "confidential" : "true"
+  }, {
+    "name" : "age",
+    "type" : "int",
+    "confidential" : "true"
+  }, {
+    "name" : "dob",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "confidential" : "true"
+  }, {
+    "name" : "email",
+    "type" : [ "null", "string" ],
+    "encrypted" : "yes"
+  }, {
+    "name" : "phone",
+    "type" : {
+      "type" : "fixed",
+      "name" : "phone",
+      "size" : 10
+    },
+    "encrypted" : "yes"
+  }, {
+    "name" : "avatar",
+    "type" : "string"
+  }, {
+    "name" : "altNames",
+    "type" : [ "null", {
+      "type" : "array",
+      "items" : "Name"
+    } ]
+  }, {
+    "name" : "family",
+    "type" : [ "null", {
+      "type" : "map",
+      "values" : "Name"
+    } ],
+    "confidential" : "true"
+  } ],
+  "aliases" : [ "person" ]
+}

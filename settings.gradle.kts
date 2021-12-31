@@ -92,5 +92,6 @@ include(
     ":libs:grpc",
     ":libs:service",
     ":libs:pipeline",
-    ":libs:crypto"
+    ":libs:crypto",
+    ":libs:avro"
 )

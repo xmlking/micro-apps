@@ -9,7 +9,6 @@ import com.google.crypto.tink.aead.KmsAeadKeyManager
 import com.google.crypto.tink.integration.gcpkms.GcpKmsClient
 import micro.apps.core.toOptional
 import mu.KotlinLogging
-import java.io.File
 import java.io.IOException
 import java.security.GeneralSecurityException
 
@@ -78,8 +77,8 @@ class CryptorImpl @Throws(IOException::class, GeneralSecurityException::class) c
         val handle: KeysetHandle = if (useKms) {
             logger.info("Creating GcpKmsClient with kekUri={}, credentialFile={}", kekUri, credentialFile)
 
-            // initialize GcpKmsClient
-            // TODO: if kekUri starts with `gcp-kms` initialize GcpKmsClient, for `aws-kms`
+            // initialize KmsClient
+            // TODO: if kekUri starts with `gcp-kms` initialize GcpKmsClient, otherwise `aws-kms` AwsKmsClient
             try {
                 GcpKmsClient.register(kekUri.toOptional(), credentialFile.toOptional())
             } catch (ex: GeneralSecurityException) {
@@ -87,43 +86,43 @@ class CryptorImpl @Throws(IOException::class, GeneralSecurityException::class) c
                 throw ex
             }
 
-            // Get the kekAead
-            val kekAead: Aead = try {
+            // Get the masterKey
+            val masterKey: Aead = try {
                 val handle = KeysetHandle.generateNew(KmsAeadKeyManager.createKeyTemplate(kekUri))
                 handle.getPrimitive(Aead::class.java)
             } catch (ex: GeneralSecurityException) {
-                logger.error("Error initializing masterKey KeysetHandle", ex)
+                logger.error("Error loading masterKey from KMS", ex)
                 throw ex
             }
 
-            // Get the KeysetHandle from encrypted keyFile with KMS
+            // Get key material from encrypted keyFile using KMS masterKey
             try {
-                KeysetHandle.read(JsonKeysetReader.withFile(File(keyFile)), kekAead)
+                KeysetHandle.read(JsonKeysetReader.withPath(keyFile), masterKey)
             } catch (ex: GeneralSecurityException) {
-                logger.error("Error initializing encrypted KeysetHandle", ex)
+                logger.error("Error loading encrypted keysetFile", ex)
                 throw ex
             } catch (ex: IOException) {
-                logger.error("Error loading encrypted KeysetHandle", ex)
+                logger.error("Error loading encrypted keysetFile", ex)
                 throw ex
             }
         } else {
-            // Get the KeysetHandle from unencrypted keyFile
+            // Get key material from unencrypted keysetFile
             try {
-                CleartextKeysetHandle.read(JsonKeysetReader.withFile(File(keyFile)))
+                CleartextKeysetHandle.read(JsonKeysetReader.withPath(keyFile))
             } catch (ex: GeneralSecurityException) {
-                logger.error("Error initializing unencrypted KeysetHandle", ex)
+                logger.error("Error loading unencrypted keysetFile", ex)
                 throw ex
             } catch (ex: IOException) {
-                logger.error("Error loading unencrypted KeysetHandle", ex)
+                logger.error("Error loading unencrypted keysetFile", ex)
                 throw ex
             }
         }
 
-        // Get the primitive.
+        // Get Aead primitive.
         aead = try {
             handle.getPrimitive(Aead::class.java)
         } catch (ex: GeneralSecurityException) {
-            logger.error("Cannot create primitive", ex)
+            logger.error("Cannot create Aead primitive", ex)
             throw ex
         }
     }

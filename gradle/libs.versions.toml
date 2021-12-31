@@ -71,7 +71,7 @@ uuid = "4.0.1"
 # yaml version
 yaml = "2.10.3"
 # avro version
-avro = "1.10.2"
+avro = "1.11.0"
 
 # spring
 #spring = "2.5.3"

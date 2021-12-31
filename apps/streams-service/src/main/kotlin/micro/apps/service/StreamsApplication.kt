@@ -2,6 +2,7 @@ package micro.apps.service
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.MyModel
+import micro.apps.model.Name
 import mu.KotlinLogging
 import org.apache.kafka.streams.kstream.KStream
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -39,7 +40,7 @@ class StreamsApplication {
      */
     @Bean
     fun generate(): Supplier<Message<MyModel>> = Supplier {
-        MessageBuilder.withPayload(MyModel(UUID.randomUUID().toString(), "Paradise", "CA"))
+        MessageBuilder.withPayload(MyModel(Name("Sumo", "Demo", "Dr"), "Paradise", "CA"))
             .setHeader(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString())
             .build()
     }

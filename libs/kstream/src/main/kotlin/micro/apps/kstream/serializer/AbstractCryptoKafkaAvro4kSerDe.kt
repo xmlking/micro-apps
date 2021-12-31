@@ -63,9 +63,7 @@ abstract class AbstractCryptoKafkaAvro4kSerDe : AbstractKafkaSchemaSerDe() {
         this.retryJitterMax = config.schemaRegistryRetryJitterMax
         this.retryPolicy = calcRetryPolicy()
         this.configureClientProperties(config, AvroSchemaProvider())
-        if (config.keyFile == null) {
-            throw IllegalArgumentException("${AbstractCryptoKafkaAvro4kSerDeConfig.CRYPTO_KEY_FILE_CONFIG} is not set correctly.")
-        }
+        require(config.keyFile != null) { "${AbstractCryptoKafkaAvro4kSerDeConfig.CRYPTO_KEY_FILE_CONFIG} is not set correctly." }
         this.cryptor = CryptorImpl(config.keyFile!!, config.useKms, config.kmsUri, config.credentialFile)
     }
 

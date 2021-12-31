@@ -45,14 +45,18 @@ gradle apps:streams-service:build
 ## Test
 
 ```bash
+# list all schemas 
 curl -s \
   "http://localhost:8081/subjects" \
   | jq .
-
+# get schemas for `all-in-topic-value`
 curl -s \
   "http://localhost:8081/subjects/all-in-topic-value/versions/1" \
+  | jq '.schema | fromjson' 
+# (or) you can see ` "sensitive": "true"` property.
+curl -s \
+  "http://localhost:8081/subjects/all-in-topic-value/versions/latest/schema" \
   | jq .
-
 ```
 
 ## Operations

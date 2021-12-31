@@ -1,8 +1,23 @@
 # Kafka Crypto SerDe
 
+Encryption/decryption Kafka record's value at the serializer/deserializer level.
+
+Uses [avro4k](https://github.com/avro-kotlin/avro4k) Kotlin data serialization without boilerplate code, doesn’t involve code generation nor additional build steps.
+
 This package includes:
-- **CryptoAvro4kSerde:** `SerDe` for _encrypt/decrypt_ payload and serialize using avro format.  
+- **CryptoAvro4kSerde:** `SerDe` for _encrypt/decrypt_ payload and serialize using AVRO format.  
 - Kotlin Extensions for **Kafka Streams DSL**
+
+## Features 
+
+- [x] Adds encryption layer to AVRO native serialization.
+- [x] Supports **Spring Cloud Stream**
+- [x] Supports **Kafka Streams** intermediate topics
+- [x] Detect when a payload is not encrypted to skip decryption
+- [x] Configurable master-key management via `gcp-kms` or `aws-kms` 
+- [x] Record-level encryption
+- [ ] Field-level encryption via schema annotations. marked with **confidential**
+
 
 ## Usage
 
@@ -36,7 +51,7 @@ Generate `keyFile` using `tinkey` CLI. See the [docs](../crypto)
 tinkey create-keyset --key-template AES128_GCM  --out-format json --out aead_keyset.json
 ```
 
-### Configuration
+### Customization
 
 - **crypto.keyFile** (required)
   - e.g., `crypto.keyFile: src/main/resources/aead_keyset.json`
@@ -119,6 +134,7 @@ Example App [streams-service](../../apps/streams-service)
 
 - External CLI tools like `kafka-avro-console-consumer`, `kafka-avro-console-producer` may not work as data is encrypted. 
 - Not all features are implemented yet.
+- For granular encryption, only leaf fields of type `String` in the class should be annotated with `@AvroProp("sensitive", "true")`   
 
 ## Development
 

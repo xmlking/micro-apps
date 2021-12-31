@@ -124,6 +124,11 @@ class SerializationTest : FunSpec({
         expectedSchema.toString(true) shouldBe generatedSchema.toString(true)
     }
 
+    test("testPrintMyModelSchema") {
+        val generatedSchema = Avro.default.schema(MyModel.serializer())
+        println(generatedSchema.toString(true))
+    }
+
     test("no-arg constructor") {
         val actual = Test::class.java.getConstructor().newInstance()
         actual.id shouldBe 0
