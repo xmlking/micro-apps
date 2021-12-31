@@ -4,8 +4,8 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import micro.apps.core.Predicate
 import micro.apps.core.and
-import micro.apps.core.memorize
 import org.apache.avro.Schema
+import java.util.concurrent.atomic.AtomicInteger
 
 class FieldExtractorTest : FunSpec({
     val SCHEMA: Schema = Schema.Parser().parse(javaClass.getResourceAsStream("/account.avsc"))
@@ -47,32 +47,23 @@ class FieldExtractorTest : FunSpec({
         extractFields(SCHEMA.getField("addresses").schema()).forEach { println(it) }
     }
 
-    test("extractFields with DefaultValues should match") {
-        val expected = listOf<String>("gender", "dob")
-        val actual = extractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
-        actual shouldBe expected
-    }
+    test("memorizedExtractFields with isLeafConfidential should be call once") {
+        val expected = listOf("id", "name.first", "addresses.street", "gender", "age", "dob", "altNames.first", "family.first")
+        val counter = AtomicInteger(0)
+        val isLeafConfidentialTest = isLeafConfidential.also { counter.incrementAndGet() }
 
-    // TODO: Test why memorized calls twice
-    test("memorizedExtractFields with isLeafField should only call once") {
-        val expected = listOf<String>("gender", "dob")
-        val actual = memorizedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
+        val actual = memorizedExtractFields(SCHEMA, isLeafConfidentialTest).map { it.first }
         actual shouldBe expected
 
-        var memorized =  listOf<String>()
-        repeat(30) {
-            memorized = memorizedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
-            println("turn: #$it, result: $memorized")
+        var memorized: List<String>
+        repeat(30) { index ->
+            memorized = memorizedExtractFields(SCHEMA, isLeafConfidentialTest).map { it.first }
+            println("turn: #$index, result: $memorized")
         }
-        memorized = memorizedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
-
-        repeat(30) {
-            memorized = cachedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
-            println("turn: #$it, result: $memorized")
-        }
-        memorized = cachedExtractFields(SCHEMA) { field -> field.hasDefaultValue() }.map { it.first }
+        memorized = memorizedExtractFields(SCHEMA, isLeafConfidentialTest).map { it.first }
 
         memorized shouldBe expected
+        counter.get() shouldBe 1
     }
 
 })
