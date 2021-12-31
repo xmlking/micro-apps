@@ -8,7 +8,7 @@ import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
 import javax.ws.rs.core.MediaType
 import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
+import kotlin.time.Duration.Companion.minutes
 
 // FIXME https://github.com/kotest/kotest/issues/1401
 @ExperimentalTime

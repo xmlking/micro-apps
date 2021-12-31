@@ -18,7 +18,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 import kotlinx.serialization.protobuf.ProtoType
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.ExperimentalTime
 
 @Serializable
@@ -37,7 +37,7 @@ data class ProtobufData(
 @ExperimentalSerializationApi
 @ExperimentalTime
 class SerializationTest : FunSpec({
-    TestCaseConfig(timeout = Duration.minutes(3), enabled = true)
+    TestCaseConfig(timeout = 3.minutes, enabled = true)
 
 //    val JSON by lazy {
 //        Json(JsonConfiguration.Stable.copy(isLenient = true, prettyPrint = true))

@@ -29,9 +29,9 @@ import mu.KotlinLogging
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import java.security.Security
 import kotlin.system.measureTimeMillis
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
+
 
 /**
  * Showcase backpressure handling techniques:
@@ -72,7 +72,7 @@ class AccountServiceResiliencyTest : FunSpec({
     Security.addProvider(BouncyCastleProvider())
 
     // defaultTestConfig
-    TestCaseConfig(timeout = Duration.minutes(3), tags = setOf(gRPC))
+    TestCaseConfig(timeout = 3.minutes, tags = setOf(gRPC))
 
     lateinit var uniqueName: String
     lateinit var server: Server
