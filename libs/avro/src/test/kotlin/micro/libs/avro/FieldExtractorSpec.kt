@@ -7,19 +7,20 @@ import micro.apps.core.and
 import org.apache.avro.Schema
 import java.util.concurrent.atomic.AtomicInteger
 
-class FieldExtractorTest : FunSpec({
+class FieldExtractorSpec : FunSpec({
     val SCHEMA: Schema = Schema.Parser().parse(javaClass.getResourceAsStream("/account.avsc"))
 
-    test("extractFields use-cases") {
+    test("extractFields examples") {
         val isString: Predicate<Schema.Field> = { field ->
             when (field.schema().type) {
                 Schema.Type.STRING -> true
-                Schema.Type.UNION -> unwrapUnionType(field) == Schema.Type.STRING
+                Schema.Type.UNION -> field.schema().extractNonNullType() == Schema.Type.STRING
                 else -> false
             }
         }
         val isLeafField: Predicate<Schema.Field> = { field ->
-            when (if (field.schema().type == Schema.Type.UNION) unwrapUnionType(field) else field.schema().type) {
+            val schema = field.schema()
+            when (if (schema.type == Schema.Type.UNION) schema.extractNonNullType() else schema.type) {
                 Schema.Type.MAP, Schema.Type.ARRAY, Schema.Type.RECORD, Schema.Type.NULL -> false
                 else -> true
             }

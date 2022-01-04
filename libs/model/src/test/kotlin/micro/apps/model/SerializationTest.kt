@@ -91,7 +91,7 @@ class SerializationTest : FunSpec({
         val output = Avro.default.openOutputStream(serializer) {
             encodeFormat = AvroEncodeFormat.Data() // Other Options: AvroEncodeFormat.Binary(), AvroEncodeFormat.Json()
             this.schema = schema
-        }.to("./libs/model/src/test/resources/data/pizzas.avro")
+        }.to("./src/test/resources/data/pizzas.avro")
         output.write(listOf(veg, hawaiian))
         output.close()
     }

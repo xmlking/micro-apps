@@ -134,7 +134,8 @@ Example App [streams-service](../../apps/streams-service)
 
 - External CLI tools like `kafka-avro-console-consumer`, `kafka-avro-console-producer` may not work as data is encrypted. 
 - Not all features are implemented yet.
-- For granular encryption, only leaf fields of type `String` in the class should be annotated with `@AvroProp("sensitive", "true")`   
+- For granular encryption, only leaf fields of type `String` in the class should be annotated with `@AvroProp("confidential", "true")`   
+- For granular encryption, If a `Record` is annotated with `@AvroProp("confidential", "true")`, it applies to all occurrence of that `Record` with in that schema.    
 
 ## Development
 

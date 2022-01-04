@@ -4,6 +4,7 @@ A set of **Avro** _data_ and _schema_ manipulation functions.
 
 - **FieldExtractor**: Traverse/extract fields from schema
 - **avpath**: XPath like DSL to query and manipulate entries of an Avro records
+- **RecordTransformer**: Traverse **GenericRecord** along **avpath** and transform values with the given **ValueTransformer**
 
 ## Usage
 
@@ -22,25 +23,26 @@ var sensitiveFields = memorizedExtractFields(SCHEMA, isConfidential).map { it.fi
 ### avpath
 
 ```kotlin
-val schema =  Schema.parse("account.avsc")
-val account = GenericData.Record(schema)
-
-traverseRecord(record, "altNames.first") { record: GenericData -> 
-    println(record)
-}
-```
-
-```kotlin
-val schema =  Schema.parse("account.avsc")
-val account = GenericData.Record(schema)
-
-var sensitiveFields = memorizedExtractFields(schema, isConfidential).map { it.first }
-
-sensitiveFields.forEach {
-    traverseRecord(record, it) { record: GenericData ->
-        println(record)
+RecordTraverser.traverseRecord(genericRecord, "name.title") { parent, suffix ->
+    parent.get(suffix)?.let { original ->
+        parent.put(suffix, "newValue for $suffix is $original ++")
     }
 }
+// Output
+// {"id": "122-333-344-555", "name": {"first": "sumo", "last": "demo", "title": "newValue for title is Mr ++"}, ...}
+```
+
+### RecordTransformer
+
+```kotlin
+val avpaths =   listOf("id", "name.first", "addresses.street", "altNames.first", "family.first")
+
+println("Before: $it")
+RecordTransformer.transform(it, avpaths) { "---MASKED---" }
+print("After: $it")
+// Output
+// Before: {"id": "122-333-344-555", "name": {"first": "sumo", "last": "demo", "title": "Mr"}, 
+// After: {"id": "---MASKED---", "name": {"first": "---MASKED---", "last": "demo", "title": "Mr"}, ...
 ```
 
 

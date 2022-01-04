@@ -1,6 +1,6 @@
 @file:JvmName("SchemaTraverser")
 
-package micro.libs.avro.traversal
+package micro.libs.avro.schema
 
 import org.apache.avro.Schema
 import java.util.*

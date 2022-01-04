@@ -1,9 +1,9 @@
-package micro.libs.avro.traversal
+package micro.libs.avro.schema
 
 import io.kotest.core.spec.style.FunSpec
 import org.apache.avro.Schema
 
-class SchemaTraverserTest : FunSpec({
+class SchemaTraverserSpec : FunSpec({
     val SCHEMA: Schema = Schema.Parser().parse(javaClass.getResourceAsStream("/account.avsc"))
 
     test("Test SchemaTraverser") {
