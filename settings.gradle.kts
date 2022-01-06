@@ -62,6 +62,7 @@ pluginManagement {
         id("com.dropbox.affectedmoduledetector") version "0.1.2" apply false
         id("com.avast.gradle.docker-compose") version "0.14.11" apply false
         id("com.github.node-gradle.node") version "3.1.1" apply false
+        id("org.owasp.dependencycheck") version "6.5.2.1"
     }
 }
 

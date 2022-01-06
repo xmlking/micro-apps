@@ -47,6 +47,14 @@ gradle check
 gradle sonarqube
 ```
 
+#### dependency-check
+
+Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies.
+
+```bash
+gradle dependencyCheckAggregate
+```
+
 #### kover
 
 Note: _Cross-module tests are not supported in reports and validation yet. For each test, only the classpath belonging to the current module is taken._

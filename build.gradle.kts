@@ -72,6 +72,8 @@ plugins {
     id("com.avast.gradle.docker-compose")
     // kotlin code coverage
     id("org.jetbrains.kotlinx.kover")
+    // Software Composition Analysis (SCA) tool
+    id("org.owasp.dependencycheck")
 }
 
 // rootProject config
