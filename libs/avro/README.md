@@ -19,6 +19,7 @@ var sensitiveFields = memorizedExtractFields(SCHEMA, isConfidential).map { it.fi
 // Output
 // [id, name.first, addresses.street, gender, age, dob, altNames.first, family.first]
 ```
+More [examples](./src/test/kotlin/micro/libs/avro/FieldExtractorSpec.kt)  
 
 ### avpath
 
@@ -31,6 +32,7 @@ RecordTraverser.traverseRecord(genericRecord, "name.title") { parent, suffix ->
 // Output
 // {"id": "122-333-344-555", "name": {"first": "sumo", "last": "demo", "title": "newValue for title is Mr ++"}, ...}
 ```
+More [examples](./src/test/kotlin/micro/libs/avro/avpath/RecordTraverserSpec.kt)
 
 ### RecordTransformer
 
@@ -44,7 +46,7 @@ print("After: $it")
 // Before: {"id": "122-333-344-555", "name": {"first": "sumo", "last": "demo", "title": "Mr"}, 
 // After: {"id": "---MASKED---", "name": {"first": "---MASKED---", "last": "demo", "title": "Mr"}, ...
 ```
-
+More [examples](./src/test/kotlin/micro/libs/avro/RecordTransformerSpec.kt)
 
 ## Developer
 ### Run
