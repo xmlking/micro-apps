@@ -34,8 +34,7 @@ class RomsHashesApplication {
             val guitar = Role(null, roleName = "GUITAR")
             val drums = Role(null, roleName = "DRUMS")
 
-            // TODO: handle @Reference deserialization
-            // roleRepo.saveAll(List.of(bass, vocals, guitar, drums));
+            roleRepo.saveAll(listOf(bass, vocals, guitar, drums));
 
             val john = User(null, "Zack", null, "de la Rocha", "zack@ratm.com", bass)
             val tim = User(null, "Tim", null, "Commerford", "tim@ratm.com", vocals)
@@ -44,7 +43,14 @@ class RomsHashesApplication {
             userRepo.saveAll(listOf(john, tim, tom, brad))
 
             val add1 = Address(null, "222", "fourt st", "riverside", "CA", "95543", "USA", Point(-122.124500, 47.640160))
-            val per1 = Person(null, Name("sumo", "demo", "Sr"), setOf(add1), Gender.MALE, SimpleDateFormat("yyyy-MM-dd").parse("1999-05-30"), "sumo@demo.com")
+            val per1 = Person(null,
+                0.0,
+                Name("sumo", "demo", "Sr"),
+                setOf(add1),
+                add1,
+                Gender.MALE,
+                SimpleDateFormat("yyyy-MM-dd").parse("1999-05-30"),
+                "sumo@demo.com")
             personRepo.saveAll(listOf(per1))
         }
     }

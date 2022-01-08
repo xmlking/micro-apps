@@ -13,30 +13,37 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.util.Optional
+import java.util.*
 
 @OptIn(ExperimentalSerializationApi::class)
 @RestController
 @RequestMapping("/api/users")
-class UserController(private val userRepository: UserRepository, private val modulesOperations: RedisModulesOperations<String, String>) {
-    var ops = modulesOperations.opsForSearch("PersonIdx")
+class UserController(
+    private val userRepository: UserRepository,
+    private val modulesOperations: RedisModulesOperations<String, String>
+) {
+    var ops = modulesOperations.opsForSearch("RoleIdx")
     private val gson: Gson = Gson()
 
-    @PostMapping("/")
+    @PostMapping("")
     fun save(@RequestBody user: User): User {
         return userRepository.save(user)
     }
 
-    @GetMapping("/title")
-    fun findByTitle(@RequestParam title: String): Person? {
-        val result: SearchResult = ops.search(Query("@title:'$title'"))
+    @GetMapping("role")
+    fun findByRoleName(@RequestParam roleName: String): Role? {
+        val result: SearchResult = ops.search(Query("""@roleName:{$roleName}"""))
         if (result.totalResults > 0) {
+            println(result.docs[0])
             val doc: Document = result.docs[0]
-            return gson.fromJson(doc.toString(), Person::class.java)
+            println(doc.get("roleName"))
+            return gson.fromJson(doc.toString(), Role::class.java)
+            //val jsonResult = if (result.docs.isEmpty()) "{}" else result.docs.get(0).get("$").toString()
+            //return gson.fromJson(jsonResult, Role::class.java) // queryMethod.getReturnedObjectType())
         } else return null
     }
 
-    @GetMapping("/q")
+    @GetMapping("q")
     fun findByName(@RequestParam firstName: String, @RequestParam lastName: String): List<User> {
         return userRepository.findByFirstNameAndLastName(firstName, lastName)
     }
@@ -51,7 +58,7 @@ class UserController(private val userRepository: UserRepository, private val mod
         return userRepository.findByLastNameStartsWithIgnoreCase(lastName)
     }
 
-    @GetMapping("/exists/")
+    @GetMapping("exists")
     fun isEmailTaken(@RequestParam("email") email: String): Boolean {
         return userRepository.existsByEmail(email)
     }

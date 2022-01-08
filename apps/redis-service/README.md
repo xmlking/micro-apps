@@ -1,9 +1,53 @@
 
+via docker-compose
+
+```bash
+# start local redis and grafana 
+nerdctl compose -f infra/redis.yml up
+# (Or) start only redis
+nerdctl compose -f infra/redis.yml up redis
+# stop local redis before restart again
+nerdctl compose -f infra/redis.yml down
+# this will stop redis and remove all volumes
+nerdctl compose -f infra/redis.yml down -v 
+```
 
 
 gradle :apps:redis-service:bootRun
 
 http :8080/api/users/name/Wilk
+http :8080/api/users/start/Wil
+http :8080/api/users/role roleName==GUITAR
+http :8080/api/users/exists email==brad@ratm.com
+http --offline :8080/api/users/exists email==brad@ratm.com
+
+http :8080/api/users/q firstName==Brad lastName==Wilk
+
+http :8080/api/people/search/sumo
+http :8080/api/people/search/@name_first:sumo
+
+```bash
+FT.SEARCH "PersonIdx" "@name_first:{sumo}"
+FT.SEARCH "PersonIdx" "@name_first:sumo"
+FT.SEARCH "PersonIdx" "@name_first:sumo "
+FT.SEARCH "PersonIdx" "@address_state:{CA}"
+FT.SEARCH "PersonIdx" "@address_city:riverside"
+FT.SEARCH "PersonIdx" "@address_city:{riverside}"
+
+FT.SEARCH "PersonIdx" "@description:girls @status:{closed}"
+
+"FT.SEARCH" "UserIdx" "@firstName:{Brad} @lastName:Wilk "
+
+FT.EXPLAINCLI "PersonIdx" "@name_first:{sumo}"
+FT.EXPLAINCLI "PersonIdx" "@name_first:sumo "
+FT.EXPLAINCLI "PersonIdx" "@name_first:(sumo deno)"
+
+FT.PROFILE "PersonIdx" SEARCH QUERY "@name_first:{sumo}"
+
+
+FT.SEARCH "RoleIdx" "@roleName:{GUITAR}"
+FT.SEARCH "UserIdx" "@firstName:{Brad} @lastName:Wilk "
+```
 
 ```log
 1639002641.464890 [0 172.18.0.1:64234] "FT.CREATE" "UserIdx" "ON" "HASH" "PREFIX" "1" "com.redis.om.hashes.domain.User:" "SCHEMA" "firstName" "AS" "firstName" "TAG" "middleName" "AS" "middleName" "TAG" "lastName" "AS" "lastName" "TAG" "email" "AS" "email" "TAG"

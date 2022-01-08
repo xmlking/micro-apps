@@ -4,6 +4,7 @@ package micro.apps.service
 
 import com.redis.om.spring.annotations.Bloom
 import com.redis.om.spring.annotations.Document
+import com.redis.om.spring.annotations.DocumentScore
 import com.redis.om.spring.annotations.Searchable
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -21,7 +22,7 @@ import micro.apps.model.Gender
 import micro.apps.model.LocalDateTimeSerializer
 import org.springframework.data.annotation.Id
 import org.springframework.data.geo.Point
-import org.springframework.data.redis.core.index.Indexed
+import com.redis.om.spring.annotations.Indexed
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.Date
@@ -37,15 +38,18 @@ import javax.validation.constraints.Size
 // import org.springframework.data.redis.core.index.GeoIndexed
 // import kotlinx.serialization.Transient as STransient
 
-@Serializable
-@ExperimentalSerializationApi
+
 @Document("person")
 data class Person(
     @Id val id: String? = null,
+    @DocumentScore
+    val score: Double,
     @Indexed
     val name: Name,
     @Indexed
     val addresses: Set<Address> = setOf(),
+    @Indexed
+    val address: Address?,
     val gender: Gender?,
     // @Serializable(with = DateAsLongSerializer::class) // @Polymorphic
     val dob: Date?,
@@ -61,8 +65,8 @@ data class Person(
     }
 }
 
-@Serializable
-@ExperimentalSerializationApi
+//@Serializable
+//@ExperimentalSerializationApi
 data class Name(
     @Searchable
     @field:NotNull
@@ -78,12 +82,12 @@ data class Name(
 )
 
 // HINT: spring-data need no-arg constructor or all properties nullable
-@Serializable
-@ExperimentalSerializationApi
+//@Serializable
+//@ExperimentalSerializationApi
 data class Address(
     @Id val id: String? = null,
     val suite: String? = null,
-    @Searchable
+    @Searchable(nostem = true)
     val street: String,
     @Indexed
     val city: String,
@@ -96,21 +100,21 @@ data class Address(
     @Serializable(with = PointSerializer::class) val location: Point? = null
 )
 
-@Serializable
-@ExperimentalSerializationApi
-data class PersonDto(
-    @field:Valid
-    val name: Name?,
-    @field:Valid val addresses: Set<AddressDto>? = setOf(),
-    val gender: Gender?,
-    @field:Past(message = "invalid DOB: {value}")
-    val dob: Date?,
-    @field:Email(message = "Email should be valid")
-    val email: String? = null,
-    val phone: String? = null,
-    val avatar: String? = "https://www.gravatar.com/avatar", // Optional
-    @Transient val valid: Boolean = false // not serialized: explicitly transient
-)
+//@Serializable
+//@ExperimentalSerializationApi
+//data class PersonDto(
+//    @field:Valid
+//    val name: Name?,
+//    @field:Valid val addresses: Set<AddressDto>? = setOf(),
+//    val gender: Gender?,
+//    @field:Past(message = "invalid DOB: {value}")
+//    val dob: Date?,
+//    @field:Email(message = "Email should be valid")
+//    val email: String? = null,
+//    val phone: String? = null,
+//    val avatar: String? = "https://www.gravatar.com/avatar", // Optional
+//    @Transient val valid: Boolean = false // not serialized: explicitly transient
+//)
 
 @ExperimentalSerializationApi
 @Serializable

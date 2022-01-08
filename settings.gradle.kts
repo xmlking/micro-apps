@@ -43,17 +43,17 @@ pluginManagement {
         id("org.jetbrains.kotlinx.kover") version "0.4.4"
         id("io.freefair.lombok") version "6.0.0-m2" apply false
         id("org.sonarqube") version "3.3"
-        id("com.diffplug.spotless") version "6.1.0"
-        id("org.jetbrains.dokka") version "1.6.0"
-        id("com.github.ben-manes.versions") version "0.39.0"
+        id("com.diffplug.spotless") version "6.1.1"
+        id("org.jetbrains.dokka") version "1.6.10"
+        id("com.github.ben-manes.versions") version "0.41.0"
         id("com.diffplug.spotless-changelog") version "2.3.2"
         id("se.patrikerdes.use-latest-versions") version "0.2.18"
         id("pl.allegro.tech.build.axion-release") version "1.13.6"
-        id("com.github.johnrengelman.shadow") version "7.1.1"
+        id("com.github.johnrengelman.shadow") version "7.1.2"
         id("com.google.cloud.tools.jib") version "3.1.4"
         id("dev.jacomet.logging-capabilities") version "0.10.0"
         id("com.google.protobuf") version "0.8.18" apply false
-        id("io.quarkus") version "2.6.0.Final" apply false
+        id("io.quarkus") version "2.6.1.Final" apply false
         // id("org.springframework.boot") version "2.5.4" apply false
         id("org.springframework.boot") version "2.6.2" apply false
         id("org.springframework.experimental.aot") version "0.11.1" apply false
