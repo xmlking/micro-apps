@@ -46,7 +46,7 @@ pluginManagement {
         id("com.diffplug.spotless") version "6.1.1"
         id("org.jetbrains.dokka") version "1.6.10"
         id("com.github.ben-manes.versions") version "0.41.0"
-        id("com.diffplug.spotless-changelog") version "2.3.2"
+        id("com.diffplug.spotless-changelog") version "2.4.0"
         id("se.patrikerdes.use-latest-versions") version "0.2.18"
         id("pl.allegro.tech.build.axion-release") version "1.13.6"
         id("com.github.johnrengelman.shadow") version "7.1.2"
