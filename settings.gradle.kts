@@ -55,7 +55,7 @@ pluginManagement {
         id("com.google.protobuf") version "0.8.18" apply false
         id("io.quarkus") version "2.6.1.Final" apply false
         // id("org.springframework.boot") version "2.5.4" apply false
-        id("org.springframework.boot") version "2.6.2" apply false
+        id("org.springframework.boot") version "2.6.3" apply false
         id("org.springframework.experimental.aot") version "0.11.1" apply false
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
         id("org.graalvm.buildtools.native") version "0.9.9" apply false
