@@ -50,7 +50,7 @@ pluginManagement {
         id("se.patrikerdes.use-latest-versions") version "0.2.18"
         id("pl.allegro.tech.build.axion-release") version "1.13.6"
         id("com.github.johnrengelman.shadow") version "7.1.2"
-        id("com.google.cloud.tools.jib") version "3.1.4"
+        id("com.google.cloud.tools.jib") version "3.2.0"
         id("dev.jacomet.logging-capabilities") version "0.10.0"
         id("com.google.protobuf") version "0.8.18" apply false
         id("io.quarkus") version "2.6.1.Final" apply false
