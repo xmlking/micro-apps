@@ -41,7 +41,7 @@ jobs:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
       - name: check
-        uses: eskatos/gradle-command-action@v1
+        uses: eskatos/gradle-command-action@v2.1.2
         id: check
         env:
           CI: true
