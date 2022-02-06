@@ -26,9 +26,6 @@ dependencies {
     implementation(libs.jackson.module.kotlin)
     implementation(libs.javafaker)
 
-    implementation(libs.kotlin.reflect)
-    implementation(libs.kotlin.stdlib.jdk8)
-
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.reactive)
     implementation(libs.kotlinx.coroutines.reactor)

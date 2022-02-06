@@ -18,7 +18,6 @@ val jacocoQualityGate: String by project
 val baseDockerImage: String by project
 
 val gradleToolVersion = libs.versions.gradleTool.get()
-val kotlinVersion = libs.versions.kotlin.get()
 val jacocoVersion = libs.versions.jacoco.get()
 val ktlintVersion = libs.versions.ktlint.get()
 val mockkVersion = libs.versions.mockk.get()
@@ -188,7 +187,7 @@ dockerCompose {
 
 // dependencyCheck generate SARIF file to publish to GitHub security
 dependencyCheck {
-    formats = listOf(SARIF, SARIF)
+    formats = listOf(HTML, SARIF)
     // suppressionFile = "$projectDir/config/owasp/owasp-supression.xml"
 }
 
