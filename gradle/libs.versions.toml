@@ -34,7 +34,7 @@ jacoco = "0.8.7"
 
 # logs
 kotlinLogging = "2.1.21"
-slf4j = { require = "2.0.0-alpha5" }
+slf4j = { require = "2.0.0-alpha6" }
 # slf4j = "1.7.31"
 
 # quarkus

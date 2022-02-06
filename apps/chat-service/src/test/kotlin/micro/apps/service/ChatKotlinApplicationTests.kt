@@ -99,7 +99,7 @@ class ChatKotlinApplicationTests(
                 .route("api.v1.messages.stream")
                 .retrieveFlow<MessageVM>()
                 .test {
-                    assertThat(expectItem().prepareForTesting())
+                    assertThat(awaitItem().prepareForTesting())
                         .isEqualTo(
                             MessageVM(
                                 "*testMessage*",
@@ -108,7 +108,7 @@ class ChatKotlinApplicationTests(
                             )
                         )
 
-                    assertThat(expectItem().prepareForTesting())
+                    assertThat(awaitItem().prepareForTesting())
                         .isEqualTo(
                             MessageVM(
                                 "<body><p><strong>testMessage2</strong></p></body>",
@@ -116,7 +116,7 @@ class ChatKotlinApplicationTests(
                                 now.minusSeconds(1).truncatedTo(MILLIS)
                             )
                         )
-                    assertThat(expectItem().prepareForTesting())
+                    assertThat(awaitItem().prepareForTesting())
                         .isEqualTo(
                             MessageVM(
                                 "<body><p><code>testMessage3</code></p></body>",
@@ -144,7 +144,7 @@ class ChatKotlinApplicationTests(
                             .collect()
                     }
 
-                    assertThat(expectItem().prepareForTesting())
+                    assertThat(awaitItem().prepareForTesting())
                         .isEqualTo(
                             MessageVM(
                                 "<body><p><code>HelloWorld</code></p></body>",
