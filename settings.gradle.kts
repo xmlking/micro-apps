@@ -43,7 +43,7 @@ pluginManagement {
         id("org.jetbrains.kotlinx.kover") version "0.4.4"
         id("io.freefair.lombok") version "6.0.0-m2" apply false
         id("org.sonarqube") version "3.3"
-        id("com.diffplug.spotless") version "6.2.0"
+        id("com.diffplug.spotless") version "6.2.1"
         id("org.jetbrains.dokka") version "1.6.10"
         id("com.github.ben-manes.versions") version "0.41.0"
         id("com.diffplug.spotless-changelog") version "2.4.0"
