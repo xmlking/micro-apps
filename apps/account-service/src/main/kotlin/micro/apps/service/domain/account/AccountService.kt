@@ -17,7 +17,7 @@ import micro.apps.proto.common.v1.Person
 import micro.apps.proto.common.v1.person
 import mu.KotlinLogging
 
-var person = person {
+var person1 = person {
     firstName = "sumo"
     lastName = "demo"
     phone = "000-000-0000"
@@ -27,7 +27,7 @@ private val logger = KotlinLogging.logger {}
 
 class AccountService : AccountServiceGrpcKt.AccountServiceCoroutineImplBase() {
 
-    override suspend fun get(request: GetRequest): GetResponse = getResponse { account = person }
+    override suspend fun get(request: GetRequest): GetResponse = getResponse { account = person1 }
 
     override suspend fun create(request: CreateRequest): StringValue {
         // TODO("not implemented")
@@ -36,7 +36,7 @@ class AccountService : AccountServiceGrpcKt.AccountServiceCoroutineImplBase() {
 
     override fun search(request: SearchRequest): Flow<SearchResponse> = flow {
         val filteredPerson = Person.newBuilder()
-        FieldMaskUtil.merge(request.fieldMask, person, filteredPerson)
+        FieldMaskUtil.merge(request.fieldMask, person1, filteredPerson)
 
         // logger.atInfo().log("firstName: {}, lastName: {}", person.firstName, person.lastName)
         // logger.atDebug().addKeyValue("firstName", person.firstName).addKeyValue("lastName", person.lastName).log("Responding with Person:")

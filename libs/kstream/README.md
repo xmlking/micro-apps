@@ -16,8 +16,8 @@ This package includes:
 - [x] Detect when a payload is not encrypted to skip decryption
 - [x] Configurable master-key management via `gcp-kms` or `aws-kms` 
 - [x] Record-level encryption
-- [ ] Field-level encryption via schema annotations. marked with **confidential**
-
+- [ ] Field-level encryption via schema annotations. marked with **confidential** annotation.
+  - [ ] when **granular** flag is enabled, encrypt _string_, _binary_ fields matching to provided **avpaths** or **avpaths** derived from avro schema annotations. 
 
 ## Usage
 

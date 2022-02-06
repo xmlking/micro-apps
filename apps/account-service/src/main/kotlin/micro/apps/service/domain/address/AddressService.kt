@@ -15,7 +15,7 @@ import micro.apps.proto.address.v1.searchResponse
 import micro.apps.proto.common.v1.address
 import mu.KotlinLogging
 
-var address = address {
+var address1 = address {
     state = "1234"
     street = "FourWinds Dr"
     city = "Riverside"
@@ -27,7 +27,7 @@ private val logger = KotlinLogging.logger {}
 
 class AddressService : AddressServiceGrpcKt.AddressServiceCoroutineImplBase() {
 
-    override suspend fun get(request: GetRequest): GetResponse = getResponse { address = address }
+    override suspend fun get(request: GetRequest): GetResponse = getResponse { address = address1 }
 
     override suspend fun create(request: CreateRequest): StringValue {
         // TODO("not implemented")
@@ -44,7 +44,7 @@ class AddressService : AddressServiceGrpcKt.AddressServiceCoroutineImplBase() {
             emit(
                 searchResponse {
                     id = StringValue.of("123e4567-e89b-12d3-a456-426614174000")
-                    address = address
+                    address = address1
                 }
             )
         }

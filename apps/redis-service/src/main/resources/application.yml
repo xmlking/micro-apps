@@ -3,3 +3,8 @@ spring.application.name: redis-service
 
 # debug:true
 logging.level.com.redis.om.spring: DEBUG
+
+# ==== application properties  ========
+features:
+  change-events:
+    enabled: true

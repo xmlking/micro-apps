@@ -32,7 +32,6 @@ import kotlin.system.measureTimeMillis
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.ExperimentalTime
 
-
 /**
  * Showcase backpressure handling techniques:
  * - Dropping the messages.
