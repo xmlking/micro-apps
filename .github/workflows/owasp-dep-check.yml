@@ -1,0 +1,49 @@
+name: OWASP Dependency Check
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/*
+    paths:
+      - 'gradle/libs.versions.toml'
+      - 'settings.gradle.kts'
+  pull_request:
+    branches:
+      - '*'
+    paths:
+      - 'gradle/libs.versions.toml'
+      - 'settings.gradle.kts'
+env:
+  CI: true
+  GRADLE_BUILD_ACTION_CACHE_DEBUG_ENABLED: true
+
+jobs:
+  check:
+    # Skip build if head commit contains 'skip ci'
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+    name: Check OWASP Dependencies
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: zulu
+      - name: check
+        uses: eskatos/gradle-command-action@v2
+        id: Run OWASP dependency check
+        env:
+          CI: true
+        with:
+          gradle-version: release-candidate
+          arguments: dependencyCheckAggregate
+      - name: Upload OWASP Dependencies scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        id: dependecyreport
+        with:
+          sarif_file: build/reports/dependency-check-report.sarif
+          category: OWASP-dependency-check

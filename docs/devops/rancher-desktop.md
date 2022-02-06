@@ -107,3 +107,36 @@ rpk topic consume twitch_chat --brokers=localhost:9092
 ```bash
 kubectl apply -f jade-shooter
 ```
+
+How to expose traefik v2 dashboard?
+
+https://github.com/rancher-sandbox/rancher-desktop/issues/896
+
+create `dashboard.yaml` route
+
+```yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`traefik.localhost`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+```
+
+
+```bash
+kubectl -n kube-system apply -f dashboard.yaml
+```
+
+open dashboard in your favorite browser and **don't forget the second slash**
+
+```bash
+open http://traefik.localhost/dashboard/#/
+```

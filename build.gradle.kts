@@ -6,6 +6,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
+import org.owasp.dependencycheck.reporting.ReportGenerator.Format.SARIF
+import org.owasp.dependencycheck.reporting.ReportGenerator.Format.HTML
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -74,6 +76,8 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
     // Software Composition Analysis (SCA) tool
     id("org.owasp.dependencycheck")
+    // Aggregating code coverage with JaCoCo
+    id("jacoco-report-aggregation")
 }
 
 // rootProject config
@@ -164,11 +168,11 @@ sonarqube {
 
 // Kotlin Code Coverage Reporing
 kover {
-    isEnabled = true // false to disable instrumentation of all test tasks in all modules
+    isDisabled = false // false to disable instrumentation of all test tasks in all modules
     coverageEngine.set(kotlinx.kover.api.CoverageEngine.INTELLIJ) // change instrumentation agent and reporter
     // intellijEngineVersion.set("1.0.622")    // change version of IntelliJ agent and reporter
     jacocoEngineVersion.set(jacocoVersion) // change version of JaCoCo agent and reporter
-    generateReportOnCheck.set(true) // false to do not execute `koverReport` task before `check` task
+    generateReportOnCheck = true // false to do not execute `koverReport` task before `check` task
 }
 
 // HINT: add this like to all subprojects that depends on dockerCompose
@@ -180,6 +184,12 @@ dockerCompose {
     nested("dgraph").apply {
         useComposeFiles.set(listOf("infra/dgraph.yml"))
     }
+}
+
+// dependencyCheck generate SARIF file to publish to GitHub security
+dependencyCheck {
+    formats = listOf(SARIF, SARIF)
+    // suppressionFile = "$projectDir/config/owasp/owasp-supression.xml"
 }
 
 // all projects config
@@ -447,6 +457,13 @@ subprojects {
                     put("Implementation-Vendor", project.group)
                 }
             }
+
+            // Reproducible Builds https://reproducible-builds.org/
+            withType<AbstractArchiveTask>() {
+                isPreserveFileTimestamps = false
+                isReproducibleFileOrder = true
+            }
+
             plugins.withId("com.github.johnrengelman.shadow") {
                 shadowJar {
                     isZip64 = true
