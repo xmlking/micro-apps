@@ -11,3 +11,5 @@ queries:
 paths-ignore:
   - docs
   - delivery
+  - sveltekit-starter/.svelte-kit
+  - libs/proto/build/generated
