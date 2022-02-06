@@ -35,7 +35,6 @@ jobs:
           distribution: zulu
       - name: check
         uses: eskatos/gradle-command-action@v2
-        id: Run OWASP dependency check
         env:
           CI: true
         with:
