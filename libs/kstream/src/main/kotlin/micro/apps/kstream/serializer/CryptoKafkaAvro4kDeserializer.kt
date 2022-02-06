@@ -1,7 +1,6 @@
 package micro.apps.kstream.serializer
 
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient
-import micro.apps.core.getThroughReflection
 import org.apache.avro.Schema
 import org.apache.kafka.common.serialization.Deserializer
 
@@ -27,11 +26,25 @@ class CryptoKafkaAvro4kDeserializer(
 
     override fun deserialize(s: String?, bytes: ByteArray?): Any? {
         // TODO: how to get associatedData?
-        return this.deserialize(s, this.decrypt(bytes!!), null)
+        return bytes?.let {
+            val plaintext = this.decrypt(bytes)
+            printSchema(plaintext)
+            this.deserialize(s, plaintext, null)
+        }
     }
 
     fun deserialize(@Suppress("UNUSED_PARAMETER") topic: String?, data: ByteArray?, readerSchema: Schema?): Any? {
         return this.deserialize(data, readerSchema)
+    }
+
+    private fun printSchema(payload: ByteArray) {
+        val schema = payload.let {
+            val buffer = getByteBuffer(payload)
+            getSchemaByIdWithRetry(buffer.int)
+        }
+        schema?.fields?.forEach {
+            println(it.name() + "   " + it.schema() + "   " + it.hasProps() + "   " + it.getProp("sensitive"))
+        }
     }
 
     override fun close() {}

@@ -11,8 +11,6 @@ import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
 import java.io.IOException
-import java.lang.Exception
-import kotlin.Throws
 
 private val logger = KotlinLogging.logger {}
 
@@ -39,8 +37,15 @@ class AppStartupRunner(private val conn: StatefulRediSearchConnection<String, St
                 "beers",
                 CreateOptions.builder<String, String>().prefix("customer:").temporary(1L).build(),
                 Field.text("name").weight(1.0).noStem(true).sortable(true).build(),
-                Field.text("name").weight(1.0).noStem(true).build(),
-                Field.numeric("ibu").build()
+                Field.text("subtitle").weight(1.0).noStem(true).build(),
+                Field.numeric("ibu").build(),
+
+                Field.text("addresses.[1]").build(),
+                Field.text("addresses.[2]").build(),
+                Field.text("addresses.[3]").build(),
+                Field.text("addresses.[4]").build(),
+                Field.text("addresses.[5]").build(),
+                Field.text("addresses.[6]").build()
             )
         } catch (lde: IOException) {
             // ignore - index already exists
