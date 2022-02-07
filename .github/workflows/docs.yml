@@ -11,10 +11,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.5.1
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Set up Node 17
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '17.x'
       - name: Release to GitHub Pages
         env:
           USE_SSH: true

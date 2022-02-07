@@ -1,15 +1,21 @@
-# Security 
+# Software 
 
 This document outlines an overview of security considerations for `micro-apps` services, components, artifacts, as well as configuration options for Kubernetes cluster.
 
 Safeguarding artifact integrity across any software supply chain.
 
-## Goals
+
+## Supply Chain Security
+
+### Goals
 
 1. Adopt [SLSA](http://slsa.dev/) Framework _Level 4_ guideline for **DevSecOps**
-2. Signed container images
-3. Software Bill of Materials (SBOM)
-4. Risk and compliance as code ([RCaC](https://cloud.google.com/solutions/risk-and-compliance-as-code))
+2. Signed container images with [Sigstore](https://www.sigstore.dev/) **Cosign**
+3. Software Bill of Materials (SBOM) with [Anchore](https://anchore.com/sbom) **Syft**
+4. Static Code Analysis with [CodeQL](https://colinsalmcorner.com/custom-codeql/)
+5. Vulnerabilities scanning with [Snyk](https://snyk.io/product/open-source-security-management/)
+6. Software Composition Analysis (SCA) with [OWASP Dependency-Check](https://jeremylong.github.io/DependencyCheck/) and [Dependabot](https://github.com/features/security)
+7. Risk and compliance as code ([RCaC](https://cloud.google.com/solutions/risk-and-compliance-as-code)) via [Open Policy Agent](https://www.openpolicyagent.org/) **Gatekeeper**
 
 ### Binary Authorization
 

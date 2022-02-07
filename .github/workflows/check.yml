@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Check code quality
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Set up JDK 17
         uses: actions/setup-java@v2
