@@ -15,6 +15,7 @@ class SerializationTest : FunSpec({
 
     val persons = mockPersonList()
 
+    // disabled to prevent unintentional overwrite file: data/person.avro
     test("test avro serialization WriteData").config(enabled = false) {
         val serializer = Person.serializer()
         val schema = Avro.default.schema(serializer)
@@ -22,7 +23,8 @@ class SerializationTest : FunSpec({
         val output = Avro.default.openOutputStream(serializer) {
             encodeFormat = AvroEncodeFormat.Data() // Other Options: AvroEncodeFormat.Binary(), AvroEncodeFormat.Json()
             this.schema = schema
-        }.to("./apps/classifier-pipeline/src/test/resources/data/person.avro")
+       // }.to("./apps/classifier-pipeline/src/test/resources/data/person.avro")
+        }.to("./src/test/resources/data/person.avro")
         output.write(persons)
         output.close()
     }

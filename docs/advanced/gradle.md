@@ -60,9 +60,12 @@ gradle dependencyCheckAggregate
 Note: _Cross-module tests are not supported in reports and validation yet. For each test, only the classpath belonging to the current module is taken._
 
 ```bash
-gradle koverReport -x test
-gradle koverCollectReports # # Default directory is $buildDir/reports/kover/all
-gradle koverVerify # Verifies code coverage metrics based on specified rules. Always executes before check task.
+gradle koverMergedReport -x test # Generates code coverage report for all enabled test tasks in all projects.
+gradle koverMergedVerify # Verifies code coverage metrics of all projects based on specified rules. Always executes before `check` task.
+# Executes before check task if property generateReportOnCheck for KoverExtension is true 
+gradle koverCollectReports # Collects all projects reports into one directory. Default directory is $buildDir/reports/kover/projects
+gradle koverReport # Executes both koverXmlReport and koverHtmlReport tasks for one project.
+gradle koverVerify # Verifies code coverage metrics of one project based on specified rules.
 ```
 
 ### Spotless tasks

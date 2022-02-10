@@ -79,8 +79,8 @@ class PubSubProducerTest : Serializable {
 
     @Test
     @Ignore
-    fun tummyTest() {
-        println("tummyTest...")
+    fun dummyTest() {
+        println("dummyTest...")
     }
 
     // NOTE:Google PubSub Emulator must be running for this test to be passed.

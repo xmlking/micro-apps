@@ -18,6 +18,7 @@ import org.apache.beam.sdk.testing.PAssert
 import org.apache.beam.sdk.testing.TestPipeline
 import org.joda.time.Instant
 import org.junit.Rule
+import org.junit.jupiter.api.Tag
 import java.io.Serializable
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -92,6 +93,7 @@ class ClassifierPipelineTest : Serializable {
     // NOTE:Google PubSub Emulator must be running for this test to be passed.
     @Test
     @Ignore
+    @Tag("integration")
     fun runE2ETest() {
         assertEquals("310s", testOptions.windowDuration)
 

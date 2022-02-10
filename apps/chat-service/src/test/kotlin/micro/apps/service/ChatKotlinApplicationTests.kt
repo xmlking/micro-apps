@@ -17,6 +17,7 @@ import micro.apps.service.service.UserVM
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -91,6 +92,7 @@ class ChatKotlinApplicationTests(
     @ExperimentalTime
     @ExperimentalCoroutinesApi
     @Test
+    @Tag("integration")
     fun `test that messages API streams latest messages`() {
         runBlocking {
             val rSocketRequester = rsocketBuilder.websocket(URI("ws://localhost:$serverPort/rsocket"))

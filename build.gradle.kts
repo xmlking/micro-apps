@@ -6,8 +6,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
-import org.owasp.dependencycheck.reporting.ReportGenerator.Format.SARIF
 import org.owasp.dependencycheck.reporting.ReportGenerator.Format.HTML
+import org.owasp.dependencycheck.reporting.ReportGenerator.Format.SARIF
 import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -142,6 +142,10 @@ println("SpotlessChangelog Version Next: ${spotlessChangelog.versionNext}  Last:
 spotless {
     kotlin {
         ktlint(ktlintVersion)
+        // Then whenever Spotless encounters a pair of fmt:off / fmt:on, it will exclude the code between them from formatting
+        toggleOffOn("fmt:off", "fmt:on")
+        trimTrailingWhitespace()
+        endWithNewline()
     }
     kotlinGradle {
         target("*.gradle.kts")
@@ -172,6 +176,7 @@ kover {
     // intellijEngineVersion.set("1.0.622")    // change version of IntelliJ agent and reporter
     jacocoEngineVersion.set(jacocoVersion) // change version of JaCoCo agent and reporter
     generateReportOnCheck = true // false to do not execute `koverReport` task before `check` task
+    runAllTestsForProjectTask = false  // true to run all tests in all projects if `koverHtmlReport`, `koverXmlReport`, `koverReport`, `koverVerify` or `check` tasks executed on some project
 }
 
 // HINT: add this like to all subprojects that depends on dockerCompose
@@ -316,6 +321,7 @@ subprojects {
             }
             kotlin {
                 targetExclude("**/build/**")
+                toggleOffOn("fmt:off", "fmt:on")
                 ktlint(ktlintVersion)
             }
             kotlinGradle {
@@ -377,7 +383,75 @@ subprojects {
                     }
                 }
             }
+/*
+            testing {
+                suites {
+                    val test by getting(JvmTestSuite::class) {
+                        useJUnitJupiter()
 
+                        targets {
+                            all {
+                                testTask.configure {
+                                    useJUnitPlatform {
+                                        excludeTags("slow", "integration")
+                                    }
+                                    filter {
+                                        isFailOnNoMatchingTests = false
+                                    }
+                                    // maxParallelForks = Runtime.getRuntime().availableProcessors() // FIXME: port conflict for quarkus
+                                    testLogging {
+                                        exceptionFormat = FULL
+                                        showExceptions = true
+                                        showStandardStreams = true
+                                        events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
+                                    }
+                                    finalizedBy("jacocoTestReport")
+                                }
+                            }
+                        }
+                    }
+
+                    val integrationTest by registering(JvmTestSuite::class) {
+                        sources {
+                            java {
+                                setSrcDirs(listOf("src/test/kotlin", "src/test/java"))
+                            }
+                            resources {
+                                setSrcDirs(listOf("src/test/resources"))
+                            }
+                        }
+
+                        dependencies {
+                            implementation(project)
+                            //testImplementation(project(path = ":ontrack-extension-casc", configuration = "tests"))
+                            implementation(project(":apps:classifier-pipeline"){ configurations { "testRuntime" } })
+                            // implementation("org.assertj:assertj-core:3.22.0")
+                        }
+
+                        targets {
+                            all {
+                                testTask.configure {
+                                    useJUnitPlatform {
+                                        includeTags("integration", "e2e")
+                                    }
+                                    filter {
+                                        isFailOnNoMatchingTests = false
+                                    }
+                                    testLogging {
+                                        exceptionFormat = FULL
+                                        showExceptions = true
+                                        showStandardStreams = true
+                                        events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
+                                    }
+                                    shouldRunAfter(test)
+                                    finalizedBy("jacocoTestReport")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+*/
             test {
                 useJUnitPlatform {
                     excludeTags("slow", "integration")
@@ -413,9 +487,9 @@ subprojects {
             }
 
             check {
+                // dependsOn(testing.suites.named("integrationTest"))
                 dependsOn("jacocoTestCoverageVerification")
                 dependsOn("jacocoTestReport")
-                // dependsOn(integrationTest)
             }
 
             dokkaHtml {
@@ -483,15 +557,15 @@ subprojects {
                         // image = "us.gcr.io/${gcloudProject}/${rootProject.name}/${project.name}:${project.version}"
 
                         /**
-                         gcr: Google Container Registry (GCR)
-                         osxkeychain: Docker Hub
+                        gcr: Google Container Registry (GCR)
+                        osxkeychain: Docker Hub
                          */
                         credHelper = "osxkeychain"
                         /**
-                         auth {
-                         username = "*******"
-                         password = "*******"
-                         }
+                        auth {
+                        username = "*******"
+                        password = "*******"
+                        }
                          */
                         tags = setOf("${project.version}")
                     }
@@ -582,12 +656,12 @@ tasks {
         description = "print all affected subprojects due to code changes"
     }
 
-    koverVerify {
+    koverMergedVerify {
         rule {
             name = "75% Coverage"
             bound {
                 minValue = 75
-                valueType = kotlinx.kover.api.VerificationValueType.COVERED_LINES_PERCENTAGE
+                // valueType = kotlinx.kover.api.VerificationValueType.COVERED_LINES_PERCENTAGE //  by default
             }
         }
     }

@@ -22,8 +22,7 @@ validation = "2.0.1.Final"
 kotlinRetry = "1.0.9"
 
 # gradle
-#gradleTool = "7.3.3"
-gradleTool = "7.4-rc-2"
+gradleTool = "7.4"
 
 # test matchers
 hamcrest = "1.3"
@@ -39,8 +38,8 @@ slf4j = { require = "2.0.0-alpha6" }
 
 # quarkus
 quarkusPluginId = "io.quarkus"
-quarkusPluginVersion = "2.7.0.Final"
-quarkusPlatformVersion = "2.7.0.Final"
+quarkusPluginVersion = "2.7.1.Final"
+quarkusPlatformVersion = "2.7.1.Final"
 quarkusPlatformGroupId = "io.quarkus"
 quarkusPlatformArtifactId = "quarkus-universe-bom"
 
@@ -64,7 +63,7 @@ guava = "30.1-jre"
 sentinel = "1.8.3"
 
 # beam
-beam = "2.35.0"
+beam = "2.36.0"
 csv = "1.8"
 openCsv = "5.0"
 uuid = "4.0.1"
@@ -88,7 +87,7 @@ javaFaker = "1.0.2"
 confluent ="7.0.1"
 
 # google
-googlePubsub = "1.115.2"
+googlePubsub = "1.115.3"
 googleTink = "1.6.1"
 
 # telemetry
