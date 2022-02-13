@@ -41,7 +41,7 @@ pluginManagement {
         kotlin("plugin.noarg") version kotlinVersion apply false
         kotlin("plugin.lombok") version kotlinVersion apply false
         id("org.jetbrains.kotlinx.kover") version "0.5.0"
-        id("io.freefair.lombok") version "6.0.0-m2" apply false
+        id("io.freefair.lombok") version "6.4.0" apply false
         id("org.sonarqube") version "3.3"
         id("com.diffplug.spotless") version "6.2.2"
         id("org.jetbrains.dokka") version "1.6.10"
