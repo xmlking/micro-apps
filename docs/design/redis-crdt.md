@@ -22,12 +22,12 @@ Contents:
 
 ## Summary
 
-**Geo-Distributed Active-Active** deployment for **Keying&Linking** means ability to process *online/streaming/batch* workloads from multiple regions simultaneously.
+**Geo-Distributed Active-Active** deployment enables ability to process *online/streaming/batch* workloads from multiple regions simultaneously.
 
 
 ### Issue
 
-Writes to BigTable(BT) are **evneuvaly consistent** when BT replication is enabled across regions.<br/>
+Writes to BigTable(BT) is **evneuvaly consistent** when BT replication is enabled across regions.<br/>
 This may lead to data inconsistency when transactions are processed simultaneously in both regions
 
 ### Decision
