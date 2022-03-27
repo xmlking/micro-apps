@@ -40,7 +40,3 @@ services:
     depends_on:
       redpanda:
         condition: service_healthy
-
-  app:
-    # NOTE: Please use the latest version here!
-    image: ghcr.io/xmlking/grpc-starter-kit/account-service:v0.1.4
