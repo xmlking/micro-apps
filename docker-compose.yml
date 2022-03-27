@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 services:
   jenkins:
@@ -37,7 +37,8 @@ services:
     image: sonarqube
     container_name: sonarqube
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "9000:9000"
     environment:
@@ -68,6 +69,11 @@ services:
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
       - "./scripts/add-keycloak-db.sh:/docker-entrypoint-initdb.d/add-keycloak-db.sh"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   keycloak:
     image: jboss/keycloak:11.0.3
@@ -84,14 +90,16 @@ services:
     volumes:
       - "./scripts/karate-quarkus-demo-realm.json:/tmp/karate-quarkus-demo-realm.json"
     depends_on:
-      - postgres
+      db:
+        condition: service_healthy
 
   graphql-engine:
     image: hasura/graphql-engine:v2.0.0-beta.1
     ports:
       - "18080:8080"
     depends_on:
-      - "postgres"
+      db:
+        condition: service_healthy
     networks:
       - demo-network
     environment:

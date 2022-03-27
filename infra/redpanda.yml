@@ -2,7 +2,7 @@ version: "3.8"
 services:
   redpanda:
     # NOTE: Please use the latest version here!
-    image: docker.vectorized.io/vectorized/redpanda:v21.11.2
+    image: docker.vectorized.io/vectorized/redpanda:v21.11.11
     command:
       - redpanda start
       - --overprovisioned
@@ -26,7 +26,8 @@ services:
       test: ["CMD", "curl", "http://localhost:9644/v1/status/ready"]
       start_period: 0s
       interval: 1s
-      retries: 30
+      timeout: 10s
+      retries: 10
 
   topic-creator:
     # NOTE: Please use the latest version here!
@@ -39,3 +40,7 @@ services:
     depends_on:
       redpanda:
         condition: service_healthy
+
+  app:
+    # NOTE: Please use the latest version here!
+    image: ghcr.io/xmlking/grpc-starter-kit/account-service:v0.1.4

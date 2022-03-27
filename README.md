@@ -41,22 +41,22 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 
 ```bash
 # start local sonarqube
-docker compose up postgres # docker compose up -V postgres
+nerdctl compose up postgres # nerdctl compose up -V postgres
 # stop local postgres before restart again
-docker compose down # docker compose down -v
+nerdctl compose down # nerdctl compose down -v
 ```
 
 > start optional CI/CD infra dependencies: sonarqube, nexus
 
 ```bash
 # start local sonarqube
-docker compose up sonarqube # docker compose up -V sonarqube
+nerdctl compose up sonarqube # nerdctl compose up -V sonarqube
 # stop local sonarqube before restart again
-docker compose down
+nerdctl compose down
 # (optional) this remove volumes - needed when you upgrade image versions 
-docker compose down -v
+nerdctl compose down -v
 # start local nexus
-docker compose up nexus
+nerdctl compose up nexus
 ```
 
 #### Dashboard access

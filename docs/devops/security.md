@@ -1,11 +1,11 @@
-# Software 
+# Security 
 
 This document outlines an overview of security considerations for `micro-apps` services, components, artifacts, as well as configuration options for Kubernetes cluster.
 
 Safeguarding artifact integrity across any software supply chain.
 
 
-## Supply Chain Security
+## Zero Trust Supply Chain Security
 
 ### Goals
 
@@ -63,3 +63,7 @@ The  deployments are configured in conformance with the Kubernetes [restricted p
 
 - properly adheres to Kubernetes security model including RBAC
 - implement policy-as-code via **OPA, Kyverno** admission controllers
+
+
+## Reference 
+- [Zero Trust Supply Chain Security](https://cd.foundation/blog/2021/10/04/zero-trust-supply-chain-security/)

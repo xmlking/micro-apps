@@ -15,7 +15,7 @@ Showcase backpressure handling techniques:
 # server
 gradle :apps:account-service:run
 # proxy
-docker compose up envoy
+nerdctl compose up envoy
 # client -> proxy -> server
 gradle :apps:account-service:runAccountClient
 # client -> server

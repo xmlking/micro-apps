@@ -21,13 +21,16 @@ services:
       # redis rdb backup config.
       # Save if 100 keys are added in every 10 seconds
       - "--save 10 100"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
 
   insight:
     image: redislabs/redisinsight:1.11.0
     ports:
       - '8001:8001'
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     volumes:
       - redisinsight:/db
 
@@ -52,7 +55,8 @@ services:
     links:
       - redis
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
 
 volumes:
   redisearch:

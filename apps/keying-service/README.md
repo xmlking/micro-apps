@@ -8,7 +8,7 @@ Keying gRPC service.
 # server
 gradle :apps:keying-service:run
 # proxy
-docker compose up envoy
+nerdctl compose up envoy
 # client -> proxy -> server
 gradle :apps:keying-service:runKeyingClient
 # client -> server
