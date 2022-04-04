@@ -4,10 +4,11 @@ Account gRPC service.
 
 Showcase backpressure handling techniques:
 
-- Dropping the messages.
-- Sensible buffering strategies (time vs count).
-- Blocking the execution and processing the current set of events.
-- Throttling and debouncing strategies.
+- [x] Dropping the messages.
+- [x] Sensible buffering strategies (time vs count).
+- [x] Blocking the execution and processing the current set of events.
+- [ ] Throttling and debouncing strategies.
+- [ ] [Portable validations for Kotlin](https://github.com/konform-kt/konform)
 
 ### 🚀 Run
 

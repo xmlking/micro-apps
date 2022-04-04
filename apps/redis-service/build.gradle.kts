@@ -32,7 +32,7 @@ dependencies {
     // Optional: for redis
 //    implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
     implementation("org.apache.commons:commons-pool2")
-    implementation("com.redis.om:redis-om-spring:0.2.0-SNAPSHOT")
+    implementation("com.redis.om:redis-om-spring:0.3.1-SNAPSHOT")
 
     // projectreactor
     implementation(libs.spring.boot.reactor.kotlin.extensions)

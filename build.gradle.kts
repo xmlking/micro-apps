@@ -560,7 +560,9 @@ subprojects {
                         gcr: Google Container Registry (GCR)
                         osxkeychain: Docker Hub
                          */
-                        credHelper = "osxkeychain"
+                        credHelper {
+                            helper = "osxkeychain"
+                        }
                         /**
                         auth {
                         username = "*******"

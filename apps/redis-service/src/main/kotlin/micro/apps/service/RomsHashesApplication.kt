@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @EnableRedisEnhancedRepositories(basePackages = ["micro.apps.service"]) // HINT without basePackages, index will not be created
-@EnableRedisDocumentRepositories(basePackages = ["micro.apps.service"], considerNestedRepositories = true)
+//@EnableRedisDocumentRepositories(basePackages = ["micro.apps.service"], considerNestedRepositories = true)
 class RomsHashesApplication {
     @Autowired
     private lateinit var userRepo: UserRepository

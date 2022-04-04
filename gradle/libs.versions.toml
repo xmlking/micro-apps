@@ -2,13 +2,13 @@
 
 # kotlin
 spek = "2.0.11"
-kotest = "5.2.1"
+kotest = "5.2.2"
 junit = "5.8.2"
 serialization = "1.3.2"
 avro4k = "1.6.0"
 avro4kSerde = "0.13.0"
 kaml = "0.17.0"
-coroutines = "1.6.0"
+coroutines = "1.6.1"
 metadata = "0.3.0"
 turbine = "0.7.0"
 ktlint = "0.43.2"
@@ -22,7 +22,7 @@ validation = "2.0.1.Final"
 kotlinRetry = "1.0.9"
 
 # gradle
-gradleTool = "7.4.1"
+gradleTool = "7.4.2"
 
 # test matchers
 hamcrest = "1.3"
@@ -38,8 +38,8 @@ slf4j = { require = "2.0.0-alpha7" }
 
 # quarkus
 quarkusPluginId = "io.quarkus"
-quarkusPluginVersion = "2.7.5.Final"
-quarkusPlatformVersion = "2.7.5.Final"
+quarkusPluginVersion = "2.8.0.Final"
+quarkusPlatformVersion = "2.8.0.Final"
 quarkusPlatformGroupId = "io.quarkus"
 quarkusPlatformArtifactId = "quarkus-universe-bom"
 
@@ -55,9 +55,9 @@ quarkusPlatformArtifactId = "quarkus-universe-bom"
 #quarkusPlatformVersion = "999-SNAPSHOT"
 
 # grpc
-grpc = "1.45.0"
+grpc = "1.45.1"
 grpcKotlin = "1.2.1"
-protobuf = "3.20.0-rc-1"
+protobuf = "3.20.0"
 pgv = "0.6.7"
 guava = "30.1-jre"
 sentinel = "1.8.3"
@@ -84,10 +84,10 @@ springCloudGcp = "2.0.5"
 # kafka
 kafkaStreams = "3.1.0"
 javaFaker = "1.0.2"
-confluent ="7.0.1"
+confluent ="7.0.2"
 
 # google
-googlePubsub = "1.116.2"
+googlePubsub = "1.116.3"
 googleTink = "1.6.1"
 
 # telemetry

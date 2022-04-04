@@ -31,7 +31,7 @@ pluginManagement {
     // enableFeaturePreview("GRADLE_METADATA")
 
     plugins {
-        val kotlinVersion = "1.6.10"
+        val kotlinVersion = "1.6.20"
 
         kotlin("jvm") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion apply false
@@ -43,26 +43,26 @@ pluginManagement {
         id("org.jetbrains.kotlinx.kover") version "0.5.0"
         id("io.freefair.lombok") version "6.0.0-m2" apply false
         id("org.sonarqube") version "3.3"
-        id("com.diffplug.spotless") version "6.3.0"
+        id("com.diffplug.spotless") version "6.4.1"
         id("org.jetbrains.dokka") version "1.6.10"
         id("com.github.ben-manes.versions") version "0.42.0"
         id("com.diffplug.spotless-changelog") version "2.4.0"
         id("se.patrikerdes.use-latest-versions") version "0.2.18"
         id("pl.allegro.tech.build.axion-release") version "1.13.6"
         id("com.github.johnrengelman.shadow") version "7.1.2"
-        id("com.google.cloud.tools.jib") version "3.2.0"
+        id("com.google.cloud.tools.jib") version "3.2.1"
         id("dev.jacomet.logging-capabilities") version "0.10.0"
         id("com.google.protobuf") version "0.8.18" apply false
-        id("io.quarkus") version "2.7.5.Final" apply false
+        id("io.quarkus") version "2.8.0.Final" apply false
         // id("org.springframework.boot") version "2.5.4" apply false
-        id("org.springframework.boot") version "2.6.5" apply false
+        id("org.springframework.boot") version "2.6.6" apply false
         id("org.springframework.experimental.aot") version "0.11.3" apply false
         id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
         id("org.graalvm.buildtools.native") version "0.9.11" apply false
         id("com.dropbox.affectedmoduledetector") version "0.1.2" apply false
         id("com.avast.gradle.docker-compose") version "0.15.2" apply false
         id("com.github.node-gradle.node") version "3.2.1" apply false
-        id("org.owasp.dependencycheck") version "7.0.1"
+        id("org.owasp.dependencycheck") version "7.0.4.1"
     }
 }
 
