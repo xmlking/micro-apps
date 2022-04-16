@@ -19,6 +19,7 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 9. Platform independent Observability instrumentation via [OpenTelemetry](https://opentelemetry.io/) 
 10. Deployment automation with [kustomize](https://kustomize.io/) and Event-driven Autoscaling
     with [KEDA](https://keda.sh/)
+11. End-to-End Google Cloud DevOps flow [pop-kustomize](https://github.com/vszal/pop-kustomize)
 
 [![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
 [![Version](https://img.shields.io/github/v/tag/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/tags)
