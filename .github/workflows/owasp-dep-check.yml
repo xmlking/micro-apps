@@ -41,7 +41,7 @@ jobs:
           gradle-version: release-candidate
           arguments: dependencyCheckAggregate
       - name: Upload OWASP Dependencies scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         id: dependecyreport
         with:
           sarif_file: build/reports/dependency-check-report.sarif
