@@ -16,7 +16,7 @@ pluginManagement {
         }
         dependencies {
             classpath("org.eclipse.jgit:org.eclipse.jgit:5.10.0.202012080955-r")
-            classpath("com.dropbox.affectedmoduledetector:affectedmoduledetector:0.1.2")
+            classpath("com.dropbox.affectedmoduledetector:affectedmoduledetector:0.1.6")
         }
         configurations.classpath {
             resolutionStrategy {
