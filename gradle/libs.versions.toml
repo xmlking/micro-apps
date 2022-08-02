@@ -2,27 +2,27 @@
 
 # kotlin
 spek = "2.0.11"
-kotest = "5.2.3"
-junit = "5.8.2"
-serialization = "1.3.2"
+kotest = "5.4.1"
+junit = "5.9.0"
+serialization = "1.3.3"
 avro4k = "1.6.0"
 avro4kSerde = "0.13.0"
 kaml = "0.17.0"
-coroutines = "1.6.1"
+coroutines = "1.6.4"
 metadata = "0.3.0"
-turbine = "0.7.0"
-ktlint = "0.43.2"
-mockk = "1.12.3"
+turbine = "0.9.0"
+ktlint = "0.46.1"
+mockk = "1.12.5"
 arrow = "0.10.5"
 konfig = "1.1.2"
-mapstruct = "1.4.2.Final"
+mapstruct = "1.5.2.Final"
 markdown = "0.1.45"
 javafaker = "1.0.2"
 validation = "2.0.1.Final"
 kotlinRetry = "1.0.9"
 
 # gradle
-gradleTool = "7.4.2"
+gradleTool = "7.5"
 
 # test matchers
 hamcrest = "1.3"
@@ -32,14 +32,14 @@ restAssured = "4.5.0"
 jacoco = "0.8.7"
 
 # logs
-kotlinLogging = "2.1.21"
+kotlinLogging = "2.1.23"
 slf4j = { require = "2.0.0-alpha7" }
 # slf4j = "1.7.31"
 
 # quarkus
 quarkusPluginId = "io.quarkus"
-quarkusPluginVersion = "2.8.0.Final"
-quarkusPlatformVersion = "2.8.0.Final"
+quarkusPluginVersion = "2.11.1.Final"
+quarkusPlatformVersion = "2.11.1.Final"
 quarkusPlatformGroupId = "io.quarkus"
 quarkusPlatformArtifactId = "quarkus-universe-bom"
 
@@ -55,15 +55,15 @@ quarkusPlatformArtifactId = "quarkus-universe-bom"
 #quarkusPlatformVersion = "999-SNAPSHOT"
 
 # grpc
-grpc = "1.45.1"
-grpcKotlin = "1.2.1"
-protobuf = "3.20.0"
+grpc = "1.48.1"
+grpcKotlin = "1.3.0"
+protobuf = "3.21.4"
 pgv = "0.6.7"
 guava = "30.1-jre"
 sentinel = "1.8.4"
 
 # beam
-beam = "2.37.0"
+beam = "2.40.0"
 csv = "1.8"
 openCsv = "5.0"
 uuid = "4.0.1"
@@ -74,7 +74,7 @@ avro = "1.11.0"
 
 # spring
 #spring = "2.5.3"
-kotestSpring = "1.1.0"
+kotestSpring = "1.1.2"
 springMockk = "3.1.1"
 snakeyaml = "1.28"
 springGrpc = "4.6.0"
@@ -82,20 +82,20 @@ springCloud = "2021.0.0"
 springCloudGcp = "2.0.5"
 
 # kafka
-kafkaStreams = "3.1.0"
+kafkaStreams = "3.2.1"
 javaFaker = "1.0.2"
-confluent ="7.1.0"
+confluent ="7.2.1"
 
 # google
-googlePubsub = "1.116.3"
+googlePubsub = "1.120.7"
 googleTink = "1.6.1"
 
 # telemetry
 otel = "1.12.0"
 otel-alpha = "1.12.0-alpha"
 otel-api-alpha = "1.10.0-alpha-rc.1" # FIXME remove
-otel-agent = "1.12.1"
-micrometer = "1.8.5"
+otel-agent = "1.16.0"
+micrometer = "1.9.2"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }

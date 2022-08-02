@@ -36,7 +36,7 @@ Find more *Quarkus QuickStart* [samples](https://github.com/quarkusio/quarkus-qu
 
 ```bash
 cd apps
-mvn io.quarkus:quarkus-maven-plugin:2.1.0.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:2.11.1.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-service \
     -DprojectVersion=0.1.0 \

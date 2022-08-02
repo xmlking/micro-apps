@@ -45,7 +45,7 @@ dependencies {
 affectedTestConfiguration { jvmTestTask = "check" }
 
 quarkus {
-    setOutputDirectory("$projectDir/build/classes/kotlin/main")
+//    setOutputDirectory("$projectDir/build/classes/kotlin/main")
 }
 
 allOpen {
@@ -61,7 +61,7 @@ tasks {
     }
 
     quarkusDev {
-        setSourceDir("$projectDir/src/main/kotlin")
+//        setSourceDir("$projectDir/src/main/kotlin")
         // You can change the working directory
         // HINT: config/certs are at project root
         // workingDir = rootDir.absolutePath

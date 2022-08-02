@@ -19,7 +19,7 @@ dependencies {
 affectedTestConfiguration { jvmTestTask = "check" }
 
 quarkus {
-    setOutputDirectory("$projectDir/build/classes/kotlin/main")
+//    setOutputDirectory("$projectDir/build/classes/kotlin/main")
 }
 
 allOpen {
@@ -37,7 +37,7 @@ tasks {
     }
 
     quarkusDev {
-        setSourceDir("$projectDir/src/main/kotlin")
+//        setSourceDir("$projectDir/src/main/kotlin")
     }
 }
 

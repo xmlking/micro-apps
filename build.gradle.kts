@@ -84,12 +84,10 @@ plugins {
 scmVersion {
     useHighestVersion = true
 
-    tag(
-        closureOf<TagNameSerializationConfig> {
-            prefix = "v" // golang and appctl need SemVer tags with `v` prefix
-            versionSeparator = ""
-        }
-    )
+    tag {
+        prefix = "v" // golang and appctl need SemVer tags with `v` prefix
+        versionSeparator = ""
+    }
 
     branchVersionIncrementer = mapOf(
         "feature/.*" to "incrementMinor",
