@@ -3,6 +3,8 @@ plugins {
     kotlin("plugin.spring")
     kotlin("plugin.serialization")
     kotlin("kapt")
+    kotlin("plugin.lombok")
+    id("io.freefair.lombok")
 
     id("org.springframework.boot")
     id("io.spring.dependency-management")
@@ -32,7 +34,7 @@ dependencies {
     // Optional: for redis
 //    implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
     implementation("org.apache.commons:commons-pool2")
-    implementation("com.redis.om:redis-om-spring:0.3.1-SNAPSHOT")
+    implementation("com.redis.om:redis-om-spring:0.5.2-SNAPSHOT")
 
     // projectreactor
     implementation(libs.spring.boot.reactor.kotlin.extensions)
@@ -108,6 +110,10 @@ tasks {
         // This will set logs level DEBUG only for local development.
         jvmArgs = listOf("-Dlogging.level.micro.apps=DEBUG")
     }
+}
+
+kapt {
+    keepJavacAnnotationProcessors = true
 }
 
 noArg {
