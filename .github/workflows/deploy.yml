@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 #jobs:
 #  BINTRAY_UPLOAD:
 #    name: Bintray Upload
@@ -22,9 +22,9 @@ jobs:
 #      BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
 #    steps:
 #      - name: Checkout Repository
-#        uses: actions/checkout@v2
+#        uses: actions/checkout@v3
 #      - name: Set up JDK 17
-#        uses: actions/setup-java@v2
+#        uses: actions/setup-java@v3
 #        with:
 #          java-version: 17
 #          distribution: 'zulu'

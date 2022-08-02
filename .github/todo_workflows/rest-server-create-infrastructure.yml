@@ -3,7 +3,7 @@ name: REST Server - Create Infrastructure
 ###
 # Create infrastructure GitHub Action
 #
-# See https://github.com/microsoft/NubesGen/blob/main/docs/gitops-overview.md 
+# See https://github.com/microsoft/NubesGen/blob/main/docs/gitops-overview.md
 # for more information about using GitOps with NubesGen.
 ###
 
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Set environment variables
       env:
         AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}

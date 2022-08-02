@@ -27,9 +27,9 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: zulu
@@ -41,7 +41,7 @@ jobs:
           gradle-version: release-candidate
           arguments: dependencyCheckAggregate
       - name: Upload OWASP Dependencies scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         id: dependecyreport
         with:
           sarif_file: build/reports/dependency-check-report.sarif

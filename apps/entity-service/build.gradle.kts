@@ -33,7 +33,7 @@ dependencies {
     implementation("com.redislabs:spring-redisearch:3.1.2")
     // implementation("com.redislabs:lettucemod:1.7.2") // https://github.com/redis-developer/lettucemod
     // implementation("com.redislabs:jredisgraph")
-    // implementation("com.redis.om:redis-om-spring:0.1.0-SNAPSHOT")
+    // implementation("com.redis.om:redis-om-spring:0.5.2-SNAPSHOT")
 
     // projectreactor
     implementation(libs.spring.boot.reactor.kotlin.extensions)
