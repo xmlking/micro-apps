@@ -4,9 +4,9 @@
 
 ```bash
 # start zero1, alpha1 and ratel
-nerdctl compose -f infra/dgraph.yml up
+docker compose -f infra/dgraph.yml up
 # check 
-nerdctl compose -f infra/dgraph.yml ps
+docker compose -f infra/dgraph.yml ps
 # stop all
-nerdctl compose -f infra/dgraph.yml down
+docker compose -f infra/dgraph.yml down
 ```

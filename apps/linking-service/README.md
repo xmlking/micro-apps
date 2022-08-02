@@ -8,7 +8,7 @@ Linking gRPC service.
 # server
 gradle :apps:linking-service:run
 # proxy
-nerdctl compose up envoy
+docker compose up envoy
 # client -> proxy -> server
 gradle :apps:linking-service:runLinkingClient
 # client -> server

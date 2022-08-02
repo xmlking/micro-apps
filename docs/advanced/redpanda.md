@@ -8,30 +8,30 @@ we are using **Redpanda** as drop-in replacement for **Kafka** broker
 
 ```bash
 # start redpanda
-nerdctl compose -f infra/redpanda.yml up redpanda
+docker compose -f infra/redpanda.yml up redpanda
 # this will stop redis and remove all volumes (-v to remove volumes)
-nerdctl compose -f infra/redpanda.yml down redpanda -v 
+docker compose -f infra/redpanda.yml down redpanda -v 
 # create topic
-nerdctl compose -f infra/redpanda.yml up topic-creator
+docker compose -f infra/redpanda.yml up topic-creator
 
 # debug
-nerdctl compose -f infra/redpanda.yml ps
+docker compose -f infra/redpanda.yml ps
 # name of the container can be found from output of the above command 
-nerdctl exec -it infra_redpanda_1 /bin/bash
-nerdctl exec -it infra_redpanda_1 rpk version
-nerdctl exec -it infra_redpanda_1 rpk topic list
-nerdctl exec -it infra_redpanda_1 rpk cluster info
-nerdctl exec -it infra_redpanda_1 rpk topic delete state-out-0 city-in-0
+docker exec -it infra-redpanda-1 /bin/bash
+docker exec -it infra-redpanda-1 rpk version
+docker exec -it infra-redpanda-1 rpk topic list
+docker exec -it infra-redpanda-1 rpk cluster info
+docker exec -it infra-redpanda-1 rpk topic delete state-out-0 city-in-0
 
 # produce
-nerdctl exec -it infra_redpanda_1 rpk topic produce all-in-topic -k my-key
+docker exec -it infra-redpanda-1 rpk topic produce all-in-topic -k my-key
 {"name": "Red", "city": "nuur", "state": "ca"}
 {"name": "Red2", "city": "nuur2", "state": "ca"}
 # or
-nerdctl exec -it infra_redpanda_1 /bin/bash
+docker exec -it infra-redpanda-1 /bin/bash
 echo '{"name": "Red", "city": "nuur", "state": "ca"}' | rpk topic produce all-in-topic -k my-key
 # consume
-nerdctl exec -it infra_redpanda_1 rpk topic consume all-in-topic
+docker exec -it infra-redpanda-1 rpk topic consume all-in-topic
 ```
 
 ### Access

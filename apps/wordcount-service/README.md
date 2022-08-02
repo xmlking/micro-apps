@@ -7,21 +7,21 @@
 Start kafka
 
 ```bash
-nerdctl compose -f infra/redpanda.yml up redpanda
+docker compose -f infra/redpanda.yml up redpanda
 
-nerdctl exec -it infra_redpanda_1 /bin/bash
-nerdctl exec -it infra_redpanda_1 rpk version
-nerdctl exec -it infra_redpanda_1 rpk cluster info
-nerdctl exec -it infra_redpanda_1 rpk topic delete state-out-0 city-in-0
+docker exec -it infra-redpanda-1 /bin/bash
+docker exec -it infra-redpanda-1 rpk version
+docker exec -it infra-redpanda-1 rpk cluster info
+docker exec -it infra-redpanda-1 rpk topic delete state-out-0 city-in-0
 
 # produce
-nerdctl exec -it infra_redpanda_1 rpk topic produce facts -k my-key
+docker exec -it infra-redpanda-1 rpk topic produce facts -k my-key
 "hi there"
 # or
-nerdctl exec -it infra_redpanda_1 /bin/bash
+docker exec -it infra-redpanda-1 /bin/bash
 echo 'hi there' | rpk topic produce facts -k my-key
 # consume
-nerdctl exec -it infra_redpanda_1 rpk topic consume facts
+docker exec -it infra-redpanda-1 rpk topic consume facts
 ```
 
 Start µService 

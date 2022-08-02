@@ -21,84 +21,83 @@ Download and install the latest binary for your OS from [here](https://github.co
 ## Usage
 
 ```bash
-nerdctl info 
-nerdctl version
-nerdctl stats
-nerdctl top CONTAINER
-nerdctl volume ls
-nerdctl network ls
+docker info 
+docker version
+docker stats
+docker top CONTAINER
+docker volume ls
+docker network ls
 ```
 
 ### Namespace management
 
 ```bash
-nerdctl namespace ls
+docker namespace ls
 ```
 
 ### Images
 
 ```bash
-nerdctl build .
-nerdctl tag
-nerdctl tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+docker build .
+docker tag
+docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 
-nerdctl images
-nerdctl -n k8s.io images
+docker images
 
-nerdctl login -u aaaa -p bbb
+docker login -u aaaa -p bbb
 
 # inspect image 
-nerdctl image inspect redislabs/redismod:edge
+docker image inspect redislabs/redismod:edge
 
 # Remove one or more images
-nerdctl -n k8s.io rmi docker.vectorized.io/vectorized/redpanda:v21.11.2
+docker  rmi docker.vectorized.io/vectorized/redpanda:v21.11.2
 
 # default from docker.io
-nerdctl -n k8s.io pull jwsy/jade-shooter:v1.1
+docker  pull jwsy/jade-shooter:v1.1
 
-nerdctl -n k8s.io images | grep jwsy
-nerdctl -n k8s.io run -d -p 8080:80 jwsy/jade-shooter:v1.1
-nerdctl -n k8s.io run -d -p 80:80 --name=nginx --restart=always nginx
+docker  images | grep jwsy
+docker  run -d -p 8080:80 jwsy/jade-shooter:v1.1
+docker  run -d -p 80:80 --name=nginx --restart=always nginx
 
 # `e2a5` is output from above command
-nerdctl -n k8s.io exec -it e2a5 sh
-nerdctl -n k8s.io images
+docker  exec -it e2a5 sh
+docker  images
 # save load  
-nerdctl -n k8s.io save -o local_jwsy_jade-shooter_v1.2.tar
-nerdctl -n k8s.io load -i local_jwsy_jade-shooter_v1.2.tar
+docker  save -o local_jwsy_jade-shooter_v1.2.tar
+docker  load -i local_jwsy_jade-shooter_v1.2.tar
 ```
 
-Encrypt image layers with [ocicrypt](https://github.com/containerd/nerdctl/blob/master/docs/ocicrypt.md).
+Encrypt image layers with [ocicrypt](https://github.com/containerd/docker/blob/master/docs/ocicrypt.md).
 
 ```bash
 openssl genrsa -out mykey.pem
 openssl rsa -in mykey.pem -pubout -out mypubkey.pem
-nerdctl image encrypt --recipient=jwe:mypubkey.pem --platform=linux/amd64,linux/arm64 foo example.com/foo:encrypted
-nerdctl push example.com/foo:encrypted
+docker image encrypt --recipient=jwe:mypubkey.pem --platform=linux/amd64,linux/arm64 foo example.com/foo:encrypted
+docker push example.com/foo:encrypted
 ```
 
 ### Compose
 
 ```bash
-nerdctl compose -f infra/redis.yml up redis
-nerdctl compose -f infra/redpanda.yml up redpanda
-nerdctl compose -f infra/redpanda.yml logs
-nerdctl compose -f infra/redis.yml down
-nerdctl compose -f infra/redpanda.yml down
+docker compose -f infra/redis.yml up redis
+docker compose -f infra/redpanda.yml up redpanda
+docker compose -f infra/redpanda.yml logs
+docker compose -f infra/redis.yml down
+docker compose -f infra/redpanda.yml down
 # this will stop redpanda and remove all volumes
-nerdctl compose -f infra/redpanda.yml down -v 
+docker compose -f infra/redpanda.yml down -v 
 
-nerdctl compose -f infra/redpanda.yml ps
+docker compose -f infra/redpanda.yml ps
 # name of the container can be found from output of above command 
-nerdctl exec -it infra_redpanda_1 /bin/bash
-nerdctl exec -it infra_redpanda_1 rpk version
-nerdctl exec -it infra_redpanda_1 rpk topic list
-nerdctl exec -it infra_redpanda_1 rpk cluster info
+docker exec -it infra-redpanda-1 /bin/bash
+docker exec -it infra-redpanda-1 rpk version
+docker exec -it infra-redpanda-1 rpk topic list
+docker exec -it infra-redpanda-1 rpk cluster info
 
 
-nerdctl exec -it redpanda-1 \
+docker exec -it redpanda-1 \
 rpk topic produce twitch_chat --brokers=localhost:9092
-nerdctl exec -it redpanda-1 \
+docker exec -it redpanda-1 \
 rpk topic consume twitch_chat --brokers=localhost:9092
 ```
 
