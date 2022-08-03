@@ -42,7 +42,7 @@ pluginManagement {
         kotlin("plugin.lombok") version kotlinVersion apply false
         id("org.jetbrains.kotlinx.kover") version "0.5.1"
         id("io.freefair.lombok") version "6.5.0.3" apply false
-        id("org.sonarqube") version "3.3"
+        id("org.sonarqube") version "3.4.0.2513"
         id("com.diffplug.spotless") version "6.9.0"
         id("org.jetbrains.dokka") version "1.7.10"
         id("com.github.ben-manes.versions") version "0.42.0"
