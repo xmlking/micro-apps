@@ -106,3 +106,6 @@ FT.SEARCH UserIdx "@firstName:{Brad} @lastName:Wilk "
 1641754524.471124 [0 10.4.1.1:33576] "BF.ADD" "bf_person_email" "kera@bani.com"
 1641754524.471887 [0 10.4.1.1:33576] "BF.ADD" "bf_person_email" "sumo@demo.com"
 ```
+
+## References
+- [What’s New in Redis OM Spring?](https://redis.com/blog/redis-om-spring/)

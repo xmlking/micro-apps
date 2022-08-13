@@ -1,12 +1,8 @@
 package micro.apps.service
 
-import com.redis.om.spring.annotations.Aggregation
-import com.redis.om.spring.annotations.Query
 import com.redis.om.spring.repository.RedisDocumentRepository
-import io.redisearch.AggregationResult
 import micro.apps.model.Gender
 import org.springframework.data.repository.CrudRepository
-import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import java.util.*
 
@@ -33,9 +29,14 @@ interface PersonRepository : RedisDocumentRepository<Person, String> {
     fun findByName_FirstStartsWithIgnoreCase(name: String): List<Person>
     fun findByGender(gender: Gender): List<Person>
     fun existsByEmail(email: String): Boolean
+    // Performing a tag search on city
+    fun findByAddress_City(city: String): Iterable<Person?>
+
+    // Performing a full-search on street
+    fun findByAddress_CityAndAddress_State(city: String, state: String): Iterable<Person?>
 
     /**
-     * > FT.SEARCH idx '@title:hello @tag:{news}'
+     * > FT.SEARCH idx '@title:hello @tag:{news}
      * 1) (integer) 1 2) "doc1" 3) 1) "$"
      * 2) "{\"title\":\"hello world\",\"tag\":[\"news\",\"article\"]}"
      */

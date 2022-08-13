@@ -2,7 +2,7 @@
 
 # kotlin
 spek = "2.0.11"
-kotest = "5.4.1"
+kotest = "5.4.2"
 junit = "5.9.0"
 serialization = "1.3.3"
 avro4k = "1.6.0"
@@ -22,7 +22,7 @@ validation = "2.0.1.Final"
 kotlinRetry = "1.0.9"
 
 # gradle
-gradleTool = "7.5"
+gradleTool = "7.5.1"
 
 # test matchers
 hamcrest = "1.3"
@@ -38,8 +38,8 @@ slf4j = { require = "2.0.0-alpha7" }
 
 # quarkus
 quarkusPluginId = "io.quarkus"
-quarkusPluginVersion = "2.11.1.Final"
-quarkusPlatformVersion = "2.11.1.Final"
+quarkusPluginVersion = "2.11.2.Final"
+quarkusPlatformVersion = "2.11.2.Final"
 quarkusPlatformGroupId = "io.quarkus"
 quarkusPlatformArtifactId = "quarkus-universe-bom"
 
@@ -57,10 +57,10 @@ quarkusPlatformArtifactId = "quarkus-universe-bom"
 # grpc
 grpc = "1.48.1"
 grpcKotlin = "1.3.0"
-protobuf = "3.21.4"
+protobuf = "3.21.5"
 pgv = "0.6.7"
 guava = "30.1-jre"
-sentinel = "1.8.4"
+sentinel = "1.8.5"
 
 # beam
 beam = "2.40.0"
@@ -87,15 +87,15 @@ javaFaker = "1.0.2"
 confluent ="7.2.1"
 
 # google
-googlePubsub = "1.120.7"
-googleTink = "1.6.1"
+googlePubsub = "1.120.11"
+googleTink = "1.7.0"
 
 # telemetry
 otel = "1.12.0"
 otel-alpha = "1.12.0-alpha"
 otel-api-alpha = "1.10.0-alpha-rc.1" # FIXME remove
 otel-agent = "1.16.0"
-micrometer = "1.9.2"
+micrometer = "1.9.3"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }

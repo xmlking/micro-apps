@@ -20,7 +20,7 @@ import java.util.*
 @RequestMapping("/api/users")
 class UserController(
     private val userRepository: UserRepository,
-    private val modulesOperations: RedisModulesOperations<String, String>
+    private val modulesOperations: RedisModulesOperations<String>
 ) {
     var ops = modulesOperations.opsForSearch("RoleIdx")
     private val gson: Gson = Gson()

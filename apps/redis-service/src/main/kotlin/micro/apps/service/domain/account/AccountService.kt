@@ -60,7 +60,7 @@ class RedisAccountService(
     private val addressRepository: AddressRepository,
     private val redisTemplate: StringRedisTemplate,
 //    private val redisTemplate: RedisTemplate<String, PersonEntity>,
-    private val modulesOperations: RedisModulesOperations<String, String>,
+    private val modulesOperations: RedisModulesOperations<String>,
     private val ceProps: ChangeEventProperties,
     // https://github.com/6rotoms/kimosabe/blob/master/api/src/main/java/kimosabe/api/repository/GameSearchRepository.java
 ) : AccountService {

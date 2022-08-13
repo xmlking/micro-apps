@@ -82,20 +82,20 @@ plugins {
 // rootProject config
 // scmVersion should be in the top, as it sets the version
 scmVersion {
-    useHighestVersion = true
+    useHighestVersion.set(true)
 
     tag {
-        prefix = "v" // golang and appctl need SemVer tags with `v` prefix
-        versionSeparator = ""
+        prefix.set("v") // golang and appctl need SemVer tags with `v` prefix
+        versionSeparator.set("")
     }
 
-    branchVersionIncrementer = mapOf(
+    branchVersionIncrementer.putAll(mapOf(
         "feature/.*" to "incrementMinor",
         "hotfix/.*" to "incrementPatch",
         "release/.*" to "incrementPrerelease",
         "develop" to "incrementPatch",
         "main" to "incrementMinor"
-    )
+    ))
     // hooks(closureOf<HooksConfig> {
     //     pre("fileUpdate", mapOf(
     //             "file" to "README.md",

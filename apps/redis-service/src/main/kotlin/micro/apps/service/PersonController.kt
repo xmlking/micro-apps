@@ -18,7 +18,7 @@ import java.util.*
 @OptIn(ExperimentalSerializationApi::class)
 @RestController
 @RequestMapping("/api/people")
-class PersonController(private val personRepository: PersonRepository, private val modulesOperations: RedisModulesOperations<String, String>) {
+class PersonController(private val personRepository: PersonRepository, private val modulesOperations: RedisModulesOperations<String>) {
     var ops = modulesOperations.opsForSearch("PersonIdx")
     private val gson: Gson = Gson()
 

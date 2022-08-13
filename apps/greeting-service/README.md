@@ -9,15 +9,15 @@ Find more *Quarkus QuickStart* [samples](https://github.com/quarkusio/quarkus-qu
 ## Prerequisites
 
 1. A working container runtime (Docker, podman)
-1. JDK 11 installed with JAVA_HOME configured appropriately
+1. JDK 17 installed with JAVA_HOME configured appropriately
     ```bash
-    sdk install java 11.0.11.hs-adpt
+    sdk install java 17.0.4-zulu
     export JAVA_HOME=$HOME/.sdkman/candidates/java/current
     ```
-1. GraalVM version 21.2.0.r11-grl installed and configured appropriately
+1. GraalVM version 22.2.r17-grl installed and configured appropriately
     ```bash
-    sdk install java  21.2.0.r11-grl
-    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/21.2.0.r11-grl
+    sdk install java  22.2.r17-grl
+    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/22.2.r17-grl
     ```
 1. Install the native-image tool using gu install:
     ```bash
@@ -36,7 +36,7 @@ Find more *Quarkus QuickStart* [samples](https://github.com/quarkusio/quarkus-qu
 
 ```bash
 cd apps
-mvn io.quarkus:quarkus-maven-plugin:2.11.1.Final:create \
+mvn io.quarkus:quarkus-maven-plugin:2.11.2.Final:create \
     -DprojectGroupId=micro.apps \
     -DprojectArtifactId=greeting-service \
     -DprojectVersion=0.1.0 \

@@ -65,7 +65,7 @@ protobuf {
         }
         // Specify protoc to generate using our grpc kotlin plugin
         id("grpckt") {
-            artifact = "io.grpc:protoc-gen-grpc-kotlin:$grpcKotlinVersion:jdk7@jar"
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:$grpcKotlinVersion:jdk8@jar"
         }
         id("javapgv") {
             artifact = "io.envoyproxy.protoc-gen-validate:protoc-gen-validate:$pgvVersion"

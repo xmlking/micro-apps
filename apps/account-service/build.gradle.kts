@@ -5,6 +5,7 @@ plugins {
 dependencies {
     implementation(project(":libs:proto"))
     implementation(project(":libs:grpc"))
+    implementation("org.bouncycastle:bctsp-jdk16:1.46")
 
     // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
     runtimeOnly(libs.grpc.netty)

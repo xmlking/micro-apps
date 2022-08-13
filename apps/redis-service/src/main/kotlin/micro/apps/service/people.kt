@@ -22,7 +22,10 @@ import micro.apps.model.Gender
 import micro.apps.model.LocalDateTimeSerializer
 import org.springframework.data.annotation.Id
 import org.springframework.data.geo.Point
+import com.redis.om.spring.annotations.AutoComplete
 import com.redis.om.spring.annotations.Indexed
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.Date
@@ -33,6 +36,7 @@ import javax.validation.constraints.NotNull
 import javax.validation.constraints.Past
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
+
 
 // import org.springframework.data.annotation.Transient
 // import org.springframework.data.redis.core.index.GeoIndexed
@@ -58,7 +62,12 @@ data class Person(
     var email: String,
 
     val phone: String? = null,
-    val avatar: String = "https://www.gravatar.com/avatarr"
+    val avatar: String = "https://www.gravatar.com/avatarr",
+
+    @CreatedDate
+    val createdDate: Date? = null,
+    @LastModifiedDate
+    val lastModifiedDate: Date? = null,
 ) {
     fun addAddress(address: Address) {
         (this.addresses as HashSet).add(address)
@@ -87,14 +96,15 @@ data class Name(
 data class Address(
     @Id val id: String? = null,
     val suite: String? = null,
-    @Searchable(nostem = true)
+    @Searchable(sortable = true, nostem = true, weight = 20.0)
     val street: String,
     @Indexed
     val city: String,
-    @Indexed
+    @AutoComplete
     val state: String,
+    @AutoComplete
     val code: String,
-    @Indexed
+    @AutoComplete
     val country: String,
     @Indexed
     @Serializable(with = PointSerializer::class) val location: Point? = null
