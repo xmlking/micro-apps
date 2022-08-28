@@ -53,7 +53,7 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version "3.2.1"
         id("dev.jacomet.logging-capabilities") version "0.10.0"
         id("com.google.protobuf") version "0.8.19" apply false
-        id("io.quarkus") version "2.11.2.Final" apply false
+        id("io.quarkus") version "2.12.0.Final" apply false
         // id("org.springframework.boot") version "2.5.4" apply false
         id("org.springframework.boot") version "2.7.2" apply false
         id("org.springframework.experimental.aot") version "0.12.1" apply false
