@@ -8,7 +8,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 import org.owasp.dependencycheck.reporting.ReportGenerator.Format.HTML
 import org.owasp.dependencycheck.reporting.ReportGenerator.Format.SARIF
-import pl.allegro.tech.build.axion.release.domain.TagNameSerializationConfig
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -168,13 +167,22 @@ sonarqube {
 }
 
 // Kotlin Code Coverage Reporing
-kover {
-    isDisabled = false // false to disable instrumentation of all test tasks in all modules
-    coverageEngine.set(kotlinx.kover.api.CoverageEngine.INTELLIJ) // change instrumentation agent and reporter
-    // intellijEngineVersion.set("1.0.622")    // change version of IntelliJ agent and reporter
-    jacocoEngineVersion.set(jacocoVersion) // change version of JaCoCo agent and reporter
-    generateReportOnCheck = true // false to do not execute `koverReport` task before `check` task
-    runAllTestsForProjectTask = false  // true to run all tests in all projects if `koverHtmlReport`, `koverXmlReport`, `koverReport`, `koverVerify` or `check` tasks executed on some project
+koverMerged {
+    enable()
+    filters {
+        projects {
+            excludes += ":libs:proto"
+        }
+    }
+
+    htmlReport {
+        enable()
+        reportDir.set(layout.buildDirectory.dir("kover/html"))
+    }
+    xmlReport {
+        enable()
+        reportFile.set(layout.buildDirectory.file("kover/coverage.xml"))
+    }
 }
 
 // HINT: add this like to all subprojects that depends on dockerCompose
@@ -656,15 +664,15 @@ tasks {
         description = "print all affected subprojects due to code changes"
     }
 
-    koverMergedVerify {
-        rule {
-            name = "75% Coverage"
-            bound {
-                minValue = 75
-                // valueType = kotlinx.kover.api.VerificationValueType.COVERED_LINES_PERCENTAGE //  by default
-            }
-        }
-    }
+//    koverMergedVerify {
+//        rule {
+//            name = "75% Coverage"
+//            bound {
+//                minValue = 75
+//                // valueType = kotlinx.kover.api.VerificationValueType.COVERED_LINES_PERCENTAGE //  by default
+//            }
+//        }
+//    }
 }
 
 // Define Custom Task
