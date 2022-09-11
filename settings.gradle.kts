@@ -15,7 +15,7 @@ pluginManagement {
             mavenCentral()
         }
         dependencies {
-            classpath("org.eclipse.jgit:org.eclipse.jgit:5.10.0.202012080955-r")
+            classpath("org.eclipse.jgit:org.eclipse.jgit:6.3.0.202209071007-r")
             classpath("com.dropbox.affectedmoduledetector:affectedmoduledetector:0.1.6")
         }
         configurations.classpath {
