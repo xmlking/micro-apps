@@ -87,21 +87,6 @@ scmVersion {
         prefix.set("v") // golang and appctl need SemVer tags with `v` prefix
         versionSeparator.set("")
     }
-
-    branchVersionIncrementer.putAll(mapOf(
-        "feature/.*" to "incrementMinor",
-        "hotfix/.*" to "incrementPatch",
-        "release/.*" to "incrementPrerelease",
-        "develop" to "incrementPatch",
-        "main" to "incrementMinor"
-    ))
-    // hooks(closureOf<HooksConfig> {
-    //     pre("fileUpdate", mapOf(
-    //             "file" to "README.md",
-    //             "pattern" to "{v,p -> /('$'v)/}",
-    //             "replacement" to """{v, p -> "'$'v"}]))"""))
-    //     pre("commit")
-    // })
 }
 
 // rootProject config
@@ -300,6 +285,7 @@ subprojects {
         }
 
         kotlin {
+            // jvmToolchain(17)
             jvmToolchain {
                 (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(17))
             }
@@ -563,23 +549,25 @@ subprojects {
                         // image = "us.gcr.io/${gcloudProject}/${rootProject.name}/${project.name}:${project.version}"
 
                         /**
-                        gcr: Google Container Registry (GCR)
-                        osxkeychain: Docker Hub
+                         gcr: Google Container Registry (GCR)
+                         osxkeychain: Docker Hub
                          */
                         credHelper {
                             helper = "osxkeychain"
                         }
                         /**
-                        auth {
-                        username = "*******"
-                        password = "*******"
-                        }
+                         auth {
+                         username = "*******"
+                         password = "*******"
+                         }
                          */
                         tags = setOf("${project.version}")
                     }
                     container {
                         jvmFlags = listOf("-Djava.security.egd=file:/dev/./urandom", "-Xms512m", "-server")
-                        creationTime = "USE_CURRENT_TIMESTAMP"
+                        // creationTime = "USE_CURRENT_TIMESTAMP"
+                        creationTime.set("USE_CURRENT_TIMESTAMP")
+                        // creationTime = project.provider { project.ext.git['git.commit.time'] }
                         ports = listOf("8080", "8443")
                         labels.putAll(
                             mapOf(

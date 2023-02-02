@@ -88,7 +88,8 @@ class GlobalExceptionHandler(private val messageSource: MessageSource /* private
         val vErrors = ex.bindingResult.fieldErrors.map {
             ValidationError(it.field, it.defaultMessage, it.rejectedValue)
         }.associateBy({ it.field }, { it })
-        return ResponseEntity.badRequest().body(ErrorResponse(ex.status, "Validation failed with ${ex.bindingResult.errorCount} error(s)", vErrors))
+        // return ResponseEntity.badRequest().body(ErrorResponse(ex.status, "Validation failed with ${ex.bindingResult.errorCount} error(s)", vErrors))
+        return ResponseEntity.badRequest().body(ErrorResponse(BAD_REQUEST, "Validation failed with ${ex.bindingResult.errorCount} error(s)", vErrors))
     }
 
     @ExceptionHandler(RuntimeException::class)

@@ -1,3 +1,4 @@
+// ktlint-disable filename
 package micro.apps.service.config
 
 import com.uchuhimo.konf.Config

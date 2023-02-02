@@ -23,7 +23,7 @@ class SerializationTest : FunSpec({
         val output = Avro.default.openOutputStream(serializer) {
             encodeFormat = AvroEncodeFormat.Data() // Other Options: AvroEncodeFormat.Binary(), AvroEncodeFormat.Json()
             this.schema = schema
-       // }.to("./apps/classifier-pipeline/src/test/resources/data/person.avro")
+            // }.to("./apps/classifier-pipeline/src/test/resources/data/person.avro")
         }.to("./src/test/resources/data/person.avro")
         output.write(persons)
         output.close()

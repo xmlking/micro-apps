@@ -24,7 +24,6 @@ object ClassifierPipeline {
 
     @JvmStatic
     fun main(args: Array<String>) {
-
         logger.info { "My Args: ${args.contentToString()}" }
 
         val (pipe, options) = PipeBuilder.from<ClassifierOptions>(args)

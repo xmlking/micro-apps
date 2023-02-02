@@ -6,7 +6,6 @@ plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
 
-    id("org.springframework.experimental.aot")
     id("org.graalvm.buildtools.native")
 }
 
@@ -52,9 +51,11 @@ tasks {
         // add `bindings` if you are running `gradle bootBuildImage` from behind corp proxy.
         // bindings = listOf("${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates")
 
-        builder = "paketobuildpacks/builder:tiny"
-        environment = mapOf(
-            "BP_NATIVE_IMAGE" to "true"
+        builder.set("paketobuildpacks/builder:tiny")
+        environment.set(
+            mapOf(
+                "BP_NATIVE_IMAGE" to "true"
+            )
         )
     }
 
@@ -62,11 +63,4 @@ tasks {
         // This will set logs level DEBUG only for local development.
         jvmArgs = listOf("-Dlogging.level.micro.apps=DEBUG")
     }
-}
-
-springAot {
-    // FIXME: https://github.com/LogNet/grpc-spring-boot-starter/issues/226
-    debugVerify.set(false)
-//    removeSpelSupport.set(true)
-//    removeYamlSupport.set(true)
 }

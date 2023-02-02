@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.messaging.rsocket.RSocketRequester
 import org.springframework.messaging.rsocket.dataWithType
 import org.springframework.messaging.rsocket.retrieveFlow
@@ -29,7 +29,7 @@ import java.net.URI
 import java.net.URL
 import java.time.Instant
 import java.time.temporal.ChronoUnit.MILLIS
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 
 @SpringBootTest(
@@ -183,7 +183,7 @@ class ChatKotlinApplicationTests(
                     .collect()
             }
 
-            delay(Duration.seconds(2))
+            delay(2.seconds)
 
             messageRepository.findAll()
                 .first { it.content.contains("HelloWorld") }

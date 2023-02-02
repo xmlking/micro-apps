@@ -29,7 +29,6 @@ class AccountClient(private val channel: ManagedChannel) : Closeable {
     private val stub: AccountServiceCoroutineStub = AccountServiceCoroutineStub(channel)
 
     suspend fun get(idReq: String) = coroutineScope {
-
         val request = getRequest {
             id = StringValue.of(idReq)
         }

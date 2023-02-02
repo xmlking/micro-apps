@@ -61,7 +61,7 @@ loggingCapabilities {
 
 tasks {
     bootBuildImage {
-        isVerboseLogging = true
+        verboseLogging.set(true)
     }
 
     bootRun {

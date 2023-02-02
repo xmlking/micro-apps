@@ -27,3 +27,4 @@ indent_size = 2
 # possible values: number (e.g. 120) (package name, imports & comments are ignored), "off"
 # it's automatically set to 100 on `ktlint --android ...` (per Android Kotlin Style Guide)
 max_line_length = off
+disabled_rules = filename,import-ordering

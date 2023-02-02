@@ -72,20 +72,20 @@ tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisCompose
 
 tasks {
     bootBuildImage {
-        isVerboseLogging = true
+        verboseLogging.set(true)
 
         // buildpacks = listOf("gcr.io/paketo-buildpacks/adopt-openjdk")
 
         // add `ca-certificates` bindings, if you are running `gradle bootBuildImage` from behind corp proxy.
-        bindings = listOf(
+        bindings.set(listOf(
             // "${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates",
             // "$buildDir/agent:/workspace/agent:ro"
-        )
+        ))
 
         // builder = "paketobuildpacks/builder:tiny"
         // runImage = "paketobuildpacks/run:tiny:tiny-cnb"
 
-        environment = mapOf(
+        environment.set(mapOf(
             // "HTTPS_PROXY" to "https://proxy.example.com",
             // "HTTPS_PROXY" to "https://proxy.example.com"
             // "BP_DEBUG_ENABLED" to "true",
@@ -93,7 +93,7 @@ tasks {
             "BPE_JAVA_TOOL_OPTIONS" to "-Dfile.encoding=UTF-8", // Optional, just for docs
             "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-XX:+HeapDumpOnOutOfMemoryError",
             "BPE_BPL_SPRING_CLOUD_BINDINGS_ENABLED" to "false",
-        )
+        ))
 
         /* Image Publishing
         imageName = "docker.example.com/library/${project.name}"
