@@ -10,7 +10,3 @@ dependencies {
 }
 
 affectedTestConfiguration { jvmTestTask = "check" }
-
-sonarqube {
-    isSkipProject = true
-}

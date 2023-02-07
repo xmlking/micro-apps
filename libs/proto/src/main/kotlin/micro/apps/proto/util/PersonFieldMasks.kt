@@ -13,7 +13,8 @@ object PersonFieldMasks {
      */
     val FIRST_AND_LAST_NAME_FIELD_MASK: FieldMask = FieldMaskUtil.fromFieldNumbers(
         Person::class.java,
-        Person.FIRST_NAME_FIELD_NUMBER, Person.LAST_NAME_FIELD_NUMBER
+        Person.FIRST_NAME_FIELD_NUMBER,
+        Person.LAST_NAME_FIELD_NUMBER
     )
 
     /**

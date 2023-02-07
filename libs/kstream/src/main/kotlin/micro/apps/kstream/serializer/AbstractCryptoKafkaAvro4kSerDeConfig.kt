@@ -41,7 +41,8 @@ abstract class AbstractCryptoKafkaAvro4kSerDeConfig(configDef: ConfigDef, props:
             false,
             ConfigDef.Importance.LOW,
             CRYPTO_IGNORE_ERRORS_DOC
-        ), props
+        ),
+        props
     ) {
     companion object {
         const val CRYPTO_ASSOCIATED_DATA_FIELD_CONFIG = "crypto.associatedData"

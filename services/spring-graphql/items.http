@@ -1,0 +1,78 @@
+### Create item
+GRAPHQL http://localhost:8080/graphql
+
+mutation {
+  addItem(input: {name: "new item", description: "hello"}) {
+    id,
+    name,
+    description
+  }
+}
+
+### Create item with variables
+GRAPHQL http://localhost:8080/graphql
+
+mutation AddItem($newItem: ItemInput!) {
+  addItem(input: $newItem) {
+    id,
+    name,
+    description
+  }
+}
+
+{
+    "newItem": {
+        "name": "new item",
+        "description": "hello"
+    }
+}
+
+### Fetch items
+GRAPHQL http://localhost:8080/graphql
+
+query {
+  item(id: 1) {
+    id,
+    name,
+    description
+  }
+}
+
+### Fetch items
+GRAPHQL http://localhost:8080/graphql
+
+query {
+  item(id: 3) {
+    id,
+    name,
+    description
+  },
+  items(id: [1, 2]) {
+    id,
+    name,
+    description
+  }
+}
+
+### List items
+GRAPHQL http://localhost:8080/graphql
+
+query {
+  items {
+    id,
+    name,
+    description
+  }
+}
+
+
+### Delete item by id
+GRAPHQL http://localhost:8080/graphql
+
+mutation {
+  deleteItem(id: 3) {
+    id,
+    name,
+    description
+  }
+}

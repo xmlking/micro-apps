@@ -10,7 +10,6 @@ import micro.apps.proto.common.v1.Currency
 import micro.apps.proto.common.v1.Order
 import micro.apps.proto.common.v1.order
 
-
 class OrderKtTest : FunSpec({
 
     val index = ReflectiveValidatorIndex()
@@ -35,8 +34,6 @@ class OrderKtTest : FunSpec({
             totalPrice = 52
             currency = Currency.CURRENCY_USD_UNSPECIFIED
         }
-
-
 
         val exception = shouldThrow<ValidationException> {
             validator.assertValid(order)

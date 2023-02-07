@@ -123,7 +123,6 @@ fun Pipeline.fromFiles(
     name: String = "Read from File Collection",
     input: String
 ): PCollection<KV<String, String>> {
-
     return this.apply(name, FileIO.match().filepattern(input))
         .apply("$name readMatches", FileIO.readMatches())
         .apply(

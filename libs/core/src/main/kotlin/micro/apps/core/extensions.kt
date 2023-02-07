@@ -10,7 +10,6 @@ import java.util.Date
 import java.util.Locale
 import java.util.Optional
 
-
 /**
  * Format an Instant as an ISO8601 timestamp
  */
@@ -68,5 +67,18 @@ inline fun <reified T : Any> Any.getThroughReflection(propertyName: String): T? 
         javaClass.getMethod(getterName).invoke(this) as? T
     } catch (e: NoSuchMethodException) {
         null
+    }
+}
+
+/**
+ * capitalize string using
+ */
+fun String.capitalize(locale: Locale): String {
+    return this.replaceFirstChar {
+        if (it.isLowerCase()) {
+            it.titlecase(locale)
+        } else {
+            it.toString()
+        }
     }
 }

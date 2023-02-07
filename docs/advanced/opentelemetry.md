@@ -6,8 +6,8 @@ Gradle setup
 
 ```gradle
     // openTelemetry bom
-    implementation(enforcedPlatform(libs.opentelemetry.bom.get()))
-    implementation(enforcedPlatform(libs.opentelemetry.bomAlpha.get()))
+    implementation(enforcedPlatform(libs.opentelemetry.bom.get().toString()))
+    implementation(enforcedPlatform(libs.opentelemetry.bomAlpha.get().toString()))
 
     // openTelemetry agent
     openTelemetry(variantOf(libs.opentelemetry.javaagent) { classifier("all") })

@@ -7,28 +7,31 @@ class SchemaTraverserSpec : FunSpec({
     val SCHEMA: Schema = Schema.Parser().parse(javaClass.getResourceAsStream("/account.avsc"))
 
     test("Test SchemaTraverser") {
-        traverseSchema(SCHEMA, visitor =
-        object : SchemaVisitor {
-            override fun visitSchema(schema: Schema) {}
-
-            override fun visitField(parent: Schema, field: Schema.Field, path: String) {
-                println("Field:: path: $path, attrib: ${field.getProp("confidential")}, fullName: ${parent.fullName}.${field.name()}")
-            }
-        }
-        )
-    }
-
-    test("Test SchemaTraverser excludeVisited") {
         traverseSchema(
-            SCHEMA, visitor =
+            SCHEMA,
+            visitor =
             object : SchemaVisitor {
                 override fun visitSchema(schema: Schema) {}
 
                 override fun visitField(parent: Schema, field: Schema.Field, path: String) {
                     println("Field:: path: $path, attrib: ${field.getProp("confidential")}, fullName: ${parent.fullName}.${field.name()}")
                 }
-            }, true
+            }
         )
     }
 
+    test("Test SchemaTraverser excludeVisited") {
+        traverseSchema(
+            SCHEMA,
+            visitor =
+            object : SchemaVisitor {
+                override fun visitSchema(schema: Schema) {}
+
+                override fun visitField(parent: Schema, field: Schema.Field, path: String) {
+                    println("Field:: path: $path, attrib: ${field.getProp("confidential")}, fullName: ${parent.fullName}.${field.name()}")
+                }
+            },
+            true
+        )
+    }
 })

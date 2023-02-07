@@ -11,7 +11,7 @@ fun Schema.containsNull(): Boolean =
     type == Schema.Type.UNION && types.any { it.type == Schema.Type.NULL }
 
 fun Schema.extractNonNull(): Schema = when (this.type) {
-    Schema.Type.UNION -> this.types.filter { it.type != Schema.Type.NULL }.let { if(it.size > 1) Schema.createUnion(it) else it[0] }
+    Schema.Type.UNION -> this.types.filter { it.type != Schema.Type.NULL }.let { if (it.size > 1) Schema.createUnion(it) else it[0] }
     else -> this
 }
 
@@ -22,9 +22,9 @@ fun Schema.extractNonNull(): Schema = when (this.type) {
 fun Schema.extractNonNullType(): Schema.Type = when (this.type) {
     Schema.Type.UNION -> this.types.filter { it.type != Schema.Type.NULL }
         .let {
-            if (it.size > 1)
+            if (it.size > 1) {
                 throw IllegalArgumentException("Schema ${this.name} has ${it.size} non-null union branches, where exactly 1 is expected")
-            else it[0].type
+            } else it[0].type
         }
     else -> this.type
 }

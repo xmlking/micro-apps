@@ -20,7 +20,6 @@ import micro.apps.crypto.CryptorImpl
 import mu.KotlinLogging
 import org.apache.avro.Schema
 import org.apache.kafka.common.errors.SerializationException
-import org.slf4j.LoggerFactory
 import kotlin.coroutines.coroutineContext
 
 private val logger = KotlinLogging.logger {}
@@ -56,7 +55,7 @@ abstract class AbstractCryptoKafkaAvro4kSerDe : AbstractKafkaSchemaSerDe() {
 
     lateinit var cryptor: Cryptor
 
-    //fun configure(config: AbstractKafkaAvro4kSerDeConfig) {
+    // fun configure(config: AbstractKafkaAvro4kSerDeConfig) {
     fun configure(config: AbstractCryptoKafkaAvro4kSerDeConfig) {
         this.retryAttempts = config.schemaRegistryRetryAttempts
         this.retryJitterBase = config.schemaRegistryRetryJitterBase
@@ -102,6 +101,4 @@ abstract class AbstractCryptoKafkaAvro4kSerDe : AbstractKafkaSchemaSerDe() {
             (schemaRegistry.getSchemaById(id) as? AvroSchema)?.rawSchema()
         }
     }
-
-
 }

@@ -11,7 +11,7 @@ dependencies {
     // implementation(libs.kotlinx.serialization.yaml) // YAML serialization
 
     // for validation annotations
-    implementation(libs.javax.validation)
+    implementation(libs.jakarta.validation)
 
     // Testing
     testImplementation(testFixtures(project(":libs:test")))

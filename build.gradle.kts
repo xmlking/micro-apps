@@ -8,74 +8,76 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
 import org.owasp.dependencycheck.reporting.ReportGenerator.Format.HTML
 import org.owasp.dependencycheck.reporting.ReportGenerator.Format.SARIF
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
 
-val jacocoQualityGate: String by project
 val baseDockerImage: String by project
-
 val gradleToolVersion = libs.versions.gradleTool.get()
-val jacocoVersion = libs.versions.jacoco.get()
 val ktlintVersion = libs.versions.ktlint.get()
-val mockkVersion = libs.versions.mockk.get()
+
 val slf4jVersion = libs.versions.slf4j.get()
 val kotlinLoggingVersion = libs.versions.kotlinLogging.get()
-val kotestVersion = libs.versions.kotest.get()
 
-val excludedProjects = setOf("apps", "libs")
+val excludedProjects = setOf("services", "pipelines", "libs")
 val webappProjects = setOf("entity-webapp")
-val springProjects = setOf("chat-service", "spring-service", "entity-service", "redis-service")
 val grpcProjects = setOf("account-service", "keying-service", "linking-service")
+val springProjects = setOf("spring-graphql", "chat-service", "spring-service", "entity-service", "redis-service")
 val quarkusProjects = setOf("greeting-service", "person-service")
 val pipelineProjects = setOf("classifier-pipeline", "ingestion-pipeline", "wordcount-pipeline")
 
+@Suppress("DSL_SCOPE_VIOLATION") // TODO remove when https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
 plugins {
     base
     idea
-    jacoco
     `maven-publish`
+
+    alias(libs.plugins.kotlin.jvm)
+
     // Code Quality
-    id("org.sonarqube")
     // Keep your code spotless
-    id("com.diffplug.spotless")
-    // Apply the Kotlin JVM plugin to add support for Kotlin.
-    kotlin("jvm")
-    // gradle dokkaHtmlMultimodule
-    id("org.jetbrains.dokka")
+    alias(libs.plugins.gradle.spotless)
+    // kotlin code coverage
+    alias(libs.plugins.kotlin.kover)
+    // Software Composition Analysis (SCA) tool
+    alias(libs.plugins.gradle.dependencycheck)
+
     // Keep dependencies up to date
     // gradle dependencyUpdates -Drevision=release
-    id("com.github.ben-manes.versions")
-    // keep your changelog spotless
-    // gradle changelogPrint // gradle changelogBump
-    id("com.diffplug.spotless-changelog")
-    // gradle useLatestVersions
-    id("se.patrikerdes.use-latest-versions")
+    alias(libs.plugins.gradle.versions)
+
+    // gradle versionCatalogUpdate --interactiv
+    alias(libs.plugins.gradle.update)
     // Versioning & Release with git tags
     // gradle currentVersion
     // gradle release
-    id("pl.allegro.tech.build.axion-release")
+    alias(libs.plugins.gradle.release)
+
     // Make fat runnable jars
     // gradle shadowJar
     // gradle runShadow
-    id("com.github.johnrengelman.shadow")
-    // Build & Publish docker images
-    // gradle jib
-    id("com.google.cloud.tools.jib")
-    // detect slf4j conflicts and configure desired backend
-    id("dev.jacomet.logging-capabilities")
-    // Affected Module Detector: must only be apply to rootProject
-    id("com.dropbox.affectedmoduledetector")
-    // TODO: https://kotlinlang.org/docs/lombok.html
-    // kotlin("plugin.lombok")
-    id("com.avast.gradle.docker-compose")
-    // kotlin code coverage
-    id("org.jetbrains.kotlinx.kover")
-    // Software Composition Analysis (SCA) tool
-    id("org.owasp.dependencycheck")
-    // Aggregating code coverage with JaCoCo
-    id("jacoco-report-aggregation")
+    alias(libs.plugins.gradle.shadow)
+
+    // Affected Module Detector: must only be applied to rootProject
+    alias(libs.plugins.gradle.amd)
+    // used by subprojects
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.kotlin.allopen) apply false
+    alias(libs.plugins.kotlin.spring) apply false
+    alias(libs.plugins.kotlin.jpa) apply false
+    alias(libs.plugins.kotlin.noarg) apply false
+    alias(libs.plugins.kotlin.lombok) apply false
+    alias(libs.plugins.gradle.lombok) apply false
+    alias(libs.plugins.gradle.jib)
+    alias(libs.plugins.gradle.logging) apply false
+    alias(libs.plugins.gradle.protobuf) apply false
+    alias(libs.plugins.gradle.quarkus) apply false
+    alias(libs.plugins.spring.boot) apply false
+    alias(libs.plugins.spring.dependencyManagement) apply false
+    alias(libs.plugins.spring.aot) apply false
+    alias(libs.plugins.gradle.flyway) apply false
+    alias(libs.plugins.gradle.native) apply false
 }
 
 // rootProject config
@@ -95,31 +97,17 @@ affectedModuleDetector {
     pathsAffectingAllModules = setOf("gradle/libs.versions.toml")
     logFilename = "output.log"
     logFolder = "${rootProject.buildDir}/affectedModuleDetector"
-    specifiedBranch = "develop"
+    specifiedBranch = "main"
     compareFrom = "SpecifiedBranchCommit" // default is PreviousCommit
 }
 
 version = scmVersion.version
-val shortRevision = scmVersion.scmPosition.shortRevision
+val shortRevision: String = scmVersion.scmPosition.shortRevision
 val isSnapshot = version.toString().endsWith("-SNAPSHOT")
 val isCI = System.getenv("CI").isNullOrBlank().not()
 if (!project.hasProperty("release.quiet")) {
     println("Version: $version,  Branch: ${scmVersion.scmPosition.branch}, isCI: $isCI")
 }
-
-spotlessChangelog {
-    changelogFile("CHANGELOG.md")
-    // enforceCheck true
-    setAppendDashSnapshotUnless_dashPrelease(true)
-    ifFoundBumpBreaking("**BREAKING**")
-    ifFoundBumpAdded("### Added", "### Feat")
-    tagPrefix("v")
-    commitMessage("Release v{{version}}")
-    remote("origin")
-    branch("release")
-}
-
-println("SpotlessChangelog Version Next: ${spotlessChangelog.versionNext}  Last: ${spotlessChangelog.versionLast}")
 
 spotless {
     kotlin {
@@ -135,23 +123,18 @@ spotless {
     }
 }
 
-sonarqube {
-    properties {
-        property("sonar.java.codeCoveragePlugin", "jacoco")
-        property("sonar.dynamicAnalysis", "reuseReports")
-        property("sonar.exclusions", "**/*Generated.java")
+versionCatalogUpdate {
+    pin {
+        // pins all libraries and plugins using the given versions
+        versions.add("my-version-name")
+        versions.add("other-version")
     }
-    tasks.sonarqube {
-        // gotcha: jacoco reports need to be generated before `sonarqube` task
-        // dependsOn("jacocoTestReport")
-        subprojects.filter { it.name !in excludedProjects }.forEach {
-
-            dependsOn(":${it.path}:check")
-        }
+    keep {
+        keepUnusedVersions.set(true)
     }
 }
 
-// Kotlin Code Coverage Reporing
+// Kotlin Code Coverage Reporting
 koverMerged {
     enable()
     filters {
@@ -170,17 +153,6 @@ koverMerged {
     }
 }
 
-// HINT: add this like to all subprojects that depends on dockerCompose
-// tasks.named("integrationTest") { dependsOn(rootProject.tasks.named("redisComposeUp")) }
-dockerCompose {
-    nested("redis").apply {
-        useComposeFiles.set(listOf("infra/redis.yml"))
-    }
-    nested("dgraph").apply {
-        useComposeFiles.set(listOf("infra/dgraph.yml"))
-    }
-}
-
 // dependencyCheck generate SARIF file to publish to GitHub security
 dependencyCheck {
     formats = listOf(HTML, SARIF)
@@ -193,7 +165,6 @@ allprojects {
         google()
         mavenLocal()
         mavenCentral()
-        maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") } // TODO: remove
         maven { url = uri("https://repo.spring.io/release") }
         maven { url = uri("https://repo.spring.io/milestone") }
         maven { url = uri("https://packages.confluent.io/maven/") }
@@ -203,26 +174,16 @@ allprojects {
 // sub projects config
 subprojects {
     if (this.name !in excludedProjects) {
-
         version = rootProject.version
         apply {
-            plugin("org.jetbrains.kotlin.jvm")
-            plugin("jacoco")
-            plugin("org.sonarqube")
-            // TODO replace "maven-publish" with  id("com.jfrog.artifactory") version "4.10.0"
-            // Adds "build information" when uploading to Artifactory
+            plugin(rootProject.project.libs.plugins.kotlin.jvm.get().pluginId)
             plugin("maven-publish")
-            plugin("org.jetbrains.dokka")
-            plugin("com.diffplug.spotless")
-            // plugin("dev.jacomet.logging-capabilities")
-            if (name !in quarkusProjects) {
-                plugin("dev.jacomet.logging-capabilities")
-            }
-            // apply for `grpcProjects` & `pipelineProjects` projects under `apps`
-            if (path.startsWith(":apps") && (name in grpcProjects + pipelineProjects)) {
+            plugin(rootProject.project.libs.plugins.gradle.spotless.get().pluginId)
+            plugin(rootProject.project.libs.plugins.kotlin.kover.get().pluginId)
+            // apply for pipelines
+            if (path.startsWith(":pipelines")) {
                 plugin("application")
-                plugin("com.github.johnrengelman.shadow")
-                plugin("com.google.cloud.tools.jib")
+                plugin(rootProject.project.libs.plugins.gradle.shadow.get().pluginId)
             }
             // apply for libs
             if (path.startsWith(":libs")) {
@@ -230,54 +191,31 @@ subprojects {
             }
         }
 
-        if (path.startsWith(":libs")) {
-            group = "micro.libs" // else default. i.e., "micro.apps"
-        }
-
-        // do we need this?
-        configurations {
-            register("bom")
-            implementation {
-                resolutionStrategy.failOnVersionConflict()
-            }
+        group = if (path.startsWith(":libs")) {
+            "hc360.libs"
+        } else if (path.startsWith(":services")) {
+            "hc360.services"
+        } else if (path.startsWith(":pipelines")) {
+            "hc360.pipelines"
+        } else {
+            "hc360"
         }
 
         dependencies {
             // Align versions of all Kotlin components
             implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-            // Use the Kotlin JDK 8 standard library.
-            implementation(kotlin("stdlib-jdk8"))
-            implementation(kotlin("reflect"))
-
             // Use kotest for testing
-            testImplementation("io.kotest:kotest-framework-engine-jvm:$kotestVersion") // for kotest framework
-            testImplementation("io.kotest:kotest-framework-api-jvm:$kotestVersion") // for kotest framework
-            testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion") // for kotest core jvm assertions
-            testImplementation("io.kotest:kotest-property-jvm:$kotestVersion") // for kotest property test
-            testImplementation("io.mockk:mockk:$mockkVersion") // Use Mockk mocking library
+            testImplementation(rootProject.project.libs.bundles.testing.common)
 
-            // Logging with slf4jVersion=2.0.0-alpha1
-            implementation("org.slf4j:slf4j-api:$slf4jVersion")
-            implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
-            runtimeOnly("org.slf4j:slf4j-jdk14:$slf4jVersion")
-            runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
+            // Logging with slf4j 2.0.x API.
+            // Add your favorite runtimeOnly lib (slf4j-jdk14 or slf4j-simple or logback) in subproject's build.gradle.kts
+            // Don't add slf4j runtimeOnly lib to libs' build.gradle.kts
+            implementation(rootProject.project.libs.bundles.logging.common)
         }
-
-        // enforce `slf4j-simple` for all sub-projects.
-        // Dataflow projects can overwrite it with `slf4j-jdk14` in project specific build.gradle.kts file
-        plugins.withId("dev.jacomet.logging-capabilities") {
-            loggingCapabilities {
-                selectSlf4JBinding("org.slf4j:slf4j-simple:$slf4jVersion")
-            }
-        }
-
-        // FIXME: specify which task to run per subproject
-        // affectedTestConfiguration { jvmTestTask = "check" }
 
         java {
             toolchain {
-                // 17 is latest at the current moment
                 languageVersion.set(JavaLanguageVersion.of(17))
             }
             withSourcesJar()
@@ -285,23 +223,7 @@ subprojects {
         }
 
         kotlin {
-            // jvmToolchain(17)
-            jvmToolchain {
-                (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(17))
-            }
-        }
-
-        jacoco {
-            toolVersion = jacocoVersion
-        }
-
-        // For every submodule we set paths
-        sonarqube {
-            properties {
-                property("sonar.junit.reportPaths", "$buildDir/test-results/test")
-                property("sonar.java.binaries", "$buildDir/classes/java, $buildDir/classes/kotlin")
-                property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml")
-            }
+            jvmToolchain(17)
         }
 
         spotless {
@@ -314,7 +236,7 @@ subprojects {
             kotlin {
                 targetExclude("**/build/**")
                 toggleOffOn("fmt:off", "fmt:on")
-                ktlint(ktlintVersion)
+                ktlint(ktlintVersion).editorConfigOverride(mapOf("disabled_rules" to "filename"))
             }
             kotlinGradle {
                 target("*.gradle.kts")
@@ -322,128 +244,35 @@ subprojects {
             }
         }
 
-        // FIXME: remove me. it is a workaround for https://youtrack.jetbrains.com/issue/KT-46165
-        tasks.withType<org.gradle.jvm.tasks.Jar> { duplicatesStrategy = DuplicatesStrategy.INCLUDE }
-
         tasks {
             compileKotlin {
                 kotlinOptions {
                     // TODO: Ultimately we need allWarningsAsErrors = true
                     // allWarningsAsErrors = true // Treat all Kotlin warnings as errors
-                    jvmTarget = JavaVersion.VERSION_17.toString() // FIXME use VERSION_17
-                    // languageVersion = "1.6"
-                    // apiVersion = "1.6"
+                    jvmTarget = JavaVersion.VERSION_17.toString()
                     javaParameters = true
                     freeCompilerArgs = listOf(
                         // "-Xjvm-enable-preview",
                         "-Xjsr305=strict",
-                        "-Xopt-in=kotlin.RequiresOptIn",
-                        "-Xopt-in=kotlin.OptIn"
+                        "-opt-in=kotlin.RequiresOptIn",
+                        "-opt-in=kotlin.OptIn"
                     )
                 }
-                // dependsOn("spotlessCheck") // TODO: Circular dependency for generateTestAot
             }
+
             compileTestKotlin {
                 kotlinOptions {
                     jvmTarget = JavaVersion.VERSION_17.toString()
-                    // languageVersion = "1.6"
-                    // apiVersion = "1.6"
                     javaParameters = true
                     freeCompilerArgs = listOf(
                         // "-Xjvm-enable-preview",
                         "-Xjsr305=strict",
-                        "-Xopt-in=kotlin.RequiresOptIn",
-                        "-Xopt-in=kotlin.OptIn"
+                        "-opt-in=kotlin.RequiresOptIn",
+                        "-opt-in=kotlin.OptIn"
                     )
                 }
             }
 
-            jacocoTestReport {
-                reports {
-                    html.required.set(true)
-                    xml.required.set(true)
-                }
-            }
-
-            jacocoTestCoverageVerification {
-                violationRules {
-                    rule { limit { minimum = jacocoQualityGate.toBigDecimal() } }
-                    rule {
-                        enabled = false
-                        element = "CLASS"
-                        includes = listOf("micro.apps.proto.*")
-                    }
-                }
-            }
-/*
-            testing {
-                suites {
-                    val test by getting(JvmTestSuite::class) {
-                        useJUnitJupiter()
-
-                        targets {
-                            all {
-                                testTask.configure {
-                                    useJUnitPlatform {
-                                        excludeTags("slow", "integration")
-                                    }
-                                    filter {
-                                        isFailOnNoMatchingTests = false
-                                    }
-                                    // maxParallelForks = Runtime.getRuntime().availableProcessors() // FIXME: port conflict for quarkus
-                                    testLogging {
-                                        exceptionFormat = FULL
-                                        showExceptions = true
-                                        showStandardStreams = true
-                                        events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
-                                    }
-                                    finalizedBy("jacocoTestReport")
-                                }
-                            }
-                        }
-                    }
-
-                    val integrationTest by registering(JvmTestSuite::class) {
-                        sources {
-                            java {
-                                setSrcDirs(listOf("src/test/kotlin", "src/test/java"))
-                            }
-                            resources {
-                                setSrcDirs(listOf("src/test/resources"))
-                            }
-                        }
-
-                        dependencies {
-                            implementation(project)
-                            //testImplementation(project(path = ":ontrack-extension-casc", configuration = "tests"))
-                            implementation(project(":apps:classifier-pipeline"){ configurations { "testRuntime" } })
-                            // implementation("org.assertj:assertj-core:3.22.0")
-                        }
-
-                        targets {
-                            all {
-                                testTask.configure {
-                                    useJUnitPlatform {
-                                        includeTags("integration", "e2e")
-                                    }
-                                    filter {
-                                        isFailOnNoMatchingTests = false
-                                    }
-                                    testLogging {
-                                        exceptionFormat = FULL
-                                        showExceptions = true
-                                        showStandardStreams = true
-                                        events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
-                                    }
-                                    shouldRunAfter(test)
-                                    finalizedBy("jacocoTestReport")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-*/
             test {
                 useJUnitPlatform {
                     excludeTags("slow", "integration")
@@ -458,7 +287,6 @@ subprojects {
                     showStandardStreams = true
                     events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
                 }
-                finalizedBy("jacocoTestReport")
             }
 
             register<Test>("integrationTest") {
@@ -475,34 +303,6 @@ subprojects {
                     events(PASSED, FAILED, SKIPPED, STANDARD_OUT, STANDARD_ERROR)
                 }
                 shouldRunAfter(test)
-                finalizedBy("jacocoTestReport")
-            }
-
-            check {
-                // dependsOn(testing.suites.named("integrationTest"))
-                dependsOn("jacocoTestCoverageVerification")
-                dependsOn("jacocoTestReport")
-            }
-
-            dokkaHtml {
-                dokkaSourceSets {
-                    /* configure main source set */
-                    // named("main") {}
-
-                    /* configure all source sets */
-                    configureEach {
-                        includes.from("README.md")
-                        /* we need to do this, due to corp proxy  */
-                        externalDocumentationLink {
-                            noJdkLink.set(true)
-                            noStdlibLink.set(true)
-                            noAndroidSdkLink.set(true)
-                            // any url you want, doesn't matter
-                            url.set(URL("https://whatever"))
-                            packageListUrl.set(URL("file:///$rootDir/package-list"))
-                        }
-                    }
-                }
             }
 
             jar {
@@ -635,11 +435,6 @@ tasks {
         checkForGradleUpdate = true
         revision = "release"
         gradleReleaseChannel = "current"
-    }
-
-    dokkaHtmlMultiModule {
-        // outputDirectory.set(buildDir.resolve("dokka"))
-        // documentationFileName.set("README.md")
     }
 
     wrapper {

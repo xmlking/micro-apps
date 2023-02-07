@@ -2,8 +2,6 @@ package micro.apps.kstream.serializer
 
 import io.confluent.kafka.schemaregistry.avro.AvroSchema
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient
-import micro.apps.core.getThroughReflection
-import mu.KotlinLogging
 import org.apache.kafka.common.serialization.Serializer
 
 class CryptoKafkaAvro4kSerializer(
@@ -38,7 +36,8 @@ class CryptoKafkaAvro4kSerializer(
                     isKey,
                     it,
                     AvroSchema(avroSchemaUtils.getSchema(it))
-                ), it
+                ),
+                it
             )
             // TODO: add associatedData, will reflect expensive?
             this.encrypt(aaa!!)

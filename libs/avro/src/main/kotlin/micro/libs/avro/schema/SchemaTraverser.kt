@@ -7,7 +7,6 @@ import java.util.*
 import kotlin.collections.ArrayDeque
 import kotlin.collections.joinToString
 
-
 interface SchemaVisitor {
     fun visitSchema(schema: Schema) {}
     fun visitField(parent: Schema, field: Schema.Field, path: String) {}
@@ -26,7 +25,7 @@ private fun traverseSchema(
 ) {
     visited?.let {
         if (visited.put(schema, java.lang.Boolean.TRUE) != null) {
-            return  //been there, done that
+            return // been there, done that
         }
     }
 
@@ -55,4 +54,3 @@ private fun traverseSchema(
         else -> {}
     }
 }
-

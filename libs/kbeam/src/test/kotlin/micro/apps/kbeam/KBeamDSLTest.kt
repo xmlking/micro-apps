@@ -19,7 +19,6 @@ class KBeamDSLTest : Serializable {
 
     @Test
     fun ShouldRunCoGroupByKeyDSLTest() {
-
         val list1 = (1..20).map { KV.of("Key_${it % 10})", it) }
         val list2 = (0..9).flatMap { ('a'..'z').map { KV.of("Key_$it)", "$it") } }
         val plist1 = pipeline.apply("Create List1", Create.of(list1))

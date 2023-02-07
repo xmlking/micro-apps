@@ -57,13 +57,13 @@ gradle dependencyCheckAggregate
 
 #### kover
 
+[Kover](https://lengrand.fr/kover-code-coverage-plugin-for-kotlin/) is Code Coverage plugin for Kotlin
+
 Note: _Cross-module tests are not supported in reports and validation yet. For each test, only the classpath belonging to the current module is taken._
 
 ```bash
 gradle koverMergedReport -x test # Generates code coverage report for all enabled test tasks in all projects.
 gradle koverMergedVerify # Verifies code coverage metrics of all projects based on specified rules. Always executes before `check` task.
-# Executes before check task if property generateReportOnCheck for KoverExtension is true 
-gradle koverCollectReports # Collects all projects reports into one directory. Default directory is $buildDir/reports/kover/projects
 gradle koverReport # Executes both koverXmlReport and koverHtmlReport tasks for one project.
 gradle koverVerify # Verifies code coverage metrics of one project based on specified rules.
 ```
@@ -81,18 +81,18 @@ gradle spotlessApply
 
 ```bash
 # addExtension - Adds Quarkus extensions specified by the user to the project.
-gradle :apps:greeting-service:addExtension --extensions="health,metrics,openapi"
-gradle :apps:greeting-service:addExtension --extensions="hibernate-validator"
-gradle :apps:greeting-service:addExtension --extensions="jdbc,agroal,non-exist-ent"
+gradle :services:greeting:addExtension --extensions="health,metrics,openapi"
+gradle :services:greeting:addExtension --extensions="hibernate-validator"
+gradle :services:greeting:addExtension --extensions="jdbc,agroal,non-exist-ent"
 # buildNative - Building a native image
-gradle :apps:greeting-service:buildNative
-gradle :apps:greeting-service:testNative
+gradle :services:greeting:buildNative
+gradle :services:greeting:testNative
 # generateConfig - Generates an example config file
 # listExtensions - Lists the available quarkus extensions
-gradle :apps:greeting-service:listExtensions
+gradle :services:greeting:listExtensions
 # quarkusBuild - Quarkus builds a runner jar based on the build jar
 # quarkusDev - Development mode: enables hot deployment with background compilation
-gradle :apps:greeting-service:quarkusDev -Dsuspend -Ddebug
+gradle :services:greeting:quarkusDev -Dsuspend -Ddebug
 # quarkusTestConfig - Sets the necessary system properties for the Quarkus tests to run.
 ```
 
@@ -108,7 +108,7 @@ gradle redisComposeDown
 gradle redisComposeLogs
 ```
 
-### Affected Module Detector
+### Affected Module Detector (AMD)
 
 The detector allows for three options for affected modules:
 
@@ -245,13 +245,17 @@ docker run -it xmlking/micro-apps-demo:1.6.5-SNAPSHOT
 
 ### Dependencies
 
+This use [versions plugin](https://github.com/ben-manes/gradle-versions-plugin) and [version-catalog-update-plugin](https://github.com/littlerobots/version-catalog-update-plugin)
+
 ```bash
 # Report dependencies
 gradle dependencyUpdates -Drevision=release -DoutputFormatter=json,xml
 # Update dependencies, `dependsOn dependencyUpdates`
-gradle useLatestVersions
-# This task will succeed if all available updates were successfully applied by useLatestVersions
-gradle useLatestVersions && gradle useLatestVersionsCheck
+# Creating a libs.versions.toml file, If you don't have a catalog file yet
+gradle versionCatalogUpdate --create
+# Updating the libs.versions.toml file
+gradle versionCatalogUpdate
+gradle versionCatalogUpdate --interactive
 ```
 
 ### Gradle
@@ -270,7 +274,7 @@ gradle classifier:dependencyInsight --dependency spring-messaging
 # refresh dependencies
 gradle build -x test --refresh-dependencies 
 # viewing and debugging dependencies
-gradle -q :apps:greeting-service:dependencyInsight  --dependency org.ow2.asm:asm --configuration testCompileClasspath
+gradle -q :services:greeting:dependencyInsight  --dependency org.ow2.asm:asm --configuration testCompileClasspath
 
 # display version 
 gradle cV

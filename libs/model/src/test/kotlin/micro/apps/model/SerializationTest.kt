@@ -30,7 +30,8 @@ data class Pizza(val name: String, val ingredients: List<Ingredient>, val vegeta
 @Serializable
 @kotlinx.serialization.ExperimentalSerializationApi
 data class ProtobufData(
-    @ProtoNumber(1) @ProtoType(ProtoIntegerType.SIGNED) val a: Int,
+    @ProtoNumber(1) @ProtoType(ProtoIntegerType.SIGNED)
+    val a: Int,
     @ProtoNumber(2) val b: Double = 42.88
 )
 

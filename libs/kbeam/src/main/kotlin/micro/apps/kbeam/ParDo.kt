@@ -104,16 +104,16 @@ inline fun <I, reified O> PCollection<I>.parDo(
     crossinline function: DoFnContext<I, O>.() -> Unit
 ):
     PCollection<O> {
-        return this.apply(
-            name,
-            ParDo.of(object : DoFn<I, O>() {
-                @ProcessElement
-                fun processElement(processContext: ProcessContext) {
-                    DoFnContextWrapper(processContext).apply(function)
-                }
-            }).withSideInputs(sideInputs)
-        )
-    }
+    return this.apply(
+        name,
+        ParDo.of(object : DoFn<I, O>() {
+            @ProcessElement
+            fun processElement(processContext: ProcessContext) {
+                DoFnContextWrapper(processContext).apply(function)
+            }
+        }).withSideInputs(sideInputs)
+    )
+}
 
 /**
  * Filter the input PCollection by a condition

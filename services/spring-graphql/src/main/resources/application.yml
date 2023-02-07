@@ -1,0 +1,66 @@
+server:
+  shutdown: graceful
+# ==================== logging ============================
+logging:
+  level:
+    micro.apps.service: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.springframework.graphql: DEBUG
+    org.springframework.r2dbc: DEBUG
+# ==================== management ==========================
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+# ==================== spring ==============================
+spring:
+  graphql:
+    path: /graphql
+    websocket:
+      path: /graphql
+    schema:
+      printer:
+        enabled: true
+      introspection:
+        enabled: false
+      locations:
+        - classpath*:graphql/**/
+    graphiql:
+      enabled: true
+#    cors:
+#      allowed-origins: '*'
+#      allowed-headers: '*'
+#      allowed-methods: '*'
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: true
+    show-sql: true
+  datasource:
+    url: jdbc:h2:./build/database/db;AUTO_SERVER=TRUE
+    username: user
+    password: password
+  devtools:
+    livereload:
+      enabled: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://tos.orderup.homes/auth/realms/orderup-tower
+          jwk-set-uri: https://tos.orderup.homes/auth/realms/orderup-tower/protocol/openid-connect/certs
+#          public-key-location: classpath:my-key.pub
+#          jws-algorithms:
+  flyway:
+    baseline-on-migrate: true
+    # default-schema: public
+
+# ==================== application properties  =============
+feature:
+  postMvp:
+    enabled: false

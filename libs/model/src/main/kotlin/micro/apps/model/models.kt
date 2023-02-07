@@ -2,6 +2,19 @@
 
 package micro.apps.model
 
+import com.github.avrokotlin.avro4k.Avro
+import com.github.avrokotlin.avro4k.AvroAliases
+import com.github.avrokotlin.avro4k.AvroDefault
+import com.github.avrokotlin.avro4k.AvroEnumDefault
+import com.github.avrokotlin.avro4k.AvroFixed
+import com.github.avrokotlin.avro4k.AvroProp
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
+import jakarta.validation.constraints.Past
+import jakarta.validation.constraints.Pattern
+import jakarta.validation.constraints.Size
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -26,20 +39,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.UUID
-import javax.validation.constraints.Email
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
-import javax.validation.constraints.Past
-import javax.validation.constraints.Pattern
-import javax.validation.constraints.Size
 import java.io.Serializable as JavaSerializable
-import com.github.avrokotlin.avro4k.AvroDefault
-import com.github.avrokotlin.avro4k.Avro
-import com.github.avrokotlin.avro4k.AvroAliases
-import com.github.avrokotlin.avro4k.AvroEnumDefault
-import com.github.avrokotlin.avro4k.AvroFixed
-import com.github.avrokotlin.avro4k.AvroProp
 
 // ----------------
 //  for Kotlin Gradle NoArg plugin
@@ -80,10 +80,12 @@ data class Name(
     @field:NotNull
     @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "FirstName must contain only letters and numbers")
     @field:Size(min = 4, max = 26, message = "FirstName must be between {min} and {max} characters")
-    @ProtoNumber(1) @AvroProp("confidential", "true") val first: String?,
+    @ProtoNumber(1) @AvroProp("confidential", "true")
+    val first: String?,
     @field:NotBlank
     @field:Pattern(regexp = "[A-Za-z0-9_]+", message = "LastName must contain only letters and numbers")
-    @ProtoNumber(2) val last: String?,
+    @ProtoNumber(2)
+    val last: String?,
     @ProtoNumber(3) val title: String? = null
 )
 
@@ -91,12 +93,14 @@ data class Name(
 @ExperimentalSerializationApi
 data class Address(
     @ProtoNumber(1) val suite: String? = null,
-    @ProtoNumber(2) @AvroProp("confidential", "true") val street: String?,
+    @ProtoNumber(2) @AvroProp("confidential", "true")
+    val street: String?,
     @ProtoNumber(3) val city: String?,
     @ProtoNumber(4) val state: String?,
     @field:Size(min = 5, max = 15)
-    @ProtoNumber(5) val code: String?,
-    @ProtoNumber(6) val country: String?,
+    @ProtoNumber(5)
+    val code: String?,
+    @ProtoNumber(6) val country: String?
     // @ProtoNumber(7) @Contextual val location: Point?
 )
 
@@ -104,18 +108,25 @@ data class Address(
 @AvroAliases(["account"])
 @ExperimentalSerializationApi
 data class Person(
-    @ProtoNumber(1)@AvroProp("confidential", "true") val id: String = "",
-    @ProtoNumber(2) @AvroProp("confidential", "true") val name: Name,
+    @ProtoNumber(1)@AvroProp("confidential", "true")
+    val id: String = "",
+    @ProtoNumber(2) @AvroProp("confidential", "true")
+    val name: Name,
     @ProtoNumber(3) val addresses: Set<Address>? = setOf(),
-    @ProtoNumber(4) @AvroProp("confidential", "true") @AvroDefault("UNKNOWN") val gender: Gender,
+    @ProtoNumber(4) @AvroProp("confidential", "true") @AvroDefault("UNKNOWN")
+    val gender: Gender,
     @field:Min(value = 18, message = "age must be at least {value}")
-    @ProtoNumber(5) @AvroProp("confidential", "true") @ProtoType(ProtoIntegerType.SIGNED) val age: Int,
+    @ProtoNumber(5) @AvroProp("confidential", "true") @ProtoType(ProtoIntegerType.SIGNED)
+    val age: Int,
     // @Serializable(with = DateAsLongSerializer::class) // @Polymorphic
     @field:Past(message = "invalid DOB: {value}")
-    @ProtoNumber(6)  @AvroDefault(Avro.NULL) @AvroProp("confidential", "true") val dob: LocalDateTime?,
+    @ProtoNumber(6) @AvroDefault(Avro.NULL) @AvroProp("confidential", "true")
+    val dob: LocalDateTime?,
     @field:Email(message = "Email should be valid")
-    @ProtoNumber(7) @AvroProp("encrypted", "yes") val email: String? = null,
-    @ProtoNumber(8) @AvroProp("encrypted", "yes") @AvroFixed(10) val phone: String? = null,
+    @ProtoNumber(7) @AvroProp("encrypted", "yes")
+    val email: String? = null,
+    @ProtoNumber(8) @AvroProp("encrypted", "yes") @AvroFixed(10)
+    val phone: String? = null,
     @ProtoNumber(9) val avatar: String = "https://www.gravatar.com/avatar", // Optional
     @Transient val valid: Boolean = false // not serialized: explicitly transient
 )
@@ -127,7 +138,6 @@ data class MyModel(
     @AvroProp("confidential", "true") var city: String? = null,
     var state: String? = null
 )
-
 
 // *** Example  KSerializer for 3rd party classes ***//
 

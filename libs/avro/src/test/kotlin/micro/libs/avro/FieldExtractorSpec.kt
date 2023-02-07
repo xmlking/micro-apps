@@ -66,5 +66,4 @@ class FieldExtractorSpec : FunSpec({
         memorized shouldBe expected
         counter.get() shouldBe 1
     }
-
 })

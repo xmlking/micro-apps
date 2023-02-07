@@ -9,7 +9,6 @@ import org.apache.avro.generic.GenericRecord
 import org.apache.avro.util.Utf8
 import java.io.File
 
-
 class RecordTransformerSpec : FunSpec({
     lateinit var records: List<GenericRecord>
     lateinit var avpaths: List<String>

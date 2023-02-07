@@ -1,10 +1,11 @@
 /* ktlint-disable no-wildcard-imports */
 import com.google.protobuf.gradle.*
 
+@Suppress("DSL_SCOPE_VIOLATION") // TODO remove when https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
 plugins {
     // For best results, install idea plugin along with `com.google.protobuf` plugin for IntelliJ.
     idea
-    id("com.google.protobuf")
+    alias(libs.plugins.gradle.protobuf)
     `java-test-fixtures`
 }
 
@@ -13,18 +14,9 @@ val grpcKotlinVersion = libs.versions.grpcKotlin.get()
 val protobufVersion = libs.versions.protobuf.get()
 val pgvVersion = libs.versions.pgv.get()
 
-// Workaround the Gradle bug resolving multi-platform dependencies.
-// FIXME: https://github.com/google/protobuf-gradle-plugin/issues/391
-//configurations.all {
-//    if (name.contains("kapt") || name.contains("proto", ignoreCase = true)) {
-//        attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class.java, Usage.JAVA_RUNTIME))
-//    }
-//}
-
 dependencies {
     // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
     implementation(libs.grpc.protobuf)
-    implementation(libs.grpc.stub) // FIXME: remove me when grpc-kotlin support latest grpc-java version
     implementation(libs.grpc.kotlin.stub)
     implementation(libs.kotlinx.coroutines.core)
 

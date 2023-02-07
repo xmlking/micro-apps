@@ -94,8 +94,10 @@ fun mockPersonList() = listOf(
             )
         ),
         dob = LocalDateTime.parse("1999-05-30", fmt),
-        gender = Gender.MALE, age = 99,
-        email = "sumo1@demo.com", phone = "0000000000"
+        gender = Gender.MALE,
+        age = 99,
+        email = "sumo1@demo.com",
+        phone = "0000000000"
     ),
     Person(
         name = Name(first = "sumo2", last = "demo2"),
@@ -110,7 +112,9 @@ fun mockPersonList() = listOf(
             )
         ),
         dob = LocalDateTime.parse("1999-05-30", fmt),
-        gender = Gender.FEMALE, age = 99,
-        email = "sumo2@demo.com", phone = "1111111111"
+        gender = Gender.FEMALE,
+        age = 99,
+        email = "sumo2@demo.com",
+        phone = "1111111111"
     )
 )

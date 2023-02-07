@@ -22,8 +22,8 @@ jobs:
         with:
           gradle-version: release-candidate
       - name: Build JVM JAR
-        run: gradle :apps:greeting-service:quarkusBuild --uber-jar
-      #        run: gradle :apps:greeting-service:quarkusBuild --uber-jar -Pversion="${{ github.event.release.tag_name }}"
+        run: gradle :services:greeting:quarkusBuild --uber-jar
+      #        run: gradle :services:greeting:quarkusBuild --uber-jar -Pversion="${{ github.event.release.tag_name }}"
       - name: Upload JVM JAR
         id: upload-jar
         uses: actions/upload-release-asset@v1
@@ -35,7 +35,7 @@ jobs:
           asset_name: greeting-service-${{ github.event.release.tag_name }}.jar
           asset_content_type: application/octet-stream
       - name: Build Native
-        run: gradle :apps:greeting-service:quarkusBuild -Dquarkus.package.type=native -Dquarkus.native.container-build=true -Pversion="${{ github.event.release.tag_name }}"
+        run: gradle :services:greeting:quarkusBuild -Dquarkus.package.type=native -Dquarkus.native.container-build=true -Pversion="${{ github.event.release.tag_name }}"
       - name: Upload Native Image (Linux)
         id: upload-native-image-linux
         uses: actions/upload-release-asset@v1

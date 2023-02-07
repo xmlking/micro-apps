@@ -1,0 +1,22 @@
+debug: false
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
+# ==================== spring ==============================
+spring:
+  graphql:
+    path: /graphql
+    schema:
+      printer:
+        enabled: true
+    graphiql:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.temp.use_jdbc_metadata_defaults: false

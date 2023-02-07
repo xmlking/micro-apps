@@ -1,0 +1,31 @@
+directive @uppercase on FIELD_DEFINITION
+directive @lowercase on FIELD_DEFINITION
+directive @capitalize on FIELD_DEFINITION
+directive @trim on FIELD_DEFINITION
+
+directive @NotBlank(message : String = "graphql.validation.NotBlank.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+directive @Size(min : Int = 0, max : Int = 2147483647, message : String = "graphql.validation.Size.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+directive @Email(message : String = "graphql.validation.Email.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+directive @Pattern(regexp : String! =".*", message : String = "graphql.validation.Pattern.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+directive @Max(value : Int! = 2147483647, message : String = "graphql.validation.Max.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+directive @Min(value : Int! = 0, message : String = "graphql.validation.Min.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+scalar DateTime
+scalar Date
+scalar Locale
+scalar JSON
+scalar BigDecimal
+scalar UUID
+scalar Url
+
+type Query {
+
+}
+
+type Mutation {
+
+}
+
+type Subscription {
+
+}

@@ -1,8 +1,14 @@
 ### Eclipse ###
-.project
+.apt_generated
 .classpath
-.settings/
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
 .idea
@@ -20,12 +26,11 @@ out/
 /nbdist/
 /.nb-gradle/
 
-
 ### VS Code ###
 .vscode/
 .factorypath
 
-# OSX
+### OSX ###
 .DS_Store
 .DS_Store?
 ._*
@@ -36,7 +41,7 @@ Thumbs.db
 .AppleDouble
 .LSOverride
 
-# Vim
+### Vim ###
 *.swp
 *.swo
 
@@ -49,6 +54,8 @@ Thumbs.db
 build/
 !gradle/wrapper/gradle-wrapper.jar
 *.hprof
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### Docker ###
 .testcontainers-tmp-*
@@ -56,11 +63,6 @@ build/
 ### appclt ###
 .appctlconfig
 .deployment/
-
-### docusaurus ###
-documentation/site/
-node_modules/
-.docusaurus
 
 # environment files #
 #####################
@@ -70,13 +72,7 @@ node_modules/
 /.env.*.local
 !.env.example
 
-
 ### Project ###
-.env
-favicon.*
-*.mv.db
-*.trace.db
-libs/demo/src/main/jenkinsfile/ssh
 TODO
 apps/sveltekit-starter
 codemr

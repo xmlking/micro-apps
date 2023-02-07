@@ -1,0 +1,20 @@
+extend type Query {
+    items(id: [ID], name: String): [Item]
+    item(id: ID!): Item
+}
+
+extend type Mutation {
+    addItem(input: ItemInput!): Item
+    deleteItem(id: ID!): Item
+}
+
+type Item {
+    id: ID!
+    name: String!
+    description: String
+}
+
+input ItemInput {
+    name: String! @NotBlank @Size(min: 4, max: 50)
+    description: String
+}

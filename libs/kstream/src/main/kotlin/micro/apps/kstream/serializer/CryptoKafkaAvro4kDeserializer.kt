@@ -23,7 +23,6 @@ class CryptoKafkaAvro4kDeserializer(
         this.configure(CryptoKafkaAvro4kDeserializerConfig(configs))
     }
 
-
     override fun deserialize(s: String?, bytes: ByteArray?): Any? {
         // TODO: how to get associatedData?
         return bytes?.let {

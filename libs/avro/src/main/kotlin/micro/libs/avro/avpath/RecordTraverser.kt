@@ -20,7 +20,7 @@ typealias Transformer = (parent: GenericRecord, suffix: String) -> Unit
 fun traverseRecord(data: GenericRecord, avpath: String, transformer: Transformer) {
     val pathStack = ArrayDeque(avpath.split(".").filter { it.isNotEmpty() })
     require(pathStack.isNotEmpty()) { "avpath: '$avpath' is empty" }
-    traverseRecord(data,pathStack, transformer)
+    traverseRecord(data, pathStack, transformer)
 }
 
 private fun traverseRecord(data: GenericRecord, pathStack: ArrayDeque<String>, transformer: Transformer) {

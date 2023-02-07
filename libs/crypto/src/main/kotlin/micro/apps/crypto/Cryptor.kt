@@ -62,7 +62,8 @@ private val logger = KotlinLogging.logger {}
  * <p>If {@code credentialPath} is present, load the credentials from that. Otherwise use the
  * default credentials.
  */
-class CryptorImpl @Throws(IOException::class, GeneralSecurityException::class) constructor(
+
+class CryptorImpl @Throws(IOException::class, GeneralSecurityException::class) constructor( // ktlint-disable annotation
     keyFile: String,
     useKms: Boolean = false,
     kekUri: String? = null,

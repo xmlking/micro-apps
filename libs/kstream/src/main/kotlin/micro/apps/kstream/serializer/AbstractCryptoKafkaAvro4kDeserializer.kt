@@ -1,6 +1,5 @@
 package micro.apps.kstream.serializer
 
-
 import com.github.avrokotlin.avro4k.Avro
 import com.github.avrokotlin.avro4k.io.AvroDecodeFormat
 import com.github.thake.kafka.avro4k.serializer.Avro4kSchemaUtils
@@ -24,14 +23,15 @@ abstract class AbstractCryptoKafkaAvro4kDeserializer : AbstractCryptoKafkaAvro4k
             mutableMapOf()
 
         private fun getLookup(recordPackages: List<String>, classLoader: ClassLoader) =
-            specificRecordLookupForClassLoader.getOrPut(Pair(recordPackages, classLoader),
-                { RecordLookup(recordPackages, classLoader) })
+            specificRecordLookupForClassLoader.getOrPut(
+                Pair(recordPackages, classLoader),
+                { RecordLookup(recordPackages, classLoader) }
+            )
     }
 
     private var recordPackages: List<String> = emptyList()
     private var binaryDecoder: BinaryDecoder? = null
     protected val avroSchemaUtils = Avro4kSchemaUtils()
-
 
     protected fun configure(config: CryptoKafkaAvro4kDeserializerConfig) {
         val configuredPackages = config.getRecordPackages()
@@ -44,12 +44,11 @@ abstract class AbstractCryptoKafkaAvro4kDeserializer : AbstractCryptoKafkaAvro4k
         return CryptoKafkaAvro4kDeserializerConfig(props)
     }
 
-
     @Throws(SerializationException::class)
     protected fun deserialize(
-        payload: ByteArray?, readerSchema: Schema?
+        payload: ByteArray?,
+        readerSchema: Schema?
     ): Any? {
-
         return if (payload == null) {
             null
         } else {
@@ -81,10 +80,9 @@ abstract class AbstractCryptoKafkaAvro4kDeserializer : AbstractCryptoKafkaAvro4k
         val recordSchema = writerSchema.types[unionTypeIndex]
         if (recordSchema.type == Schema.Type.NULL) return null
         binaryDecoder = decoder
-        //Decode avro type as record
+        // Decode avro type as record
         return deserialize(recordSchema, readerSchema, decoder.inputStream())
     }
-
 
     private fun deserialize(writerSchema: Schema, readerSchema: Schema?, bytes: InputStream) =
         when (writerSchema.type) {
@@ -121,20 +119,18 @@ abstract class AbstractCryptoKafkaAvro4kDeserializer : AbstractCryptoKafkaAvro4k
     private fun getLookup(contextClassLoader: ClassLoader) = Companion.getLookup(recordPackages, contextClassLoader)
 
     protected open fun getDeserializedClass(msgSchema: Schema): KClass<*> {
-        //First lookup using the context class loader
+        // First lookup using the context class loader
         val contextClassLoader = Thread.currentThread().contextClassLoader
         var objectClass: Class<*>? = null
         if (contextClassLoader != null) {
             objectClass = getLookup(contextClassLoader).lookupType(msgSchema)
         }
         if (objectClass == null) {
-            //Fallback to classloader of this class
+            // Fallback to classloader of this class
             objectClass = getLookup(AbstractCryptoKafkaAvro4kDeserializer::class.java.classLoader).lookupType(msgSchema)
                 ?: throw SerializationException("Couldn't find matching class for record type ${msgSchema.fullName}. Full schema: $msgSchema")
         }
 
         return objectClass.kotlin
     }
-
-
 }

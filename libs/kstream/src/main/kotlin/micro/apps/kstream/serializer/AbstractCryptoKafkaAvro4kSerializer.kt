@@ -1,6 +1,5 @@
 package micro.apps.kstream.serializer
 
-
 import com.github.avrokotlin.avro4k.Avro
 import com.github.avrokotlin.avro4k.io.AvroEncodeFormat
 import com.github.thake.kafka.avro4k.serializer.Avro4kSchemaUtils

@@ -16,7 +16,6 @@ import org.apache.avro.util.Utf8
 import java.io.File
 import java.util.concurrent.atomic.AtomicInteger
 
-
 class RecordTraverserSpec : FunSpec({
     lateinit var records: List<GenericRecord>
 
@@ -29,10 +28,10 @@ class RecordTraverserSpec : FunSpec({
             // HINT: Recommended for avro file with large number of records.
             // Reuse user object by passing it to next(). This saves us from allocating and
             // garbage collecting many objects for files with many items.
-            //val tmpRecord: GenericRecord? = null
-            //val seq = generateSequence {
+            // val tmpRecord: GenericRecord? = null
+            // val seq = generateSequence {
             //    if (reader.hasNext()) reader.next(tmpRecord) else null
-            //}
+            // }
             val seq = (reader as Iterable<GenericRecord>).asSequence()
             records = seq.toList()
         }
@@ -171,5 +170,4 @@ class RecordTraverserSpec : FunSpec({
             }
         }
     }
-
 })
