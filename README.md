@@ -75,35 +75,35 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 
 #### Apache Beam Pipelines
 
-> Explore [Wordcount Pipeline](./apps/wordcount-pipeline/)
+> Explore [Wordcount Pipeline](./pipelines/wordcount/)
 
-> Explore [Streaming Ingestion Pipeline](./apps/ingestion-pipeline/)
+> Explore [Streaming Ingestion Pipeline](./pipelines/ingestion/)
 
-> Explore [Classifier Pipeline](./apps/classifier-pipeline/)
+> Explore [Classifier Pipeline](./pipelines/classifier/)
 
 #### Quarkus
 
-> Explore [REST, OpenAPI, OpenID Connect,  API](./apps/greeting-service/)
+> Explore [REST, OpenAPI, OpenID Connect,  API](./services/greeting/)
 
-> Explore [GraphQL API](./apps/person-service/)
+> Explore [GraphQL API](./services/person/)
 
 #### Kotlin-gRPC
 
-> Explore [Account-gRPC API](./apps/account-service/)
+> Explore [Account-gRPC API](./services/account/)
 
-> Explore [Kotlin-gRPC API](./apps/keying-service/)
+> Explore [Kotlin-gRPC API](./services/keying/)
 
-> Explore [Kotlin-gRPC API](./apps/linking-service/)
+> Explore [Kotlin-gRPC API](./services/linking/)
 
 #### Spring
 
-> Explore [Spring-RSocket Chat APP](./apps/chat-service/)
+> Explore [Spring-RSocket Chat APP](./services/chat/)
 
-> Explore [Spring CRUD + Redis Search API](./apps/entity-service/)
+> Explore [Spring CRUD + Redis Search API](./services/entity/)
 
 #### Svelte
 
-> Explore [SvelteKit WebApp](./apps/entity-webapp/)
+> Explore [SvelteKit WebApp](./services/webapp/)
 
 ### Libs
 
@@ -121,8 +121,10 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
  
 > Explore [Shared Pipelines Code](./libs/pipeline/)
 
-> Explore [Shared Services Code](./libs/service/)
+> Explore [Shared Spring Services Code](./libs/spring/)
 
+> Explore [Shared Spring GraphQL Services Code](./libs/graphql/)
+>
 > Explore [Shared ProtoBuf Contracts](./libs/proto/)
 
 > Explore [Shared Test Fixtures](./libs/test/)
