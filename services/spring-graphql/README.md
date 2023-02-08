@@ -3,11 +3,16 @@
 Demo GraphQL APIs with Spring Boot 3.x
 
 ## Features 
-- [x] [Error Handling](https://www.baeldung.com/spring-graphql-error-handling)
-  - [x] [DataFetcherExceptionResolverAdapter](https://docs.spring.io/spring-graphql/docs/current/reference/html/#execution.exceptions)
+- [x] Error Handling
 - [ ] Input Validation 
-- [ ] JWT Authentication Provider & fine-grained security `@PreAuthorize`
- 
+- [x] JWT **AuthN** and **AuthZ**
+- [x] Use `.env` for [sensitive properties](https://stackoverflow.com/questions/58549361/using-dotenv-files-with-spring-boot)
+
+## Setup
+
+> Make a copy `.env.example` as `.env` in the subproject root  
+> Add any environment variables that you want to overwrite in application.yml
+
 ## Run
 
 ```shell
@@ -31,9 +36,6 @@ open http://localhost:8080/graphiql
 
 open http://localhost:8080/h2-console
 
-
-## Test
-
 ```shell
 http -v http://localhost:8080/actuator/info \
 'Authorization: Bearer YOUR_TOKEN'
@@ -42,6 +44,8 @@ http http://localhost:8080/actuator/health \
 'Authorization: Bearer YOUR_TOKEN'
 
 ```
+
+## Test
 
 ```shell
 gradle :services:spring-graphql:test

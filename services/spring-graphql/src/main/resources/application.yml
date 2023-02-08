@@ -19,6 +19,8 @@ management:
         include: health,info,metrics,prometheus
 # ==================== spring ==============================
 spring:
+  config:
+    import: optional:file:.env[.properties]
   graphql:
     path: /graphql
     websocket:
@@ -67,4 +69,4 @@ feature:
     enabled: false
 security:
   jwt:
-    signing-key: ${JWT_SIGNING_KEY:12345}
+    signing-key: ${JWT_SIGNING_KEY}
