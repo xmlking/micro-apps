@@ -1,6 +1,7 @@
 ### Create item
 GRAPHQL http://localhost:8080/graphql
-Authorization: Bearer YOUR_TOKEN
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 mutation {
   addItem(input: {name: "new item", description: "hello"}) {
@@ -12,6 +13,8 @@ mutation {
 
 ### Create item with variables
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 mutation AddItem($newItem: ItemInput!) {
   addItem(input: $newItem) {
@@ -30,6 +33,8 @@ mutation AddItem($newItem: ItemInput!) {
 
 ### Fetch items
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 query {
   item(id: 1) {
@@ -41,6 +46,8 @@ query {
 
 ### Fetch items
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 query {
   item(id: 3) {
@@ -57,6 +64,8 @@ query {
 
 ### List items
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 query {
   items {
@@ -69,6 +78,8 @@ query {
 
 ### Delete item by id
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 mutation {
   deleteItem(id: 3) {

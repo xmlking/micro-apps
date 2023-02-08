@@ -4,7 +4,7 @@ Modern microservices for Post-Kubernetes Era.
 
 Monorepo(apps, libs) project to showcase workspace setup with multiple apps and shared libraries
 
-### Features
+## Features
 
 1. **Polyglot** - Support multiple languages (java, kotlin, groovy)
 2. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)
@@ -33,6 +33,75 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=bugs)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=xmlking_jvm-gitops&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=xmlking_jvm-gitops)
+
+### Sub Modules
+
+| Services                             | Libs                      | Pipelines                            |
+|--------------------------------------|---------------------------|--------------------------------------|
+| [GraphQL](./services/spring-graphql) | [Core](./libs/core)       | [WordCount](./pipelines/wordcount)   |
+| [Redis OM](./services/redis)         | [KBeam](./libs/kbeam)     | [Classifier](./pipelines/classifier) |
+| [Streams](./services/streams)        | [Spring](./libs/spring)   | [Ingestion](./pipelines/ingestion)   |
+| [Account](./services/account)        | [GraphQL](./libs/graphql) |                                      |
+|                                      | [Test](./libs/test)       |                                      |
+
+## Setup
+
+### Prerequisites
+
+```shell
+sdk rm java
+sdk i java 17.0.6-zulu
+java --version
+
+sdk rm gradle
+sdk i gradle
+gradle --version
+
+sdk i springboot
+sdk i quarkus
+```
+
+### IntelliJ Plugins
+1. [Spotless](https://plugins.jetbrains.com/plugin/18321-spotless-gradle)
+2. [Kotest](https://plugins.jetbrains.com/plugin/14080-kotest)
+3. [GraphQL](https://plugins.jetbrains.com/plugin/8097-graphql)
+
+## Contribution
+
+### Pre-commit checks
+
+```shell
+# spotlessCheck - Checks that sourcecode satisfies formatting steps.
+gradle spotlessCheck
+# spotlessApply - Applies code formatting steps to sourcecode in-place.
+gradle spotlessApply
+```
+
+Run tests, lint, coverage for all subprojects
+
+```shell
+gradle check
+```
+
+### Code Quality
+
+```shell
+# Generates code coverage HTML and XML reports for all enabled test tasks in one project.
+gradle koverMergedReport
+```
+
+Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies.
+
+```shell
+gradle dependencyCheckAggregate
+```
+
+### Maintenance
+
+```shell
+# Update versions in libs.versions.toml file
+gradle versionCatalogUpdate --interactive
+```
 
 ### Run
 

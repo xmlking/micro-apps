@@ -7,6 +7,7 @@ logging:
     org.hibernate.SQL: DEBUG
     org.springframework.graphql: DEBUG
     org.springframework.r2dbc: DEBUG
+    org.springframework.security: DEBUG
 # ==================== management ==========================
 management:
   info:

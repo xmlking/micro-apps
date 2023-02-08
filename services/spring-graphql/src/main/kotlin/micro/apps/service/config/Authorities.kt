@@ -11,3 +11,10 @@ object Authorities {
     const val UPDATE_AUTHORITY = "UPDATE_AUTHORITY"
     const val DELETE_AUTHORITY = "DELETE_AUTHORITY"
 }
+
+object Roles {
+    const val ROLE_VIEWER = "SCOPE_viewer"
+    const val ROLE_EDITOR = "SCOPE_editor"
+    const val ROLE_MODERATOR = "SCOPE_moderator"
+    const val ROLE_SUPERVISOR = "SCOPE_supervisor"
+}

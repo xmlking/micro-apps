@@ -2,36 +2,30 @@ package micro.apps.service.config
 
 import micro.apps.service.config.Authorities.SCOPE_ACTUATOR
 import micro.apps.service.config.Authorities.SCOPE_API
-import micro.apps.service.config.Authorities.SCOPE_GRAPHIQL
 import micro.apps.service.config.Authorities.SCOPE_H2
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest
+import org.springframework.boot.actuate.health.HealthEndpoint
 import org.springframework.boot.actuate.info.InfoEndpoint
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.actuate.health.HealthEndpoint
 import org.springframework.context.annotation.Profile
 import org.springframework.core.annotation.Order
-import org.springframework.core.convert.converter.Converter
-import org.springframework.security.authentication.AbstractAuthenticationToken
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurityDsl
 import org.springframework.security.config.web.server.invoke
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm
-import org.springframework.security.oauth2.jwt.*
-import org.springframework.security.oauth2.server.resource.authentication.*
+import org.springframework.security.oauth2.jwt.MappedJwtClaimSetConverter
+import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder
+import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder
 import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository
 import org.springframework.security.web.server.savedrequest.NoOpServerRequestCache
 import org.springframework.security.web.server.util.matcher.PathPatternParserServerWebExchangeMatcher
-import java.util.*
+import java.util.Collections
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
@@ -43,7 +37,7 @@ private val logger = KotlinLogging.logger {}
 // OR @EnableRSocketSecurity
 @EnableReactiveMethodSecurity
 class SecurityConfig(
-    @Value("\${security.jwt.signing-key}") private val secretKey: String,
+    @Value("\${security.jwt.signing-key}") private val secretKey: String
 ) {
     @Bean
     @Order(101)

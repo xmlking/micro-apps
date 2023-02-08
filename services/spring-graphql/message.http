@@ -1,9 +1,10 @@
 ### Add message
 GRAPHQL http://localhost:8080/graphql
-Content-Type: application-json
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 mutation {
-  addMessage(input: {content: "new message"}) {
+  addMessage(input: {content: "new message "}) {
     id,
     content
   }
@@ -11,6 +12,8 @@ mutation {
 
 ### hello message
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 query {
   hello {
@@ -21,6 +24,8 @@ query {
 
 ### Subscriptions over WebSockets
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer {{token}}
+Content-Type: application/json
 
 subscription  {
     messages {

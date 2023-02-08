@@ -3,7 +3,6 @@ name: Check
 on:
   push:
     branches:
-      - develop
       - feature/*
     paths-ignore:
       - '**.md'
@@ -24,30 +23,18 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: 'zulu'
-      # Cache Gradle dependencies
-      - name: Setup Gradle Dependencies Cache
-        uses: actions/cache@v3.0.5
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties', 'gradle/libs.versions.toml') }}
-      # Cache Gradle Wrapper
-      - name: Setup Gradle Wrapper Cache
-        uses: actions/cache@v3.0.5
-        with:
-          path: ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
-      - name: check
-        uses: eskatos/gradle-command-action@v2
+      - name: Gradle Check
+        uses: gradle/gradle-build-action@v2
         id: check
         env:
           CI: true
         with:
-          gradle-version: release-candidate
+          gradle-version: current
           arguments: runAffectedUnitTests -Paffected_module_detector.enable
       - name: comment
         uses: unsplash/comment-on-pr@master

@@ -38,7 +38,7 @@ jobs:
         env:
           CI: true
         with:
-          gradle-version: release-candidate
+          gradle-version: current
           arguments: dependencyCheckAggregate
       - name: Upload OWASP Dependencies scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2

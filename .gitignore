@@ -74,5 +74,5 @@ build/
 
 ### Project ###
 TODO
-apps/sveltekit-starter
 codemr
+http-client.private.env.json

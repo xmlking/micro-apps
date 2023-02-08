@@ -20,7 +20,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: release-candidate
+          gradle-version: current
       - name: Build JVM JAR
         run: gradle :services:greeting:quarkusBuild --uber-jar
       #        run: gradle :services:greeting:quarkusBuild --uber-jar -Pversion="${{ github.event.release.tag_name }}"
