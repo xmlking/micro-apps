@@ -3,36 +3,48 @@ package micro.apps.service.config
 import micro.apps.service.config.Authorities.SCOPE_ACTUATOR
 import micro.apps.service.config.Authorities.SCOPE_API
 import micro.apps.service.config.Authorities.SCOPE_GRAPHIQL
+import micro.apps.service.config.Authorities.SCOPE_H2
+import mu.KotlinLogging
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest
 import org.springframework.boot.actuate.info.InfoEndpoint
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.actuate.health.HealthEndpoint
 import org.springframework.context.annotation.Profile
 import org.springframework.core.annotation.Order
+import org.springframework.core.convert.converter.Converter
+import org.springframework.security.authentication.AbstractAuthenticationToken
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.config.web.server.ServerHttpSecurityDsl
 import org.springframework.security.config.web.server.invoke
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm
+import org.springframework.security.oauth2.jwt.*
+import org.springframework.security.oauth2.server.resource.authentication.*
 import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository
 import org.springframework.security.web.server.savedrequest.NoOpServerRequestCache
 import org.springframework.security.web.server.util.matcher.PathPatternParserServerWebExchangeMatcher
+import java.util.*
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
 
-// https://github.com/test-automation-in-practice/showcase-skill-manager/blob/master/deployables/skill-manager-service/src/main/kotlin/skillmanagement/runtime/security/WebSecurityConfiguration.kt
-// https://github.com/santelos/pstorganov-showroom/blob/main/services/account/user-auth-service/src/main/kotlin/ru/stroganov/oauth2/userauthservice/config/SecurityConfig.kt
-// https://github.com/Tiscs/spring-boot-practices/blob/main/sbp-users/src/main/kotlin/io/github/tiscs/sbp/config/WebSecurityConfig.kt
-// https://github.com/rsTopStar/react-spring-project/blob/master/docs/security/method.md
-// https://github.com/zzq1027/springsecurity5.8x/blob/main/docs/modules/ROOT/pages/migration/reactive.adoc
-// https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html
-// only have spring-security-oauth2-resource-server ???
-// https://github.com/saint-rivers/orderup-docker-cleanup/tree/master/user-service
+private val logger = KotlinLogging.logger {}
 
 @Profile("!test")
 @Configuration
 @EnableWebFluxSecurity
+// OR @EnableRSocketSecurity
 @EnableReactiveMethodSecurity
-class SecurityConfig {
+class SecurityConfig(
+    @Value("\${security.jwt.signing-key}") private val secretKey: String,
+) {
     @Bean
     @Order(101)
     fun apiSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
@@ -40,14 +52,11 @@ class SecurityConfig {
             securityMatcher(
                 PathPatternParserServerWebExchangeMatcher("/api/**")
             )
-
             defaults()
-
             authorizeExchange {
                 authorize("/api/**", hasAuthority(SCOPE_API))
             }
         }
-//        return http.build()
     }
 
     @Bean
@@ -55,29 +64,11 @@ class SecurityConfig {
     fun actuatorSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         return http {
             securityMatcher(EndpointRequest.toAnyEndpoint())
-
             defaults()
-
             authorizeExchange {
                 authorize(EndpointRequest.to(InfoEndpoint::class.java), permitAll)
+                authorize(EndpointRequest.to(HealthEndpoint::class.java), permitAll)
                 authorize(EndpointRequest.toAnyEndpoint(), hasAuthority(SCOPE_ACTUATOR))
-            }
-        }
-    }
-
-    @Bean
-    @Order(103)
-    fun graphiqlSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
-        return http {
-//            securityMatcher("/graphiql")
-            securityMatcher(
-                PathPatternParserServerWebExchangeMatcher("/graphiql")
-            )
-
-            defaults()
-
-            authorizeExchange {
-                authorize("/graphiql", hasAuthority(SCOPE_GRAPHIQL))
             }
         }
     }
@@ -86,17 +77,19 @@ class SecurityConfig {
     @Order(199)
     fun generalSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         return http {
-//            securityMatcher("/**")
             securityMatcher(
                 PathPatternParserServerWebExchangeMatcher("/**")
             )
-
             defaults()
-
             authorizeExchange {
+                authorize("/favicon.ico", permitAll)
                 authorize("/docs/**", permitAll)
                 authorize("/error", permitAll)
-                authorize("/**", denyAll)
+                authorize("/graphiql", permitAll)
+                // authorize("/graphiql", hasAuthority(SCOPE_GRAPHIQL))
+                authorize("/h2-console", hasAuthority(SCOPE_H2))
+                // authorize("/**", denyAll)
+                authorize(anyExchange, authenticated)
             }
         }
     }
@@ -104,9 +97,6 @@ class SecurityConfig {
     private fun ServerHttpSecurityDsl.defaults() {
         cors { disable() }
         csrf { disable() }
-//        csrf {
-//            csrfTokenRequestHandler = XorServerCsrfTokenRequestAttributeHandler()
-//        }
         requestCache {
             requestCache = NoOpServerRequestCache.getInstance()
         }
@@ -116,14 +106,65 @@ class SecurityConfig {
         logout {
             disable()
         }
-        // httpBasic {}
         oauth2ResourceServer {
             jwt {
-                // jwtAuthenticationConverter = myConverter()
-                // jwkSetUri = "https://idp.example.com/.well-known/jwks.json"
-                // jwtDecoder = myCustomDecoder()
+                // jwtAuthenticationConverter = jwtAuthenticationConverter()
+                // jwtDecoder = reactiveJwtDecoder()
             }
         }
+    }
+
+    /**
+     * Claims Mapping:
+     * Use either jwtAuthenticationConverter() or reactiveJwtDecoder's MappedJwtClaimSetConverter
+     * for claims mapping. Don't use both.
+     */
+
+    /*
+    @Bean
+    fun jwtAuthenticationConverter(): ReactiveJwtAuthenticationConverter {
+        return ReactiveJwtAuthenticationConverter().apply {
+            setJwtGrantedAuthoritiesConverter { jwt: Jwt ->
+                println("${jwt.tokenValue}\nwith claims: ${jwt.claims}")
+                Flux.concat(
+                    Flux.fromIterable(
+                        ((jwt.claims["realm_access"] as Map<*, *>)["roles"] as List<*>)
+                    ).map { SimpleGrantedAuthority("ROLE_$it") },
+                    Flux.fromIterable(
+                        ((jwt.claims["scope"] as String).split(" "))
+                    ).map { SimpleGrantedAuthority("SCOPE_$it") },
+                )
+            }
+        }
+    }
+    */
+
+    @Bean
+    fun reactiveJwtDecoder(): ReactiveJwtDecoder {
+        // val delegatingOAuth2TokenValidator = DelegatingOAuth2TokenValidator(JwtTimestampValidator())
+        val delegate = MappedJwtClaimSetConverter.withDefaults(Collections.emptyMap())
+
+        return NimbusReactiveJwtDecoder.withSecretKey(
+            SecretKeySpec(
+                secretKey.encodeToByteArray(),
+                Mac.getInstance("HmacSHA256").algorithm
+            )
+        ).macAlgorithm(MacAlgorithm.HS256).build()
+            .also { decoder ->
+                // decoder.setJwtValidator(delegatingOAuth2TokenValidator)
+                decoder.setClaimSetConverter {
+                    val convertedClaims = delegate.convert(it)
+                    convertedClaims?.let {
+                        it["https://hasura.io/jwt/claims"]?.let {
+                            it as MutableMap<*, *>
+                            convertedClaims.getOrPut("sub") { it["x-hasura-user-id"] }
+                            convertedClaims.getOrPut("scp") { (it["x-hasura-allowed-roles"] as ArrayList<*>).joinToString(" ") }
+                        }
+                    }
+                    logger.atDebug().log("convertedClaims {}", convertedClaims)
+                    convertedClaims
+                }
+            }
     }
 
     @Bean

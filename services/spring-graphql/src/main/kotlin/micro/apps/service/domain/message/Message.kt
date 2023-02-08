@@ -11,6 +11,7 @@ import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Controller
 import reactor.core.publisher.Mono
 
@@ -30,6 +31,7 @@ class MessageController {
     private val flow = MutableSharedFlow<Message>(replay = 1)
 
     @QueryMapping
+    @PreAuthorize("hasAuthority('SCOPE_messages')")
     suspend fun hello(): Message {
         logger.atInfo().log("called hello query")
         return Mono.just(Message(UuidCreator.getTimeOrderedEpoch().toString(), "Hello GQL!"))

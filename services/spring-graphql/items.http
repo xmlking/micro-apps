@@ -1,5 +1,6 @@
 ### Create item
 GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer YOUR_TOKEN
 
 mutation {
   addItem(input: {name: "new item", description: "hello"}) {

@@ -52,15 +52,18 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://tos.orderup.homes/auth/realms/orderup-tower
-          jwk-set-uri: https://tos.orderup.homes/auth/realms/orderup-tower/protocol/openid-connect/certs
-#          public-key-location: classpath:my-key.pub
-#          jws-algorithms:
+          # issuer-uri: https://accounts.google.com
+          # jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+          # public-key-location: classpath:my-key.pub
+          jws-algorithms: [HS256,RS256]
+          audiences: hasura
   flyway:
     baseline-on-migrate: true
     # default-schema: public
-
 # ==================== application properties  =============
 feature:
   postMvp:
     enabled: false
+security:
+  jwt:
+    signing-key: ${JWT_SIGNING_KEY:12345}

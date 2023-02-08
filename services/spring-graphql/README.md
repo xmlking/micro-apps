@@ -21,10 +21,27 @@ gradle :services:spring-graphql:bootRun -Dspring.profiles.active=test
 
 open http://localhost:8080/graphiql
 
+> add token in JSON format in the `graphiql` Web Console under headers section.
+```json
+{
+  "Authorization": "Bearer YOUR_TOKEN"
+}
+```
+
+
 open http://localhost:8080/h2-console
 
 
 ## Test
+
+```shell
+http -v http://localhost:8080/actuator/info \
+'Authorization: Bearer YOUR_TOKEN'
+
+http http://localhost:8080/actuator/health \
+'Authorization: Bearer YOUR_TOKEN'
+
+```
 
 ```shell
 gradle :services:spring-graphql:test
