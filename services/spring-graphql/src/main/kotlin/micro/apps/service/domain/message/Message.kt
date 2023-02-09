@@ -46,11 +46,11 @@ class MessageController {
     @PreAuthorize("hasAuthority('SCOPE_editor')")
     suspend fun addMessage(principal: Principal, @Argument input: AddMessageInput): Message {
         logger.atDebug().log("incoming message: {}", input)
-        val claims = principal.jwtAuthentication().token.claims
-        logger.atDebug().log("called addMessage, claims: {}, sub: {}", claims, claims["sub"])
+        val claims = principal.jwtAuthentication()?.token?.claims
+        logger.atDebug().log("called addMessage, claims?: {}", claims)
         val message = Message(
             UuidCreator.getTimeOrderedEpoch().toString(),
-            input.content + claims["sub"]
+            input.content
         )
         flow.emit(message)
         return Mono.just(

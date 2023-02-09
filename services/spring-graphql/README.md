@@ -29,7 +29,7 @@ open http://localhost:8080/graphiql
 > add token in JSON format in the `graphiql` Web Console under headers section.
 ```json
 {
-  "Authorization": "Bearer YOUR_TOKEN"
+    "Authorization": "Basic YWRtaW46bmltZGE="
 }
 ```
 
@@ -37,12 +37,11 @@ open http://localhost:8080/graphiql
 open http://localhost:8080/h2-console
 
 ```shell
-http -v http://localhost:8080/actuator/info \
-'Authorization: Bearer YOUR_TOKEN'
-
-http http://localhost:8080/actuator/health \
-'Authorization: Bearer YOUR_TOKEN'
-
+http :8080/actuator/info
+http :8080/actuator/health
+http :8080/actuator/metrics
+http -a actuator:rotautca :8080/actuator/metrics
+http -a actuator:rotautca :8080/actuator
 ```
 
 ## Test

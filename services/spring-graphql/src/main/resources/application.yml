@@ -70,3 +70,22 @@ feature:
 security:
   jwt:
     signing-key: ${JWT_SIGNING_KEY}
+  users:
+    basic-auth:
+      - username: "user"
+        password: "resu"
+        authorities:
+          - "SCOPE_GRAPHQL"
+          - "SCOPE_viewer"
+      - username: "admin"
+        password: "nimda"
+        authorities:
+          - "SCOPE_GRAPHQL"
+          - "SCOPE_GRAPHIQL"
+          - "SCOPE_H2"
+          - "SCOPE_editor"
+          - "SCOPE_moderator"
+      - username: "actuator"
+        password: "rotautca"
+        authorities:
+          - "SCOPE_ACTUATOR"

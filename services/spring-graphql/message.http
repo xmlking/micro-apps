@@ -10,7 +10,19 @@ mutation {
   }
 }
 
-### hello message
+### hello message with basic auth
+GRAPHQL http://localhost:8080/graphql
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+query {
+  hello {
+    id,
+    content
+  }
+}
+
+### hello message with OAuth token
 GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer {{token}}
 Content-Type: application/json

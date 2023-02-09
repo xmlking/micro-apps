@@ -1,8 +1,8 @@
 package micro.apps.service.config
 
 object Authorities {
-    const val SCOPE_API = "SCOPE_API"
     const val SCOPE_ACTUATOR = "SCOPE_ACTUATOR"
+    const val SCOPE_GRAPHQL = "SCOPE_GRAPHQL"
     const val SCOPE_GRAPHIQL = "SCOPE_GRAPHIQL"
     const val SCOPE_H2 = "SCOPE_H2"
 

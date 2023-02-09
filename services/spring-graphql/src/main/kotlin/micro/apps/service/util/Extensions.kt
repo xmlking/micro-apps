@@ -8,8 +8,8 @@ fun SecurityContext.jwtAuthentication(): JwtAuthenticationToken {
     return authentication as JwtAuthenticationToken
 }
 
-fun Principal.jwtAuthentication(): JwtAuthenticationToken {
-    return this as JwtAuthenticationToken
+fun Principal.jwtAuthentication(): JwtAuthenticationToken? {
+    return this as? JwtAuthenticationToken
 }
 
 fun JwtAuthenticationToken.tokenValue(): String {
