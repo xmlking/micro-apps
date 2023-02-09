@@ -24,7 +24,10 @@ SPRING_PROFILES_ACTIVE=test gradle :services:spring-graphql:bootRun
 gradle :services:spring-graphql:bootRun -Dspring.profiles.active=test
 ```
 
+### GraphQL Web Console
 open http://localhost:8080/graphiql
+
+Login: admin : nimda
 
 > add token in JSON format in the `graphiql` Web Console under headers section.
 ```json
@@ -33,8 +36,11 @@ open http://localhost:8080/graphiql
 }
 ```
 
+### GraphQL H2 Console
 
 open http://localhost:8080/h2-console
+
+Login: admin : nimda
 
 ```shell
 http :8080/actuator/info
@@ -42,6 +48,10 @@ http :8080/actuator/health
 http :8080/actuator/metrics
 http -a actuator:rotautca :8080/actuator/metrics
 http -a actuator:rotautca :8080/actuator
+http -a actuator:rotautca :8080/actuator/metrics/spring.security.http.secured.requests
+http -a actuator:rotautca :8080/actuator/metrics/jvm.info
+http -a actuator:rotautca :8080/actuator/flyway
+http -a actuator:rotautca :8080/actuator/env
 ```
 
 ## Test

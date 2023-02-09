@@ -6,6 +6,7 @@ import micro.apps.service.config.Authorities.SCOPE_GRAPHQL
 import micro.apps.service.config.Authorities.SCOPE_H2
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
@@ -39,7 +40,8 @@ private val logger = KotlinLogging.logger {}
 // OR @EnableRSocketSecurity
 @EnableReactiveMethodSecurity
 class SecurityConfig(
-    @Value("\${security.jwt.signing-key}") private val secretKey: String
+    @Value("\${security.jwt.signing-key}") private val secretKey: String,
+    private val webEndpointProperties: WebEndpointProperties
 ) {
     private val passwordEncoder = createDelegatingPasswordEncoder()
 
@@ -58,6 +60,8 @@ class SecurityConfig(
             }
         }
         authorizeExchange {
+            // every oAuth logged-in user will have SCOPE_GRAPHQL Authority.
+            // we will enforce permissions at method-level as well
             authorize("/graphql", hasAuthority(SCOPE_GRAPHQL))
         }
     }
@@ -67,18 +71,18 @@ class SecurityConfig(
     fun actuatorSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain = http {
         // securityMatcher(EndpointRequest.toAnyEndpoint())
         securityMatcher(
-            PathPatternParserServerWebExchangeMatcher("/actuator/**")
+            PathPatternParserServerWebExchangeMatcher(webEndpointProperties.basePath + "/**")
         )
         defaults()
         httpBasic {}
         authorizeExchange {
-            authorize("/actuator/info", permitAll)
-            authorize("/actuator/health", permitAll)
             // FIXME: https://github.com/spring-projects/spring-boot/issues/13826
             // authorize(EndpointRequest.to(InfoEndpoint::class.java), permitAll)
             // authorize(EndpointRequest.to(HealthEndpoint::class.java), permitAll)
             // authorize(EndpointRequest.toAnyEndpoint(), hasAuthority(SCOPE_ACTUATOR))
-            authorize("/actuator/**", hasAuthority(SCOPE_ACTUATOR))
+            authorize(webEndpointProperties.basePath + "/info", permitAll)
+            authorize(webEndpointProperties.basePath + "/health", permitAll)
+            authorize(webEndpointProperties.basePath + "/**", hasAuthority(SCOPE_ACTUATOR))
         }
     }
 
@@ -169,7 +173,8 @@ class SecurityConfig(
                             convertedClaims.putIfAbsent("sub", it["x-hasura-user-id"])
                             convertedClaims.putIfAbsent("scp", (it["x-hasura-allowed-roles"] as ArrayList<*>).joinToString(" "))
                         }
-                        convertedClaims["scp"] = convertedClaims["scp"] as String + " GRAPHQL"
+                        // every oAuth logged-in user will have SCOPE_GRAPHQL Authority.
+                        convertedClaims["scp"] = convertedClaims["scp"] as? String + " GRAPHQL"
                     }
                     logger.atDebug().log("convertedClaims {}", convertedClaims)
                     convertedClaims
