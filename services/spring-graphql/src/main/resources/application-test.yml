@@ -1,12 +1,6 @@
 debug: false
 # ==================== spring ==============================
 spring:
-  profiles:
-    active: test
-  graphql:
-    schema:
-      locations:
-        - classpath*:graphql/**/
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration

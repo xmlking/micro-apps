@@ -274,6 +274,7 @@ subprojects {
             }
 
             test {
+                systemProperty("spring.profiles.active", "test")
                 useJUnitPlatform {
                     excludeTags("slow", "integration")
                 }
@@ -290,6 +291,7 @@ subprojects {
             }
 
             register<Test>("integrationTest") {
+                systemProperty("spring.profiles.active", "test")
                 useJUnitPlatform {
                     includeTags("integration", "e2e")
                 }

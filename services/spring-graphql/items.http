@@ -3,19 +3,6 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
-mutation {
-  addItem(input: {name: "new item", description: "hello"}) {
-    id,
-    name,
-    description
-  }
-}
-
-### Create item with variables
-GRAPHQL http://localhost:8080/graphql
-Authorization: Bearer {{token}}
-Content-Type: application/json
-
 mutation AddItem($newItem: ItemInput!) {
   addItem(input: $newItem) {
     id,
@@ -31,7 +18,7 @@ mutation AddItem($newItem: ItemInput!) {
     }
 }
 
-### Fetch items
+### Fetch item
 GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -67,7 +54,7 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
-query {
+query ListItems {
   items {
     id,
     name,

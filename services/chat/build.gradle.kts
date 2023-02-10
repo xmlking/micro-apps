@@ -17,7 +17,7 @@ dependencies {
     implementation(libs.spring.boot.starter.data.r2dbc)
     implementation(libs.spring.boot.starter.rsocket)
 
-    implementation(libs.database.h2.r2dbc)
+    implementation(libs.database.r2dbc.h2)
     // FIXME https://docs.uptrace.dev/guide/java.html#introduction
     implementation(libs.snakeyaml)
 
@@ -31,7 +31,7 @@ dependencies {
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.turbine.test)
 
-    runtimeOnly(libs.database.h2.r2dbc)
+    runtimeOnly(libs.database.r2dbc.h2)
 
     implementation(libs.markdown)
 }

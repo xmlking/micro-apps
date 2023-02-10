@@ -23,13 +23,13 @@ internal class ItemControllerTest(
 
         // when
         val response = graphQlTester
-            .documentName("addItem")
+            .documentName("MUTATION.AddItem")
             .variable("input", input)
             .execute()
 
         // then
         response
-            .path("addItem")
+            .path("data.addItem")
             .entity(Item::class.java)
             .isEqualTo(item)
     }
@@ -41,13 +41,11 @@ internal class ItemControllerTest(
 
         // when
         val response = graphQlTester
-            .documentName("items")
+            .documentName("QUERY.ListItems")
             .execute()
 
         // then
         response
-            .path("items")
-            .entity(Item::class.java)
-            .isEqualTo(item)
+            .path("data.items").entity(Item::class.java).isEqualTo(listOf(item))
     }
 })

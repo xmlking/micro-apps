@@ -1,4 +1,4 @@
-query items {
+query ListItems {
     items {
         id,
         name,

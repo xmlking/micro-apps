@@ -1,4 +1,4 @@
-mutation addItem($input: ItemInput!) {
+mutation AddItem($input: ItemInput!) {
     addItem(input: $input) {
         id,
         name,

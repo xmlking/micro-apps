@@ -18,10 +18,10 @@ Demo GraphQL APIs with Spring Boot 3.x
 ```shell
 gradle :services:spring-graphql:clean
 gradle :services:spring-graphql:bootRun
-# to use environment specific profiles 
-SPRING_PROFILES_ACTIVE=test gradle :services:spring-graphql:bootRun
+# to use environment specific profiles
+SPRING_PROFILES_ACTIVE=local gradle :services:spring-graphql:bootRun
 # or
-gradle :services:spring-graphql:bootRun -Dspring.profiles.active=test
+gradle :services:spring-graphql:bootRun -Dspring.profiles.active=local
 ```
 
 ### GraphQL Web Console
@@ -64,12 +64,16 @@ gradle :services:spring-graphql:test
 
 ```shell
 gradle :services:spring-graphql:flywayInfo
+gradle :services:spring-graphql:flywayBaseline
+gradle :services:spring-graphql:flywayClean
 gradle :services:spring-graphql:flywayMigrate
-gradle :services:spring-graphql:flywayRepair
 gradle :services:spring-graphql:flywayValidate
+gradle :services:spring-graphql:flywayUndo
+gradle :services:spring-graphql:flywayRepair
 ```
 
 
 ## Reference 
 
 - [Spring for GraphQL Documentation](https://docs.spring.io/spring-graphql/docs/current/reference/html/#overview) 
+- [GraphQL Fullstack Samples using Spring GraphQL & React](https://github.com/susimsek/spring-graphql-samples)

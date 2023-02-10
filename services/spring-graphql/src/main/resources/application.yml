@@ -45,8 +45,8 @@ spring:
     open-in-view: true
     show-sql: true
   datasource:
-    url: jdbc:h2:./build/database/db;AUTO_SERVER=TRUE
-    username: user
+    url: jdbc:h2:./build/database/testdb;AUTO_SERVER=TRUE
+    username: sa
     password: password
   devtools:
     livereload:

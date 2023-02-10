@@ -29,6 +29,7 @@ idea {
 dependencies {
     implementation(project(":libs:core"))
     implementation(project(":libs:graphql"))
+
     // Spring
     implementation(libs.bundles.spring.graphql)
     // rsocket-starter is optional
@@ -55,6 +56,11 @@ dependencies {
     annotationProcessor(libs.lombok)
     developmentOnly(libs.spring.boot.devtools)
     annotationProcessor(libs.spring.boot.configuration.processor)
+    annotationProcessor(libs.spring.boot.autoconfigure.processor)
+
+    // TODO: openTelemetry
+    // micrometer for openTelemetry
+
     // Test
     testImplementation(testFixtures(project(":libs:test")))
     testImplementation(libs.spring.boot.starter.test) {
@@ -76,9 +82,12 @@ dependencies {
 }
 
 flyway {
-    url = "jdbc:h2:./build/database/db;AUTO_SERVER=TRUE"
-    user = "user"
+    cleanDisabled = false
+    url = "jdbc:h2:./services/spring-graphql/build/database/testdb;AUTO_SERVER=TRUE;USER=sa;PASSWORD=password"
+    user = "sa"
     password = "password"
+    schemas = arrayOf("PUBLIC")
+    defaultSchema = "PUBLIC"
 }
 
 kapt {
