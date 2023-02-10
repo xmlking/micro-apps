@@ -45,7 +45,7 @@ Login: admin : nimda
 ```shell
 http :8080/actuator/info
 http :8080/actuator/health
-http :8080/actuator/metrics
+http :8080/actuator/metrics # this should fail with 401
 http -a actuator:rotautca :8080/actuator/metrics
 http -a actuator:rotautca :8080/actuator
 http -a actuator:rotautca :8080/actuator/metrics/spring.security.http.secured.requests

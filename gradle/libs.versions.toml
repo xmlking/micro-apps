@@ -43,6 +43,7 @@ mapstruct = "1.5.3.Final"
 markdown = "0.3.6"
 javafaker = "1.0.2"
 jakartaValidation = "3.0.2"
+jakartaPersistence = "3.1.0"
 kotlinRetry = "1.0.9"
 
 # gradle
@@ -143,6 +144,7 @@ sentinel-grpc-adapter = { module = "com.alibaba.csp:sentinel-grpc-adapter", vers
 pgv-java-stub = { module = "io.envoyproxy.protoc-gen-validate:pgv-java-stub", version.ref = "pgv" }
 #concurrency-limits-grpc = { module="com.netflix.concurrency-limits:concurrency-limits-grpc", version.ref="netflixConcurrency" }
 jakarta-validation = { module = "jakarta.validation:jakarta.validation-api", version.ref = "jakartaValidation" }
+jakarta-persistence = { module = "jakarta.persistence:jakarta.persistence-api", version.ref = "jakartaPersistence" }
 
 # Kotlin metadata
 kotlin-metadata = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm", version.ref = "metadata" }

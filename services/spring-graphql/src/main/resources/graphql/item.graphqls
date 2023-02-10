@@ -1,6 +1,7 @@
 extend type Query {
     items(id: [ID], name: String): [Item]
     item(id: ID!): Item
+    listItems: [Item]
 }
 
 extend type Mutation {
