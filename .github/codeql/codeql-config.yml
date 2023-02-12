@@ -8,12 +8,3 @@ queries:
   # other, because we're testing the parsing logic and
   # that the suites exist in the codeql bundle.
   - uses: security-extended
-paths-ignore:
-  - docs
-  - delivery
-  - sveltekit-starter/.svelte-kit
-  - libs/proto/build/generated
-  - node_modules
-  - target
-  - build
-  - node
