@@ -7,10 +7,10 @@ permissions:
 on:
   workflow_dispatch:
   push:
-    branches: [ develop ]
+    branches: [ main ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ develop ]
+    branches: [ main ]
   schedule:
     #        ┌───────────── minute (0 - 59)
     #        │  ┌───────────── hour (0 - 23)

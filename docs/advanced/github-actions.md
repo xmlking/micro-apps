@@ -21,7 +21,7 @@ See [github actions](../../.github/main.yml)
 
 ### PR Pipeline
 
-> triggered when PR is created for `develop` branch
+> triggered when PR is created for `main` branch
 
 - lint
 - unit tests

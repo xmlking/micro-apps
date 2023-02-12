@@ -3,7 +3,7 @@ name: Dependency Check
 on:
   push:
     branches:
-      - develop
+      - main
       - feature/*
     paths:
       - 'gradle/libs.versions.toml'
