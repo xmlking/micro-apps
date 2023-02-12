@@ -1,0 +1,60 @@
+### Add message
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+mutation {
+  addMessage(input: {content: "new message "}) {
+    id,
+    content
+  }
+}
+
+### hello message with basic auth
+GRAPHQL http://localhost:8080/graphql
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+query {
+  hello {
+    id,
+    content
+  }
+}
+
+### hello message with OAuth token
+GRAPHQL http://localhost:8080/graphql
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+query {
+  hello {
+    id,
+    content
+  }
+}
+
+
+### Subscriptions over WebSockets
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+subscription  {
+    messages {
+         id,
+        content
+    }
+}
+
+### messages
+#WEBSOCKET ws://localhost:8080/graphql
+#
+#subscription  {
+#    messages {
+#         id,
+#        content
+#    }
+#}

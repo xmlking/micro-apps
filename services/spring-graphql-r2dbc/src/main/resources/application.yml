@@ -1,0 +1,121 @@
+server:
+  shutdown: graceful
+# ==================== logging ============================
+logging:
+  level:
+    micro.apps.service: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.springframework.graphql: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.r2dbc: DEBUG
+    io.r2dbc.h2.QUERY: DEBUG # for queries
+    io.r2dbc.h2.PARAM: DEBUG # for parameters
+    io.r2dbc.postgresql.QUERY: DEBUG # for queries
+    io.r2dbc.postgresql.PARAM: DEBUG # for parameters
+# ==================== management ==========================
+management:
+  info:
+    env:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,prometheus,flyway
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+# ==================== spring ==============================
+spring:
+#  main:
+#    allow-bean-definition-overriding: true
+  config:
+    import: optional:file:.env[.properties]
+  graphql:
+    path: /graphql
+    websocket:
+      path: /graphql
+    schema:
+      printer:
+        enabled: true
+      introspection:
+        enabled: false
+      locations:
+        - classpath*:graphql/**/
+    graphiql:
+      enabled: true
+#    cors:
+#      allowed-origins: '*'
+#      allowed-headers: '*'
+#      allowed-methods: '*'
+
+  r2dbc:
+    url: ${DB_URL}
+    name: ${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    pool:
+      enabled: true
+      initial-size: 10
+      max-idle-time: 1m
+      max-size: 50
+      max-create-connection-time: 30
+    properties:
+      errorResponseLogLevel: DEBUG
+
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+
+  flyway:
+    url: ${DB_FLYWAY_URL}
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}
+    clean-disabled: false
+#    default-schema: PUBLIC
+#    schemas: ["PUBLIC"]
+    baseline-on-migrate: true
+
+  devtools:
+    livereload:
+      enabled: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # issuer-uri: https://accounts.google.com
+          # jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+          # public-key-location: classpath:my-key.pub
+          jws-algorithms: [HS256,RS256]
+          audiences: hasura
+# ==================== application properties  =============
+feature:
+  postMvp:
+    enabled: false
+security:
+  jwt:
+    signing-key: ${JWT_SIGNING_KEY}
+  users:
+    basic-auth:
+      - username: "user"
+        password: "resu"
+        authorities:
+          - "SCOPE_GRAPHQL"
+          - "SCOPE_viewer"
+      - username: "admin"
+        password: "nimda"
+        authorities:
+          - "SCOPE_GRAPHQL"
+          - "SCOPE_GRAPHIQL"
+          - "SCOPE_H2"
+          - "SCOPE_editor"
+          - "SCOPE_moderator"
+      - username: "actuator"
+        password: "rotautca"
+        authorities:
+          - "SCOPE_ACTUATOR"

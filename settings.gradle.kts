@@ -43,7 +43,8 @@ include(
     ":services:streams",
     ":services:wordcount",
     ":services:spring-demo",
-    ":services:spring-graphql",
+    ":services:spring-graphql-jpa",
+    ":services:spring-graphql-r2dbc",
 
     ":pipelines:classifier",
     ":pipelines:ingestion",

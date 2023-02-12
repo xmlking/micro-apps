@@ -1,0 +1,82 @@
+### Create item
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+mutation AddItem($newItem: ItemInput!) {
+  addItem(input: $newItem) {
+    id,
+    name,
+    description
+  }
+}
+
+{
+    "newItem": {
+        "name": "new item",
+        "description": "hello"
+    }
+}
+
+### Fetch item
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+query {
+  item(id: 1) {
+    id,
+    name,
+    description
+  }
+}
+
+### Fetch items
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+query {
+  item(id: 3) {
+    id,
+    name,
+    description
+  },
+  items(id: [1, 2], name: "sumo") {
+    id,
+    name,
+    description
+  }
+}
+
+### List items
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+query ListItems {
+  listItems {
+    id,
+    name,
+    description
+  }
+}
+
+
+### Delete item by id
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+mutation {
+  deleteItem(id: 3) {
+    id,
+    name,
+    description
+  }
+}

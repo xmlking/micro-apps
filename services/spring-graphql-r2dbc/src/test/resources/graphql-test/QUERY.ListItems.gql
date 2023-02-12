@@ -1,0 +1,7 @@
+query ListItems {
+    listItems {
+        id,
+        name,
+        description
+    }
+}

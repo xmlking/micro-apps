@@ -1,0 +1,20 @@
+extend type Query {
+    hello: Message
+}
+
+extend type Mutation {
+    addMessage(input: AddMessageInput!): Message!
+}
+
+extend type Subscription {
+    messages: Message!
+}
+
+type Message {
+    id: ID!,
+    content: String!
+}
+
+input AddMessageInput {
+    content: String! @NotBlank @Size(min: 4, max: 1000)
+}

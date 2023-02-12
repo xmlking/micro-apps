@@ -15,18 +15,13 @@ Demo GraphQL APIs with Spring Boot 3.x
 
 ## Run
 
-```bash
-# To generate your own metadata using the annotation processor.
-gradle :services:spring-graphql:kaptKotlin
-```
-
 ```shell
-gradle :services:spring-graphql:clean
-gradle :services:spring-graphql:bootRun
+gradle :services:spring-graphq-r2dbc:clean
+gradle :services:spring-graphq-r2dbc:bootRun
 # to use environment specific profiles
-SPRING_PROFILES_ACTIVE=local gradle :services:spring-graphql:bootRun
+SPRING_PROFILES_ACTIVE=local gradle :services:spring-graphq-r2dbc:bootRun
 # or
-gradle :services:spring-graphql:bootRun -Dspring.profiles.active=local
+gradle :services:spring-graphq-r2dbc:bootRun -Dspring.profiles.active=local
 ```
 
 ### GraphQL Web Console
@@ -62,19 +57,19 @@ http -a actuator:rotautca :8080/actuator/env
 ## Test
 
 ```shell
-gradle :services:spring-graphql:test
+gradle :services:spring-graphq-r2dbc:test
 ```
 
 ## Maintenance
 
 ```shell
-gradle :services:spring-graphql:flywayInfo
-gradle :services:spring-graphql:flywayBaseline
-gradle :services:spring-graphql:flywayClean
-gradle :services:spring-graphql:flywayMigrate
-gradle :services:spring-graphql:flywayValidate
-gradle :services:spring-graphql:flywayUndo
-gradle :services:spring-graphql:flywayRepair
+gradle :services:spring-graphq-r2dbc:flywayInfo
+gradle :services:spring-graphq-r2dbc:flywayBaseline
+gradle :services:spring-graphq-r2dbc:flywayClean
+gradle :services:spring-graphq-r2dbc:flywayMigrate
+gradle :services:spring-graphq-r2dbc:flywayValidate
+gradle :services:spring-graphq-r2dbc:flywayUndo
+gradle :services:spring-graphq-r2dbc:flywayRepair
 ```
 
 

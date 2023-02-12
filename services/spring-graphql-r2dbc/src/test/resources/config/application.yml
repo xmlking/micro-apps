@@ -1,0 +1,17 @@
+# this config override src/main/resources/application.yml
+# and combined config is used by tests.
+# If we also set `spring.profiles.active=test` env for gradle test task,
+# src/main/resources/application-test.yml config also loaded and mixed.
+# beans tagged with @Profile("!test") are ignored.
+debug: false
+# ==================== spring ==============================
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
+# ==================== application properties  =============
+command:
+  line:
+    runner:
+      enabled: false
