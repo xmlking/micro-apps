@@ -237,6 +237,7 @@ spring-cloud-function-context = {module = "org.springframework.cloud:spring-clou
 snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
 markdown = { module = "org.jetbrains:markdown", version.ref = "markdown" }
 javafaker = { module = "com.github.javafaker:javafaker", version.ref = "javafaker" }
+# Use implementation(libs.kotlinx.serialization.json) instead of implementation(libs.jackson.module.kotlin)
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 
 # quarkus dependencies
@@ -431,6 +432,8 @@ spring-graphql = [
     "spring-boot-starter-actuator",
     # Spring Validation
     "spring-boot-starter-validation",
+    # Kotlin Serialization
+    "kotlinx-serialization-json", # Don't include "jackson-module-kotlin" so that, it defaults to Kotlin serialization
     # Spring GraphQL
     "spring-boot-starter-graphql",
     "graphql-java-extended-validation",

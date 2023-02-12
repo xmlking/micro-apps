@@ -15,6 +15,11 @@ Demo GraphQL APIs with Spring Boot 3.x
 
 ## Run
 
+```bash
+# To generate your own metadata using the annotation processor.
+gradle :services:spring-graphql:kaptKotlin
+```
+
 ```shell
 gradle :services:spring-graphql:clean
 gradle :services:spring-graphql:bootRun

@@ -22,10 +22,10 @@ data class Item(
     val description: String?
 //    @Column("created_at")
 //    @CreatedDate
-//    var createdAt: LocalDateTime? = null,
+//    var createdAt: LocalDateTime = LocalDateTime.now(),
 //    @LastModifiedDate
 //    @Column("last_modified_at")
-//    var lastModifiedAt: LocalDateTime? = null,
+//    var lastModifiedAt: LocalDateTime? = LocalDateTime.now()
 )
 
 data class ItemInput(

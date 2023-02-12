@@ -31,6 +31,13 @@
     - **@Valid** is for one-step validation
     - Ref [stackoverflow](https://stackoverflow.com/questions/36173332/difference-between-valid-and-validated-in-spring)
 
+- How to use lombok with kotlin-spring-boot projects?
+  - 
+  - Add `alias(libs.plugins.gradle.lombok)` and `alias(libs.plugins.kotlin.lombok)` plugins to subproject's `build.gradle.kts`.
+  - No need to add `compileOnly(libs.lombok)` and `annotationProcessor(libs.lombok)` dependencies.
+  - You can only add lombok annotations to java classes.
+  - Kotlin compiler ignores Lombok annotations if you use them in Kotlin code.
+
 - Logging with slf4j fluent API
    - 
    - We are using slf4j 2.0.0's [fluent API](http://www.slf4j.org/manual.html#fluent) for logging.

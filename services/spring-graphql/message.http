@@ -1,6 +1,7 @@
 ### Add message
 GRAPHQL http://localhost:8080/graphql
-Authorization: Bearer {{token}}
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
 Content-Type: application/json
 
 mutation {
@@ -34,9 +35,11 @@ query {
   }
 }
 
+
 ### Subscriptions over WebSockets
 GRAPHQL http://localhost:8080/graphql
-Authorization: Bearer {{token}}
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
 Content-Type: application/json
 
 subscription  {

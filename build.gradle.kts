@@ -20,11 +20,11 @@ val slf4jVersion = libs.versions.slf4j.get()
 val kotlinLoggingVersion = libs.versions.kotlinLogging.get()
 
 val excludedProjects = setOf("services", "pipelines", "libs")
-val webappProjects = setOf("entity-webapp")
-val grpcProjects = setOf("account-service", "keying-service", "linking-service")
-val springProjects = setOf("spring-graphql", "chat-service", "spring-service", "entity-service", "redis-service")
-val quarkusProjects = setOf("greeting-service", "person-service")
-val pipelineProjects = setOf("classifier-pipeline", "ingestion-pipeline", "wordcount-pipeline")
+val webappProjects = setOf("webapp")
+val grpcProjects = setOf("account", "keying", "linking")
+val springProjects = setOf("spring-graphql", "chat", "spring", "entity", "redis")
+val quarkusProjects = setOf("greeting", "person")
+val pipelineProjects = setOf("classifier", "ingestion", "wordcount")
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO remove when https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
 plugins {
@@ -204,6 +204,10 @@ subprojects {
         dependencies {
             // Align versions of all Kotlin components
             implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+
+            // Use the Kotlin JDK 8 standard library.
+            implementation(kotlin("stdlib-jdk8"))
+            implementation(kotlin("reflect"))
 
             // Use kotest for testing
             testImplementation(rootProject.project.libs.bundles.testing.common)

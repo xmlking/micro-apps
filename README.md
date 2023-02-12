@@ -63,8 +63,11 @@ sdk i quarkus
 
 ### IntelliJ Plugins
 1. [Spotless](https://plugins.jetbrains.com/plugin/18321-spotless-gradle)
-2. [Kotest](https://plugins.jetbrains.com/plugin/14080-kotest)
-3. [GraphQL](https://plugins.jetbrains.com/plugin/8097-graphql)
+2. [Ktlint](https://plugins.jetbrains.com/plugin/15057-ktlint-unofficial-/)
+3. [Kotest](https://plugins.jetbrains.com/plugin/14080-kotest)
+4. [GraphQL](https://plugins.jetbrains.com/plugin/8097-graphql)
+5. [Env files support](https://plugins.jetbrains.com/plugin/9525--env-files-support)
+6. [lombok](https://plugins.jetbrains.com/plugin/6317-lombok)
 
 ## Contribution
 

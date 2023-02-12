@@ -1,11 +1,8 @@
 package micro.apps.service.domain.book
 
-import lombok.NoArgsConstructor
-import lombok.RequiredArgsConstructor
 import org.springframework.data.annotation.Id
-
-@RequiredArgsConstructor
-@NoArgsConstructor
+// import micro.apps.model.NoArg
+// @NoArg
 data class Book(
     val title: String,
     val author: String,

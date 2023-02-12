@@ -1,11 +1,12 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO remove when https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
 plugins {
-    kotlin("plugin.spring")
+    alias(libs.plugins.kotlin.spring)
 
-    id("org.springframework.boot")
-    id("io.spring.dependency-management")
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.spring.dependencyManagement)
+    alias(libs.plugins.kotlin.serialization)
 
-    id("org.graalvm.buildtools.native")
+    alias(libs.plugins.gradle.native)
 }
 
 val slf4jVersion = libs.versions.slf4j.get()
@@ -21,7 +22,8 @@ dependencies {
     // FIXME https://docs.uptrace.dev/guide/java.html#introduction
     implementation(libs.snakeyaml)
 
-    implementation(libs.jackson.module.kotlin)
+//    implementation(libs.jackson.module.kotlin)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.javafaker)
 
     implementation(libs.kotlinx.coroutines.core)

@@ -2,10 +2,12 @@
 plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependencyManagement)
-    alias(libs.plugins.gradle.flyway)
-    alias(libs.plugins.gradle.lombok)
+//    alias(libs.plugins.gradle.lombok)
+//    alias(libs.plugins.kotlin.lombok)
     alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.jpa)
+    alias(libs.plugins.gradle.flyway)
     // alias(libs.plugins.kotlin.kapt)
     id(libs.plugins.kotlin.kapt.get().pluginId)
 }
@@ -32,33 +34,29 @@ dependencies {
 
     // Spring
     implementation(libs.bundles.spring.graphql)
-    // rsocket-starter is optional
-    // implementation(libs.spring.boot.starter.rsocket)
+    // implementation(libs.spring.boot.starter.rsocket) // rsocket-starter is optional
     implementation(libs.spring.boot.starter.data.jpa)
-//    implementation(libs.spring.boot.starter.data.r2dbc)
     implementation(libs.spring.boot.starter.oauth2.resource.server)
-    implementation(libs.jackson.module.kotlin)
+
+    // Database Drivers
+    runtimeOnly(libs.database.h2)
+    implementation(libs.flyway.core)
 
     // Query SQL
     implementation(libs.querydsl.jpa) { artifact { classifier = "jakarta" } }
     kapt(group = "com.querydsl", name = "querydsl-apt", classifier = "jakarta")
     // FIXME: https://github.com/querydsl/querydsl/discussions/3036
     // kapt("com.querydsl:querydsl-kotlin-codegen")
+
     implementation(libs.arrow.core)
     implementation(libs.uuid)
 
-//    runtimeOnly(libs.database.h2.r2dbc)
-    runtimeOnly(libs.database.h2)
-    implementation(libs.flyway.core)
-
     // DevTools
-    compileOnly(libs.lombok)
-    annotationProcessor(libs.lombok)
-    developmentOnly(libs.spring.boot.devtools)
     annotationProcessor(libs.spring.boot.configuration.processor)
     annotationProcessor(libs.spring.boot.autoconfigure.processor)
+    developmentOnly(libs.spring.boot.devtools)
 
-    // TODO: openTelemetry
+    // TODO: add openTelemetry
     // micrometer for openTelemetry
 
     // Test
@@ -72,14 +70,9 @@ dependencies {
     testImplementation(libs.kotest.extensions.spring)
     testImplementation(libs.spring.boot.graphql.test)
     testImplementation(libs.spring.boot.security.test)
-
-// 	testCompileOnly("com.querydsl:querydsl-jpa")
-//  testAnnotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jakarta")
-// 	testImplementation("org.projectlombok:lombok")
-// 	testAnnotationProcessor("org.projectlombok:lombok")
-// 	testCompileOnly("org.projectlombok:lombok")
-//  kaptTest(group = "com.querydsl", name = "querydsl-apt", classifier = "jakarta")
 }
+
+affectedTestConfiguration { jvmTestTask = "check" }
 
 flyway {
     cleanDisabled = false
@@ -88,6 +81,14 @@ flyway {
     password = "password"
     schemas = arrayOf("PUBLIC")
     defaultSchema = "PUBLIC"
+}
+
+noArg {
+    invokeInitializers = true
+    annotation("micro.apps.model.NoArg")
+    annotation("com.redis.om.spring.annotations.Document")
+    annotation("org.springframework.data.redis.core.RedisHash")
+    annotation("org.springframework.data.relational.core.mapping.Table")
 }
 
 kapt {

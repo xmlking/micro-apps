@@ -1,6 +1,7 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO remove when https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
 plugins {
-    kotlin("plugin.serialization")
-    kotlin("plugin.noarg")
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.jpa)
     // which produces test fixtures
     `java-test-fixtures`
 }
@@ -25,4 +26,5 @@ noArg {
     annotation("micro.apps.model.NoArg")
     annotation("com.redis.om.spring.annotations.Document")
     annotation("org.springframework.data.redis.core.RedisHash")
+    annotation("org.springframework.data.relational.core.mapping.Table")
 }

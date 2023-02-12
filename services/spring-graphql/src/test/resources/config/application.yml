@@ -10,3 +10,8 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
       - org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
+# ==================== application properties  =============
+command:
+  line:
+    runner:
+      enabled: false

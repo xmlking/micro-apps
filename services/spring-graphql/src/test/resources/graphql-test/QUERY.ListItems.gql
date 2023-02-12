@@ -1,5 +1,5 @@
 query ListItems {
-    items {
+    listItems {
         id,
         name,
         description
