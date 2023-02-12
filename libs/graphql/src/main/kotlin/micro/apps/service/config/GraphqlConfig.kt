@@ -33,11 +33,6 @@ class GraphqlConfig {
     }
 
     @Bean
-    fun dateScalarType(): GraphQLScalarType {
-        return ExtendedScalars.Date
-    }
-
-    @Bean
     fun jsonScalarType(): GraphQLScalarType {
         return ExtendedScalars.Json
     }

@@ -109,6 +109,7 @@ springCloudGcp = "4.0.0"
 querydsl = "5.0.0"
 lombok = "1.18.26"
 graphqlJava = "20.0"
+graphqlDatetime = "6.0.0"
 nfobip = "8.1.0"
 r2dbc = "Borca-RELEASE"
 
@@ -183,6 +184,7 @@ spring-boot-starter-graphql = { module = "org.springframework.boot:spring-boot-s
 spring-boot-starter-validation  = { module = "org.springframework.boot:spring-boot-starter-validation" }
 graphql-java-extended-validation  = { module = "com.graphql-java:graphql-java-extended-validation" , version.ref = "graphqlJava" }
 graphql-java-extended-scalars  = { module = "com.graphql-java:graphql-java-extended-scalars" , version.ref = "graphqlJava" }
+graphql-datetime-spring-boot-autoconfigure = { module = "com.tailrocks.graphql:graphql-datetime-spring-boot-autoconfigure" , version.ref = "graphqlDatetime" }
 # Usage: annotationProcessor(libs.spring.boot.configuration.processor)
 spring-boot-configuration-processor  = { module = "org.springframework.boot:spring-boot-configuration-processor" }  # to validate auto-completion on configuration properties
 # Usage: annotationProcessor(libs.spring.boot.autoconfigure.processor)
@@ -438,6 +440,7 @@ spring-graphql = [
     "spring-boot-starter-graphql",
     "graphql-java-extended-validation",
     "graphql-java-extended-scalars",
+    "graphql-datetime-spring-boot-autoconfigure",
     # Kotlin Coroutines
     "kotlinx-coroutines-core",
     "kotlinx-coroutines-jvm",

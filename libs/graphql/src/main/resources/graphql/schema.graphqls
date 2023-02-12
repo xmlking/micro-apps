@@ -11,12 +11,25 @@ directive @Max(value : Int! = 2147483647, message : String = "graphql.validation
 directive @Min(value : Int! = 0, message : String = "graphql.validation.Min.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 scalar DateTime
-scalar Date
 scalar Locale
 scalar JSON
 scalar BigDecimal
 scalar UUID
 scalar Url
+# java.util.Date implementation
+scalar Date
+# java.time.LocalDate implementation
+scalar LocalDate
+# java.time.LocalDateTime implementation
+scalar LocalDateTime
+# java.time.LocalTime implementation
+scalar LocalTime
+# java.time.OffsetDateTime implementation
+scalar OffsetDateTime
+# java.time.YearMonth implementation
+scalar YearMonth
+# java.time.Duration implementation
+scalar Duration
 
 type Query {
 
