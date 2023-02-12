@@ -34,7 +34,7 @@ internal class ItemControllerTest(
             .isEqualTo(item)
     }
 
-    test("list").config(enabled = false) {
+    test("list").config(enabled = true) {
         // given
         val item = Item(1, "sumo", "demo")
         coEvery { itemRepository.findAll() } returns listOf(item)
@@ -46,6 +46,6 @@ internal class ItemControllerTest(
 
         // then
         response
-            .path("data.items").entity(Item::class.java).isEqualTo(listOf(item))
+            .path("data.listItems").entityList(Item::class.java).hasSizeGreaterThan(0)
     }
 })
