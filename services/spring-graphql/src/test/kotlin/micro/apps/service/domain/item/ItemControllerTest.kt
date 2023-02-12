@@ -3,6 +3,7 @@ package micro.apps.service.domain.item
 import com.ninjasquad.springmockk.MockkBean
 import io.kotest.core.spec.style.FunSpec
 import io.mockk.coEvery
+import io.mockk.coVerify
 import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureHttpGraphQlTester
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.graphql.test.tester.HttpGraphQlTester
@@ -32,12 +33,16 @@ internal class ItemControllerTest(
             .path("data.addItem")
             .entity(Item::class.java)
             .isEqualTo(item)
+
+        coVerify(exactly = 1) { itemRepository.save(any()) }
     }
 
     test("list").config(enabled = true) {
         // given
-        val item = Item(1, "sumo", "demo")
-        coEvery { itemRepository.findAll() } returns listOf(item)
+        coEvery { itemRepository.findAll() } returns listOf(
+            Item(1, "sumo1", "demo1"),
+            Item(2, "sumo2", "demo2")
+        )
 
         // when
         val response = graphQlTester
@@ -46,6 +51,10 @@ internal class ItemControllerTest(
 
         // then
         response
-            .path("data.listItems").entityList(Item::class.java).hasSizeGreaterThan(0)
+            .path("data.listItems[*].name")
+            .entityList(String::class.java)
+            .hasSize(2).contains("sumo1", "sumo2")
+
+        coVerify(exactly = 1) { itemRepository.findAll() }
     }
 })
