@@ -1,7 +1,7 @@
 package micro.apps.service
 
 import io.opentelemetry.api.trace.Span
-import io.opentelemetry.extension.annotations.WithSpan
+import io.opentelemetry.instrumentation.annotations.WithSpan
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.ExperimentalSerializationApi
 import micro.apps.model.Address

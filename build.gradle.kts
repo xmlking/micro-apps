@@ -166,6 +166,7 @@ allprojects {
         maven { url = uri("https://repo.spring.io/release") }
         maven { url = uri("https://repo.spring.io/milestone") }
         maven { url = uri("https://packages.confluent.io/maven/") }
+        maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
     }
 }
 
@@ -277,6 +278,7 @@ subprojects {
 
             test {
                 systemProperty("spring.profiles.active", "test")
+                // select test framework before configuring options
                 useJUnitPlatform {
                     excludeTags("slow", "integration")
                 }
@@ -294,6 +296,7 @@ subprojects {
 
             register<Test>("integrationTest") {
                 systemProperty("spring.profiles.active", "test")
+                // select test framework before configuring options
                 useJUnitPlatform {
                     includeTags("integration", "e2e")
                 }

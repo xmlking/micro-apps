@@ -1,22 +1,31 @@
 package micro.apps.service.config
 
-import micro.apps.service.util.jsonCodecConfig
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.codec.ServerCodecConfigurer
-import org.springframework.http.codec.json.KotlinSerializationJsonDecoder
-import org.springframework.http.codec.json.KotlinSerializationJsonEncoder
 import org.springframework.web.reactive.config.WebFluxConfigurer
 
 @Configuration
 class WebFluxConfig : WebFluxConfigurer {
-    override fun configureHttpMessageCodecs(configurer: ServerCodecConfigurer) {
-        // configurer.registerDefaults(false)
+//    override fun configureHttpMessageCodecs(configurer: ServerCodecConfigurer) {
+//        // configurer.registerDefaults(false)
+//
+//        // configurer.defaultCodecs().kotlinSerializationJsonEncoder(KotlinSerializationJsonEncoder(jsonCodecConfig))
+//        // configurer.defaultCodecs().kotlinSerializationJsonDecoder(KotlinSerializationJsonDecoder(jsonCodecConfig))
+//        configurer.customCodecs().registerWithDefaultConfig(KotlinSerializationJsonEncoder(jsonCodecConfig))
+//        configurer.customCodecs().registerWithDefaultConfig(KotlinSerializationJsonDecoder(jsonCodecConfig))
+//    }
 
-        // configurer.defaultCodecs().kotlinSerializationJsonEncoder(KotlinSerializationJsonEncoder(jsonCodecConfig))
-        // configurer.defaultCodecs().kotlinSerializationJsonDecoder(KotlinSerializationJsonDecoder(jsonCodecConfig))
-        configurer.customCodecs().registerWithDefaultConfig(KotlinSerializationJsonEncoder(jsonCodecConfig))
-        configurer.customCodecs().registerWithDefaultConfig(KotlinSerializationJsonDecoder(jsonCodecConfig))
-    }
+//    override fun extendMessageConverters(converters: MutableList<HttpMessageConverter<*>>) {
+//        val converter = KotlinSerializationJsonHttpMessageConverter(Json {
+//            serializersModule = modelSerializersModule
+//            ignoreUnknownKeys = true
+//        })
+//        converters.forEachIndexed { index, httpMessageConverter ->
+//            if (httpMessageConverter is KotlinSerializationJsonHttpMessageConverter) {
+//                converters[index] = converter
+//                return
+//            }
+//        }
+//    }
 
 //    @Bean
 //    @Primary

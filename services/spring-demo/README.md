@@ -13,9 +13,9 @@ This µService also showcase running both **REST** and **gRPC** services on sing
 ## Run
 
 ```bash
-gradle :services:spring:bootRun
+gradle :services:spring-demo:bootRun
 # log at debug level
-gradle :services:spring:bootRun --debug
+gradle :services:spring-demo:bootRun --debug
 ```
 
 #### Options
@@ -30,8 +30,8 @@ open http://localhost:8080/intro
 ## Test
 
 ```
-gradle :services:spring:test
-gradle :services:spring:integrationTest
+gradle :services:spring-demo:test
+gradle :services:spring-demo:integrationTest
 ```
 
 ### Test REST services
@@ -68,13 +68,13 @@ grpcurl -plaintext \
 ### Build fatJar
 
 ```bash
-gradle :services:spring:build
+gradle :services:spring-demo:build
 ```
 
 ### Build native image
 
 ```bash
-gradle :services:spring:bootBuildImage -x test
+gradle :services:spring-demo:bootBuildImage -x test
 ```
 
 Then, you can run the app like any other container:

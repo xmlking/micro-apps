@@ -51,6 +51,7 @@ dependencies {
     // openTelemetry bom
     implementation(enforcedPlatform(libs.opentelemetry.bom.get().toString()))
     implementation(enforcedPlatform(libs.opentelemetry.bomAlpha.get().toString()))
+    implementation(enforcedPlatform(libs.opentelemetry.instrumentation.bom.get().toString()))
 
     // openTelemetry agent
     // openTelemetry(variantOf(libs.opentelemetry.javaagent) { classifier("all") })
@@ -69,8 +70,8 @@ dependencies {
     // micrometer for openTelemetry
     runtimeOnly(libs.micrometer.registry.prometheus)
 
-    // extensions for openTelemetry
-    implementation(libs.opentelemetry.extension.annotations) // to use  @WithSpan etc
+    // instrumentation for openTelemetry
+    implementation(libs.opentelemetry.instrumentation.annotations) // to use  @WithSpan etc
     implementation(libs.opentelemetry.extension.kotlin)
 
     testImplementation(libs.bundles.opentelemetry.test)
