@@ -6,8 +6,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT
-import org.owasp.dependencycheck.reporting.ReportGenerator.Format.HTML
-import org.owasp.dependencycheck.reporting.ReportGenerator.Format.SARIF
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
@@ -155,7 +153,7 @@ koverMerged {
 
 // dependencyCheck generate SARIF file to publish to GitHub security
 dependencyCheck {
-    formats = listOf(HTML, SARIF)
+    formats = listOf("HTML", "SARIF")
     // suppressionFile = "$projectDir/config/owasp/owasp-supression.xml"
 }
 

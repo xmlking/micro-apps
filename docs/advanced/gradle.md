@@ -255,6 +255,7 @@ gradle dependencyUpdates -Drevision=release -DoutputFormatter=json,xml
 gradle versionCatalogUpdate --create
 # Updating the libs.versions.toml file
 gradle versionCatalogUpdate
+# Generate delta updates file `libs.versions.updates.toml` that you can apply manually 
 gradle versionCatalogUpdate --interactive
 ```
 

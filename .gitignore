@@ -76,3 +76,4 @@ build/
 TODO
 codemr
 http-client.private.env.json
+gradle/libs.versions.updates.toml
