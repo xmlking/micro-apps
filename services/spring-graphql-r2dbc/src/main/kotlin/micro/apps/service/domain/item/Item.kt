@@ -2,9 +2,10 @@ package micro.apps.service.domain.item
 
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
 import mu.KotlinLogging
 import org.springframework.data.annotation.Id
+import org.springframework.data.domain.Sort
 import org.springframework.data.relational.core.mapping.Table
 import org.springframework.data.repository.kotlin.CoroutineCrudRepository
 import org.springframework.data.repository.kotlin.CoroutineSortingRepository
@@ -39,6 +40,8 @@ interface ItemRepository : CoroutineCrudRepository<Item, Long>, CoroutineSorting
 //    suspend fun findOne(id: String): Item
 //    fun findByFirstname(firstname: String): Flow<Item>
 //    suspend fun findAllByFirstname(id: String): List<Item>
+//    fun findByName(name: String, page: Pageable): Flow<Item>
+//    fun findAll(pageable: Pageable): Flow<Item>
 }
 
 private val logger = KotlinLogging.logger {}
@@ -47,10 +50,24 @@ private val logger = KotlinLogging.logger {}
 class ItemController(private val itemRepository: ItemRepository) {
 
     // --- Query ---
+    @Transactional(readOnly = true)
     @QueryMapping
-    fun listItems(): Flow<Item> {
+    // FIXME: https://github.com/spring-projects/spring-graphql/issues/393
+    // fun listItems(): Flow<Item> {
+    suspend fun listItems(): List<Item> {
         logger.atDebug().log("listing items")
-        return itemRepository.findAll()
+        return itemRepository.findAll().toList()
+    }
+
+    @Transactional(readOnly = true)
+    @QueryMapping
+    // FIXME: https://github.com/spring-projects/spring-graphql/issues/393
+    // fun findAll(@Argument offset: Int = 0, @Argument limit: Int = 100, @Argument orderBy: String = "name"): Flow<Item> {
+    suspend fun findAll(@Argument offset: Int = 0, @Argument limit: Int = 100, @Argument orderBy: String = "name"): List<Item> {
+        // val pageRequest = PageRequest.of(offset, limit, Sort.by(Sort.Direction.ASC, orderBy))
+        // val content = itemRepository.findAll(pageRequest)
+        // return PageImpl(content.toList(), pageRequest, itemRepository.count())
+        return itemRepository.findAll(Sort.by(Sort.Direction.ASC, orderBy)).toList()
     }
 
     // --- Association ---

@@ -2,6 +2,7 @@ extend type Query {
     items(id: [ID], name: String): [Item]
     item(id: ID!): Item
     listItems: [Item]
+    findAll(offset: Int = 0, limit: Int = 10, orderBy: String = "name"): [Item]
 }
 
 extend type Mutation {

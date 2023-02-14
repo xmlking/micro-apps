@@ -76,7 +76,7 @@ affectedTestConfiguration { jvmTestTask = "check" }
 
 flyway {
     cleanDisabled = false
-    url = "jdbc:h2:./services/spring-graphql/build/database/testdb;AUTO_SERVER=TRUE;USER=sa;PASSWORD=password"
+    url = "jdbc:h2:./services/spring-graphql-jpa/build/database/testdb;AUTO_SERVER=TRUE;USER=sa;PASSWORD=password"
     user = "sa"
     password = "password"
     schemas = arrayOf("PUBLIC")

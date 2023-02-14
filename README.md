@@ -13,10 +13,10 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 5. Integrated with best testing frameworks ([kotest](https://github.com/kotest/kotest/blob/master/doc/reference.md)
    , [MockK](https://mockk.io/))
 6. Build **lightweight** Docker and [OCI](https://github.com/opencontainers/image-spec) images
-   with [Jib](https://github.com/GoogleContainerTools/jib) 
+   with [Jib](https://github.com/GoogleContainerTools/jib)
 7. Build native binaries using [GraalVM](https://www.graalvm.org/)
 8. Cloud Native (Service Mesh, health checks, observability)
-9. Platform independent Observability instrumentation via [OpenTelemetry](https://opentelemetry.io/) 
+9. Platform independent Observability instrumentation via [OpenTelemetry](https://opentelemetry.io/)
 10. Deployment automation with [kustomize](https://kustomize.io/) and Event-driven Autoscaling
     with [KEDA](https://keda.sh/)
 11. End-to-End Google Cloud DevOps flow [pop-kustomize](https://github.com/vszal/pop-kustomize)
@@ -43,6 +43,7 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 | [Streams](./services/streams)        | [Spring](./libs/spring)   | [Ingestion](./pipelines/ingestion)   |
 | [Account](./services/account)        | [GraphQL](./libs/graphql) |                                      |
 |                                      | [Test](./libs/test)       |                                      |
+|                                      | [Model](./libs/model)     |                                      |
 
 ## Setup
 
@@ -62,6 +63,7 @@ sdk i quarkus
 ```
 
 ### IntelliJ Plugins
+
 1. [Spotless](https://plugins.jetbrains.com/plugin/18321-spotless-gradle)
 2. [Ktlint](https://plugins.jetbrains.com/plugin/15057-ktlint-unofficial-/)
 3. [Kotest](https://plugins.jetbrains.com/plugin/14080-kotest)
@@ -93,7 +95,8 @@ gradle check
 gradle koverMergedReport
 ```
 
-Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies.
+Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a
+project’s dependencies.
 
 ```shell
 gradle dependencyCheckAggregate
@@ -155,7 +158,7 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 
 #### Quarkus
 
-> Explore [REST, OpenAPI, OpenID Connect,  API](./services/greeting/)
+> Explore [REST, OpenAPI, OpenID Connect, API](./services/greeting/)
 
 > Explore [GraphQL API](./services/person/)
 
@@ -190,7 +193,7 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 > Explore [Shared Core Code](./libs/core/)
 
 > Explore [Shared Model Objects](./libs/model/)
- 
+
 > Explore [Shared Pipelines Code](./libs/pipeline/)
 
 > Explore [Shared Spring Services Code](./libs/spring/)

@@ -29,7 +29,6 @@ _OpenTelemetry helps generate and collect telemetry data from Spring Boot applic
 
 OpenTelemetry does not provide storage and visualization layer for the collected data. The advantage of using OpenTelemetry is that it can export the collected data in many different formats. So you're free to choose your telemetry backend. Natively, OpenTelemetry supports a wire protocol known as OTLP. This protocol sends the data to OpenTelemetry Collector as shown in the diagram above.
 
-
 ## Setup
 
 Gradle setup

@@ -10,6 +10,12 @@ here
 
 This µService also showcase running both **REST** and **gRPC** services on single server.
 
+This project demonstrates Observability using:
+* [Prometheus](https://prometheus.io/) for monitoring and alerting
+* [Loki](https://grafana.com/oss/loki/) for Distributed Logging
+* [Tempo](https://grafana.com/oss/tempo/) for Distributed Tracing
+* [Grafan](https://grafana.com/) for visualization
+* 
 ## Run
 
 ```bash

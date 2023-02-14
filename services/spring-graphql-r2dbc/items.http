@@ -25,7 +25,7 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Basic admin nimda
 Content-Type: application/json
 
-query {
+query GetItem {
   item(id: 1) {
     id,
     name,
@@ -39,7 +39,7 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Basic admin nimda
 Content-Type: application/json
 
-query {
+query GetItems {
   item(id: 3) {
     id,
     name,
@@ -66,6 +66,25 @@ query ListItems {
   }
 }
 
+### Find all items
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+query FindAll($orderBy: String ) {
+  findAll(orderBy: $orderBy ) {
+    id,
+    name,
+    description
+  }
+}
+
+{
+    "orderBy": "name"
+}
+
+
 
 ### Delete item by id
 GRAPHQL http://localhost:8080/graphql
@@ -73,7 +92,7 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Basic admin nimda
 Content-Type: application/json
 
-mutation {
+mutation DeleteItem {
   deleteItem(id: 3) {
     id,
     name,

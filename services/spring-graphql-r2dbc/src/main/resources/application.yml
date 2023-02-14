@@ -20,6 +20,8 @@ management:
   endpoint:
     health:
       show-details: always
+    prometheus:
+      enabled: true
   endpoints:
     web:
       exposure:
@@ -78,6 +80,7 @@ spring:
     clean-disabled: false
 #    default-schema: PUBLIC
 #    schemas: ["PUBLIC"]
+    baseline-version: 1.0.0
     baseline-on-migrate: true
 
   devtools:

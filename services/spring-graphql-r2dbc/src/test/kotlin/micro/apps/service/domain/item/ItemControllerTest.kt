@@ -46,7 +46,7 @@ internal class ItemControllerTest(
         coVerify(exactly = 1) { itemRepository.save(any()) }
     }
 
-    test("list").config(enabled = false) {
+    test("list").config(enabled = true) {
         // given
         coEvery { itemRepository.findAll() } returns flowOf(
             Item(1, "sumo1", "demo1"),

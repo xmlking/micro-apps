@@ -5,3 +5,11 @@ spring:
     exclude:
     - org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
     - org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
+  flyway:
+    locations: classpath:/db/migration,classpath:/db/testdata
+
+# ==================== application properties  =============
+command:
+  line:
+    runner:
+      enabled: false
