@@ -77,3 +77,4 @@ gradle :services:spring-graphq-r2dbc:flywayRepair
 
 - [Spring for GraphQL Documentation](https://docs.spring.io/spring-graphql/docs/current/reference/html/#overview) 
 - [GraphQL Fullstack Samples using Spring GraphQL & React](https://github.com/susimsek/spring-graphql-samples)
+- [Spring Boot CodeGen GraphQL Gradle plugin](https://github.com/graphql-java-generator/graphql-maven-plugin-project/wiki/client_spring)

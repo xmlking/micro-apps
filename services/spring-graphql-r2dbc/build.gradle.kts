@@ -6,6 +6,9 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.jpa)
     alias(libs.plugins.gradle.flyway)
+    // TODO: enable when 2.x is released.
+    // https://github.com/graphql-java-generator/graphql-maven-plugin-project/issues/170
+    // alias(libs.plugins.gradle.graphql)
 }
 
 configurations {
@@ -23,6 +26,9 @@ dependencies {
     // implementation(libs.spring.boot.starter.rsocket) // rsocket-starter is optional
     implementation(libs.spring.boot.starter.data.r2dbc)
     implementation(libs.spring.boot.starter.oauth2.resource.server)
+
+    // TODO: enable when 2.x is released.
+    // implementation(libs.graphql.java.client.runtime)
 
     // Database Drivers
     implementation(enforcedPlatform(libs.database.r2dbc.bom.get().toString()))
@@ -76,3 +82,22 @@ noArg {
     annotation("org.springframework.data.redis.core.RedisHash")
     annotation("org.springframework.data.relational.core.mapping.Table")
 }
+
+// TODO: enable when 2.x is released.
+/*
+generatePojoConf {
+    packageName = "$group.graphql"
+    setSchemaFileFolder("$projectDir/src/main/resources/graphql")
+    mode = com.graphql_java_generator.plugin.conf.PluginMode.server
+
+    customScalars.push(
+        com.graphql_java_generator.plugin.conf.CustomScalarDefinition(
+            "Long",
+            "java.lang.Long",
+            null,
+            "graphql.scalars.ExtendedScalars.GraphQLLong",
+            null
+        )
+    )
+}
+*/

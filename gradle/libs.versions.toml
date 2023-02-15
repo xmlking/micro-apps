@@ -21,6 +21,7 @@ flywayTest = "7.0.0"
 native = "0.9.19"
 amd = "0.2.1"
 dependencycheck = "8.1.0"
+graphql-generator = "1.18.9"
 
 # kotlin
 spek = "2.0.11"
@@ -188,6 +189,8 @@ spring-boot-starter-validation  = { module = "org.springframework.boot:spring-bo
 graphql-java-extended-validation  = { module = "com.graphql-java:graphql-java-extended-validation" , version.ref = "graphqlJava" }
 graphql-java-extended-scalars  = { module = "com.graphql-java:graphql-java-extended-scalars" , version.ref = "graphqlJava" }
 graphql-datetime-spring-boot-autoconfigure = { module = "com.tailrocks.graphql:graphql-datetime-spring-boot-autoconfigure" , version.ref = "graphqlDatetime" }
+# THE VERSION MUST BE THE SAME AS THE PLUGIN's ONE
+graphql-java-client-runtime = { module = "com.graphql-java-generator:graphql-java-client-runtime" , version.ref = "graphql-generator" }
 # Usage: annotationProcessor(libs.spring.boot.configuration.processor)
 spring-boot-configuration-processor  = { module = "org.springframework.boot:spring-boot-configuration-processor" }  # to validate auto-completion on configuration properties
 # Usage: annotationProcessor(libs.spring.boot.autoconfigure.processor)
@@ -526,3 +529,4 @@ gradle-flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
 gradle-native = { id = "org.graalvm.buildtools.native", version.ref = "native" }
 gradle-amd = { id = "com.dropbox.affectedmoduledetector", version.ref = "amd" }
 gradle-dependencycheck = { id = "org.owasp.dependencycheck", version.ref = "dependencycheck" }
+gradle-graphql = { id = "com.graphql_java_generator.graphql-gradle-plugin" , version.ref = "graphql-generator" }
