@@ -8,9 +8,12 @@ My Hosted Redis https://app.redislabs.com/#/databases
 
 ```bash
 brew install redis
+# optional
 brew install redis-developer/tap/riot-file
 brew install redis-developer/tap/riot-gen
 ```
+
+(optional) Install [RedisInsight-v2](https://redis.com/redis-enterprise/redis-insight/) app
 
 ### Setup
 

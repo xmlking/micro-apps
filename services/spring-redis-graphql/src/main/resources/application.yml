@@ -1,0 +1,31 @@
+server:
+  shutdown: graceful
+# ==================== logging =============================
+logging:
+  level:
+    micro.apps.service: DEBUG
+    com.redis.om.spring: DEBUG
+# ==================== management ==========================
+management:
+  info:
+    env:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,prometheus,flyway
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+# ==================== spring ==============================
+
+# ==================== application properties  =============
+features:
+  change-events:
+    enabled: true

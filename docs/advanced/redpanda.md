@@ -117,3 +117,4 @@ curl -s \
 
 ## Reference 
 - Redpanda's [schema registry](https://vectorized.io/blog/schema_registry/)
+- [Redpanda Quickstart](https://docs.redpanda.com/docs/get-started/quick-start/quick-start-docker/?num-brokers=one)

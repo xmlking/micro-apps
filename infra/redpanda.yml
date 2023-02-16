@@ -1,27 +1,57 @@
-version: "3.8"
+version: "3.9"
+
 services:
-  redpanda:
-    # NOTE: Please use the latest version here!
-    image: docker.vectorized.io/vectorized/redpanda:v22.1.6
+  redpanda-0:
     command:
-      - redpanda start
-      - --overprovisioned
+      - redpanda
+      - start
+      - --kafka-addr
+      - internal://0.0.0.0:9092,external://0.0.0.0:19092
+      # use the internal addresses to connect to the Redpanda brokers'
+      # from inside the same Docker network.
+      #
+      # use the external addresses to connect to the Redpanda brokers'
+      # from outside the Docker network.
+      #
+      # address the broker advertises to clients that connect to the Kafka API.
+      - --advertise-kafka-addr
+      - internal://redpanda-0:9092,external://localhost:19092
+      - --pandaproxy-addr
+      - internal://0.0.0.0:8082,external://0.0.0.0:18082
+      # address the broker advertises to clients that connect to PandaProxy.
+      - --advertise-pandaproxy-addr
+      - internal://redpanda-0:8082,external://localhost:18082
+      - --schema-registry-addr
+      - internal://0.0.0.0:8081,external://0.0.0.0:18081
+      # Redpanda brokers use the RPC API to communicate with eachother internally.
+      - --rpc-addr
+      - redpanda-0:33145
+      - --advertise-rpc-addr
+      - redpanda-0:33145
+      # tells Seastar (the framework Redpanda uses under the hood) to use 1 core on the system.
       - --smp 1
+      # the amount of memory to make available to Redpanda.
       - --memory 1G
+      # the amount of memory that's left for the Seastar subsystem.
+      # For development purposes this is set to 0.
       - --reserve-memory 0M
-      - --node-id 0
-      - --check=false
-      - --kafka-addr PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
-      - --advertise-kafka-addr PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
-      - --pandaproxy-addr 0.0.0.0:8082
-      - --advertise-pandaproxy-addr redpanda:8082
-      - --set redpanda.enable_transactions=true
-      - --set redpanda.enable_idempotence=true
+      # Redpanda won't assume it has all of the provisioned CPU
+      # (to accommodate Docker resource limitations).
+      - --overprovisioned
+      # enable logs for debugging.
+      - --default-log-level=debug
+    # NOTE: Please use the latest version here!
+    image: docker.redpanda.com/redpandadata/redpanda:v22.3.13
+    container_name: redpanda-0
+    volumes:
+      - redpanda-0:/var/lib/redpanda/data
+    networks:
+      - redpanda_network
     ports:
-      - "8081:8081" # schema_registry
-      - "8082:8082"
-      - "9092:9092"
-      - "29092:29092"
+      - 18081:18081
+      - 18082:18082
+      - 19092:19092
+      - 19644:9644
     healthcheck:
       test: ["CMD", "curl", "http://localhost:9644/v1/status/ready"]
       start_period: 0s
@@ -29,14 +59,33 @@ services:
       timeout: 10s
       retries: 10
 
-  topic-creator:
+  console:
+    container_name: redpanda-console
     # NOTE: Please use the latest version here!
-    image: docker.vectorized.io/vectorized/redpanda:v22.1.6
-    command:
-      - topic
-      - --brokers redpanda:9092
-      - create
-      - sumo
+    image: docker.redpanda.com/redpandadata/console:v2.1.1
+    networks:
+      - redpanda_network
+    entrypoint: /bin/sh
+    command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["redpanda-0:9092"]
+          schemaRegistry:
+            enabled: true
+            urls: ["http://redpanda-0:8081"]
+        redpanda:
+          adminApi:
+            enabled: true
+            urls: ["http://redpanda-0:9644"]
+    ports:
+      - 8080:8080
     depends_on:
-      redpanda:
-        condition: service_healthy
+      - redpanda-0
+
+networks:
+  redpanda_network:
+    driver: bridge
+volumes:
+  redpanda-0: null

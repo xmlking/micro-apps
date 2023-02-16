@@ -1,0 +1,9 @@
+# this config override src/main/resources/application.yml
+# and combined config is used by tests.
+# If we also set `spring.profiles.active=test` env for gradle test task,
+# src/main/resources/application-test.yml config also loaded and mixed.
+# beans tagged with @Profile("!test") are ignored.
+# ==================== spring ==============================
+spring:
+  profiles:
+    active: test

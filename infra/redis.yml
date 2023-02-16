@@ -7,25 +7,22 @@ services:
     environment:
       # make a test user and database
       - REDIS_PASSWORD=redis
-    ports:
-      - 6379:6379
-    volumes:
-      # - ./db_scripts/1-schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
-      - redisearch:/data
-    command:
-      # you've to load the associated *.so for the module to work in docker
-      - "--loadmodule /usr/lib/redis/modules/redisearch.so"
-      - "--loadmodule /usr/lib/redis/modules/redisgraph.so"
-      - "--loadmodule /usr/lib/redis/modules/rejson.so"
-      - "--loadmodule /usr/lib/redis/modules/redisbloom.so"
       # redis rdb backup config.
-      # Save if 100 keys are added in every 10 seconds
-      - "--save 10 100"
+      # Save if 100 keys are added in every 10 seconds: --save 10 100
+      - "REDIS_ARGS=--appendonly yes"
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
     healthcheck:
       test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
 
   insight:
-    image: redislabs/redisinsight:1.11.0
+    image: redislabs/redisinsight:1.13.1
     ports:
       - '8001:8001'
     depends_on:
@@ -35,7 +32,7 @@ services:
       - redisinsight:/db
 
   grafana:
-    image: grafana/grafana:8.1.8
+    image: grafana/grafana:8.2.6
     ports:
       - "3000:3000"
     environment:
@@ -59,6 +56,6 @@ services:
         condition: service_healthy
 
 volumes:
-  redisearch:
+  redisdata:
   redisinsight:
   grafana:
