@@ -96,6 +96,30 @@ gradle :services:greeting:quarkusDev -Dsuspend -Ddebug
 # quarkusTestConfig - Sets the necessary system properties for the Quarkus tests to run.
 ```
 
+### Flyway
+
+Docs: Gradle [Flyway Plugin](https://github.com/flyway/flyway/blob/main/documentation/Flyway%20CLI%20and%20API/Usage/Gradle%20Task.md)
+
+Ref [Adding dependencies on Flyway Database Types](https://github.com/flyway/flyway/blob/main/documentation/Flyway%20CLI%20and%20API/Usage/Gradle%20Task.md#adding-dependencies-on-flyway-database-types)
+
+For some Flyway database types, like [Cloud Spanner] and [SQL Server], you'll need to add a dependency to the database type in a `buildscript` closure to get your Gradle commands to work properly.
+This puts the database type on the build classpath, and not the project classpath.
+
+Here is an example `settings.gradle.kts`:
+
+```groovy
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.flywaydb:flyway-mysql:{{ site.flywayVersion }} "
+    }
+}
+```
+
+Without this you may see an error like the following: `No database found to handle jdbc:...`
+
 ### Docker Compose
 
 start/stop dependent services for your app

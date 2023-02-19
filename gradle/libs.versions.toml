@@ -22,6 +22,8 @@ native = "0.9.20"
 amd = "0.2.1"
 dependencycheck = "8.1.0"
 graphql-generator = "1.18.9"
+dotenv = "2.0.0"
+
 
 # kotlin
 spek = "2.0.11"
@@ -113,6 +115,7 @@ graphqlJava = "20.0"
 graphqlDatetime = "6.0.0"
 nfobip = "8.1.0"
 r2dbc = "Borca-RELEASE"
+mssql = "11.2.3.jre17"
 
 # kafka
 kafkaStreams = "3.3.2"
@@ -209,7 +212,7 @@ database-r2dbc-h2 = { module = "io.r2dbc:r2dbc-h2" } # runtimeOnly
 database-r2dbc-postgresql = { module = "io.r2dbc:r2dbc-postgresql" } # runtimeOnly
 database-r2dbc-mssql = { module = "io.r2dbc:r2dbc-mssql" } # runtimeOnly
 database-h2  = { module = "com.h2database:h2" } # runtimeOnly
-database-mssql  = { module = "com.microsoft.sqlserver:mssql-jdbc" } # runtimeOnly
+database-mssql  = { module = "com.microsoft.sqlserver:mssql-jdbc", version.ref = "mssql" } # runtimeOnly
 
 lombok  = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 # Usage: developmentOnly(libs.spring.boot.devtools)
@@ -531,3 +534,4 @@ gradle-native = { id = "org.graalvm.buildtools.native", version.ref = "native" }
 gradle-amd = { id = "com.dropbox.affectedmoduledetector", version.ref = "amd" }
 gradle-dependencycheck = { id = "org.owasp.dependencycheck", version.ref = "dependencycheck" }
 gradle-graphql = { id = "com.graphql_java_generator.graphql-gradle-plugin" , version.ref = "graphql-generator" }
+gradle-dotenv = { id = "co.uzzu.dotenv.gradle" , version.ref = "dotenv" }

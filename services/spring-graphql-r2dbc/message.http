@@ -4,7 +4,7 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Basic admin nimda
 Content-Type: application/json
 
-mutation {
+mutation AddMessage {
   addMessage(input: {content: "new message "}) {
     id,
     content
@@ -16,7 +16,7 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Basic admin nimda
 Content-Type: application/json
 
-query {
+query Hello {
   hello {
     id,
     content
@@ -28,7 +28,7 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
-query {
+query Hello {
   hello {
     id,
     content
@@ -42,7 +42,7 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Basic admin nimda
 Content-Type: application/json
 
-subscription  {
+subscription Messages {
     messages {
          id,
         content
@@ -52,7 +52,7 @@ subscription  {
 ### messages
 #WEBSOCKET ws://localhost:8080/graphql
 #
-#subscription  {
+#subscription Messages {
 #    messages {
 #         id,
 #        content

@@ -76,11 +76,13 @@ affectedTestConfiguration { jvmTestTask = "check" }
 
 flyway {
     cleanDisabled = false
-    url = "jdbc:h2:./services/spring-graphql-jpa/build/database/testdb;AUTO_SERVER=TRUE;USER=sa;PASSWORD=password"
-    user = "sa"
-    password = "password"
+    url = env.DB_FLYWAY_URL.value
+    user = env.DB_USER.value
+    password = env.DB_PASSWORD.value
     schemas = arrayOf("PUBLIC")
     defaultSchema = "PUBLIC"
+    placeholders = mapOf("type_serial" to "SERIAL")
+    locations = arrayOf( "classpath:db/migration/common","classpath:/db/migration/${env.DB_FLYWAY_VENDOR.value}","classpath:/db/testdata")
 }
 
 noArg {

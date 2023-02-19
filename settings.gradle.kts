@@ -16,6 +16,8 @@ pluginManagement {
         }
         dependencies {
             classpath("org.eclipse.jgit:org.eclipse.jgit:5.13.1.202206130422-r")
+            // For mssql, flyway gradle plugin need driver in `settings.gradle.kts` buildscript
+            classpath("org.flywaydb:flyway-sqlserver:9.14.1")
         }
         configurations.classpath {
             resolutionStrategy {
@@ -45,7 +47,7 @@ include(
     ":services:spring-demo",
     ":services:spring-graphql-jpa",
     ":services:spring-graphql-r2dbc",
-    ":services:spring-redis-graphql",
+    ":services:spring-graphql-redis",
 
     ":pipelines:classifier",
     ":pipelines:ingestion",

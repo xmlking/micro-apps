@@ -82,6 +82,12 @@ spring:
 #    schemas: ["PUBLIC"]
     baseline-version: 1.0.0
     baseline-on-migrate: true
+    # if you want to initialize testdata only during testing,
+    # keep `main/resources/db/testdata` empty,
+    # and create `afterMigrate.sql` in `test/resources/db/testdata`
+    locations: classpath:db/migration/common,classpath:/db/migration/{vendor},classpath:/db/testdata
+    placeholders:
+      type_serial: "SERIAL"
 
   devtools:
     livereload:

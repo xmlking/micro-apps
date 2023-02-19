@@ -70,7 +70,7 @@ build/
 /.env.*
 /.env.local
 /.env.*.local
-!.env.example
+!.env.template
 
 ### Project ###
 TODO

@@ -10,7 +10,7 @@ Demo GraphQL APIs with Spring Boot 3.x
 
 ## Setup
 
-> Make a copy `.env.example` as `.env` in the subproject root  
+> Make a copy `.env.template` as `.env` in the subproject root  
 > Add any environment variables that you want to overwrite in application.yml
 
 ## Run
@@ -82,3 +82,6 @@ gradle :services:spring-graphq-jpa:flywayRepair
 
 - [Spring for GraphQL Documentation](https://docs.spring.io/spring-graphql/docs/current/reference/html/#overview) 
 - [GraphQL Fullstack Samples using Spring GraphQL & React](https://github.com/susimsek/spring-graphql-samples)
+- [Spring Boot CodeGen GraphQL Gradle plugin](https://github.com/graphql-java-generator/graphql-maven-plugin-project/wiki/client_spring)
+- [GraphQL Kotlin](https://opensource.expediagroup.com/graphql-kotlin/docs)
+- [Managing flyway migrations using Placeholders in PostgreSQL/MySQL/H2 in Spring Boot](https://medium.com/@justdpk/managing-multiple-flyway-migrations-in-postgresql-mysql-h2-in-spring-boot-e790f07547b3)

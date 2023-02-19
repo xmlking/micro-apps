@@ -1,7 +1,6 @@
 # Spring Redis GraphQL
 
-## TODO
-
+## Features
 - [ ] integrate GraphQL
 
 ## Setup
@@ -26,7 +25,7 @@ docker compose -f infra/redis.yml down -v
 Start application
 
 ```shell
-gradle :services:spring-redis-graphql:bootRun
+gradle :services:spring-graphql-redis:bootRun
 ```
 
 ## Test

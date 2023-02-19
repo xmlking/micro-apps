@@ -36,14 +36,14 @@ Monorepo(apps, libs) project to showcase workspace setup with multiple apps and 
 
 ### Sub Modules
 
-| Services                             | Libs                      | Pipelines                            |
-|--------------------------------------|---------------------------|--------------------------------------|
-| [GraphQL](./services/spring-graphql) | [Core](./libs/core)       | [WordCount](./pipelines/wordcount)   |
-| [Redis OM](./services/redis)         | [KBeam](./libs/kbeam)     | [Classifier](./pipelines/classifier) |
-| [Streams](./services/streams)        | [Spring](./libs/spring)   | [Ingestion](./pipelines/ingestion)   |
-| [Account](./services/account)        | [GraphQL](./libs/graphql) |                                      |
-|                                      | [Test](./libs/test)       |                                      |
-|                                      | [Model](./libs/model)     |                                      |
+| Services                                         | Libs                      | Pipelines                            |
+|--------------------------------------------------|---------------------------|--------------------------------------|
+| [GraphQL-r2dbc](./services/spring-graphql-r2dbc) | [Core](./libs/core)       | [WordCount](./pipelines/wordcount)   |
+| [Redis OM](./services/redis)                     | [KBeam](./libs/kbeam)     | [Classifier](./pipelines/classifier) |
+| [Streams](./services/streams)                    | [Spring](./libs/spring)   | [Ingestion](./pipelines/ingestion)   |
+| [Account](./services/account)                    | [GraphQL](./libs/graphql) |                                      |
+|                                                  | [Test](./libs/test)       |                                      |
+|                                                  | [Model](./libs/model)     |                                      |
 
 ## Setup
 

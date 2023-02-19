@@ -58,6 +58,9 @@ plugins {
 
     // Affected Module Detector: must only be applied to rootProject
     alias(libs.plugins.gradle.amd)
+
+    // allow access environment variables in .kts from dotenv
+    alias(libs.plugins.gradle.dotenv)
     // used by subprojects
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.kotlin.serialization) apply false
