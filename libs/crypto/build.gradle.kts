@@ -1,7 +1,7 @@
 val tinkVersion = libs.versions.googleTink.get()
 
 dependencies {
-    implementation(project(":libs:core"))
+    implementation(projects.libs.core)
     implementation("com.google.crypto.tink:tink:$tinkVersion")
     // Optional
     implementation("com.google.crypto.tink:tink-gcpkms:$tinkVersion")
@@ -10,7 +10,7 @@ dependencies {
     implementation("com.google.http-client:google-http-client-jackson2:1.42.3")
 
     // Testing
-    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(projects.libs.test))
     testImplementation(libs.kotlinx.coroutines.test)
 }
 

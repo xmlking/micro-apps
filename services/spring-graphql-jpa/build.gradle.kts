@@ -29,8 +29,8 @@ idea {
 */
 
 dependencies {
-    implementation(project(":libs:core"))
-    implementation(project(":libs:graphql"))
+    implementation(projects.libs.core)
+    implementation(projects.libs.graphql)
 
     // Spring
     implementation(libs.bundles.spring.graphql)
@@ -60,7 +60,7 @@ dependencies {
     // micrometer for openTelemetry
 
     // Test
-    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(projects.libs.test))
     testImplementation(libs.spring.boot.starter.test) {
         exclude(module = "mockito-core")
     }

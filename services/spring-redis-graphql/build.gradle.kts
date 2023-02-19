@@ -20,9 +20,9 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":libs:core"))
-    implementation(project(":libs:model"))
-    implementation(project(":libs:spring"))
+    implementation(projects.libs.core)
+    implementation(projects.libs.model)
+    implementation(projects.libs.spring)
 
     // Spring
     implementation(libs.bundles.spring.basic)
@@ -40,8 +40,8 @@ dependencies {
     // micrometer for openTelemetry
 
     // Test
-    testImplementation(testFixtures(project(":libs:test")))
-    testImplementation(testFixtures(project(":libs:model")))
+    testImplementation(testFixtures(projects.libs.test))
+    testImplementation(testFixtures(projects.libs.model))
     testImplementation(libs.spring.boot.starter.test) {
         exclude(module = "mockito-core")
     }

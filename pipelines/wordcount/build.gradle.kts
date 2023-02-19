@@ -2,8 +2,8 @@ val junitVersion = libs.versions.junit.get()
 val slf4jVersion = libs.versions.slf4j.get()
 
 dependencies {
-    implementation(project(":libs:core"))
-    implementation(project(":libs:kbeam"))
+    implementation(projects.libs.core)
+    implementation(projects.libs.kbeam)
 
     // Use Apache Beam
     implementation(libs.bundles.beam)

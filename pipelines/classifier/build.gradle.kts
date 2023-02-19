@@ -16,10 +16,10 @@ configurations.all {
 }
 
 dependencies {
-    implementation(project(":libs:core"))
-    implementation(project(":libs:model"))
-    implementation(project(":libs:kbeam"))
-    implementation(project(":libs:pipeline"))
+    implementation(projects.libs.core)
+    implementation(projects.libs.model)
+    implementation(projects.libs.kbeam)
+    implementation(projects.libs.pipeline)
 
     // Use Apache Beam
     implementation(libs.bundles.beam)
@@ -37,10 +37,10 @@ dependencies {
     testImplementation(libs.hamcrest.all.test)
     testImplementation(libs.google.cloud.pubsub)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(testFixtures(project(":libs:test")))
-    testImplementation(testFixtures(project(":libs:model")))
-    testImplementation(testFixtures(project(":libs:proto")))
-    testImplementation(testFixtures(project(":libs:pipeline")))
+    testImplementation(testFixtures(projects.libs.test))
+    testImplementation(testFixtures(projects.libs.model))
+    testImplementation(testFixtures(projects.libs.proto))
+    testImplementation(testFixtures(projects.libs.pipeline))
 }
 
 affectedTestConfiguration { jvmTestTask = "check" }

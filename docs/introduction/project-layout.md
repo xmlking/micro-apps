@@ -41,7 +41,7 @@ micro-apps/
     - contains runnable `apps`. i.e., microservices, cli tools, ETL pipelines etc
     - can be build into `fatJars` and/or `docker` images
     - there should be only one entry point per app. i.e, one top-level class with `main()` method.
-    - `apps` imports local `libs` as needed `implementation(project(":libs:dlib"))`
+    - `apps` imports local `libs` as needed `implementation(projects.libs.mylib)`
 
 - libs
     - libraries are two types: `core` and `shared`

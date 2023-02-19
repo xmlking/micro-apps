@@ -6,12 +6,9 @@ plugins {
 
 dependencies {
     // TODO
-    // implementation(projects.libs.core)
-    // implementation(projects.libs.model)
-    // implementation(projects.libs.proto)
-    implementation(project(":libs:core"))
-    implementation(project(":libs:model"))
-    implementation(project(":libs:proto"))
+     implementation(projects.libs.core)
+     implementation(projects.libs.model)
+     implementation(projects.libs.proto)
 
     // quarkus
     implementation(enforcedPlatform(libs.quarkus.bom.get().toString()))
@@ -39,7 +36,7 @@ dependencies {
     // testing
     testImplementation(libs.quarkus.junit5.test)
     testImplementation(libs.rest.assured.kotlin.test)
-    testImplementation(testFixtures(project(":libs:proto")))
+    testImplementation(testFixtures(projects.libs.proto))
 }
 
 affectedTestConfiguration { jvmTestTask = "check" }

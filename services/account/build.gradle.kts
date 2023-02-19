@@ -6,8 +6,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":libs:proto"))
-    implementation(project(":libs:grpc"))
+    implementation(projects.libs.proto)
+    implementation(projects.libs.grpc)
     implementation("org.bouncycastle:bctsp-jdk16:1.46")
 
     // Grpc `io.grpc:grpc-all` has grpc-auth, grpc-alts, grpc-protobuf, grpc-xds ...
@@ -39,9 +39,9 @@ dependencies {
 
     // Test
     // testImplementation("io.kotest.extensions:kotest-extensions-koin:{version}")
-    testImplementation(testFixtures(project(":libs:test")))
-    testImplementation(testFixtures(project(":libs:model")))
-    testImplementation(testFixtures(project(":libs:proto")))
+    testImplementation(testFixtures(projects.libs.test))
+    testImplementation(testFixtures(projects.libs.model))
+    testImplementation(testFixtures(projects.libs.proto))
     // grpc testing TODO: https://github.com/grpc/grpc-java/issues/5331
     testImplementation(libs.grpc.test)
     // testImplementation("io.grpc:grpc-testing:$grpcVersion")

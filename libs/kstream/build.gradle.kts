@@ -5,8 +5,8 @@ val confluentVersion = libs.versions.confluent.get()
 val kotlinRetryVersion = libs.versions.kotlinRetry.get()
 
 dependencies {
-    implementation(project(":libs:core"))
-    implementation(project(":libs:crypto"))
+    implementation(projects.libs.core)
+    implementation(projects.libs.crypto)
     implementation("org.apache.kafka:kafka-streams:$kafkaStreamsVersion")
     implementation("com.github.thake.avro4k:avro4k-kafka-serializer:$avro4kSerdeVersion")
     implementation("io.confluent:kafka-streams-avro-serde:$confluentVersion") // ??? should be loaded as transient dep
@@ -17,7 +17,7 @@ dependencies {
     implementation(libs.bundles.kotlinx.coroutines)
 
     // Testing
-    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(projects.libs.test))
     testImplementation(libs.kotlinx.coroutines.test)
 }
 

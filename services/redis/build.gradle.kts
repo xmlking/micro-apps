@@ -18,11 +18,11 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":libs:core"))
+    implementation(projects.libs.core)
     // TODO: enable when `entity-webapp` is ready
-    // implementation(project(":services:webapp"))
-    implementation(project(":libs:model"))
-    implementation(project(":libs:spring"))
+    // implementation(projects.services.webapp)
+    implementation(projects.libs.model)
+    implementation(projects.libs.spring)
 
     // implementation(platform("org.springframework.data:spring-data-bom:2021.1.0-M2"))
 
@@ -44,8 +44,8 @@ dependencies {
     // DevTools
     developmentOnly(libs.spring.boot.devtools)
 
-    testImplementation(testFixtures(project(":libs:test")))
-    testImplementation(testFixtures(project(":libs:model")))
+    testImplementation(testFixtures(projects.libs.test))
+    testImplementation(testFixtures(projects.libs.model))
     testImplementation(libs.spring.boot.starter.test) {
         exclude(module = "mockito-core")
     }

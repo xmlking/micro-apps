@@ -15,11 +15,11 @@ val slf4jVersion = libs.versions.slf4j.get()
 val openTelemetry: Configuration by configurations.creating
 
 dependencies {
-    implementation(project(":libs:core"))
+    implementation(projects.libs.core)
     // TODO: enable when `entity-webapp` is ready
-    // implementation(project(":services:webapp"))
-    implementation(project(":libs:model"))
-    implementation(project(":libs:spring"))
+    // implementation(projects.services.webapp)
+    implementation(projects.libs.model)
+    implementation(projects.libs.spring)
 
     implementation(libs.bundles.spring.basic)
     api(libs.spring.boot.starter.validation)
@@ -34,7 +34,7 @@ dependencies {
 
     // Optional: if you also want to add some gRPC services
     // TODO: gRPC not working with GraalVM
-    implementation(project(":libs:proto"))
+    implementation(projects.libs.proto)
     implementation(libs.bundles.spring.grpc)
 
     // projectreactor
@@ -76,8 +76,8 @@ dependencies {
 
     testImplementation(libs.bundles.opentelemetry.test)
 
-    testImplementation(testFixtures(project(":libs:test")))
-    testImplementation(testFixtures(project(":libs:model")))
+    testImplementation(testFixtures(projects.libs.test))
+    testImplementation(testFixtures(projects.libs.model))
     testImplementation(libs.spring.boot.starter.test) {
         exclude(module = "mockito-core")
     }

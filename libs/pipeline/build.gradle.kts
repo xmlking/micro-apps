@@ -17,7 +17,7 @@ dependencies {
     }
     testImplementation(libs.hamcrest.all.test)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(projects.libs.test))
     testFixturesImplementation(libs.google.cloud.pubsub)
 }
 

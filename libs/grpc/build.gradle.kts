@@ -28,7 +28,7 @@ dependencies {
     // implementation(libs.concurrency.limits.grpc)
 
     // Test
-    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(projects.libs.test))
 }
 
 affectedTestConfiguration { jvmTestTask = "check" }

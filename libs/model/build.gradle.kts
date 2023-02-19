@@ -15,7 +15,7 @@ dependencies {
     implementation(libs.jakarta.validation)
 
     // Testing
-    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(projects.libs.test))
     testImplementation(libs.kotlinx.coroutines.test)
 }
 

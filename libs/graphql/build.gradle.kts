@@ -9,11 +9,11 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":libs:core"))
+    implementation(projects.libs.core)
     // Spring
     implementation(libs.bundles.spring.graphql)
     // Test
-    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(projects.libs.test))
     testImplementation(libs.spring.boot.starter.test) {
         exclude(module = "mockito-core")
     }

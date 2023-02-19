@@ -28,7 +28,7 @@ dependencies {
     implementation(libs.pgv.java.stub)
 
     // Testing
-    testImplementation(testFixtures(project(":libs:test")))
+    testImplementation(testFixtures(projects.libs.test))
     // grpc testing TODO: https://github.com/grpc/grpc-java/issues/5331
     // testImplementation(libs.grpc.test)
     testFixturesImplementation(libs.protobuf.java)

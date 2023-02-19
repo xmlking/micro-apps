@@ -16,8 +16,8 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":libs:model"))
-    implementation(project(":libs:spring"))
+    implementation(projects.libs.model)
+    implementation(projects.libs.spring)
     implementation(libs.bundles.spring.basic)
     developmentOnly(libs.spring.boot.devtools)
 
@@ -37,7 +37,7 @@ dependencies {
     // kafka serializers
     // implementation("io.confluent:kafka-streams-avro-serde:$confluentVersion")
     // implementation("com.github.thake.avro4k:avro4k-kafka-serializer:$avro4kSerdeVersion")
-    implementation(project(":libs:kstream"))
+    implementation(projects.libs.kstream)
 
     testImplementation(libs.spring.boot.starter.test) {
         exclude(module = "mockito-core")

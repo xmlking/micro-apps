@@ -9,7 +9,7 @@ contains test helper functions, fixtures and `kotest` tags etc
 import it as `testImplementation` in your `build.gradle.kts`
 
 ```gradle
-testImplementation(testFixtures(project(":libs:test")))
+testImplementation(testFixtures(projects.libs.test))
 ```
 
 ### Test

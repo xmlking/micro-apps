@@ -15,8 +15,8 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":libs:spring"))
-    implementation(project(":libs:kstream"))
+    implementation(projects.libs.spring)
+    implementation(projects.libs.kstream)
     implementation(libs.bundles.spring.basic)
     developmentOnly(libs.spring.boot.devtools)
 
