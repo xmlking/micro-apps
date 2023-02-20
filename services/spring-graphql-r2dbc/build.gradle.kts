@@ -62,6 +62,7 @@ dependencies {
     testImplementation(libs.kotest.extensions.spring)
     testImplementation(libs.spring.boot.graphql.test)
     testImplementation(libs.spring.boot.security.test)
+    testImplementation(libs.spring.boot.flyway.test)
 }
 
 affectedTestConfiguration { jvmTestTask = "check" }

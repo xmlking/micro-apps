@@ -64,7 +64,6 @@ spring:
       initial-size: 10
       max-idle-time: 1m
       max-size: 50
-      max-create-connection-time: 30
     properties:
       errorResponseLogLevel: DEBUG
 

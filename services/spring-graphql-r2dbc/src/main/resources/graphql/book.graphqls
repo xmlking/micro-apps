@@ -1,0 +1,36 @@
+extend type Query {
+    getBook(id: UUID!): Book
+}
+
+extend type Mutation {
+    createBook(input: CreateBookInput!): Book
+#    deleteBook(id: ID!): Book
+}
+
+extend type Subscription {
+    books: Book!
+}
+
+
+type Book {
+    id: UUID!
+    title: String!
+    pages: Int
+    category: Category!
+    author: String!
+    createdAt: LocalDateTime!
+    lastModifiedAt: LocalDateTime!
+}
+
+input CreateBookInput {
+    title: String! @NotBlank @Size(min: 4, max: 50)
+    pages: Int
+    category: Category!
+    author: String! @NotBlank @Size(min: 4, max: 50)
+}
+
+enum Category {
+    HORROR
+    COMEDY
+    FANTASY
+}

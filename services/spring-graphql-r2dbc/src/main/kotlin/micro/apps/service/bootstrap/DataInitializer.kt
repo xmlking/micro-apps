@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 private val logger = KotlinLogging.logger {}
 
 /**
- * `command.line.runner.enabled` set to `false` during tests
+ * `application.runner.enabled` set to `false` during tests
  */
 @Component
 @ConditionalOnProperty(

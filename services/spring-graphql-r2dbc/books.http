@@ -1,0 +1,47 @@
+### Create book
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+mutation CreateBook($newBook: CreateBookInput!) {
+  createBook(input: $newBook) {
+    id,
+    title,
+    category,
+    createdAt,
+    lastModifiedAt
+  }
+}
+
+{
+    "newBook": {
+        "title": "my book",
+        "pages": 50,
+        "category": "HORROR",
+        "author": "sumo"
+    }
+}
+
+> {% client.global.set("book_id", response.body.data.createBook.id); %}
+
+
+### Get book
+GRAPHQL http://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+query GetItem($id: UUID!) {
+  getBook(id: $id) {
+    id,
+    title,
+    category,
+    createdAt,
+    lastModifiedAt
+  }
+}
+
+{
+    "id": "{{book_id}}"
+}
