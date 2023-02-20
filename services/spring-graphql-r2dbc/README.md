@@ -58,6 +58,7 @@ http -a actuator:rotautca :8080/actuator/env
 
 ```shell
 gradle :services:spring-graphq-r2dbc:test
+gradle :services:spring-graphq-r2dbc:integrationTest
 ```
 
 ## Maintenance

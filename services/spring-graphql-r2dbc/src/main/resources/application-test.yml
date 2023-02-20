@@ -5,6 +5,11 @@ spring:
     exclude:
     - org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
     - org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
+  r2dbc:
+    url: r2dbc:h2:file://././build/database/testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;AUTO_SERVER=TRUE
+    name: testdb
+    username: sa
+    password: Passw@rd
 # ==================== application properties  =============
 application:
   runner:
