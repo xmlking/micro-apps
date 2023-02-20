@@ -82,7 +82,7 @@ flyway {
     schemas = arrayOf("PUBLIC")
     defaultSchema = "PUBLIC"
     placeholders = mapOf("type_serial" to "SERIAL")
-    locations = arrayOf( "classpath:db/migration/common","classpath:/db/migration/${env.DB_FLYWAY_VENDOR.value}","classpath:/db/testdata")
+    locations = arrayOf("classpath:db/migration/common", "classpath:/db/migration/${env.DB_FLYWAY_VENDOR.value}", "classpath:/db/testdata")
 }
 
 noArg {

@@ -7,10 +7,8 @@ import org.springframework.data.repository.kotlin.CoroutineSortingRepository
 import org.springframework.graphql.data.GraphQlRepository
 import java.util.UUID
 
-
 @GraphQlRepository
 interface BookRepository : CoroutineCrudRepository<Book, UUID>, CoroutineSortingRepository<Book, UUID> {
     @Query("SELECT * FROM books WHERE name = @name")
     fun findAllByName(name: String): Flow<Book>
 }
-

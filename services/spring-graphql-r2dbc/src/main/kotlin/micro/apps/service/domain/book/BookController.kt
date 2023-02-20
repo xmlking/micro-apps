@@ -2,13 +2,12 @@ package micro.apps.service.domain.book
 
 import com.github.f4b6a3.uuid.UuidCreator
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.buffer
+import kotlinx.coroutines.flow.cancellable
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.reactive.asPublisher
-import micro.apps.service.domain.book.Book
-import micro.apps.service.domain.book.CreateBookInput
 import mu.KotlinLogging
 import org.reactivestreams.Publisher
-import org.springframework.data.domain.Sort
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.graphql.data.method.annotation.QueryMapping
@@ -16,7 +15,6 @@ import org.springframework.graphql.data.method.annotation.SubscriptionMapping
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.stereotype.Controller
-import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
@@ -54,4 +52,3 @@ class BookController(private val bookService: BookService) {
         }.cancellable().buffer().asPublisher()
     }
 }
-

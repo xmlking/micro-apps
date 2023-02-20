@@ -31,7 +31,7 @@ enum class Category {
 
 @Table("authors")
 data class Author(
-    @Id  val id: UUID,
+    @Id val id: UUID,
     val name: String,
     val age: Int?,
     @Version
@@ -40,10 +40,9 @@ data class Author(
     private val bookId: UUID? = null
 )
 
-
 data class CreateBookInput(
     val title: String,
     val pages: Int,
     val category: Category,
-    val author: String,
+    val author: String
 )

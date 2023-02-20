@@ -54,11 +54,9 @@ internal class BookControllerTest(
                 it.category shouldBe input.category
             }
 
-
         coVerify(exactly = 1) { bookService.createBook(any()) }
     }
 
     test("list").config(enabled = true) {
-
     }
 })

@@ -14,18 +14,17 @@ private val logger = KotlinLogging.logger {}
 @SpringBootTest()
 internal class BookIntegrationTest(
     private val bookService: BookService,
-    private val  flyway: Flyway
+    private val flyway: Flyway
 ) : FunSpec({
 
     lateinit var input: CreateBookInput
 
     beforeTest {
         logger.atDebug().log("before each test...")
-        flyway.clean();
-        flyway.migrate();
+        flyway.clean()
+        flyway.migrate()
     }
 
     test("list").config(enabled = true, tags = setOf(E2E)) {
-
     }
 })
