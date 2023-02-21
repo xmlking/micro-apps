@@ -4,9 +4,11 @@ CREATE TABLE IF NOT EXISTS books (
     pages DECIMAL(10),
 --     category ENUM('HORROR', 'COMEDY', 'FANTASY') NOT NULL,
     category varchar(255) check (category in ('HORROR', 'COMEDY', 'FANTASY')),
-    version int8 not null,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-    last_modified_at TIMESTAMP WITH TIME ZONE NOT NULL
+    created_by VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE,
+    updated_by VARCHAR(255),
+    version int8 not null
 );
 
 CREATE TABLE IF NOT EXISTS authors (

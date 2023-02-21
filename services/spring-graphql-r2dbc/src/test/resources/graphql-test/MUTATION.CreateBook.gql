@@ -4,6 +4,8 @@ mutation CreateBook($input: CreateBookInput!) {
         title,
         category,
         createdAt,
-        lastModifiedAt
+        createdBy,
+        updatedAt,
+        updatedBy
     }
 }

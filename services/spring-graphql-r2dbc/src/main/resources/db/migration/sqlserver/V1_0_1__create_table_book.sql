@@ -10,9 +10,11 @@ CREATE TABLE books (
     pages DECIMAL(10),
 --     category ENUM('HORROR', 'COMEDY', 'FANTASY') NOT NULL,
     category varchar(255) check (category in ('HORROR', 'COMEDY', 'FANTASY')),
-    version int not null,
     created_at datetimeoffset NOT NULL,
-    last_modified_at datetimeoffset NOT NULL
+    created_by VARCHAR(255) NOT NULL,
+    updated_at datetimeoffset,
+    updated_by VARCHAR(255),
+    version int not null
 );
 
 CREATE TABLE authors (

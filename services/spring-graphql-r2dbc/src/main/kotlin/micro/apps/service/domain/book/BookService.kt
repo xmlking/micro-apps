@@ -1,9 +1,9 @@
 package micro.apps.service.domain.book
 
-import com.github.f4b6a3.uuid.UuidCreator
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import java.util.UUID
+// import com.github.f4b6a3.uuid.UuidCreator
 
 private val logger = KotlinLogging.logger {}
 
@@ -14,11 +14,11 @@ class BookService(private val bookRepository: BookRepository, private val author
     // @Transactional
     suspend fun createBook(input: CreateBookInput): Book {
         val book = bookRepository.save(
-            Book(id = UuidCreator.getTimeOrderedEpoch(), title = input.title, pages = input.pages, category = input.category)
+            Book(/*id = UuidCreator.getTimeOrderedEpoch(),*/ title = input.title, pages = input.pages, category = input.category)
         )
         logger.atDebug().addKeyValue("book", book).log("saved book")
         authorRepository.save(
-            Author(id = UuidCreator.getTimeOrderedEpoch(), name = input.author, age = 0, bookId = book.id)
+            Author(/*id = UuidCreator.getTimeOrderedEpoch(),*/ name = input.author, age = 0, bookId = book.id)
         )
         return book
     }

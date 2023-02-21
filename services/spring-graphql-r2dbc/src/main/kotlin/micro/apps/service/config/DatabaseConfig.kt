@@ -1,24 +1,33 @@
 package micro.apps.service.config
 
-// @Configuration
-// @EnableR2dbcRepositories
-// @EnableR2dbcAuditing
-// @EnableTransactionManagement
-class DatabaseConfig {
-//    @Bean
-//    fun transactionManager(connectionFactory: ConnectionFactory):
-//        ReactiveTransactionManager {
-//        return R2dbcTransactionManager(connectionFactory)
-//    }
+import kotlinx.coroutines.reactor.mono
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.data.domain.ReactiveAuditorAware
+import org.springframework.data.r2dbc.config.EnableR2dbcAuditing
+import org.springframework.security.core.context.ReactiveSecurityContextHolder
 
-//    @Bean
-//    fun initializer(connectionFactory: ConnectionFactory): ConnectionFactoryInitializer {
-//        val initializer = ConnectionFactoryInitializer()
-//        initializer.setConnectionFactory(connectionFactory)
-//        val populator = CompositeDatabasePopulator()
-//        populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("schema.sql")))
-//        populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("data.sql")))
-//        initializer.setDatabasePopulator(populator)
-//        return initializer
-//    }
+@Configuration
+// @EnableR2dbcRepositories
+// @EnableTransactionManagement
+@EnableR2dbcAuditing
+class DatabaseConfig {
+    /*
+    @Bean
+    fun transactionManager(connectionFactory: ConnectionFactory):
+        ReactiveTransactionManager {
+        return R2dbcTransactionManager(connectionFactory)
+    }
+    */
+
+    @Bean
+    fun reactiveAuditorAware(): ReactiveAuditorAware<String> {
+        return ReactiveAuditorAware<String> {
+            ReactiveSecurityContextHolder.getContext()
+                .map { it.authentication }
+                .filter { it.isAuthenticated }
+                .map { it.name }
+                .switchIfEmpty(mono { "anonymous" })
+        }
+    }
 }

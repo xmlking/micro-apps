@@ -81,3 +81,5 @@ gradle :services:spring-graphq-r2dbc:flywayRepair
 - [Spring Boot CodeGen GraphQL Gradle plugin](https://github.com/graphql-java-generator/graphql-maven-plugin-project/wiki/client_spring)
 - [GraphQL Kotlin](https://opensource.expediagroup.com/graphql-kotlin/docs)
 - [Managing flyway migrations using Placeholders in PostgreSQL/MySQL/H2 in Spring Boot](https://medium.com/@justdpk/managing-multiple-flyway-migrations-in-postgresql-mysql-h2-in-spring-boot-e790f07547b3)
+- [Spring R2dbc Example](https://github.com/hantsy/spring-r2dbc-sample)
+- [Data Auditing With Spring Data R2dbc](https://medium.com/swlh/data-auditing-with-spring-data-r2dbc-5d428fc94688)

@@ -15,11 +15,13 @@ extend type Subscription {
 type Book {
     id: UUID!
     title: String!
-    pages: Int
+    pages: Int!
     category: Category!
     author: String!
-    createdAt: LocalDateTime!
-    lastModifiedAt: LocalDateTime!
+    createdAt: LocalDateTime
+    createdBy: String
+    updatedAt: LocalDateTime
+    updatedBy: String
 }
 
 input CreateBookInput {

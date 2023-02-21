@@ -7,11 +7,13 @@ logging:
     org.hibernate.SQL: DEBUG
     org.springframework.graphql: DEBUG
     org.springframework.security: DEBUG
-    org.springframework.r2dbc: DEBUG
+    org.springframework.data.r2dbc: DEBUG
     io.r2dbc.h2.QUERY: DEBUG # for queries
     io.r2dbc.h2.PARAM: DEBUG # for parameters
     io.r2dbc.postgresql.QUERY: DEBUG # for queries
     io.r2dbc.postgresql.PARAM: DEBUG # for parameters
+    io.r2dbc.mssql.QUERY: DEBUG # for queries
+    io.r2dbc.mssql.PARAM: DEBUG # for parameters
 # ==================== management ==========================
 management:
   info:

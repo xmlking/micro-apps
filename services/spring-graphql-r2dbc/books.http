@@ -10,7 +10,9 @@ mutation CreateBook($newBook: CreateBookInput!) {
     title,
     category,
     createdAt,
-    lastModifiedAt
+    createdBy,
+    updatedAt,
+    updatedBy
   }
 }
 
@@ -38,7 +40,9 @@ query GetItem($id: UUID!) {
     title,
     category,
     createdAt,
-    lastModifiedAt
+    createdBy,
+    updatedAt,
+    updatedBy
   }
 }
 
