@@ -1,11 +1,14 @@
 # Micro Apps
 
-Modern microservices for Post-Kubernetes Era.
+Modern microservices for Post-Kubernetes Era. An open source framework for building and deploying distributed applications.  
+This template _monorepo_ style project allows you to write your application as a modular monolith and deploy it as a set of microservices.
 
-Monorepo(apps, libs) project to showcase workspace setup with multiple apps and shared libraries
+Monorepo(services, pipelines and libs) project to showcase workspace setup with multiple apps and shared libraries  
+This template project has the best of both worlds: _the development velocity of a monolith, with the scalability, security, and fault-tolerance of microservices._
 
 ## Features
 
+1. Modular-monolith distributed applications
 1. **Polyglot** - Support multiple languages (java, kotlin, groovy)
 2. Support multiple app frameworks (apache-beam, cli, micronaut, quarkus)
 3. Support multiple serialization methods (JSON, Avro, ProtoBuf)
@@ -211,3 +214,4 @@ See [gradle commands](docs/advanced/gradle.md) for this project.
 * Why is a [workspace](https://nrwl.io/nx/why-a-workspace) (or monorepo) needed?
 * Gradle Setup [arara](https://github.com/cereda/arara)
 * GoogleCloudPlatform's [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo)
+* Google Service Weaver: [A Framework for Writing Distributed Applications](https://opensource.googleblog.com/2023/03/introducing-service-weaver-framework-for-writing-distributed-applications.html)
