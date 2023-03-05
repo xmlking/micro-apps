@@ -26,7 +26,7 @@ dependencies {
 
     // java faker for data generation FIXME https://github.com/DiUS/java-faker/issues/327
     implementation("com.github.javafaker:javafaker:$javaFakerVersion") { exclude(module = "org.yaml") }
-    implementation("org.yaml:snakeyaml:1.33")
+    implementation("org.yaml:snakeyaml:2.0")
 
     // spring-cloud bom
     implementation(enforcedPlatform(libs.spring.cloud.bom.get().toString()))
