@@ -29,7 +29,7 @@ dependencies {
     api(libs.spring.boot.starter.validation)
     // Redis
     // implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
-    implementation("com.redis.om:redis-om-spring:0.8.0-SNAPSHOT")
+    implementation("com.redis.om:redis-om-spring:0.8.0")
 
     // DevTools
     annotationProcessor(libs.spring.boot.configuration.processor)
