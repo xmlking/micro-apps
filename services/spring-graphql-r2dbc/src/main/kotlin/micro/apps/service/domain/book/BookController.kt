@@ -1,8 +1,29 @@
 package micro.apps.service.domain.book
 
+import kotlinx.coroutines.channels.BufferOverflow.DROP_OLDEST
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.reactive.asPublisher
+import mu.KotlinLogging
+import org.reactivestreams.Publisher
+import org.springframework.graphql.data.method.annotation.Argument
+import org.springframework.graphql.data.method.annotation.MutationMapping
+import org.springframework.graphql.data.method.annotation.QueryMapping
+import org.springframework.graphql.data.method.annotation.SubscriptionMapping
+import org.springframework.stereotype.Controller
+import java.security.Principal
+import java.util.UUID
+
+private val logger = KotlinLogging.logger {}
+
 @Controller
 class BookController(private val bookService: BookService) {
-    private val _events = MutableSharedFlow<Book>(1, 10) // private mutable shared flow
+    private val _events = MutableSharedFlow<Book>( // private mutable shared flow
+        replay = 1,
+        extraBufferCapacity = 10,
+        onBufferOverflow = DROP_OLDEST
+    )
     val events = _events.asSharedFlow() // publicly exposed as read-only shared flow
 
     // private val sink1 = Sinks.many().replay().limit<Book>(10, Duration.ofSeconds(2))
@@ -28,14 +49,15 @@ class BookController(private val bookService: BookService) {
 
     // --- Subscriptions ---
     @SubscriptionMapping
-    fun bookStream(principal: Principal): Publisher<Book> {
-        logger.atDebug().log("called bookStream subscription, principal: {}", principal.name)
-        return events.asPublisher()
+    fun bookStream(@Argument category: Category, principal: Principal): Publisher<Book> {
+        logger.atDebug().log("bookStream subscription called,category: {} principal: {}", category, principal.name)
+        return events.filter { it.category == category } .asPublisher()
+        // return events.asPublisher()
     }
 
     /*
     @SubscriptionMapping
-    fun bookStream(@Argument count: Int, @AuthenticationPrincipal jwt: Jwt): Publisher<Book> {
+    fun bookAdded(@Argument category: Category, @AuthenticationPrincipal jwt: Jwt): Publisher<Book> {
         logger.atDebug().log("called messages subscription, jwt: {}", jwt)
         return sink.asFlux()
             .cache()

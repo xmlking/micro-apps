@@ -57,8 +57,8 @@ GRAPHQL ws://localhost:8080/graphql
 Authorization: Basic admin nimda
 Content-Type: application/json
 
-subscription BookStream {
-  bookStream {
+subscription BookStream($category: Category) {
+  bookStream(category: $category) {
     id,
     title,
     category,
@@ -67,4 +67,8 @@ subscription BookStream {
     updatedAt,
     updatedBy
   }
+}
+
+{
+    "category": "COMEDY"
 }

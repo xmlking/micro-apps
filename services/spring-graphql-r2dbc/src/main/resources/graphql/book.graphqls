@@ -8,7 +8,7 @@ extend type Mutation {
 }
 
 extend type Subscription {
-    bookStream: Book!
+    bookStream(category: Category): Book!
 }
 
 
