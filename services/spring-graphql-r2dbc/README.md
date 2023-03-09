@@ -36,11 +36,7 @@ Login: admin : nimda
 }
 ```
 
-### GraphQL H2 Console
-
-open http://localhost:8080/h2-console
-
-Login: admin : nimda
+### HealthChecks
 
 ```shell
 http :8080/actuator/info
@@ -53,8 +49,7 @@ http -a actuator:rotautca :8080/actuator/metrics/jvm.info
 http -a actuator:rotautca :8080/actuator/flyway
 http -a actuator:rotautca :8080/actuator/env
 ```
-
-## Test
+### Unit Test
 
 ```shell
 gradle :services:spring-graphq-r2dbc:test
@@ -83,3 +78,6 @@ gradle :services:spring-graphq-r2dbc:flywayRepair
 - [Managing flyway migrations using Placeholders in PostgreSQL/MySQL/H2 in Spring Boot](https://medium.com/@justdpk/managing-multiple-flyway-migrations-in-postgresql-mysql-h2-in-spring-boot-e790f07547b3)
 - [Spring R2dbc Example](https://github.com/hantsy/spring-r2dbc-sample)
 - [Data Auditing With Spring Data R2dbc](https://medium.com/swlh/data-auditing-with-spring-data-r2dbc-5d428fc94688)
+- [graphql-kafka-subscriptions](https://github.com/ancashoria/graphql-kafka-subscriptions)
+- [Using Kafka and Debezium for GraphQL Subscriptions](https://github.com/nilshartmann/spring-graphql-debezium-subscriptions), [Talk](https://graphql.schule/galaxy-2022)
+- [Using Project Reactor to Build a GraphQL Subscription and Hook it with Redis for Distributed Computing](https://tanzu.vmware.com/developer/guides/project-reactor-build-graphql-subscription-with-redis/)

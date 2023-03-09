@@ -19,6 +19,11 @@ management:
   info:
     env:
       enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
   endpoint:
     health:
       show-details: always

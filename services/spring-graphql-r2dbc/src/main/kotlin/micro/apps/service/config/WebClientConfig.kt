@@ -5,6 +5,7 @@ import org.springframework.boot.web.reactive.function.client.WebClientCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import org.springframework.graphql.client.HttpGraphQlClient
 import org.springframework.web.reactive.function.client.ExchangeStrategies
 import org.springframework.web.reactive.function.client.WebClient
 
@@ -25,6 +26,12 @@ class WebClientConfig {
     @ConditionalOnMissingBean
     fun webClient(builder: WebClient.Builder): WebClient {
         return builder.build()
+    }
+
+    @Bean(name = ["gqlClient"])
+    fun httpGraphQlClientBuilder(webClientBuilder: WebClient.Builder): HttpGraphQlClient.Builder<*> {
+        val webClient = webClientBuilder.build()
+        return HttpGraphQlClient.builder(webClient)
     }
 
     @Bean

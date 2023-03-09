@@ -1,26 +1,12 @@
 package micro.apps.service.domain.book
 
-import com.github.f4b6a3.uuid.UuidCreator
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.buffer
-import kotlinx.coroutines.flow.cancellable
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.reactive.asPublisher
-import mu.KotlinLogging
-import org.reactivestreams.Publisher
-import org.springframework.graphql.data.method.annotation.Argument
-import org.springframework.graphql.data.method.annotation.MutationMapping
-import org.springframework.graphql.data.method.annotation.QueryMapping
-import org.springframework.graphql.data.method.annotation.SubscriptionMapping
-import org.springframework.security.core.annotation.AuthenticationPrincipal
-import org.springframework.security.oauth2.jwt.Jwt
-import org.springframework.stereotype.Controller
-import java.util.UUID
-
-private val logger = KotlinLogging.logger {}
-
 @Controller
 class BookController(private val bookService: BookService) {
+    private val _events = MutableSharedFlow<Book>(1, 10) // private mutable shared flow
+    val events = _events.asSharedFlow() // publicly exposed as read-only shared flow
+
+    // private val sink1 = Sinks.many().replay().limit<Book>(10, Duration.ofSeconds(2))
+    // private val sink = Sinks.many().multicast().onBackpressureBuffer<Book>(20)
 
     // --- Queries ---
     @QueryMapping
@@ -36,19 +22,25 @@ class BookController(private val bookService: BookService) {
     @MutationMapping
     suspend fun createBook(@Argument input: CreateBookInput): Book {
         logger.atDebug().addKeyValue("input", input).log("create book")
-        return bookService.createBook(input)
+        return bookService.createBook(input).also { _events.emit(it) }
+        // return bookService.createBook(input).also { sink.emitNext(book, Sinks.EmitFailureHandler.FAIL_FAST)  } // tryEmitNext
     }
 
     // --- Subscriptions ---
     @SubscriptionMapping
+    fun bookStream(principal: Principal): Publisher<Book> {
+        logger.atDebug().log("called bookStream subscription, principal: {}", principal.name)
+        return events.asPublisher()
+    }
+
+    /*
+    @SubscriptionMapping
     fun bookStream(@Argument count: Int, @AuthenticationPrincipal jwt: Jwt): Publisher<Book> {
         logger.atDebug().log("called messages subscription, jwt: {}", jwt)
-        return flow {
-            emit(Book(id = UuidCreator.getTimeOrderedEpoch(), title = "sumo", pages = 99, category = Category.FANTASY))
-            for (n in count downTo 1) {
-                delay(5000)
-                emit(Book(id = UuidCreator.getTimeOrderedEpoch(), title = "sumo", pages = 99, category = Category.FANTASY))
-            }
-        }.cancellable().buffer().asPublisher()
+        return sink.asFlux()
+            .cache()
+            .doOnComplete { logger.info("Stream completed") }
+            .doOnError { logger.error("Something when wrong with the stream", it) }
     }
+    */
 }

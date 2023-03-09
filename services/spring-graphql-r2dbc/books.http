@@ -49,3 +49,22 @@ query GetItem($id: UUID!) {
 {
     "id": "{{book_id}}"
 }
+
+### Stream books
+// WebSockets are handy for GraphQL subscriptions
+GRAPHQL ws://localhost:8080/graphql
+#Authorization: Bearer {{token}}
+Authorization: Basic admin nimda
+Content-Type: application/json
+
+subscription BookStream {
+  bookStream {
+    id,
+    title,
+    category,
+    createdAt,
+    createdBy,
+    updatedAt,
+    updatedBy
+  }
+}
