@@ -48,6 +48,7 @@ include(
     ":services:spring-graphql-jpa",
     ":services:spring-graphql-r2dbc",
     ":services:spring-graphql-redis",
+    ":services:spring-kafka-functions",
 
     ":pipelines:classifier",
     ":pipelines:ingestion",

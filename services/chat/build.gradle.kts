@@ -20,7 +20,7 @@ dependencies {
 
     implementation(libs.database.r2dbc.h2)
     // FIXME https://docs.uptrace.dev/guide/java.html#introduction
-    implementation(libs.snakeyaml)
+    // implementation(libs.snakeyaml)
 
 //    implementation(libs.jackson.module.kotlin)
     implementation(libs.kotlinx.serialization.json)

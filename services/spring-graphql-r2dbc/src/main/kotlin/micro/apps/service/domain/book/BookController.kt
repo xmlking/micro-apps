@@ -51,7 +51,7 @@ class BookController(private val bookService: BookService) {
     @SubscriptionMapping
     fun bookStream(@Argument category: Category, principal: Principal): Publisher<Book> {
         logger.atDebug().log("bookStream subscription called,category: {} principal: {}", category, principal.name)
-        return events.filter { it.category == category } .asPublisher()
+        return events.filter { it.category == category }.asPublisher()
         // return events.asPublisher()
     }
 

@@ -1,0 +1,16 @@
+# ========================== server ==========================
+spring:
+
+# ========================== kafka ===========================
+  kafka:
+    properties:
+      # Broker
+      bootstrap.servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: ${SASL_JAAS_CONFIG_PROPERTY_FORMAT:org.apache.kafka.common.security.plain.PlainLoginModule   required username='blah'   password='blah'}"
+      security.protocol: SASL_SSL
+      # Schema Registry
+      basic.auth.credentials.source: USER_INFO
+      schema.registry.basic.auth.user.info: ${SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO}
+      schema.registry.url: ${SCHEMA_REGISTRY_URL:https://schema-registry:8081}
+

@@ -1,0 +1,91 @@
+server:
+  shutdown: graceful # also set `timeout-per-shutdown-phase`
+# ==================== logging ============================
+logging:
+  level:
+    micro.apps.service: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.springframework.graphql: DEBUG
+    org.springframework.security: DEBUG
+# ==================== management ==========================
+management:
+  info:
+    env:
+      enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,prometheus,bindings,kafkastreamstopology
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+# ==================== spring ==============================
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: "10s"
+
+# ========================== kafka ===========================
+  kafka:
+    properties:
+      # Broker
+      bootstrap.servers: localhost:9092
+      # Schema Registry
+      schema.registry.url: http://localhost:8081
+
+# ================= spring-cloud-functions ===================
+spring.cloud.function:
+  definition: generate;city;state;print
+
+# ================= spring-cloud-stream ======================
+spring.cloud.stream:
+  bindings:
+    generate-out-0:
+      destination: all-in-topic
+      producer.useNativeEncoding: true
+    city-in-0.destination: all-in-topic
+    city-out-0.destination: city-out-topic
+    state-in-0.destination: all-in-topic
+    state-out-0.destination: state-out-topic
+    print-in-0.destination: city-out-topic,state-out-topic
+
+# =========== spring-cloud-stream kafka-binder================
+# default producer config for all kafka binder bindings.
+  kafka.binder:
+    producer-properties:
+      record.packages: micro.apps.service
+      key.serializer: org.apache.kafka.common.serialization.StringSerializer
+      value.serializer: com.github.thake.kafka.avro4k.serializer.KafkaAvro4kSerializer
+
+
+# ============ spring-cloud-stream kstreams-binder============
+  kafka.streams.binder:
+    deserialization-exception-handler: logAndContinue
+    configuration:
+      record.packages: micro.apps.service
+      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      default.value.serde: com.github.thake.kafka.avro4k.serializer.Avro4kSerde
+
+# ====================security=================================
+
+# ====================devtools=================================
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: false
+
+# ==================== application properties  =============
+feature:
+  postMvp:
+    enabled: false
