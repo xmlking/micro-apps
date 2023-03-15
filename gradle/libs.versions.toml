@@ -103,7 +103,7 @@ avro = "1.11.1"
 # spring
 springKotest = "1.1.2"
 springMockk = "4.0.2"
-snakeyaml = "2.0"
+snakeyaml = "1.33"
 springGrpc = "5.0.0"
 springCloud = "2022.0.1"
 springCloudGcp = "4.0.0"

@@ -178,6 +178,7 @@ subprojects {
     if (this.name !in excludedProjects) {
         version = rootProject.version
         apply {
+            // plugin("java-conventions")
             plugin(rootProject.project.libs.plugins.kotlin.jvm.get().pluginId)
             plugin("maven-publish")
             plugin(rootProject.project.libs.plugins.gradle.spotless.get().pluginId)
