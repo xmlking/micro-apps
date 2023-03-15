@@ -6,7 +6,7 @@ lombok-plugin = "6.6.3"
 kover = "0.6.1"
 spotless = "6.17.0"
 versions = "0.46.0"
-update = "0.7.0"
+update = "0.8.0"
 release = "1.14.4"
 shadow = "8.1.0"
 jib = "3.3.1"
@@ -135,7 +135,7 @@ otel-instrumentation  = "1.23.0"
 otel-instrumentation-alpha  = "1.23.0"
 otel-instrumentation-snapshot  = "1.24.0-SNAPSHOT"
 otel-instrumentation-snapshot-alpha  = "1.24.0-alpha-SNAPSHOT"
-micrometer = "1.10.4"
+micrometer = "1.10.5"
 
 [libraries]
 uuid = { module = "com.github.f4b6a3:uuid-creator", version.ref = "uuid" }
