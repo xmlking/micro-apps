@@ -13,12 +13,28 @@ management:
   info:
     env:
       enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
   endpoints:
     web:
       exposure:
         include: health,info,metrics,env,prometheus,flyway
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 # ==================== spring ==============================
 spring:
+#  main:
+#    allow-bean-definition-overriding: true
   config:
     import: optional:file:.env[.properties]
   graphql:
@@ -29,7 +45,7 @@ spring:
       printer:
         enabled: true
       introspection:
-        enabled: false
+        enabled: true
       locations:
         - classpath*:graphql/**/
     graphiql:

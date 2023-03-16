@@ -51,7 +51,7 @@ spring:
       printer:
         enabled: true
       introspection:
-        enabled: false
+        enabled: true
       locations:
         - classpath*:graphql/**/
     graphiql:

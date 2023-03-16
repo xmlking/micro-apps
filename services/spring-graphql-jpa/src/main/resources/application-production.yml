@@ -6,7 +6,6 @@ logging:
 # ==================== spring ==============================
 spring:
   graphql:
-    path: /graphql
     schema:
       printer:
         enabled: true

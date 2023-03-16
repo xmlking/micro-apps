@@ -1,12 +1,16 @@
 package micro.apps.service.domain.item
 
+import com.querydsl.core.types.OrderSpecifier
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import kotlinx.coroutines.flow.toList
 import mu.KotlinLogging
+import org.springframework.data.domain.Sort
 import org.springframework.data.querydsl.QuerydslPredicateExecutor
 import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.graphql.data.GraphQlRepository
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping
@@ -14,18 +18,13 @@ import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.annotation.Transactional
 
+
 @Entity
 data class Item(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val name: String,
     val description: String?
-//    @Column("created_at")
-//    @CreatedDate
-//    var createdAt: LocalDateTime = LocalDateTime.now(),
-//    @LastModifiedDate
-//    @Column("last_modified_at")
-//    var lastModifiedAt: LocalDateTime? = LocalDateTime.now()
 )
 
 data class ItemInput(
@@ -36,7 +35,7 @@ data class ItemInput(
 }
 
 @GraphQlRepository
-interface ItemRepository : CrudRepository<Item, Long>, QuerydslPredicateExecutor<Item>
+interface ItemRepository : CrudRepository<Item, Long>, PagingAndSortingRepository<Item, Long>, QuerydslPredicateExecutor<Item>
 
 // @GraphQlRepository
 // interface ItemRepository : PagingAndSortingRepository<Item, Long>, QuerydslPredicateExecutor<Item> {
@@ -54,6 +53,14 @@ class ItemController(private val itemRepository: ItemRepository) {
     fun listItems(): Iterable<Item> {
         logger.atDebug().log("listing items")
         return itemRepository.findAll()
+    }
+
+    @QueryMapping
+     fun findAll(@Argument offset: Int = 0, @Argument limit: Int = 100, @Argument orderBy: String = "name"): List<Item> {
+        // val pageRequest = PageRequest.of(offset, limit, Sort.by(Sort.Direction.ASC, orderBy))
+        // val content = itemRepository.findAll(pageRequest)
+        // return PageImpl(content.toList(), pageRequest, itemRepository.count())
+        return itemRepository.findAll(Sort.by(Sort.Direction.ASC, orderBy)).toList()
     }
 
     // --- Association ---
