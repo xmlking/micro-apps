@@ -11,6 +11,7 @@ import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping
+import org.springframework.graphql.data.method.annotation.SchemaMapping
 import org.springframework.stereotype.Controller
 import java.security.Principal
 import java.util.UUID
@@ -31,10 +32,16 @@ class BookController(private val bookService: BookService) {
 
     // --- Queries ---
     @QueryMapping
-    suspend fun getBook(@Argument id: UUID): Book? {
-        val book = bookService.getBook(id)
-        logger.atDebug().log("get book: {}", book)
+    suspend fun bookById(@Argument id: UUID): Book? {
+        val book = bookService.bookById(id)
+        logger.atDebug().log("get bookById: {}", book)
         return book
+    }
+
+    // --- SchemaMapping ---
+    @SchemaMapping
+    suspend fun author(book: Book): Author? {
+        return book.id?.let { bookService.authorByBookId(it) }
     }
 
     // --- Associations ---

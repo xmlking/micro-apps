@@ -96,6 +96,8 @@ spring:
       type_serial: "SERIAL"
 
   devtools:
+    restart:
+      enabled: true
     livereload:
       enabled: false
 

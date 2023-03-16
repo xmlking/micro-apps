@@ -1,5 +1,5 @@
 extend type Query {
-    getBook(id: UUID!): Book
+    bookById(id: UUID!): Book
 }
 
 extend type Mutation {
@@ -17,11 +17,17 @@ type Book {
     title: String!
     pages: Int!
     category: Category!
-    author: String!
+    author: Author
     createdAt: LocalDateTime
     createdBy: String
     updatedAt: LocalDateTime
     updatedBy: String
+}
+
+type Author {
+    id: UUID!
+    name: String!
+    age: Int
 }
 
 input CreateBookInput {

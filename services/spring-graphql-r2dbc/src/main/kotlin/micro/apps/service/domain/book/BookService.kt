@@ -31,7 +31,11 @@ class BookService(private val bookRepository: BookRepository, private val author
 
     // FIXME after: https://github.com/spring-projects/spring-framework/issues/29829
     // @Transactional(readOnly = true)
-    suspend fun getBook(id: UUID): Book? {
+    suspend fun bookById(id: UUID): Book? {
         return bookRepository.findById(id)
+    }
+
+    suspend fun authorByBookId(bookId: UUID): Author? {
+        return authorRepository.findAuthorByBookId(bookId)
     }
 }

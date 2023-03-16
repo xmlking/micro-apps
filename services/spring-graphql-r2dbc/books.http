@@ -2,16 +2,21 @@
 GRAPHQL http://localhost:8080/graphql
 #Authorization: Bearer {{token}}
 Authorization: Basic admin nimda
+#Authorization: Basic user resu
 Content-Type: application/json
 
 mutation CreateBook($newBook: CreateBookInput!) {
   createBook(input: $newBook) {
-    id,
-    title,
-    category,
-    createdAt,
-    createdBy,
-    updatedAt,
+    id
+    title
+    category
+    author {
+      id
+      name
+    }
+    createdAt
+    createdBy
+    updatedAt
     updatedBy
   }
 }
@@ -34,15 +39,20 @@ GRAPHQL http://localhost:8080/graphql
 Authorization: Basic admin nimda
 Content-Type: application/json
 
-query GetItem($id: UUID!) {
-  getBook(id: $id) {
-    id,
-    title,
-    category,
-    createdAt,
-    createdBy,
-    updatedAt,
+query BookById($id: UUID!) {
+  bookById(id: $id) {
+    id
+    title
+    category
+    createdAt
+    createdBy
+    updatedAt
     updatedBy
+    author {
+      id
+      name
+      age
+    }
   }
 }
 
@@ -59,12 +69,15 @@ Content-Type: application/json
 
 subscription BookStream($category: Category) {
   bookStream(category: $category) {
-    id,
-    title,
-    category,
-    createdAt,
-    createdBy,
-    updatedAt,
+    id
+    title
+    category
+    author {
+      name
+    }
+    createdAt
+    createdBy
+    updatedAt
     updatedBy
   }
 }

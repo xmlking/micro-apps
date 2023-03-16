@@ -187,6 +187,7 @@ spring-boot-starter-rsocket = { module = "org.springframework.boot:spring-boot-s
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
 spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
 spring-boot-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+spring-boot-reactor-kafka = { module = "io.projectreactor.kafka:reactor-kafka" }
 
 spring-boot-starter-graphql = { module = "org.springframework.boot:spring-boot-starter-graphql" }
 spring-boot-starter-validation  = { module = "org.springframework.boot:spring-boot-starter-validation" }

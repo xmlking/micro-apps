@@ -6,4 +6,6 @@ import org.springframework.graphql.data.GraphQlRepository
 import java.util.UUID
 
 @GraphQlRepository
-interface AuthorRepository : CoroutineCrudRepository<Author, UUID>, CoroutineSortingRepository<Author, UUID>
+interface AuthorRepository : CoroutineCrudRepository<Author, UUID>, CoroutineSortingRepository<Author, UUID> {
+    suspend fun findAuthorByBookId(id: UUID): Author
+}
