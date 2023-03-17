@@ -1,5 +1,6 @@
 package micro.apps.service.domain.book
 
+import com.github.f4b6a3.uuid.UuidCreator
 import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
@@ -13,7 +14,14 @@ import java.util.UUID
 
 @Table("books")
 data class Book(
-    @Id val id: UUID? = null,
+    // setting id = null, lets database set UUID if supported.
+    // @Id val id: UUID? = null,
+    /**
+     * Having application generated ids means the id is known even before the entity is persisted.
+     * This lets us model our entities as immutable objects and we avoid having to handle null values on the id
+     * https://jivimberg.io/blog/2018/11/05/using-uuid-on-spring-data-jpa-entities/
+     */
+    @Id val id: UUID = UuidCreator.getTimeOrderedEpoch(),
     val title: String,
     val pages: Int,
     val category: Category,
@@ -42,7 +50,7 @@ enum class Category {
 
 @Table("authors")
 data class Author(
-    @Id val id: UUID? = null,
+    @Id val id: UUID = UuidCreator.getTimeOrderedEpoch(),
     val name: String,
     val age: Int?,
     @Column("book_id")

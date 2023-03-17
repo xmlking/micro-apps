@@ -1,5 +1,7 @@
 extend type Query {
     bookById(id: UUID!): Book
+    bookByTitle(title: String!): Book
+    books : [Book!]
 }
 
 extend type Mutation {

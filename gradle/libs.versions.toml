@@ -188,6 +188,7 @@ spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
 spring-boot-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
 spring-boot-reactor-kafka = { module = "io.projectreactor.kafka:reactor-kafka" }
+spring-boot-kafka = { module = "org.springframework.kafka:spring-kafka" }
 
 spring-boot-starter-graphql = { module = "org.springframework.boot:spring-boot-starter-graphql" }
 spring-boot-starter-validation  = { module = "org.springframework.boot:spring-boot-starter-validation" }
@@ -354,6 +355,7 @@ spring-boot-mockk-test = { module = "com.ninja-squad:springmockk", version.ref =
 spring-boot-reactor-test = { module = "io.projectreactor:reactor-test" }
 spring-boot-graphql-test = { module = "org.springframework.graphql:spring-graphql-test" }
 spring-boot-security-test = { module = "org.springframework.security:spring-security-test" }
+spring-boot-kafka-test = { module = "org.springframework.kafka:spring-kafka-test" }
 turbine-test = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 junit4-test = { module = "junit:junit", version.ref = "junit4" }
 spring-boot-flyway-test = { module = "org.flywaydb.flyway-test-extensions:flyway-spring-test", version.ref = "flywayTest" }
