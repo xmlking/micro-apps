@@ -7,7 +7,7 @@ dependencies {
     implementation("com.google.crypto.tink:tink-gcpkms:$tinkVersion")
     // implementation("com.google.crypto.tink:tink-awskms:$tinkVersion")
     // FIXME: temp workaround https://github.com/google/tink/issues/549
-    implementation("com.google.http-client:google-http-client-jackson2:1.42.3")
+    implementation("com.google.http-client:google-http-client-jackson2:1.43.1")
 
     // Testing
     testImplementation(testFixtures(projects.libs.test))
