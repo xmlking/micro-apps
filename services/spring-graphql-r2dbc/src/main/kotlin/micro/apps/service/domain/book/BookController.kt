@@ -41,7 +41,7 @@ class BookController(private val bookService: BookService) {
     // --- SchemaMapping ---
     @SchemaMapping
     suspend fun author(book: Book): Author? {
-        return book.id?.let { bookService.authorByBookId(it) }
+        return book.id.let { bookService.authorByBookId(it) }
     }
 
     // --- Associations ---
