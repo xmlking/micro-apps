@@ -17,7 +17,7 @@ pluginManagement {
         dependencies {
             classpath("org.eclipse.jgit:org.eclipse.jgit:5.13.1.202206130422-r")
             // For mssql, flyway gradle plugin need driver in `settings.gradle.kts` buildscript
-            classpath("org.flywaydb:flyway-sqlserver:9.14.1")
+            classpath("org.flywaydb:flyway-sqlserver:9.16.3")
         }
         configurations.classpath {
             resolutionStrategy {
