@@ -1,3 +1,5 @@
+description = "Core Lib module"
+
 // Test
 dependencies {
     // Testing

@@ -18,7 +18,7 @@ class BookService(private val bookRepository: BookRepository, private val author
         )
         logger.atDebug().addKeyValue("book", book).log("saved book")
         authorRepository.save(
-            Author( name = input.author, age = 0, bookId = book.id)
+            Author(name = input.author, age = 0, bookId = book.id)
         )
         return book
     }

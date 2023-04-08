@@ -22,7 +22,7 @@ testing {
             targets {
                 all {
                     testTask.configure {
-                        // select test framework before configuring options
+                        // select test framework before configuring optionsa
                         useJUnitPlatform {
                             excludeTags("slow", "integration")
                         }

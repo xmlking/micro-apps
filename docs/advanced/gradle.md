@@ -16,7 +16,7 @@
 
 > first time generating a new library project
 
-```bash
+```shell
 gradle init --type kotlin-library --dsl kotlin
 ```
 
@@ -28,7 +28,7 @@ Check Task Dependencies With a Dry Run with dryRun: -m or --dry-run i.e., `gradl
 
 > display computed version
 
-```bash
+```shell
 gradle cV
 gradle currentVersion
 # to get version # as plain text
@@ -38,7 +38,7 @@ echo $VERSION
 
 ### Verification
 
-```bash
+```shell
 gradle test
 gradle jacocoTestReport
 gradle jacocoTestCoverageVerification
@@ -47,11 +47,26 @@ gradle check
 gradle sonarqube
 ```
 
+#### Benchmark
+
+Using [kotlinx-benchmark](https://github.com/Kotlin/kotlinx-benchmark)
+
+Benchmark tasks
+```shell
+gradle assembleBenchmarks - Generate and build all benchmarks in a project
+gradle benchmark - Execute all benchmarks in a project
+gradle benchmarksBenchmark - Execute benchmark for 'benchmarks'
+gradle benchmarksBenchmarkCompile - Compile JMH source files for 'benchmarks'
+gradle benchmarksBenchmarkGenerate - Generate JMH source files for 'benchmarks'
+gradle benchmarksBenchmarkJar - Build JAR for JMH compiled files for 'benchmarks'
+```
+
+
 #### dependency-check
 
 Software Composition Analysis (SCA) tool that attempts to detect publicly disclosed vulnerabilities contained within a project’s dependencies.
 
-```bash
+```shell
 gradle dependencyCheckAggregate
 ```
 
@@ -61,7 +76,7 @@ gradle dependencyCheckAggregate
 
 Note: _Cross-module tests are not supported in reports and validation yet. For each test, only the classpath belonging to the current module is taken._
 
-```bash
+```shell
 gradle koverMergedReport -x test # Generates code coverage report for all enabled test tasks in all projects.
 gradle koverMergedVerify # Verifies code coverage metrics of all projects based on specified rules. Always executes before `check` task.
 gradle koverReport # Executes both koverXmlReport and koverHtmlReport tasks for one project.
@@ -70,7 +85,7 @@ gradle koverVerify # Verifies code coverage metrics of one project based on spec
 
 ### Spotless tasks
 
-```bash
+```shell
 # spotlessCheck - Checks that sourcecode satisfies formatting steps.
 gradle spotlessCheck
 # spotlessApply - Applies code formatting steps to sourcecode in-place.
@@ -79,7 +94,7 @@ gradle spotlessApply
 
 ### Quarkus tasks
 
-```bash
+```shell
 # addExtension - Adds Quarkus extensions specified by the user to the project.
 gradle :services:greeting:addExtension --extensions="health,metrics,openapi"
 gradle :services:greeting:addExtension --extensions="hibernate-validator"
@@ -123,7 +138,7 @@ Without this you may see an error like the following: `No database found to hand
 ### Docker Compose
 
 start/stop dependent services for your app
-```bash
+```shell
 # start local redis
 gradle redisComposeUp
 # stop local redis before restart again
@@ -140,7 +155,7 @@ The detector allows for three options for affected modules:
 - **Dependent Projects:** These are projects which are dependent on projects which had changes within them enabled with `-Paffected_module_detector.dependentProjects`)
 - **All Affected Projects:** This is the union of Changed Projects and Dependent Projects (this is the default configuration)
 
-```bash
+```shell
 # Running All Affected Projects (Changed Projects + Dependent Projects)
 gradle runAffectedUnitTests -Paffected_module_detector.enable
 # Running All Changed Projects
@@ -158,7 +173,7 @@ gradle assembleAffectedAndroidTests -Paffected_module_detector.enable
 
 > build jar
 
-```bash
+```shell
 gradle build
 gradle build -x test
 # overriding version
@@ -167,7 +182,7 @@ gradle build -Prelease.forceVersion=3.0.0
 
 ### Run
 
-```bash
+```shell
 gradle run
 ```
 
@@ -175,7 +190,7 @@ gradle run
 
 > https://github.com/Kotlin/dokka/blob/master/docs/src/doc/docs/user_guide/gradle/usage.md
 
-```bash
+```shell
 gradle dokkaHtmlMultimodule -Dorg.gradle.jvmargs="-Xmx4096m -XX:MaxMetaspaceSize=512m"
 gradle dokkaHtmlMultimodule
 gradle dokkaHtml
@@ -185,7 +200,7 @@ gradle dokkaHtml
 
 > bump git Tag and Push
 
-```bash
+```shell
 # dryRun
 gradle release -Prelease.dryRun
 # disable all checks for current release
@@ -205,7 +220,7 @@ gradle markNextVersion  -Prelease.disableChecks -Prelease.incrementer=incrementM
 
 > With every release, run `git-chglog`
 
-```bash
+```shell
 # first time
 git-chglog --init
 # on release branch, generate CHANGELOG.md and commit before merging back to develop & main.
@@ -213,7 +228,7 @@ git-chglog -c .github/chglog/config.yml -o CHANGELOG.md
 git-chglog -c .github/chglog/config.yml -o CHANGELOG.md --next-tag 2.0.0
 ```
 
-```bash
+```shell
 # prints the last published version and calculated next version
 gradle changelogPrint
 # throws an error if the changelog is not formatted according to your rules
@@ -231,7 +246,7 @@ gradle changelogPush
 
 > publish after release
 
-```bash
+```shell
 gradle publish
 # skip tests in CI
 gradle publish -x test --profile
@@ -244,7 +259,7 @@ CI=true GITHUB_USER=xmlking GITHUB_TOKEN=<GITHUB_PACKAGES_TOKEN> gradle publish
 
 ### Docker
 
-```bash
+```shell
 # Build an image tarball,
 # then you can load with `docker load --input build/jib-image.tar`
 gradle jibBuildTar
@@ -258,7 +273,7 @@ gradle jibDockerBuild
 
 pull a remote image and locally use it as base image
 
-```bash
+```shell
 # pull base image first
 docker pull gcr.io/distroless/java:11
 # use local docker image as base, build image only (on publish)
@@ -271,7 +286,7 @@ docker run -it xmlking/micro-apps-demo:1.6.5-SNAPSHOT
 
 This use [versions plugin](https://github.com/ben-manes/gradle-versions-plugin) and [version-catalog-update-plugin](https://github.com/littlerobots/version-catalog-update-plugin)
 
-```bash
+```shell
 # Report dependencies
 gradle dependencyUpdates -Drevision=release -DoutputFormatter=json,xml
 # Update dependencies, `dependsOn dependencyUpdates`
@@ -285,7 +300,7 @@ gradle versionCatalogUpdate --interactive
 
 ### Gradle
 
-```bash
+```shell
 # upgrade gradlew
 # upgrade project gradle version
 gradle wrapper --distribution-type all
@@ -309,7 +324,7 @@ gradle cV
 
 Remove a local built dependency from local-maven-repository
 
-```bash
+```shell
 mvn dependency:purge-local-repository -DmanualInclude="com.redis.om:redis-om-spring"
 ```
 

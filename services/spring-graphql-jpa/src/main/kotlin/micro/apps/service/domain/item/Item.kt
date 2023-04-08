@@ -1,6 +1,5 @@
 package micro.apps.service.domain.item
 
-import com.querydsl.core.types.OrderSpecifier
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -17,7 +16,6 @@ import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.annotation.Transactional
-
 
 @Entity
 data class Item(
@@ -56,7 +54,7 @@ class ItemController(private val itemRepository: ItemRepository) {
     }
 
     @QueryMapping
-     fun findAll(@Argument offset: Int = 0, @Argument limit: Int = 100, @Argument orderBy: String = "name"): List<Item> {
+    fun findAll(@Argument offset: Int = 0, @Argument limit: Int = 100, @Argument orderBy: String = "name"): List<Item> {
         // val pageRequest = PageRequest.of(offset, limit, Sort.by(Sort.Direction.ASC, orderBy))
         // val content = itemRepository.findAll(pageRequest)
         // return PageImpl(content.toList(), pageRequest, itemRepository.count())

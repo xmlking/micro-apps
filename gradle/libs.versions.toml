@@ -4,7 +4,8 @@
 kotlin = "1.8.20"
 lombok-plugin = "8.0.1"
 kover = "0.6.1"
-spotless = "6.17.0"
+benchmark = "0.4.7"
+spotless = "6.18.0"
 versions = "0.46.0"
 update = "0.8.0"
 release = "1.15.0"
@@ -12,18 +13,18 @@ shadow = "8.1.1"
 jib = "3.3.1"
 logging = "0.11.0"
 protobufPlugin = "0.9.2"
-quarkus = "2.16.5.Final"
+quarkus = "2.16.6.Final"
 spring-boot = "3.0.5"
 spring-dependencyManagement = "1.1.0"
 spring-aot = "0.12.2"
-flyway = "9.16.1"
-flywayTest = "7.0.0"
+flyway = "9.16.3"
+flywayTest = "9.5.0"
 native = "0.9.20"
 amd = "0.2.1"
 dependencycheck = "8.2.1"
-graphql-generator = "1.18.9"
 dotenv = "2.0.0"
-
+graphql-generator = "1.18.9"
+graphql-kotlin = "7.0.0-alpha.4"
 
 # kotlin
 spek = "2.0.11"
@@ -119,7 +120,7 @@ redisOm = "0.8.0"
 # kafka
 kafkaStreams = "3.4.0"
 javaFaker = "1.0.2"
-confluent ="7.3.2"
+confluent ="7.3.3"
 # @pin
 avro4kSerde = "0.14.0"
 
@@ -203,6 +204,10 @@ spring-boot-configuration-processor  = { module = "org.springframework.boot:spri
 spring-boot-autoconfigure-processor  = { module = "org.springframework.boot:spring-boot-autoconfigure-processor" } # improve startup time
 spring-boot-starter-grpc  = { module = "io.github.lognet:grpc-spring-boot-starter", version.ref = "springGrpc" }
 spring-boot-redis-om  = { module = "com.redis.om:redis-om-spring", version.ref = "redisOm" }
+
+# [graphql-kotlin](https://opensource.expediagroup.com/graphql-kotlin/docs)
+graphql-kotlin-spring-server = { module="com.expediagroup:graphql-kotlin-spring-server",  version.ref = "graphql-kotlin" }
+graphql-kotlin-hooks-provider = { module="com.expediagroup:graphql-kotlin-hooks-provider",  version.ref = "graphql-kotlin" }
 
 querydsl-jpa  = { module = "com.querydsl:querydsl-jpa", version.ref = "querydsl" }
 # Flyway
@@ -342,6 +347,7 @@ kotest-property-jvm = { module = "io.kotest:kotest-property-jvm", version.ref = 
 kotest-runner-junit5-jvm = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
 kotest-extensions-spring = { module = "io.kotest.extensions:kotest-extensions-spring", version.ref = "springKotest" }
 
+kotlinx-benchmark-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-benchmark-runtime", version.ref = "benchmark" }
 mockk-test = { module = "io.mockk:mockk", version.ref = "mockk" }
 hamcrest-all-test = { module = "org.hamcrest:hamcrest-all", version.ref = "hamcrest" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
@@ -376,6 +382,12 @@ konf-yaml = { module = "com.uchuhimo:konf-yaml", version.ref = "konfig" }
 
 # google
 google-cloud-pubsub = { module = "com.google.cloud:google-cloud-pubsub", version.ref = "googlePubsub" }
+
+
+# buildSrc plugin libraries
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-allopen-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-allopen", version.ref = "kotlin" }
+kotlin-benchmark-plugin = { group = "org.jetbrains.kotlinx", name = "kotlinx-benchmark-plugin", version.ref = "benchmark" }
 
 # Bundles of dependencies usually used together so they can be included in one go
 [bundles]
@@ -524,8 +536,10 @@ kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "ko
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
 kotlin-noarg = { id = "org.jetbrains.kotlin.plugin.noarg", version.ref = "kotlin" }
-kotlin-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 kotlin-lombok = { id = "org.jetbrains.kotlin.plugin.lombok", version.ref = "kotlin" }
+kotlin-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+kotlin-benchmark = { id = "org.jetbrains.kotlinx.benchmark", version.ref = "benchmark" }
+
 gradle-lombok = { id = "io.freefair.lombok", version.ref = "lombok-plugin" }
 gradle-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
@@ -543,5 +557,6 @@ gradle-flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
 gradle-native = { id = "org.graalvm.buildtools.native", version.ref = "native" }
 gradle-amd = { id = "com.dropbox.affectedmoduledetector", version.ref = "amd" }
 gradle-dependencycheck = { id = "org.owasp.dependencycheck", version.ref = "dependencycheck" }
-gradle-graphql = { id = "com.graphql_java_generator.graphql-gradle-plugin" , version.ref = "graphql-generator" }
+gradle-graphql-generator = { id = "com.graphql_java_generator.graphql-gradle-plugin" , version.ref = "graphql-generator" }
+gradle-graphql-kotlin = { id = "com.expediagroup.graphql" , version.ref = "graphql-kotlin" }
 gradle-dotenv = { id = "co.uzzu.dotenv.gradle" , version.ref = "dotenv" }

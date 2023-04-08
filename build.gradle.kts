@@ -69,6 +69,7 @@ plugins {
     alias(libs.plugins.kotlin.jpa) apply false
     alias(libs.plugins.kotlin.noarg) apply false
     alias(libs.plugins.kotlin.lombok) apply false
+    alias(libs.plugins.kotlin.benchmark) apply false
     alias(libs.plugins.gradle.lombok) apply false
     alias(libs.plugins.gradle.jib)
     alias(libs.plugins.gradle.logging) apply false
