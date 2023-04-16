@@ -13,7 +13,7 @@ dependencies {
     // in the future maybe we could update below to <plugin id>:<plugin id>.gradle.plugin:<plugin version> coordinates
 //    implementation(libs.kotlin.gradle.plugin)
 //    implementation(libs.kotlin.allopen.plugin)
-//    implementation(libs.kotlinx.benchmark.plugin)
+//    implementation(libs.kotlin.benchmark.plugin)
 
     // this is a workaround to enable version catalog usage in the convention plugin
     // see https://github.com/gradle/gradle/issues/15383#issuecomment-779893192

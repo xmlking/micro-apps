@@ -3,6 +3,7 @@ version: "3.9"
 services:
   redpanda:
     image: redpandadata/redpanda:v23.1.1
+    container_name: redpanda
     networks:
       - redpanda_network
     command:
@@ -28,7 +29,8 @@ services:
     container_name: connect
     networks:
       - redpanda_network
-    #platform: 'linux/amd64'
+    # comment `platform` if you are using windows or intel mac.
+    platform: 'linux/amd64'
     environment:
       CONNECT_CONFIGURATION: |
         key.converter=org.apache.kafka.connect.converters.ByteArrayConverter

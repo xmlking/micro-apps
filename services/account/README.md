@@ -97,7 +97,7 @@ gradle :services:account:jib \
 
 ```bash
 # build native
-gradle :services:account:nativeBuild
+gradle :services:account:nativeCompile
 gradle :services:account:nativeRun
 gradle :services:account:nativeTestBuild
 gradle :services:account:nativeTest

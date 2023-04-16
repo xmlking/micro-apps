@@ -11,13 +11,13 @@ Find more *Quarkus QuickStart* [samples](https://github.com/quarkusio/quarkus-qu
 1. A working container runtime (Docker, podman)
 1. JDK 17 installed with JAVA_HOME configured appropriately
     ```bash
-    sdk install java 17.0.4-zulu
+    sdk install java 17.0.6-zulu
     export JAVA_HOME=$HOME/.sdkman/candidates/java/current
     ```
 1. GraalVM version 22.2.r17-grl installed and configured appropriately
     ```bash
-    sdk install java  22.2.r17-grl
-    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/22.2.r17-grl
+    sdk install java  22.3.r17-grl
+    export GRAALVM_HOME=$HOME/.sdkman/candidates/java/22.3.r17-grl
     ```
 1. Install the native-image tool using gu install:
     ```bash

@@ -20,7 +20,7 @@ val kotlinLoggingVersion = libs.versions.kotlinLogging.get()
 val excludedProjects = setOf("services", "pipelines", "libs")
 val webappProjects = setOf("webapp")
 val grpcProjects = setOf("account", "keying", "linking")
-val springProjects = setOf("spring-graphql", "chat", "spring", "entity", "redis")
+val springProjects = setOf("sspring-graphql-r2dbc", "spring-graphql-redis", "spring-graphql-kafka", "chat", "spring", "entity", "redis")
 val quarkusProjects = setOf("greeting", "person")
 val pipelineProjects = setOf("classifier", "ingestion", "wordcount")
 
@@ -179,7 +179,8 @@ subprojects {
     if (this.name !in excludedProjects) {
         version = rootProject.version
         apply {
-            // plugin("java-conventions")
+            // plugin("micro.apps.build.internal.convention-base")
+            // plugin("micro.apps.build.internal.convention-test")
             plugin(rootProject.project.libs.plugins.kotlin.jvm.get().pluginId)
             plugin("maven-publish")
             plugin(rootProject.project.libs.plugins.gradle.spotless.get().pluginId)
@@ -429,7 +430,7 @@ subprojects {
 // rootProject tasks
 tasks {
     fun isNonStable(version: String): Boolean {
-        val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+        val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
         val regex = "^[0-9,.v-]+(-r)?$".toRegex()
         val isStable = stableKeyword || regex.matches(version)
         return isStable.not()

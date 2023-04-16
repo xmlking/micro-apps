@@ -1,3 +1,9 @@
+import kotlinx.benchmark.gradle.JvmBenchmarkTarget
+// import com.graphql_java_generator.plugin.conf.CustomScalarDefinition
+// import com.graphql_java_generator.plugin.conf.PluginMode
+
+description = "Sample code for GraphQL server with r2dbc"
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO remove when https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.spring.boot)
@@ -8,7 +14,8 @@ plugins {
     alias(libs.plugins.gradle.flyway)
     // TODO: enable when 2.x is released.
     // https://github.com/graphql-java-generator/graphql-maven-plugin-project/issues/170
-    // alias(libs.plugins.gradle.graphql)
+    // alias(libs.plugins.gradle.graphql.generator)
+    alias(libs.plugins.kotlin.benchmark)
 }
 
 configurations {
@@ -63,6 +70,7 @@ dependencies {
     testImplementation(libs.spring.boot.graphql.test)
     testImplementation(libs.spring.boot.security.test)
     testImplementation(libs.spring.boot.flyway.test)
+    implementation(libs.kotlinx.benchmark.test)
 }
 
 affectedTestConfiguration { jvmTestTask = "check" }
@@ -75,7 +83,11 @@ flyway {
     schemas = arrayOf("PUBLIC")
     defaultSchema = "PUBLIC"
     placeholders = mapOf("type_serial" to "SERIAL")
-    locations = arrayOf("classpath:db/migration/common", "classpath:/db/migration/${env.DB_FLYWAY_VENDOR.value}", "classpath:/db/testdata")
+    locations = arrayOf(
+        "classpath:db/migration/common",
+        "classpath:/db/migration/${env.DB_FLYWAY_VENDOR.value}",
+        "classpath:/db/testdata"
+    )
 }
 
 noArg {
@@ -87,20 +99,61 @@ noArg {
 }
 
 // TODO: enable when 2.x is released.
-/*
-generatePojoConf {
-    packageName = "$group.graphql"
-    setSchemaFileFolder("$projectDir/src/main/resources/graphql")
-    mode = com.graphql_java_generator.plugin.conf.PluginMode.server
+// Let's configure the GraphQL Gradle Plugin, for the code generation, for both the client and the server pojo
+// (the plugin will automatically add it as a dependency to compileJava and processResources)
+// The line below adds the generated sources as a java source folder
+// sourceSets.main.java.srcDirs += "$buildDir/generated/sources/graphqlGradlePlugin"
+// generatePojoConf {
+//    isAddRelayConnections = true
+//    javaTypeForIDType = "java.lang.String"
+//    mode = PluginMode.server
+//    packageName = "$group.graphql"
+//    setSchemaFileFolder("$projectDir/src/main/resources/graphql")
+//    schemaFilePattern = "**/*.graphqls"
+//    isSeparateUtilityClasses = true
+//    setCustomScalars(
+//        arrayOf(
+//            CustomScalarDefinition(
+//                "Duration", "java.time.Duration", "", "com.hedera.mirror.graphql.config.GraphQlDuration.INSTANCE", ""
+//            ),
+//            CustomScalarDefinition("Long", "java.lang.Long", "", "graphql.scalars.GraphQLLong", ""),
+//            CustomScalarDefinition("Object", "java.lang.Object", "", "graphql.scalars.Object", ""),
+//            CustomScalarDefinition(
+//                "Timestamp",
+//                "java.time.Instant",
+//                "",
+//                "com.hedera.mirror.graphql.config.GraphQlTimestamp.INSTANCE",
+//                ""
+//            ),
+//        )
+//    )
+// }
 
-    customScalars.push(
-        com.graphql_java_generator.plugin.conf.CustomScalarDefinition(
-            "Long",
-            "java.lang.Long",
-            null,
-            "graphql.scalars.ExtendedScalars.GraphQLLong",
-            null
-        )
-    )
+/***
+ * Benchmarks
+ * gradle :services:spring-graphql-r2dbc:benchmarksBenchmark
+ */
+
+allOpen {
+    annotation("org.openjdk.jmh.annotations.State")
+    annotation("org.openjdk.jmh.annotations.BenchmarkMode")
 }
-*/
+
+// Create a separate source set for benchmarks.
+sourceSets.create("benchmarks")
+
+kotlin.sourceSets.getByName("benchmarks") {
+    dependencies {
+        implementation(libs.kotlinx.benchmark.test)
+        implementation(sourceSets.main.get().output)
+        implementation(sourceSets.main.get().runtimeClasspath)
+    }
+}
+
+benchmark {
+    targets {
+        register("benchmarks") {
+            this as JvmBenchmarkTarget
+        }
+    }
+}

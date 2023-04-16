@@ -24,6 +24,7 @@ amd = "0.2.1"
 dependencycheck = "8.2.1"
 dotenv = "2.0.0"
 graphql-generator = "1.18.9"
+#graphql-generator = "2.0RC1"
 graphql-kotlin = "7.0.0-alpha.4"
 
 # kotlin
@@ -49,7 +50,7 @@ jakartaPersistence = "3.1.0"
 kotlinRetry = "1.0.9"
 
 # gradle
-gradleTool = "8.0.2"
+gradleTool = "8.1"
 
 # test matchers
 hamcrest = "1.3"
@@ -60,7 +61,7 @@ jacoco = "0.8.7"
 
 # logs
 kotlinLogging = "3.0.5"
-slf4j = { require = "2.0.6" }
+slf4j = { require = "2.0.7" }
 # slf4j = "1.7.31"
 
 # uuid
@@ -79,13 +80,11 @@ quarkusPlatformArtifactId = "quarkus-universe-bom"
 #quarkusPlatformVersion = "2.2.1.CR1"
 #quarkusPlatformGroupId = "io.quarkus"
 #quarkusPlatformArtifactId = "quarkus-bom"
-
 # to use locally built Quarkus, use `quarkus-bom` and `999-SNAPSHOT`
 #quarkusPlatformArtifactId = "quarkus-bom"
 #quarkusPlatformVersion = "999-SNAPSHOT"
-
 # grpc
-grpc = "1.53.0"
+grpc = "1.54.0"
 grpcKotlin = "1.3.0"
 protobuf = "3.22.2"
 pgv = "0.6.13"
@@ -529,34 +528,33 @@ quarkus-deployment = [
 mapstruct = ["mapstruct-core", "mapstruct-processor"]
 
 [plugins]
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
-kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
-kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
-kotlin-noarg = { id = "org.jetbrains.kotlin.plugin.noarg", version.ref = "kotlin" }
-kotlin-lombok = { id = "org.jetbrains.kotlin.plugin.lombok", version.ref = "kotlin" }
-kotlin-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-kotlin-benchmark = { id = "org.jetbrains.kotlinx.benchmark", version.ref = "benchmark" }
-
-gradle-lombok = { id = "io.freefair.lombok", version.ref = "lombok-plugin" }
-gradle-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
-gradle-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "update" }
-gradle-release = { id = "pl.allegro.tech.build.axion-release", version.ref = "release" }
-gradle-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
-gradle-jib = { id = "com.google.cloud.tools.jib", version.ref = "jib" }
-gradle-logging = { id = "dev.jacomet.logging-capabilities", version.ref = "logging" }
-gradle-protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
-gradle-quarkus = { id = "io.quarkus", version.ref = "quarkus" }
-spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
-spring-dependencyManagement = { id = "io.spring.dependency-management", version.ref = "spring-dependencyManagement" }
-spring-aot = { id = "org.springframework.experimental.aot", version.ref = "spring-aot" }
-gradle-flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
-gradle-native = { id = "org.graalvm.buildtools.native", version.ref = "native" }
 gradle-amd = { id = "com.dropbox.affectedmoduledetector", version.ref = "amd" }
 gradle-dependencycheck = { id = "org.owasp.dependencycheck", version.ref = "dependencycheck" }
+gradle-dotenv = { id = "co.uzzu.dotenv.gradle", version.ref = "dotenv" }
+gradle-flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
+gradle-jib = { id = "com.google.cloud.tools.jib", version.ref = "jib" }
+gradle-logging = { id = "dev.jacomet.logging-capabilities", version.ref = "logging" }
+gradle-lombok = { id = "io.freefair.lombok", version.ref = "lombok-plugin" }
+gradle-native = { id = "org.graalvm.buildtools.native", version.ref = "native" }
+gradle-protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+gradle-quarkus = { id = "io.quarkus", version.ref = "quarkus" }
+gradle-release = { id = "pl.allegro.tech.build.axion-release", version.ref = "release" }
+gradle-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+gradle-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+gradle-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "update" }
+gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
 gradle-graphql-generator = { id = "com.graphql_java_generator.graphql-gradle-plugin" , version.ref = "graphql-generator" }
 gradle-graphql-kotlin = { id = "com.expediagroup.graphql" , version.ref = "graphql-kotlin" }
-gradle-dotenv = { id = "co.uzzu.dotenv.gradle" , version.ref = "dotenv" }
+kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
+kotlin-benchmark = { id = "org.jetbrains.kotlinx.benchmark", version.ref = "benchmark" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+kotlin-lombok = { id = "org.jetbrains.kotlin.plugin.lombok", version.ref = "kotlin" }
+kotlin-noarg = { id = "org.jetbrains.kotlin.plugin.noarg", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-aot = { id = "org.springframework.experimental.aot", version.ref = "spring-aot" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependencyManagement = { id = "io.spring.dependency-management", version.ref = "spring-dependencyManagement" }

@@ -304,7 +304,7 @@ gradle versionCatalogUpdate --interactive
 # upgrade gradlew
 # upgrade project gradle version
 gradle wrapper --distribution-type all
-# gradle wrapper --gradle-version=7.0
+# gradle wrapper --gradle-version=8.1
 # gradle daemon status 
 gradle --status
 gradle --stop
