@@ -77,15 +77,15 @@ affectedTestConfiguration { jvmTestTask = "check" }
 
 flyway {
     cleanDisabled = false
-    url = env.DB_FLYWAY_URL.value
-    user = env.DB_USER.value
-    password = env.DB_PASSWORD.value
+    url = env.DB_FLYWAY_URL.orElse("jdbc:h2:./build/database/testdb;AUTO_SERVER=TRUE")
+    user = env.DB_USER.orElse("sa")
+    password = env.DB_PASSWORD.orElse("Passw@rd")
     schemas = arrayOf("PUBLIC")
     defaultSchema = "PUBLIC"
     placeholders = mapOf("type_serial" to "SERIAL")
     locations = arrayOf(
         "classpath:db/migration/common",
-        "classpath:/db/migration/${env.DB_FLYWAY_VENDOR.value}",
+        "classpath:/db/migration/${env.DB_FLYWAY_VENDOR.orElse("h2")}",
         "classpath:/db/testdata"
     )
 }
