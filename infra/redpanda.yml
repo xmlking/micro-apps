@@ -1,19 +1,25 @@
 version: "3.9"
-
 services:
   redpanda:
-    image: redpandadata/redpanda:v23.1.1
+    image: redpandadata/redpanda:v23.1.7
     container_name: redpanda
     networks:
       - redpanda_network
     command:
       - redpanda start
-      - --smp 1
       - --overprovisioned
+      - --smp 1
+      - --memory 1G
+      - --reserve-memory 0M
+      - --node-id 0
+      - --check=false
       - --kafka-addr PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
       - --advertise-kafka-addr PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
       - --pandaproxy-addr 0.0.0.0:8082
-      - --advertise-pandaproxy-addr localhost:8082
+      - --advertise-pandaproxy-addr redpanda:8082
+      - --set redpanda.enable_transactions=true
+      - --set redpanda.enable_idempotence=true
+      - --set redpanda.auto_create_topics_enabled=true
     ports:
       - 8081:8081
       - 8082:8082
@@ -63,39 +69,9 @@ services:
     depends_on:
       redpanda:
         condition: service_healthy
-#    volumes:
-#      - "./kafka/connectors/confluentinc-kafka-connect-datagen:/kafka/manual
-
-  ksqldb-server:
-    image: confluentinc/ksqldb-server:0.28.2
-    hostname: ksqldb-server
-    container_name: ksqldb-server
-    # comment `platform` if you are using windows or intel mac.
-    platform: 'linux/amd64'
-    networks:
-      - redpanda_network
-    depends_on:
-      redpanda:
-        condition: service_healthy
-      connect:
-        condition: service_healthy
-    ports:
-      - "8088:8088"
-    environment:
-      KSQL_LISTENERS: http://0.0.0.0:8088
-      KSQL_BOOTSTRAP_SERVERS: redpanda:29092
-      KSQL_KSQL_SCHEMA_REGISTRY_URL: "http://redpanda:8081"
-      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
-      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
-      KSQL_KSQL_CONNECT_URL: "http://connect:8083"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8088/healthcheck"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
 
   console:
-    image: redpandadata/console:v2.2.2
+    image: redpandadata/console:v2.2.3
     hostname: console
     container_name: console
     networks:
@@ -117,11 +93,11 @@ services:
         connect:
           enabled: true
           clusters:
-            - name: local-connect-cluster
-              url: "http://connect:8083"
+            - name: ksql-connect-cluster
+              url: "http://ksqldb:8083"
 #          clusters:
-#            - name: ksql-connect-cluster
-#              url: "http://ksqldb-server:8083"
+#            - name: local-connect-cluster
+#              url: "http://connect:8083"
     ports:
       - 9090:8080
     depends_on:
@@ -129,17 +105,17 @@ services:
         condition: service_healthy
       connect:
         condition: service_healthy
-      ksqldb-server:
+      ksqldb:
         condition: service_healthy
 
 
 
-  # Ref: https://github.com/geoHeil/streaming-example/blob/master/docker-compose.yml
+# Ref: https://github.com/geoHeil/streaming-example/blob/master/docker-compose.yml
 # Ref: https://redpanda.com/blog/ksqldb-materialized-cache
-  ksqldb-server2:
+  ksqldb:
     image: confluentinc/ksqldb-server:0.28.2
-    hostname: ksqldb-server
-    container_name: ksqldb-server
+    hostname: ksqldb
+    container_name: ksqldb
     networks:
       - redpanda_network
     depends_on:
@@ -148,37 +124,35 @@ services:
     ports:
       - "8088:8088"
       - "8083:8083"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088/healthcheck"]
+      interval: 45s
+      timeout: 15s
+      retries: 5
     # comment `platform` if you are using windows or intel mac.
     platform: 'linux/amd64'
     volumes:
-      - "./kafka/connectors/:/usr/share/kafka/connectors/"
-      - ./kafka/sql:/usr/share/kafka/sql
+      - "./kafka/plugins/:/usr/share/kafka/plugins/"
 #      - /kafka/connectors/confluentinc-kafka-connect-elasticsearch:/opt/kafka/redpanda-plugins/confluentinc-kafka-connect-elasticsearch
 #      - /kafka/connectors/confluentinc-kafka-connect-datagen:/opt/kafka/redpanda-plugins/confluentinc-kafka-connect-datagen
 #      - /kafka/connectors/confluentinc-kafka-connect-s3:/opt/kafka/redpanda-plugins/confluentinc-kafka-connect-s3
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8088/healthcheck"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
     environment:
-      KSQL_HOST_NAME: ksqldb-server
-      KSQL_APPLICATION_ID: "ksql-server"
-      KSQL_KSQL_SERVICE_ID: ksql-local_
-      KSQL_CACHE_MAX_BYTES_BUFFERING: 0
+      KSQL_HOST_NAME: "event-mesh"
       KSQL_LISTENERS: "http://0.0.0.0:8088"
-      KSQL_KSQL_ADVERTISED_LISTENER: http://ksqldb-server:8088
+      KSQL_KSQL_ADVERTISED_LISTENER: http://ksqldb:8088
       KSQL_BOOTSTRAP_SERVERS: "redpanda:29092"
+      KSQL_KSQL_STREAMS_BOOTSTRAP_SERVERS: "redpanda:29092"
       KSQL_KSQL_SCHEMA_REGISTRY_URL: "http://redpanda:8081"
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
       # Configuration to embed Kafka Connect support.
-      KSQL_CONNECT_REST_ADVERTISED_HOST_NAME: 'ksqldb-server'
+      KSQL_CONNECT_REST_ADVERTISED_HOST_NAME: 'ksqldb'
       KSQL_CONNECT_REST_PORT: 8083
       KSQL_CONNECT_GROUP_ID: "ksql-connect-cluster"
       KSQL_CONNECT_BOOTSTRAP_SERVERS: "redpanda:29092"
       KSQL_CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.storage.StringConverter"
       KSQL_CONNECT_VALUE_CONVERTER: "io.confluent.connect.avro.AvroConverter"
+      KSQL_CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: "http://redpanda:8081"
       KSQL_CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: "http://redpanda:8081"
 #      KSQL_KSQL_PERSISTENCE_DEFAULT_FORMAT_KEY: AVRO
 #      KSQL_KSQL_PERSISTENCE_DEFAULT_FORMAT_VALUE: AVRO
@@ -204,23 +178,28 @@ services:
       KSQL_CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
       KSQL_CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
       KSQL_CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
-      KSQL_CONNECT_PLUGIN_PATH: "/usr/share/kafka/connectors"
-
+      KSQL_CONNECT_PLUGIN_PATH: "/usr/share/kafka/plugins"
+    restart: unless-stopped
+#    depends_on:
+#      redpanda:
+#        condition: service_healthy
+#      connect:
+#        condition: service_healthy
 
   ksqldb-cli:
     image: confluentinc/ksqldb-cli:0.28.2
     container_name: ksqldb-cli
     # comment `platform` if you are using windows or intel mac.
     platform: 'linux/amd64'
-    depends_on:
-      redpanda:
-        condition: service_healthy
-      ksqldb-server:
-        condition: service_healthy
     entrypoint: /bin/sh
     tty: true
     volumes:
       - ./kafka/sql:/etc/sql
+#    depends_on:
+#      redpanda:
+#        condition: service_healthy
+#      ksqldb:
+#        condition: service_healthy
 
   kafdrop:
     image: obsidiandynamics/kafdrop:3.31.0
@@ -237,11 +216,32 @@ services:
     depends_on:
       redpanda:
         condition: service_healthy
-      ksqldb-server:
+      ksqldb:
         condition: service_healthy
     healthcheck:
       test: "curl -f kafdrop:9000/actuator/health || exit 1"
       start_period: 30s
+
+  materialized:
+    image: materialize/materialized:latest
+    container_name: materialized
+    command: -w2 --disable-telemetry
+    ports:
+      - 6875:6875
+  mzcli:
+    image: materialize/cli:latest
+    container_name: mzcli
+    init: true
+    tty: true
+    depends_on:
+      - materialize
+  metabase:
+    image: metabase/metabase:v0.46.1
+    container_name: metabase
+    depends_on:
+      - materialized
+    ports:
+      - 3030:3000
 
 networks:
   redpanda_network:
