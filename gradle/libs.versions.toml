@@ -91,7 +91,7 @@ guava = "30.1-jre"
 sentinel = "1.8.6"
 
 # beam
-beam = "2.46.0"
+beam = "2.49.0"
 csv = "1.8"
 openCsv = "5.0"
 # yaml version
