@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   redpanda:
-    image: redpandadata/redpanda:v23.1.7
+    image: redpandadata/redpanda:latest
     container_name: redpanda
     networks:
       - redpanda_network
@@ -234,7 +234,7 @@ services:
     init: true
     tty: true
     depends_on:
-      - materialize
+      - materialized
   metabase:
     image: metabase/metabase:v0.46.1
     container_name: metabase

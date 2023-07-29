@@ -23,8 +23,9 @@ This template project has the best of both worlds: _the development velocity of 
 10. Deployment automation with [kustomize](https://kustomize.io/) and Event-driven Autoscaling
     with [KEDA](https://keda.sh/)
 11. End-to-End Google Cloud DevOps flow [pop-kustomize](https://github.com/vszal/pop-kustomize)
+12. [JReleaser](https://jreleaser.org/) The quick and effortless way to release your project!
 
-[![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
+13. [![Check](https://github.com/xmlking/micro-apps/workflows/Check/badge.svg)](https://github.com/xmlking/micro-apps/actions?query=workflow%3ACheck)
 [![Version](https://img.shields.io/github/v/tag/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/tags)
 [![License](https://img.shields.io/github/license/xmlking/micro-apps)](https://github.com/xmlking/micro-apps/blob/develop/LICENSE)
 
@@ -54,7 +55,7 @@ This template project has the best of both worlds: _the development velocity of 
 
 ```shell
 sdk rm java
-sdk i java 17.0.6-zulu
+sdk i java 17.0.8-zulu
 java --version
 
 sdk rm gradle
@@ -63,6 +64,12 @@ gradle --version
 
 sdk i springboot
 sdk i quarkus
+
+# optional
+sdk i java 20.0.1-graal
+# Do you want java 20.0.2-graalce to be set as default? (Y/n): n
+# and add GRAALVM_HOME environment variable to ~/my/exports.zsh
+export GRAALVM_HOME=$HOME/.sdkman/candidates/java/20.0.2-graalce
 ```
 
 ### IntelliJ Plugins

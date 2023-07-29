@@ -103,6 +103,7 @@ noArg {
 // (the plugin will automatically add it as a dependency to compileJava and processResources)
 // The line below adds the generated sources as a java source folder
 // sourceSets.main.java.srcDirs += "$buildDir/generated/sources/graphqlGradlePlugin"
+// sourceSets.main.resources.srcDirs += "$buildDir/generated/resources/graphqlGradlePlugin"
 // generatePojoConf {
 //    isAddRelayConnections = true
 //    javaTypeForIDType = "java.lang.String"

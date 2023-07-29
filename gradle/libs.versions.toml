@@ -543,7 +543,7 @@ gradle-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow"
 gradle-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 gradle-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "update" }
 gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
-gradle-graphql-generator = { id = "com.graphql_java_generator.graphql-gradle-plugin" , version.ref = "graphql-generator" }
+gradle-graphql-generator = { id = "com.graphql-java-generator.graphql-gradle-plugin" , version.ref = "graphql-generator" }
 gradle-graphql-kotlin = { id = "com.expediagroup.graphql" , version.ref = "graphql-kotlin" }
 kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
 kotlin-benchmark = { id = "org.jetbrains.kotlinx.benchmark", version.ref = "benchmark" }
