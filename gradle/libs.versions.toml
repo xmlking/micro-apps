@@ -1,7 +1,7 @@
 [versions]
 
 # plugins
-kotlin = "1.8.20"
+kotlin = "1.9.0"
 lombok-plugin = "8.0.1"
 kover = "0.6.1"
 benchmark = "0.4.7"
@@ -50,7 +50,7 @@ jakartaPersistence = "3.1.0"
 kotlinRetry = "1.0.9"
 
 # gradle
-gradleTool = "8.1"
+gradleTool = "8.2.1"
 
 # test matchers
 hamcrest = "1.3"
