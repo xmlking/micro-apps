@@ -4,26 +4,24 @@
 
 > you need following tools. versions listed here are minimal versions tested.
 
-| Software                      | Version         | Optional         |  
-|-------------------------------|-----------------|------------------| 
-| Java                          | 11.0.11.hs-adpt | 21.2.0.r11-grl   | 
-| Kotlin                        | 1.13.70         |                  | 
-| Gradle                        | 7.1.1           |                  |
-| IntelliJ                      |                 | 2021.1           |
-| Docker for Mac                | latest          |                  |
-| SDKMan                        | latest          |                  |
+| Software                      | Version    | Optional |  
+|-------------------------------|------------|----------| 
+| Java                          | 21-graal   | 17-graal | 
+| Kotlin                        | 1.9.0      |          |
+| Gradle                        | 8.4-rc-1   |          |
+| IntelliJ                      |            | 2021.1   |
+| Docker for Mac                | latest     |          |
+| SDKMan                        | latest     |          |
 
 
 ### Install Prerequisites
 
 ```bash
 # install or Update Node with brew or NVM
-sdk install java 11.0.11.hs-adpt
-sdk install java 21.2.0.r11-grl
-sdk default java 11.0.11.hs-adpt
+sdk install java 21-graal
 sdk install gradle
-# to remove old version e.g., gradle 4.10:
-sdk remove gradle 7.2
+# to remove old version e.g., gradle 8.4:
+sdk remove gradle 8.4
 sdk install kotlin 
 # Optional
 sdk install maven

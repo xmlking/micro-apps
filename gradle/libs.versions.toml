@@ -50,7 +50,7 @@ jakartaPersistence = "3.1.0"
 kotlinRetry = "1.0.9"
 
 # gradle
-gradleTool = "8.2.1"
+gradleTool = "8.4-rc-1"
 
 # test matchers
 hamcrest = "1.3"
