@@ -26,8 +26,8 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          java-version: 17
-          distribution: 'zulu'
+          java-version: 21
+          distribution: zulu
       - name: Gradle Check
         uses: gradle/gradle-build-action@v2.7.0
         id: check
