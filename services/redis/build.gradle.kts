@@ -72,7 +72,7 @@ tasks {
         bindings.set(
             listOf(
                 // "${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates",
-                // "$buildDir/agent:/workspace/agent:ro"
+                // "$projectDir/build/agent:/workspace/agent:ro"
             )
         )
 

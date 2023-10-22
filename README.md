@@ -66,11 +66,11 @@ sdk i springboot
 sdk i quarkus
 
 # optional
-sdk i java 20.0.1-graal
-# Do you want java 20.0.2-graalce to be set as default? (Y/n): n
-# and add GRAALVM_HOME environment variable to ~/my/exports.zsh
-export GRAALVM_HOME=$HOME/.sdkman/candidates/java/20.0.2-graalce
+sdk i java 21-graal
+# Do you want java 21-graal to be set as default? (Y/n): n
 ```
+
+[Oracle GraalVM Container Images](https://blogs.oracle.com/java/post/new-oracle-graalvm-container-images)
 
 ### IntelliJ Plugins
 

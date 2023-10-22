@@ -4,14 +4,14 @@
 
 > you need following tools. versions listed here are minimal versions tested.
 
-| Software                      | Version    | Optional |  
-|-------------------------------|------------|----------| 
-| Java                          | 21-graal   | 17-graal | 
-| Kotlin                        | 1.9.0      |          |
-| Gradle                        | 8.4-rc-1   |          |
-| IntelliJ                      |            | 2021.1   |
-| Docker for Mac                | latest     |          |
-| SDKMan                        | latest     |          |
+| Software                      | Version  | Optional |  
+|-------------------------------|----------|----------| 
+| Java                          | 21-graal | 17-graal | 
+| Kotlin                        | 1.9.20   |          |
+| Gradle                        | 8.4      |          |
+| IntelliJ                      | 2023.2.3 |          |
+| Docker for Mac                | latest   |          |
+| SDKMan                        | latest   |          |
 
 
 ### Install Prerequisites

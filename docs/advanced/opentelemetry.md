@@ -65,7 +65,7 @@ Gradle setup
             jvmArgs = listOf(
                 // This will set logs level DEBUG only for local development.
                 "-Dlogging.level.micro.apps=DEBUG",
-                "-javaagent:$buildDir/agent/opentelemetry-javaagent-all.jar",
+                "-javaagent:$projectDir/build/agent/opentelemetry-javaagent-all.jar",
                 // "-Dotel.javaagent.debug=true",
                 "-Dotel.traces.exporter=logging",
                 // "-Dotel.traces.exporter=jaeger",
@@ -81,7 +81,7 @@ Gradle setup
     /*** copy oTel agent ***/
     val copyOpenTelemetryAgent = tasks.register<Sync>("copyOpenTelemetryAgent") {
         from(openTelemetry.asPath)
-        into("$buildDir/agent")
+        into("$projectDir/build/agent")
         rename("opentelemetry-javaagent-(.+?)-all.jar", "opentelemetry-javaagent-all.jar")
     }
     tasks.named("processResources") {

@@ -21,7 +21,7 @@ configurations {
 /*
 idea {
     module {
-        val kaptMain = file("$buildDir/generated/source/kapt/main")
+        val kaptMain = file("projectDir/build/generated/source/kapt/main")
         sourceDirs.plusAssign(kaptMain)
         generatedSourceDirs.plusAssign(kaptMain)
     }

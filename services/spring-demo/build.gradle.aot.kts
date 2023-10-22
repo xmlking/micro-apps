@@ -170,7 +170,7 @@ springAot {
 val copyOpenTelemetryAgent = tasks.register<Sync>("copyOpenTelemetryAgent") {
     println(openTelemetry.asPath)
     from(openTelemetry.asPath)
-    into("$buildDir/agent")
+    into("$projectDir/build/agent")
     rename("opentelemetry-javaagent-(.+?).jar", "opentelemetry-javaagent.jar")
 }
 tasks.named("processAotResources") {

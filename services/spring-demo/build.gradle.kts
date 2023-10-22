@@ -104,7 +104,7 @@ tasks {
         bindings.set(
             listOf(
                 // "${rootDir}/infra/bindings/ca-certificates:/platform/bindings/ca-certificates",
-                "$buildDir/agent:/workspace/agent:ro"
+                "$projectDir/build/agent:/workspace/agent:ro"
             )
         )
 
@@ -150,7 +150,7 @@ tasks {
         jvmArgs = listOf(
             // This will set logs level DEBUG only for local development.
             "-Dlogging.level.micro.apps=DEBUG",
-            "-javaagent:$buildDir/agent/opentelemetry-javaagent.jar",
+            "-javaagent:$projectDir/build/agent/opentelemetry-javaagent.jar",
             // "-Dotel.javaagent.debug=true",
             "-Dotel.traces.exporter=logging",
             // "-Dotel.traces.exporter=jaeger",
@@ -167,7 +167,7 @@ tasks {
 val copyOpenTelemetryAgent = tasks.register<Sync>("copyOpenTelemetryAgent") {
     println(openTelemetry.asPath)
     from(openTelemetry.asPath)
-    into("$buildDir/agent")
+    into("$projectDir/build/agent")
     rename("opentelemetry-javaagent-(.+?).jar", "opentelemetry-javaagent.jar")
 }
 tasks.named("processResources") {

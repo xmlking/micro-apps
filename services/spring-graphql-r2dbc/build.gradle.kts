@@ -102,8 +102,8 @@ noArg {
 // Let's configure the GraphQL Gradle Plugin, for the code generation, for both the client and the server pojo
 // (the plugin will automatically add it as a dependency to compileJava and processResources)
 // The line below adds the generated sources as a java source folder
-// sourceSets.main.java.srcDirs += "$buildDir/generated/sources/graphqlGradlePlugin"
-// sourceSets.main.resources.srcDirs += "$buildDir/generated/resources/graphqlGradlePlugin"
+// sourceSets.main.java.srcDirs += "$projectDir/build/generated/sources/graphqlGradlePlugin"
+// sourceSets.main.resources.srcDirs += "$projectDir/build/generated/resources/graphqlGradlePlugin"
 // generatePojoConf {
 //    isAddRelayConnections = true
 //    javaTypeForIDType = "java.lang.String"

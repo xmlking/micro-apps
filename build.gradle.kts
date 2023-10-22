@@ -98,7 +98,7 @@ affectedModuleDetector {
     baseDir = "${project.rootDir}"
     pathsAffectingAllModules = setOf("gradle/libs.versions.toml")
     logFilename = "output.log"
-    logFolder = "${rootProject.buildDir}/affectedModuleDetector"
+    logFolder = "${rootProject}/build/affectedModuleDetector"
     specifiedBranch = "main"
     compareFrom = "SpecifiedBranchCommit" // default is PreviousCommit
 }
@@ -225,14 +225,20 @@ subprojects {
 
         java {
             toolchain {
-                languageVersion.set(JavaLanguageVersion.of(17))
+                languageVersion.set(JavaLanguageVersion.of(21))
             }
             withSourcesJar()
             withJavadocJar()
         }
 
         kotlin {
-            jvmToolchain(17)
+            sourceSets.all {
+                languageSettings {
+                    languageVersion = "2.0"
+                    apiVersion = "2.0"
+                }
+            }
+            jvmToolchain(21)
         }
 
         spotless {
@@ -258,7 +264,7 @@ subprojects {
                 kotlinOptions {
                     // TODO: Ultimately we need allWarningsAsErrors = true
                     // allWarningsAsErrors = true // Treat all Kotlin warnings as errors
-                    jvmTarget = JavaVersion.VERSION_17.toString()
+                    jvmTarget = JavaVersion.VERSION_21.toString()
                     javaParameters = true
                     freeCompilerArgs = listOf(
                         // "-Xjvm-enable-preview",
@@ -271,7 +277,7 @@ subprojects {
 
             compileTestKotlin {
                 kotlinOptions {
-                    jvmTarget = JavaVersion.VERSION_17.toString()
+                    jvmTarget = JavaVersion.VERSION_21.toString()
                     javaParameters = true
                     freeCompilerArgs = listOf(
                         // "-Xjvm-enable-preview",
@@ -417,8 +423,8 @@ subprojects {
                     }
                 } else {
                     maven {
-                        val releasesRepoUrl = "$buildDir/repos/releases"
-                        val snapshotsRepoUrl = "$buildDir/repos/snapshots"
+                        val releasesRepoUrl = "$projectDir/build/repos/releases"
+                        val snapshotsRepoUrl = "$projectDir/build/repos/snapshots"
                         url = if (isSnapshot) uri(snapshotsRepoUrl) else uri(releasesRepoUrl)
                     }
                 }
@@ -442,7 +448,7 @@ tasks {
         }
 
         // optional parameters
-        outputDir = "$buildDir/dependencyUpdates"
+        outputDir = "$projectDir/build/dependencyUpdates"
         checkForGradleUpdate = true
         revision = "release"
         gradleReleaseChannel = "current"
