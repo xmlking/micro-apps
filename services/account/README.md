@@ -9,6 +9,7 @@ Showcase backpressure handling techniques:
 - [x] Blocking the execution and processing the current set of events.
 - [ ] Throttling and debouncing strategies.
 - [ ] [Portable validations for Kotlin](https://github.com/konform-kt/konform)
+- [ ] Try [Connect-Kotlin](https://connect.build/docs/kotlin/getting-started/)
 
 ### 🚀 Run
 

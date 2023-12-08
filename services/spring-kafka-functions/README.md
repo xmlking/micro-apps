@@ -116,3 +116,4 @@ implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka-strea
 - InteractiveQueryService https://github.com/piomin/sample-spring-cloud-stream-kafka/blob/master/stock-service/src/main/java/pl/piomin/samples/kafka/stock/controller/TransactionController.java
 - https://github.com/spring-cloud/spring-cloud-stream-samples/blob/main/kafka-streams-samples/kafka-streams-inventory-count/src/main/java/kafka/streams/inventory/count/KafkaStreamsInventoryCountApplication.java
 - https://github.com/ru-rocker/kafka-stream-employee-example
+- [Distributed Transactions in Microservices with SAGA, Kafka Streams and Spring Boot ](https://github.com/piomin/sample-spring-kafka-microservices)
